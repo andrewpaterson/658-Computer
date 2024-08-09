@@ -1318,7 +1318,7 @@
 				)
 			)
 			(property "Description" "5V Digital Power Switch"
-				(at 12.7 -10.795 0)
+				(at 12.7 -8.255 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1375,18 +1375,9 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP2151AW-7, 0.5A SINGLE CHANNEL CURRENT-LIMITED POWER SWITCH"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "AP2151AW-7_0_0"
 				(pin passive line
-					(at 0 -7.62 0)
+					(at 0 -5.08 0)
 					(length 5.08)
 					(name "GND"
 						(effects
@@ -1407,7 +1398,7 @@
 			(symbol "AP2151AW-7_0_1"
 				(polyline
 					(pts
-						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
+						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
 					)
 					(stroke
 						(width 0)
@@ -1437,8 +1428,8 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -2.54 0)
+				(pin output line
+					(at 25.4 -5.08 180)
 					(length 5.08)
 					(name "FLG"
 						(effects
@@ -1456,7 +1447,7 @@
 					)
 				)
 				(pin input line
-					(at 0 -5.08 0)
+					(at 0 -2.54 0)
 					(length 5.08)
 					(name "EN"
 						(effects
@@ -7615,22 +7606,16 @@
 		(uuid "413af9fc-5730-4581-bcd6-4066802553e7")
 	)
 	(junction
+		(at 81.28 208.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49e5163d-51c2-420a-9a1f-2fe1dd7419ec")
+	)
+	(junction
 		(at 62.23 251.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4e065e59-0139-43b3-91df-b0e852c6275a")
-	)
-	(junction
-		(at 69.85 208.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "55f331a1-1a31-4cdf-952f-d090f207b933")
-	)
-	(junction
-		(at 31.75 207.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "adc6b785-19f9-47e8-9728-7b6ba94c6532")
 	)
 	(junction
 		(at 69.85 231.14)
@@ -7719,6 +7704,10 @@
 	(no_connect
 		(at 35.56 92.71)
 		(uuid "6c4c44a4-1576-4646-bdfb-bc35cee7e9ad")
+	)
+	(no_connect
+		(at 69.85 213.36)
+		(uuid "774ae69c-93ac-4224-bc5a-c2fd39ddac1f")
 	)
 	(no_connect
 		(at 275.59 214.63)
@@ -7856,16 +7845,6 @@
 	)
 	(wire
 		(pts
-			(xy 43.18 207.01) (xy 31.75 207.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08f96c97-b6e5-4d6c-8ac7-94e7fd0ab09a")
-	)
-	(wire
-		(pts
 			(xy 283.21 208.28) (xy 288.29 208.28)
 		)
 		(stroke
@@ -7923,16 +7902,6 @@
 			(type default)
 		)
 		(uuid "165811cd-4e38-4ef8-b0c5-618b50e8f4b3")
-	)
-	(wire
-		(pts
-			(xy 38.1 210.82) (xy 44.45 210.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "16d8c65c-7f74-4e5f-9f33-29c8e4718bcd")
 	)
 	(wire
 		(pts
@@ -8206,6 +8175,16 @@
 	)
 	(wire
 		(pts
+			(xy 69.85 208.28) (xy 81.28 208.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d8b3956-2634-4324-ab0f-fe416d5ee061")
+	)
+	(wire
+		(pts
 			(xy 25.4 231.14) (xy 40.64 231.14)
 		)
 		(stroke
@@ -8396,7 +8375,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 208.28) (xy 74.93 208.28)
+			(xy 81.28 208.28) (xy 86.36 208.28)
 		)
 		(stroke
 			(width 0)
@@ -8816,7 +8795,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 215.9) (xy 69.85 208.28)
+			(xy 81.28 213.36) (xy 81.28 208.28)
 		)
 		(stroke
 			(width 0)
@@ -8876,16 +8855,6 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 207.01) (xy 31.75 210.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba230aa2-d12a-421b-b8ee-7e4108bdf3be")
-	)
-	(wire
-		(pts
 			(xy 226.06 69.85) (xy 201.93 69.85)
 		)
 		(stroke
@@ -8916,7 +8885,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 207.01) (xy 31.75 207.01)
+			(xy 25.4 207.01) (xy 43.18 207.01)
 		)
 		(stroke
 			(width 0)
@@ -9223,16 +9192,6 @@
 			(type default)
 		)
 		(uuid "f5a44683-1946-4e2a-9349-8f328e411edc")
-	)
-	(wire
-		(pts
-			(xy 31.75 210.82) (xy 33.02 210.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f84698f8-f51a-4398-8838-2a32374f955c")
 	)
 	(wire
 		(pts
@@ -9661,7 +9620,7 @@
 		(uuid "17484042-b240-4e31-b7a8-17e201e76760")
 	)
 	(label "Switch"
-		(at 44.45 213.36 180)
+		(at 44.45 210.82 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10134,7 +10093,7 @@
 		(uuid "4c756880-f052-48a4-8886-1ca67405950c")
 	)
 	(label "GND"
-		(at 44.45 215.9 180)
+		(at 44.45 213.36 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10299,7 +10258,7 @@
 		(uuid "573a0d86-9970-489e-839e-abf8c197cad3")
 	)
 	(label "5V Switched"
-		(at 74.93 208.28 0)
+		(at 86.36 208.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -11124,7 +11083,7 @@
 		(uuid "a9ed3499-521d-43d5-956c-cec24bcebb27")
 	)
 	(label "GND"
-		(at 74.93 215.9 0)
+		(at 86.36 213.36 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -13071,7 +13030,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 74.93 215.9 180)
+		(at 86.36 213.36 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13079,7 +13038,7 @@
 		(dnp no)
 		(uuid "36fd990a-7b4e-4e7a-b9d2-012477f14e71")
 		(property "Reference" "C12"
-			(at 72.644 218.44 0)
+			(at 84.074 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13087,7 +13046,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 72.39 213.36 0)
+			(at 83.82 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13095,7 +13054,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 58.166 208.28 0)
+			(at 69.596 205.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13104,7 +13063,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.7075 216.2175 90)
+			(at 84.1375 213.6775 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13113,7 +13072,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 74.93 215.9 0)
+			(at 86.36 213.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14304,7 +14263,7 @@
 			)
 		)
 		(property "Description" "5V Digital Power Switch"
-			(at 57.15 219.075 0)
+			(at 57.15 216.535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14358,15 +14317,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "DiodesZetex AP2151AW-7, 0.5A SINGLE CHANNEL CURRENT-LIMITED POWER SWITCH"
-			(at 44.45 208.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -15675,73 +15625,6 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "IC1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 33.02 210.82 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "aa7178fd-f37c-49a7-9401-795bec042a74")
-		(property "Reference" "R3"
-			(at 35.56 209.042 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10KΩ"
-			(at 35.56 212.725 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 50.546 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 33.02 210.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2b3f91ca-8c05-48de-bbf4-f8c7446151cd")
-		)
-		(pin "2"
-			(uuid "768113e9-f03c-4c24-b208-7be391db1c81")
-		)
-		(instances
-			(project "Hex LCD Device"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R3")
 					(unit 1)
 				)
 			)

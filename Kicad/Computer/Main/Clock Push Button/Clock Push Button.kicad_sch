@@ -1,837 +1,2184 @@
-(kicad_sch (version 20230121) (generator eeschema)
-
-  (uuid 337b5f72-8be1-4121-9dc6-479b565482b2)
-
-  (paper "A4")
-
-  (title_block
-    (title "Push Button Clock")
-    (date "2023-12-06")
-    (rev "V1")
-  )
-
-  (lib_symbols
-    (symbol "Connector:Conn_01x03_Pin" (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
-      (property "Reference" "J" (at 0 5.08 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "Conn_01x03_Pin" (at 0 -5.08 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Datasheet" "~" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_locked" "" (at 0 0 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "ki_keywords" "connector" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Garbage" "Generic connector, single row, 01x03, script generated" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_fp_filters" "Connector*:*_1x??_*" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "Conn_01x03_Pin_1_1"
-        (polyline
-          (pts
-            (xy 1.27 -2.54)
-            (xy 0.8636 -2.54)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 1.27 0)
-            (xy 0.8636 0)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 1.27 2.54)
-            (xy 0.8636 2.54)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type none))
-        )
-        (rectangle (start 0.8636 -2.413) (end 0 -2.667)
-          (stroke (width 0.1524) (type default))
-          (fill (type outline))
-        )
-        (rectangle (start 0.8636 0.127) (end 0 -0.127)
-          (stroke (width 0.1524) (type default))
-          (fill (type outline))
-        )
-        (rectangle (start 0.8636 2.667) (end 0 2.413)
-          (stroke (width 0.1524) (type default))
-          (fill (type outline))
-        )
-        (pin passive line (at 5.08 2.54 180) (length 3.81)
-          (name "Pin_1" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 5.08 0 180) (length 3.81)
-          (name "Pin_2" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 5.08 -2.54 180) (length 3.81)
-          (name "Pin_3" (effects (font (size 1.27 1.27))))
-          (number "3" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
-    (symbol "Diptronic:DTS-62N-V" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-      (property "Reference" "S" (at 12.7 6.35 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "DTS-62N-V" (at 12.7 4.445 0)
-        (effects (font (size 1.27 1.27) bold))
-      )
-      (property "Footprint" "DTS62NV" (at 21.59 -13.97 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Datasheet" "http://akizukidenshi.com/download/ds/cosland/DTS-6-V.PDF" (at 21.59 -16.51 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Description" "Tactile Switch" (at 12.7 -6.985 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Height" "7" (at 21.59 -11.43 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Name" "Diptronics" (at 21.59 -19.05 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Part_Number" "DTS-62N-V" (at 21.59 -21.59 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Part Number" "113-DTS-62N-V" (at 21.59 -24.13 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-62N-V?qs=gTYE2QTfZfSKTB5KYn%252Brkw%3D%3D" (at 21.59 -26.67 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Arrow Part Number" "" (at 29.21 -17.78 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Arrow Price/Stock" "" (at 29.21 -20.32 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Garbage" "Tactile Switches Through Hole 6*6" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "DTS-62N-V_0_0"
-        (pin passive line (at 0 0 0) (length 5.08)
-          (name "C1" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 0 -2.54 0) (length 5.08)
-          (name "C2" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 25.4 0 180) (length 5.08)
-          (name "N1" (effects (font (size 1.27 1.27))))
-          (number "3" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 25.4 -2.54 180) (length 5.08)
-          (name "N2" (effects (font (size 1.27 1.27))))
-          (number "4" (effects (font (size 1.27 1.27))))
-        )
-      )
-      (symbol "DTS-62N-V_0_1"
-        (polyline
-          (pts
-            (xy 10.16 -1.905)
-            (xy 10.16 -0.635)
-          )
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 12.7 1.27)
-            (xy 12.7 2.54)
-          )
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 15.24 -1.905)
-            (xy 15.24 -0.635)
-          )
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 15.875 1.27)
-            (xy 9.525 1.27)
-          )
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 5.08 3.175)
-            (xy 20.32 3.175)
-            (xy 20.32 -5.715)
-            (xy 5.08 -5.715)
-            (xy 5.08 3.175)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type background))
-        )
-        (circle (center 10.16 -2.54) (radius 0.508)
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (circle (center 10.16 0) (radius 0.508)
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (circle (center 15.24 -2.54) (radius 0.508)
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (circle (center 15.24 0) (radius 0.508)
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-      )
-    )
-    (symbol "HCP65:C_0805" (pin_numbers hide) (pin_names (offset 0.254) hide) (in_bom yes) (on_board yes)
-      (property "Reference" "C" (at 2.286 2.54 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "?μF" (at 2.54 -2.54 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "SamacSys_Parts:C_0805" (at 16.764 -7.62 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Datasheet" "" (at 2.2225 0.3175 90)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "capacitor cap" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Garbage" "Unpolarized capacitor, small symbol" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_fp_filters" "C_*" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "C_0805_0_1"
-        (polyline
-          (pts
-            (xy 1.9685 -1.4605)
-            (xy 1.9685 1.5875)
-          )
-          (stroke (width 0.3048) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 2.9845 -1.4605)
-            (xy 2.9845 1.5875)
-          )
-          (stroke (width 0.3302) (type default))
-          (fill (type none))
-        )
-      )
-      (symbol "C_0805_1_1"
-        (pin passive line (at 0 0 0) (length 2.032)
-          (name "~" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 5.08 0 180) (length 2.032)
-          (name "~" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
-    (symbol "Maxim:MAX6816EUS+T" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-      (property "Reference" "IC" (at 12.7 6.35 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "MAX6816EUS+T" (at 12.7 3.81 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "MAX812REUST" (at 20.955 -10.16 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf" (at 20.955 -12.7 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Description" "bounce eliminator" (at 12.7 -6.35 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Height" "1.22" (at 20.955 -17.78 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Name" "Maxim Integrated" (at 20.955 -20.32 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Part_Number" "MAX6816EUS+T" (at 20.955 -22.86 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Part Number" "700-MAX6816EUST" (at 20.955 -25.4 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D" (at 20.955 -27.94 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Arrow Part Number" "MAX6816EUS+T" (at 20.955 -30.48 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Arrow Price/Stock" "https://www.arrow.com/en/products/max6816eust/maxim-integrated?region=nac" (at 20.955 -33.02 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Silkscreen" "MAX6816" (at 20.955 -15.24 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Garbage" "Maxim MAX6816EUS+T, Bounce Eliminator Circuit, 2.7 V to 5.5 V, 4-Pin SOT-143" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "MAX6816EUS+T_0_0"
-        (pin passive line (at 0 0 0) (length 5.08)
-          (name "GND" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin input line (at 0 -2.54 0) (length 5.08)
-          (name "IN" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin output line (at 25.4 -2.54 180) (length 5.08)
-          (name "OUT" (effects (font (size 1.27 1.27))))
-          (number "3" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 25.4 0 180) (length 5.08)
-          (name "VCC" (effects (font (size 1.27 1.27))))
-          (number "4" (effects (font (size 1.27 1.27))))
-        )
-      )
-      (symbol "MAX6816EUS+T_0_1"
-        (polyline
-          (pts
-            (xy 5.08 2.54)
-            (xy 20.32 2.54)
-            (xy 20.32 -5.08)
-            (xy 5.08 -5.08)
-            (xy 5.08 2.54)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type background))
-        )
-      )
-    )
-    (symbol "Nexperia:74LVC2G74DP,125" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-      (property "Reference" "IC" (at 13.335 5.08 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "74LVC2G74DP,125" (at 12.7 3.175 0)
-        (effects (font (size 1.27 1.27) bold))
-      )
-      (property "Footprint" "SOP65P400X110-8N" (at 22.86 -17.78 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G74.pdf" (at 22.86 -20.32 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Description" "D-type flip-flop" (at 12.7 -13.335 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Height" "1.1" (at 22.86 -25.4 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Name" "Nexperia" (at 22.86 -27.94 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Manufacturer_Part_Number" "74LVC2G74DP,125" (at 22.86 -30.48 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Part Number" "771-74LVC2G74DP-G" (at 22.86 -33.02 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G74DP125?qs=me8TqzrmIYX1iMHaYTXJug%3D%3D" (at 22.86 -35.56 0)
-        (effects (font (size 1.27 1.27)) (justify left) hide)
-      )
-      (property "Silkscreen" "'2G74" (at 25.4 -15.24 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Garbage" "74LVC2G74 - Single D-type flip-flop with set and reset; positive edge trigger@en-us" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "74LVC2G74DP,125_0_0"
-        (pin input line (at 0 -5.08 0) (length 5.08)
-          (name "D" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin output line (at 25.4 -2.54 180) (length 5.08)
-          (name "Q" (effects (font (size 1.27 1.27))))
-          (number "5" (effects (font (size 1.27 1.27))))
-        )
-      )
-      (symbol "74LVC2G74DP,125_0_1"
-        (polyline
-          (pts
-            (xy 5.08 1.905)
-            (xy 20.32 1.905)
-            (xy 20.32 -12.065)
-            (xy 5.08 -12.065)
-            (xy 5.08 1.905)
-          )
-          (stroke (width 0.1524) (type default))
-          (fill (type background))
-        )
-      )
-      (symbol "74LVC2G74DP,125_1_0"
-        (pin input clock (at 0 0 0) (length 5.08)
-          (name "CP" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin output inverted (at 25.4 -5.08 180) (length 5.08)
-          (name "~{Q}" (effects (font (size 1.27 1.27))))
-          (number "3" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 0 -10.16 0) (length 5.08) hide
-          (name "GND" (effects (font (size 1.27 1.27))))
-          (number "4" (effects (font (size 1.27 1.27))))
-        )
-        (pin input inverted (at 0 -7.62 0) (length 5.08)
-          (name "~{RD}" (effects (font (size 1.27 1.27))))
-          (number "6" (effects (font (size 1.27 1.27))))
-        )
-        (pin input inverted (at 0 -2.54 0) (length 5.08)
-          (name "~{SD}" (effects (font (size 1.27 1.27))))
-          (number "7" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 25.4 0 180) (length 5.08) hide
-          (name "3V" (effects (font (size 1.27 1.27))))
-          (number "8" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
-  )
-
-
-  (no_connect (at 54.61 93.98) (uuid 0b5a681f-d86e-4498-b31f-a34eb6fe52a0))
-  (no_connect (at 113.03 123.19) (uuid 4e0e2773-5168-4274-b6ae-91c5c08a77e7))
-  (no_connect (at 85.09 93.98) (uuid 66914bd3-fe4e-45c9-a9b4-cb957aaf4a99))
-  (no_connect (at 48.26 123.19) (uuid b26671f4-e46d-4c23-8cf0-77c8071a57db))
-  (no_connect (at 22.86 123.19) (uuid edb56c47-869e-4642-869b-302d2cbe3020))
-
-  (wire (pts (xy 81.28 137.16) (xy 81.28 125.73))
-    (stroke (width 0) (type default))
-    (uuid 3760c447-60e3-442e-b53e-cf9bfe105872)
-  )
-  (wire (pts (xy 115.57 125.73) (xy 115.57 137.16))
-    (stroke (width 0) (type default))
-    (uuid 3b9d5f2b-4cba-4a89-bc4d-1350701458a2)
-  )
-  (wire (pts (xy 115.57 137.16) (xy 81.28 137.16))
-    (stroke (width 0) (type default))
-    (uuid 44d2f06a-9268-4d5b-83da-1e9c877b5206)
-  )
-  (wire (pts (xy 48.26 120.65) (xy 54.61 120.65))
-    (stroke (width 0) (type default))
-    (uuid 98ccbb19-a2b6-4d81-a191-ea367eec1e93)
-  )
-  (wire (pts (xy 113.03 125.73) (xy 115.57 125.73))
-    (stroke (width 0) (type default))
-    (uuid a4c5e6fa-f824-4aef-9cd8-c3e5cb9b299e)
-  )
-  (wire (pts (xy 80.01 120.65) (xy 87.63 120.65))
-    (stroke (width 0) (type default))
-    (uuid b246dcaa-181c-4847-98c0-1790daf363da)
-  )
-  (wire (pts (xy 81.28 125.73) (xy 87.63 125.73))
-    (stroke (width 0) (type default))
-    (uuid c3a03b8c-031c-4874-8f31-b8ca95cce81d)
-  )
-
-  (label "GND" (at 69.85 143.51 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 0d1c9d8f-cc40-4930-8dd2-1250a59a752d)
-  )
-  (label "GND" (at 69.85 134.62 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 12cf9b5f-38ae-46d2-83ca-45aee4991290)
-  )
-  (label "3.3V" (at 113.03 120.65 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 1676fc84-988f-42ed-a1ad-9d0194fbdd4e)
-  )
-  (label "~{Reset}" (at 87.63 128.27 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 1d110f20-ebb1-400b-83e6-94782a19d6e7)
-  )
-  (label "3.3V" (at 64.77 134.62 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 3ce6d6d8-8eb9-41d9-ba27-0b09ff21ee34)
-  )
-  (label "~{Reset}" (at 54.61 91.44 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 448442ef-e303-49e9-b39c-0d734eabfe2f)
-  )
-  (label "3.3V" (at 85.09 91.44 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 46394f42-b244-4c80-b1bd-ee05855651e0)
-  )
-  (label "GND" (at 54.61 96.52 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 78e9065f-7ea1-4bd6-afa2-edaed0b33623)
-  )
-  (label "GND" (at 87.63 130.81 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 83fd51ec-797a-4bad-b853-173d05c515a7)
-  )
-  (label "3.3V" (at 22.86 120.65 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid 969e9a81-3ef8-489f-9598-6a0587104855)
-  )
-  (label "CLK" (at 85.09 96.52 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid c0792a0e-7bfd-4b8d-bd74-89fc92f7e2e9)
-  )
-  (label "CLK" (at 115.57 125.73 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid d1b3e6a7-3b92-41a5-b2dd-a14611669b08)
-  )
-  (label "3.3V" (at 80.01 118.11 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid d5b2f40b-d939-4cdd-8f41-b34966b9050a)
-  )
-  (label "3.3V" (at 87.63 123.19 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid dc197363-1b44-4267-b0de-81b6bd9a64cf)
-  )
-  (label "GND" (at 54.61 118.11 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid f24afd65-5740-4f6e-a46c-673709068f3e)
-  )
-  (label "3.3V" (at 64.77 143.51 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid fbd3f234-9215-4ea6-8005-6b6b5af66b59)
-  )
-
-  (symbol (lib_id "Connector:Conn_01x03_Pin") (at 80.01 93.98 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 090d9d5d-1a7c-49ee-81d6-6f2936916bd4)
-    (property "Reference" "J2" (at 80.01 88.9 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "Conn_01x03_Pin" (at 80.01 99.06 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (at 80.01 93.98 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 80.01 93.98 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 0a5900ca-18c3-46bf-bb91-4b86102a596a))
-    (pin "2" (uuid 147d8a28-8f16-4ef9-8d0b-707bfd2750c9))
-    (pin "3" (uuid f7ad10ea-693d-4741-ab0f-e736c774ded9))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "J2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "HCP65:C_0805") (at 64.77 143.51 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 15c540c0-03ca-4189-ac6e-32295ae96046)
-    (property "Reference" "C2" (at 67.056 140.97 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "1μF" (at 67.31 146.05 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "SamacSys_Parts:C_0805" (at 81.534 151.13 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 66.9925 143.1925 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid fb39d612-af4a-461b-bb5b-49286f5ece88))
-    (pin "2" (uuid 9595b81f-2d2d-4873-b2cd-927484f02fb5))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "C2") (unit 1)
-        )
-      )
-      (project "Pico Sound"
-        (path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-          (reference "C23") (unit 1)
-        )
-      )
-      (project "Video Timer"
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-          (reference "C?") (unit 1)
-        )
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-          (reference "C30") (unit 1)
-        )
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-          (reference "C68") (unit 1)
-        )
-      )
-      (project "Sound"
-        (path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
-          (reference "C2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Connector:Conn_01x03_Pin") (at 59.69 93.98 0) (mirror y) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 438ef4db-20ac-42e2-8e52-b92b5d5c9068)
-    (property "Reference" "J1" (at 59.69 88.9 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "Conn_01x03_Pin" (at 59.69 99.06 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (at 59.69 93.98 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 59.69 93.98 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid af3aadba-9f6c-41da-8246-a930e87ccfce))
-    (pin "2" (uuid 3e084bc8-ff8e-421a-a495-e9673a0169cb))
-    (pin "3" (uuid a9eb499a-b307-4bcf-bf63-92c4ea8826a4))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "J1") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Nexperia:74LVC2G74DP,125") (at 87.63 120.65 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 79d096d8-2685-460f-9f4e-ca24ab7c89b5)
-    (property "Reference" "IC3" (at 100.965 115.57 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "74LVC2G74DP,125" (at 100.33 117.475 0)
-      (effects (font (size 1.27 1.27) bold))
-    )
-    (property "Footprint" "SOP65P400X110-8N" (at 110.49 138.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G74.pdf" (at 110.49 140.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "D-type flip-flop" (at 100.33 133.985 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Height" "1.1" (at 110.49 146.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Nexperia" (at 110.49 148.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "74LVC2G74DP,125" (at 110.49 151.13 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "771-74LVC2G74DP-G" (at 110.49 153.67 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G74DP125?qs=me8TqzrmIYX1iMHaYTXJug%3D%3D" (at 110.49 156.21 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Silkscreen" "'2G74" (at 113.03 135.89 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "2" (uuid 7ebf942d-8f49-43ff-b489-a98af346ea96))
-    (pin "5" (uuid 78023ca0-5170-444d-98e6-ac5fc3b8609f))
-    (pin "1" (uuid e84b15e3-ff18-449e-8a00-972d4a072fff))
-    (pin "3" (uuid d0fc3029-6586-4e43-969c-503cb4499b9f))
-    (pin "4" (uuid 82f0a56a-0b6d-4bd8-b753-48d0a8cafb2f))
-    (pin "6" (uuid 3359ba59-5380-40d5-9631-3951532e25a7))
-    (pin "7" (uuid 5b50c6f7-1602-48bd-b7c8-083dbeefd94a))
-    (pin "8" (uuid 7f5e6c0d-f967-444f-97ff-ee13c9e31c69))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "IC3") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "HCP65:C_0805") (at 64.77 134.62 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 975add08-da06-4d6d-a590-7ea0e17b7690)
-    (property "Reference" "C1" (at 67.056 132.08 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "1μF" (at 67.31 137.16 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "SamacSys_Parts:C_0805" (at 81.534 142.24 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 66.9925 134.3025 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 84f958f7-2457-454c-bf78-b9eece2515ef))
-    (pin "2" (uuid cecef8b1-0ab7-429c-b94a-1a0512c7985e))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "C1") (unit 1)
-        )
-      )
-      (project "Pico Sound"
-        (path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-          (reference "C23") (unit 1)
-        )
-      )
-      (project "Video Timer"
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-          (reference "C?") (unit 1)
-        )
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-          (reference "C30") (unit 1)
-        )
-        (path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-          (reference "C68") (unit 1)
-        )
-      )
-      (project "Sound"
-        (path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
-          (reference "C2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Maxim:MAX6816EUS+T") (at 54.61 118.11 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 9a98ef03-c483-46e1-9ae0-d32a6b295f48)
-    (property "Reference" "IC2" (at 67.31 111.76 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "MAX6816EUS+T" (at 67.31 114.3 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "MAX812REUST" (at 75.565 128.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf" (at 75.565 130.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "bounce eliminator" (at 67.31 124.46 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Height" "1.22" (at 75.565 135.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Maxim Integrated" (at 75.565 138.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "MAX6816EUS+T" (at 75.565 140.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "700-MAX6816EUST" (at 75.565 143.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D" (at 75.565 146.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "MAX6816EUS+T" (at 75.565 148.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "https://www.arrow.com/en/products/max6816eust/maxim-integrated?region=nac" (at 75.565 151.13 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Silkscreen" "MAX6816" (at 75.565 133.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (pin "1" (uuid 3d4dbce7-3958-4301-a976-a9b82d542da6))
-    (pin "2" (uuid af8dd6b7-e245-4c5a-b758-651cee46af18))
-    (pin "3" (uuid bc2a61d7-5437-4428-ab48-6761294ad6e5))
-    (pin "4" (uuid f2745c70-1876-4446-aa36-6b91d7c6756c))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "IC2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Diptronic:DTS-62N-V") (at 22.86 120.65 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid f8b97f3e-acae-4884-b575-0552771dc709)
-    (property "Reference" "S2" (at 35.56 114.3 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "DTS-62N-V" (at 35.56 116.205 0)
-      (effects (font (size 1.27 1.27) bold))
-    )
-    (property "Footprint" "DTS62NV" (at 44.45 134.62 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "http://akizukidenshi.com/download/ds/cosland/DTS-6-V.PDF" (at 44.45 137.16 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Tactile Switch" (at 35.56 127.635 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Height" "7" (at 44.45 132.08 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Diptronics" (at 44.45 139.7 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "DTS-62N-V" (at 44.45 142.24 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "113-DTS-62N-V" (at 44.45 144.78 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-62N-V?qs=gTYE2QTfZfSKTB5KYn%252Brkw%3D%3D" (at 44.45 147.32 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 52.07 138.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 52.07 140.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (pin "1" (uuid f4cfd00b-71c0-4bf4-ae69-5780aea3f504))
-    (pin "2" (uuid 2c0166e2-0713-401b-8083-6ef996e08131))
-    (pin "3" (uuid 5933237f-1905-4a39-a038-91568d592657))
-    (pin "4" (uuid fcae9f8b-8b97-4f51-86dd-a03bdcf3101d))
-    (instances
-      (project "Clock Push Button"
-        (path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-          (reference "S2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
-  )
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "337b5f72-8be1-4121-9dc6-479b565482b2")
+	(paper "A4")
+	(title_block
+		(title "Push Button Clock")
+		(date "2023-12-06")
+		(rev "V1")
+	)
+	(lib_symbols
+		(symbol "Connector:Conn_01x03_Pin"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_Pin_1_1"
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Diptronic:DTS-62N-V"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "S"
+				(at 12.7 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "DTS-62N-V"
+				(at 12.7 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:DTS62NV"
+				(at 21.59 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://akizukidenshi.com/download/ds/cosland/DTS-6-V.PDF"
+				(at 21.59 -16.51 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Tactile Switch"
+				(at 12.7 -6.985 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "7"
+				(at 21.59 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Diptronics"
+				(at 21.59 -19.05 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "DTS-62N-V"
+				(at 21.59 -21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "113-DTS-62N-V"
+				(at 21.59 -24.13 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-62N-V?qs=gTYE2QTfZfSKTB5KYn%252Brkw%3D%3D"
+				(at 21.59 -26.67 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Part Number" ""
+				(at 29.21 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Price/Stock" ""
+				(at 29.21 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "Tactile Switches Through Hole 6*6"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "DTS-62N-V_0_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "C1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "C2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "N1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "N2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "DTS-62N-V_0_1"
+				(polyline
+					(pts
+						(xy 10.16 -1.905) (xy 10.16 -0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 12.7 1.27) (xy 12.7 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 15.24 -1.905) (xy 15.24 -0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 15.875 1.27) (xy 9.525 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -5.715) (xy 5.08 -5.715) (xy 5.08 3.175)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center 10.16 -2.54)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 10.16 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 15.24 -2.54)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 15.24 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
+		(symbol "HCP65:C_0805"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.254) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 2.286 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "?μF"
+				(at 2.54 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:C_0805"
+				(at 16.764 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 2.2225 0.3175 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0805_0_1"
+				(polyline
+					(pts
+						(xy 1.9685 -1.4605) (xy 1.9685 1.5875)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.9845 -1.4605) (xy 2.9845 1.5875)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_0805_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Maxim:MAX6816EUS+T"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MAX6816EUS+T"
+				(at 12.7 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:MAX812REUST"
+				(at 20.955 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf"
+				(at 20.955 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "bounce eliminator"
+				(at 12.7 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.22"
+				(at 20.955 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Maxim Integrated"
+				(at 20.955 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "MAX6816EUS+T"
+				(at 20.955 -22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "700-MAX6816EUST"
+				(at 20.955 -25.4 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D"
+				(at 20.955 -27.94 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "MAX6816"
+				(at 20.955 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "MAX6816EUS+T_0_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MAX6816EUS+T_0_1"
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 20.32 2.54) (xy 20.32 -5.08) (xy 5.08 -5.08) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
+		(symbol "Nexperia:74LVC2G74DP,125"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 13.335 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74LVC2G74DP,125"
+				(at 12.7 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOP65P400X110-8N"
+				(at 22.86 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G74.pdf"
+				(at 22.86 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "D-type flip-flop"
+				(at 12.7 -13.335 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.1"
+				(at 22.86 -25.4 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Nexperia"
+				(at 22.86 -27.94 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "74LVC2G74DP,125"
+				(at 22.86 -30.48 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "771-74LVC2G74DP-G"
+				(at 22.86 -33.02 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G74DP125?qs=me8TqzrmIYX1iMHaYTXJug%3D%3D"
+				(at 22.86 -35.56 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "'2G74"
+				(at 25.4 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "74LVC2G74 - Single D-type flip-flop with set and reset; positive edge trigger@en-us"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "74LVC2G74DP,125_0_0"
+				(pin input line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "Q"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LVC2G74DP,125_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -12.065) (xy 5.08 -12.065) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "74LVC2G74DP,125_1_0"
+				(pin input clock
+					(at 0 0 0)
+					(length 5.08)
+					(name "CP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "~{Q}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 0)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "~{RD}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "~{SD}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08) hide
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 54.61 93.98)
+		(uuid "0b5a681f-d86e-4498-b31f-a34eb6fe52a0")
+	)
+	(no_connect
+		(at 113.03 123.19)
+		(uuid "4e0e2773-5168-4274-b6ae-91c5c08a77e7")
+	)
+	(no_connect
+		(at 85.09 93.98)
+		(uuid "66914bd3-fe4e-45c9-a9b4-cb957aaf4a99")
+	)
+	(no_connect
+		(at 48.26 123.19)
+		(uuid "b26671f4-e46d-4c23-8cf0-77c8071a57db")
+	)
+	(no_connect
+		(at 22.86 123.19)
+		(uuid "edb56c47-869e-4642-869b-302d2cbe3020")
+	)
+	(wire
+		(pts
+			(xy 81.28 137.16) (xy 81.28 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3760c447-60e3-442e-b53e-cf9bfe105872")
+	)
+	(wire
+		(pts
+			(xy 115.57 125.73) (xy 115.57 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b9d5f2b-4cba-4a89-bc4d-1350701458a2")
+	)
+	(wire
+		(pts
+			(xy 115.57 137.16) (xy 81.28 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44d2f06a-9268-4d5b-83da-1e9c877b5206")
+	)
+	(wire
+		(pts
+			(xy 48.26 120.65) (xy 54.61 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98ccbb19-a2b6-4d81-a191-ea367eec1e93")
+	)
+	(wire
+		(pts
+			(xy 113.03 125.73) (xy 115.57 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4c5e6fa-f824-4aef-9cd8-c3e5cb9b299e")
+	)
+	(wire
+		(pts
+			(xy 80.01 120.65) (xy 87.63 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b246dcaa-181c-4847-98c0-1790daf363da")
+	)
+	(wire
+		(pts
+			(xy 81.28 125.73) (xy 87.63 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3a03b8c-031c-4874-8f31-b8ca95cce81d")
+	)
+	(label "GND"
+		(at 69.85 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0d1c9d8f-cc40-4930-8dd2-1250a59a752d")
+	)
+	(label "GND"
+		(at 69.85 134.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "12cf9b5f-38ae-46d2-83ca-45aee4991290")
+	)
+	(label "3.3V"
+		(at 113.03 120.65 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1676fc84-988f-42ed-a1ad-9d0194fbdd4e")
+	)
+	(label "~{Reset}"
+		(at 87.63 128.27 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1d110f20-ebb1-400b-83e6-94782a19d6e7")
+	)
+	(label "3.3V"
+		(at 64.77 134.62 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3ce6d6d8-8eb9-41d9-ba27-0b09ff21ee34")
+	)
+	(label "~{Reset}"
+		(at 54.61 91.44 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "448442ef-e303-49e9-b39c-0d734eabfe2f")
+	)
+	(label "3.3V"
+		(at 85.09 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "46394f42-b244-4c80-b1bd-ee05855651e0")
+	)
+	(label "GND"
+		(at 54.61 96.52 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "78e9065f-7ea1-4bd6-afa2-edaed0b33623")
+	)
+	(label "GND"
+		(at 87.63 130.81 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "83fd51ec-797a-4bad-b853-173d05c515a7")
+	)
+	(label "3.3V"
+		(at 22.86 120.65 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "969e9a81-3ef8-489f-9598-6a0587104855")
+	)
+	(label "CLK"
+		(at 85.09 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0792a0e-7bfd-4b8d-bd74-89fc92f7e2e9")
+	)
+	(label "CLK"
+		(at 115.57 125.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d1b3e6a7-3b92-41a5-b2dd-a14611669b08")
+	)
+	(label "3.3V"
+		(at 80.01 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d5b2f40b-d939-4cdd-8f41-b34966b9050a")
+	)
+	(label "3.3V"
+		(at 87.63 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dc197363-1b44-4267-b0de-81b6bd9a64cf")
+	)
+	(label "GND"
+		(at 54.61 118.11 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f24afd65-5740-4f6e-a46c-673709068f3e")
+	)
+	(label "3.3V"
+		(at 64.77 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fbd3f234-9215-4ea6-8005-6b6b5af66b59")
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 80.01 93.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "090d9d5d-1a7c-49ee-81d6-6f2936916bd4")
+		(property "Reference" "J2"
+			(at 80.01 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 80.01 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+			(at 80.01 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 80.01 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 80.01 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0a5900ca-18c3-46bf-bb91-4b86102a596a")
+		)
+		(pin "2"
+			(uuid "147d8a28-8f16-4ef9-8d0b-707bfd2750c9")
+		)
+		(pin "3"
+			(uuid "f7ad10ea-693d-4741-ab0f-e736c774ded9")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 64.77 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "15c540c0-03ca-4189-ac6e-32295ae96046")
+		(property "Reference" "C2"
+			(at 67.056 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 67.31 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 81.534 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.9925 143.1925 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 64.77 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fb39d612-af4a-461b-bb5b-49286f5ece88")
+		)
+		(pin "2"
+			(uuid "9595b81f-2d2d-4873-b2cd-927484f02fb5")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+			(project "Pico Sound"
+				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
+					(reference "C23")
+					(unit 1)
+				)
+			)
+			(project "Video Timer"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "C?")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C30")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
+					(reference "C68")
+					(unit 1)
+				)
+			)
+			(project "Sound"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x03_Pin")
+		(at 59.69 93.98 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "438ef4db-20ac-42e2-8e52-b92b5d5c9068")
+		(property "Reference" "J1"
+			(at 59.69 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_01x03_Pin"
+			(at 59.69 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
+			(at 59.69 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 59.69 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated"
+			(at 59.69 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "af3aadba-9f6c-41da-8246-a930e87ccfce")
+		)
+		(pin "2"
+			(uuid "3e084bc8-ff8e-421a-a495-e9673a0169cb")
+		)
+		(pin "3"
+			(uuid "a9eb499a-b307-4bcf-bf63-92c4ea8826a4")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Nexperia:74LVC2G74DP,125")
+		(at 87.63 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "79d096d8-2685-460f-9f4e-ca24ab7c89b5")
+		(property "Reference" "IC3"
+			(at 100.965 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC2G74DP,125"
+			(at 100.33 117.475 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P400X110-8N"
+			(at 110.49 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G74.pdf"
+			(at 110.49 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "D-type flip-flop"
+			(at 100.33 133.985 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 110.49 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 110.49 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC2G74DP,125"
+			(at 110.49 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "771-74LVC2G74DP-G"
+			(at 110.49 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G74DP125?qs=me8TqzrmIYX1iMHaYTXJug%3D%3D"
+			(at 110.49 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "'2G74"
+			(at 113.03 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "74LVC2G74 - Single D-type flip-flop with set and reset; positive edge trigger@en-us"
+			(at 87.63 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7ebf942d-8f49-43ff-b489-a98af346ea96")
+		)
+		(pin "5"
+			(uuid "78023ca0-5170-444d-98e6-ac5fc3b8609f")
+		)
+		(pin "1"
+			(uuid "e84b15e3-ff18-449e-8a00-972d4a072fff")
+		)
+		(pin "3"
+			(uuid "d0fc3029-6586-4e43-969c-503cb4499b9f")
+		)
+		(pin "4"
+			(uuid "82f0a56a-0b6d-4bd8-b753-48d0a8cafb2f")
+		)
+		(pin "6"
+			(uuid "3359ba59-5380-40d5-9631-3951532e25a7")
+		)
+		(pin "7"
+			(uuid "5b50c6f7-1602-48bd-b7c8-083dbeefd94a")
+		)
+		(pin "8"
+			(uuid "7f5e6c0d-f967-444f-97ff-ee13c9e31c69")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "IC3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 64.77 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "975add08-da06-4d6d-a590-7ea0e17b7690")
+		(property "Reference" "C1"
+			(at 67.056 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 67.31 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 81.534 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 66.9925 134.3025 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 64.77 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "84f958f7-2457-454c-bf78-b9eece2515ef")
+		)
+		(pin "2"
+			(uuid "cecef8b1-0ab7-429c-b94a-1a0512c7985e")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+			(project "Pico Sound"
+				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
+					(reference "C23")
+					(unit 1)
+				)
+			)
+			(project "Video Timer"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "C?")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C30")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
+					(reference "C68")
+					(unit 1)
+				)
+			)
+			(project "Sound"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Maxim:MAX6816EUS+T")
+		(at 54.61 118.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9a98ef03-c483-46e1-9ae0-d32a6b295f48")
+		(property "Reference" "IC2"
+			(at 67.31 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MAX6816EUS+T"
+			(at 67.31 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:MAX812REUST"
+			(at 75.565 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf"
+			(at 75.565 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "bounce eliminator"
+			(at 67.31 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.22"
+			(at 75.565 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Maxim Integrated"
+			(at 75.565 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "MAX6816EUS+T"
+			(at 75.565 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "700-MAX6816EUST"
+			(at 75.565 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D"
+			(at 75.565 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "MAX6816"
+			(at 75.565 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d4dbce7-3958-4301-a976-a9b82d542da6")
+		)
+		(pin "2"
+			(uuid "af8dd6b7-e245-4c5a-b758-651cee46af18")
+		)
+		(pin "3"
+			(uuid "bc2a61d7-5437-4428-ab48-6761294ad6e5")
+		)
+		(pin "4"
+			(uuid "f2745c70-1876-4446-aa36-6b91d7c6756c")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "IC2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diptronic:DTS-62N-V")
+		(at 22.86 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f8b97f3e-acae-4884-b575-0552771dc709")
+		(property "Reference" "S2"
+			(at 35.56 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DTS-62N-V"
+			(at 35.56 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:DTS62NV"
+			(at 44.45 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://akizukidenshi.com/download/ds/cosland/DTS-6-V.PDF"
+			(at 44.45 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Tactile Switch"
+			(at 35.56 127.635 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "7"
+			(at 44.45 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Diptronics"
+			(at 44.45 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "DTS-62N-V"
+			(at 44.45 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "113-DTS-62N-V"
+			(at 44.45 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-62N-V?qs=gTYE2QTfZfSKTB5KYn%252Brkw%3D%3D"
+			(at 44.45 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 52.07 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 52.07 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Tactile Switches Through Hole 6*6"
+			(at 22.86 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f4cfd00b-71c0-4bf4-ae69-5780aea3f504")
+		)
+		(pin "2"
+			(uuid "2c0166e2-0713-401b-8083-6ef996e08131")
+		)
+		(pin "3"
+			(uuid "5933237f-1905-4a39-a038-91568d592657")
+		)
+		(pin "4"
+			(uuid "fcae9f8b-8b97-4f51-86dd-a03bdcf3101d")
+		)
+		(instances
+			(project "Clock Push Button"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "S2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
 )

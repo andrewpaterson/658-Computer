@@ -22316,7 +22316,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -22879,8 +22879,21 @@
 		(layer "Edge.Cuts")
 		(uuid "a2d9eceb-1a36-4bd1-ac4e-268a5ea462b4")
 	)
+	(gr_text "Device 3: 32KB Only"
+		(at 40.15 197.739 0)
+		(layer "F.SilkS")
+		(uuid "0f76c0a1-7509-496a-9e3e-91410e288e88")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "HCP65 Small Mainboard"
-		(at 226.06 104.18 0)
+		(at 256.54 22.86 0)
 		(layer "F.SilkS" knockout)
 		(uuid "5a0395de-06aa-46cc-94cc-cefe3c68cc1a")
 		(effects
@@ -22890,6 +22903,97 @@
 				(bold yes)
 			)
 			(justify bottom)
+		)
+	)
+	(gr_text "Device 5: 32KB, Main Access 2"
+		(at 40.15 152.781 0)
+		(layer "F.SilkS")
+		(uuid "6fcb84fb-892b-49d1-bb6e-ccfd71d4a265")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Device 17: 128KB Only"
+		(at 40.15 45.339 0)
+		(layer "F.SilkS")
+		(uuid "79e2ff81-dcbc-47a1-bdb7-bedb39eb8806")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "Device 4: 32KB Only"
+		(at 40.15 178.181 0)
+		(layer "F.SilkS")
+		(uuid "93559f60-2b70-4916-a9db-bf346031ba53")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Processor Board"
+		(at 196.993 89.608 0)
+		(layer "F.SilkS")
+		(uuid "d7a68f70-0419-413e-b94c-6604c2811cec")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Processor Board"
+		(at 180.83 89.281 0)
+		(layer "F.SilkS")
+		(uuid "e6743769-6984-4556-9a1a-c1cbfc80f6a9")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify right top)
+		)
+	)
+	(gr_text "Device 16: 128KB Only"
+		(at 40.15 25.781 0)
+		(layer "F.SilkS")
+		(uuid "ef2b1b32-f44a-42b3-9bf0-60cdf0aa2706")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left top)
+		)
+	)
+	(gr_text "Device 6: 32KB,\nMain Access 1"
+		(at 40.15 122.301 0)
+		(layer "F.SilkS")
+		(uuid "f61cc12c-d6a9-44be-98fc-5ea56c765a95")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+				(bold yes)
+			)
+			(justify left top)
 		)
 	)
 	(segment
@@ -25216,6 +25320,14 @@
 		(uuid "4691f285-6393-499f-a75a-3e89dd9769ba")
 	)
 	(segment
+		(start 68.58 175.26)
+		(end 65.151 171.831)
+		(width 0.38)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "46970987-b14a-443a-98fe-710f9d7fe520")
+	)
+	(segment
 		(start 210.439 47.879)
 		(end 213.36 50.8)
 		(width 0.38)
@@ -25230,14 +25342,6 @@
 		(layer "F.Cu")
 		(net 2)
 		(uuid "477fb423-71d1-4ed7-b258-074cc12e3f7b")
-	)
-	(segment
-		(start 65.405 172.085)
-		(end 51.435 172.085)
-		(width 0.38)
-		(layer "F.Cu")
-		(net 2)
-		(uuid "48ce88ee-041e-41e6-92df-6258250df0bb")
 	)
 	(segment
 		(start 177.550595 204.3982)
@@ -26128,6 +26232,14 @@
 		(uuid "9a721ff0-1d24-4ced-a16b-1a6558d9fdf1")
 	)
 	(segment
+		(start 51.689 171.831)
+		(end 48.26 175.26)
+		(width 0.38)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "9bfba088-6e46-467f-b326-2e8daee960e2")
+	)
+	(segment
 		(start 103.5323 206.3477)
 		(end 104.14 205.74)
 		(width 0.38)
@@ -26752,20 +26864,20 @@
 		(uuid "dc6aa6f7-1674-4391-a4ec-80decf3bce73")
 	)
 	(segment
+		(start 65.151 171.831)
+		(end 51.689 171.831)
+		(width 0.38)
+		(layer "F.Cu")
+		(net 2)
+		(uuid "dcb3af2d-b086-409f-a801-c48ea679876e")
+	)
+	(segment
 		(start 154.503667 54.5723)
 		(end 173.156332 54.5723)
 		(width 0.38)
 		(layer "F.Cu")
 		(net 2)
 		(uuid "dd264e25-4930-41c1-988d-e62511bccacf")
-	)
-	(segment
-		(start 68.58 175.26)
-		(end 65.405 172.085)
-		(width 0.38)
-		(layer "F.Cu")
-		(net 2)
-		(uuid "de9a8590-328b-412e-b905-ec7adaf619bb")
 	)
 	(segment
 		(start 56.2475 95.5175)
@@ -26878,14 +26990,6 @@
 		(layer "F.Cu")
 		(net 2)
 		(uuid "e7a0cc9d-d75e-4800-a585-02a87fabfe23")
-	)
-	(segment
-		(start 51.435 172.085)
-		(end 48.26 175.26)
-		(width 0.38)
-		(layer "F.Cu")
-		(net 2)
-		(uuid "e9d4fc22-9d45-46ae-957c-b9a302090ac8")
 	)
 	(segment
 		(start 118.11 27.94)

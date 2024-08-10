@@ -64,9 +64,9 @@ public class TraceData
     return traceView;
   }
 
-  public void createAndConnectComponent(SubcircuitSimulation subcircuitSimulation,
-                                        TraceLoader traceLoader,
-                                        TraceView traceView)
+  public void createAndConnectComponentDuringLoad(SubcircuitSimulation subcircuitSimulation,
+                                                  TraceLoader traceLoader,
+                                                  TraceView traceView)
   {
     long[] traces = simulationTraces.get(subcircuitSimulation.getId());
     if (traces == null)
@@ -74,7 +74,7 @@ public class TraceData
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", subcircuitSimulation.getDescription());
     }
 
-    traceView.wireConnect(subcircuitSimulation, traceLoader, traces);
+    traceView.wireConnectDuringLoad(subcircuitSimulation, traceLoader, traces);
   }
 }
 

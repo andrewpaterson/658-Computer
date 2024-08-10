@@ -645,7 +645,8 @@ public class SubcircuitView
     return connectionViewCache.getConnectionView(x, y);
   }
 
-  public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView, Collection<ConnectionView> tracesConnectionViews)
+  public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView,
+                                                            Collection<ConnectionView> tracesConnectionViews)
   {
     CircuitInstanceViewPaths paths = getCircuitEditor().createCircuitInstanceViewPaths();
 
@@ -654,7 +655,10 @@ public class SubcircuitView
     {
       for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
       {
-        Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(subcircuitSimulation, tracesConnectionViews, paths);
+        Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(circuitInstanceView,
+                                                                                                           subcircuitSimulation,
+                                                                                                           tracesConnectionViews,
+                                                                                                           paths);
         allUpdatedConnectionViews.addAll(updatedConnectionViews);
       }
     }
@@ -663,7 +667,8 @@ public class SubcircuitView
     return allUpdatedConnectionViews;
   }
 
-  protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation,
+  protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(CircuitInstanceView circuitInstanceView,
+                                                                                      SubcircuitSimulation subcircuitSimulation,
                                                                                       Collection<ConnectionView> tracesConnectionViews,
                                                                                       CircuitInstanceViewPaths paths)
   {
@@ -677,7 +682,9 @@ public class SubcircuitView
 
       if (!updatedConnectionViews.contains(connectionView))
       {
-        WireList wireList = WireListFinder.findAndConnectTraces(connectionView, paths);
+        WireList wireList = WireListFinder.findAndConnectTraces(circuitInstanceView,
+                                                                connectionView,
+                                                                paths);
 
         WireTraceConverter wireTraceConverter = new WireTraceConverter(paths, subcircuitSimulation);
         wireTraceConverter.createTracesAndConnectPorts(wireList, subcircuitSimulation);

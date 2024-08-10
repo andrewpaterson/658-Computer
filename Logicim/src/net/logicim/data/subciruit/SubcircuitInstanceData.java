@@ -70,15 +70,15 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
+  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
   {
     throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponent() is not implemented.  Call createAndConnectComponent2() instead.");
   }
 
-  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
-                                        SubcircuitInstanceSimulation subcircuitInstanceSimulation,
-                                        CircuitLoaders circuitLoaders,
-                                        SubcircuitInstanceView componentView)
+  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+                                                  SubcircuitInstanceSimulation subcircuitInstanceSimulation,
+                                                  CircuitLoaders circuitLoaders,
+                                                  SubcircuitInstanceView componentView)
   {
     componentView.createSubcircuitInstance(containingSubcircuitSimulation, subcircuitInstanceSimulation);
 

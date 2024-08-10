@@ -36,9 +36,19 @@ public class CircuitInstanceViewPaths
     }
   }
 
-  public CircuitInstanceViewPath getFirst()
+  public CircuitInstanceViewPath getFirst(CircuitInstanceView circuitInstanceView)
   {
-    return paths.iterator().next();
+    for (CircuitInstanceViewPath path : paths)
+    {
+      if (path.size() == 1)
+      {
+        if (path.getPath().get(0) == circuitInstanceView)
+        {
+          return path;
+        }
+      }
+    }
+    throw new SimulatorException("Cannot get first path for [%s].", circuitInstanceView.getDescription());
   }
 
   public CircuitInstanceViewPath getPath(CircuitInstanceViewPath circuitInstanceViewPath, CircuitInstanceView circuitInstanceView)

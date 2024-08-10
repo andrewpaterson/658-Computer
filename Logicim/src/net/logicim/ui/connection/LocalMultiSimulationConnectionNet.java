@@ -19,7 +19,7 @@ public class LocalMultiSimulationConnectionNet
   protected Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires;
   protected List<ComponentConnection<PinView>> pinViews;
 
-  protected List<ComponentViewPortNames> componentViewPortNames;  //These are the editor 'traces'.
+  protected List<ComponentViewPortNames> componentViewPortNamesList;  //These are the editor 'traces'.
 
   public LocalMultiSimulationConnectionNet()
   {
@@ -40,14 +40,14 @@ public class LocalMultiSimulationConnectionNet
 
     if (isValid(minimumPorts))
     {
-      componentViewPortNames = createPortConnections(minimumPorts);
+      componentViewPortNamesList = getComponentViewPortNamesList(minimumPorts);
 
       findConnections(localConnectionNets);
-      addWirePortIndices();
+      addPortToComponentViewPortNames(componentViewPortNamesList);
     }
     else
     {
-      componentViewPortNames = new ArrayList<>();
+      componentViewPortNamesList = new ArrayList<>();
 
       findConnections(localConnectionNets);
     }
@@ -58,7 +58,7 @@ public class LocalMultiSimulationConnectionNet
     return minimumPorts != Integer.MAX_VALUE;
   }
 
-  protected List<ComponentViewPortNames> createPortConnections(int minimumPorts)
+  protected List<ComponentViewPortNames> getComponentViewPortNamesList(int minimumPorts)
   {
     List<ComponentViewPortNames> componentViewPortNames = new ArrayList<>(minimumPorts);
     for (int i = 0; i < minimumPorts; i++)
@@ -139,7 +139,9 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  private void addConnectedWire(CircuitInstanceViewPath path, ConnectionView connectionView, WireView connectedView)
+  private void addConnectedWire(CircuitInstanceViewPath path,
+                                ConnectionView connectionView,
+                                WireView connectedView)
   {
     List<WireConnection> wireConnections = connectedWires.get(path);
     if (wireConnections == null)
@@ -163,26 +165,35 @@ public class LocalMultiSimulationConnectionNet
     componentConnections.add(new ComponentConnection<>(componentView, connectionView));
   }
 
-  protected void addWirePortIndices()
+  protected void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList)
   {
     for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
-      List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
+      addPortToComponentViewPortNames(componentViewPortNamesList, entry.getValue());
+    }
+  }
 
-      for (ComponentConnection<ComponentView<?>> connectedComponent : componentConnections)
-      {
-        ComponentView<?> componentView = connectedComponent.component;
-        ConnectionView connectionView = connectedComponent.connection;
-        PortView portView = componentView.getPortView(connectionView);
-        List<String> portNames = portView.getPortNames();
+  private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList, List<ComponentConnection<ComponentView<?>>> componentConnections)
+  {
+    for (ComponentConnection<ComponentView<?>> connectedComponent : componentConnections)
+    {
+      ComponentView<?> componentView = connectedComponent.component;
+      ConnectionView connectionView = connectedComponent.connection;
 
-        for (int i = 0; i < componentViewPortNames.size(); i++)
-        {
-          String portName = portNames.get(i);
-          ComponentViewPortNames componentViewPortNames = this.componentViewPortNames.get(i);
-          componentViewPortNames.addPort(componentView, portName);
-        }
-      }
+      PortView portView = componentView.getPortView(connectionView);
+      List<String> portNames = portView.getPortNames();
+
+      addPortToComponentViewPortNames(componentViewPortNamesList, componentView, portNames);
+    }
+  }
+
+  private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList, ComponentView<?> componentView, List<String> portNames)
+  {
+    for (int i = 0; i < componentViewPortNamesList.size(); i++)
+    {
+      String portName = portNames.get(i);
+      ComponentViewPortNames componentViewPortNames = componentViewPortNamesList.get(i);
+      componentViewPortNames.addPort(componentView, portName);
     }
   }
 
@@ -191,9 +202,9 @@ public class LocalMultiSimulationConnectionNet
     return connectedWires;
   }
 
-  public List<ComponentViewPortNames> getComponentViewPortNames()
+  public List<ComponentViewPortNames> getComponentViewPortNamesList()
   {
-    return componentViewPortNames;
+    return componentViewPortNamesList;
   }
 
   public List<ConnectionView> getConnectionViews()

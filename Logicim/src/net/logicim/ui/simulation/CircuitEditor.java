@@ -425,7 +425,7 @@ public class CircuitEditor
         {
           SubcircuitSimulation containingSubcircuitSimulation = loaders.getSubcircuitSimulation(data.containingSimulation);
           SubcircuitInstanceSimulation subcircuitSimulation = (SubcircuitInstanceSimulation) loaders.getSubcircuitSimulation(data.instanceSimulation);
-          subcircuitInstanceData.createAndConnectComponent(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
+          subcircuitInstanceData.createAndConnectComponentDuringLoad(containingSubcircuitSimulation, subcircuitSimulation, loaders, subcircuitInstanceView);
         }
       }
     }
@@ -837,7 +837,6 @@ public class CircuitEditor
     {
       circuitInstanceViewPaths.process(subcircuitEditor);
     }
-    printCircuitInstanceViewPaths(circuitInstanceViewPaths);
     return circuitInstanceViewPaths;
   }
 

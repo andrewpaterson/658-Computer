@@ -35,5 +35,10 @@ public class CircuitInstanceViewPath
   {
     return path;
   }
+
+  public int size()
+  {
+    return path.size();
+  }
 }
 

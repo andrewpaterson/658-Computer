@@ -35,9 +35,9 @@ public interface WireView
     return getWireViewComp().getWireSubcircuitSimulations();
   }
 
-  default void wireConnect(SubcircuitSimulation subcircuitSimulation,
-                           TraceLoader traceLoader,
-                           long[] traceIds)
+  default void wireConnectDuringLoad(SubcircuitSimulation subcircuitSimulation,
+                                     TraceLoader traceLoader,
+                                     long[] traceIds)
   {
     List<Trace> traces = new ArrayList<>(traceIds.length);
     for (long id : traceIds)

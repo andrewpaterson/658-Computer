@@ -1,6 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.common.SimulatorException;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;
@@ -14,7 +15,9 @@ import java.util.*;
 
 public abstract class WireListFinder
 {
-  public static WireList findAndConnectTraces(ConnectionView inputConnectionView, CircuitInstanceViewPaths paths)
+  public static WireList findAndConnectTraces(CircuitInstanceView circuitInstanceView,
+                                              ConnectionView inputConnectionView,
+                                              CircuitInstanceViewPaths paths)
   {
     if (inputConnectionView == null)
     {
@@ -22,7 +25,7 @@ public abstract class WireListFinder
     }
 
     List<SplitterViewProcessStackItem> splitterViewStack = new ArrayList<>();
-    splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(), inputConnectionView));
+    splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(circuitInstanceView), inputConnectionView));
 
     Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
     Set<SubcircuitPinView> processedSubcircuitPinViews = new HashSet<>();
@@ -34,13 +37,13 @@ public abstract class WireListFinder
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.contains(connectionView))
       {
-        processLocalMultiSimulationConnections(splitterViewConnection.path,
-                                               connectionView,
-                                               connectionNets,
-                                               splitterViewStack,
-                                               processedSplitterViewConnections,
-                                               processedSubcircuitPinViews,
-                                               paths);
+        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = processLocalMultiSimulationConnections(splitterViewConnection.path,
+                                                                                                                     connectionView,
+                                                                                                                     splitterViewStack,
+                                                                                                                     processedSplitterViewConnections,
+                                                                                                                     processedSubcircuitPinViews,
+                                                                                                                     paths);
+        connectionNets.add(localMultiSimulationConnectionNet);
       }
     }
 
@@ -60,10 +63,10 @@ public abstract class WireListFinder
     WireList wireList = new WireList(connectionNets);
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      List<ComponentViewPortNames> componentViewPortNames = connectionNet.getComponentViewPortNames();
-      if (!componentViewPortNames.isEmpty())
+      List<ComponentViewPortNames> componentViewPortNamesList = connectionNet.getComponentViewPortNamesList();
+      if (!componentViewPortNamesList.isEmpty())
       {
-        List<FullWire> fullWires = createFullWires(totalPortWireMap, processedComponentViewPortNames, componentViewPortNames);
+        List<FullWire> fullWires = createFullWires(totalPortWireMap, processedComponentViewPortNames, componentViewPortNamesList);
         wireList.add(fullWires);
       }
       else
@@ -147,7 +150,7 @@ public abstract class WireListFinder
     Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap = new HashMap<>();
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      List<ComponentViewPortNames> componentViewPortNamesList = connectionNet.getComponentViewPortNames();
+      List<ComponentViewPortNames> componentViewPortNamesList = connectionNet.getComponentViewPortNamesList();
       for (ComponentViewPortNames componentViewPortNames : componentViewPortNamesList)
       {
         List<ComponentViewPortName> splitterPortIndices = componentViewPortNames.getSplitterPortIndices();
@@ -164,16 +167,14 @@ public abstract class WireListFinder
     return totalPortWireMap;
   }
 
-  private static void processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
-                                                             ConnectionView inputConnectionView,
-                                                             List<LocalMultiSimulationConnectionNet> connectionNets,
-                                                             List<SplitterViewProcessStackItem> splitterViewStack,
-                                                             Set<ConnectionView> processedSplitterViewConnections,
-                                                             Set<SubcircuitPinView> processedSubcircuitPinViews,
-                                                             CircuitInstanceViewPaths paths)
+  private static LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
+                                                                                          ConnectionView inputConnectionView,
+                                                                                          List<SplitterViewProcessStackItem> splitterViewStack,
+                                                                                          Set<ConnectionView> processedSplitterViewConnections,
+                                                                                          Set<SubcircuitPinView> processedSubcircuitPinViews,
+                                                                                          CircuitInstanceViewPaths paths)
   {
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
-    connectionNets.add(localMultiSimulationConnectionNet);
 
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     localConnectionsToProcess.add(new ConnectionViewProcessStackItem(path, inputConnectionView));
@@ -189,6 +190,7 @@ public abstract class WireListFinder
                               processedSubcircuitPinViews,
                               paths);
     }
+    return localMultiSimulationConnectionNet;
   }
 
   private static void processLocalConnections(ConnectionViewProcessStackItem connectionViewProcessStackItem,

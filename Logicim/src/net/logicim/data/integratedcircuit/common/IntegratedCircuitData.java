@@ -119,9 +119,9 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  public void createAndConnectComponent(SubcircuitSimulation containingSubcircuitSimulation,
-                                        CircuitLoaders circuitLoaders,
-                                        ICV integratedCircuitView)
+  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+                                                  CircuitLoaders circuitLoaders,
+                                                  ICV integratedCircuitView)
   {
     integratedCircuitView.createComponent(containingSubcircuitSimulation);
 

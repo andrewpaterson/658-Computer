@@ -15,7 +15,7 @@ public abstract class SubcircuitEditorLoadDataHelper
                                   SubcircuitSimulation subcircuitSimulation,
                                   TraceLoader traceLoader)
   {
-    data.createAndConnectComponent(subcircuitSimulation, traceLoader, view);
+    data.createAndConnectComponentDuringLoad(subcircuitSimulation, traceLoader, view);
   }
 
   public static void loadViewData(StaticView view,
@@ -23,7 +23,7 @@ public abstract class SubcircuitEditorLoadDataHelper
                                   SubcircuitSimulation subcircuitSimulation,
                                   CircuitLoaders circuitLoaders)
   {
-    data.createAndConnectComponent(subcircuitSimulation, circuitLoaders, view);
+    data.createAndConnectComponentDuringLoad(subcircuitSimulation, circuitLoaders, view);
   }
 }
 

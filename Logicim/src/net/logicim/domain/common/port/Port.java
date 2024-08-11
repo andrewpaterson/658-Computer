@@ -94,11 +94,8 @@ public abstract class Port
       throw new SimulatorException("Cannot connect null Trace to Port [%s].", getName());
     }
 
-    if (trace != null)
-    {
-      this.trace = trace;
-      this.trace.connect(this);
-    }
+    this.trace = trace;
+    this.trace.connect(this);
   }
 
   public Set<Port> getConnectedPorts()

@@ -152,15 +152,15 @@ public class LocalMultiSimulationConnectionNet
     wireConnections.add(new WireConnection(connectedView, connectionView));
   }
 
-  private void addConnectedComponent(CircuitInstanceViewPath circuitInstanceView,
+  private void addConnectedComponent(CircuitInstanceViewPath path,
                                      ConnectionView connectionView,
                                      ComponentView<?> componentView)
   {
-    List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(circuitInstanceView);
+    List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(path);
     if (componentConnections == null)
     {
       componentConnections = new ArrayList<>();
-      connectedComponents.put(circuitInstanceView, componentConnections);
+      connectedComponents.put(path, componentConnections);
     }
     componentConnections.add(new ComponentConnection<>(componentView, connectionView));
   }
@@ -207,11 +207,16 @@ public class LocalMultiSimulationConnectionNet
     return componentViewPortNamesList;
   }
 
-  public List<ConnectionView> getConnectionViews()
+  public Map<CircuitInstanceViewPath, Set<ConnectionView>> getConnectionViews()
   {
-    List<ConnectionView> connectionViews = new ArrayList<>(connectedComponents.size());
+    LinkedHashMap<CircuitInstanceViewPath, Set<ConnectionView>> result = new LinkedHashMap<>();
+
     for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
+      CircuitInstanceViewPath path = entry.getKey();
+      Set<ConnectionView> connectionViews = new LinkedHashSet<>();
+      result.put(path, connectionViews);
+
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)
       {
@@ -219,7 +224,25 @@ public class LocalMultiSimulationConnectionNet
         connectionViews.add(connectionView);
       }
     }
-    return connectionViews;
+
+    for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry : connectedWires.entrySet())
+    {
+      CircuitInstanceViewPath path = entry.getKey();
+      Set<ConnectionView> connectionViews = result.get(path);
+      if (connectionViews == null)
+      {
+        connectionViews = new LinkedHashSet<>();
+        result.put(path, connectionViews);
+      }
+
+      List<WireConnection> wireConnections = entry.getValue();
+      for (WireConnection wireConnection : wireConnections)
+      {
+        connectionViews.addAll(wireConnection.getWireView().getConnectionViews());
+      }
+    }
+
+    return result;
   }
 
   public String toString()

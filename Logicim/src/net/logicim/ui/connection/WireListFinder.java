@@ -304,12 +304,22 @@ public abstract class WireListFinder
 
   public static List<ConnectionView> getConnectionViews(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      connectionViews.addAll(connectionNet.getConnectionViews());
+      Map<CircuitInstanceViewPath, Set<ConnectionView>> iDontKnowWhatImDoing = connectionNet.getConnectionViews();
+
+      if (iDontKnowWhatImDoing.size() > 1)
+      {
+        int xxx = 0;
+      }
+
+      for (Set<ConnectionView> value : iDontKnowWhatImDoing.values())
+      {
+        connectionViews.addAll(value);
+      }
     }
-    return connectionViews;
+    return new ArrayList<>(connectionViews);
   }
 }
 

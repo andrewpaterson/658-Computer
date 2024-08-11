@@ -1,13 +1,13 @@
 package net.logicim.ui.connection;
 
+import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
+import net.logicim.ui.common.wire.WireView;
 
 import java.util.*;
 
@@ -20,9 +20,9 @@ public class WireTraceConverter
     localMultiSimulationConnectionNetMap = new HashMap<>();
   }
 
-  public void createTracesAndConnectPorts(CircuitInstanceViewPaths circuitInstanceViewPaths, WireList wireList, SubcircuitSimulation verySuspect)
+  public void createTracesAndConnectPorts(WireList wireList, SubcircuitSimulation startingSubcircuitSimulation)
   {
-    createTracesAndConnectPorts(verySuspect, wireList);
+    createTracesAndConnectPorts(startingSubcircuitSimulation, wireList);
 
 //    disconnectWireViews(wireList);
 //    connectWireViews(wireList);
@@ -52,6 +52,28 @@ public class WireTraceConverter
         }
 
         addTrace(multiSimulationConnectionNet, trace);
+      }
+    }
+
+    for (Map.Entry<LocalMultiSimulationConnectionNet, List<Trace>> entry : localMultiSimulationConnectionNetMap.entrySet())
+    {
+      LocalMultiSimulationConnectionNet connectionNet = entry.getKey();
+      List<Trace> traces = entry.getValue();
+
+      Set<WireView> processedWireViews = new HashSet<>();
+      Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires = connectionNet.getConnectedWires();
+      for (Map.Entry<CircuitInstanceViewPath, List<WireConnection>> entry1 : connectedWires.entrySet())
+      {
+        List<WireConnection> wireConnections = entry1.getValue();
+        for (WireConnection wireConnection : wireConnections)
+        {
+          WireView wireView = wireConnection.getWireView();
+          if (!processedWireViews.contains(wireView))
+          {
+            wireView.connectTraces(startingSubcircuitSimulation, traces);
+            processedWireViews.add(wireView);
+          }
+        }
       }
     }
   }

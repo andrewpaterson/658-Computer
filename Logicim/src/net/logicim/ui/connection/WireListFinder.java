@@ -15,7 +15,7 @@ import java.util.*;
 
 public abstract class WireListFinder
 {
-  public static WireList findAndConnectTraces(CircuitInstanceView circuitInstanceView,
+  public static WireList findTraceConnections(CircuitInstanceView circuitInstanceView,
                                               ConnectionView inputConnectionView,
                                               CircuitInstanceViewPaths paths)
   {

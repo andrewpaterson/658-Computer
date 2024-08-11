@@ -15,22 +15,12 @@ public class WireTraceConverter
 {
   protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
 
-  public WireTraceConverter(CircuitInstanceViewPaths circuitInstanceViewPaths, SubcircuitSimulation startingSubcircuitSimulation)
+  public WireTraceConverter()
   {
     localMultiSimulationConnectionNetMap = new HashMap<>();
-
-    for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths.getPaths())
-    {
-      List<CircuitInstanceView> path = circuitInstanceViewPath.getPath();
-      SubcircuitSimulation subcircuitSimulation = startingSubcircuitSimulation;
-      for (CircuitInstanceView circuitInstanceView : path)
-      {
-        circuitInstanceView.getDescription();
-      }
-    }
   }
 
-  public void createTracesAndConnectPorts(WireList wireList, SubcircuitSimulation verySuspect)
+  public void createTracesAndConnectPorts(CircuitInstanceViewPaths circuitInstanceViewPaths, WireList wireList, SubcircuitSimulation verySuspect)
   {
     createTracesAndConnectPorts(verySuspect, wireList);
 

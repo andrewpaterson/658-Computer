@@ -42,9 +42,10 @@ public abstract class InputDialog
     return dimension;
   }
 
-  public void setOkayButton(ActionButton okayButton)
+  public ActionButton setOkayButton(ActionButton okayButton)
   {
     this.okayButton = okayButton;
+    return okayButton;
   }
 
   protected void close()

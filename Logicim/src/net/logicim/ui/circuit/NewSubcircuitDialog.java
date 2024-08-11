@@ -37,7 +37,7 @@ public class NewSubcircuitDialog
     contentPane.add(editorPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
     JPanel bottomPanel = buildButtons(DEFAULT_WIDTH,
-                                      new ActionButton("Okay", this),
+                                      setOkayButton(new ActionButton("Okay", this)),
                                       new CancelButton("Cancel", this));
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

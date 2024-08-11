@@ -66,14 +66,11 @@ public abstract class PropertyEditorDialog
     propertiesPanel = (PropertiesPanel) editorPanel;
     contentPane.add(editorPanel, gridBagConstraints(0, 0, 1, 1, BOTH));
 
-    ActionButton okayButton = new ActionButton("Okay", this);
-    setOkayButton(okayButton);
-
     saveAsDefaultButton = new ActionButton("Save Defaults", this);
     JPanel bottomPanel = buildButtons(1,
                                       ButtonUtil.DEFAULT_WIDTH,
                                       saveAsDefaultButton,
-                                      okayButton,
+                                      setOkayButton(new ActionButton("Okay", this)),
                                       new CancelButton("Cancel", this));
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

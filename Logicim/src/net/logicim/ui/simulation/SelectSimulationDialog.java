@@ -49,11 +49,9 @@ public class SelectSimulationDialog
 
     formPanel.addLabeledComponent("Simulation", comboBox);
 
-    ActionButton okayButton = new ActionButton("Okay", this);
     JPanel bottomPanel = buildButtons(DEFAULT_WIDTH,
-                                      okayButton,
+                                      setOkayButton(new ActionButton("Okay", this)),
                                       new CancelButton("Cancel", this));
-    setOkayButton(okayButton);
     contentPane.add(bottomPanel, gridBagConstraints(0, 2, 0, 0, BOTH));
     bottomPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
   }

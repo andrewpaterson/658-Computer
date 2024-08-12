@@ -2079,35 +2079,7 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
 					(at 0 -5.08 0)
 					(length 5.08)
@@ -2162,24 +2134,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "AP7365-33WG-7_0_1"
 				(polyline
@@ -2192,6 +2146,44 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6VIn"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "3.3VOut"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -2238,15 +2230,6 @@
 				)
 			)
 			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
 				(at 0 0 0)
 				(effects
 					(font
@@ -6829,15 +6812,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 121.92 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "cb46a8ab-716d-446a-b3ce-c45ee4c4d794")
 		)
@@ -6862,12 +6836,12 @@
 					(reference "C?")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C38")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C12")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -6931,15 +6905,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 152.4 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "ab07648e-83c6-410f-9eb1-affcfb5ca91d")
 		)
@@ -6964,12 +6929,12 @@
 					(reference "C?")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C38")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C12")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -7095,15 +7060,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 20.32 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "628f1736-229f-4686-b415-9bde569ba56a")
 		)
@@ -7128,12 +7084,12 @@
 					(reference "C1")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C19")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C7")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -7197,15 +7153,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 91.44 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "4bc0ec5c-b8b0-4ce5-9a47-b8e583dba719")
 		)
@@ -7230,12 +7177,12 @@
 					(reference "C?")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C38")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C12")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -7594,16 +7541,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 55.88 221.742 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f7b9c6a5-a9f9-4b2a-a7a1-65c5775433e6")
 		)
@@ -7637,12 +7574,12 @@
 					(reference "IC7")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "IC6")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "IC24")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "IC6")
 					(unit 1)
 				)
 			)
@@ -7987,15 +7924,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 106.68 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "58af97d7-2ee8-41e4-9618-730d534ba11d")
 		)
@@ -8020,12 +7948,12 @@
 					(reference "C?")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C38")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C12")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -8090,15 +8018,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 63.5 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "65ca7132-67f0-4c91-b553-f227979172f7")
 		)
@@ -8123,12 +8042,12 @@
 					(reference "C2")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C8")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -8445,15 +8364,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 137.16 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "5246bcc8-5a08-4436-b955-e4764f11dd36")
 		)
@@ -8478,12 +8388,12 @@
 					(reference "C?")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C38")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C12")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C38")
 					(unit 1)
 				)
 			)

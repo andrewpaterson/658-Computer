@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.4*%
-%TF.CreationDate,2024-08-08T09:03:18+02:00*%
+%TF.CreationDate,2024-08-12T20:09:22+02:00*%
 %TF.ProjectId,W65C816 Latch,57363543-3831-4362-904c-617463682e6b,V1*%
 %TF.SameCoordinates,PX54c81a0PY37b6b20*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-08 09:03:18*
+G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-12 20:09:22*
 %MOMM*%
 %LPD*%
 G01*

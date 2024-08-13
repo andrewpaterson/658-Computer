@@ -1,12 +1,12 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,7.0.5*%
-%TF.CreationDate,2024-01-27T16:37:14+02:00*%
+%TF.GenerationSoftware,KiCad,Pcbnew,8.0.4*%
+%TF.CreationDate,2024-08-13T19:01:42+02:00*%
 %TF.ProjectId,Sound Address Decode,536f756e-6420-4416-9464-726573732044,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.5) date 2024-01-27 16:37:14*
+G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-13 19:01:42*
 %MOMM*%
 %LPD*%
 G01*

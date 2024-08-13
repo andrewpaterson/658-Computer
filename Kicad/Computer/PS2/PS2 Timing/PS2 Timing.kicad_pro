@@ -58,7 +58,9 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_edge_clearance|126460255|48132000|696c23fe-e7d3-4e15-87ba-bff115a77ac8|5479704c-6c7b-4fc2-9524-7b0cb6412ee7"
+      ],
       "meta": {
         "version": 2
       },
@@ -79,6 +81,7 @@
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "warning",
         "item_on_disabled_layer": "error",
@@ -512,19 +515,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "*/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "*/5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "*/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "*/12V*"
+        "pattern": "*12V*"
       }
     ]
   },
@@ -533,7 +536,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "PS2 Timing",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "PS2 Timing.step",
@@ -544,6 +547,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",

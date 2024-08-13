@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.4*%
-%TF.CreationDate,2024-08-13T08:37:04+02:00*%
+%TF.CreationDate,2024-08-13T10:13:26+02:00*%
 %TF.ProjectId,PS2 Board,50533220-426f-4617-9264-2e6b69636164,rev?*%
 %TF.SameCoordinates,PX292dfe0PY463f660*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-13 08:37:04*
+G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-13 10:13:26*
 %MOMM*%
 %LPD*%
 G01*

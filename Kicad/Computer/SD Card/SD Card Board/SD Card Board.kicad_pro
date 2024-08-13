@@ -217,6 +217,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.6,
+          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false
@@ -522,19 +526,19 @@
       },
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       }
     ]
   },
@@ -543,7 +547,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "PS2 Board",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",

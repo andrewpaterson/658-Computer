@@ -29054,34 +29054,7 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Automotive 300mA Low-Iq, High PSRR Low-Dropout (LDO) Regulator"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "TLV702125QDBVRQ1_0_0"
-			(pin passive line
-				(at 0 0 0)
-				(length 5.08)
-				(name "IN"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin passive line
 				(at 0 -5.08 0)
 				(length 5.08)
@@ -29093,42 +29066,6 @@
 					)
 				)
 				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 25.4 -5.08 180)
-				(length 5.08)
-				(name "NC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 25.4 0 180)
-				(length 5.08)
-				(name "OUT"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -29152,6 +29089,24 @@
 			)
 		)
 		(symbol "TLV702125QDBVRQ1_1_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "5VIn"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin input line
 				(at 0 -2.54 0)
 				(length 5.08)
@@ -29163,6 +29118,42 @@
 					)
 				)
 				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 25.4 -5.08 180)
+				(length 5.08) hide
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08)
+				(name "1.25VOut"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)

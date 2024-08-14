@@ -1383,35 +1383,7 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
 					(at 0 -5.08 0)
 					(length 5.08)
@@ -1466,24 +1438,6 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "AP7365-33WG-7_0_1"
 				(polyline
@@ -1496,6 +1450,44 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6VIn"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "3.3VOut"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -1542,15 +1534,6 @@
 				)
 			)
 			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Unpolarized capacitor, small symbol"
 				(at 0 0 0)
 				(effects
 					(font
@@ -7307,15 +7290,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 149.86 175.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "21724d68-9a14-4da5-8bae-0205e555759f")
 		)
@@ -7375,15 +7349,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 119.38 175.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 119.38 175.26 0)
 			(effects
 				(font
@@ -7485,15 +7450,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 134.62 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "85bd9cb8-e916-476b-a7d0-8912c9c2d171")
 		)
@@ -7579,15 +7535,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 104.14 175.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 104.14 175.26 0)
 			(effects
 				(font
@@ -7689,15 +7636,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 29.21 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "628f1736-229f-4686-b415-9bde569ba56a")
 		)
@@ -7722,12 +7660,12 @@
 					(reference "C1")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C19")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C7")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C19")
 					(unit 1)
 				)
 			)
@@ -7783,15 +7721,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 104.14 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 104.14 184.15 0)
 			(effects
 				(font
@@ -8128,16 +8057,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 64.77 214.122 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f7b9c6a5-a9f9-4b2a-a7a1-65c5775433e6")
 		)
@@ -8171,12 +8090,12 @@
 					(reference "IC7")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "IC6")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "IC24")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "IC6")
 					(unit 1)
 				)
 			)
@@ -8386,15 +8305,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 72.39 181.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "65ca7132-67f0-4c91-b553-f227979172f7")
 		)
@@ -8419,12 +8329,12 @@
 					(reference "C2")
 					(unit 1)
 				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
 					(reference "C8")
+					(unit 1)
+				)
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
+					(reference "C20")
 					(unit 1)
 				)
 			)
@@ -8480,15 +8390,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 119.38 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 119.38 184.15 0)
 			(effects
 				(font
@@ -8556,15 +8457,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 134.62 175.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
 			(at 134.62 175.26 0)
 			(effects
 				(font

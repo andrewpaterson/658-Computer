@@ -871,15 +871,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Address Buffer 24bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Address Buffer 24bit"
 			(at 0 0 0)
 			(effects
@@ -924,10 +915,10 @@
 			)
 		)
 		(symbol "Address_Buffer_24bit_1_1"
-			(pin input line
-				(at -5.08 -10.16 0)
+			(pin input inverted
+				(at -5.08 0 0)
 				(length 5.08)
-				(name "A23_{IN}"
+				(name "~{OE}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -942,10 +933,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 35.56 0 180)
-				(length 5.08) hide
-				(name "GND"
+			(pin input line
+				(at -5.08 -25.4 0)
+				(length 5.08)
+				(name "A17_{IN}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -953,6 +944,24 @@
 					)
 				)
 				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -27.94 0)
+				(length 5.08)
+				(name "A16_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -970,7 +979,7 @@
 						)
 					)
 				)
-				(number "11"
+				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -982,24 +991,6 @@
 				(at -5.08 -33.02 0)
 				(length 5.08)
 				(name "A14_{IN}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input inverted
-				(at -5.08 0 0)
-				(length 5.08)
-				(name "Device_~{CS}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1123,9 +1114,9 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -12.7 0)
+				(at -5.08 -10.16 0)
 				(length 5.08)
-				(name "A22_{IN}"
+				(name "A23_{IN}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1501,9 +1492,9 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -15.24 0)
+				(at -5.08 -12.7 0)
 				(length 5.08)
-				(name "A21_{IN}"
+				(name "A22_{IN}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1644,10 +1635,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 35.56 -7.62 180)
-				(length 5.08) hide
-				(name "GND"
+			(pin output line
+				(at 35.56 -27.94 180)
+				(length 5.08)
+				(name "A16"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1662,10 +1653,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 35.56 -73.66 180)
+			(pin passive line
+				(at 35.56 -7.62 180)
 				(length 5.08) hide
-				(name "N.C."
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1673,42 +1664,6 @@
 					)
 				)
 				(number "48"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -27.94 180)
-				(length 5.08)
-				(name "A16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "49"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -5.08 -17.78 0)
-				(length 5.08)
-				(name "A20_{IN}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1726,7 +1681,25 @@
 						)
 					)
 				)
-				(number "50"
+				(number "49"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "A21_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1744,7 +1717,7 @@
 						)
 					)
 				)
-				(number "51"
+				(number "50"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1762,7 +1735,7 @@
 						)
 					)
 				)
-				(number "52"
+				(number "51"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1780,7 +1753,7 @@
 						)
 					)
 				)
-				(number "53"
+				(number "52"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1798,7 +1771,7 @@
 						)
 					)
 				)
-				(number "54"
+				(number "53"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1816,7 +1789,7 @@
 						)
 					)
 				)
-				(number "55"
+				(number "54"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1834,7 +1807,43 @@
 						)
 					)
 				)
+				(number "55"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -2.54 0)
+				(length 5.08)
+				(name "CLK"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
 				(number "56"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -17.78 0)
+				(length 5.08)
+				(name "A20_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1852,7 +1861,7 @@
 						)
 					)
 				)
-				(number "6"
+				(number "7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1870,24 +1879,6 @@
 						)
 					)
 				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -5.08 -25.4 0)
-				(length 5.08)
-				(name "A17_{IN}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
 				(number "8"
 					(effects
 						(font
@@ -1896,10 +1887,10 @@
 					)
 				)
 			)
-			(pin input line
-				(at -5.08 -27.94 0)
-				(length 5.08)
-				(name "A16_{IN}"
+			(pin passive line
+				(at 35.56 0 180)
+				(length 5.08) hide
+				(name "GND"
 					(effects
 						(font
 							(size 1.27 1.27)

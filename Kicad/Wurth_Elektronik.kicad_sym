@@ -1,1443 +1,3844 @@
-(kicad_symbol_lib (version 20220914) (generator kicad_symbol_editor)
-  (symbol "150224BS73100A" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "LED" (at 0 1.905 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Value" "150224BS73100A" (at 12.7 -13.335 0)
-      (effects (font (size 1.27 1.27)) (justify bottom) hide)
-    )
-    (property "Footprint" "SamacSys_Parts:150224BS73100A" (at 4.445 -8.255 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Datasheet" "https://www.we-online.com/catalog/datasheet/150224BS73100A.pdf" (at 4.445 -10.795 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Description" "blue LED" (at 0 -3.175 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Height" "1.41" (at 4.445 -15.875 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 4.445 -18.415 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Part_Number" "150224BS73100A" (at 4.445 -20.955 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Part Number" "710-150224BS73100A" (at 4.445 -23.495 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224BS73100A?qs=fAHHVMwC%252BbiyYxPpssMINA%3D%3D" (at 4.445 -26.035 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Silkscreen" "blu" (at 5.715 -5.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Garbage" "Blue LED" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "150224BS73100A_0_0"
-      (pin passive line (at -3.81 0 0) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 3.81 0 180) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "150224BS73100A_0_1"
-      (polyline
-        (pts
-          (xy -1.27 1.27)
-          (xy -1.27 -1.27)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy 0 1.27)
-          (xy -0.635 1.905)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy -1.27 0)
-          (xy 1.27 1.27)
-          (xy 1.27 -1.27)
-          (xy -1.27 0)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 0 1.905)
-          (xy -0.635 1.27)
-          (xy -0.635 1.905)
-          (xy 0 1.905)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type outline))
-      )
-    )
-  )
-  (symbol "150224SS73100" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "LED" (at 0 1.905 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Value" "150224SS73100" (at 12.065 -13.335 0)
-      (effects (font (size 1.27 1.27)) (justify bottom) hide)
-    )
-    (property "Footprint" "SamacSys_Parts:150224SS73100A" (at 3.81 -8.255 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Datasheet" "http://www.farnell.com/datasheets/2301711.pdf" (at 3.81 -10.795 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Description" "red LED" (at 0 -3.175 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Height" "1.31" (at 3.81 -15.875 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 3.81 -18.415 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Part_Number" "150224SS73100" (at 3.81 -20.955 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Part Number" "710-150224SS73100" (at 3.81 -23.495 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224SS73100?qs=5aG0NVq1C4xYrTr%2FIVl59g%3D%3D" (at 3.81 -26.035 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Silkscreen" "red" (at 5.715 -5.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Garbage" "Red LED" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "150224SS73100_0_0"
-      (pin passive line (at -3.81 0 0) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 3.81 0 180) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "150224SS73100_0_1"
-      (polyline
-        (pts
-          (xy -1.27 1.27)
-          (xy -1.27 -1.27)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy 0 1.27)
-          (xy -0.635 1.905)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy -1.27 0)
-          (xy 1.27 1.27)
-          (xy 1.27 -1.27)
-          (xy -1.27 0)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 0 1.905)
-          (xy -0.635 1.27)
-          (xy -0.635 1.905)
-          (xy 0 1.905)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type outline))
-      )
-    )
-  )
-  (symbol "150224VS73100A" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "LED" (at 0 1.905 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Value" "150224VS73100A" (at 12.065 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify bottom) hide)
-    )
-    (property "Footprint" "SamacSys_Parts:150224VS73100A" (at 3.81 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Datasheet" "https://www.we-online.com/katalog/datasheet/150224VS73100A.pdf" (at 3.81 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Description" "green LED" (at 0 -3.175 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Height" "1.41" (at 3.81 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 3.81 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Part_Number" "150224VS73100A" (at 3.81 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Part Number" "710-150224VS73100A" (at 3.81 -24.13 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224VS73100A?qs=8Aam6%252B7C6HG2%2FfdOsQ%2FdNg%3D%3D" (at 3.81 -26.67 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Silkscreen" "grn" (at 5.715 -5.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Garbage" "Green LED" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "150224VS73100A_0_0"
-      (pin passive line (at -3.81 0 0) (length 2.54)
-        (name "" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 3.81 0 180) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "150224VS73100A_0_1"
-      (polyline
-        (pts
-          (xy -1.27 1.27)
-          (xy -1.27 -1.27)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy 0 1.27)
-          (xy -0.635 1.905)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy -1.27 0)
-          (xy 1.27 1.27)
-          (xy 1.27 -1.27)
-          (xy -1.27 0)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 0 1.905)
-          (xy -0.635 1.27)
-          (xy -0.635 1.905)
-          (xy 0 1.905)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type outline))
-      )
-    )
-  )
-  (symbol "150224YS73100A" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "LED" (at 0 1.905 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Value" "150224YS73100A" (at 12.7 -13.335 0)
-      (effects (font (size 1.27 1.27)) (justify bottom) hide)
-    )
-    (property "Footprint" "SamacSys_Parts:150224BS73100A" (at 4.445 -8.255 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Datasheet" "https://www.we-online.com/catalog/datasheet/150224BS73100A.pdf" (at 4.445 -10.795 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Description" "yellow LED" (at 0 -3.175 0)
-      (effects (font (size 1.27 1.27)) (justify bottom))
-    )
-    (property "Height" "1.41" (at 4.445 -15.875 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 4.445 -18.415 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom) hide)
-    )
-    (property "Silkscreen" "ylw" (at 5.715 -5.08 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Garbage" "Yellow LED" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "150224YS73100A_0_0"
-      (pin passive line (at -3.81 0 0) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 3.81 0 180) (length 2.54)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "150224YS73100A_0_1"
-      (polyline
-        (pts
-          (xy -1.27 1.27)
-          (xy -1.27 -1.27)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy 0 1.27)
-          (xy -0.635 1.905)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type none))
-      )
-      (polyline
-        (pts
-          (xy -1.27 0)
-          (xy 1.27 1.27)
-          (xy 1.27 -1.27)
-          (xy -1.27 0)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 0 1.905)
-          (xy -0.635 1.27)
-          (xy -0.635 1.905)
-          (xy 0 1.905)
-        )
-        (stroke (width 0.254) (type default))
-        (fill (type outline))
-      )
-    )
-  )
-  (symbol "618015330923" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "J" (at 11.43 5.08 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "618015330923" (at 11.43 3.175 0)
-      (effects (font (size 1.27 1.27) bold))
-    )
-    (property "Footprint" "SamacSys_Parts:618015330923" (at 20.32 -30.48 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "http://uk.rs-online.com/web/p/products/7718341" (at 20.32 -33.02 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "D-sub connector (VGA)" (at 13.335 -26.035 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Height" "" (at 19.05 -5.08 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 20.32 -35.56 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "618015330923" (at 20.32 -38.1 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-618015330923" (at 20.32 -40.64 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/618015330923?qs=ZtY9WdtwX566yFL5v0bMIQ%3D%3D" (at 20.32 -43.18 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 19.05 -17.78 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 19.05 -20.32 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Wurth Elektronik 618 Series 2.54 mm, 5.08 mm Pitch 15 Way Right Angle Through Hole Mount PCB D-sub Connector, Socket" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "618015330923_0_1"
-      (polyline
-        (pts
-          (xy 5.08 1.905)
-          (xy 20.32 1.905)
-          (xy 20.32 -24.765)
-          (xy 5.08 -24.765)
-          (xy 5.08 1.905)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-    (symbol "618015330923_1_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "RED" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 -10.16 180) (length 5.08)
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "10" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -15.24 0) (length 5.08)
-        (name "ID0" (effects (font (size 1.27 1.27))))
-        (number "11" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -17.78 0) (length 5.08)
-        (name "ID1" (effects (font (size 1.27 1.27))))
-        (number "12" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -7.62 0) (length 5.08)
-        (name "HSYNC" (effects (font (size 1.27 1.27))))
-        (number "13" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -10.16 0) (length 5.08)
-        (name "VSYNC" (effects (font (size 1.27 1.27))))
-        (number "14" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -22.86 0) (length 5.08)
-        (name "ID3" (effects (font (size 1.27 1.27))))
-        (number "15" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -2.54 0) (length 5.08)
-        (name "GREEN" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -5.08 0) (length 5.08)
-        (name "BLUE" (effects (font (size 1.27 1.27))))
-        (number "3" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 0 -20.32 0) (length 5.08)
-        (name "ID2" (effects (font (size 1.27 1.27))))
-        (number "4" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 0 180) (length 5.08)
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "5" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 -2.54 180) (length 5.08)
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "6" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 -5.08 180) (length 5.08)
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "7" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 -7.62 180) (length 5.08)
-        (name "GND" (effects (font (size 1.27 1.27))))
-        (number "8" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 25.4 -15.24 180) (length 5.08)
-        (name "KEY" (effects (font (size 1.27 1.27))))
-        (number "9" (effects (font (size 1.27 1.27))))
-      )
-    )
-  )
-  (symbol "885012007051" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012007051" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X70N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012007051.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10pF NP00805100J050DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.7" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012007051" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012007051" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=710-885012007051" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10pF NP00805100J050DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012007051_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012007051_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012107014" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012107014" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X135N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012107014.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000000pF X5R0805106M016DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "1.35" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012107014" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012107014?qs=0KOYDY2FL28i0pwNdARIlg%3D%3D" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012107014" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000000pF X5R0805106M016DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012107014_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012107014_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207027" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207027" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207027.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K016DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207027" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207027?qs=0KOYDY2FL28IWYVDh0DkrQ%3D%3D" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207027" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K016DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207027_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207027_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207033" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 5.715 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207033" (at -1.27 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207033.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "MLCC 1000pF" (at 0 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207033" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207033" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207033?qs=0KOYDY2FL28ky2lrUPvQ%2Fw%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K016DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207033_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207033_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207039" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207039" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207039.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K016DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207039" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207039?qs=0KOYDY2FL2%252BjKOMMj37%2Fng%3D%3D" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207039" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K016DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207039_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207039_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207045" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207045" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207045.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K016DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207045" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207045?qs=0KOYDY2FL2%252BXQfJ0lEk3cQ%3D%3D" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207045" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K016DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207045_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207045_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207060" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207060" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207060.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K025DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207060" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207060" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207060?qs=0KOYDY2FL2%252BYUmSrx5mMUA%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K025DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207060_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207060_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207066" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207066" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207066.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K025DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207066" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207066" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207066?qs=0KOYDY2FL2%252BM7ItRdrmg%252BQ%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K025DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207066_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207066_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207072" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207072" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207072.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K025DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207072" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207072" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207072?qs=0KOYDY2FL28rQMV4504TxA%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K025DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207072_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207072_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207078" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207078" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X135N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207078.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K025DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "1.35" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207078" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207078" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207078?qs=0KOYDY2FL2%252BPiA0twQIXxQ%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K025DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207078_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207078_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207080" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207080" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X90N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207080.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K050DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "0.9" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207080" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207080" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207080?qs=0KOYDY2FL29nQj6zPLvtMg%3D%3D" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Part Number" "" (at 8.89 -19.05 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Arrow Price/Stock" "" (at 8.89 -21.59 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K050DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207080_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207080_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
-  (symbol "885012207103" (pin_names (offset 0.762)) (in_bom yes) (on_board yes)
-    (property "Reference" "C" (at 8.89 6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "885012207103" (at 8.89 3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "SamacSys_Parts:CAPC2012X135N" (at 8.89 1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207103.pdf" (at 8.89 -1.27 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K050DFCT10000" (at 8.89 -3.81 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Height" "1.35" (at 8.89 -6.35 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Part Number" "710-885012207103" (at 8.89 -8.89 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207103?qs=0KOYDY2FL29xtVOqwDMWZA%3D%3D" (at 8.89 -11.43 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Name" "Wurth Elektronik" (at 8.89 -13.97 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Manufacturer_Part_Number" "885012207103" (at 8.89 -16.51 0)
-      (effects (font (size 1.27 1.27)) (justify left) hide)
-    )
-    (property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K050DFCT10000" (at 0 0 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (symbol "885012207103_0_0"
-      (pin passive line (at 0 0 0) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "1" (effects (font (size 1.27 1.27))))
-      )
-      (pin passive line (at 12.7 0 180) (length 5.08)
-        (name "~" (effects (font (size 1.27 1.27))))
-        (number "2" (effects (font (size 1.27 1.27))))
-      )
-    )
-    (symbol "885012207103_0_1"
-      (polyline
-        (pts
-          (xy 5.08 0)
-          (xy 5.588 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 5.588 2.54)
-          (xy 5.588 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 0)
-          (xy 7.62 0)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-      (polyline
-        (pts
-          (xy 7.112 2.54)
-          (xy 7.112 -2.54)
-        )
-        (stroke (width 0.1524) (type default))
-        (fill (type background))
-      )
-    )
-  )
+(kicad_symbol_lib
+	(version 20231120)
+	(generator "kicad_symbol_editor")
+	(generator_version "8.0")
+	(symbol "150224BS73100A"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "LED"
+			(at 0 1.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224BS73100A"
+			(at 12.7 -13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224BS73100A"
+			(at 4.445 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.we-online.com/catalog/datasheet/150224BS73100A.pdf"
+			(at 4.445 -10.795 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "blue LED"
+			(at 0 -3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.41"
+			(at 4.445 -15.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 4.445 -18.415 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "150224BS73100A"
+			(at 4.445 -20.955 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-150224BS73100A"
+			(at 4.445 -23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224BS73100A?qs=fAHHVMwC%252BbiyYxPpssMINA%3D%3D"
+			(at 4.445 -26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "blu"
+			(at 5.715 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Blue LED"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "150224BS73100A_0_0"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "150224BS73100A_0_1"
+			(polyline
+				(pts
+					(xy -1.27 1.27) (xy -1.27 -1.27)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.27) (xy -0.635 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0) (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.905) (xy -0.635 1.27) (xy -0.635 1.905) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+	)
+	(symbol "150224SS73100"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "LED"
+			(at 0 1.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224SS73100"
+			(at 12.065 -13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224SS73100A"
+			(at 3.81 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.farnell.com/datasheets/2301711.pdf"
+			(at 3.81 -10.795 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "red LED"
+			(at 0 -3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.31"
+			(at 3.81 -15.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 3.81 -18.415 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "150224SS73100"
+			(at 3.81 -20.955 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-150224SS73100"
+			(at 3.81 -23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224SS73100?qs=5aG0NVq1C4xYrTr%2FIVl59g%3D%3D"
+			(at 3.81 -26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "red"
+			(at 5.715 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Red LED"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "150224SS73100_0_0"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "150224SS73100_0_1"
+			(polyline
+				(pts
+					(xy -1.27 1.27) (xy -1.27 -1.27)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.27) (xy -0.635 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0) (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.905) (xy -0.635 1.27) (xy -0.635 1.905) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+	)
+	(symbol "150224VS73100A"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "LED"
+			(at 0 1.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224VS73100A"
+			(at 12.065 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224VS73100A"
+			(at 3.81 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.we-online.com/katalog/datasheet/150224VS73100A.pdf"
+			(at 3.81 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "green LED"
+			(at 0 -3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.41"
+			(at 3.81 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 3.81 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "150224VS73100A"
+			(at 3.81 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-150224VS73100A"
+			(at 3.81 -24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224VS73100A?qs=8Aam6%252B7C6HG2%2FfdOsQ%2FdNg%3D%3D"
+			(at 3.81 -26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "grn"
+			(at 5.715 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Green LED"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "150224VS73100A_0_0"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "150224VS73100A_0_1"
+			(polyline
+				(pts
+					(xy -1.27 1.27) (xy -1.27 -1.27)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.27) (xy -0.635 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0) (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.905) (xy -0.635 1.27) (xy -0.635 1.905) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+	)
+	(symbol "150224YS73100A"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "LED"
+			(at 0 1.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224YS73100A"
+			(at 12.7 -13.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224BS73100A"
+			(at 4.445 -8.255 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.we-online.com/catalog/datasheet/150224BS73100A.pdf"
+			(at 4.445 -10.795 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "yellow LED"
+			(at 0 -3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.41"
+			(at 4.445 -15.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 4.445 -18.415 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "ylw"
+			(at 5.715 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Yellow LED"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "150224YS73100A_0_0"
+			(pin passive line
+				(at -3.81 0 0)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 3.81 0 180)
+				(length 2.54)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "150224YS73100A_0_1"
+			(polyline
+				(pts
+					(xy -1.27 1.27) (xy -1.27 -1.27)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.27) (xy -0.635 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0) (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0 1.905) (xy -0.635 1.27) (xy -0.635 1.905) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+	)
+	(symbol "618015330923"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "J"
+			(at 12.7 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "618015330923"
+			(at 12.7 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:618015330923"
+			(at 20.32 -30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://uk.rs-online.com/web/p/products/7718341"
+			(at 20.32 -33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "D-sub connector (VGA)"
+			(at 13.335 -26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" ""
+			(at 19.05 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 20.32 -35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "618015330923"
+			(at 20.32 -38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-618015330923"
+			(at 20.32 -40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/618015330923?qs=ZtY9WdtwX566yFL5v0bMIQ%3D%3D"
+			(at 20.32 -43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 19.05 -17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 19.05 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "618015330923_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -24.765) (xy 5.08 -24.765) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "618015330923_1_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "RED"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -10.16 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "ID0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -17.78 0)
+				(length 5.08)
+				(name "ID1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "HSYNC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "VSYNC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -22.86 0)
+				(length 5.08)
+				(name "ID3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "GREEN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "BLUE"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -20.32 0)
+				(length 5.08)
+				(name "ID2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -2.54 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -5.08 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -7.62 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -15.24 180)
+				(length 5.08)
+				(name "KEY"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -20.32 180)
+				(length 5.08) hide
+				(name "MH1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "MH1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 -22.86 180)
+				(length 5.08) hide
+				(name "MH2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "MH2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "885012007051"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012007051"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X70N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012007051.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10pF NP00805100J050DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.7"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012007051"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012007051"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=710-885012007051"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10pF NP00805100J050DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012007051_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012007051_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012107014"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012107014"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X135N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012107014.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000000pF X5R0805106M016DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "1.35"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012107014"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012107014?qs=0KOYDY2FL28i0pwNdARIlg%3D%3D"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012107014"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000000pF X5R0805106M016DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012107014_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012107014_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207027"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207027"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207027.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K016DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207027"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207027?qs=0KOYDY2FL28IWYVDh0DkrQ%3D%3D"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207027"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K016DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207027_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207027_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207033"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 5.715 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207033"
+			(at -1.27 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207033.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "MLCC 1000pF"
+			(at 0 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207033"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207033"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207033?qs=0KOYDY2FL28ky2lrUPvQ%2Fw%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K016DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207033_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207033_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207039"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207039"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207039.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K016DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207039"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207039?qs=0KOYDY2FL2%252BjKOMMj37%2Fng%3D%3D"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207039"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K016DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207039_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207039_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207045"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207045"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207045.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K016DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207045"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207045?qs=0KOYDY2FL2%252BXQfJ0lEk3cQ%3D%3D"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207045"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K016DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207045_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207045_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207060"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207060"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207060.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K025DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207060"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207060"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207060?qs=0KOYDY2FL2%252BYUmSrx5mMUA%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000pF X7R0805102K025DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207060_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207060_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207066"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207066"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207066.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K025DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207066"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207066"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207066?qs=0KOYDY2FL2%252BM7ItRdrmg%252BQ%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 10000pF X7R0805103K025DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207066_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207066_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207072"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207072"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207072.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K025DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207072"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207072"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207072?qs=0KOYDY2FL28rQMV4504TxA%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100000pF X7R0805104K025DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207072_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207072_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207078"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207078"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X135N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207078.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K025DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "1.35"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207078"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207078"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207078?qs=0KOYDY2FL2%252BPiA0twQIXxQ%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K025DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207078_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207078_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207080"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207080"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X90N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207080.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K050DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "0.9"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207080"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207080"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207080?qs=0KOYDY2FL29nQj6zPLvtMg%3D%3D"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 8.89 -19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 8.89 -21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 100pF X7R0805101K050DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207080_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207080_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
+	(symbol "885012207103"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "C"
+			(at 8.89 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "885012207103"
+			(at 8.89 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAPC2012X135N"
+			(at 8.89 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://katalog.we-online.com/pbs/datasheet/885012207103.pdf"
+			(at 8.89 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K050DFCT10000"
+			(at 8.89 -3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "1.35"
+			(at 8.89 -6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-885012207103"
+			(at 8.89 -8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/885012207103?qs=0KOYDY2FL29xtVOqwDMWZA%3D%3D"
+			(at 8.89 -11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 8.89 -13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "885012207103"
+			(at 8.89 -16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Multilayer Ceramic Chip Capacitor WCAP-CSGP Series 0805 1000000pF X7R0805105K050DFCT10000"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "885012207103_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 5.08)
+				(name "~"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "885012207103_0_1"
+			(polyline
+				(pts
+					(xy 5.08 0) (xy 5.588 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.588 2.54) (xy 5.588 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.112 2.54) (xy 7.112 -2.54)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+	)
 )

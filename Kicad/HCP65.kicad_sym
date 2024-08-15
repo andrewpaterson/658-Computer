@@ -58,15 +58,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Address Buffer 16bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Address Buffer 16bit"
 			(at 0 0 0)
 			(effects
@@ -855,7 +846,7 @@
 			)
 		)
 		(property "Description" "Address Buffer 24bit"
-			(at 15.875 -22.86 0)
+			(at 15.875 -33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -863,7 +854,7 @@
 			)
 		)
 		(property "Silkscreen" "Address Buffer 24bit"
-			(at 15.875 -25.4 0)
+			(at 15.875 -35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -915,6 +906,1098 @@
 			)
 		)
 		(symbol "Address_Buffer_24bit_1_1"
+			(pin input line
+				(at -5.08 -10.16 0)
+				(length 5.08)
+				(name "A23_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -27.94 0)
+				(length 5.08)
+				(name "A16_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -30.48 0)
+				(length 5.08)
+				(name "A15_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -33.02 0)
+				(length 5.08)
+				(name "A14_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 0 0)
+				(length 5.08)
+				(name "Device_~{CS}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -35.56 0)
+				(length 5.08)
+				(name "A13_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -38.1 0)
+				(length 5.08)
+				(name "A12_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -40.64 0)
+				(length 5.08)
+				(name "A11_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -43.18 0)
+				(length 5.08)
+				(name "A10_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -45.72 0)
+				(length 5.08)
+				(name "A9_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -48.26 0)
+				(length 5.08)
+				(name "A8_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -12.7 0)
+				(length 5.08)
+				(name "A22_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 -2.54 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -50.8 0)
+				(length 5.08)
+				(name "A7_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -53.34 0)
+				(length 5.08)
+				(name "A7_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -55.88 0)
+				(length 5.08)
+				(name "A5_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -58.42 0)
+				(length 5.08)
+				(name "A4_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -60.96 0)
+				(length 5.08)
+				(name "A3_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -63.5 0)
+				(length 5.08)
+				(name "A2_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -66.04 0)
+				(length 5.08)
+				(name "A1_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -68.58 0)
+				(length 5.08)
+				(name "A0_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -71.12 180)
+				(length 5.08)
+				(name "A0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -71.12 0)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -68.58 180)
+				(length 5.08)
+				(name "A1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -73.66 0)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -66.04 180)
+				(length 5.08)
+				(name "A2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -63.5 180)
+				(length 5.08)
+				(name "A3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "33"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -60.96 180)
+				(length 5.08)
+				(name "A4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "34"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -58.42 180)
+				(length 5.08)
+				(name "A5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "35"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -55.88 180)
+				(length 5.08)
+				(name "A6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "36"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -53.34 180)
+				(length 5.08)
+				(name "A7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "38"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -50.8 180)
+				(length 5.08)
+				(name "A8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "39"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "A21_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -48.26 180)
+				(length 5.08)
+				(name "A9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "40"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -45.72 180)
+				(length 5.08)
+				(name "A10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "41"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -43.18 180)
+				(length 5.08)
+				(name "A11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "42"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -40.64 180)
+				(length 5.08)
+				(name "A12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "43"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -38.1 180)
+				(length 5.08)
+				(name "A13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "44"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -35.56 180)
+				(length 5.08)
+				(name "A14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "45"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -33.02 180)
+				(length 5.08)
+				(name "A15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "46"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -30.48 180)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "47"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 -7.62 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "48"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -27.94 180)
+				(length 5.08)
+				(name "A16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "49"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -17.78 0)
+				(length 5.08)
+				(name "A20_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -25.4 180)
+				(length 5.08)
+				(name "A17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "50"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -22.86 180)
+				(length 5.08)
+				(name "A18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "51"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -20.32 180)
+				(length 5.08)
+				(name "A19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -17.78 180)
+				(length 5.08)
+				(name "A20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "53"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -15.24 180)
+				(length 5.08)
+				(name "A21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "54"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -12.7 180)
+				(length 5.08)
+				(name "A22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "55"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -10.16 180)
+				(length 5.08)
+				(name "A23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "56"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -20.32 0)
+				(length 5.08)
+				(name "A19_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -22.86 0)
+				(length 5.08)
+				(name "A18_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -25.4 0)
+				(length 5.08)
+				(name "A17_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 0 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "Address_Buffer_24bit_Old"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "B"
+			(at 15.875 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Address Buffer 24bit"
+			(at 15.24 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Address_Buffer_24bit"
+			(at 15.24 -76.835 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Address Buffer 24bit"
+			(at 15.875 -22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "Address Buffer 24bit"
+			(at 15.875 -25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "Address Buffer 24bit"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "Address_Buffer_24bit_Old_0_1"
+			(polyline
+				(pts
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -75.565) (xy 0 -75.565) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "Address_Buffer_24bit_Old_1_0"
+			(pin passive line
+				(at 35.56 -5.08 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "37"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Address_Buffer_24bit_Old_1_1"
 			(pin input inverted
 				(at -5.08 0 0)
 				(length 5.08)
@@ -9649,15 +10732,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Clock Hold Select"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Clock Hold Select"
 			(at 0 0 0)
 			(effects
@@ -10455,15 +11529,6 @@
 		)
 		(property "Silkscreen" "Clock Hold Standard"
 			(at 14.605 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Clock Hold Standard"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11276,15 +12341,6 @@
 		)
 		(property "Silkscreen" "Comparator 10bit"
 			(at 15.24 -17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Comparator 10bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14634,15 +15690,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Counter 24bit with IO"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Counter 24bit with IO"
 			(at 0 0 0)
 			(effects
@@ -15879,15 +16926,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "D-type Flip Flop 16bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "D-type Flip Flop 16bit"
 			(at 0 0 0)
 			(effects
@@ -16685,15 +17723,6 @@
 		)
 		(property "Silkscreen" "D-type Flip Flop 24bit"
 			(at 15.24 -72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "D-type Flip Flop 24bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17793,15 +18822,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "8 Signal 8bit Data Buffer"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "8 Signal 8bit Data Buffer"
 			(at 0 0 0)
 			(effects
@@ -18599,15 +19619,6 @@
 		)
 		(property "Silkscreen" "Device Buffer"
 			(at 15.24 -45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Buffer"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20502,15 +21513,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Device Decode Stage B"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Device Decode Stage B"
 			(at 0 0 0)
 			(effects
@@ -21274,15 +22276,6 @@
 		)
 		(property "Silkscreen" "Device Interrupts"
 			(at 15.24 -43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Interrupts"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22087,15 +23080,6 @@
 		)
 		(property "Silkscreen" "Device Interrupts Wide"
 			(at 15.24 -68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Interrupts Wide"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23339,15 +24323,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Device Reset"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Device Reset"
 			(at 0 0 0)
 			(effects
@@ -24145,15 +25120,6 @@
 		)
 		(property "Silkscreen" "Dual Comparator 8bit"
 			(at 14.605 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual Comparator 8bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24965,15 +25931,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Flags Interrupt"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Flags Interrupt"
 			(at 0 0 0)
 			(effects
@@ -25625,15 +26582,6 @@
 		)
 		(property "Silkscreen" "GPIO 16bit"
 			(at 15.24 -27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "GPIO 16bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26438,15 +27386,6 @@
 		)
 		(property "Silkscreen" "GPIO 4bit"
 			(at 15.24 -17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "GPIO 4bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28341,15 +29280,6 @@
 		)
 		(property "Silkscreen" "Kernal Mode"
 			(at 15.24 -53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Kernal Mode"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31767,15 +32697,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "MPU Address Decode Wide"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "MPU Address Decode Wide"
 			(at 0 0 0)
 			(effects
@@ -34408,15 +35329,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "MPU NMI"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "MPU NMI"
 			(at 0 0 0)
 			(effects
@@ -35737,15 +36649,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Main Memory Select"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Main Memory Select"
 			(at 0 0 0)
 			(effects
@@ -36831,15 +37734,6 @@
 		)
 		(property "Silkscreen" "Main Clock Generator"
 			(at 16.51 -43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Main Clock Generator"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38083,15 +38977,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Main Memory Abort"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Main Memory Abort"
 			(at 0 0 0)
 			(effects
@@ -38745,15 +39630,6 @@
 		)
 		(property "Silkscreen" "Main Memory Address"
 			(at 15.24 -10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Main Memory Address"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39997,15 +40873,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Main Memory Channel"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "HCP65 Main Memory Channel"
 			(at 0 0 0)
 			(effects
@@ -40803,15 +41670,6 @@
 		)
 		(property "Silkscreen" "Main Memory Data"
 			(at 14.605 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Main Memory Data"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42263,15 +43121,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
 			(at 0 0 0)
 			(effects
 				(font
@@ -43782,15 +44631,6 @@
 		)
 		(property "Silkscreen" "GPIO Address Decode"
 			(at 15.875 -53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Pico GPIO Address Decode"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51285,7 +52125,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_SNES_Controller_Reader"
-			(at 15.24 -59.69 0)
+			(at 16.51 -36.195 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51817,15 +52657,6 @@
 		)
 		(property "Silkscreen" "Selector 18bit"
 			(at 14.605 -45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Selector 18bit"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53864,15 +54695,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Selector 1-of-4 4bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "HCP65 Selector 1-of-4 4bit"
 			(at 0 0 0)
 			(effects
@@ -54526,15 +55348,6 @@
 		)
 		(property "Silkscreen" "Selector 1-of-4 4bit"
 			(at 14.605 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Selector 1-of-4 4bit with Input"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56500,15 +57313,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "State Reader 16bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "State Reader 16bit"
 			(at 0 0 0)
 			(effects
@@ -57160,15 +57964,6 @@
 		)
 		(property "Silkscreen" "Status Device Board"
 			(at 14.605 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Status Device Board"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -58606,7 +59401,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_TTL5V_UART"
-			(at 15.24 -46.99 0)
+			(at 15.24 -46.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -61626,15 +62421,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Address Reader"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Video Address Reader"
 			(at 0 0 0)
 			(effects
@@ -62432,15 +63218,6 @@
 		)
 		(property "Silkscreen" "Video Address Selector"
 			(at 15.24 -35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Address Selector"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -63684,15 +64461,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Blank and Sync"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Video Blank and Sync"
 			(at 0 0 0)
 			(effects
@@ -64346,15 +65114,6 @@
 		)
 		(property "Silkscreen" "Video Clock"
 			(at 15.24 -17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Clock"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -65166,15 +65925,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Counter 12bit"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Video Counter 12bit"
 			(at 0 0 0)
 			(effects
@@ -65972,15 +66722,6 @@
 		)
 		(property "Silkscreen" "Video DAC"
 			(at 15.24 -40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video DAC"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -67596,15 +68337,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Device RAM Select"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "HCP65 Video Device RAM Select"
 			(at 0 0 0)
 			(effects
@@ -68633,7 +69365,7 @@
 			)
 		)
 		(symbol "Video_Memory_2MB_1_1"
-			(text "D=0; M to Memory"
+			(text "S=0: M to Memory"
 				(at 15.24 0 0)
 				(effects
 					(font
@@ -68641,7 +69373,7 @@
 					)
 				)
 			)
-			(text "D=1; V to Memory"
+			(text "S=1: V to Memory"
 				(at 15.24 -2.54 0)
 				(effects
 					(font
@@ -69627,7 +70359,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Video_Pixel_Doubler"
-			(at 15.24 -50.8 0)
+			(at 15.24 -50.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -69654,15 +70386,6 @@
 		)
 		(property "Silkscreen" "Video Pixel Doubler"
 			(at 14.605 -15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Pixel Doubler"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -70844,15 +71567,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Signal Dragger"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "HCP65 Video Signal Dragger"
 			(at 0 0 0)
 			(effects
@@ -71657,15 +72371,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Signals Output"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(property "ki_keywords" "Video Signals Output"
 			(at 0 0 0)
 			(effects
@@ -72319,15 +73024,6 @@
 		)
 		(property "Silkscreen" "W65C816 Breakout"
 			(at 15.24 -55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "W65C816 Breakout"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -73580,15 +74276,6 @@
 		)
 		(property "Silkscreen" "W65C816 Clock Hold"
 			(at 13.97 -10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "W65C816 Clock Hold"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)

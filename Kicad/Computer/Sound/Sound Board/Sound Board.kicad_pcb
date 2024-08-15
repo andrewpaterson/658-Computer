@@ -133,8 +133,8 @@
 	(net 37 "/C14")
 	(net 38 "unconnected-(B1-C15-Pad39)")
 	(net 39 "unconnected-(B1-TC_{12..15}-Pad40)")
-	(net 40 "unconnected-(B2-N.C.-Pad1)")
-	(net 41 "unconnected-(B2-N.C.-Pad2)")
+	(net 40 "unconnected-(B2-~{PH=QH}-Pad1)")
+	(net 41 "unconnected-(B2-~{PL=QL}-Pad2)")
 	(net 42 "unconnected-(B2-N.C.-Pad4)")
 	(net 43 "unconnected-(B2-N.C.-Pad5)")
 	(net 44 "unconnected-(B2-N.C.-Pad17)")
@@ -214,8 +214,8 @@
 	(net 118 "unconnected-(B5-Q9-Pad37)")
 	(net 119 "/CPU B ~{OE}·~{WE}")
 	(net 120 "/~{WR}_{B}")
-	(net 121 "unconnected-(B7-N.C.-Pad1)")
-	(net 122 "unconnected-(B7-N.C.-Pad2)")
+	(net 121 "unconnected-(B7-~{PL=QL}-Pad2)")
+	(net 122 "unconnected-(B7-~{PH=QH}-Pad1)")
 	(net 123 "unconnected-(B7-N.C.-Pad4)")
 	(net 124 "unconnected-(B7-N.C.-Pad5)")
 	(net 125 "unconnected-(B7-N.C.-Pad17)")
@@ -5426,7 +5426,7 @@
 		)
 		(fp_arc
 			(start 86.040048 -8.4)
-			(mid 86.35762 -9.156489)
+			(mid 86.357626 -9.156454)
 			(end 87.117096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -5437,7 +5437,7 @@
 		)
 		(fp_arc
 			(start 90.297 -9.466799)
-			(mid 91.056441 -9.156453)
+			(mid 91.056476 -9.156459)
 			(end 91.374048 -8.4)
 			(stroke
 				(width 0.1)
@@ -5448,7 +5448,7 @@
 		)
 		(fp_arc
 			(start 139.499048 -8.4)
-			(mid 139.81662 -9.156489)
+			(mid 139.816626 -9.156454)
 			(end 140.576096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -9195,7 +9195,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -9295,9 +9295,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 40 "unconnected-(B2-N.C.-Pad1)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 40 "unconnected-(B2-~{PH=QH}-Pad1)")
+			(pinfunction "~{PH=QH}")
+			(pintype "output+no_connect")
 			(teardrops
 				(best_length_ratio 0.5)
 				(max_length 1)
@@ -9317,9 +9317,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "unconnected-(B2-N.C.-Pad2)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 41 "unconnected-(B2-~{PL=QL}-Pad2)")
+			(pinfunction "~{PL=QL}")
+			(pintype "output+no_connect")
 			(teardrops
 				(best_length_ratio 0.5)
 				(max_length 1)
@@ -12052,7 +12052,7 @@
 				)
 			)
 		)
-		(property "Value" "Flags Interrupt"
+		(property "Value" "Flags & Interrupt"
 			(at 7.112 42.926 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -12215,7 +12215,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -12226,7 +12226,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -14501,7 +14501,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -16645,7 +16645,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -17448,7 +17448,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -17548,9 +17548,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 121 "unconnected-(B7-N.C.-Pad1)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 122 "unconnected-(B7-~{PH=QH}-Pad1)")
+			(pinfunction "~{PH=QH}")
+			(pintype "output+no_connect")
 			(teardrops
 				(best_length_ratio 0.5)
 				(max_length 1)
@@ -17570,9 +17570,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 122 "unconnected-(B7-N.C.-Pad2)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 121 "unconnected-(B7-~{PL=QL}-Pad2)")
+			(pinfunction "~{PL=QL}")
+			(pintype "output+no_connect")
 			(teardrops
 				(best_length_ratio 0.5)
 				(max_length 1)
@@ -18602,7 +18602,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -19580,7 +19580,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -24151,7 +24151,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524006)
+			(mid 7.62 -1.524007)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)

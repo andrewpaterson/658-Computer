@@ -2929,15 +2929,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Clock Hold Standard"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "Clock Hold Standard"
 				(at 0 0 0)
 				(effects
@@ -3418,7 +3409,7 @@
 				)
 			)
 			(property "Footprint" "HCP65_Parts:HCP65_Comparator_16bit"
-				(at 15.24 -64.77 0)
+				(at 15.24 -64.135 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3613,10 +3604,10 @@
 				)
 			)
 			(symbol "Comparator_16bit_1_1"
-				(pin no_connect line
-					(at 35.56 -27.94 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output line
+					(at 35.56 -43.18 180)
+					(length 5.08)
+					(name "~{PH=QH}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3811,10 +3802,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -30.48 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output line
+					(at 35.56 -45.72 180)
+					(length 5.08)
+					(name "~{PL=QL}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5035,15 +5026,6 @@
 			)
 			(property "Silkscreen" "Device Buffer"
 				(at 15.24 -45.72 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Device Buffer"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -6938,15 +6920,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Device Decode Stage B"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(property "ki_keywords" "Device Decode Stage B"
 				(at 0 0 0)
 				(effects
@@ -7710,15 +7683,6 @@
 			)
 			(property "Silkscreen" "Flags & Interrupt"
 				(at 15.24 -22.86 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Flags Interrupt"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -9325,15 +9289,6 @@
 				)
 			)
 			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Mounting Hole with connection"
 				(at 0 0 0)
 				(effects
 					(font
@@ -12492,6 +12447,10 @@
 		(uuid "3caa2102-415e-4539-afb2-154550a393e2")
 	)
 	(no_connect
+		(at 320.04 189.23)
+		(uuid "3f481418-7d0d-4ce6-bbd4-c657619c4456")
+	)
+	(no_connect
 		(at 408.94 171.45)
 		(uuid "4bd53e44-7158-4a66-a0e2-18933ba8c73c")
 	)
@@ -12608,6 +12567,10 @@
 		(uuid "941103c9-0ec9-441b-b040-8928415e16da")
 	)
 	(no_connect
+		(at 320.04 96.52)
+		(uuid "957c3fd9-73d7-48a6-947e-fb5a4e1280ed")
+	)
+	(no_connect
 		(at 58.42 184.15)
 		(uuid "96c147b7-1065-4e84-a588-219b0f04cd94")
 	)
@@ -12622,6 +12585,10 @@
 	(no_connect
 		(at 35.56 92.71)
 		(uuid "98ed3e25-0352-49a2-8e4e-f13980b950a1")
+	)
+	(no_connect
+		(at 320.04 99.06)
+		(uuid "99bea062-7339-4102-99db-7cec32b58cd8")
 	)
 	(no_connect
 		(at 35.56 125.73)
@@ -12702,6 +12669,10 @@
 	(no_connect
 		(at 58.42 209.55)
 		(uuid "d6f9f85e-68d6-4260-be36-3aaed62165ba")
+	)
+	(no_connect
+		(at 320.04 191.77)
+		(uuid "d7d48811-83f0-4b7d-a9ce-d0be7d6b33bf")
 	)
 	(no_connect
 		(at 35.56 95.25)
@@ -27261,15 +27232,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Mounting Hole with connection"
-			(at 45.72 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "86c18491-ec7a-4c51-9fa8-d023f31496b3")
 		)
@@ -27665,7 +27627,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Comparator_16bit"
-			(at 299.72 118.11 0)
+			(at 299.72 117.475 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27873,15 +27835,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 58.42 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
 			(at 58.42 227.33 0)
 			(effects
 				(font
@@ -28308,7 +28261,7 @@
 				)
 			)
 		)
-		(property "Value" "Flags Interrupt"
+		(property "Value" "Flags & Interrupt"
 			(at 203.2 163.195 0)
 			(effects
 				(font
@@ -28345,15 +28298,6 @@
 		)
 		(property "Silkscreen" "Flags & Interrupt"
 			(at 203.2 189.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Flags Interrupt"
-			(at 187.96 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28883,15 +28827,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Clock Hold Standard"
-			(at 97.79 335.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "43ecbec4-6d97-460b-8308-dddc8028aa69")
 		)
@@ -29356,7 +29291,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Comparator_16bit"
-			(at 299.72 210.82 0)
+			(at 299.72 210.185 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29573,15 +29508,6 @@
 		)
 		(property "Silkscreen" "Device Buffer"
 			(at 113.03 270.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Buffer"
-			(at 97.79 224.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29851,15 +29777,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Device Decode Stage B"
-			(at 373.38 280.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "7eb775af-49be-47de-af40-ff0af9e31fae")
 		)
@@ -30010,15 +29927,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 33.02 227.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Mounting Hole with connection"
 			(at 33.02 227.33 0)
 			(effects
 				(font

@@ -92,7 +92,7 @@
 			(mirror no)
 			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "Fabrication/")
+			(outputdirectory "UART Board")
 		)
 	)
 	(net 0 "")
@@ -426,7 +426,7 @@
 		)
 		(fp_arc
 			(start 8.62 -2.524)
-			(mid 7.62 -1.524002)
+			(mid 7.62 -1.524003)
 			(end 6.619999 -2.524)
 			(stroke
 				(width 0.12)
@@ -1781,7 +1781,7 @@
 		)
 		(fp_arc
 			(start 26.503803 -16.293381)
-			(mid 27.734591 -15.783562)
+			(mid 27.734626 -15.783568)
 			(end 28.244422 -14.552762)
 			(stroke
 				(width 0.1)
@@ -6613,7 +6613,7 @@
 		)
 		(fp_arc
 			(start 14.507073 -16.484471)
-			(mid 16.322285 -15.658212)
+			(mid 16.322282 -15.65821)
 			(end 17.021544 -13.790394)
 			(stroke
 				(width 0.1)
@@ -6635,7 +6635,7 @@
 		)
 		(fp_arc
 			(start 17.021545 38.156813)
-			(mid 16.195259 39.971996)
+			(mid 16.195256 39.971994)
 			(end 14.327467 40.671284)
 			(stroke
 				(width 0.1)
@@ -7471,7 +7471,7 @@
 		)
 		(fp_arc
 			(start 86.040048 -8.4)
-			(mid 86.35762 -9.156489)
+			(mid 86.357626 -9.156454)
 			(end 87.117096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -7482,7 +7482,7 @@
 		)
 		(fp_arc
 			(start 90.297 -9.466799)
-			(mid 91.056441 -9.156453)
+			(mid 91.056476 -9.156459)
 			(end 91.374048 -8.4)
 			(stroke
 				(width 0.1)
@@ -7493,7 +7493,7 @@
 		)
 		(fp_arc
 			(start 139.499048 -8.4)
-			(mid 139.81662 -9.156489)
+			(mid 139.816626 -9.156454)
 			(end 140.576096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -12794,8 +12794,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "HCP65 Daughter Board"
-		(at 193.675 125.73 90)
+	(gr_text "HCP65 Daughter Board\nLCD and SNES Reader V0"
+		(at 198.0184 125.4252 90)
 		(layer "F.SilkS" knockout)
 		(uuid "7cb08cb4-7e1b-407f-9774-045ed21acc1a")
 		(effects
@@ -12830,19 +12830,6 @@
 				(bold yes)
 			)
 			(justify left bottom)
-		)
-	)
-	(gr_text "LCD and SNES Reader V0"
-		(at 204.47 125.349 90)
-		(layer "F.SilkS" knockout)
-		(uuid "b1e163df-7af6-40f3-abb8-60fbae999c1e")
-		(effects
-			(font
-				(size 3 3)
-				(thickness 0.6)
-				(bold yes)
-			)
-			(justify bottom)
 		)
 	)
 	(gr_text "12V"

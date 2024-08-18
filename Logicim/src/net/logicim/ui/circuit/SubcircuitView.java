@@ -978,6 +978,7 @@ public class SubcircuitView
       connectionViews.addAll(disconnectTraceViewAndDestroyComponents(traceView));
     }
 
+//    xxx
     createTracesForConnectionViews(circuitInstanceView, connectionViews);
 
     createTraceViews(circuitInstanceView, new HashSet<>(), connectedOtherTraceViews);

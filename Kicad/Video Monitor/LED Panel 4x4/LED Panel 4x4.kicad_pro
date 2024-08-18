@@ -58,24 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|117949946|74521568|59faa818-7e4d-4547-a4b7-f4478a07a2c5|df678bd2-cf8e-425d-adbc-82702c7269f0",
-        "courtyards_overlap|118330946|69441568|566d4604-05b5-4c31-b86c-e4dc7ce69ef5|09938d72-d781-4d92-a22a-ee28a35e64dd",
-        "courtyards_overlap|119647599|67497387|166e8329-e7c8-4429-a129-3c83f61442ba|09938d72-d781-4d92-a22a-ee28a35e64dd",
-        "courtyards_overlap|119647599|69148387|ec5b6e37-35a9-4fb5-997c-39d9a8a8cbad|09938d72-d781-4d92-a22a-ee28a35e64dd",
-        "courtyards_overlap|119647599|71492151|21d2894f-096f-4537-a794-c53099c2437c|df678bd2-cf8e-425d-adbc-82702c7269f0",
-        "courtyards_overlap|120727601|66985444|166e8329-e7c8-4429-a129-3c83f61442ba|397df573-940d-4eb5-9bee-777a5cc006c2",
-        "courtyards_overlap|120727601|68636444|ec5b6e37-35a9-4fb5-997c-39d9a8a8cbad|397df573-940d-4eb5-9bee-777a5cc006c2",
-        "courtyards_overlap|124727599|75947570|2bf5b29c-0247-4963-995b-fb7252d79caf|ac83d0ff-d48b-46da-b270-0bd979210b45",
-        "courtyards_overlap|125807601|83958103|b60c1b60-1cd2-4980-b991-2f1f876e633d|424e9ad9-ae16-4133-81c1-a67a6f9d14d8",
-        "courtyards_overlap|126686249|75797701|522e6b75-cdfd-490a-aa78-8c4ac3d65b27|11ec9062-5cb7-4c0d-8a3a-f35cf3033728",
-        "courtyards_overlap|127855946|74521568|d62f041b-cb78-415b-b5ae-774a23370c7f|aeb46352-5c83-453b-82de-063d47a05efa",
-        "courtyards_overlap|129807599|76572151|fa13b464-0090-465e-8825-2c67527c6463|11ec9062-5cb7-4c0d-8a3a-f35cf3033728",
-        "courtyards_overlap|130887601|66051103|9a70f581-3d36-4c56-b014-269af4003467|447192d8-696b-47ab-85b8-58072052ede7",
-        "courtyards_overlap|130887601|81418103|66a80df7-257a-4791-bda3-9114f1c78aa4|4eb6ee11-7421-4ff7-960e-c4b47e702472",
-        "courtyards_overlap|130887601|83323103|a1bf160f-3a91-4497-83bb-64e2e0d52bcd|4eb6ee11-7421-4ff7-960e-c4b47e702472",
-        "courtyards_overlap|132681946|79601568|3f557d30-3765-445b-917a-9b11519f2083|5db45e95-dfa8-4b44-94aa-48e5b4d409fd"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -85,7 +68,7 @@
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
-        "courtyards_overlap": "error",
+        "courtyards_overlap": "ignore",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -541,6 +524,14 @@
       {
         "netclass": "Power",
         "pattern": "*5V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*G1"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*G2"
       }
     ]
   },

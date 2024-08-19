@@ -9404,7 +9404,7 @@
 				)
 			)
 		)
-		(property "Footprint" "74HCT259BQ115"
+		(property "Footprint" "SamacSys_Parts:74HCT259BQ115"
 			(at 28.575 -30.48 0)
 			(effects
 				(font
@@ -9430,16 +9430,6 @@
 				(font
 					(size 1.27 1.27)
 				)
-			)
-		)
-		(property "Description_1" "74HC(T)259 - 8-bit addressable latch@en-us"
-			(at 28.575 -35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
 			)
 		)
 		(property "Height" "1"
@@ -9492,7 +9482,7 @@
 				(hide yes)
 			)
 		)
-		(property "Silkscree" "'259"
+		(property "Silkscreen" "'259"
 			(at 30.48 -27.94 0)
 			(effects
 				(font
@@ -9699,7 +9689,7 @@
 		)
 		(symbol "74HCT259BQ,115_1_0"
 			(pin input line
-				(at 0 -17.78 0)
+				(at 0 -15.24 0)
 				(length 5.08)
 				(name "D0"
 					(effects
@@ -9763,6 +9753,24 @@
 					)
 				)
 				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -17.78 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
 					(effects
 						(font
 							(size 1.27 1.27)

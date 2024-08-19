@@ -80,6 +80,7 @@
         "footprint_type_mismatch": "error",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "ignore",
         "item_on_disabled_layer": "error",
@@ -502,11 +503,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*GND"
       }
     ]
   },

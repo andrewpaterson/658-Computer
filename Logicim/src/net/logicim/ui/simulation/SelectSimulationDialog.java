@@ -39,7 +39,7 @@ public class SelectSimulationDialog
 
     comboBox = new JComboBox<>();
     SubcircuitEditor currentSubcircuitEditor = editor.getCurrentSubcircuitEditor();
-    List<SubcircuitSimulation> simulations = new ArrayList<>(currentSubcircuitEditor.getSubcircuitSimulations());
+    List<? extends SubcircuitSimulation> simulations = currentSubcircuitEditor.getSubcircuitSimulations();
     SubcircuitSimulation currentSimulation = editor.getSubcircuitSimulation();
     for (SubcircuitSimulation simulation : simulations)
     {

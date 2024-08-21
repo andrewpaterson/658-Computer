@@ -20,9 +20,16 @@ public class ClockOscillator
   protected long initialisationTime;
   protected long fullTicks;
 
-  public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency)
+  public ClockOscillator(Circuit circuit,
+                         String name,
+                         ClockOscillatorPins pins,
+                         float frequency)
   {
-    this(circuit, name, pins, frequency, frequencyToTime(frequency) / 2);
+    this(circuit,
+         name,
+         pins,
+         frequency,
+         frequencyToTime(frequency) / 2);
   }
 
   public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency, long initialisationTime)

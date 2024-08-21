@@ -342,6 +342,18 @@ public class SubcircuitInstanceView
     return result;
   }
 
+  @Override
+  public List<? extends SubcircuitSimulation> getPathSubcircuitSimulations()
+  {
+    ArrayList<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
+    Collection<SubcircuitInstance> subcircuitInstances = simulationSubcircuitInstances.values();
+    for (SubcircuitInstance subcircuitInstance : subcircuitInstances)
+    {
+      subcircuitSimulations.add(subcircuitInstance.getSubcircuitInstanceSimulation());
+    }
+    return subcircuitSimulations;
+  }
+
   public String getShortDescription()
   {
     String name = getName();

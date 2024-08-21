@@ -8,15 +8,13 @@ public class SubcircuitInstanceSimulation
 {
   protected SubcircuitInstance subcircuitInstance;
 
-  public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                      SubcircuitInstance subcircuitInstance)
+  public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation, SubcircuitInstance subcircuitInstance)
   {
     super(circuitSimulation);
     this.subcircuitInstance = subcircuitInstance;
   }
 
-  public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation,
-                                      long id)
+  public SubcircuitInstanceSimulation(CircuitSimulation circuitSimulation, long id)
   {
     super(circuitSimulation, id);
     this.subcircuitInstance = null;

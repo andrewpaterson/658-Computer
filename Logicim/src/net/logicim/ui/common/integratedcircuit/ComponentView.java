@@ -358,16 +358,11 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public void disconnectViewAndDestroyAllComponents()
   {
-    disconnectAndDestroyPortViewComponents();
-    destroyAllComponents();
-  }
-
-  protected void disconnectAndDestroyPortViewComponents()
-  {
     for (PortView portView : portViews)
     {
       portView.disconnectViewAndDestroyAllComponents();
     }
+    destroyAllComponents();
   }
 
   protected void destroyPortViewComponents(SubcircuitSimulation subcircuitSimulation)
@@ -400,7 +395,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public void createComponents(SubcircuitSimulations simulations)
   {
-    //validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
+    validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
       createComponent(subcircuitSimulation);

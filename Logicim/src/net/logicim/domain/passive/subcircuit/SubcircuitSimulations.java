@@ -59,9 +59,9 @@ public class SubcircuitSimulations
     return simulations.get(circuitSimulation);
   }
 
-  public Collection<SubcircuitTopSimulation> getSubcircuitTopSimulations()
+  public List<SubcircuitTopSimulation> getSubcircuitTopSimulations()
   {
-    ArrayList<SubcircuitTopSimulation> subcircuitTopSimulations = new ArrayList<>();
+    List<SubcircuitTopSimulation> subcircuitTopSimulations = new ArrayList<>();
     for (List<SubcircuitSimulation> subcircuitSimulations : simulations.values())
     {
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
@@ -75,9 +75,9 @@ public class SubcircuitSimulations
     return subcircuitTopSimulations;
   }
 
-  public Collection<SubcircuitInstanceSimulation> getSubcircuitInstanceSimulations()
+  public List<SubcircuitInstanceSimulation> getSubcircuitInstanceSimulations()
   {
-    ArrayList<SubcircuitInstanceSimulation> subcircuitTopSimulations = new ArrayList<>();
+    List<SubcircuitInstanceSimulation> subcircuitTopSimulations = new ArrayList<>();
     for (List<SubcircuitSimulation> subcircuitSimulations : simulations.values())
     {
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
@@ -91,9 +91,9 @@ public class SubcircuitSimulations
     return subcircuitTopSimulations;
   }
 
-  public Collection<SubcircuitSimulation> getSubcircuitSimulations()
+  public List<? extends SubcircuitSimulation> getSubcircuitSimulations()
   {
-    ArrayList<SubcircuitSimulation> result = new ArrayList<>();
+    List<SubcircuitSimulation> result = new ArrayList<>();
     Collection<List<SubcircuitSimulation>> collection = simulations.values();
     for (List<SubcircuitSimulation> subcircuitSimulations : collection)
     {

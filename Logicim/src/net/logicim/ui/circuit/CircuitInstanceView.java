@@ -3,6 +3,7 @@ package net.logicim.ui.circuit;
 import net.common.util.Counter;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public interface CircuitInstanceView
   String getDescription();
 
   List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation);
+
+  List<? extends SubcircuitSimulation> getPathSubcircuitSimulations();
 
   default List<CircuitInstanceView> getOrderedCircuitInstanceViews()
   {

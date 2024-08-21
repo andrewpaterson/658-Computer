@@ -19,7 +19,10 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.*;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.CircuitInstanceViewPaths;
+import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.HoverConnectionView;
@@ -760,28 +763,12 @@ public class CircuitEditor
   {
   }
 
-  protected Map<SubcircuitEditor, List<SubcircuitInstanceView>> getSubcircuitInstanceViewsInSubcircuitEditor(SubcircuitEditor currentSubcircuitEditor)
-  {
-    List<SubcircuitEditor> subcircuitEditors = getSubcircuitEditors();
-    Map<SubcircuitEditor, List<SubcircuitInstanceView>> map = new LinkedHashMap<>();
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitEditor.getCircuitSubcircuitView().getSubcircuitInstanceViews(currentSubcircuitEditor.getCircuitSubcircuitView());
-      if (subcircuitInstanceViews.size() > 0)
-      {
-        map.put(subcircuitEditor, subcircuitInstanceViews);
-      }
-    }
-
-    return map;
-  }
-
   public List<SubcircuitTopEditorSimulation> getSubcircuitTopSimulations()
   {
     ArrayList<SubcircuitTopEditorSimulation> result = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors.findAll())
     {
-      Collection<SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSubcircuitSimulations();
+      List<? extends SubcircuitSimulation> subcircuitSimulations = subcircuitEditor.getSubcircuitSimulations();
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
       {
         if (subcircuitSimulation instanceof SubcircuitTopSimulation)
@@ -832,33 +819,14 @@ public class CircuitEditor
 
   public CircuitInstanceViewPaths createCircuitInstanceViewPaths()
   {
-    CircuitInstanceViewPaths circuitInstanceViewPaths = new CircuitInstanceViewPaths();
-    for (SubcircuitEditor subcircuitEditor : getSubcircuitEditors())
-    {
-      circuitInstanceViewPaths.process(subcircuitEditor);
-    }
-    return circuitInstanceViewPaths;
+    return new CircuitInstanceViewPaths(getSubcircuitEditors());
   }
 
   protected void printCircuitInstanceViewPaths(CircuitInstanceViewPaths circuitInstanceViewPaths)
   {
     for (CircuitInstanceViewPath path : circuitInstanceViewPaths.getPaths())
     {
-      StringBuilder builder = new StringBuilder();
-      boolean first = true;
-      for (CircuitInstanceView circuitInstanceView : path.getPath())
-      {
-        if (!first)
-        {
-          builder.append(" - ");
-        }
-        else
-        {
-          first = false;
-        }
-        builder.append(circuitInstanceView.getDescription());
-      }
-      System.out.println(builder.toString());
+      System.out.println(path.toString());
     }
   }
 }

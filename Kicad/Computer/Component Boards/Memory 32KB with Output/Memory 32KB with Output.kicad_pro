@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "isolated_copper|118531132|64947340|41a5c9b5-4510-454c-990f-386f38051ed5|00000000-0000-0000-0000-000000000000"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -498,15 +496,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       }
     ]
   },
@@ -515,7 +513,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Memory 32KB with IO",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "Memory 32KB with Output.step",
@@ -626,7 +624,7 @@
   "sheets": [
     [
       "337b5f72-8be1-4121-9dc6-479b565482b2",
-      ""
+      "Root"
     ]
   ],
   "text_variables": {}

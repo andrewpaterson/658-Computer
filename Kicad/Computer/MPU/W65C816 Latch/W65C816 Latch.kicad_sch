@@ -1556,6 +1556,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 149.86) (xy 64.77 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ba3bdcc-0e88-4533-88ba-5db88641aa13")
+	)
+	(wire
+		(pts
 			(xy 151.13 107.95) (xy 163.83 107.95)
 		)
 		(stroke
@@ -1613,6 +1623,16 @@
 			(type default)
 		)
 		(uuid "726ccc0a-b942-4286-9915-e7de39f65c0a")
+	)
+	(wire
+		(pts
+			(xy 66.04 147.32) (xy 64.77 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "783ed414-808c-4627-9b80-3a89397096ac")
 	)
 	(wire
 		(pts
@@ -1748,17 +1768,6 @@
 		)
 		(uuid "0eb7f409-5c07-427d-84aa-36d18f16df76")
 	)
-	(label "~{Trans Out}"
-		(at 64.77 149.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "28bf281b-1fbd-4b34-85ce-674493e37da5")
-	)
 	(label "GND"
 		(at 143.51 76.2 0)
 		(fields_autoplaced yes)
@@ -1780,17 +1789,6 @@
 			(justify right bottom)
 		)
 		(uuid "4a27a771-9e02-424e-b019-7977c0f44592")
-	)
-	(label "Bank Latch"
-		(at 64.77 147.32 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5390f942-c997-4231-bf1e-83d4258e90d9")
 	)
 	(label "~{PHI2}"
 		(at 115.57 86.36 180)
@@ -1924,17 +1922,6 @@
 		)
 		(uuid "a0737195-07a8-4240-8310-fb90d5ac41a6")
 	)
-	(label "~{PHI2}"
-		(at 52.07 147.32 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c7a12437-4cb3-4506-80cb-0b628655a3c8")
-	)
 	(label "~{PHI2}_{3}"
 		(at 115.57 101.6 180)
 		(fields_autoplaced yes)
@@ -1979,6 +1966,50 @@
 			)
 		)
 	)
+	(global_label "~{PHI2}"
+		(shape input)
+		(at 52.07 147.32 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1deb49d6-7e1b-47e1-a476-bcd59c5c1fc2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 44.67 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Bank Latch"
+		(shape output)
+		(at 66.04 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3d06986a-374a-4609-a8c5-dca4b29b40d6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 79.7293 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "GND"
 		(shape passive)
 		(at 66.04 142.24 0)
@@ -1992,6 +2023,28 @@
 		(uuid "c867b221-e1fb-4e70-8d9b-46af864a0157")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 71.7844 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "~{Trans Out}"
+		(shape output)
+		(at 66.04 149.86 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e7d2eb28-6157-4ed6-8a45-1efc6173b6aa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.2779 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)

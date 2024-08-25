@@ -1082,17 +1082,6 @@
 		)
 		(uuid "15396d70-7a18-4f96-8eda-b728be175d05")
 	)
-	(label "GND"
-		(at 127 86.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1e4c9b44-8088-4417-9681-fab39011d597")
-	)
 	(label "~{Reset}"
 		(at 54.61 91.44 180)
 		(fields_autoplaced yes)
@@ -1116,7 +1105,7 @@
 		(uuid "46394f42-b244-4c80-b1bd-ee05855651e0")
 	)
 	(label "GND"
-		(at 127 78.74 0)
+		(at 72.39 113.03 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1137,17 +1126,6 @@
 		)
 		(uuid "66053900-59ff-4b85-b900-bd9d034a6ecc")
 	)
-	(label "3.3V"
-		(at 121.92 86.36 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6770531f-b80a-41f8-9035-674e0ce23f8e")
-	)
 	(label "CLK"
 		(at 142.24 118.11 0)
 		(fields_autoplaced yes)
@@ -1160,7 +1138,7 @@
 		(uuid "6a051e1d-c5e9-426f-92ba-9b016eaa6648")
 	)
 	(label "3.3V"
-		(at 121.92 78.74 180)
+		(at 67.31 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1380,99 +1358,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 121.92 86.36 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4bbebb64-76a0-4630-b120-4346afabaf1a")
-		(property "Reference" "C1"
-			(at 124.206 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10nF"
-			(at 124.46 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 138.684 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 124.1425 86.0425 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 121.92 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c692c693-a49e-4a72-b933-457bdbd6478a")
-		)
-		(pin "2"
-			(uuid "81dcda71-61c6-45d3-b826-2bee490ac882")
-		)
-		(instances
-			(project "Clock LTC6903"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C1")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C23")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C?")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C30")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/caddd2e8-648a-419e-bcd6-73bf11c1d49f"
-					(reference "C68")
-					(unit 1)
-				)
-			)
-			(project "Sound"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
-					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
 		(at 99.06 115.57 0)
 		(unit 1)
@@ -1544,7 +1429,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 121.92 78.74 0)
+		(at 67.31 113.03 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1552,7 +1437,7 @@
 		(dnp no)
 		(uuid "696d6131-effb-4a2a-a6a8-5939ca20a6e3")
 		(property "Reference" "C2"
-			(at 124.206 76.2 0)
+			(at 69.596 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1560,7 +1445,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 124.46 81.28 0)
+			(at 69.85 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1568,7 +1453,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 138.684 86.36 0)
+			(at 84.074 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1577,7 +1462,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.1425 78.4225 90)
+			(at 69.5325 112.7125 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1586,7 +1471,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 121.92 78.74 0)
+			(at 67.31 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)

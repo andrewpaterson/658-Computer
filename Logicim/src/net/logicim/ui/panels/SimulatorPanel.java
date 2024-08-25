@@ -18,6 +18,7 @@ import net.logicim.ui.input.EditorActionsFactory;
 import net.logicim.ui.input.KeyInputsFactory;
 import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.NewSimulationDialog;
 import net.logicim.ui.simulation.SelectSimulationDialog;
 import net.logicim.ui.simulation.ShowSimulationsDialog;
@@ -359,8 +360,11 @@ public class SimulatorPanel
 
   public void newSimulation()
   {
-    NewSimulationDialog selectSimulationDialog = new NewSimulationDialog(getFrame(), logicim);
-    new EditorDialogHelper().showDialog(selectSimulationDialog);
+    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    {
+      NewSimulationDialog selectSimulationDialog = new NewSimulationDialog(getFrame(), logicim);
+      new EditorDialogHelper().showDialog(selectSimulationDialog);
+    }
   }
 
   @Override

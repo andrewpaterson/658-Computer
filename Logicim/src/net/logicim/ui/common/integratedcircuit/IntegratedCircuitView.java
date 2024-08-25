@@ -23,6 +23,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.awt.*;
 import java.util.List;
@@ -49,6 +50,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 
   public IC createComponent(SubcircuitSimulation subcircuitSimulation)
   {
+    DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);

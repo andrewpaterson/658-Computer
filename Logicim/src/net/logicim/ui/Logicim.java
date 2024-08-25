@@ -13,10 +13,7 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.domain.passive.subcircuit.*;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -834,8 +831,71 @@ public class Logicim
     circuitSimulation.reset(circuitSimulation);
   }
 
+  public void haltAndDestroySimulations()
+  {
+//    List<SubcircuitTopEditorSimulation> subcircuitTopSimulations = circuitEditor.getSubcircuitTopSimulations();
+//    List<SubcircuitEditor> subcircuitEditors = circuitEditor.getSubcircuitEditors();
+//    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+//    {
+//      subcircuitEditor.
+//    }
+//    for (SubcircuitTopEditorSimulation subcircuitTopSimulation : subcircuitTopSimulations)
+//    {
+//      su
+//    }
+//
+//    SubcircuitSimulation currentSubcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
+//    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
+//
+//    List<CircuitInstanceView> circuitInstanceViews = currentSubcircuitEditor.getOrderedCircuitInstanceViews();
+//    currentSubcircuitEditor.validateOnlyThisSubcircuitEditor(circuitInstanceViews);
+//
+//    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+//    {
+//      circuitInstanceView.destroyComponents(currentSubcircuitSimulation);
+//    }
+//
+//    Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();
+//    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+//    {
+//      System.out.println(circuitInstanceView.toString());
+//
+//      if (circuitInstanceView instanceof SubcircuitEditor)
+//      {
+//        SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
+//        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitView.createSubcircuitSimulation();
+//        subcircuitView.createComponents(newSubcircuitTopSimulation);
+//        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
+//        for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
+//        {
+//          map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(newSubcircuitTopSimulation));
+//        }
+//      }
+//      else if (circuitInstanceView instanceof SubcircuitInstanceView)
+//      {
+//        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) circuitInstanceView;
+//        SubcircuitInstance subcircuitInstance = map.get(subcircuitInstanceView);
+//        SubcircuitSimulation subcircuitSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+//        SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
+//        subcircuitView.createComponents(subcircuitSimulation);
+//        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
+//        for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
+//        {
+//          map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(subcircuitSimulation));
+//        }
+//      }
+//    }
+  }
+
   public void recreateCurrentSimulation()
   {
+    List<SubcircuitEditor> subcircuitEditors = circuitEditor.getSubcircuitEditors();
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      SubcircuitView subcircuitView = subcircuitEditor.getCircuitSubcircuitView();
+      SubcircuitSimulations simulations = subcircuitView.getSimulations();
+      List<? extends SubcircuitSimulation> subcircuitSimulations = simulations.getSubcircuitSimulations();
+    }
 //    SubcircuitSimulation currentSubcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
 //    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
 //

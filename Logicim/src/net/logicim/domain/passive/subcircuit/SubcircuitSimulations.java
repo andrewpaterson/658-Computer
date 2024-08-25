@@ -3,6 +3,7 @@ package net.logicim.domain.passive.subcircuit;
 import net.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.*;
 
@@ -123,17 +124,20 @@ public class SubcircuitSimulations
 
   protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
-    CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
-    int depth = 0;
-    for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
+    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
-      List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
-
-      if (innerSubcircuitSimulations.isEmpty() && depth > 0)
+      CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
+      int depth = 0;
+      for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
       {
-        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
+        List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+
+        if (innerSubcircuitSimulations.isEmpty() && depth > 0)
+        {
+          throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
+        }
+        depth++;
       }
-      depth++;
     }
   }
 

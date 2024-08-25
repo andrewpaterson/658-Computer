@@ -54,6 +54,8 @@ public class CircuitEditor
 
   protected NavigationStack navigationStack;
 
+  protected DebugGlobalEnvironment globals;
+
   public CircuitEditor(SubcircuitEditorList subcircuitEditorList)
   {
     subcircuitEditors = subcircuitEditorList;
@@ -63,6 +65,7 @@ public class CircuitEditor
     lastSubcircuitEditorSimulation = new LinkedHashMap<>();
 
     navigationStack = new NavigationStack();
+    globals = new DebugGlobalEnvironment();
   }
 
   public CircuitEditor(String mainSubcircuitTypeName, SubcircuitEditorList subcircuitEditorList)
@@ -350,7 +353,10 @@ public class CircuitEditor
     loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap);
 
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
-    setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    {
+      setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    }
     setCurrentSubcircuitEditor(subcircuitEditor);
 
     SwingUtilities.invokeLater(new Runnable()
@@ -682,31 +688,34 @@ public class CircuitEditor
 
   private void setCurrentSubcircuitSimulation(SubcircuitEditor newSubcircuitEditor, SubcircuitSimulation lastSubcircuitSimulation)
   {
-    SubcircuitSimulation newSubcircuitSimulation = lastSubcircuitEditorSimulation.get(newSubcircuitEditor);
-    if (newSubcircuitSimulation != null)
+    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
-      setSubcircuitSimulation(newSubcircuitEditor, newSubcircuitSimulation);
-      return;
-    }
-    else if (lastSubcircuitSimulation != null)
-    {
-      CircuitSimulation circuitSimulation = lastSubcircuitSimulation.getCircuitSimulation();
-      Collection<SubcircuitSimulation> simulations = newSubcircuitEditor.getSubcircuitSimulations(circuitSimulation);
-      if (simulations.size() > 0)
+      SubcircuitSimulation newSubcircuitSimulation = lastSubcircuitEditorSimulation.get(newSubcircuitEditor);
+      if (newSubcircuitSimulation != null)
       {
-        setSubcircuitSimulation(newSubcircuitEditor, simulations.iterator().next());
+        setSubcircuitSimulation(newSubcircuitEditor, newSubcircuitSimulation);
         return;
       }
-    }
+      else if (lastSubcircuitSimulation != null)
+      {
+        CircuitSimulation circuitSimulation = lastSubcircuitSimulation.getCircuitSimulation();
+        Collection<SubcircuitSimulation> simulations = newSubcircuitEditor.getSubcircuitSimulations(circuitSimulation);
+        if (simulations.size() > 0)
+        {
+          setSubcircuitSimulation(newSubcircuitEditor, simulations.iterator().next());
+          return;
+        }
+      }
 
-    List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getCircuitSubcircuitView().getTopSimulations();
-    if (!simulations.isEmpty())
-    {
-      setSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
-    }
-    else
-    {
-      throw new SimulatorException("No top level simulation found for subcircuit editor.");
+      List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getCircuitSubcircuitView().getTopSimulations();
+      if (!simulations.isEmpty())
+      {
+        setSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
+      }
+      else
+      {
+        throw new SimulatorException("No top level simulation found for subcircuit editor.");
+      }
     }
   }
 

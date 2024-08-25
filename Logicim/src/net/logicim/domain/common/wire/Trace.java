@@ -1,10 +1,12 @@
 package net.logicim.domain.common.wire;
 
+import net.common.SimulatorException;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.voltage.Voltage;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -29,6 +31,7 @@ public class Trace
 
   public Trace(long id)
   {
+    DebugGlobalEnvironment.validateCanCreateTrace();
     connectedPorts = new LinkedHashSet<>();
     this.id = id;
     if (id >= nextId)

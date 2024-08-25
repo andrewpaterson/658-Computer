@@ -27,6 +27,7 @@ import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.rectangle.Rectangle;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.component.passive.pin.PinPropertyHelper;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 
@@ -225,6 +226,7 @@ public class SubcircuitInstanceView
   @Override
   public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation)
   {
+    DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(containingSubcircuitSimulation);
 
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();

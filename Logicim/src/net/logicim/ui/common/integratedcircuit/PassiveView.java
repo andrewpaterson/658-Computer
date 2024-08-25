@@ -9,6 +9,7 @@ import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -35,6 +36,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation)
   {
+    DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);
 
     PASSIVE passive = createPassive(subcircuitSimulation);

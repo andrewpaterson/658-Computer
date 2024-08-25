@@ -18,6 +18,7 @@ import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.awt.*;
 import java.util.List;

@@ -9,6 +9,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,6 +80,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   @Override
   public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
+    DebugGlobalEnvironment.validateCanCreateComponent();
     return null;
   }
 

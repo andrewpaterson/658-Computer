@@ -5,6 +5,7 @@
 	(uuid "8357857d-ab8c-4646-b786-aad4001c0a6b")
 	(paper "A3")
 	(title_block
+		(title "HCP65 UART Board")
 		(date "2024-08-04")
 		(rev "V0")
 	)
@@ -7266,11 +7267,12 @@
 				)
 			)
 			(property "Silkscreen" "'1G08"
-				(at 12.7 -10.795 0)
+				(at 24.13 -17.145 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -8563,6 +8565,10 @@
 		(uuid "5d07c600-d0f6-448b-aa0e-9d1a02da9ddd")
 	)
 	(no_connect
+		(at 53.34 129.54)
+		(uuid "5f488008-c906-4354-b745-105b5fe9273d")
+	)
+	(no_connect
 		(at 53.34 180.34)
 		(uuid "63f08f61-d2a5-41f1-be2c-32c9e0e605b9")
 	)
@@ -8709,6 +8715,10 @@
 	(no_connect
 		(at 53.34 182.88)
 		(uuid "d7b96993-64a9-40c2-a22b-b6b5b5c2af4b")
+	)
+	(no_connect
+		(at 53.34 127)
+		(uuid "d938791d-e0cd-4b71-9784-760df164e2d3")
 	)
 	(no_connect
 		(at 30.48 106.68)
@@ -12071,17 +12081,6 @@
 		)
 		(uuid "5bbcd88b-a59d-40f4-bc8e-36703feb72bf")
 	)
-	(label "A16_{D}"
-		(at 53.34 129.54 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5c136a52-7a06-4acd-a7d7-b0e7407f887f")
-	)
 	(label "GND"
 		(at 123.19 199.39 0)
 		(fields_autoplaced yes)
@@ -12566,6 +12565,17 @@
 		)
 		(uuid "7e8541d0-1241-473c-bb57-f995c7e392c5")
 	)
+	(label "GND"
+		(at 82.55 104.14 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7eb73728-32c3-4d47-88d8-74ee1d4ac107")
+	)
 	(label "D5_{D}"
 		(at 82.55 162.56 180)
 		(fields_autoplaced yes)
@@ -12620,17 +12630,6 @@
 			(justify right bottom)
 		)
 		(uuid "83059765-fb94-4597-8b06-bc1409b22e66")
-	)
-	(label "A15_{D}"
-		(at 82.55 106.68 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "864911b5-c036-42b7-b86b-78f7486c0d08")
 	)
 	(label "A8_{D}"
 		(at 53.34 109.22 0)
@@ -13466,17 +13465,6 @@
 		)
 		(uuid "d2cb67cd-d789-44f7-8e5d-741b1dfcd2bf")
 	)
-	(label "A16_{D}"
-		(at 82.55 104.14 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d35fb525-6609-4d5d-84fa-52734fba4584")
-	)
 	(label "D5"
 		(at 123.19 162.56 0)
 		(fields_autoplaced yes)
@@ -13520,6 +13508,17 @@
 			(justify right bottom)
 		)
 		(uuid "d7634c35-2f24-4487-aea0-247da2bbafef")
+	)
+	(label "GND"
+		(at 82.55 106.68 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d7767a3a-05ab-40a5-8cb3-af0095108ff0")
 	)
 	(label "~{INT2}"
 		(at 335.28 175.26 0)
@@ -13586,17 +13585,6 @@
 			(justify left bottom)
 		)
 		(uuid "e1391986-d09c-4cf8-b40c-dddd9775d371")
-	)
-	(label "A15_{D}"
-		(at 53.34 127 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e1c52510-b8ca-44d6-a881-dd1e42691278")
 	)
 	(label "A10_{D}"
 		(at 82.55 119.38 180)
@@ -14705,11 +14693,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G08"
-			(at 245.11 45.085 0)
+			(at 256.54 51.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)

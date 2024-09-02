@@ -17,25 +17,25 @@
 		)
 	)
 	(property "Value" "HCP65 Counter 24bit"
-		(at 7.493 73.787 0)
+		(at 7.62 72.898 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
 	)
-	(property "Footprint" ""
-		(at 0 0 0)
+	(property "Footprint" "HCP65_Counter_24bit"
+		(at 7.62 75.057 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "e79bc795-8bbe-4656-95b6-ba07ce7bb353")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
@@ -47,20 +47,32 @@
 		(uuid "35d8af9c-e74d-46ef-9110-9dcd256aff89")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
 	)
-	(property "Description" "HCP65 Counter 24bit"
-		(at 7.4168 75.3872 0)
+	(property "Description" "Counter 24bit"
+		(at 7.62 74.041 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "0b778e67-a7d7-4fdc-9fa7-be40cb0fc6c8")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.635 0.635)
 				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 7.62 71.501 0)
+		(layer "F.SilkS")
+		(uuid "a487d7aa-ecbd-47bc-b353-ccc92cf5c190")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
 			)
 		)
 	)
@@ -230,18 +242,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "aa136522-97fe-4c53-8094-5e9258117daa")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 6.985 72.136 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

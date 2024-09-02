@@ -13788,20 +13788,12 @@
 			)
 		)
 		(property "Silkscreen" "74F260"
-			(at 12.7 -30.48 0)
+			(at 23.495 -68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual 5-input positive-NOR gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -15671,7 +15663,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOIC127P600X175-16N"
-			(at 22.225 -29.21 0)
+			(at 22.86 -34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15681,7 +15673,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/sn74f283.pdf"
-			(at 22.225 -31.75 0)
+			(at 22.86 -36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15691,7 +15683,7 @@
 			)
 		)
 		(property "Description" "4-bit adder"
-			(at 12.7 -21.59 0)
+			(at 12.7 -29.845 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15699,7 +15691,7 @@
 			)
 		)
 		(property "Height" "1.75"
-			(at 22.225 -36.83 0)
+			(at 22.86 -41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15709,7 +15701,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74F283D"
-			(at 22.225 -39.37 0)
+			(at 22.86 -44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15719,7 +15711,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74F283D?qs=RnzODY3cU8t9RP7%252BwWjEZw%3D%3D"
-			(at 22.225 -41.91 0)
+			(at 22.86 -46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15729,7 +15721,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 22.225 -44.45 0)
+			(at 22.86 -49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15739,7 +15731,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74F283D"
-			(at 22.225 -46.99 0)
+			(at 22.86 -52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15749,26 +15741,18 @@
 			)
 		)
 		(property "Silkscreen" "74F283"
-			(at 12.7 -24.13 0)
+			(at 22.86 -39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "4-BITBIN FULL ADDER"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
 		(symbol "SN74F283D_0_0"
-			(pin passive line
-				(at 0 0 0)
+			(pin output line
+				(at 25.4 -11.43 180)
 				(length 5.08)
 				(name "Σ2"
 					(effects
@@ -15785,8 +15769,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -15.24 180)
+			(pin output line
+				(at 25.4 -6.35 180)
 				(length 5.08)
 				(name "Σ4"
 					(effects
@@ -15803,8 +15787,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -12.7 180)
+			(pin input line
+				(at 0 -12.7 0)
 				(length 5.08)
 				(name "B4"
 					(effects
@@ -15821,8 +15805,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -10.16 180)
+			(pin input line
+				(at 0 0 0)
 				(length 5.08)
 				(name "A4"
 					(effects
@@ -15839,8 +15823,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -7.62 180)
+			(pin output line
+				(at 25.4 -8.89 180)
 				(length 5.08)
 				(name "Σ3"
 					(effects
@@ -15857,8 +15841,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -5.08 180)
+			(pin input line
+				(at 0 -2.54 0)
 				(length 5.08)
 				(name "A3"
 					(effects
@@ -15875,8 +15859,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 -2.54 180)
+			(pin input line
+				(at 0 -15.24 0)
 				(length 5.08)
 				(name "B3"
 					(effects
@@ -15893,26 +15877,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 25.4 0 180)
-				(length 5.08)
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -2.54 0)
+			(pin input line
+				(at 0 -17.78 0)
 				(length 5.08)
 				(name "B2"
 					(effects
@@ -15929,7 +15895,7 @@
 					)
 				)
 			)
-			(pin passive line
+			(pin input line
 				(at 0 -5.08 0)
 				(length 5.08)
 				(name "A2"
@@ -15947,8 +15913,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -7.62 0)
+			(pin output line
+				(at 25.4 -13.97 180)
 				(length 5.08)
 				(name "Σ1"
 					(effects
@@ -15965,8 +15931,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -10.16 0)
+			(pin input line
+				(at 0 -7.62 0)
 				(length 5.08)
 				(name "A1"
 					(effects
@@ -15983,8 +15949,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -12.7 0)
+			(pin input line
+				(at 0 -20.32 0)
 				(length 5.08)
 				(name "B1"
 					(effects
@@ -16001,8 +15967,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -15.24 0)
+			(pin input line
+				(at 0 -24.13 0)
 				(length 5.08)
 				(name "C0"
 					(effects
@@ -16019,26 +15985,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -17.78 0)
-				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 25.4 -17.78 180)
+			(pin output line
+				(at 25.4 -24.13 180)
 				(length 5.08)
 				(name "C4"
 					(effects
@@ -16059,7 +16007,7 @@
 		(symbol "SN74F283D_0_1"
 			(polyline
 				(pts
-					(xy 5.08 2.54) (xy 20.32 2.54) (xy 20.32 -20.32) (xy 5.08 -20.32) (xy 5.08 2.54)
+					(xy 5.08 2.54) (xy 20.32 2.54) (xy 20.32 -28.575) (xy 5.08 -28.575) (xy 5.08 2.54)
 				)
 				(stroke
 					(width 0.1524)
@@ -16067,6 +16015,59 @@
 				)
 				(fill
 					(type background)
+				)
+			)
+		)
+		(symbol "SN74F283D_1_0"
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -26.67 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "SN74F283D_1_1"
+			(polyline
+				(pts
+					(xy 13.97 -8.255) (xy 13.97 -7.62) (xy 10.795 -7.62) (xy 12.065 -10.16) (xy 10.795 -12.7) (xy 13.97 -12.7)
+					(xy 13.97 -12.065)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
 				)
 			)
 		)
@@ -24750,7 +24751,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP50P310X90-8N"
-			(at 20.574 -16.764 0)
+			(at 20.32 -16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24760,7 +24761,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc3g04"
-			(at 20.574 -19.304 0)
+			(at 20.32 -19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24778,7 +24779,7 @@
 			)
 		)
 		(property "Height" "0.9"
-			(at 20.574 -24.384 0)
+			(at 20.32 -24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24788,7 +24789,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 20.574 -26.924 0)
+			(at 20.32 -26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24798,7 +24799,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74LVC3G04DCUR"
-			(at 20.574 -29.464 0)
+			(at 20.32 -29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24808,7 +24809,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74LVC3G04DCUR"
-			(at 20.574 -32.004 0)
+			(at 20.32 -31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24818,7 +24819,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC3G04DCUR?qs=vxEfx8VrU7ChLh1GswJlmg%3D%3D"
-			(at 20.574 -34.544 0)
+			(at 20.32 -34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24827,21 +24828,13 @@
 				(hide yes)
 			)
 		)
-		(property "Silkscreen" "74LVC3G04"
-			(at 12.7 -13.335 0)
+		(property "Silkscreen" "'3G04"
+			(at 20.32 -21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "TRIPLE INVERTER GATE"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)

@@ -5410,8 +5410,8 @@
 		(uuid "47be3890-5e57-4fbd-b40f-147b406e732c")
 	)
 	(no_connect
-		(at 30.48 99.06)
-		(uuid "4957a8a9-7808-460b-a951-6b3b10713f7f")
+		(at -40.64 92.71)
+		(uuid "47cd6e35-1b75-4840-8421-ce52e0aac84d")
 	)
 	(no_connect
 		(at -21.59 130.81)
@@ -5494,6 +5494,10 @@
 		(uuid "92c1837a-c2fa-4380-8575-ed1e42752296")
 	)
 	(no_connect
+		(at -40.64 90.17)
+		(uuid "92cf1c68-992c-4244-a0a7-80441ef1788d")
+	)
+	(no_connect
 		(at -40.64 105.41)
 		(uuid "9a209bbb-3ede-45ee-bd40-727138e53b09")
 	)
@@ -5574,10 +5578,6 @@
 		(uuid "cc42eb8c-47b9-44d5-9981-11983b6ce695")
 	)
 	(no_connect
-		(at 30.48 86.36)
-		(uuid "ce1c3deb-42dd-4eae-88b8-267619a7c53d")
-	)
-	(no_connect
 		(at -40.64 161.29)
 		(uuid "ce235c4a-e056-4d4b-8aae-c2f233732b02")
 	)
@@ -5602,12 +5602,12 @@
 		(uuid "cff3107f-c946-4a16-a88e-cb3413d2b08b")
 	)
 	(no_connect
-		(at -21.59 166.37)
-		(uuid "d25086d8-f0d4-4297-aacf-87fb1ad08cb6")
+		(at -40.64 87.63)
+		(uuid "d189f620-70df-4003-8efe-eebc3812cf48")
 	)
 	(no_connect
-		(at 30.48 106.68)
-		(uuid "db502672-c3ee-4dc0-8048-289c6e4a0be1")
+		(at -21.59 166.37)
+		(uuid "d25086d8-f0d4-4297-aacf-87fb1ad08cb6")
 	)
 	(no_connect
 		(at -40.64 179.07)
@@ -6118,6 +6118,16 @@
 	)
 	(wire
 		(pts
+			(xy -44.45 92.71) (xy -40.64 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28dd0888-b1c6-4e34-870f-dd34788e7046")
+	)
+	(wire
+		(pts
 			(xy -44.45 184.15) (xy -40.64 184.15)
 		)
 		(stroke
@@ -6345,6 +6355,16 @@
 			(type default)
 		)
 		(uuid "5a28b65e-3934-4cac-a181-bf732cbf4c84")
+	)
+	(wire
+		(pts
+			(xy -44.45 90.17) (xy -40.64 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5bc2c1e0-9bee-4f65-bae8-bb853e3f2332")
 	)
 	(wire
 		(pts
@@ -6665,6 +6685,16 @@
 			(type default)
 		)
 		(uuid "abd5c19c-37ae-42dd-8b87-f85582ffa592")
+	)
+	(wire
+		(pts
+			(xy -44.45 87.63) (xy -40.64 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aecdabe1-be5b-4d93-9212-56f8f32bf6c3")
 	)
 	(wire
 		(pts
@@ -7589,6 +7619,17 @@
 		)
 		(uuid "22d351ef-e4ca-4da6-8433-db4d69593edf")
 	)
+	(label "~{Main Access}"
+		(at 30.48 106.68 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "23f237ff-2a29-4f20-853b-945a856a9cf0")
+	)
 	(label "A3"
 		(at 123.19 137.16 0)
 		(fields_autoplaced yes)
@@ -7831,6 +7872,17 @@
 		)
 		(uuid "39f2b214-3d3f-4094-bb0f-fb951ee08c23")
 	)
+	(label "CLK_{M}"
+		(at 30.48 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3aa9d4f8-cb50-4dfb-8b9e-2cf905a834d8")
+	)
 	(label "~{Enable}_{D}"
 		(at 30.48 134.62 180)
 		(fields_autoplaced yes)
@@ -7973,6 +8025,17 @@
 			(justify right bottom)
 		)
 		(uuid "44dc866d-43ed-4dda-8598-ae85c9ede037")
+	)
+	(label "~{Main Access}"
+		(at -44.45 92.71 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "45130e8e-8343-4b5e-a84a-4f753f618ca2")
 	)
 	(label "A20_{M}"
 		(at -44.45 113.03 180)
@@ -8557,6 +8620,17 @@
 		)
 		(uuid "719b68d8-2878-47c3-8bdf-a58b1ec68f6e")
 	)
+	(label "CLK_{M}"
+		(at -44.45 87.63 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "72757b38-46bc-4be1-9a95-fe2da6d01f9f")
+	)
 	(label "A14"
 		(at 123.19 109.22 0)
 		(fields_autoplaced yes)
@@ -8567,6 +8641,17 @@
 			(justify left bottom)
 		)
 		(uuid "74156f55-f621-4533-8129-5fad9eb99a18")
+	)
+	(label "~{Main}"
+		(at 30.48 101.6 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "743297b7-de1f-46e3-85f2-b46f1581e4ac")
 	)
 	(label "D7_{D}"
 		(at -25.4 158.75 180)
@@ -9326,6 +9411,17 @@
 			(justify right bottom)
 		)
 		(uuid "b57db6b1-2bd5-4ac6-8d96-a9fcf1c70608")
+	)
+	(label "~{Main}"
+		(at -44.45 90.17 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b585bca8-a052-4acc-a695-3be327f598c6")
 	)
 	(label "A0"
 		(at 152.4 234.95 180)

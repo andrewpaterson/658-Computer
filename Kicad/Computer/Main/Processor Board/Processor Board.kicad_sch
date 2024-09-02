@@ -13100,10 +13100,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin input clock
 					(at -5.08 -78.74 0)
 					(length 5.08)
-					(name "S"
+					(name "MCLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13460,10 +13460,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -78.74 180)
-					(length 5.08)
-					(name "MS"
+				(pin no_connect line
+					(at 35.56 -83.82 180)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13478,10 +13478,10 @@
 						)
 					)
 				)
-				(pin no_connect inverted
-					(at 35.56 -81.28 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output clock
+					(at 35.56 -78.74 180)
+					(length 5.08)
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -13496,10 +13496,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -83.82 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output inverted_clock
+					(at 35.56 -81.28 180)
+					(length 5.08)
+					(name "~{CLK}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -20325,6 +20325,10 @@
 	(no_connect
 		(at 314.96 273.05)
 		(uuid "46e7f985-49fc-417f-b156-950187b52c61")
+	)
+	(no_connect
+		(at 237.49 212.09)
+		(uuid "4701c288-c5e9-4c83-97ff-74d06ef6a990")
 	)
 	(no_connect
 		(at 93.98 311.15)

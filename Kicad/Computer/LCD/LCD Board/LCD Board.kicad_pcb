@@ -7,6 +7,11 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "LCD and SNES Device")
+		(date "2024-08-26")
+		(rev "V1")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(31 "B.Cu" signal)
@@ -4438,7 +4443,7 @@
 		)
 		(fp_arc
 			(start 24.765028 1.905401)
-			(mid 26.252922 -1.686684)
+			(mid 26.252921 -1.686687)
 			(end 29.845 -3.174599)
 			(stroke
 				(width 0.1)
@@ -7353,7 +7358,7 @@
 		)
 		(fp_arc
 			(start 86.040048 -8.4)
-			(mid 86.35762 -9.156489)
+			(mid 86.357626 -9.156454)
 			(end 87.117096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -7364,7 +7369,7 @@
 		)
 		(fp_arc
 			(start 90.297 -9.466799)
-			(mid 91.056441 -9.156453)
+			(mid 91.056476 -9.156459)
 			(end 91.374048 -8.4)
 			(stroke
 				(width 0.1)
@@ -7375,7 +7380,7 @@
 		)
 		(fp_arc
 			(start 139.499048 -8.4)
-			(mid 139.81662 -9.156489)
+			(mid 139.816626 -9.156454)
 			(end 140.576096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -10017,7 +10022,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -12488,6 +12493,19 @@
 			(justify left bottom mirror)
 		)
 	)
+	(gr_text "HCP65 Daughter Board\nLCD and SNES Device V1"
+		(at 197.231 132.969 270)
+		(layer "B.SilkS" knockout)
+		(uuid "ae47e70c-aa78-49da-adf7-8fba7246ca52")
+		(effects
+			(font
+				(size 3 3)
+				(thickness 0.6)
+				(bold yes)
+			)
+			(justify mirror)
+		)
+	)
 	(gr_text "A8_{D}"
 		(at 77.597 154.178 315)
 		(layer "B.SilkS")
@@ -12644,7 +12662,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "HCP65 Daughter Board\nLCD and SNES Reader V0"
+	(gr_text "HCP65 Daughter Board\nLCD and SNES Device V1"
 		(at 197.5104 132.9944 90)
 		(layer "F.SilkS" knockout)
 		(uuid "2f713ff5-8236-48ce-bb6b-c84c257b1a0d")

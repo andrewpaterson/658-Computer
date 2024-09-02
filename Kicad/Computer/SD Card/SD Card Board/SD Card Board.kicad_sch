@@ -3036,10 +3036,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 35.56 0 180)
+				(pin no_connect line
+					(at -5.08 -60.96 0)
 					(length 5.08) hide
-					(name "GND"
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3252,10 +3252,10 @@
 						)
 					)
 				)
-				(pin input inverted
+				(pin input line
 					(at -5.08 -10.16 0)
 					(length 5.08)
-					(name "~{Latch_Bank}"
+					(name "Latch_Bank"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3270,10 +3270,10 @@
 						)
 					)
 				)
-				(pin input inverted
+				(pin input line
 					(at -5.08 -12.7 0)
 					(length 5.08)
-					(name "~{Latch_High}"
+					(name "Latch_High"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3288,10 +3288,10 @@
 						)
 					)
 				)
-				(pin input inverted
+				(pin input line
 					(at -5.08 -15.24 0)
 					(length 5.08)
-					(name "~{Latch_Low}"
+					(name "Latch_Low"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3612,10 +3612,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08) hide
-					(name "GND"
+				(pin output line
+					(at 35.56 -30.48 180)
+					(length 5.08)
+					(name "C15"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3630,10 +3630,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -30.48 180)
-					(length 5.08)
-					(name "C15"
+				(pin passive line
+					(at 35.56 -5.08 180)
+					(length 5.08) hide
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3810,10 +3810,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at -5.08 -60.96 0)
+				(pin passive line
+					(at 35.56 0 180)
 					(length 5.08) hide
-					(name "N.C."
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8726,10 +8726,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin input clock
 					(at -5.08 -78.74 0)
 					(length 5.08)
-					(name "S"
+					(name "MCLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9086,10 +9086,10 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -78.74 180)
-					(length 5.08)
-					(name "MS"
+				(pin no_connect line
+					(at 35.56 -83.82 180)
+					(length 5.08) hide
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9104,10 +9104,10 @@
 						)
 					)
 				)
-				(pin no_connect inverted
-					(at 35.56 -81.28 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output clock
+					(at 35.56 -78.74 180)
+					(length 5.08)
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9122,10 +9122,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -83.82 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin output inverted_clock
+					(at 35.56 -81.28 180)
+					(length 5.08)
+					(name "~{CLK}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15862,21 +15862,13 @@
 					(hide yes)
 				)
 			)
-			(property "Silkscreen" "74LVC138A"
-				(at 12.7 -25.4 0)
+			(property "Silkscreen" "74LVC138"
+				(at 26.035 -42.545 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -16185,282 +16177,6 @@
 				)
 			)
 		)
-		(symbol "Nexperia:74LVC1G17GV,125"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 12.065 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "74LVC1G17GV,125"
-				(at 12.7 5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-				(at 18.415 -13.97 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G17.pdf"
-				(at 18.415 -16.51 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "Schmitt buffer"
-				(at 13.335 -5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 18.415 -21.59 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 18.415 -24.13 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC1G17GV,125"
-				(at 18.415 -26.67 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-LVC1G17GV125"
-				(at 18.415 -29.21 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G17GV125?qs=me8TqzrmIYX3DxU5Fpa8sQ%3D%3D"
-				(at 18.415 -31.75 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "'1G17"
-				(at 18.415 -19.05 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC1G17 - Single Schmitt trigger buffer@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "74LVC1G17GV,125_0_0"
-				(pin no_connect line
-					(at 0 2.54 0)
-					(length 5.08) hide
-					(name "n.c."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 0 0)
-					(length 5.08)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 2.54 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LVC1G17GV,125_0_1"
-				(polyline
-					(pts
-						(xy 9.525 0) (xy 11.43 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 13.97 0) (xy 15.875 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.43 -1.016) (xy 13.97 0) (xy 11.43 1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 4.445) (xy 20.32 4.445) (xy 20.32 -4.445) (xy 5.08 -4.445) (xy 5.08 4.445)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 11.43 1.016)
-					(end 11.43 -1.016)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-		)
 		(symbol "ST_Microelectronics:LD1117S50C"
 			(pin_names
 				(offset 0.762)
@@ -16713,10 +16429,6 @@
 		(uuid "19710729-a1e7-42af-9a5e-52faac70e1af")
 	)
 	(no_connect
-		(at 146.05 367.03)
-		(uuid "20824146-d7cb-4d8e-aac4-f24641f5a606")
-	)
-	(no_connect
 		(at 381 345.44)
 		(uuid "2470ef34-d595-4e59-a615-2b0d5192e09e")
 	)
@@ -16841,6 +16553,18 @@
 		(uuid "912f71b4-4cf4-4243-bc14-fe4a1f47a09c")
 	)
 	(no_connect
+		(at 482.6 340.36)
+		(uuid "9459b05b-bf27-4833-ae67-297ef38a7b22")
+	)
+	(no_connect
+		(at 146.05 369.57)
+		(uuid "97cf2217-02a9-4c39-837e-79cd4f0dc8ee")
+	)
+	(no_connect
+		(at 482.6 335.28)
+		(uuid "98fe9cd3-829b-42de-9921-28efd2ca90d8")
+	)
+	(no_connect
 		(at 322.58 208.28)
 		(uuid "9906fecc-ed9a-4595-b28e-ecceab277b41")
 	)
@@ -16935,6 +16659,10 @@
 	(no_connect
 		(at 240.03 180.34)
 		(uuid "e6115d83-e589-40f2-a627-7f75b9f9b93c")
+	)
+	(no_connect
+		(at 482.6 337.82)
+		(uuid "efa70f26-faf5-4863-8d0b-33358e70a0ae")
 	)
 	(no_connect
 		(at 381 342.9)
@@ -17998,17 +17726,6 @@
 		)
 		(uuid "1f693181-761b-49f1-a21f-19b4e1837b65")
 	)
-	(label "Fast CLK"
-		(at 63.5 110.49 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1f732e86-caf5-48ca-8000-f94b8635b10d")
-	)
 	(label "GND"
 		(at 322.58 180.34 0)
 		(fields_autoplaced yes)
@@ -18975,17 +18692,6 @@
 		)
 		(uuid "425c8d38-b19c-49ab-8bb3-ba66bfe07393")
 	)
-	(label "~{Write Count Low Address}"
-		(at 482.6 340.36 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "42686c5f-4936-4a22-b626-45412f99b69b")
-	)
 	(label "~{Reset}"
 		(at 340.36 307.34 180)
 		(fields_autoplaced yes)
@@ -19338,17 +19044,6 @@
 		)
 		(uuid "4e367b17-1f93-41c5-8e68-76565b83ce45")
 	)
-	(label "GND"
-		(at 105.41 367.03 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4e7d4426-c83c-4291-bd3e-933172913ccf")
-	)
 	(label "D1_{D}"
 		(at 106.68 137.16 180)
 		(fields_autoplaced yes)
@@ -19481,17 +19176,6 @@
 		)
 		(uuid "5251f331-864c-4284-9747-829188918c76")
 	)
-	(label "CLK_{M}"
-		(at 38.1 110.49 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "528a1326-b2a4-494e-9f51-b89753914a1f")
-	)
 	(label "GND"
 		(at 106.68 78.74 180)
 		(fields_autoplaced yes)
@@ -19612,17 +19296,6 @@
 			(justify right bottom)
 		)
 		(uuid "57cc26df-e2fe-4e91-adbf-4790280935c1")
-	)
-	(label "~{Write Count High Address}"
-		(at 482.6 337.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "58976c95-2ae5-4920-876f-e2de302f0d15")
 	)
 	(label "D5"
 		(at 147.32 127 0)
@@ -19855,17 +19528,6 @@
 		)
 		(uuid "61068d60-7a31-499d-9ca8-750ea51fbb41")
 	)
-	(label "3.3V"
-		(at 48.26 93.98 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "61dac406-cebf-4f36-acc0-fe51c31e4052")
-	)
 	(label "~{RD}_{M}"
 		(at 146.05 303.53 0)
 		(fields_autoplaced yes)
@@ -20073,17 +19735,6 @@
 			(justify right bottom)
 		)
 		(uuid "676adf04-8ea7-4ca0-96fd-ac0079387b80")
-	)
-	(label "GND"
-		(at 53.34 93.98 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "678632d3-e687-41e0-b71d-760a56f5d0ba")
 	)
 	(label "D0"
 		(at 187.96 360.68 180)
@@ -20502,7 +20153,7 @@
 		)
 		(uuid "770e754d-15b7-42c2-b600-1e8b22db4ac8")
 	)
-	(label "~{Write Count High Address}"
+	(label "Write Count High Address"
 		(at 486.41 195.58 180)
 		(fields_autoplaced yes)
 		(effects
@@ -20853,7 +20504,7 @@
 		)
 		(uuid "82ded041-26eb-420d-bd20-4a673cf34e8b")
 	)
-	(label "~{Write Count Bank Address}"
+	(label "Write Count Bank Address"
 		(at 486.41 193.04 180)
 		(fields_autoplaced yes)
 		(effects
@@ -21356,17 +21007,6 @@
 		)
 		(uuid "92235ce6-acad-433d-87e3-d29a179f61ae")
 	)
-	(label "~{Write Count Bank Address}"
-		(at 482.6 335.28 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9262bd6a-1328-4daa-99c9-32f336265e37")
-	)
 	(label "GND"
 		(at 240.03 233.68 0)
 		(fields_autoplaced yes)
@@ -21498,6 +21138,17 @@
 			(justify left bottom)
 		)
 		(uuid "97e56b72-adad-4be0-9cf2-d45b02155520")
+	)
+	(label "CLK_{M}"
+		(at 105.41 367.03 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "98c5994b-3a5c-40f0-9f6b-e17a2b523797")
 	)
 	(label "~{A4}"
 		(at 199.39 99.06 180)
@@ -21663,6 +21314,17 @@
 			(justify right bottom)
 		)
 		(uuid "a062fdd7-1424-4213-8456-bd0d44697a50")
+	)
+	(label "Fast CLK"
+		(at 146.05 367.03 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a0acac50-3afe-4cae-a1ad-35dbaf6dd7f7")
 	)
 	(label "~{Select}_{D}"
 		(at 106.68 63.5 180)
@@ -22377,17 +22039,6 @@
 		)
 		(uuid "b7909577-103f-477e-b783-e6bf46964dfe")
 	)
-	(label "GND"
-		(at 38.1 113.03 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b80a37e4-2059-4221-9466-abe327772001")
-	)
 	(label "MA11"
 		(at 105.41 334.01 180)
 		(fields_autoplaced yes)
@@ -22980,7 +22631,7 @@
 		)
 		(uuid "c93d13ad-c541-4071-b9a8-fe97923cea0a")
 	)
-	(label "~{Write Count Low Address}"
+	(label "Write Count Low Address"
 		(at 486.41 198.12 180)
 		(fields_autoplaced yes)
 		(effects
@@ -23966,17 +23617,6 @@
 		)
 		(uuid "ebf2f494-1ca2-4179-b362-2dfde2f32a59")
 	)
-	(label "3.3V"
-		(at 63.5 107.95 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ec292fdd-94f9-4c89-9597-2edb9ba43214")
-	)
 	(label "D5_{M}"
 		(at 240.03 251.46 0)
 		(fields_autoplaced yes)
@@ -24477,21 +24117,13 @@
 				(hide yes)
 			)
 		)
-		(property "Silkscreen" "74LVC138A"
-			(at 372.11 81.28 0)
+		(property "Silkscreen" "74LVC138"
+			(at 385.445 98.425 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 359.41 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -24762,99 +24394,6 @@
 			(project "PS2 Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "R3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 48.26 93.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "21753a88-8afd-421f-9f86-e3360b287d7d")
-		(property "Reference" "C11"
-			(at 50.546 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 50.8 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 65.024 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 50.4825 93.6625 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 48.26 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4f4d6bf2-9ac8-437f-93fa-9a81962966b3")
-		)
-		(pin "2"
-			(uuid "cd6374a9-c95a-4348-94e3-b1d7b3f2bcf1")
-		)
-		(instances
-			(project "Clock Hold Select"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C11")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C7")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C2")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
-					(reference "C8")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
-			)
-			(project "PS2 Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -28457,154 +27996,6 @@
 			(project "PS2 Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC1G17GV,125")
-		(at 38.1 110.49 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c94f0e0b-e446-454a-92c6-4378ad38eb5c")
-		(property "Reference" "IC2"
-			(at 50.165 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "74LVC1G17GV,125"
-			(at 50.8 104.775 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-			(at 56.515 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G17.pdf"
-			(at 56.515 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "Schmitt buffer"
-			(at 51.435 116.205 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 56.515 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 56.515 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC1G17GV,125"
-			(at 56.515 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-LVC1G17GV125"
-			(at 56.515 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G17GV125?qs=me8TqzrmIYX3DxU5Fpa8sQ%3D%3D"
-			(at 56.515 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "'1G17"
-			(at 56.515 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC1G17 - Single Schmitt trigger buffer@en-us"
-			(at 38.1 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "4f476ba4-7156-429c-a0dc-2165c3978127")
-		)
-		(pin "4"
-			(uuid "2b566ef5-771c-49c6-a629-e566687710ce")
-		)
-		(pin "2"
-			(uuid "6ce7bd6d-c066-495a-8bff-f36375f6498a")
-		)
-		(pin "5"
-			(uuid "2c3ee0da-fd83-4e45-ac65-ef22712d8101")
-		)
-		(pin "1"
-			(uuid "234d915c-8023-481f-948d-b063d4d1e16a")
-		)
-		(instances
-			(project ""
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC2")
 					(unit 1)
 				)
 			)

@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "8.0")
 	(uuid "337b5f72-8be1-4121-9dc6-479b565482b2")
-	(paper "A4")
+	(paper "A5")
 	(title_block
 		(title "Video Row Latch")
 		(date "2024-06-05")
@@ -1161,6 +1161,734 @@
 				)
 			)
 		)
+		(symbol "Nexperia:74LVC04APW,118"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74LVC04APW,118"
+				(at 12.7 5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
+				(at 20.955 -22.225 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC04A.pdf"
+				(at 20.955 -24.765 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "6-input inverter"
+				(at 12.7 -18.415 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.1"
+				(at 20.955 -29.845 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Nexperia"
+				(at 20.955 -32.385 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "74LVC04APW,118"
+				(at 20.955 -34.925 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "771-74LVC04APW-T"
+				(at 20.955 -37.465 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC04APW118?qs=me8TqzrmIYUA5zXidd9%2F4g%3D%3D"
+				(at 20.955 -40.005 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "74LVC04"
+				(at 13.335 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "74LVC04APW,118_0_0"
+				(pin input line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -10.16 180)
+					(length 5.08)
+					(name "5Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "5A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -12.7 180)
+					(length 5.08)
+					(name "6Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "6A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 2.54 180)
+					(length 5.08) hide
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "1Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "2A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "2Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "3A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "3Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 0)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 25.4 -7.62 180)
+					(length 5.08)
+					(name "4Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "4A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LVC04APW,118_0_1"
+				(polyline
+					(pts
+						(xy 9.525 -12.7) (xy 10.7949 -12.7)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -10.16) (xy 10.7949 -10.16)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -7.62) (xy 10.7949 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -5.08) (xy 10.7949 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 -2.54) (xy 10.7949 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 0) (xy 10.7949 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 -12.7) (xy 15.875 -12.7)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 -10.16) (xy 15.875 -10.16)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 -7.62) (xy 15.875 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 -5.08) (xy 15.875 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 -2.54) (xy 15.875 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 14.351 0) (xy 15.875 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -13.716) (xy 13.335 -12.7) (xy 10.795 -11.684)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -11.176) (xy 13.335 -10.16) (xy 10.795 -9.144)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -8.636) (xy 13.335 -7.62) (xy 10.795 -6.604)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -6.096) (xy 13.335 -5.08) (xy 10.795 -4.064)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -3.556) (xy 13.335 -2.54) (xy 10.795 -1.524)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.795 -1.016) (xy 13.335 0) (xy 10.795 1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 5.08 4.445) (xy 20.32 4.445) (xy 20.32 -17.145) (xy 5.08 -17.145) (xy 5.08 4.445)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 -11.684)
+					(end 10.795 -13.716)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 -9.144)
+					(end 10.795 -11.176)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 -6.604)
+					(end 10.795 -8.636)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 -4.064)
+					(end 10.795 -6.096)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 -1.524)
+					(end 10.795 -3.556)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start 10.795 1.016)
+					(end 10.795 -1.016)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center 13.843 -12.7)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.843 -10.16)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.843 -7.62)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.843 -5.08)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.843 -2.54)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.843 0)
+					(radius 0.508)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC138APW-Q100J"
 			(pin_names
 				(offset 0.762)
@@ -1186,7 +1914,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-				(at 28.575 -30.48 0)
+				(at 29.21 -31.115 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1196,7 +1924,7 @@
 				)
 			)
 			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-				(at 28.575 -33.02 0)
+				(at 29.21 -33.655 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1214,7 +1942,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 28.575 -38.1 0)
+				(at 29.21 -38.735 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1224,7 +1952,7 @@
 				)
 			)
 			(property "Mouser Part Number" "771-74LVC138APWQ100J"
-				(at 28.575 -40.64 0)
+				(at 29.21 -41.275 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1234,7 +1962,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-				(at 28.575 -43.18 0)
+				(at 29.21 -43.815 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1244,7 +1972,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Nexperia"
-				(at 28.575 -45.72 0)
+				(at 29.21 -46.355 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1254,7 +1982,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-				(at 28.575 -48.26 0)
+				(at 29.21 -48.895 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1264,20 +1992,12 @@
 				)
 			)
 			(property "Silkscreen" "74LVC138"
-				(at 12.7 -27.305 0)
+				(at 29.21 -36.195 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -2013,282 +2733,6 @@
 				)
 			)
 		)
-		(symbol "Nexperia:74LVC1G04GV,125"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 13.335 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "74LVC1G04GV,125"
-				(at 12.7 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-				(at 26.035 -22.86 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G04.pdf"
-				(at 26.035 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "1-input inverter"
-				(at 12.7 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 26.035 -30.48 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 26.035 -33.02 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC1G04GV,125"
-				(at 26.035 -35.56 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-74LVC1G04GV"
-				(at 26.035 -38.1 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G04GV125?qs=me8TqzrmIYW6McwMAxl%2F9w%3D%3D"
-				(at 26.035 -40.64 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "'1G04"
-				(at 13.335 -10.795 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "74LVC1G04GV,125_0_0"
-				(pin no_connect line
-					(at 25.4 -5.08 180)
-					(length 5.08)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 25.4 -2.54 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LVC1G04GV,125_0_1"
-				(polyline
-					(pts
-						(xy 9.525 -2.54) (xy 10.7949 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.351 -2.54) (xy 15.875 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.795 -3.556) (xy 13.335 -2.54) (xy 10.795 -1.524)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 10.795 -1.524)
-					(end 10.795 -3.556)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(circle
-					(center 13.843 -2.54)
-					(radius 0.508)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-		)
 		(symbol "Nexperia:74LVC74APW,118"
 			(pin_names
 				(offset 0.762)
@@ -2681,92 +3125,100 @@
 		)
 	)
 	(junction
-		(at 44.45 167.64)
+		(at 36.83 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "413af9fc-5730-4581-bcd6-4066802553e7")
 	)
 	(junction
-		(at 73.66 167.64)
+		(at 66.04 100.33)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b483095b-b3f1-413b-bfdc-dd45b3a6b7a0")
 	)
 	(no_connect
-		(at 58.42 100.33)
+		(at 41.91 44.45)
 		(uuid "000e4458-53e2-4381-ac6b-792f64bbad88")
 	)
 	(no_connect
-		(at 196.85 59.69)
+		(at 170.18 46.99)
 		(uuid "0abd3e08-3cb2-40ec-bd46-9d5207a28b1e")
 	)
 	(no_connect
-		(at 45.72 80.01)
+		(at 29.21 24.13)
 		(uuid "104e1d4e-08dc-4959-bf2f-171765440f81")
 	)
 	(no_connect
-		(at 58.42 97.79)
+		(at 41.91 41.91)
 		(uuid "2632e998-7a30-454b-bd5a-0e8f556fb416")
 	)
 	(no_connect
-		(at 69.85 172.72)
+		(at 62.23 105.41)
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
 	(no_connect
-		(at 196.85 97.79)
+		(at 170.18 85.09)
 		(uuid "2c3eb517-7ec2-4a89-b542-91966016689d")
 	)
 	(no_connect
-		(at 58.42 92.71)
+		(at 41.91 36.83)
 		(uuid "31fccf45-b5a5-4949-aa45-822c75c5428c")
 	)
 	(no_connect
-		(at 58.42 85.09)
+		(at 41.91 29.21)
 		(uuid "333eda79-bbf6-4370-83e2-3c0d401f982c")
 	)
 	(no_connect
-		(at 135.89 130.81)
+		(at 119.38 74.93)
 		(uuid "39a58e65-0f1c-45f2-a78d-0f7989812819")
 	)
 	(no_connect
-		(at 45.72 90.17)
+		(at 29.21 34.29)
 		(uuid "523a32e1-0574-41e5-b082-8b9070f8ca89")
 	)
 	(no_connect
-		(at 196.85 102.87)
+		(at 64.77 71.12)
+		(uuid "5cbb6421-37e1-4a11-8311-1dc39ff50c1e")
+	)
+	(no_connect
+		(at 170.18 90.17)
 		(uuid "6870d40a-6bfe-446b-817d-8b7790049eb1")
 	)
 	(no_connect
-		(at 58.42 90.17)
+		(at 41.91 34.29)
 		(uuid "74c2ee5f-c5ce-411d-97a5-fffa99ac7830")
 	)
 	(no_connect
-		(at 58.42 87.63)
+		(at 41.91 31.75)
 		(uuid "770b6d43-1792-4298-bd80-3d94285ad2d0")
 	)
 	(no_connect
-		(at 196.85 100.33)
+		(at 170.18 87.63)
 		(uuid "92dd5337-315a-4a7b-8bbc-6a7ccf08ddb6")
 	)
 	(no_connect
-		(at 196.85 85.09)
+		(at 170.18 72.39)
 		(uuid "9307b08b-7b8a-46d5-ab06-73fb425e756a")
 	)
 	(no_connect
-		(at 196.85 54.61)
+		(at 170.18 41.91)
 		(uuid "9b2b45fc-105c-48cf-ad35-440e216cd8c3")
 	)
 	(no_connect
-		(at 45.72 77.47)
+		(at 29.21 21.59)
 		(uuid "bd620efd-f5c4-4ee7-8aab-01f3524eec3e")
 	)
 	(no_connect
-		(at 135.89 140.97)
+		(at 119.38 85.09)
 		(uuid "da129f7c-dd24-4cb8-9cc8-36c2ea230b6d")
+	)
+	(no_connect
+		(at 64.77 68.58)
+		(uuid "eed5c4de-3513-4f97-80e8-4b6450e99ebb")
 	)
 	(wire
 		(pts
-			(xy 73.66 172.72) (xy 73.66 167.64)
+			(xy 66.04 105.41) (xy 66.04 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2776,7 +3228,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 167.64) (xy 44.45 167.64)
+			(xy 21.59 100.33) (xy 36.83 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2786,7 +3238,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 167.64) (xy 44.45 170.18)
+			(xy 36.83 100.33) (xy 36.83 102.87)
 		)
 		(stroke
 			(width 0)
@@ -2796,7 +3248,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 167.64) (xy 73.66 167.64)
+			(xy 62.23 100.33) (xy 66.04 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2806,7 +3258,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 167.64) (xy 29.21 172.72)
+			(xy 21.59 100.33) (xy 21.59 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2816,7 +3268,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 172.72) (xy 30.48 172.72)
+			(xy 21.59 105.41) (xy 22.86 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2826,7 +3278,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 167.64) (xy 78.74 167.64)
+			(xy 66.04 100.33) (xy 71.12 100.33)
 		)
 		(stroke
 			(width 0)
@@ -2834,8 +3286,19 @@
 		)
 		(uuid "f5a44683-1946-4e2a-9349-8f328e411edc")
 	)
+	(label "GND"
+		(at 39.37 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "05430119-7193-46c7-88ac-d65a424bc11f")
+	)
 	(label "~{MR}_{1}"
-		(at 135.89 128.27 0)
+		(at 119.38 72.39 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2846,7 +3309,7 @@
 		(uuid "124b2473-fbf8-4148-8abe-9fbacf05858c")
 	)
 	(label "CEP"
-		(at 171.45 57.15 180)
+		(at 144.78 44.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2857,7 +3320,7 @@
 		(uuid "129cd1f2-4d12-4e93-b413-b32e9e2ce02c")
 	)
 	(label "~{CLK}"
-		(at 45.72 87.63 180)
+		(at 29.21 31.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2868,7 +3331,7 @@
 		(uuid "1303c7a3-6779-430e-bf52-693529c34680")
 	)
 	(label "3.3V"
-		(at 110.49 143.51 180)
+		(at 93.98 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2878,8 +3341,19 @@
 		)
 		(uuid "14d184e1-3def-46c0-983f-03e73aa42f54")
 	)
+	(label "~{Load Address High}"
+		(at 39.37 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1545de94-cbde-4caf-904b-b69ef04a6afe")
+	)
 	(label "GND"
-		(at 129.54 173.99 0)
+		(at 62.23 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2890,7 +3364,7 @@
 		(uuid "18072bbe-7054-4ed1-ac71-d4f908f31d79")
 	)
 	(label "~{MR}_{2}"
-		(at 135.89 138.43 0)
+		(at 119.38 82.55 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2901,7 +3375,7 @@
 		(uuid "1b4b6836-63cc-43be-a4a7-431b21d38f99")
 	)
 	(label "3.3V"
-		(at 171.45 59.69 180)
+		(at 144.78 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2912,7 +3386,7 @@
 		(uuid "1fe7677d-d685-4f35-8eb6-8f30b94ed327")
 	)
 	(label "~{CLK}"
-		(at 110.49 135.89 180)
+		(at 93.98 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2923,7 +3397,7 @@
 		(uuid "22331d77-30b8-4b9b-95b4-9d4477088d42")
 	)
 	(label "3.3V"
-		(at 196.85 82.55 0)
+		(at 170.18 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2934,7 +3408,7 @@
 		(uuid "230948d1-3ab2-4778-bac5-3e1f7175c550")
 	)
 	(label "GND"
-		(at 160.02 173.99 0)
+		(at 77.47 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2945,7 +3419,7 @@
 		(uuid "233f9cd9-1e3e-4223-9da6-b18600f133ef")
 	)
 	(label "CLK"
-		(at 45.72 85.09 180)
+		(at 29.21 29.21 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2956,7 +3430,7 @@
 		(uuid "25e2eded-7ed6-4b17-826b-bb72c3bce26d")
 	)
 	(label "GND"
-		(at 78.74 172.72 0)
+		(at 71.12 105.41 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2967,7 +3441,7 @@
 		(uuid "2703f9d4-cbda-4d41-b75d-1696dd2e6090")
 	)
 	(label "GND"
-		(at 171.45 52.07 180)
+		(at 144.78 39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2978,7 +3452,7 @@
 		(uuid "31f6d748-ec9a-4b2a-83ca-22384b8dc766")
 	)
 	(label "CLK"
-		(at 171.45 44.45 180)
+		(at 144.78 31.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2989,7 +3463,7 @@
 		(uuid "322cb984-5523-42dd-96a2-7c04f177932b")
 	)
 	(label "3.3V"
-		(at 135.89 125.73 0)
+		(at 119.38 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2999,8 +3473,19 @@
 		)
 		(uuid "359155df-1d66-4212-89c6-48ef74f9c840")
 	)
+	(label "~{Load Address Low}"
+		(at 170.18 74.93 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3aef547a-9e7b-4d33-a924-c079ff4c2dec")
+	)
 	(label "LA2"
-		(at 196.85 52.07 0)
+		(at 170.18 39.37 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3011,7 +3496,7 @@
 		(uuid "3b505445-abbf-4f99-a86b-d03928f5a2a1")
 	)
 	(label "LA0"
-		(at 196.85 46.99 0)
+		(at 170.18 34.29 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3022,7 +3507,7 @@
 		(uuid "43cc7595-d9e5-4f3d-9294-5f123088d3f8")
 	)
 	(label "GND"
-		(at 35.56 172.72 0)
+		(at 27.94 105.41 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3033,7 +3518,7 @@
 		(uuid "47a447a5-df4b-4ed7-a925-ccbc4a7d8442")
 	)
 	(label "5V"
-		(at 29.21 167.64 180)
+		(at 21.59 100.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3043,8 +3528,19 @@
 		)
 		(uuid "47d2502c-5742-4892-a601-e4d8b2225d2f")
 	)
+	(label "~{Load Address Low}"
+		(at 39.37 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4ad25925-d8b7-4156-b41f-4949d8518792")
+	)
 	(label "~{MR}"
-		(at 110.49 130.81 180)
+		(at 93.98 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3055,7 +3551,7 @@
 		(uuid "4e823e9a-b553-4106-ad98-da12a0d28ffe")
 	)
 	(label "LA0"
-		(at 171.45 97.79 180)
+		(at 144.78 85.09 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3066,7 +3562,7 @@
 		(uuid "4fc5f19f-33a0-44b9-ba5d-4138d3166851")
 	)
 	(label "GND"
-		(at 99.06 173.99 0)
+		(at 31.75 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3076,8 +3572,8 @@
 		)
 		(uuid "4fe86906-0599-49a6-8a4e-7223bad402b4")
 	)
-	(label "~{Load Address Bank}"
-		(at 196.85 92.71 0)
+	(label "Load Address Bank"
+		(at 64.77 78.74 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3088,7 +3584,7 @@
 		(uuid "51757ac7-a08c-4cab-86fc-8627eb9930c1")
 	)
 	(label "3.3V"
-		(at 110.49 133.35 180)
+		(at 93.98 77.47 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3099,7 +3595,7 @@
 		(uuid "553de2d7-145c-4928-b4be-d79395520125")
 	)
 	(label "~{MR}_{1}"
-		(at 110.49 140.97 180)
+		(at 93.98 85.09 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3110,7 +3606,7 @@
 		(uuid "5b73c558-1621-4d30-a4ec-05b5127c4d20")
 	)
 	(label "CLK"
-		(at 110.49 125.73 180)
+		(at 93.98 69.85 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3121,7 +3617,7 @@
 		(uuid "5bae68d8-9e3e-4ebc-812e-e11a2c04eab8")
 	)
 	(label "GND"
-		(at 44.45 172.72 180)
+		(at 36.83 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3132,7 +3628,7 @@
 		(uuid "60f2ef0b-8946-432b-ba1c-d834ef88b410")
 	)
 	(label "3.3V"
-		(at 171.45 41.91 180)
+		(at 144.78 29.21 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3143,7 +3639,7 @@
 		(uuid "658adb23-9238-46c7-9559-bf6ce36c7ad5")
 	)
 	(label "GND"
-		(at 58.42 95.25 0)
+		(at 41.91 39.37 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3154,7 +3650,7 @@
 		(uuid "6b341047-ed8e-4582-859f-c40ca6d4db4e")
 	)
 	(label "MR"
-		(at 54.61 130.81 180)
+		(at 39.37 66.04 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3165,7 +3661,7 @@
 		(uuid "6d15ce9e-521d-4f8e-b36d-953ba3a4e4cc")
 	)
 	(label "3.3V"
-		(at 154.94 173.99 180)
+		(at 72.39 123.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3176,7 +3672,7 @@
 		(uuid "7077dd46-7d15-4be5-b5b3-cc2ec9845e83")
 	)
 	(label "5V"
-		(at 45.72 74.93 180)
+		(at 29.21 19.05 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3187,7 +3683,7 @@
 		(uuid "7094bcbd-23bc-48b5-ba3c-25073d6e2f55")
 	)
 	(label "GND"
-		(at 171.45 54.61 180)
+		(at 144.78 41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3198,7 +3694,7 @@
 		(uuid "764e4440-3260-47ca-bf2e-efc81bcbe5ac")
 	)
 	(label "GND"
-		(at 58.42 82.55 0)
+		(at 41.91 26.67 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3209,7 +3705,7 @@
 		(uuid "7d6eaa89-7b67-4bf8-ac5d-010a99081152")
 	)
 	(label "GND"
-		(at 171.45 85.09 180)
+		(at 144.78 72.39 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3219,8 +3715,8 @@
 		)
 		(uuid "8372e81c-d85b-4048-b599-aeb3d081a5eb")
 	)
-	(label "~{Load Address Bank}"
-		(at 58.42 80.01 0)
+	(label "Load Address Bank"
+		(at 41.91 24.13 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3231,7 +3727,7 @@
 		(uuid "88dd0887-e9ba-4dcf-aad0-d0d602c6e6f5")
 	)
 	(label "3.3V"
-		(at 196.85 39.37 0)
+		(at 170.18 26.67 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3242,7 +3738,7 @@
 		(uuid "8a66f713-011d-47ae-844f-1ac8ca209a61")
 	)
 	(label "~{MR}"
-		(at 80.01 130.81 0)
+		(at 64.77 66.04 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3252,8 +3748,8 @@
 		)
 		(uuid "8d2ca02b-2504-4642-86cc-3495216f51b4")
 	)
-	(label "~{Load Address Low}"
-		(at 58.42 74.93 0)
+	(label "Load Address Low"
+		(at 41.91 19.05 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3264,7 +3760,7 @@
 		(uuid "8d6941b7-2307-4eba-b030-bd748428669c")
 	)
 	(label "3.3V"
-		(at 93.98 173.99 180)
+		(at 26.67 123.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3275,7 +3771,7 @@
 		(uuid "8da0ec47-5f2f-4b9b-8b0e-a16ac66f875c")
 	)
 	(label "GND"
-		(at 171.45 49.53 180)
+		(at 144.78 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3285,8 +3781,19 @@
 		)
 		(uuid "8e492e8c-e53a-47ff-b81f-e607a30a4015")
 	)
-	(label "~{Load Address Low}"
-		(at 196.85 87.63 0)
+	(label "~{Load Address Bank}"
+		(at 39.37 78.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "94440e75-0d54-467a-bfb4-d6784b2a29c9")
+	)
+	(label "Load Address Low"
+		(at 64.77 73.66 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3297,7 +3804,7 @@
 		(uuid "9b859094-9345-4322-b6e4-1ff0bc35ee5b")
 	)
 	(label "3.3V"
-		(at 110.49 138.43 180)
+		(at 93.98 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3308,7 +3815,7 @@
 		(uuid "9dbb5415-e651-4b0c-ab36-398b42e3783d")
 	)
 	(label "LA2"
-		(at 45.72 97.79 180)
+		(at 29.21 41.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3319,7 +3826,7 @@
 		(uuid "9f09e2d7-5f48-49f7-a155-69f76fc4c6d2")
 	)
 	(label "GND"
-		(at 54.61 133.35 180)
+		(at 39.37 81.28 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3330,7 +3837,7 @@
 		(uuid "a0d449be-dbe3-4ebc-bb7a-d43f6c955441")
 	)
 	(label "3.3V"
-		(at 110.49 128.27 180)
+		(at 93.98 72.39 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3341,7 +3848,7 @@
 		(uuid "a311d74a-efba-4b77-b2a6-59731f23b132")
 	)
 	(label "GND"
-		(at 45.72 95.25 180)
+		(at 29.21 39.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3352,7 +3859,7 @@
 		(uuid "a3cddf3e-49ce-4e8a-9b86-39769057b056")
 	)
 	(label "3.3V"
-		(at 124.46 173.99 180)
+		(at 57.15 123.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3363,7 +3870,7 @@
 		(uuid "a3dc5d02-61e8-4306-b2a5-37f3f6c1dc48")
 	)
 	(label "3.3V"
-		(at 109.22 173.99 180)
+		(at 41.91 123.19 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3374,7 +3881,7 @@
 		(uuid "a54bf19e-8bf7-4de2-9904-f6751e622516")
 	)
 	(label "GND"
-		(at 171.45 102.87 180)
+		(at 144.78 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3385,7 +3892,7 @@
 		(uuid "aaa361f1-2ac6-47b4-b46e-76fddb8678c4")
 	)
 	(label "3.3V"
-		(at 78.74 167.64 0)
+		(at 71.12 100.33 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3396,7 +3903,7 @@
 		(uuid "b39af118-c84e-4c7c-86e2-a785c4040d1a")
 	)
 	(label "GND"
-		(at 171.45 62.23 180)
+		(at 144.78 49.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3407,7 +3914,7 @@
 		(uuid "b4fe17e1-06de-4ba9-9ea9-9bff8a77462d")
 	)
 	(label "GND"
-		(at 171.45 46.99 180)
+		(at 144.78 34.29 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3417,8 +3924,19 @@
 		)
 		(uuid "ba796dca-5b21-4066-afc6-06c537017d36")
 	)
+	(label "~{Load Address High}"
+		(at 170.18 77.47 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bdeb2ad0-8fce-4584-9207-f96daf9df28a")
+	)
 	(label "5V"
-		(at 58.42 102.87 0)
+		(at 41.91 46.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3429,7 +3947,7 @@
 		(uuid "c0bf6593-0bad-435b-a5ff-7328dc5983f6")
 	)
 	(label "LA1"
-		(at 171.45 95.25 180)
+		(at 144.78 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3440,7 +3958,7 @@
 		(uuid "c61ee0d2-3ef9-4dc0-9fea-357497f36191")
 	)
 	(label "GND"
-		(at 114.3 173.99 0)
+		(at 46.99 123.19 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3451,7 +3969,7 @@
 		(uuid "c728fcd5-a01f-464f-8788-aaa050354830")
 	)
 	(label "3.3V"
-		(at 80.01 128.27 0)
+		(at 64.77 63.5 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3462,7 +3980,7 @@
 		(uuid "c8d3421b-4824-4419-be4f-881e5ab3b7a2")
 	)
 	(label "3.3V"
-		(at 171.45 87.63 180)
+		(at 144.78 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3473,7 +3991,7 @@
 		(uuid "cc08882f-b133-41cd-9719-d21df83dab10")
 	)
 	(label "GND"
-		(at 110.49 146.05 180)
+		(at 93.98 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3484,7 +4002,7 @@
 		(uuid "ccb4cb9e-0da9-402e-8dc0-761da7a00a4e")
 	)
 	(label "GND"
-		(at 171.45 82.55 180)
+		(at 144.78 69.85 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3494,8 +4012,8 @@
 		)
 		(uuid "ce2b8b52-f3ed-41b8-9f5c-7b0886e6c27d")
 	)
-	(label "~{Load Address High}"
-		(at 58.42 77.47 0)
+	(label "Load Address High"
+		(at 41.91 21.59 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3505,8 +4023,19 @@
 		)
 		(uuid "d0b08a14-5291-4d96-87d6-03ec89df5cd1")
 	)
+	(label "GND"
+		(at 39.37 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d3808986-aad6-4ce8-a417-171e9eebf4ac")
+	)
 	(label "CEP"
-		(at 196.85 95.25 0)
+		(at 170.18 82.55 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3516,8 +4045,19 @@
 		)
 		(uuid "d71fd208-473f-43e3-9afa-609762eb8d73")
 	)
+	(label "~{Load Address Bank}"
+		(at 170.18 80.01 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dc3b2640-8e14-4954-9299-87335c8167d1")
+	)
 	(label "LA2"
-		(at 171.45 92.71 180)
+		(at 144.78 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3527,8 +4067,8 @@
 		)
 		(uuid "dce61872-7c56-4e19-8188-ccd713cd0965")
 	)
-	(label "~{Load Address High}"
-		(at 196.85 90.17 0)
+	(label "Load Address High"
+		(at 64.77 76.2 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3539,7 +4079,7 @@
 		(uuid "dfe8f2ef-f41f-41d7-b31e-896730d591ee")
 	)
 	(label "LA1"
-		(at 45.72 100.33 180)
+		(at 29.21 44.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3550,7 +4090,7 @@
 		(uuid "efac3ce7-f049-4c90-80ca-5b5acba5e857")
 	)
 	(label "LA1"
-		(at 196.85 49.53 0)
+		(at 170.18 36.83 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3561,7 +4101,7 @@
 		(uuid "f0811727-2839-4802-8e26-656d4e875ec3")
 	)
 	(label "~{MR}_{2}"
-		(at 171.45 39.37 180)
+		(at 144.78 26.67 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3572,7 +4112,7 @@
 		(uuid "f465ff5c-c6b5-4d29-81e9-58621e135ec2")
 	)
 	(label "MR"
-		(at 45.72 92.71 180)
+		(at 29.21 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3583,7 +4123,7 @@
 		(uuid "f48bedc8-4371-4d0b-895e-2cfae5fa0b90")
 	)
 	(label "LA0"
-		(at 45.72 102.87 180)
+		(at 29.21 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3594,7 +4134,7 @@
 		(uuid "f68b296c-c05b-4333-a39d-813687a4ffa2")
 	)
 	(label "GND"
-		(at 45.72 82.55 180)
+		(at 29.21 26.67 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3605,8 +4145,172 @@
 		(uuid "f6fbf4f6-fc82-46cf-88f6-15a1343ef466")
 	)
 	(symbol
+		(lib_id "Nexperia:74LVC04APW,118")
+		(at 39.37 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "25918442-b09b-4612-a1ed-68f6e3adaf6a")
+		(property "Reference" "IC3"
+			(at 52.07 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC04APW,118"
+			(at 52.07 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
+			(at 60.325 88.265 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC04A.pdf"
+			(at 60.325 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "6-input inverter"
+			(at 52.07 84.455 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 60.325 95.885 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 60.325 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC04APW,118"
+			(at 60.325 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "771-74LVC04APW-T"
+			(at 60.325 103.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC04APW118?qs=me8TqzrmIYUA5zXidd9%2F4g%3D%3D"
+			(at 60.325 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74LVC04"
+			(at 52.705 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b75f470a-10c7-40e0-a19a-7109b02abae8")
+		)
+		(pin "13"
+			(uuid "394197d3-07f5-462c-97d9-3c8fde0293cd")
+		)
+		(pin "3"
+			(uuid "cab39995-97c9-4a4c-8897-e42b4780490a")
+		)
+		(pin "4"
+			(uuid "13e25e19-21ca-4629-9192-ceadc7777fdf")
+		)
+		(pin "5"
+			(uuid "90acfa5c-60a8-415f-9ef1-f792cd29e350")
+		)
+		(pin "6"
+			(uuid "c725b9be-ef4e-4172-a587-22c4e9de7cbb")
+		)
+		(pin "10"
+			(uuid "cb8f2d6d-5631-4707-b044-c9082832c3d9")
+		)
+		(pin "14"
+			(uuid "6ddd3bdd-2578-4239-93bf-26c8d7b5c20a")
+		)
+		(pin "2"
+			(uuid "e8eeff77-67b3-418e-9ff1-46402ef759e3")
+		)
+		(pin "8"
+			(uuid "7d2cc603-cdc9-452c-b02b-98ad3876147c")
+		)
+		(pin "7"
+			(uuid "4d24fc7b-9f58-4a79-9a6a-eba83b9b3b82")
+		)
+		(pin "9"
+			(uuid "5864e0c9-20bb-496e-829d-f5c2ea5c8422")
+		)
+		(pin "11"
+			(uuid "efb53c36-c7c8-49f5-88a7-793cf497f00a")
+		)
+		(pin "12"
+			(uuid "c0ea0ef7-0bc6-46be-b052-0a1844d7d2a2")
+		)
+		(instances
+			(project ""
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "IC3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_02x12_Counter_Clockwise")
-		(at 50.8 87.63 0)
+		(at 34.29 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3614,7 +4318,7 @@
 		(dnp no)
 		(uuid "3717ff5d-fd6d-4fc2-ae4d-4004410aec96")
 		(property "Reference" "J1"
-			(at 52.07 72.39 0)
+			(at 35.56 16.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3622,7 +4326,7 @@
 			)
 		)
 		(property "Value" "Conn_02x12_Counter_Clockwise"
-			(at 52.07 105.41 0)
+			(at 35.56 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3630,7 +4334,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:DIP-24_Board_W15.24mm"
-			(at 50.8 87.63 0)
+			(at 34.29 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3639,7 +4343,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 50.8 87.63 0)
+			(at 34.29 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3648,7 +4352,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x12, counter clockwise pin numbering scheme (similar to DIP package numbering), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 50.8 87.63 0)
+			(at 34.29 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3739,7 +4443,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC163PW,118")
-		(at 171.45 39.37 0)
+		(at 144.78 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3747,7 +4451,7 @@
 		(dnp no)
 		(uuid "49e7c71b-550e-4f77-8dac-f4a4c996f30d")
 		(property "Reference" "IC1"
-			(at 184.15 34.29 0)
+			(at 157.48 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3755,7 +4459,7 @@
 			)
 		)
 		(property "Value" "74LVC163PW,118"
-			(at 184.15 36.195 0)
+			(at 157.48 23.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3764,7 +4468,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 208.28 59.69 0)
+			(at 181.61 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3774,7 +4478,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC163.pdf"
-			(at 208.28 62.23 0)
+			(at 181.61 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3784,7 +4488,7 @@
 			)
 		)
 		(property "Description" "4-bit up counter"
-			(at 184.15 65.405 0)
+			(at 157.48 52.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3792,7 +4496,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 208.28 67.31 0)
+			(at 181.61 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3802,7 +4506,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC163PW-T"
-			(at 208.28 69.85 0)
+			(at 181.61 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3812,7 +4516,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC163PW118?qs=me8TqzrmIYUWRf9xrCNBjw%3D%3D"
-			(at 208.28 72.39 0)
+			(at 181.61 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3822,7 +4526,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 208.28 64.77 0)
+			(at 181.61 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3832,7 +4536,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC163PW,118"
-			(at 208.28 77.47 0)
+			(at 181.61 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3842,7 +4546,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC163"
-			(at 184.15 67.31 0)
+			(at 157.48 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3851,7 +4555,7 @@
 			)
 		)
 		(property "Garbage" "74LVC163 - Presettable synchronous 4-bit binary counter; synchronous reset@en-us"
-			(at 171.45 39.37 0)
+			(at 144.78 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3924,7 +4628,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 109.22 173.99 0)
+		(at 41.91 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3932,7 +4636,7 @@
 		(dnp no)
 		(uuid "5c8c740d-c82c-4b79-b6c1-8b52b8d681f0")
 		(property "Reference" "C1"
-			(at 111.506 171.45 0)
+			(at 44.196 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3940,7 +4644,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 111.76 176.53 0)
+			(at 44.45 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3948,7 +4652,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 125.984 181.61 0)
+			(at 58.674 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3957,7 +4661,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.4425 173.6725 90)
+			(at 44.1325 122.8725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3966,7 +4670,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 109.22 173.99 0)
+			(at 41.91 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4016,193 +4720,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Nexperia:74LVC138APW-Q100J")
-		(at 171.45 80.645 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5da2d693-9311-4cf5-a09a-5743d89b5480")
-		(property "Reference" "IC2"
-			(at 184.15 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LVC138APW-Q100J"
-			(at 184.15 79.375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 200.025 111.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 200.025 113.665 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "3-to-8 decoder"
-			(at 184.15 106.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 200.025 118.745 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 200.025 121.285 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 200.025 123.825 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 200.025 126.365 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 200.025 128.905 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC138"
-			(at 184.15 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 171.45 80.645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f7ca9503-c7f0-4aac-bdf8-62bc4b064f95")
-		)
-		(pin "10"
-			(uuid "e448e0ef-806a-4fc0-bf71-003b9201eef1")
-		)
-		(pin "11"
-			(uuid "702dde74-817d-47b1-b847-04ff02c0ca94")
-		)
-		(pin "12"
-			(uuid "00cf532e-4848-4b18-820b-03552da3795c")
-		)
-		(pin "13"
-			(uuid "167d932e-4163-4596-bbe3-8f324c2daae2")
-		)
-		(pin "14"
-			(uuid "17476950-0455-4659-ad67-6da726e2367c")
-		)
-		(pin "15"
-			(uuid "83c28605-be69-4c74-b2fe-d316da81a3a8")
-		)
-		(pin "16"
-			(uuid "7890ff5f-073e-4775-b465-fa6035f1d64f")
-		)
-		(pin "2"
-			(uuid "e0675804-2748-4ef3-8c44-deef98b88187")
-		)
-		(pin "3"
-			(uuid "6ecbe256-63f1-4e42-b7a8-709fad810e5c")
-		)
-		(pin "6"
-			(uuid "91e682d7-f048-44fe-838a-2337874f29c7")
-		)
-		(pin "7"
-			(uuid "0ab03025-54d8-4900-8a40-f05d9677b6cf")
-		)
-		(pin "8"
-			(uuid "31fe1461-6966-4863-9228-771166a55543")
-		)
-		(pin "9"
-			(uuid "83418fb2-d6e2-4755-abb8-f2b1cc7e1799")
-		)
-		(pin "4"
-			(uuid "a2c575e3-501d-413d-bed3-93149a901708")
-		)
-		(pin "5"
-			(uuid "5193d978-0484-41ad-a16d-e1f183fb954e")
-		)
-		(instances
-			(project "Video Row Latch"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "IC2")
-					(unit 1)
-				)
-			)
-			(project "Video Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 154.94 173.99 0)
+		(at 72.39 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4210,7 +4729,7 @@
 		(dnp no)
 		(uuid "814b51e0-7e1e-43e9-ac33-b017dbf2dbb4")
 		(property "Reference" "C4"
-			(at 157.226 171.45 0)
+			(at 74.676 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4218,7 +4737,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 157.48 176.53 0)
+			(at 74.93 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4226,7 +4745,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 171.704 181.61 0)
+			(at 89.154 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4235,7 +4754,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 157.1625 173.6725 90)
+			(at 74.6125 122.8725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4244,7 +4763,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 154.94 173.99 0)
+			(at 72.39 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4295,7 +4814,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 93.98 173.99 0)
+		(at 26.67 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4303,7 +4822,7 @@
 		(dnp no)
 		(uuid "87466651-0170-49d8-b919-89d02ba03681")
 		(property "Reference" "C5"
-			(at 96.266 171.45 0)
+			(at 28.956 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4311,7 +4830,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 96.52 176.53 0)
+			(at 29.21 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4319,7 +4838,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 110.744 181.61 0)
+			(at 43.434 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4328,7 +4847,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 96.2025 173.6725 90)
+			(at 28.8925 122.8725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4337,7 +4856,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 93.98 173.99 0)
+			(at 26.67 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4388,7 +4907,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 30.48 172.72 0)
+		(at 22.86 105.41 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4396,7 +4915,7 @@
 		(dnp no)
 		(uuid "917f04ae-f97d-4894-bd1f-ee221fa78eea")
 		(property "Reference" "C8"
-			(at 32.766 170.18 0)
+			(at 25.146 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4404,7 +4923,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 33.02 175.26 0)
+			(at 25.4 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4412,7 +4931,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 47.244 180.34 0)
+			(at 39.624 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4421,7 +4940,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 32.7025 172.4025 90)
+			(at 25.0825 105.0925 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4430,7 +4949,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 30.48 172.72 0)
+			(at 22.86 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4481,7 +5000,7 @@
 	)
 	(symbol
 		(lib_id "Diodes_Inc:AP7365-33WG-7")
-		(at 44.45 167.64 0)
+		(at 36.83 100.33 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4489,7 +5008,7 @@
 		(dnp no)
 		(uuid "b4ee3465-e6d3-4314-a2ec-3e4d6aa12bf0")
 		(property "Reference" "IC7"
-			(at 57.15 162.56 0)
+			(at 49.53 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4497,7 +5016,7 @@
 			)
 		)
 		(property "Value" "AP7365-33WG-7"
-			(at 57.15 164.465 0)
+			(at 49.53 97.155 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4506,7 +5025,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
-			(at 66.04 182.245 0)
+			(at 58.42 114.935 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4516,7 +5035,7 @@
 			)
 		)
 		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
-			(at 66.04 184.785 0)
+			(at 58.42 117.475 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4526,7 +5045,7 @@
 			)
 		)
 		(property "Description" "3.3V LDO voltage regulator"
-			(at 57.15 175.895 0)
+			(at 49.53 108.585 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4534,7 +5053,7 @@
 			)
 		)
 		(property "Height" "1.3"
-			(at 66.04 187.325 0)
+			(at 58.42 120.015 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4544,7 +5063,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Diodes Inc."
-			(at 66.04 189.865 0)
+			(at 58.42 122.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4554,7 +5073,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "AP7365-33WG-7"
-			(at 66.04 192.405 0)
+			(at 58.42 125.095 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4564,7 +5083,7 @@
 			)
 		)
 		(property "Mouser Part Number" "621-AP7365-33WG-7"
-			(at 66.04 194.945 0)
+			(at 58.42 127.635 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4574,7 +5093,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
-			(at 66.04 197.485 0)
+			(at 58.42 130.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4584,7 +5103,7 @@
 			)
 		)
 		(property "Arrow Part Number" "AP7365-33WG-7"
-			(at 66.04 200.025 0)
+			(at 58.42 132.715 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4594,7 +5113,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
-			(at 66.04 202.565 0)
+			(at 58.42 135.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4604,7 +5123,7 @@
 			)
 		)
 		(property "Silkscreen" "AP7365"
-			(at 66.04 179.705 0)
+			(at 58.42 112.395 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4665,7 +5184,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 73.66 172.72 0)
+		(at 66.04 105.41 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4673,7 +5192,7 @@
 		(dnp no)
 		(uuid "ca8a3ba5-4963-4a20-bcbe-311314889adc")
 		(property "Reference" "C9"
-			(at 75.946 170.18 0)
+			(at 68.326 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4681,7 +5200,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 76.2 175.26 0)
+			(at 68.58 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4689,7 +5208,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 90.424 180.34 0)
+			(at 82.804 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4698,7 +5217,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 75.8825 172.4025 90)
+			(at 68.2625 105.0925 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4707,7 +5226,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 73.66 172.72 0)
+			(at 66.04 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4757,8 +5276,179 @@
 		)
 	)
 	(symbol
+		(lib_id "Nexperia:74LVC138APW-Q100J")
+		(at 144.78 67.945 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d817a32f-601b-4732-ae7c-a1fdb189deff")
+		(property "Reference" "IC2"
+			(at 157.48 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC138APW-Q100J"
+			(at 157.48 66.675 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
+			(at 173.99 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
+			(at 173.99 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "3-to-8 decoder"
+			(at 157.48 93.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 173.99 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "771-74LVC138APWQ100J"
+			(at 173.99 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
+			(at 173.99 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 173.99 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
+			(at 173.99 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74LVC138"
+			(at 173.99 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "b7405466-80e0-478e-b2c3-709b2cd2f275")
+		)
+		(pin "14"
+			(uuid "e2b233e7-7473-43a4-a584-980f0a6b0ea2")
+		)
+		(pin "1"
+			(uuid "b402d29d-400f-4ba5-ad98-9c029dcdae52")
+		)
+		(pin "5"
+			(uuid "ff57e037-7e29-4498-bca1-608a40aa2f98")
+		)
+		(pin "6"
+			(uuid "98f00481-fcb3-411d-8298-cdc9ea6b0682")
+		)
+		(pin "2"
+			(uuid "cf6d4bbc-8554-4589-b809-dc46f7f082d2")
+		)
+		(pin "11"
+			(uuid "f9ec8d5c-5d5f-4b4d-8fd9-481de7da7c83")
+		)
+		(pin "13"
+			(uuid "9ae4078d-5261-42b6-a2d9-0034e0a60874")
+		)
+		(pin "12"
+			(uuid "dbc50762-9744-4166-a946-ac84d77d61e6")
+		)
+		(pin "3"
+			(uuid "10597392-6f99-453b-8ae1-a94c568bd543")
+		)
+		(pin "8"
+			(uuid "244d9a90-24e6-4f50-895d-aee9f8dfd558")
+		)
+		(pin "7"
+			(uuid "5ec1c80d-28cc-476e-a30b-b876d146a8b6")
+		)
+		(pin "10"
+			(uuid "46d8a0a5-45fa-4f19-93f4-852dea6b0693")
+		)
+		(pin "15"
+			(uuid "69ecf972-9a76-4061-b447-537d6f6d56c1")
+		)
+		(pin "16"
+			(uuid "fa552c43-6156-4c4a-bbac-f92c5d8041e3")
+		)
+		(pin "9"
+			(uuid "52869ad2-4ac8-4a46-800e-143aa366afc3")
+		)
+		(instances
+			(project ""
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "IC2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 124.46 173.99 0)
+		(at 57.15 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4766,7 +5456,7 @@
 		(dnp no)
 		(uuid "e1a38401-c34e-4aca-9e5b-fdf500fc344e")
 		(property "Reference" "C2"
-			(at 126.746 171.45 0)
+			(at 59.436 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4774,7 +5464,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 127 176.53 0)
+			(at 59.69 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4782,7 +5472,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 141.224 181.61 0)
+			(at 73.914 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4791,7 +5481,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 126.6825 173.6725 90)
+			(at 59.3725 122.8725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4800,7 +5490,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 124.46 173.99 0)
+			(at 57.15 123.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4851,7 +5541,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC74APW,118")
-		(at 110.49 125.73 0)
+		(at 93.98 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4859,7 +5549,7 @@
 		(dnp no)
 		(uuid "fdbc1053-1401-4acc-824d-0893d39ca8dc")
 		(property "Reference" "IC6"
-			(at 122.555 120.65 0)
+			(at 106.045 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4868,7 +5558,7 @@
 			)
 		)
 		(property "Value" "74LVC74APW,118"
-			(at 123.19 122.555 0)
+			(at 106.68 66.675 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4877,7 +5567,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-			(at 135.255 151.13 0)
+			(at 118.745 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4887,7 +5577,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC74A.pdf"
-			(at 135.255 153.67 0)
+			(at 118.745 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4897,7 +5587,7 @@
 			)
 		)
 		(property "Description" "D-type flip-flop"
-			(at 123.19 149.225 0)
+			(at 106.68 93.345 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4905,7 +5595,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 135.255 158.75 0)
+			(at 118.745 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4915,7 +5605,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC74APW-T"
-			(at 135.255 161.29 0)
+			(at 118.745 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4925,7 +5615,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC74APW118?qs=me8TqzrmIYVtXwVfet0lzw%3D%3D"
-			(at 135.255 163.83 0)
+			(at 118.745 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4935,7 +5625,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 135.255 166.37 0)
+			(at 118.745 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4945,7 +5635,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC74APW,118"
-			(at 135.255 168.91 0)
+			(at 118.745 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4955,7 +5645,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC74"
-			(at 123.19 151.765 0)
+			(at 106.68 95.885 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4964,7 +5654,7 @@
 			)
 		)
 		(property "Garbage" "74LVC74A - Dual D-type flip-flop with set and reset; positive-edge trigger@en-us"
-			(at 110.49 125.73 0)
+			(at 93.98 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5024,143 +5714,6 @@
 			(project "Video Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "IC6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC1G04GV,125")
-		(at 54.61 128.27 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ff7f304c-2b3d-4e1b-a16b-1da82e59340d")
-		(property "Reference" "IC4"
-			(at 67.945 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LVC1G04GV,125"
-			(at 67.31 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-			(at 80.645 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G04.pdf"
-			(at 80.645 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "1-input inverter"
-			(at 67.31 136.525 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 80.645 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 80.645 161.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC1G04GV,125"
-			(at 80.645 163.83 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC1G04GV"
-			(at 80.645 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G04GV125?qs=me8TqzrmIYW6McwMAxl%2F9w%3D%3D"
-			(at 80.645 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "'1G04"
-			(at 67.945 139.065 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "5"
-			(uuid "60c1b189-0e4c-4469-a215-d466d1959246")
-		)
-		(pin "3"
-			(uuid "749cbbcb-5f09-49cc-9a19-d927e0b9a561")
-		)
-		(pin "4"
-			(uuid "1aeab719-903c-4fda-ade6-81d174a8489b")
-		)
-		(pin "2"
-			(uuid "69fd3e6e-f74e-44b7-8f6b-81388f76195b")
-		)
-		(pin "1"
-			(uuid "a5cd3c68-f832-440d-afa6-2e33fec3db25")
-		)
-		(instances
-			(project "Video Row Latch"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "IC4")
 					(unit 1)
 				)
 			)

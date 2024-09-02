@@ -41,19 +41,21 @@ public class SubcircuitEditor
 
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
-    this(new SubcircuitView(circuitEditor));
-    this.subcircuitView.createSubcircuitTopSimulation("Top " + typeName);
-
-    this.setTypeName(typeName);
+    this(new SubcircuitView(circuitEditor), typeName);
+    this.subcircuitView.createSubcircuitTopSimulation(getTopSimulationNameName(typeName));
 
     id = nextId;
     nextId++;
   }
 
+  public static String getTopSimulationNameName(String typeName)
+  {
+    return "Top " + typeName;
+  }
+
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName, long id)
   {
-    this(new SubcircuitView(circuitEditor));
-    this.setTypeName(typeName);
+    this(new SubcircuitView(circuitEditor), typeName);
 
     this.id = id;
     if (id >= nextId)
@@ -62,10 +64,11 @@ public class SubcircuitEditor
     }
   }
 
-  public SubcircuitEditor(SubcircuitView subcircuitView)
+  public SubcircuitEditor(SubcircuitView subcircuitView, String typeName)
   {
     this.subcircuitView = subcircuitView;
     this.selection = new Selection();
+    this.setTypeName(typeName);
   }
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)

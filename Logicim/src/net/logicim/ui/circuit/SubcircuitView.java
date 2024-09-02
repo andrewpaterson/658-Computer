@@ -1289,12 +1289,12 @@ public class SubcircuitView
     }
   }
 
-  public void createComponentsForSubcircuitInstanceView(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation subcircuitSimulation)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.createComponent(subcircuitInstanceSimulation);
+      staticView.createComponent(subcircuitSimulation);
     }
 
     simulationStarted(staticViews);

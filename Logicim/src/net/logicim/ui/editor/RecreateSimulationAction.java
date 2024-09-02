@@ -15,7 +15,7 @@ public class RecreateSimulationAction
   @Override
   public void executeEditorAction()
   {
-    editor.recreateCurrentSimulation();
+    editor.createAndUnhaltSimulations();
   }
 
   @Override

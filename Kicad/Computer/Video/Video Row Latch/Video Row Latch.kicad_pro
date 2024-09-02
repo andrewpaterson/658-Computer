@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "silk_edge_clearance|95790772|56312275|9582d373-0d20-475f-bcaa-f29afcf578de|d5921c87-bf1c-4eab-a1aa-2d636e8e3ae4"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -515,19 +513,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       }
     ]
   },

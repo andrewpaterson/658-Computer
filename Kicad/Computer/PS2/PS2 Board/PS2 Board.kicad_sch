@@ -4204,10 +4204,10 @@
 						)
 					)
 				)
-				(pin no_connect inverted
-					(at 35.56 -10.16 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin input inverted
+					(at -5.08 -35.56 0)
+					(length 5.08)
+					(name "~{Reset}_{IN2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4222,10 +4222,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin input inverted
 					(at -5.08 -33.02 0)
 					(length 5.08)
-					(name "~{Reset}_{IN}"
+					(name "~{Reset}_{IN1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4241,7 +4241,7 @@
 					)
 				)
 				(pin no_connect inverted
-					(at 35.56 -20.32 180)
+					(at 35.56 -10.16 180)
 					(length 5.08) hide
 					(name "N.C."
 						(effects
@@ -4421,7 +4421,7 @@
 					)
 				)
 				(pin no_connect inverted
-					(at -5.08 -35.56 0)
+					(at 35.56 -20.32 180)
 					(length 5.08) hide
 					(name "N.C."
 						(effects
@@ -10920,10 +10920,6 @@
 		(uuid "f63ce7e8-5509-4c9a-bfd7-6e36ad3fa1b2")
 	)
 	(no_connect
-		(at -132.08 93.98)
-		(uuid "fb381897-0339-4028-a245-bf86c67d8d23")
-	)
-	(no_connect
 		(at 115.57 224.79)
 		(uuid "ff8a14ac-f8fb-4be5-9e25-eacde2421251")
 	)
@@ -10936,16 +10932,6 @@
 			(type default)
 		)
 		(uuid "0b05e069-4571-4a38-810e-727bec92faa9")
-	)
-	(wire
-		(pts
-			(xy -143.51 93.98) (xy -132.08 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "35151340-63f7-406d-af3e-1a714ebd8ab6")
 	)
 	(wire
 		(pts
@@ -13330,6 +13316,17 @@
 			(justify right bottom)
 		)
 		(uuid "883edb0a-fd9d-4ff4-b5fd-505fcc7e806a")
+	)
+	(label "~{Reset}_{System}"
+		(at 5.08 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "884fbc4f-90dd-4396-8ae1-0a164550f940")
 	)
 	(label "~{Device Registers}"
 		(at 45.72 66.04 0)

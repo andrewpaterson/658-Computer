@@ -5301,10 +5301,10 @@
 						)
 					)
 				)
-				(pin no_connect inverted
-					(at 35.56 -10.16 180)
-					(length 5.08) hide
-					(name "N.C."
+				(pin input inverted
+					(at -5.08 -35.56 0)
+					(length 5.08)
+					(name "~{Reset}_{IN2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5319,10 +5319,10 @@
 						)
 					)
 				)
-				(pin input line
+				(pin input inverted
 					(at -5.08 -33.02 0)
 					(length 5.08)
-					(name "~{Reset}_{IN}"
+					(name "~{Reset}_{IN1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5338,7 +5338,7 @@
 					)
 				)
 				(pin no_connect inverted
-					(at 35.56 -20.32 180)
+					(at 35.56 -10.16 180)
 					(length 5.08) hide
 					(name "N.C."
 						(effects
@@ -5518,7 +5518,7 @@
 					)
 				)
 				(pin no_connect inverted
-					(at -5.08 -35.56 0)
+					(at 35.56 -20.32 180)
 					(length 5.08) hide
 					(name "N.C."
 						(effects
@@ -9104,10 +9104,10 @@
 						)
 					)
 				)
-				(pin output clock
-					(at 35.56 -78.74 180)
+				(pin output inverted_clock
+					(at 35.56 -81.28 180)
 					(length 5.08)
-					(name "CLK"
+					(name "~{CLK}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9122,10 +9122,10 @@
 						)
 					)
 				)
-				(pin output inverted_clock
-					(at 35.56 -81.28 180)
+				(pin output clock
+					(at 35.56 -78.74 180)
 					(length 5.08)
-					(name "~{CLK}"
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -16513,10 +16513,6 @@
 		(uuid "7251396a-996f-4927-a719-fe4285b41626")
 	)
 	(no_connect
-		(at 20.32 135.89)
-		(uuid "731dca85-bc0d-4943-993e-ad3cd1b6af2d")
-	)
-	(no_connect
 		(at 240.03 121.92)
 		(uuid "734d5502-5bbf-4864-a119-d372df4aa045")
 	)
@@ -16685,16 +16681,6 @@
 			(type default)
 		)
 		(uuid "0b05e069-4571-4a38-810e-727bec92faa9")
-	)
-	(wire
-		(pts
-			(xy 31.75 135.89) (xy 20.32 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a3669b0-c306-4e1d-9b71-5c66f0c03357")
 	)
 	(wire
 		(pts
@@ -20284,6 +20270,17 @@
 			(justify right bottom)
 		)
 		(uuid "7abb2d39-777d-4994-a16a-ead58afec842")
+	)
+	(label "~{Reset}_{System}"
+		(at 199.39 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7bb84f74-f266-4b07-b656-783b2231db6e")
 	)
 	(label "GND"
 		(at 109.22 212.09 180)

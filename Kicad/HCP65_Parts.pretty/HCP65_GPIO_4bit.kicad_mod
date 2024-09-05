@@ -3,8 +3,8 @@
 	(generator "pcbnew")
 	(generator_version "8.0")
 	(layer "F.Cu")
-	(descr "HCP65 32Pad Board W15.24mm")
-	(tags "HCP65 32Pad Board W15.24mm")
+	(descr "HCP65 GPIO 4bit")
+	(tags "HCP65 GPIO 4bit")
 	(property "Reference" "REF**"
 		(at 7.62 -0.762 0)
 		(layer "F.SilkS")
@@ -16,27 +16,28 @@
 			)
 		)
 	)
-	(property "Value" "HCP65 32Pad Board W15.24mm"
+	(property "Value" "HCP65 GPIO 4bit"
 		(at 7.366 43.688 0)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
 		(effects
 			(font
-				(size 1 1)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
 	)
 	(property "Footprint" "HCP65_GPIO_4bit"
-		(at 0 0 0)
+		(at 7.366 44.831 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b7670740-b952-4e39-bf65-40285d0805b3")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -48,7 +49,8 @@
 		(uuid "49fac089-1d56-4c1d-a764-f0468d9863cc")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -60,7 +62,19 @@
 		(uuid "b2d51caa-8463-4b51-9425-965855ca08ef")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 6.985 41.656 0)
+		(layer "F.SilkS")
+		(uuid "5c45de18-fa9a-493b-a4bc-35d4fedc7323")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -230,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "aa136522-97fe-4c53-8094-5e9258117daa")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 6.985 41.656 0)
-		(layer "F.SilkS")
-		(uuid "0e9c2a2a-8f69-496e-9ff9-de6628f32983")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

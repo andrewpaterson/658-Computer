@@ -17886,7 +17886,7 @@
 		(uuid "27c0bfc9-72d2-4426-aac5-58bfaa636e11")
 	)
 	(no_connect
-		(at 402.59 154.94)
+		(at 406.4 166.37)
 		(uuid "2e4ca546-a6df-445b-9e6d-7fcb382cce69")
 	)
 	(no_connect
@@ -17974,7 +17974,7 @@
 		(uuid "700d14c8-3916-45ec-a023-d406b7b9dd3e")
 	)
 	(no_connect
-		(at 402.59 195.58)
+		(at 406.4 207.01)
 		(uuid "705255d0-f4a8-4124-9747-4ee7fdaddde1")
 	)
 	(no_connect
@@ -20832,13 +20832,23 @@
 	)
 	(text "CLK1 ticks Source Lookup Address Offset"
 		(exclude_from_sim no)
-		(at 382.27 210.82 0)
+		(at 386.08 222.25 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 		)
 		(uuid "063f1c37-007b-4687-8966-ec33866c74b3")
+	)
+	(text "CLK0 loads Destination Address"
+		(exclude_from_sim no)
+		(at 487.68 337.82 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "105ffaf0-8ea2-454b-b3ea-4ca84a1e6ebd")
 	)
 	(text "CLK1 ticks Destination Address"
 		(exclude_from_sim no)
@@ -20849,6 +20859,16 @@
 			)
 		)
 		(uuid "279049ee-0b9b-4cbf-9ee9-af50da3f5059")
+	)
+	(text "CLK1 latches Source Lookup Address Offset"
+		(exclude_from_sim no)
+		(at 481.33 222.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ac78243a-32e9-4b3a-9af5-9fc4ebc3171a")
 	)
 	(label "~{Device Select}"
 		(at 95.25 186.69 180)
@@ -21082,7 +21102,7 @@
 		(uuid "07b656f7-61f9-4297-86ec-d087a99eba75")
 	)
 	(label "C4"
-		(at 402.59 182.88 0)
+		(at 406.4 194.31 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -21247,7 +21267,7 @@
 		(uuid "0ba240f4-c446-4d1b-9db1-363ef80d4e60")
 	)
 	(label "5V"
-		(at 361.95 195.58 180)
+		(at 365.76 207.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -21489,7 +21509,7 @@
 		(uuid "11950ed4-9daa-4a40-8594-7a94b7e3fce6")
 	)
 	(label "D6"
-		(at 375.92 205.74 270)
+		(at 379.73 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -21764,7 +21784,7 @@
 		(uuid "1afd0ac9-0ec4-4af7-ba54-e07eb85aa9cd")
 	)
 	(label "C8"
-		(at 402.59 172.72 0)
+		(at 406.4 184.15 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22105,7 +22125,7 @@
 		(uuid "250bef3a-9440-49e0-99ce-065c8ee0e5fd")
 	)
 	(label "C9"
-		(at 402.59 170.18 0)
+		(at 406.4 181.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22116,7 +22136,7 @@
 		(uuid "251ab5bc-24d8-481c-aad3-839967ebb7d7")
 	)
 	(label "GND"
-		(at 402.59 144.78 0)
+		(at 406.4 156.21 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22633,7 +22653,7 @@
 		(uuid "3411d260-ce2e-448a-9c40-e4ef98a2793d")
 	)
 	(label "C14"
-		(at 402.59 157.48 0)
+		(at 406.4 168.91 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22644,7 +22664,7 @@
 		(uuid "3413edfd-818f-43ec-965e-3cd99702e910")
 	)
 	(label "C2"
-		(at 402.59 187.96 0)
+		(at 406.4 199.39 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -22787,7 +22807,7 @@
 		(uuid "38940f4f-e9d2-4841-9b99-30c828726a15")
 	)
 	(label "C1"
-		(at 402.59 190.5 0)
+		(at 406.4 201.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23062,7 +23082,7 @@
 		(uuid "402d6f67-dfc0-473a-9d58-b7385f9682f6")
 	)
 	(label "GND"
-		(at 402.59 152.4 0)
+		(at 406.4 163.83 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23194,7 +23214,7 @@
 		(uuid "470e3e14-8efc-43b5-9059-bdddc69b7c7e")
 	)
 	(label "C12"
-		(at 402.59 162.56 0)
+		(at 406.4 173.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -23271,7 +23291,7 @@
 		(uuid "49e96fb0-8fd2-4bd6-8212-9ebf9366039b")
 	)
 	(label "GND"
-		(at 402.59 149.86 0)
+		(at 406.4 161.29 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24041,7 +24061,7 @@
 		(uuid "6434be12-68bc-4a23-9799-a7463abf4041")
 	)
 	(label "Counting"
-		(at 361.95 165.1 180)
+		(at 365.76 176.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24184,7 +24204,7 @@
 		(uuid "69909d2a-e904-4a5b-8820-56f6c1057d30")
 	)
 	(label "~{Reset}"
-		(at 361.95 160.02 180)
+		(at 365.76 171.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24316,7 +24336,7 @@
 		(uuid "6de58780-f4c3-41fd-8e0e-d46c59bc5b89")
 	)
 	(label "GND"
-		(at 402.59 147.32 0)
+		(at 406.4 158.75 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24404,7 +24424,7 @@
 		(uuid "7161c203-7af6-40fd-805d-977de66d0006")
 	)
 	(label "C5"
-		(at 402.59 180.34 0)
+		(at 406.4 191.77 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24602,7 +24622,7 @@
 		(uuid "76ac45d9-f02a-4759-936f-7d9246a4f63d")
 	)
 	(label "C6"
-		(at 402.59 177.8 0)
+		(at 406.4 189.23 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24833,7 +24853,7 @@
 		(uuid "7beb16e2-1a45-4f39-b92e-ff739c9a0fa9")
 	)
 	(label "D7"
-		(at 373.38 205.74 270)
+		(at 377.19 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -24943,7 +24963,7 @@
 		(uuid "7e3acb97-a328-44c3-9801-b9fea0c26766")
 	)
 	(label "Write Count Offset Start Low"
-		(at 361.95 147.32 180)
+		(at 365.76 158.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25163,7 +25183,7 @@
 		(uuid "85a5f487-7e6e-47f6-9c65-23f0072c8c5d")
 	)
 	(label "5V"
-		(at 361.95 198.12 180)
+		(at 365.76 209.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25515,7 +25535,7 @@
 		(uuid "8ebd6c6c-44c6-42a2-a092-f7733044aae0")
 	)
 	(label "D0"
-		(at 391.16 205.74 270)
+		(at 394.97 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25548,7 +25568,7 @@
 		(uuid "904f4343-13a2-4f34-8e6e-76b1b472bcb9")
 	)
 	(label "D2"
-		(at 386.08 205.74 270)
+		(at 389.89 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -25977,7 +25997,7 @@
 		(uuid "9d88dd8c-2890-4c40-861f-000c8958e001")
 	)
 	(label "Read Count Offset Start High"
-		(at 361.95 152.4 180)
+		(at 365.76 163.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26010,7 +26030,7 @@
 		(uuid "9e0806d9-25cb-49ed-9ffa-066fa246ea5f")
 	)
 	(label "CLK1"
-		(at 361.95 157.48 180)
+		(at 365.76 168.91 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26032,7 +26052,7 @@
 		(uuid "9e74f871-7c4c-493d-b222-7d06935b6d5e")
 	)
 	(label "Read Count Offset Start Low"
-		(at 361.95 154.94 180)
+		(at 365.76 166.37 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26065,7 +26085,7 @@
 		(uuid "9f2fc225-1f8f-484d-90a1-5dc1467090e2")
 	)
 	(label "~{Load Count Start}"
-		(at 361.95 162.56 180)
+		(at 365.76 173.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26450,7 +26470,7 @@
 		(uuid "ab4336b3-cae1-4383-a52d-277912ffff1f")
 	)
 	(label "CLK1"
-		(at 361.95 149.86 180)
+		(at 365.76 161.29 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26758,7 +26778,7 @@
 		(uuid "b28ceeb2-d33f-4809-bfdd-419f7493a94f")
 	)
 	(label "D5"
-		(at 378.46 205.74 270)
+		(at 382.27 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -26923,7 +26943,7 @@
 		(uuid "b73f1d11-5a8a-477d-a650-d4b14764804c")
 	)
 	(label "D3"
-		(at 383.54 205.74 270)
+		(at 387.35 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27176,7 +27196,7 @@
 		(uuid "bfbc9dd0-7e75-48a5-b802-baae4b3b3f7a")
 	)
 	(label "C11"
-		(at 402.59 165.1 0)
+		(at 406.4 176.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27649,7 +27669,7 @@
 		(uuid "caac5a0b-8bf9-4015-b642-9260225fdb49")
 	)
 	(label "D1"
-		(at 388.62 205.74 270)
+		(at 392.43 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -27935,7 +27955,7 @@
 		(uuid "d246885c-0d62-4fd9-b237-e7bc23b6f6c8")
 	)
 	(label "C13"
-		(at 402.59 160.02 0)
+		(at 406.4 171.45 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28166,7 +28186,7 @@
 		(uuid "d9bdb425-aaad-483a-99b1-92193d98ea33")
 	)
 	(label "C0"
-		(at 402.59 193.04 0)
+		(at 406.4 204.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28353,7 +28373,7 @@
 		(uuid "e1a6b2c2-94cb-48a7-b703-4938f7866e62")
 	)
 	(label "C7"
-		(at 402.59 175.26 0)
+		(at 406.4 186.69 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28408,7 +28428,7 @@
 		(uuid "e4436da0-fc17-4c52-a875-d289a585dee4")
 	)
 	(label "C10"
-		(at 402.59 167.64 0)
+		(at 406.4 179.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -28496,7 +28516,7 @@
 		(uuid "e75abbd9-60d5-4c74-9ca3-00028206e62c")
 	)
 	(label "C3"
-		(at 402.59 185.42 0)
+		(at 406.4 196.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -29068,7 +29088,7 @@
 		(uuid "f7771aa5-6bb5-48a5-9903-d935d8fe39c4")
 	)
 	(label "D4"
-		(at 381 205.74 270)
+		(at 384.81 217.17 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -29277,7 +29297,7 @@
 		(uuid "fbf4c1ce-7d83-4c3d-be2b-ec19a30d3b43")
 	)
 	(label "Write Count Offset Start High"
-		(at 361.95 144.78 180)
+		(at 365.76 156.21 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -35181,7 +35201,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:Counter_16bit_with_IO")
-		(at 367.03 144.78 0)
+		(at 370.84 156.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -35189,7 +35209,7 @@
 		(dnp no)
 		(uuid "b7bc36a6-c588-4543-8602-0b4175906948")
 		(property "Reference" "B5"
-			(at 382.905 139.7 0)
+			(at 386.715 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35197,7 +35217,7 @@
 			)
 		)
 		(property "Value" "Counter 16bit with IO"
-			(at 382.27 141.605 0)
+			(at 386.08 153.035 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35206,7 +35226,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Counter_16bit_DIO"
-			(at 382.27 214.63 0)
+			(at 386.08 226.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35215,7 +35235,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 367.03 157.48 0)
+			(at 370.84 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35224,7 +35244,7 @@
 			)
 		)
 		(property "Description" "Counter 16bit with IO"
-			(at 381.635 168.275 0)
+			(at 385.445 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35232,7 +35252,7 @@
 			)
 		)
 		(property "Silkscreen" "Counter 16bit with IO"
-			(at 381.635 170.815 0)
+			(at 385.445 182.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)

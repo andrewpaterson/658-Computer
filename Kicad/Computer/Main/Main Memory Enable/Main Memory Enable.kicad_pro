@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 1.0,
-          "height": 1.7,
-          "width": 1.7
+          "height": 1.6,
+          "width": 1.6
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -63,7 +63,7 @@
         "version": 2
       },
       "rule_severities": {
-        "annular_width": "ignore",
+        "annular_width": "error",
         "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
@@ -81,7 +81,7 @@
         "hole_near_hole": "error",
         "holes_co_located": "warning",
         "invalid_outline": "error",
-        "isolated_copper": "ignore",
+        "isolated_copper": "warning",
         "item_on_disabled_layer": "error",
         "items_not_allowed": "error",
         "length_out_of_range": "error",
@@ -96,7 +96,7 @@
         "padstack": "warning",
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
-        "silk_edge_clearance": "ignore",
+        "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
@@ -147,7 +147,7 @@
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 0,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -158,7 +158,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 0,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -169,7 +169,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 0,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -182,8 +182,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38,
-        1.0
+        0.38
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -215,10 +214,6 @@
         {
           "diameter": 0.0,
           "drill": 0.0
-        },
-        {
-          "diameter": 1.6,
-          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false
@@ -238,7 +233,10 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "pin_to_pin|1041400|304800|70e9852a-ca80-4bc6-83cc-b80c16b3f878|e4f5f2f1-c91d-45ab-aea5-2725ae40d8a3|/337b5f72-8be1-4121-9dc6-479b565482b2|/337b5f72-8be1-4121-9dc6-479b565482b2|/337b5f72-8be1-4121-9dc6-479b565482b2",
+      "pin_to_pin|2870200|1562100|e4f5f2f1-c91d-45ab-aea5-2725ae40d8a3|038a241b-52c5-4e78-8412-247f89c33fca|/337b5f72-8be1-4121-9dc6-479b565482b2|/337b5f72-8be1-4121-9dc6-479b565482b2|/337b5f72-8be1-4121-9dc6-479b565482b2"
+    ],
     "meta": {
       "version": 0
     },
@@ -426,7 +424,7 @@
       "extra_units": "error",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
-      "label_dangling": "warning",
+      "label_dangling": "error",
       "lib_symbol_issues": "warning",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
@@ -453,7 +451,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Mainboard Small.kicad_pro",
+    "filename": "Main Memory Enable.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -518,11 +516,11 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "Power"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "*3.3V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
@@ -531,10 +529,6 @@
       {
         "netclass": "12V",
         "pattern": "*12V*"
-      },
-      {
-        "netclass": "Power",
-        "pattern": "*5V"
       }
     ]
   },
@@ -543,10 +537,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "Mainboard Small",
+      "plot": "Main Memory Enable",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Main Memory Enable.step",
       "svg": "",
       "vrml": ""
     },
@@ -653,7 +647,7 @@
   },
   "sheets": [
     [
-      "8357857d-ab8c-4646-b786-aad4001c0a6b",
+      "337b5f72-8be1-4121-9dc6-479b565482b2",
       "Root"
     ]
   ],

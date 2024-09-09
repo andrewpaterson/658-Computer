@@ -42621,7 +42621,7 @@
 			)
 		)
 		(property "Description" "Main Memory Abort"
-			(at 14.605 -17.78 0)
+			(at 15.875 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42629,7 +42629,7 @@
 			)
 		)
 		(property "Silkscreen" "Main Memory Abort"
-			(at 14.605 -20.32 0)
+			(at 15.875 -20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42637,7 +42637,7 @@
 				(hide yes)
 			)
 		)
-		(property "ki_keywords" "Main Memory Abort"
+		(property "ki_keywords" "HCP65 Main Memory Abort"
 			(at 0 0 0)
 			(effects
 				(font
@@ -42662,7 +42662,7 @@
 		)
 		(symbol "Main_Memory_Abort_1_0"
 			(pin no_connect line
-				(at 35.56 -38.1 180)
+				(at 35.56 -35.56 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42700,9 +42700,9 @@
 				)
 			)
 			(pin input inverted
-				(at -5.08 -7.62 0)
+				(at -5.08 -12.7 0)
 				(length 5.08)
-				(name "~{Main}_{2}"
+				(name "~{Main}5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -42717,10 +42717,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -22.86 0)
-				(length 5.08) hide
-				(name "N.C."
+			(pin input inverted
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "~{Main}6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -42754,9 +42754,9 @@
 				)
 			)
 			(pin input inverted
-				(at -5.08 0 0)
+				(at -5.08 -17.78 0)
 				(length 5.08)
-				(name "~{Reset}"
+				(name "~{Main}7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -42843,10 +42843,10 @@
 					)
 				)
 			)
-			(pin output inverted
-				(at 35.56 -10.16 180)
-				(length 5.08)
-				(name "~{Contention}"
+			(pin no_connect line
+				(at -5.08 -33.02 0)
+				(length 5.08) hide
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -42862,7 +42862,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -33.02 0)
+				(at 35.56 -38.1 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42880,7 +42880,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -10.16 0)
+				(at -5.08 -20.32 0)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42897,10 +42897,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 35.56 -15.24 180)
-				(length 5.08) hide
-				(name "N.C."
+			(pin output inverted
+				(at 35.56 -10.16 180)
+				(length 5.08)
+				(name "~{Set_Contention}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -42934,7 +42934,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -17.78 180)
+				(at 35.56 -12.7 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42952,7 +42952,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -20.32 180)
+				(at 35.56 -15.24 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42970,7 +42970,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -22.86 180)
+				(at 35.56 -17.78 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -42988,7 +42988,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -25.4 180)
+				(at 35.56 -20.32 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43005,10 +43005,10 @@
 					)
 				)
 			)
-			(pin output inverted
-				(at 35.56 -12.7 180)
-				(length 5.08)
-				(name "~{Main}_{M}"
+			(pin no_connect line
+				(at 35.56 -22.86 180)
+				(length 5.08) hide
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43024,7 +43024,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -27.94 180)
+				(at 35.56 -25.4 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43060,7 +43060,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -30.48 180)
+				(at 35.56 -27.94 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43078,7 +43078,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -12.7 0)
+				(at -5.08 -22.86 0)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43096,7 +43096,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -33.02 180)
+				(at 35.56 -30.48 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43114,7 +43114,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -35.56 180)
+				(at 35.56 -33.02 180)
 				(length 5.08) hide
 				(name "N.C."
 					(effects
@@ -43131,10 +43131,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -15.24 0)
-				(length 5.08) hide
-				(name "N.C."
+			(pin input inverted
+				(at -5.08 0 0)
+				(length 5.08)
+				(name "~{Main}0"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43167,10 +43167,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -17.78 0)
-				(length 5.08) hide
-				(name "N.C."
+			(pin input inverted
+				(at -5.08 -2.54 0)
+				(length 5.08)
+				(name "~{Main}1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43186,9 +43186,9 @@
 				)
 			)
 			(pin input inverted
-				(at -5.08 -2.54 0)
+				(at -5.08 -5.08 0)
 				(length 5.08)
-				(name "~{Main}_{0}"
+				(name "~{Main}2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43203,10 +43203,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -20.32 0)
-				(length 5.08) hide
-				(name "N.C."
+			(pin input inverted
+				(at -5.08 -7.62 0)
+				(length 5.08)
+				(name "~{Main}3"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43222,9 +43222,9 @@
 				)
 			)
 			(pin input inverted
-				(at -5.08 -5.08 0)
+				(at -5.08 -10.16 0)
 				(length 5.08)
-				(name "~{Main}_{1}"
+				(name "~{Main}4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -45925,6 +45925,666 @@
 				(at -5.08 -15.24 0)
 				(length 5.08)
 				(name "D5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol "Main_Memory_Enable"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "B"
+			(at 15.875 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Main Memory Enable"
+			(at 15.24 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Enable"
+			(at 15.24 -41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Main Memory Enable"
+			(at 15.24 -25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "Main Memory Enable"
+			(at 15.24 -27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "HCP65 Main Memory Enable"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "Main_Memory_Enable_0_1"
+			(polyline
+				(pts
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -40.005) (xy 0 -40.005) (xy 0 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "Main_Memory_Enable_1_0"
+			(pin passive line
+				(at 35.56 -38.1 180)
+				(length 5.08)
+				(name "3.3V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Main_Memory_Enable_1_1"
+			(pin passive line
+				(at -5.08 -35.56 0)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -17.78 0)
+				(length 5.08)
+				(name "~{Main}5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -20.32 0)
+				(length 5.08)
+				(name "~{Main}6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 -2.54 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -22.86 0)
+				(length 5.08)
+				(name "~{Main}7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -30.48 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 0 0)
+				(length 5.08)
+				(name "~{Reset}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -2.54 0)
+				(length 5.08)
+				(name "~{Set_Contention}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -38.1 0)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 35.56 -12.7 180)
+				(length 5.08)
+				(name "~{Contention}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -33.02 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -25.4 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -15.24 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 -5.08 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -17.78 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -20.32 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -22.86 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -25.4 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -27.94 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -30.48 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 -7.62 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 35.56 -10.16 180)
+				(length 5.08)
+				(name "~{Main_Memory}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -27.94 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -33.02 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -35.56 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -5.08 0)
+				(length 5.08)
+				(name "~{Main}0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 35.56 0 180)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -7.62 0)
+				(length 5.08)
+				(name "~{Main}1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -10.16 0)
+				(length 5.08)
+				(name "~{Main}2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -12.7 0)
+				(length 5.08)
+				(name "~{Main}3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "~{Main}4"
 					(effects
 						(font
 							(size 1.27 1.27)

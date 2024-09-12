@@ -37,6 +37,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -49,6 +50,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -61,6 +63,18 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 6.985 82.296 0)
+		(layer "F.SilkS")
+		(uuid "cd6b1026-0701-4144-aca8-761eb7bab2cb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
 			)
 		)
 	)
@@ -230,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "f8e3c663-f632-4335-ac17-32eeec79f6ad")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 6.985 82.296 0)
-		(layer "F.SilkS")
-		(uuid "4671fc4b-e1e7-4ed4-859d-f6d79d8ced7b")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

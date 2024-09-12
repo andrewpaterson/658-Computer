@@ -67,6 +67,17 @@
 			)
 		)
 	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 7.493 41.783 0)
+		(layer "F.SilkS")
+		(uuid "5ea82650-7cab-4b27-9385-dd39e1f7580f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+			)
+		)
+	)
 	(attr through_hole)
 	(fp_line
 		(start -1.778 38.1)
@@ -233,18 +244,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "f2053690-fe83-4db0-91b7-26af460b4b2b")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 7.5 41.75 0)
-		(layer "F.SilkS")
-		(uuid "da6972ac-efe9-444f-a2a0-8b2a661963a6")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)

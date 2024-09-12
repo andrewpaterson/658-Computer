@@ -1563,15 +1563,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "74LVC08APW,112_0_0"
 				(pin input line
 					(at 0 0 0)
@@ -2250,7 +2241,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOT65P210X110-6N"
-				(at 22.86 -14.605 0)
+				(at 22.86 -13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2260,7 +2251,7 @@
 				)
 			)
 			(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc1g332"
-				(at 22.86 -17.145 0)
+				(at 22.86 -16.51 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2278,7 +2269,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 22.86 -17.78 0)
+				(at 22.86 -19.05 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2288,7 +2279,7 @@
 				)
 			)
 			(property "Mouser Part Number" "595-SN74LVC1G332DCKR"
-				(at 22.86 -24.765 0)
+				(at 22.86 -24.13 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2298,7 +2289,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC1G332DCKR?qs=nqigI8dpoHJbC41czqKUfw%3D%3D"
-				(at 22.86 -27.305 0)
+				(at 22.86 -26.67 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2308,7 +2299,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Texas Instruments"
-				(at 22.86 -29.845 0)
+				(at 22.86 -29.21 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2318,7 +2309,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "SN74LVC1G332DCKR"
-				(at 22.86 -32.385 0)
+				(at 22.86 -31.75 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2328,20 +2319,12 @@
 				)
 			)
 			(property "Silkscreen" "'1G332"
-				(at 12.7 -12.7 0)
+				(at 22.86 -21.59 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Single 3-Input Positive-OR Gate"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -2393,24 +2376,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 25.4 -2.54 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2574,6 +2539,26 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+			)
+			(symbol "SN74LVC1G332DCKR_1_0"
+				(pin output line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -3824,6 +3809,17 @@
 			(justify left bottom)
 		)
 		(uuid "b39af118-c84e-4c7c-86e2-a785c4040d1a")
+	)
+	(label "~{Read}_{4}"
+		(at 167.64 105.41 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b6920994-312a-4468-b085-78de3747cd87")
 	)
 	(label "MD6"
 		(at 193.04 113.03 0)
@@ -5110,7 +5106,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT65P210X110-6N"
-			(at 144.78 88.265 0)
+			(at 144.78 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5120,7 +5116,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc1g332"
-			(at 144.78 90.805 0)
+			(at 144.78 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5138,7 +5134,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 144.78 91.44 0)
+			(at 144.78 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5148,7 +5144,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74LVC1G332DCKR"
-			(at 144.78 98.425 0)
+			(at 144.78 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5158,7 +5154,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC1G332DCKR?qs=nqigI8dpoHJbC41czqKUfw%3D%3D"
-			(at 144.78 100.965 0)
+			(at 144.78 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5168,7 +5164,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 144.78 103.505 0)
+			(at 144.78 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5178,7 +5174,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74LVC1G332DCKR"
-			(at 144.78 106.045 0)
+			(at 144.78 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5188,20 +5184,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G332"
-			(at 134.62 86.36 0)
+			(at 144.78 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Single 3-Input Positive-OR Gate"
-			(at 121.92 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5416,7 +5404,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT65P210X110-6N"
-			(at 144.78 69.215 0)
+			(at 144.78 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5426,7 +5414,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc1g332"
-			(at 144.78 71.755 0)
+			(at 144.78 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5444,7 +5432,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 144.78 72.39 0)
+			(at 144.78 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5454,7 +5442,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74LVC1G332DCKR"
-			(at 144.78 79.375 0)
+			(at 144.78 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5464,7 +5452,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC1G332DCKR?qs=nqigI8dpoHJbC41czqKUfw%3D%3D"
-			(at 144.78 81.915 0)
+			(at 144.78 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5474,7 +5462,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 144.78 84.455 0)
+			(at 144.78 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5484,7 +5472,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74LVC1G332DCKR"
-			(at 144.78 86.995 0)
+			(at 144.78 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5494,20 +5482,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G332"
-			(at 134.62 67.31 0)
+			(at 144.78 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Single 3-Input Positive-OR Gate"
-			(at 121.92 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5766,15 +5746,6 @@
 		)
 		(property "Silkscreen" "74LVC08"
 			(at 134.62 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-			(at 121.92 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)

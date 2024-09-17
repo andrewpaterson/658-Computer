@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|44383185|76454001|a267a182-922c-47f3-abea-e0c8109b7e2b|d7e6855a-301e-4ae7-a678-1c456060bf59"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -526,19 +524,19 @@
       },
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       }
     ]
   },

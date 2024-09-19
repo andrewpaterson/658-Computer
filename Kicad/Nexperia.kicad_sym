@@ -57732,7 +57732,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "D"
-			(at 13.97 6.35 0)
+			(at 2.54 -5.715 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57740,15 +57740,17 @@
 			)
 		)
 		(property "Value" "BAS40-06W,115"
-			(at 13.97 3.81 0)
+			(at 2.54 -8.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
 				)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT65P210X110-3N"
-			(at 24.13 2.54 0)
+			(at 10.16 -26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57758,7 +57760,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.co.za/datasheet/2/916/BAS40_1PSXXSB4X_SER-1598244.pdf"
-			(at 24.13 0 0)
+			(at 10.16 -29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57768,7 +57770,7 @@
 			)
 		)
 		(property "Description" "Schottky diode"
-			(at 15.24 -6.35 0)
+			(at 2.54 -20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57776,7 +57778,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 24.13 -5.08 0)
+			(at 10.16 -31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57786,7 +57788,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 24.13 -7.62 0)
+			(at 10.16 -34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57796,7 +57798,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "BAS40-06W,115"
-			(at 24.13 -10.16 0)
+			(at 10.16 -36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57806,7 +57808,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-BAS40-06W115"
-			(at 24.13 -12.7 0)
+			(at 10.16 -39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57816,7 +57818,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=771-BAS40-06W115"
-			(at 24.13 -15.24 0)
+			(at 10.16 -41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57825,38 +57827,19 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "BAS40-06W,115"
-			(at 24.13 -17.78 0)
+		(property "Silkscreen" "BAS40-06W"
+			(at 10.16 -44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/bas40-06w115/nexperia"
-			(at 24.13 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Schottky Diodes & Rectifiers DIODE SCHOTTKY"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
 		(symbol "BAS40-06W,115_0_0"
 			(pin passive line
-				(at 0 0 0)
+				(at -8.89 -11.43 0)
 				(length 5.08)
 				(name "K1"
 					(effects
@@ -57874,7 +57857,7 @@
 				)
 			)
 			(pin passive line
-				(at 0 -2.54 0)
+				(at -8.89 -16.51 0)
 				(length 5.08)
 				(name "K2"
 					(effects
@@ -57891,10 +57874,86 @@
 					)
 				)
 			)
+		)
+		(symbol "BAS40-06W,115_0_1"
+			(polyline
+				(pts
+					(xy 3.81 -16.51) (xy 1.27 -16.51)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 -11.43) (xy 1.27 -11.43)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 -15.24) (xy 3.81 -17.78) (xy 1.27 -16.51) (xy 3.81 -15.24)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 3.81 -10.16) (xy 3.81 -12.7) (xy 1.27 -11.43) (xy 3.81 -10.16)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.635 -15.875) (xy 0.635 -15.24) (xy 1.27 -15.24) (xy 1.27 -17.78) (xy 1.905 -17.78) (xy 1.905 -17.145)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 0.635 -10.795) (xy 0.635 -10.16) (xy 1.27 -10.16) (xy 1.27 -12.7) (xy 1.905 -12.7) (xy 1.905 -12.065)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "BAS40-06W,115_1_0"
 			(pin passive line
-				(at 27.94 0 180)
+				(at 15.24 -13.97 180)
 				(length 5.08)
-				(name "A1;A2"
+				(name "A"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -57910,17 +57969,89 @@
 				)
 			)
 		)
-		(symbol "BAS40-06W,115_0_1"
+		(symbol "BAS40-06W,115_1_1"
 			(polyline
 				(pts
-					(xy 5.08 2.54) (xy 22.86 2.54) (xy 22.86 -5.08) (xy 5.08 -5.08) (xy 5.08 2.54)
+					(xy 1.27 -16.51) (xy 0 -16.51)
 				)
 				(stroke
-					(width 0.1524)
+					(width 0.254)
 					(type default)
 				)
 				(fill
-					(type background)
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.27 -11.43) (xy 0 -11.43)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 -16.51) (xy 3.81 -16.51)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 -13.97) (xy 5.08 -16.51)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 -11.43) (xy 3.81 -11.43)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 -11.43) (xy 5.08 -13.97)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 7.62 -13.97) (xy 5.08 -13.97)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
 				)
 			)
 		)
@@ -57933,7 +58064,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "Z"
-			(at 12.7 6.35 0)
+			(at 10.16 6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57941,15 +58072,17 @@
 			)
 		)
 		(property "Value" "BZX84-C56,215"
-			(at 12.7 3.81 0)
+			(at 10.16 3.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
 				)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT95P230X110-3N"
-			(at 21.59 2.54 0)
+			(at 15.24 -10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57959,7 +58092,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BZX84_SER.pdf"
-			(at 21.59 0 0)
+			(at 15.24 -12.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57968,8 +58101,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Zener diode"
-			(at 12.7 -6.35 0)
+		(property "Description" "56V Zener diode"
+			(at 10.16 -5.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57977,7 +58110,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 21.59 -5.08 0)
+			(at 15.24 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57987,7 +58120,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 21.59 -7.62 0)
+			(at 15.24 -20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57997,7 +58130,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "BZX84-C56,215"
-			(at 21.59 -10.16 0)
+			(at 15.24 -22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -58026,32 +58159,13 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "BZX84-C56,215"
-			(at 21.59 -17.78 0)
+		(property "Silkscreen" "BZX84-C56"
+			(at 15.24 -15.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/bzx84-c56215/nexperia"
-			(at 21.59 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Nexperia, 56V Zener Diode +/-5% 250 (Total Power Dissipation) mW, 40 (Peak Reverse Power Dissipation) W SMT 3-Pin TO-236AB"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -58074,26 +58188,8 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 0 -2.54 0)
-				(length 5.08)
-				(name "N.C."
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin passive line
-				(at 25.4 0 180)
+				(at 20.32 0 180)
 				(length 5.08)
 				(name "K"
 					(effects
@@ -58114,14 +58210,320 @@
 		(symbol "BZX84-C56,215_0_1"
 			(polyline
 				(pts
-					(xy 5.08 2.54) (xy 20.32 2.54) (xy 20.32 -5.08) (xy 5.08 -5.08) (xy 5.08 2.54)
+					(xy 11.43 0) (xy 8.89 0)
 				)
 				(stroke
-					(width 0.1524)
+					(width 0)
 					(type default)
 				)
 				(fill
-					(type background)
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 8.89 -1.27) (xy 8.89 1.27) (xy 9.398 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 11.43 -1.27) (xy 11.43 1.27) (xy 8.89 0) (xy 11.43 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+		(symbol "BZX84-C56,215_1_0"
+			(pin no_connect line
+				(at 0 -2.54 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "BZX84-C56,215_1_1"
+			(polyline
+				(pts
+					(xy 8.89 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 0) (xy 11.43 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+	)
+	(symbol "BZX84-C9V1,215"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "Z"
+			(at 10.16 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BZX84-C56,215"
+			(at 10.16 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOT95P230X110-3N"
+			(at 15.24 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/BZX84_SER.pdf"
+			(at 15.24 -12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "9.1V Zener diode"
+			(at 10.16 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 15.24 -17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 15.24 -20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "BZX84-C56,215"
+			(at 15.24 -22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 21.59 -12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 21.59 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "BZX84-C56"
+			(at 15.24 -15.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "BZX84-C9V1,215_0_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 20.32 0 180)
+				(length 5.08)
+				(name "K"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "BZX84-C9V1,215_0_1"
+			(polyline
+				(pts
+					(xy 11.43 0) (xy 8.89 0)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 8.89 -1.27) (xy 8.89 1.27) (xy 9.398 1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 11.43 -1.27) (xy 11.43 1.27) (xy 8.89 0) (xy 11.43 -1.27)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type outline)
+				)
+			)
+		)
+		(symbol "BZX84-C9V1,215_1_0"
+			(pin no_connect line
+				(at 0 -2.54 0)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "BZX84-C9V1,215_1_1"
+			(polyline
+				(pts
+					(xy 8.89 0) (xy 7.62 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 12.7 0) (xy 11.43 0)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
 				)
 			)
 		)

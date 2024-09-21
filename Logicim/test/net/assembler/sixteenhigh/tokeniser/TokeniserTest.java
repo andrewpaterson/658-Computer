@@ -661,14 +661,14 @@ public abstract class TokeniserTest
              "end\n" +
              "\n" +
              "@array:\n" +
-             "   uint8* xxx\n" +
+             "   uint8* aix\n" +
              "   int32 y = 3\n" +
              "   y = (y + y - y + y - y)\n" +
-             "   xxx[0] = 1\n" +
-             "   xxx[1] = 2\n" +
-             "   xxx[2] = 3\n" +
-             "   xxx[3] = 0\n" +
-             "   xxx[(xxx[y] + y)] = 2\n" +
+             "   aix[0] = 1\n" +
+             "   aix[1] = 2\n" +
+             "   aix[2] = 3\n" +
+             "   aix[3] = 0\n" +
+             "   aix[(aix[y] + y)] = 2\n" +
              "end\n", s);
   }
 

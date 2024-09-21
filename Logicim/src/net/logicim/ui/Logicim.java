@@ -905,7 +905,7 @@ public class Logicim
       subcircuitView.createSubcircuitTopSimulation(getTopSimulationNameName(subcircuitView.getTypeName()));
     }
 
-
+    //xxx
     circuitEditor.setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
 
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)

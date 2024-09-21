@@ -30,7 +30,10 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
                                        Rotation rotation,
                                        PROPERTIES properties)
   {
-    super(containingSubcircuitView, position, rotation, properties);
+    super(containingSubcircuitView,
+          position,
+          rotation,
+          properties);
   }
 
   protected void createPortViews()

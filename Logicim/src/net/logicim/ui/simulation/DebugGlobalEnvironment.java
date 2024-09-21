@@ -17,7 +17,7 @@ public class DebugGlobalEnvironment
   {
     if (instance == null)
     {
-      enableSimulationCreation = false;
+      enableSimulationCreation = true;
       instance = this;
     }
   }

@@ -435,11 +435,6 @@ public class SimulatorPanel
     mouseWheel(e.getWheelRotation());
   }
 
-  public SubcircuitEditorList getSubcircuitList()
-  {
-    return logicim.getSubcircuitList();
-  }
-
   public void setCurrentSubcircuitEditor(SubcircuitEditor editor)
   {
     logicim.gotoSubcircuit(editor);

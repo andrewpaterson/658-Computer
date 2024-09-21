@@ -94,7 +94,6 @@ public class Logicim
   protected KeyboardButtons keyboardButtons;
 
   protected CircuitEditor circuitEditor;
-  protected SubcircuitEditorList subcircuits;
 
   protected TraceView hoverTraceView;
   protected StaticView<?> hoverComponentView;
@@ -118,7 +117,6 @@ public class Logicim
 
   public Logicim()
   {
-    this.subcircuits = new SubcircuitEditorList();
     this.inputEvents = new ConcurrentLinkedDeque<>();
 
     this.viewport = new Viewport(this);
@@ -133,7 +131,7 @@ public class Logicim
     this.inputActions = new InputActions();
     this.labels = new InfoLabels();
 
-    this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME, subcircuits);
+    this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
     this.edit = null;
     this.creationRotation = Rotation.West;
 
@@ -907,6 +905,7 @@ public class Logicim
       subcircuitView.createSubcircuitTopSimulation(getTopSimulationNameName(subcircuitView.getTypeName()));
     }
 
+
     circuitEditor.setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
 
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
@@ -1018,7 +1017,7 @@ public class Logicim
 
     clearHover();
 
-    circuitEditor = new CircuitEditor(subcircuits);
+    circuitEditor = new CircuitEditor();
     circuitEditor.load(editorData.circuit);
 
     simulationSpeed.setRunning(editorData.running);
@@ -1611,19 +1610,19 @@ public class Logicim
     return getCurrentSelection().size() > 0;
   }
 
-  public SubcircuitEditorList getSubcircuitList()
+  public SubcircuitEditorList getSubcircuitEditorList()
   {
-    return subcircuits;
+    return circuitEditor.getSubcircuitEditorList();
   }
 
   public void setSubcircuitListChangedNotifier(SubcircuitListChangedNotifier changedNotifier)
   {
-    subcircuits.setChangedNotifier(changedNotifier);
+    getSubcircuitEditorList().setChangedNotifier(changedNotifier);
   }
 
   public void notifySubcircuitListChanged()
   {
-    subcircuits.getChangedNotifier().subcircuitListChanged();
+    getSubcircuitEditorList().getChangedNotifier().subcircuitListChanged();
   }
 
   public void validateInputActions()

@@ -14,7 +14,7 @@ public class SubcircuitListPanel
 {
   public SubcircuitListPanel(Logicim editor, ListSelectionListener simulatorFrame)
   {
-    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(editor.getSubcircuitList());
+    SubcircuitListModel subcircuitListModel = new SubcircuitListModel(editor.getSubcircuitEditorList());
     editor.setSubcircuitListChangedNotifier(this);
     setModel(subcircuitListModel);
     setMinimumSize(new Dimension(0, 0));

@@ -366,5 +366,10 @@ public class FamilyVoltageConfiguration
   {
     Collections.sort(voltageConfigurations);
   }
+
+  public Family getFamily()
+  {
+    return family;
+  }
 }
 

@@ -39,7 +39,10 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
                                Rotation rotation,
                                PROPERTIES properties)
   {
-    super(containingSubcircuitView, position, rotation, properties);
+    super(containingSubcircuitView,
+          position,
+          rotation,
+          properties);
     if (properties.family == null)
     {
       throw new SimulatorException("Family may not be null on IC [%s].", getDescription());
@@ -187,9 +190,12 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   public String getComponentType()
   {
-    for (IC integratedCircuit : simulationIntegratedCircuits.values())
+    if (simulationIntegratedCircuits != null)
     {
-      return integratedCircuit.getType();
+      for (IC integratedCircuit : simulationIntegratedCircuits.values())
+      {
+        return integratedCircuit.getType();
+      }
     }
     return "";
   }

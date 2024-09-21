@@ -124,7 +124,7 @@ public class SubcircuitEditorList
     return newSubcircuitEditor;
   }
 
-  public SubcircuitEditor getSubcircuitEditor()
+  public SubcircuitEditor getCurrentSubcircuitEditor()
   {
     return currentSubcircuitEditor;
   }

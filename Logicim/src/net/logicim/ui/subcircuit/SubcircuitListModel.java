@@ -34,7 +34,7 @@ public class SubcircuitListModel
 
   public int getSubcircuitEditorIndex()
   {
-    SubcircuitEditor subcircuitEditor = subcircuitEditorList.getSubcircuitEditor();
+    SubcircuitEditor subcircuitEditor = subcircuitEditorList.getCurrentSubcircuitEditor();
     return subcircuitEditorList.indexOf(subcircuitEditor);
   }
 }

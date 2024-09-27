@@ -906,7 +906,7 @@ public class Logicim
     }
 
     //xxx
-    circuitEditor.setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    //circuitEditor.setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
 
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {

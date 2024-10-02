@@ -1,12 +1,12 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,8.0.4*%
-%TF.CreationDate,2024-08-19T15:40:28+02:00*%
+%TF.GenerationSoftware,KiCad,Pcbnew,8.0.5*%
+%TF.CreationDate,2024-10-02T08:18:06+02:00*%
 %TF.ProjectId,HCP65 MPU Timer,48435036-3520-44d5-9055-2054696d6572,V1*%
 %TF.SameCoordinates,PX54c81a0PY37b6b20*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.4) date 2024-08-19 15:40:28*
+G04 Created by KiCad (PCBNEW 8.0.5) date 2024-10-02 08:18:06*
 %MOMM*%
 %LPD*%
 G01*

@@ -285,15 +285,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Bourns CAY16 Series 4.7k +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "CAY16-681J4LF_0_0"
 				(pin passive line
 					(at 0 0 0)
@@ -4878,17 +4869,6 @@
 		)
 		(uuid "0c5bec92-ab0b-40ed-b232-acb2e7fe2ea6")
 	)
-	(label "12V"
-		(at 127 128.27 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0f1552b0-3ef2-4651-a910-e7b2626ddff3")
-	)
 	(label "GND"
 		(at 266.7 130.81 0)
 		(fields_autoplaced yes)
@@ -5814,17 +5794,6 @@
 		(uuid "e7c893bc-5cc6-4aae-83c0-2c1e3b433f61")
 	)
 	(label "GND"
-		(at 146.05 128.27 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e7f39bdd-4663-405c-9f50-23280b101e25")
-	)
-	(label "GND"
 		(at 266.7 123.19 0)
 		(fields_autoplaced yes)
 		(effects
@@ -6429,6 +6398,28 @@
 			)
 		)
 	)
+	(global_label "12V"
+		(shape input)
+		(at 127 128.27 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "62689456-fa52-443b-ac48-f43776f95ddb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 133.4928 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "Addr2"
 		(shape input)
 		(at 116.84 92.71 270)
@@ -6491,6 +6482,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "GND"
+		(shape input)
+		(at 146.05 128.27 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "71c914cb-54ef-4016-8ba7-99e109e446ba")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 152.9057 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -7841,15 +7854,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Bourns CAY16 Series 4.7k +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 231.14 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f66c4e86-c1df-4955-8404-8167218c6ec0")
 		)
@@ -8442,15 +8446,6 @@
 		)
 		(property "Silkscreen" "680Ω"
 			(at 241.3 80.645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 4.7k +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 231.14 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9909,15 +9904,6 @@
 		)
 		(property "Silkscreen" "680Ω"
 			(at 241.3 144.145 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 4.7k +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 231.14 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)

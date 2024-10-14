@@ -33,6 +33,7 @@ public abstract class PortHolder
         return port;
       }
     }
+    
     throw new SimulatorException("Cannot get port named [%s] on %s [%s].", name, getClass().getSimpleName(), getName());
   }
 

@@ -23,6 +23,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.Map;
 
@@ -459,6 +460,8 @@ public class SimulationTest
 
   public static void test()
   {
+    new DebugGlobalEnvironment();
+
     testInverterEvents();
     testInverterLevels();
     testClockOscillator();

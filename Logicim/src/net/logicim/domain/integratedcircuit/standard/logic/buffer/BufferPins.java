@@ -27,13 +27,13 @@ public class BufferPins
     {
       LogicPort input = new LogicPort(Input,
                                       this,
-                                      "Input " + i,
+                                      calculatePortName("Input", i, bufferCount),
                                       voltageConfiguration);
       inputs.add(input);
 
       LogicPort output = new LogicPort(Output,
                                        this,
-                                       "Output " + i,
+                                       calculatePortName("Output", i, bufferCount),
                                        voltageConfiguration);
       outputs.add(output);
     }

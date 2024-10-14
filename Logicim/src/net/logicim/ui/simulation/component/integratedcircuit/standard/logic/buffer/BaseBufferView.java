@@ -55,23 +55,26 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   protected void createPortViews(boolean negateOutput)
   {
     List<Integer> portOffsets = calculatePortOffsets(properties.inputCount);
-    for (int portNumber = 0; portNumber < portOffsets.size(); portNumber++)
+    int portSize = portOffsets.size();
+    for (int portNumber = 0; portNumber < portSize; portNumber++)
     {
       int portOffset = portOffsets.get(portNumber);
       new PortView(this,
-                   getPortNames("Input ",
+                   getPortNames("Input",
                                 portNumber,
-                                properties.inputWidth),
+                                properties.inputWidth,
+                                properties.inputCount),
                    new Int2D(portOffset, 1));
     }
 
-    for (int portNumber = 0; portNumber < portOffsets.size(); portNumber++)
+    for (int portNumber = 0; portNumber < portSize; portNumber++)
     {
       int portOffset = portOffsets.get(portNumber);
       PortView outputPortView = new PortView(this,
-                                             getPortNames("Output ",
+                                             getPortNames("Output",
                                                           portNumber,
-                                                          properties.inputWidth),
+                                                          properties.inputWidth,
+                                                          properties.inputCount),
                                              new Int2D(portOffset, -1));
       if (negateOutput)
       {

@@ -200,12 +200,14 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return "";
   }
 
-  protected List<String> getPortNames(String prefix, int portNumber, int inputWidth)
+  protected List<String> getPortNames(String name, int portNumber, int inputWidth, int inputCount)
   {
     ArrayList<String> portNames = new ArrayList<>();
-    for (int i = portNumber * inputWidth; i < (portNumber + 1) * inputWidth; i++)
+    int numPorts = (portNumber + 1) * inputWidth;
+    int maxPorts = (portNumber + 1) * (inputWidth * inputCount);
+    for (int i = portNumber * inputWidth; i < numPorts; i++)
     {
-      String portName = prefix + i;
+      String portName = calculatePortName(name, i, maxPorts);
       portNames.add(portName);
     }
     return portNames;

@@ -18,7 +18,6 @@ import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
-import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.awt.*;
 import java.util.List;
@@ -434,6 +433,18 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     Component component = getComponent(subcircuitSimulation);
     return component.getPort(portName);
+  }
+
+  protected String calculatePortName(String name, int i, int bufferCount)
+  {
+    if (bufferCount > 1)
+    {
+      return name + " " + i;
+    }
+    else
+    {
+      return name;
+    }
   }
 
   public abstract String getComponentType();

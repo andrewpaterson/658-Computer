@@ -309,7 +309,7 @@ public class W65C816View
     rightPorts.add(vectorPullPortView);
 
     y += yStep;
-    PortView addressPortView = createPortView(y, "Address ", 16, right);
+    PortView addressPortView = createPortView(y, "Address", 16, right);
     rightPorts.add(addressPortView);
 
     y += yStep;
@@ -326,14 +326,17 @@ public class W65C816View
 
     //Bidirectional
     y += yStep;
-    PortView dataPortView = createPortView(y, "Data ", 8, right);
+    PortView dataPortView = createPortView(y, "Data", 8, right);
     rightPorts.add(dataPortView);
   }
 
-  private PortView createPortView(int x, String portName, int i, int y)
+  private PortView createPortView(int x, String portName, int portCount, int y)
   {
     return new PortView(this,
-                        getPortNames(portName, 0, i),
+                        getPortNames(portName,
+                                     0,
+                                     portCount,
+                                     1),
                         new Int2D(yOffset + x, y)).setText(portName);
   }
 

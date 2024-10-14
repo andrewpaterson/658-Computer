@@ -60,7 +60,9 @@ public class OscilloscopeView
   {
     for (int portNumber = 0; portNumber < properties.inputCount; portNumber++)
     {
-      new PortView(this, "Input " + portNumber, new Int2D(0, portNumber * properties.divHeightInGrids));
+      new PortView(this,
+                   calculatePortName("Input", portNumber, properties.inputCount),
+                   new Int2D(0, portNumber * properties.divHeightInGrids));
     }
   }
 

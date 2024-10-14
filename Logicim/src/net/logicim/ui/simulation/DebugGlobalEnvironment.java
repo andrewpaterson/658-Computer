@@ -24,7 +24,13 @@ public class DebugGlobalEnvironment
 
   public static void validateCanCreateComponent()
   {
-    if (!DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    DebugGlobalEnvironment debugGlobalEnvironment = DebugGlobalEnvironment.getInstance();
+    if (debugGlobalEnvironment == null)
+    {
+      throw new SimulatorException("DebugGlobalEnvironment instance not set.  Call new DebugGlobalEnvironment().");
+    }
+
+    if (!debugGlobalEnvironment.isEnableSimulationCreation())
     {
       throw new SimulatorException("Cannot create Component when simulation creation is disabled");
     }
@@ -32,7 +38,12 @@ public class DebugGlobalEnvironment
 
   public static void validateCanCreateTrace()
   {
-    if (!DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    DebugGlobalEnvironment debugGlobalEnvironment = DebugGlobalEnvironment.getInstance();
+    if (debugGlobalEnvironment == null)
+    {
+      throw new SimulatorException("DebugGlobalEnvironment instance not set.  Call new DebugGlobalEnvironment().");
+    }
+    if (!debugGlobalEnvironment.isEnableSimulationCreation())
     {
       throw new SimulatorException("Cannot create Trace when simulation creation is disabled");
     }

@@ -20,7 +20,7 @@ public class OscilloscopePins
     {
       LogicPort port = new LogicPort(Input,
                                      this,
-                                     "Input " + i,
+                                     calculatePortName("Input", i, inputCount),
                                      null);
       inputs.add(port);
     }

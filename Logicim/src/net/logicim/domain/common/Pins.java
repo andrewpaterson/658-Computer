@@ -68,6 +68,18 @@ public abstract class Pins
     return vss;
   }
 
+  protected String calculatePortName(String name, int i, int bufferCount)
+  {
+    if (bufferCount > 1)
+    {
+      return name + " " + i;
+    }
+    else
+    {
+      return name;
+    }
+  }
+
   @Override
   public void traceConnected(Simulation simulation, Port port)
   {

@@ -60,7 +60,7 @@ import net.logicim.ui.simulation.selection.SelectionEdit;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
 import net.logicim.ui.subcircuit.SubcircuitEditorList;
-import net.logicim.ui.subcircuit.SubcircuitListChangedNotifier;
+import net.logicim.ui.subcircuit.SubcircuitListChangedListener;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -132,6 +132,7 @@ public class Logicim
     this.labels = new InfoLabels();
 
     this.circuitEditor = new CircuitEditor(MAIN_SUBCIRCUIT_TYPE_NAME);
+
     this.edit = null;
     this.creationRotation = Rotation.West;
 
@@ -207,7 +208,7 @@ public class Logicim
         {
           if (clickCount == 1)
           {
-            StatefulEdit edit = null;
+            StatefulEdit edit;
             if (isInSelectedComponent(x, y))
             {
               edit = new StartEditInComponent(keyboardButtons);
@@ -1017,7 +1018,10 @@ public class Logicim
 
     clearHover();
 
+    List<SubcircuitListChangedListener> subcircuitListChangedListeners = getSubcircuitEditorList().getSubcircuitListChangedListeners();
     circuitEditor = new CircuitEditor();
+    getSubcircuitEditorList().addSubcircuitListChangedListeners(subcircuitListChangedListeners);
+
     circuitEditor.load(editorData.circuit);
 
     simulationSpeed.setRunning(editorData.running);
@@ -1615,19 +1619,19 @@ public class Logicim
     return circuitEditor.getSubcircuitEditorList();
   }
 
-  public void setSubcircuitListChangedNotifier(SubcircuitListChangedNotifier changedNotifier)
-  {
-    getSubcircuitEditorList().setChangedNotifier(changedNotifier);
-  }
-
   public void notifySubcircuitListChanged()
   {
-    getSubcircuitEditorList().getChangedNotifier().subcircuitListChanged();
+    getSubcircuitEditorList().notifySubcircuitListChanged(true);
   }
 
   public void validateInputActions()
   {
     inputActions.validate();
+  }
+
+  public void addSubcircuitListChangedListener(SubcircuitListChangedListener subcircuitListChangedListener)
+  {
+    getSubcircuitEditorList().addSubcircuitListChangedListener(subcircuitListChangedListener);
   }
 }
 

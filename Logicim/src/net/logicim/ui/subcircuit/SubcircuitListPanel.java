@@ -10,16 +10,17 @@ import java.awt.*;
 
 public class SubcircuitListPanel
     extends JList<SubcircuitEditor>
-    implements SubcircuitListChangedNotifier
+    implements SubcircuitListChangedListener
 {
-  public SubcircuitListPanel(Logicim editor, ListSelectionListener simulatorFrame)
+  public SubcircuitListPanel(ListSelectionListener simulatorFrame, Logicim editor)
   {
     SubcircuitListModel subcircuitListModel = new SubcircuitListModel(editor.getSubcircuitEditorList());
-    editor.setSubcircuitListChangedNotifier(this);
     setModel(subcircuitListModel);
     setMinimumSize(new Dimension(0, 0));
     setBackground(Colours.getInstance().getPanelBackground());
     addListSelectionListener(simulatorFrame);
+
+    editor.addSubcircuitListChangedListener(this);
   }
 
   @Override

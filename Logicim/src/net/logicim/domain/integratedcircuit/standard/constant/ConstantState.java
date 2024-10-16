@@ -9,7 +9,7 @@ public class ConstantState
 
   public ConstantState()
   {
-    super();
+    this(0);
   }
 
   public ConstantState(long constantValue)

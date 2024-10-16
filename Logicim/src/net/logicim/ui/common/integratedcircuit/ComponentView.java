@@ -329,7 +329,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     addPortsToPortViews(subcircuitSimulation, component);
     validateComponent(subcircuitSimulation);
-    component.reset();
   }
 
   private void addPortsToPortViews(SubcircuitSimulation subcircuitSimulation, Component component)
@@ -378,8 +377,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     for (SubcircuitSimulation subcircuitSimulation : getComponentSubcircuitSimulations())
     {
-      Component integratedCircuit = getComponent(subcircuitSimulation);
-      integratedCircuit.simulationStarted(subcircuitSimulation.getSimulation());
+      Component component = getComponent(subcircuitSimulation);
+      component.reset(subcircuitSimulation.getSimulation());
     }
   }
 

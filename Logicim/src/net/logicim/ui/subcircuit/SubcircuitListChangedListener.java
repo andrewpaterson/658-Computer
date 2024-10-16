@@ -1,6 +1,6 @@
 package net.logicim.ui.subcircuit;
 
-public interface SubcircuitListChangedNotifier
+public interface SubcircuitListChangedListener
 {
   void subcircuitListChanged();
 }

@@ -365,7 +365,7 @@ public class CircuitEditor
       @Override
       public void run()
       {
-        subcircuitEditorList.notifyChange();
+        subcircuitEditorList.notifySubcircuitListChanged(true);
       }
     });
   }

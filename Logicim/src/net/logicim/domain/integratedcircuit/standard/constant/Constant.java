@@ -17,7 +17,11 @@ public class Constant
   protected int propagationTime;
   protected long defaultValue;
 
-  public Constant(Circuit circuit, String name, ConstantPins pins, int propagationTime, int defaultValue)
+  public Constant(Circuit circuit,
+                  String name,
+                  ConstantPins pins,
+                  int propagationTime,
+                  int defaultValue)
   {
     super(circuit, name, pins);
     this.propagationTime = propagationTime;

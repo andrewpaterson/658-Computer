@@ -26,13 +26,11 @@ public class Circuit
     Simulation simulation = circuitSimulation.getSimulation();
     for (IntegratedCircuit<? extends Pins, ? extends State> integratedCircuit : integratedCircuits)
     {
-      integratedCircuit.reset();
-      integratedCircuit.simulationStarted(simulation);
+      integratedCircuit.reset(simulation);
     }
     for (Passive passive : passives)
     {
-      passive.reset();
-      passive.simulationStarted(simulation);
+      passive.reset(simulation);
     }
   }
 

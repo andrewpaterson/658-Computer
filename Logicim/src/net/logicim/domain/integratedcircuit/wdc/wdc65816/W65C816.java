@@ -28,7 +28,7 @@ public class W65C816
     return pins;
   }
 
-  public void reset()
+  protected void reset()
   {
     super.reset();
     state.resetPulled();

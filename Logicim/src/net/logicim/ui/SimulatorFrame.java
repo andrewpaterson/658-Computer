@@ -47,7 +47,7 @@ public class SimulatorFrame
     creationPanel = new CreationPanel(this, logicim);
     selectedInfoPanel = new SelectedInfoPanel(this);
     circuitInfoPanel = new CircuitInfoPanel(this, logicim);
-    subcircuitListPanel = new SubcircuitListPanel(logicim, this);
+    subcircuitListPanel = new SubcircuitListPanel(this, logicim);
 
     JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), createSurroundPanel(simulatorPanel));
     splitPane.setBorder(BorderFactory.createEmptyBorder());

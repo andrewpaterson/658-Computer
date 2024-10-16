@@ -242,6 +242,8 @@ public class SimulationTest
     CircuitSimulation circuitSimulation = new CircuitSimulation("");
     Simulation simulation = circuitSimulation.getSimulation();
 
+    constant.reset(simulation);
+
     Map<Long, SimultaneousEvents> events = simulation.getTimeline().getAllEvents();
     validate(1, events.size());
     validateTreeEvent(events, 0, nanosecondsToTime(1), TickEvent.class, constant);

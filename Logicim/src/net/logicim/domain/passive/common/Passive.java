@@ -69,6 +69,12 @@ public abstract class Passive
     return this;
   }
 
+  public void reset(Simulation simulation)
+  {
+    reset();
+    simulationStarted(simulation);
+  }
+
   public abstract String getType();
 }
 

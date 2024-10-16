@@ -1431,7 +1431,7 @@ public class SubcircuitView
       IntegratedCircuit<?, ?> existingIntegratedCircuit = integratedCircuitView.getComponent(existingSimulation);
       IntegratedCircuit<?, ?> newIntegratedCircuit = integratedCircuitView.createComponent(newSimulation);
       connectPorts(existingIntegratedCircuit.getPorts(), newIntegratedCircuit.getPorts(), traceMap);
-      newIntegratedCircuit.simulationStarted(newSimulation.getSimulation());
+      newIntegratedCircuit.reset(newSimulation.getSimulation());
     }
   }
 
@@ -1444,7 +1444,7 @@ public class SubcircuitView
       Passive existingPassive = passiveView.getComponent(existingSimulation);
       Passive newPassive = passiveView.createComponent(newSimulation);
       connectPorts(existingPassive.getPorts(), newPassive.getPorts(), traceMap);
-      newPassive.simulationStarted(newSimulation.getSimulation());
+      newPassive.reset(newSimulation.getSimulation());
     }
   }
 

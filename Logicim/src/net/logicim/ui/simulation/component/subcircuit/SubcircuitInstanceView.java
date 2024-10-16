@@ -238,6 +238,7 @@ public class SubcircuitInstanceView
     createTracePorts(subcircuitInstance);
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
+    subcircuitInstance.reset(circuitSimulation.getSimulation());
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
     //instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);

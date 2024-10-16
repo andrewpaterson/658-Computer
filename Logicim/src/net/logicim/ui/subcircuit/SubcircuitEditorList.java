@@ -15,31 +15,26 @@ public class SubcircuitEditorList
 {
   protected List<SubcircuitEditor> subcircuitEditors;
   protected SubcircuitEditor currentSubcircuitEditor;
-  protected SubcircuitListChangedNotifier changedNotifier;
+  protected List<SubcircuitListChangedListener> subcircuitListChangedListeners;
 
   public SubcircuitEditorList()
   {
-    subcircuitEditors = new ArrayList<>();
-    currentSubcircuitEditor = null;
-    changedNotifier = null;
-  }
-
-  public void setChangedNotifier(SubcircuitListChangedNotifier changedNotifier)
-  {
-    this.changedNotifier = changedNotifier;
+    this.subcircuitEditors = new ArrayList<>();
+    this.currentSubcircuitEditor = null;
+    this.subcircuitListChangedListeners = new ArrayList<>();
   }
 
   public void clear(boolean notifyChange)
   {
     subcircuitEditors = new ArrayList<>();
-    notifyChange(notifyChange);
+    notifySubcircuitListChanged(notifyChange);
     currentSubcircuitEditor = null;
   }
 
   public void add(SubcircuitEditor subcircuitEditor, boolean notifyChange)
   {
     subcircuitEditors.add(subcircuitEditor);
-    notifyChange(notifyChange);
+    notifySubcircuitListChanged(notifyChange);
   }
 
   public SubcircuitEditor get(int index)
@@ -132,26 +127,19 @@ public class SubcircuitEditorList
   public String setSubcircuitEditor(SubcircuitEditor subcircuitEditor, boolean notifyChange)
   {
     currentSubcircuitEditor = subcircuitEditor;
-    notifyChange(notifyChange);
+    notifySubcircuitListChanged(notifyChange);
     return currentSubcircuitEditor.getTypeName();
   }
 
-  protected void notifyChange(boolean notifyChange)
+  public void notifySubcircuitListChanged(boolean notifyChange)
   {
-    if ((notifyChange && (changedNotifier != null)))
+    if (notifyChange)
     {
-      notifyChange();
+      for (SubcircuitListChangedListener listener : subcircuitListChangedListeners)
+      {
+        listener.subcircuitListChanged();
+      }
     }
-  }
-
-  public void notifyChange()
-  {
-    changedNotifier.subcircuitListChanged();
-  }
-
-  public SubcircuitListChangedNotifier getChangedNotifier()
-  {
-    return changedNotifier;
   }
 
   @Override
@@ -164,6 +152,31 @@ public class SubcircuitEditorList
       subcircuitInstanceViews.addAll(circuitSubcircuitView.getSubcircuitInstanceViews(subcircuitView));
     }
     return subcircuitInstanceViews;
+  }
+
+  public void addSubcircuitListChangedListener(SubcircuitListChangedListener subcircuitListChangedListener)
+  {
+    if (!subcircuitListChangedListeners.contains(subcircuitListChangedListener))
+    {
+      subcircuitListChangedListeners.add(subcircuitListChangedListener);
+    }
+    else
+    {
+      throw new SimulatorException("Listener has already been added.");
+    }
+  }
+
+  public void addSubcircuitListChangedListeners(List<SubcircuitListChangedListener> subcircuitListChangedListeners)
+  {
+    for (SubcircuitListChangedListener subcircuitListChangedListener : subcircuitListChangedListeners)
+    {
+      addSubcircuitListChangedListener(subcircuitListChangedListener);
+    }
+  }
+
+  public List<SubcircuitListChangedListener> getSubcircuitListChangedListeners()
+  {
+    return subcircuitListChangedListeners;
   }
 }
 

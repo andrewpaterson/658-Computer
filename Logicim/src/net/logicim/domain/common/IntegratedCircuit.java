@@ -76,7 +76,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     }
   }
 
-  public void reset()
+  protected void reset()
   {
     events.clear();
     for (Port port : pins.getPorts())
@@ -154,6 +154,13 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   public State createState()
   {
     return new Stateless();
+  }
+
+  @Override
+  public void reset(Simulation simulation)
+  {
+    reset();
+    simulationStarted(simulation);
   }
 
   public abstract void simulationStarted(Simulation simulation);

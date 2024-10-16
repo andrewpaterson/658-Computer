@@ -14,6 +14,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;
+import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockProperties;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
@@ -64,6 +65,8 @@ public class CircuitEditorTest
 
   public static void main(String[] args)
   {
+    new DebugGlobalEnvironment();
+
     CircuitEditorTest.test();
   }
 }

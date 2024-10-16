@@ -13,15 +13,15 @@ public interface Component
 
   void disconnect(Simulation simulation);
 
-  void reset();
+  void simulationStarted(Simulation simulation);
+
+  void reset(Simulation simulation);
 
   String getType();
 
   String getName();
 
   Port getPort(String portName);
-
-  void simulationStarted(Simulation simulation);
 
   default String getDescription()
   {

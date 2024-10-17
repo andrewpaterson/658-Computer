@@ -12,6 +12,7 @@ public class TraceSmoothVoltage
   {
     super(maximumDelta, simulation);
     this.trace = trace;
+    this.lastValue = getVoltage(simulation.getTime());
   }
 
   @Override

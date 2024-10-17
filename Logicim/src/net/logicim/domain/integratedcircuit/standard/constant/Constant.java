@@ -37,11 +37,14 @@ public class Constant
   @Override
   public void executeTick(Simulation simulation)
   {
-    ConstantState state = getState();
-    Timeline timeline = simulation.getTimeline();
-    long constantValue = state.getConstantValue();
-    LogicPort output = pins.getOutput();
-    output.writeBool(timeline, (constantValue & 1) == 1);
+    if (isPowered(simulation.getTime()))
+    {
+      ConstantState state = getState();
+      Timeline timeline = simulation.getTimeline();
+      long constantValue = state.getConstantValue();
+      LogicPort output = pins.getOutput();
+      output.writeBool(timeline, (constantValue & 1) == 1);
+    }
   }
 
   @Override

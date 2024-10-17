@@ -17,17 +17,31 @@ public class SlewEvent
   protected float endVoltage;    // @ time + slewTime
   protected long slewTime;
 
-  public SlewEvent(LogicPort port, float endVoltage, long time, Timeline timeline)
+  public SlewEvent(LogicPort port,
+                   float endVoltage,
+                   long time,
+                   Timeline timeline)
   {
-    super(port, timeline.getTime() + time, timeline);
+    super(port,
+          timeline.getTime() + time,
+          timeline);
     this.startVoltage = Float.NaN;
     this.endVoltage = endVoltage;
     this.slewTime = -1;
   }
 
-  public SlewEvent(LogicPort port, long time, long id, float startVoltage, float endVoltage, long slewTime, Timeline timeline)
+  public SlewEvent(LogicPort port,
+                   long time,
+                   long id,
+                   float startVoltage,
+                   float endVoltage,
+                   long slewTime,
+                   Timeline timeline)
   {
-    super(port, time, id, timeline);
+    super(port,
+          time,
+          id,
+          timeline);
     this.startVoltage = startVoltage;
     this.endVoltage = endVoltage;
     this.slewTime = slewTime;
@@ -91,7 +105,9 @@ public class SlewEvent
     float vcc = port.getVCC(time);
 
     long nowTime = timeline.getTime();
-    startVoltage = voltageConfiguration.calculateStartVoltage(calculateVoltageAtTime(nowTime, calculateStartVoltage(nowTime, voltageConfiguration, vcc)), vcc);
+    float startVoltage = calculateStartVoltage(nowTime, voltageConfiguration, vcc);
+    float portVoltage = calculateVoltageAtTime(nowTime, startVoltage);
+    this.startVoltage = voltageConfiguration.calculateStartVoltage(portVoltage, vcc);
 
     slewTime = calculateSlewTime(voltageConfiguration, vcc);
     if (slewTime != Long.MAX_VALUE)

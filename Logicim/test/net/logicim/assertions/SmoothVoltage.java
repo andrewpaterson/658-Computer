@@ -13,7 +13,7 @@ public abstract class SmoothVoltage
   {
     this.maximumDelta = maximumDelta;
     this.simulation = simulation;
-    this.lastValue = getVoltage(simulation.getTime());
+    this.lastValue = Float.NaN;
   }
 
   public void validate()

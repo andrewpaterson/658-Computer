@@ -66,6 +66,11 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public void setState(State state)
   {
+    if (this.state != null)
+    {
+      throw new SimulatorException("Cannot set state on %s.  It is already set.", getDescription());
+    }
+
     if (state != null)
     {
       this.state = (STATE) state;

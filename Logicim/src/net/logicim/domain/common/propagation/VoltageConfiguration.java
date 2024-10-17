@@ -56,15 +56,6 @@ public class VoltageConfiguration
     validateSlewTimes();
   }
 
-  protected void setVoltages(float lowVoltageIn, float highVoltageIn, float lowVoltageOut, float highVoltageOut)
-  {
-    this.lowVoltageIn = lowVoltageIn;
-    this.highVoltageIn = highVoltageIn;
-
-    this.highVoltageOut = highVoltageOut;
-    this.lowVoltageOut = lowVoltageOut;
-  }
-
   public VoltageConfiguration(float vcc,
                               float lowVoltageIn,
                               float highVoltageIn,
@@ -126,6 +117,15 @@ public class VoltageConfiguration
 
     validateVoltages();
     validateSlewTimes();
+  }
+
+  protected void setVoltages(float lowVoltageIn, float highVoltageIn, float lowVoltageOut, float highVoltageOut)
+  {
+    this.lowVoltageIn = lowVoltageIn;
+    this.highVoltageIn = highVoltageIn;
+
+    this.highVoltageOut = highVoltageOut;
+    this.lowVoltageOut = lowVoltageOut;
   }
 
   protected void setPropagationTime(int highToLowPropagation, int lowToHighPropagation)

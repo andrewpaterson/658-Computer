@@ -12,6 +12,7 @@ public class PortSmoothVoltage
   {
     super(maximumDelta, simulation);
     this.port = port;
+    this.lastValue = getVoltage(simulation.getTime());
   }
 
   @Override

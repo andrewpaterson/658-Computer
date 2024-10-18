@@ -14,6 +14,7 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
@@ -751,15 +752,19 @@ public class SubcircuitView
     }
   }
 
-  private void createComponentsForAllSimulations(List<StaticView<?>> staticViews)
+  private List<? extends Component> createComponentsForAllSimulations(List<StaticView<?>> staticViews)
   {
+    ArrayList<Component> result = new ArrayList<>();
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
       for (StaticView<?> staticView : staticViews)
       {
-        staticView.createComponents(simulations);
+        List<? extends Component> components = staticView.createComponents(simulations);
+        result.addAll(components);
       }
     }
+
+    return result;
   }
 
   public void simulationStarted(List<StaticView<?>> staticViews)
@@ -767,6 +772,14 @@ public class SubcircuitView
     for (StaticView<?> staticView : staticViews)
     {
       staticView.simulationStarted();
+    }
+  }
+
+  public void simulationStarted(List<StaticView<?>> staticViews, SubcircuitSimulation subcircuitSimulation)
+  {
+    for (StaticView<?> staticView : staticViews)
+    {
+      staticView.simulationStarted(subcircuitSimulation);
     }
   }
 
@@ -1297,7 +1310,7 @@ public class SubcircuitView
       staticView.createComponent(subcircuitSimulation);
     }
 
-    simulationStarted(staticViews);
+    simulationStarted(staticViews, subcircuitSimulation);
   }
 
   public void createTracesForSubcircuitInstanceView(CircuitInstanceView circuitInstanceView)

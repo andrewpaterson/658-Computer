@@ -11,6 +11,7 @@ import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.data.subciruit.SubcircuitInstanceSimulationSimulationData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
+import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
@@ -247,12 +248,15 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public void createComponents(SubcircuitSimulations simulations)
+  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
   {
+    ArrayList<Component> result = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
-      createComponent(subcircuitSimulation);
+      SubcircuitInstance component = createComponent(subcircuitSimulation);
+      result.add(component);
     }
+    return result;
   }
 
   //Called from SubcircuitInstanceData.

@@ -221,14 +221,20 @@ public class TunnelView
   }
 
   @Override
+  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  {
+  }
+
+  @Override
   public Component createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     return null;
   }
 
   @Override
-  public void createComponents(SubcircuitSimulations simulations)
+  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
   {
+    return new ArrayList<>();
   }
 
   @Override

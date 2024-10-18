@@ -382,6 +382,13 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
+  @Override
+  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  {
+    Component component = getComponent(subcircuitSimulation);
+    component.reset(subcircuitSimulation.getSimulation());
+  }
+
   public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
 
   protected void validateNoComponents()
@@ -392,13 +399,17 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public void createComponents(SubcircuitSimulations simulations)
+  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
   {
     validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
+
+    ArrayList<Component> result = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
-      createComponent(subcircuitSimulation);
+      Component component = createComponent(subcircuitSimulation);
+      result.add(component);
     }
+    return result;
   }
 
   public SubcircuitSimulation getComponentSubcircuitSimulation(CircuitSimulation circuitSimulation)
@@ -431,7 +442,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   public Port getPort(SubcircuitSimulation subcircuitSimulation, String portName)
   {
     Component component = getComponent(subcircuitSimulation);
-    return component.getPort(portName);
+    if (component != null)
+    {
+      return component.getPort(portName);
+    }
+    else
+    {
+      return null;
+    }
   }
 
   protected String calculatePortName(String name, int i, int bufferCount)

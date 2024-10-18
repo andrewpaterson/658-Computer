@@ -39,6 +39,11 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
+  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  {
+  }
+
+  @Override
   public List<ConnectionView> getConnectionViews()
   {
     return Collections.emptyList();
@@ -85,8 +90,9 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void createComponents(SubcircuitSimulations simulations)
+  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
   {
+    return new ArrayList<>();
   }
 }
 

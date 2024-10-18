@@ -300,7 +300,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract void createComponents(SubcircuitSimulations simulations);
+  public abstract List<? extends Component> createComponents(SubcircuitSimulations simulations);
 
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
@@ -311,6 +311,8 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract void destroyAllComponents();
 
   public abstract void simulationStarted();
+
+  public abstract void simulationStarted(SubcircuitSimulation subcircuitSimulation);
 
   public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
 

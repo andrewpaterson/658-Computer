@@ -22,7 +22,7 @@ import java.util.List;
 import static java.awt.GridBagConstraints.*;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 
-public class SimulatorFrame
+public class LogicimFrame
     extends JFrame
     implements WindowListener,
                KeyListener,
@@ -37,7 +37,7 @@ public class SimulatorFrame
   protected CircuitInfoPanel circuitInfoPanel;
   protected SubcircuitListPanel subcircuitListPanel;
 
-  public SimulatorFrame() throws HeadlessException
+  public LogicimFrame() throws HeadlessException
   {
     Logicim logicim = new Logicim();
 
@@ -110,16 +110,16 @@ public class SimulatorFrame
     ensureDataConstructors();
     ensureEnumStores();
 
-    SimulatorFrame simulatorFrame = new SimulatorFrame();
+    LogicimFrame logicimFrame = new LogicimFrame();
 
-    simulatorFrame.setTitle("Logicim");
-    simulatorFrame.setMinimumSize(new Dimension(320, 240));
-    simulatorFrame.setVisible(true);
+    logicimFrame.setTitle("Logicim");
+    logicimFrame.setMinimumSize(new Dimension(320, 240));
+    logicimFrame.setVisible(true);
 
-    WindowSizer.setPercentageOfScreenSize(simulatorFrame, 65.0, 65.0);
-    WindowSizer.centre(simulatorFrame);
+    WindowSizer.setPercentageOfScreenSize(logicimFrame, 65.0, 65.0);
+    WindowSizer.centre(logicimFrame);
 
-    simulatorFrame.loop();
+    logicimFrame.loop();
   }
 
   private void loop()

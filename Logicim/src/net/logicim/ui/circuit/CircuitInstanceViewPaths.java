@@ -35,9 +35,8 @@ public class CircuitInstanceViewPaths
 
   public void addSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
-    List<CircuitSimulation> circuitSimulations = new ArrayList<>(subcircuitEditor.getCircuitSimulations());
     List<CircuitInstanceView> pathList = new ArrayList<>();
-    recurseFindPaths(subcircuitEditor, pathList, circuitSimulations);
+    recurseFindPaths(subcircuitEditor, pathList);
   }
 
   protected void createSubcircuitSimulationMap()
@@ -93,16 +92,16 @@ public class CircuitInstanceViewPaths
     }
   }
 
-  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, List<CircuitSimulation> circuitSimulations)
+  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path)
   {
     path.add(circuitInstanceView);
-    paths.add(new CircuitInstanceViewPath(path, circuitSimulations));
+    paths.add(new CircuitInstanceViewPath(path));
 
     SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
     List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      recurseFindPaths(subcircuitInstanceView, path, circuitSimulations);
+      recurseFindPaths(subcircuitInstanceView, path);
     }
   }
 

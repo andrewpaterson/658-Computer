@@ -17,7 +17,7 @@ public class CircuitInstanceViewPath
   protected CircuitInstanceViewPath previous;
   protected CircuitInstanceViewPath next;
 
-  public CircuitInstanceViewPath(List<CircuitInstanceView> path, List<CircuitSimulation> circuitSimulations)
+  public CircuitInstanceViewPath(List<CircuitInstanceView> path)
   {
     this.path = new ArrayList<>(path);
     this.circuitSimulations = new LinkedHashMap<>();

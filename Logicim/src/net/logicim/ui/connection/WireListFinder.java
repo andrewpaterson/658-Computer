@@ -25,7 +25,8 @@ public abstract class WireListFinder
     }
 
     List<SplitterViewProcessStackItem> splitterViewStack = new ArrayList<>();
-    splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(circuitInstanceView), inputConnectionView));
+    CircuitInstanceViewPath firstCircuitInstancePath = paths.getFirst(circuitInstanceView);
+    splitterViewStack.add(new SplitterViewProcessStackItem(null, firstCircuitInstancePath, inputConnectionView));
 
     Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
     Set<SubcircuitPinView> processedSubcircuitPinViews = new HashSet<>();
@@ -47,9 +48,9 @@ public abstract class WireListFinder
       }
     }
 
-    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+    for (LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet : connectionNets)
     {
-      connectionNet.process();
+      localMultiSimulationConnectionNet.process();
     }
 
     return createWireList(connectionNets);
@@ -107,7 +108,7 @@ public abstract class WireListFinder
       ComponentViewPortName componentViewPortName = portIndexStack.get(portStackIndex);
       portStackIndex++;
 
-      SplitterView splitterView = (SplitterView) componentViewPortName.componentView;
+      SplitterView splitterView = (SplitterView) componentViewPortName.getComponentView();
       String oppositeSplitterPort = splitterView.getOpposite(componentViewPortName.portName);
 
       if (oppositeSplitterPort == null)
@@ -134,12 +135,10 @@ public abstract class WireListFinder
     for (Map.Entry<ComponentViewPortName, ComponentViewPortNames> entry : totalPortWireMap.entrySet())
     {
       ComponentViewPortName key = entry.getKey();
-      if (key.componentView == splitterView)
+      if (key.isComponent(splitterView) &&
+          key.isPortName(oppositeSplitterPort))
       {
-        if (key.portName.equals(oppositeSplitterPort))
-        {
-          oppositeComponentViewPortNames = entry.getValue();
-        }
+        oppositeComponentViewPortNames = entry.getValue();
       }
     }
     return oppositeComponentViewPortNames;

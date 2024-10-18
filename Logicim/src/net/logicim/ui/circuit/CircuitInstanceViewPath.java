@@ -126,5 +126,24 @@ public class CircuitInstanceViewPath
   {
     return circuitSimulations.get(circuitSimulation);
   }
+
+  public String getDescription()
+  {
+    StringBuilder builder = new StringBuilder();
+    boolean first = true;
+    for (CircuitInstanceView circuitInstanceView : path)
+    {
+      if (first)
+      {
+        first = false;
+      }
+      else
+      {
+        builder.append(" -> ");
+      }
+      builder.append(circuitInstanceView.getDescription());
+    }
+    return builder.toString();
+  }
 }
 

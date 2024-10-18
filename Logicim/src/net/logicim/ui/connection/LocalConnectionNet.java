@@ -46,15 +46,15 @@ public class LocalConnectionNet
       {
         if (connectedView instanceof SubcircuitInstanceView)
         {
-          subcircuitInstanceViews.add(new ComponentConnection<>((SubcircuitInstanceView) connectedView, connectionView));
+          subcircuitInstanceViews.add(new ComponentConnection<>(path, (SubcircuitInstanceView) connectedView, connectionView));
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViews.add(new ComponentConnection<>((SplitterView) connectedView, connectionView));
+          splitterViews.add(new ComponentConnection<>(path, (SplitterView) connectedView, connectionView));
         }
         else if (connectedView instanceof PinView)
         {
-          pinViews.add(new ComponentConnection<>((PinView) connectedView, connectionView));
+          pinViews.add(new ComponentConnection<>(path, (PinView) connectedView, connectionView));
         }
       }
     }

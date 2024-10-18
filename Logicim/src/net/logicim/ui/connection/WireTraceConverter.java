@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
@@ -44,7 +45,7 @@ public class WireTraceConverter
 
   private void createTracesAndConnectPorts()
   {
-    Simulation simulation = startingSubcircuitSimulation.getSimulation();
+    Simulation simulation = circuitSimulation.getSimulation();
 
     List<FullWire> fullWires = wireList.getFullWires();
     for (FullWire fullWire : fullWires)
@@ -58,9 +59,21 @@ public class WireTraceConverter
         List<ComponentViewPortName> connectedPortIndices = localWire.getConnectedPortIndices();
         for (ComponentViewPortName connectedPortIndex : connectedPortIndices)
         {
-          ComponentView<?> componentView = connectedPortIndex.componentView;
-          String portName = connectedPortIndex.portName;
-          Port port = componentView.getPort(startingSubcircuitSimulation, portName);
+          ComponentView<?> componentView = connectedPortIndex.getComponentView();
+          String portName = connectedPortIndex.getPortName();
+          CircuitInstanceViewPath path = connectedPortIndex.getPath();
+
+          SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
+          if (subcircuitSimulation == null)
+          {
+            throw new SimulatorException("Could not get SubcircuitSimulation for Path [%s].", path.getDescription());
+          }
+
+          Port port = componentView.getPort(subcircuitSimulation, portName);
+          if (port == null)
+          {
+            throw new SimulatorException("Could not find Port [%s] on ComponentView [%s] for simulation [%s].", portName, componentView.getDescription(), subcircuitSimulation.getDescription());
+          }
           port.disconnect(simulation);
           port.connect(trace);
         }

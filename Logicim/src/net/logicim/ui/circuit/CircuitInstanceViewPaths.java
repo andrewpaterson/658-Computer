@@ -61,9 +61,9 @@ public class CircuitInstanceViewPaths
 
     for (Map.Entry<SubcircuitSimulation, CircuitInstanceViewPath> entry : subcircuitSimulations.entrySet())
     {
-      SubcircuitSimulation key = entry.getKey();
+      SubcircuitSimulation subcircuitSimulation = entry.getKey();
       CircuitInstanceViewPath path = entry.getValue();
-      path.addSubcircuitSimulation(key);
+      path.addSubcircuitSimulation(subcircuitSimulation);
     }
   }
 

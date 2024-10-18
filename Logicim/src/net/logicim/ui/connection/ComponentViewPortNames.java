@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
@@ -17,9 +18,11 @@ public class ComponentViewPortNames
     this.connectedPortIndices = new ArrayList<>();
   }
 
-  public void addPort(ComponentView<?> componentView, String portName)
+  public void addPort(ComponentView<?> componentView,
+                      String portName,
+                      CircuitInstanceViewPath path)
   {
-    ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName);
+    ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName, path);
     connectedPortIndices.add(componentViewPortName);
   }
 
@@ -33,7 +36,7 @@ public class ComponentViewPortNames
     List<ComponentViewPortName> splitterPortIndices = new ArrayList<>();
     for (ComponentViewPortName componentViewPortName : connectedPortIndices)
     {
-      ComponentView<?> componentView = componentViewPortName.componentView;
+      ComponentView<?> componentView = componentViewPortName.getComponentView();
       boolean isSplitter = componentView instanceof SplitterView;
       if (isSplitter)
       {

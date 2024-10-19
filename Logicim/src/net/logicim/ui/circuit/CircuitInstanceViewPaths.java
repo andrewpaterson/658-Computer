@@ -39,6 +39,20 @@ public class CircuitInstanceViewPaths
     recurseFindPaths(subcircuitEditor, pathList);
   }
 
+  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path)
+  {
+    path.add(circuitInstanceView);
+    paths.add(new CircuitInstanceViewPath(path));
+
+    SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
+    List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      recurseFindPaths(subcircuitInstanceView, path);
+    }
+    path.remove(path.size() - 1);
+  }
+
   protected void createSubcircuitSimulationMap()
   {
     for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
@@ -68,7 +82,8 @@ public class CircuitInstanceViewPaths
 
   protected void createPathLinks()
   {
-    for (CircuitInstanceViewPath circuitInstanceViewPath : subcircuitSimulations.values())
+    Collection<CircuitInstanceViewPath> circuitInstanceViewPaths = subcircuitSimulations.values();
+    for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths)
     {
       CircuitInstanceView secondLast = circuitInstanceViewPath.getSecondLast();
       if (secondLast != null)
@@ -89,19 +104,6 @@ public class CircuitInstanceViewPaths
       {
         previous.setNext(circuitInstanceViewPath);
       }
-    }
-  }
-
-  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path)
-  {
-    path.add(circuitInstanceView);
-    paths.add(new CircuitInstanceViewPath(path));
-
-    SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
-    List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
-    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
-    {
-      recurseFindPaths(subcircuitInstanceView, path);
     }
   }
 

@@ -185,7 +185,7 @@ public class LinkedList<E>
 
   public LinkedListIterator<E> iterator()
   {
-    return new LinkedListIterator<E>(this);
+    return new LinkedListIterator<>(this);
   }
 
   public boolean add(E value)
@@ -250,6 +250,18 @@ public class LinkedList<E>
       count++;
     }
     throw new ArrayIndexOutOfBoundsException(index);
+  }
+
+  public boolean contains(E value)
+  {
+    for (E e : this)
+    {
+      if (e == value)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

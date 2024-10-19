@@ -58,11 +58,7 @@ public class LogicPort
 
   public void remove(PortEvent event)
   {
-    boolean removed = events.remove(event);
-    if (!removed)
-    {
-      throw new SimulatorException("Cannot remove event");
-    }
+    events.remove(event);
   }
 
   public LinkedList<PortEvent> getEvents()

@@ -28,7 +28,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 {
   protected PROPERTIES properties;
 
-  protected SubcircuitView containingSubcircuitView;
   protected Int2D position;
   protected Rotation rotation;
   protected BoundingBox boundingBox;
@@ -58,10 +57,9 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
                     BoundingBox selectionBox,
                     PROPERTIES properties)
   {
-    super();
+    super(containingSubcircuitView);
     this.properties = properties;
 
-    this.containingSubcircuitView = containingSubcircuitView;
     this.position = position.clone();
     this.rotation = rotation;
     this.boundingBox = boundingBox;
@@ -287,11 +285,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     {
       shape.setRelativeRightRotations(relativeRightRotations);
     }
-  }
-
-  public SubcircuitView getContainingSubcircuitView()
-  {
-    return containingSubcircuitView;
   }
 
   public abstract void clampProperties(PROPERTIES newProperties);

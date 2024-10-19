@@ -5,6 +5,7 @@ import net.common.type.Int2D;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +116,21 @@ public class ConnectionViewCache
     {
       removeConnectionView(view, connectionView);
     }
+  }
+
+  public List<ConnectionView> findAll()
+  {
+    List<ConnectionView> result = new ArrayList<>();
+    for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
+    {
+      Map<Integer, ConnectionView> yMap = xEntry.getValue();
+      for (Map.Entry<Integer, ConnectionView> yEntry : yMap.entrySet())
+      {
+        ConnectionView connectionView = yEntry.getValue();
+        result.add(connectionView);
+      }
+    }
+    return result;
   }
 }
 

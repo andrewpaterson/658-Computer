@@ -17,32 +17,44 @@ public class TraceView
     extends View
     implements WireView
 {
-  protected SubcircuitView containingSubcircuitView;
   protected WireViewComp wireView;
 
   protected Line line;
 
-  public TraceView(SubcircuitView subcircuitView, Line line)
+  public TraceView(SubcircuitView containingSubcircuitView, Line line)
   {
-    this(subcircuitView, line.getStart(), line.getEnd(), true);
+    this(containingSubcircuitView,
+         line.getStart(),
+         line.getEnd(),
+         true);
   }
 
-  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections)
+  public TraceView(SubcircuitView subcircuitView,
+                   Int2D start,
+                   Int2D end,
+                   boolean addConnections)
   {
-    this(subcircuitView, start, end, addConnections, nextId++);
+    this(subcircuitView,
+         start,
+         end,
+         addConnections,
+         nextId++);
   }
 
-  public TraceView(SubcircuitView subcircuitView, Int2D start, Int2D end, boolean addConnections, long id)
+  public TraceView(SubcircuitView containingSubcircuitView,
+                   Int2D start,
+                   Int2D end,
+                   boolean addConnections,
+                   long id)
   {
-    super(id);
-    this.containingSubcircuitView = subcircuitView;
+    super(containingSubcircuitView, id);
     this.line = new Line(start, end);
     this.wireView = new WireViewComp();
     if (addConnections)
     {
-      addConnections(subcircuitView, start, end);
+      addConnections(containingSubcircuitView, start, end);
     }
-    subcircuitView.addTraceView(this);
+    containingSubcircuitView.addTraceView(this);
   }
 
   protected void addConnections(SubcircuitView subcircuitView, Int2D start, Int2D end)

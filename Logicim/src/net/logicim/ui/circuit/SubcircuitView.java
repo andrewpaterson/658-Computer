@@ -75,6 +75,16 @@ public class SubcircuitView
     this.simulations = new SubcircuitSimulations();
   }
 
+  public static List<Line> getTraceViewLines(Collection<TraceView> traceViews)
+  {
+    List<Line> newLines = new ArrayList<>();
+    for (TraceView traceView : traceViews)
+    {
+      newLines.add(traceView.getLine());
+    }
+    return newLines;
+  }
+
   public List<View> getAllViews()
   {
     List<View> views = new ArrayList<>();
@@ -342,6 +352,7 @@ public class SubcircuitView
   private void validateConnectionViews()
   {
     StaticViewIterator iterator = staticViewIterator();
+    Set<ConnectionView> viewConnectionViews = new LinkedHashSet<>();
     while (iterator.hasNext())
     {
       StaticView<?> staticView = iterator.next();
@@ -373,6 +384,8 @@ public class SubcircuitView
       }
 
       List<ConnectionView> localConnectionViews = staticView.getConnectionViews();
+      viewConnectionViews.addAll(localConnectionViews);
+
       for (ConnectionView connectionView : localConnectionViews)
       {
         if (connectionView == null)
@@ -397,6 +410,40 @@ public class SubcircuitView
     }
 
     connectionViewCache.validatePositions();
+
+    Set<ConnectionView> cacheConnectionViews = new LinkedHashSet<>(connectionViewCache.findAll());
+    for (ConnectionView cacheConnectionView : cacheConnectionViews)
+    {
+      cacheConnectionView.validateContainingSubcircuitViews(this);
+    }
+
+    for (TraceView traceView : traceViews)
+    {
+      viewConnectionViews.add(traceView.getStartConnection());
+      viewConnectionViews.add(traceView.getEndConnection());
+    }
+
+    List<ConnectionView> viewConnectionViewsList = new ArrayList<>(viewConnectionViews);
+    List<ConnectionView> cacheConnectionViewsList = new ArrayList<>(cacheConnectionViews);
+
+    Collections.sort(viewConnectionViewsList);
+    Collections.sort(cacheConnectionViewsList);
+
+    if (viewConnectionViews.size() != cacheConnectionViews.size())
+    {
+      throw new SimulatorException("Cached connection views size [%s] but View connection views size [%s].", cacheConnectionViewsList.size(), viewConnectionViewsList.size());
+    }
+
+    for (int i = 0; i < viewConnectionViewsList.size(); i++)
+    {
+      ConnectionView viewConnectionView = viewConnectionViewsList.get(i);
+      ConnectionView cacheConnectionView = cacheConnectionViewsList.get(i);
+
+      if (viewConnectionView != cacheConnectionView)
+      {
+        throw new SimulatorException("Cached connection view [%s] at index [%s] does not match view connection view [%s].", cacheConnectionView.toString(), i, viewConnectionView.toString());
+      }
+    }
   }
 
   protected void validateTunnelViews()
@@ -864,16 +911,6 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public static List<Line> getTraceViewLines(Collection<TraceView> traceViews)
-  {
-    List<Line> newLines = new ArrayList<>();
-    for (TraceView traceView : traceViews)
-    {
-      newLines.add(traceView.getLine());
-    }
-    return newLines;
-  }
-
   protected Set<ConnectionView> findNonTraceConnections(Set<TraceView> inputTraceViews)
   {
     Set<ConnectionView> nonTraceConnectionViews = new LinkedHashSet<>();
@@ -1176,15 +1213,15 @@ public class SubcircuitView
     return typeName;
   }
 
+  public void setTypeName(String typeName)
+  {
+    this.typeName = typeName;
+  }
+
   @Override
   public String toString()
   {
     return typeName;
-  }
-
-  public void setTypeName(String typeName)
-  {
-    this.typeName = typeName;
   }
 
   public List<PinView> findAllPins()

@@ -3,6 +3,7 @@ package net.logicim.ui.common.integratedcircuit;
 import net.common.type.Int2D;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
@@ -18,13 +19,16 @@ public abstract class View
   protected long id;
   protected boolean enabled;
 
-  public View()
+  protected SubcircuitView containingSubcircuitView;
+
+  public View(SubcircuitView containingSubcircuitView)
   {
-    this(nextId++);
+    this(containingSubcircuitView, nextId++);
   }
 
-  public View(long id)
+  public View(SubcircuitView containingSubcircuitView, long id)
   {
+    this.containingSubcircuitView = containingSubcircuitView;
     this.id = id;
     if (id >= nextId)
     {
@@ -44,6 +48,11 @@ public abstract class View
     graphics.fillRect(left, top, width, height);
     graphics.setColor(Color.BLACK);
     graphics.drawRect(left, top, width, height);
+  }
+
+  public SubcircuitView getContainingSubcircuitView()
+  {
+    return containingSubcircuitView;
   }
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);

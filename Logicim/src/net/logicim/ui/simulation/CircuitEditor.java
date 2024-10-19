@@ -643,7 +643,8 @@ public class CircuitEditor
 
   public void validate()
   {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditorList.findAll())
+    List<SubcircuitEditor> subcircuitEditors = subcircuitEditorList.findAll();
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       subcircuitEditor.validate();
     }

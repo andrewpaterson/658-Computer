@@ -2,6 +2,7 @@ package net.logicim.ui.common;
 
 import net.common.SimulatorException;
 import net.common.type.Int2D;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 
@@ -22,6 +23,11 @@ public class ConnectionView
 
   public ConnectionView(View parentView, int x, int y)
   {
+    if (parentView == null)
+    {
+      throw new SimulatorException("ParentView must be provided.");
+    }
+
     connectedComponents = new ArrayList<>();
     connectedComponents.add(parentView);
     this.gridPosition = new Int2D(x, y);
@@ -111,7 +117,16 @@ public class ConnectionView
     {
       return Integer.compare(position.x, otherPosition.x);
     }
-    return 0;
+
+    int compare = Integer.compare(position.x, otherPosition.x);
+    if (compare != 0)
+    {
+      return compare;
+    }
+    else
+    {
+      return Integer.compare(position.y, otherPosition.y);
+    }
   }
 
   @Override
@@ -158,6 +173,34 @@ public class ConnectionView
   public boolean isConnectedComponentsEmpty()
   {
     return connectedComponents.isEmpty();
+  }
+
+  public SubcircuitView getContainingSubcircuitView()
+  {
+    View view = getParentView();
+    return view.getContainingSubcircuitView();
+  }
+
+  protected View getParentView()
+  {
+    return connectedComponents.get(0);
+  }
+
+  public void validateContainingSubcircuitViews(SubcircuitView expectedContainingSubcircuitView)
+  {
+    if (connectedComponents.size() == 0)
+    {
+      throw new SimulatorException("Expected at least one connected component.");
+    }
+
+    for (View connectedComponent : connectedComponents)
+    {
+      SubcircuitView containingSubcircuitView = connectedComponent.getContainingSubcircuitView();
+      if (containingSubcircuitView != expectedContainingSubcircuitView)
+      {
+        throw new SimulatorException("Component [%s] SubcircuitView [%s] doe not match expected SubcircuitView [%s].", connectedComponent.getDescription(), containingSubcircuitView.getTypeName(), expectedContainingSubcircuitView.getTypeName());
+      }
+    }
   }
 }
 

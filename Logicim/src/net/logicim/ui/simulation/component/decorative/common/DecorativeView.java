@@ -18,13 +18,13 @@ import java.util.List;
 public abstract class DecorativeView<T extends DecorativeProperties>
     extends StaticView<T>
 {
-  public DecorativeView(SubcircuitView subcircuitView,
+  public DecorativeView(SubcircuitView containingSubcircuitView,
                         Int2D position,
                         Rotation rotation,
                         T properties)
   {
-    super(subcircuitView, position, rotation, properties);
-    subcircuitView.addDecorativeView(this);
+    super(containingSubcircuitView, position, rotation, properties);
+    containingSubcircuitView.addDecorativeView(this);
   }
 
   @Override

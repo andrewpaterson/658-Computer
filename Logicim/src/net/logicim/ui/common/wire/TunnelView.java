@@ -44,12 +44,12 @@ public class TunnelView
   protected String sanitisedName;
   protected Int2D startPosition;
 
-  public TunnelView(SubcircuitView subcircuitView,
+  public TunnelView(SubcircuitView containingSubcircuitView,
                     Int2D position,
                     Rotation rotation,
                     TunnelProperties properties)
   {
-    super(subcircuitView,
+    super(containingSubcircuitView,
           position,
           rotation,
           properties);
@@ -57,7 +57,7 @@ public class TunnelView
     this.startCache = new PointGridCache(new Int2D());
     this.endCache = new PointGridCache(new Int2D());
     this.sanitisedName = createSanitisedName(properties);
-    this.tunnels = subcircuitView.addTunnel(this);
+    this.tunnels = containingSubcircuitView.addTunnel(this);
     this.startPosition = new Int2D(0, 0);
     this.endPosition = createGraphics();
 

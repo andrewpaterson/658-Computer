@@ -26,7 +26,6 @@ import net.logicim.ui.common.TraceOverlap;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.*;
-import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
 import net.logicim.ui.connection.WireList;
 import net.logicim.ui.connection.WireListFinder;
 import net.logicim.ui.connection.WireTraceConverter;
@@ -735,7 +734,8 @@ public class SubcircuitView
       {
         if (!updatedConnectionViews.contains(connectionView))
         {
-          WireList wireList = WireListFinder.findTraceConnections(circuitInstanceView, connectionView, paths);
+          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
+          WireList wireList = wireListFinder.createWireList();
 
           for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
           {
@@ -743,8 +743,7 @@ public class SubcircuitView
             wireTraceConverter.process();
           }
 
-          List<LocalMultiSimulationConnectionNet> connectionNets = wireList.getConnectionNets();
-          List<ConnectionView> connectionNetConnectionViews = WireListFinder.getConnectionViews(connectionNets);
+          List<ConnectionView> connectionNetConnectionViews = wireList.getConnectionViews();
           updatedConnectionViews.addAll(connectionNetConnectionViews);
         }
       }

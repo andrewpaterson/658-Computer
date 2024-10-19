@@ -13,23 +13,31 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitPinView;
 
 import java.util.*;
 
-public abstract class WireListFinder
+public class WireListFinder
 {
-  public static WireList findTraceConnections(CircuitInstanceView circuitInstanceView,
-                                              ConnectionView inputConnectionView,
-                                              CircuitInstanceViewPaths paths)
+  protected CircuitInstanceViewPaths paths;
+  protected List<SplitterViewProcessStackItem> splitterViewStack;
+  protected Set<SubcircuitPinView> processedSubcircuitPinViews;
+  protected Set<ConnectionView> processedSplitterViewConnections;
+
+  public WireListFinder(CircuitInstanceView circuitInstanceView,
+                        ConnectionView inputConnectionView,
+                        CircuitInstanceViewPaths paths)
   {
     if (inputConnectionView == null)
     {
       throw new SimulatorException("Input connection may not be null.");
     }
 
-    List<SplitterViewProcessStackItem> splitterViewStack = new ArrayList<>();
-    CircuitInstanceViewPath firstCircuitInstancePath = paths.getFirst(circuitInstanceView);
-    splitterViewStack.add(new SplitterViewProcessStackItem(null, firstCircuitInstancePath, inputConnectionView));
+    this.paths = paths;
+    this.splitterViewStack = new ArrayList<>();
+    this.splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(circuitInstanceView), inputConnectionView));
+    this.processedSubcircuitPinViews = new LinkedHashSet<>();
+    this.processedSplitterViewConnections = new LinkedHashSet<>();
+  }
 
-    Set<ConnectionView> processedSplitterViewConnections = new HashSet<>();
-    Set<SubcircuitPinView> processedSubcircuitPinViews = new HashSet<>();
+  public WireList createWireList()
+  {
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
 
     while (splitterViewStack.size() > 0)
@@ -38,12 +46,7 @@ public abstract class WireListFinder
       ConnectionView connectionView = splitterViewConnection.connection;
       if (!processedSplitterViewConnections.contains(connectionView))
       {
-        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = processLocalMultiSimulationConnections(splitterViewConnection.path,
-                                                                                                                     connectionView,
-                                                                                                                     splitterViewStack,
-                                                                                                                     processedSplitterViewConnections,
-                                                                                                                     processedSubcircuitPinViews,
-                                                                                                                     paths);
+        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = processLocalMultiSimulationConnections(splitterViewConnection.path, connectionView);
         connectionNets.add(localMultiSimulationConnectionNet);
       }
     }
@@ -56,7 +59,7 @@ public abstract class WireListFinder
     return createWireList(connectionNets);
   }
 
-  private static WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
+  private WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
     Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap = createSplitterPortMap(connectionNets);
 
@@ -78,9 +81,9 @@ public abstract class WireListFinder
     return wireList;
   }
 
-  private static List<FullWire> createFullWires(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap,
-                                                Set<ComponentViewPortNames> processedComponentViewPortNames,
-                                                List<ComponentViewPortNames> componentViewPortNamesList)
+  private List<FullWire> createFullWires(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap,
+                                         Set<ComponentViewPortNames> processedComponentViewPortNames,
+                                         List<ComponentViewPortNames> componentViewPortNamesList)
   {
     List<FullWire> fullWires = new ArrayList<>();
     for (ComponentViewPortNames componentViewPortNames : componentViewPortNamesList)
@@ -94,9 +97,9 @@ public abstract class WireListFinder
     return fullWires;
   }
 
-  private static FullWire createFullWire(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap,
-                                         Set<ComponentViewPortNames> processedComponentViewPortNames,
-                                         ComponentViewPortNames componentViewPortNames)
+  private FullWire createFullWire(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap,
+                                  Set<ComponentViewPortNames> processedComponentViewPortNames,
+                                  ComponentViewPortNames componentViewPortNames)
   {
     List<ComponentViewPortName> portIndexStack = new ArrayList<>();
     FullWire fullWire = new FullWire();
@@ -129,7 +132,7 @@ public abstract class WireListFinder
     return fullWire;
   }
 
-  private static ComponentViewPortNames getOppositePortConnection(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap, SplitterView splitterView, String oppositeSplitterPort)
+  private ComponentViewPortNames getOppositePortConnection(Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap, SplitterView splitterView, String oppositeSplitterPort)
   {
     ComponentViewPortNames oppositeComponentViewPortNames = null;
     for (Map.Entry<ComponentViewPortName, ComponentViewPortNames> entry : totalPortWireMap.entrySet())
@@ -144,7 +147,7 @@ public abstract class WireListFinder
     return oppositeComponentViewPortNames;
   }
 
-  private static Map<ComponentViewPortName, ComponentViewPortNames> createSplitterPortMap(List<LocalMultiSimulationConnectionNet> connectionNets)
+  private Map<ComponentViewPortName, ComponentViewPortNames> createSplitterPortMap(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
     Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap = new HashMap<>();
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
@@ -166,12 +169,8 @@ public abstract class WireListFinder
     return totalPortWireMap;
   }
 
-  private static LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
-                                                                                          ConnectionView inputConnectionView,
-                                                                                          List<SplitterViewProcessStackItem> splitterViewStack,
-                                                                                          Set<ConnectionView> processedSplitterViewConnections,
-                                                                                          Set<SubcircuitPinView> processedSubcircuitPinViews,
-                                                                                          CircuitInstanceViewPaths paths)
+  private LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
+                                                                                   ConnectionView inputConnectionView)
   {
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
 
@@ -181,32 +180,33 @@ public abstract class WireListFinder
     while (localConnectionsToProcess.size() > 0)
     {
       ConnectionViewProcessStackItem connectionViewProcessStackItem = localConnectionsToProcess.remove(0);
-      processLocalConnections(connectionViewProcessStackItem,
-                              localConnectionsToProcess,
-                              localMultiSimulationConnectionNet,
-                              splitterViewStack,
-                              processedSplitterViewConnections,
-                              processedSubcircuitPinViews,
-                              paths);
+      processLocalConnections(connectionViewProcessStackItem, localConnectionsToProcess, localMultiSimulationConnectionNet);
     }
     return localMultiSimulationConnectionNet;
   }
 
-  private static void processLocalConnections(ConnectionViewProcessStackItem connectionViewProcessStackItem,
-                                              List<ConnectionViewProcessStackItem> localConnectionsToProcess,
-                                              LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet,
-                                              List<SplitterViewProcessStackItem> splitterViewStack,
-                                              Set<ConnectionView> processedSplitterViewConnections,
-                                              Set<SubcircuitPinView> processedSubcircuitPinViews,
-                                              CircuitInstanceViewPaths paths)
+  private void processLocalConnections(ConnectionViewProcessStackItem connectionViewProcessStackItem,
+                                       List<ConnectionViewProcessStackItem> localConnectionsToProcess,
+                                       LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet)
   {
     LocalConnectionNet localConnectionNet = new LocalConnectionNet(connectionViewProcessStackItem.circuitInstanceViewPath);
     localMultiSimulationConnectionNet.add(localConnectionNet);
     localConnectionNet.process(connectionViewProcessStackItem.inputConnectionView);
 
-    splitterViewStack.addAll(createSplitterViewComponentConnections(localConnectionNet, processedSplitterViewConnections));
+    List<SplitterViewProcessStackItem> splitterViewComponentConnections = createSplitterViewStackItemsForLocalConnectionNet(localConnectionNet);
+    splitterViewStack.addAll(splitterViewComponentConnections);
 
-    for (ComponentConnection<SubcircuitInstanceView> subcircuitInstanceViewConnection : localConnectionNet.subcircuitInstanceViews)
+    List<ConnectionViewProcessStackItem> subcircuitInstanceViewItemsToProcess = createConnectionViewStackItemsForSubcircuitInstanceViews(localConnectionNet.subcircuitInstanceViews, connectionViewProcessStackItem.circuitInstanceViewPath);
+    localConnectionsToProcess.addAll(subcircuitInstanceViewItemsToProcess);
+
+    List<ConnectionViewProcessStackItem> pinViewItemsToProcess = createConnectionViewStackItemsForPinVies(connectionViewProcessStackItem, localConnectionNet.pinViews);
+    localConnectionsToProcess.addAll(pinViewItemsToProcess);
+  }
+
+  private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForSubcircuitInstanceViews(List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews, CircuitInstanceViewPath circuitInstanceViewPath)
+  {
+    List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
+    for (ComponentConnection<SubcircuitInstanceView> subcircuitInstanceViewConnection : subcircuitInstanceViews)
     {
       SubcircuitInstanceView subcircuitInstanceView = subcircuitInstanceViewConnection.component;
 
@@ -221,11 +221,16 @@ public abstract class WireListFinder
 
       ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, subcircuitInstanceViewConnection.connection);
 
-      CircuitInstanceViewPath newPath = paths.getPath(connectionViewProcessStackItem.circuitInstanceViewPath, subcircuitInstanceView);
+      CircuitInstanceViewPath newPath = paths.getPath(circuitInstanceViewPath, subcircuitInstanceView);
       localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, pinConnection));
     }
+    return localConnectionsToProcess;
+  }
 
-    for (ComponentConnection<PinView> pinViewConnection : localConnectionNet.pinViews)
+  private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForPinVies(ConnectionViewProcessStackItem connectionViewProcessStackItem, List<ComponentConnection<PinView>> pinViews)
+  {
+    List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
+    for (ComponentConnection<PinView> pinViewConnection : pinViews)
     {
       PinView pinView = pinViewConnection.component;
       List<SubcircuitPinView> subcircuitPinViews = pinView.getSubcircuitPinViews();
@@ -243,9 +248,10 @@ public abstract class WireListFinder
         }
       }
     }
+    return localConnectionsToProcess;
   }
 
-  private static ConnectionView getPinConnectionView(SubcircuitInstanceView subcircuitInstanceView, ConnectionView connectionView)
+  private ConnectionView getPinConnectionView(SubcircuitInstanceView subcircuitInstanceView, ConnectionView connectionView)
   {
     SubcircuitPinView subcircuitPinView = subcircuitInstanceView.getSubcircuitPinView(connectionView);
     PinView pinView = subcircuitPinView.getPinView();
@@ -253,28 +259,24 @@ public abstract class WireListFinder
     return portView.getConnection();
   }
 
-  private static List<SplitterViewProcessStackItem> createSplitterViewComponentConnections(LocalConnectionNet connectionNet,
-                                                                                           Set<ConnectionView> processedSplitterViewConnections)
+  private List<SplitterViewProcessStackItem> createSplitterViewStackItemsForLocalConnectionNet(LocalConnectionNet connectionNet)
   {
     List<SplitterViewProcessStackItem> splitterComponentsConnections = new ArrayList<>();
     List<ComponentConnection<SplitterView>> splitterViews = connectionNet.getSplitterViews();
 
-    updatedProcessedSplitterViewConnections(processedSplitterViewConnections, splitterViews);
+    updatedProcessedSplitterViewConnections(splitterViews);
 
     for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
-      List<SplitterViewProcessStackItem> splitterViewConnectionList = createSplitterViewConnections(processedSplitterViewConnections,
-                                                                                                    splitterViewConnection.component,
-                                                                                                    connectionNet.path);
+      List<SplitterViewProcessStackItem> splitterViewConnectionList = createSplitterViewConnections(splitterViewConnection.component, connectionNet.path);
       splitterComponentsConnections.addAll(splitterViewConnectionList);
     }
 
     return splitterComponentsConnections;
   }
 
-  private static List<SplitterViewProcessStackItem> createSplitterViewConnections(Set<ConnectionView> processedSplitterViewConnections,
-                                                                                  SplitterView splitterView,
-                                                                                  CircuitInstanceViewPath path)
+  private List<SplitterViewProcessStackItem> createSplitterViewConnections(SplitterView splitterView,
+                                                                           CircuitInstanceViewPath path)
   {
     List<SplitterViewProcessStackItem> splitterComponentsConnections = new ArrayList<>();
 
@@ -284,41 +286,18 @@ public abstract class WireListFinder
       ConnectionView portConnectionView = portView.getConnection();
       if (!processedSplitterViewConnections.contains(portConnectionView))
       {
-        splitterComponentsConnections.add(new SplitterViewProcessStackItem(splitterView,
-                                                                           path,
-                                                                           portConnectionView));
+        splitterComponentsConnections.add(new SplitterViewProcessStackItem(splitterView, path, portConnectionView));
       }
     }
     return splitterComponentsConnections;
   }
 
-  private static void updatedProcessedSplitterViewConnections(Set<ConnectionView> processedSplitterViewConnections,
-                                                              List<ComponentConnection<SplitterView>> splitterViews)
+  private void updatedProcessedSplitterViewConnections(List<ComponentConnection<SplitterView>> splitterViews)
   {
     for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
       processedSplitterViewConnections.add(splitterViewConnection.connection);
     }
-  }
-
-  public static List<ConnectionView> getConnectionViews(List<LocalMultiSimulationConnectionNet> connectionNets)
-  {
-    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
-    {
-      Map<CircuitInstanceViewPath, Set<ConnectionView>> iDontKnowWhatImDoing = connectionNet.getConnectionViews();
-
-      if (iDontKnowWhatImDoing.size() > 1)
-      {
-        int xxx = 0;
-      }
-
-      for (Set<ConnectionView> value : iDontKnowWhatImDoing.values())
-      {
-        connectionViews.addAll(value);
-      }
-    }
-    return new ArrayList<>(connectionViews);
   }
 }
 

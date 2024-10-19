@@ -1,8 +1,9 @@
 package net.logicim.ui.connection;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.common.ConnectionView;
+
+import java.util.*;
 
 public class WireList
 {
@@ -42,6 +43,26 @@ public class WireList
   public List<LocalMultiSimulationConnectionNet> getConnectionNets()
   {
     return connectionNets;
+  }
+
+  public List<ConnectionView> getConnectionViews()
+  {
+    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
+    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+    {
+      Map<CircuitInstanceViewPath, Set<ConnectionView>> iDontKnowWhatImDoing = connectionNet.getConnectionViews();
+
+      if (iDontKnowWhatImDoing.size() > 1)
+      {
+        int xxx = 0;
+      }
+
+      for (Set<ConnectionView> value : iDontKnowWhatImDoing.values())
+      {
+        connectionViews.addAll(value);
+      }
+    }
+    return new ArrayList<>(connectionViews);
   }
 }
 

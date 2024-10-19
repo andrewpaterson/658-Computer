@@ -229,6 +229,8 @@ public class WireListFinder
 
   private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForPinVies(ConnectionViewProcessStackItem connectionViewProcessStackItem, List<ComponentConnection<PinView>> pinViews)
   {
+    CircuitInstanceViewPath path = connectionViewProcessStackItem.circuitInstanceViewPath;
+
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     for (ComponentConnection<PinView> pinViewConnection : pinViews)
     {
@@ -236,15 +238,18 @@ public class WireListFinder
       List<SubcircuitPinView> subcircuitPinViews = pinView.getSubcircuitPinViews();
       for (SubcircuitPinView subcircuitPinView : subcircuitPinViews)
       {
-        //I'm not sure this check is good enough for partial wires and splitter views.
-        if (!processedSubcircuitPinViews.contains(subcircuitPinView))
+        CircuitInstanceView pathLast = path.getLast();
+        if (subcircuitPinView.getSubcircuitInstanceView() == pathLast)
         {
-          processedSubcircuitPinViews.add(subcircuitPinView);
+          //I'm not sure this check is good enough for partial wires and splitter views.
+          if (!processedSubcircuitPinViews.contains(subcircuitPinView))
+          {
+            processedSubcircuitPinViews.add(subcircuitPinView);
 
-          SubcircuitInstanceView subcircuitInstanceView = subcircuitPinView.getSubcircuitInstanceView();
-          ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
-          CircuitInstanceViewPath newPath = paths.getPathExceptLast(connectionViewProcessStackItem.circuitInstanceViewPath, subcircuitInstanceView);
-          localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, subcircuitInstanceConnection));
+            ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
+            CircuitInstanceViewPath newPath = paths.getPathExceptLast(path);
+            localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, subcircuitInstanceConnection));
+          }
         }
       }
     }

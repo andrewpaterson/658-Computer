@@ -130,19 +130,10 @@ public class CircuitInstanceViewPaths
     return getPath(newPath);
   }
 
-  public CircuitInstanceViewPath getPathExceptLast(CircuitInstanceViewPath circuitInstanceViewPath, SubcircuitInstanceView expectedFinalPathElement)
+  public CircuitInstanceViewPath getPathExceptLast(CircuitInstanceViewPath circuitInstanceViewPath)
   {
     List<CircuitInstanceView> newPath = new ArrayList<>(circuitInstanceViewPath.path);
     newPath.remove(newPath.size() - 1);
-
-    CircuitInstanceView actualFinalPathElement = newPath.get(newPath.size() - 1);
-    if (actualFinalPathElement != expectedFinalPathElement)
-    {
-      throw new SimulatorException("Expected final path element [%s] was not equal to final path element [%s].",
-                                   expectedFinalPathElement.getDescription(),
-                                   actualFinalPathElement.getDescription());
-    }
-
     return getPath(newPath);
   }
 

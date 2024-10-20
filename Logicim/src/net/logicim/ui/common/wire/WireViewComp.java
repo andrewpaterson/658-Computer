@@ -50,7 +50,8 @@ public class WireViewComp
 
   public boolean hasConnections()
   {
-    return getStartConnection() != null && getEndConnection() != null;
+    return getStartConnection() != null &&
+           getEndConnection() != null;
   }
 
   public List<ConnectionView> getConnections()
@@ -157,7 +158,7 @@ public class WireViewComp
     simulationTraces.clear();
   }
 
-  public void disconnect(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
     simulationTraces.remove(subcircuitSimulation);
   }

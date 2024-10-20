@@ -426,16 +426,16 @@ public class SubcircuitInstanceView
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    SubcircuitInstance removed = simulationSubcircuitInstances.get(subcircuitSimulation);
-    if (removed == null)
+    SubcircuitInstance removedSubcircuitInstance = simulationSubcircuitInstances.get(subcircuitSimulation);
+    if (removedSubcircuitInstance == null)
     {
       throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
-    SubcircuitInstanceSimulation subcircuitInstanceSimulation = removed.getSubcircuitInstanceSimulation();
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = removedSubcircuitInstance.getSubcircuitInstanceSimulation();
     instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
 
     Circuit circuit = subcircuitSimulation.getCircuit();
-    circuit.remove(removed);
+    circuit.remove(removedSubcircuitInstance);
     simulationSubcircuitInstances.remove(subcircuitInstanceSimulation);
   }
 

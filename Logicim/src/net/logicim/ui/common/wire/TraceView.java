@@ -335,9 +335,9 @@ public class TraceView
   }
 
   @Override
-  public void disconnect(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.disconnect(subcircuitSimulation);
+    wireView.destroyComponent(subcircuitSimulation);
   }
 
   public WireViewComp getWireViewComp()

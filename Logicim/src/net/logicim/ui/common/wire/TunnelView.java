@@ -240,19 +240,13 @@ public class TunnelView
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    wireView.disconnect(subcircuitSimulation);
+    wireView.destroyComponent(subcircuitSimulation);
   }
 
   @Override
   public void destroyAllComponents()
   {
     wireView.destroyAllComponents();
-  }
-
-  @Override
-  public void disconnect(SubcircuitSimulation subcircuitSimulation)
-  {
-    wireView.disconnect(subcircuitSimulation);
   }
 
   @Override
@@ -282,7 +276,7 @@ public class TunnelView
   }
 
   @Override
-  public void disconnectViewAndDestroyAllComponents()
+  public void disconnectViewAndDestroyComponents()
   {
     wireView.disconnectViewAndDestroyComponents();
   }

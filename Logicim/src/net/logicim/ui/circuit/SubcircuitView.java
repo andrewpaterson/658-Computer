@@ -145,17 +145,17 @@ public class SubcircuitView
   {
     if (staticView == null)
     {
-      throw new SimulatorException("Cannot disconnect [null] view.");
+      throw new SimulatorException("SubcircuitView [%s] cannot disconnect [null] view.", getTypeName());
     }
 
     List<ConnectionView> connectionViews = staticView.getConnectionViews();
     if (connectionViews == null)
     {
-      throw new SimulatorException("Cannot disconnect %s with [null] connections.", staticView.toIdentifierString());
+      throw new SimulatorException("SubcircuitView [%s] cannot disconnect %s with [null] connections.", getTypeName(), staticView.toIdentifierString());
     }
 
     connectionViewCache.removeAll(staticView, connectionViews);
-    staticView.disconnectViewAndDestroyAllComponents();
+    staticView.disconnectViewAndDestroyComponents();
 
     return connectionViews;
   }
@@ -174,7 +174,7 @@ public class SubcircuitView
     {
       if (componentView == null)
       {
-        throw new SimulatorException("Cannot delete a [null] view.");
+        throw new SimulatorException("SubcircuitView [%s] cannot delete a [null] view.", getTypeName());
       }
 
       List<ConnectionView> disconnectedConnectionViews = disconnectStaticView(componentView);
@@ -182,7 +182,7 @@ public class SubcircuitView
       {
         if (connectionView == null)
         {
-          throw new SimulatorException("Disconnected connection may not be null from component [%s].", componentView.toIdentifierString());
+          throw new SimulatorException("SubcircuitView [%s] disconnected Connection View may not be [null] from component [%s].", getTypeName(), componentView.toIdentifierString());
         }
       }
 
@@ -418,20 +418,23 @@ public class SubcircuitView
 
     for (TraceView traceView : traceViews)
     {
-      ConnectionView startConnection = traceView.getStartConnection();
-      ConnectionView endConnection = traceView.getEndConnection();
-
-      if (startConnection == null)
+      if (traceView.isEnabled())
       {
-        throw new SimulatorException("Start Connection on [%s] cannot be null.", traceView.toIdentifierString());
-      }
-      if (endConnection == null)
-      {
-        throw new SimulatorException("End Connection on [%s] cannot be null.", traceView.toIdentifierString());
-      }
+        ConnectionView startConnection = traceView.getStartConnection();
+        ConnectionView endConnection = traceView.getEndConnection();
 
-      viewConnectionViews.add(startConnection);
-      viewConnectionViews.add(endConnection);
+        if (startConnection == null)
+        {
+          throw new SimulatorException("Start Connection on [%s] cannot be null.", traceView.toIdentifierString());
+        }
+        if (endConnection == null)
+        {
+          throw new SimulatorException("End Connection on [%s] cannot be null.", traceView.toIdentifierString());
+        }
+
+        viewConnectionViews.add(startConnection);
+        viewConnectionViews.add(endConnection);
+      }
     }
 
     List<ConnectionView> viewConnectionViewsList = new ArrayList<>(viewConnectionViews);
@@ -442,7 +445,7 @@ public class SubcircuitView
 
     if (viewConnectionViews.size() != cacheConnectionViews.size())
     {
-      throw new SimulatorException("Cached connection views size [%s] but View connection views size [%s].", cacheConnectionViewsList.size(), viewConnectionViewsList.size());
+      throw new SimulatorException("SubcircuitView [%s] has cached connection views size [%s] but View connection views size [%s].", getTypeName(), cacheConnectionViewsList.size(), viewConnectionViewsList.size());
     }
 
     for (int i = 0; i < viewConnectionViewsList.size(); i++)
@@ -452,7 +455,7 @@ public class SubcircuitView
 
       if (viewConnectionView != cacheConnectionView)
       {
-        throw new SimulatorException("Cached connection view [%s] at index [%s] does not match view connection view [%s].", cacheConnectionView.toString(), i, viewConnectionView.toString());
+        throw new SimulatorException("SubcircuitView [%s] has cached connection view [%s] at index [%s] does not match view connection view [%s].", getTypeName(), cacheConnectionView.toString(), i, viewConnectionView.toString());
       }
     }
   }
@@ -467,7 +470,7 @@ public class SubcircuitView
         String sanitisedName = name.trim().toLowerCase();
         if (!tunnelView.getSanitisedName().equals(sanitisedName))
         {
-          throw new SimulatorException("Tunnel view sanitised name is [%s] but should be [%s].", tunnelView.getSanitisedName(), sanitisedName);
+          throw new SimulatorException("SubcircuitView [%s] Tunnel view sanitised name is [%s] but should be [%s].", getTypeName(), tunnelView.getSanitisedName(), sanitisedName);
         }
 
         Set<TunnelView> tunnelViews = tunnelViewsMap.get(sanitisedName);
@@ -475,11 +478,11 @@ public class SubcircuitView
         {
           if (tunnelViews == null)
           {
-            throw new SimulatorException("TunnelViewsMap did not contain a map for name [%s]", tunnelView.getName());
+            throw new SimulatorException("SubcircuitView [%s] TunnelViewsMap did not contain a map for name [%s]", getTypeName(), tunnelView.getName());
           }
           if (!tunnelViews.contains(tunnelView))
           {
-            throw new SimulatorException("TunnelViewsMap did not contain tunnel view [%s].", tunnelView.getName());
+            throw new SimulatorException("SubcircuitView [%s] TunnelViewsMap did not contain tunnel view [%s].", getTypeName(), tunnelView.getName());
           }
         }
       }
@@ -492,7 +495,7 @@ public class SubcircuitView
       {
         if (!this.tunnelViews.contains(tunnelView))
         {
-          throw new SimulatorException("TunnelViews did not contain tunnel view [%s].", tunnelView.getName());
+          throw new SimulatorException("SubcircuitView [%s] TunnelViews did not contain tunnel view [%s].", getTypeName(), tunnelView.getName());
         }
       }
     }
@@ -552,16 +555,16 @@ public class SubcircuitView
           }
           else if (view == null)
           {
-            throw new SimulatorException("TraceView [" + traceView.getDescription() + "] does not include trace has null connection.");
+            throw new SimulatorException("SubcircuitView [%s] with TraceView [" + traceView.getDescription() + "] does not include trace has [null] connection.", getTypeName());
           }
           else
           {
-            throw new SimulatorException(view.getDescription() + " referenced by TraceView [" + traceView.getDescription() + "] has not been included in validateConsistency.");
+            throw new SimulatorException("SubcircuitView [%s] with %s referenced by TraceView [%s] has not been included in validateConsistency.", getTypeName(), view.getDescription(), traceView.getDescription());
           }
 
           if (!contained)
           {
-            throw new SimulatorException(view.getDescription() + " referenced by TraceView [" + traceView.getDescription() + "] does not include trace.");
+            throw new SimulatorException("SubcircuitView [%s] with %s referenced by TraceView [%s] does not include trace.", getTypeName(), view.getDescription(), traceView.getDescription());
           }
         }
       }
@@ -640,21 +643,26 @@ public class SubcircuitView
       {
         if (!traceViews.remove(traceView))
         {
-          throw new SimulatorException("Cannot remove trace not in circuit editor.");
+          throw new SimulatorException("SubcircuitView [%s] cannot remove trace not in trace views.", getTypeName());
         }
       }
     }
     else
     {
-      throw new SimulatorException("Cannot remove trace view with connections.");
+      throw new SimulatorException("SubcircuitView [%s] cannot remove trace view with connections.", getTypeName());
     }
   }
 
-  public void addTraceView(TraceView view)
+  public void addTraceView(TraceView traceView)
   {
+    if (!traceView.hasConnections())
+    {
+      throw new SimulatorException("SubcircuitView [%s] cannot add trace [%s] without connections.", getTypeName(), traceView.toIdentifierString());
+    }
+
     synchronized (this)
     {
-      traceViews.add(view);
+      traceViews.add(traceView);
     }
   }
 
@@ -730,7 +738,7 @@ public class SubcircuitView
     {
       if (connectionView == null)
       {
-        throw new SimulatorException("Connection View may not be null.");
+        throw new SimulatorException("SubcircuitView [%s] Connection View may not be [null].", getTypeName());
       }
     }
   }
@@ -1338,7 +1346,7 @@ public class SubcircuitView
 
     for (TraceView traceView : traceViews)
     {
-      traceView.disconnectViewAndDestroyComponents();
+      traceView.destroyComponent(subcircuitInstanceSimulation);
     }
 
     for (StaticView<?> staticView : staticViews)
@@ -1416,17 +1424,17 @@ public class SubcircuitView
     {
       if ((subcircuitTopSimulations.isEmpty()))
       {
-        throw new SimulatorException("Expected at least one subcircuit top simulation.");
+        throw new SimulatorException("SubcircuitView [%s] expected at least one subcircuit top simulation.", getTypeName());
       }
 
       if (orderedTopDownCircuitInstanceViews.size() == 0)
       {
-        throw new SimulatorException("Expected at least one circuit instance view.");
+        throw new SimulatorException("SubcircuitView [%s] expected at least one circuit instance view.", getTypeName());
       }
       CircuitInstanceView circuitInstanceView = orderedTopDownCircuitInstanceViews.get(0);
       if (circuitInstanceView.getCircuitSubcircuitView() != this)
       {
-        throw new SimulatorException("First circuit instance view");
+        throw new SimulatorException("SubcircuitView [%s] does not match first circuit instance view [%s].", getTypeName(), circuitInstanceView.getCircuitSubcircuitView().getTypeName());
       }
 
       simulations.validate(orderedTopDownCircuitInstanceViews);
@@ -1435,7 +1443,7 @@ public class SubcircuitView
     {
       if (!subcircuitTopSimulations.isEmpty())
       {
-        throw new SimulatorException("Expected no subcircuit top simulations.");
+        throw new SimulatorException("SubcircuitView [%s] expected no subcircuit top simulations.", getTypeName());
       }
     }
   }

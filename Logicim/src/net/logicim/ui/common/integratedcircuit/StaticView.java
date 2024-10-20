@@ -297,7 +297,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract void disconnectViewAndDestroyAllComponents();
+  public abstract void disconnectViewAndDestroyComponents();
 
   public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);
 

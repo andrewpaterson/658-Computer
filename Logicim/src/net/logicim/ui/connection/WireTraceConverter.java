@@ -124,7 +124,7 @@ public class WireTraceConverter
           WireView wireView = wireConnection.getWireView();
 
           SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
-          wireView.disconnect(subcircuitSimulation);
+          wireView.destroyComponent(subcircuitSimulation);
         }
       }
     }
@@ -139,7 +139,7 @@ public class WireTraceConverter
         {
           WireView wireView = connectedWire.wireView;
           SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
-          wireView.disconnect(subcircuitSimulation);
+          wireView.destroyComponent(subcircuitSimulation);
         }
       }
     }

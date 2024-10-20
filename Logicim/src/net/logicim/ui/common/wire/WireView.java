@@ -24,7 +24,7 @@ public interface WireView
 
   void destroyAllComponents();
 
-  void disconnect(SubcircuitSimulation subcircuitSimulation);
+  void destroyComponent(SubcircuitSimulation subcircuitSimulation);
 
   String getDescription();
 

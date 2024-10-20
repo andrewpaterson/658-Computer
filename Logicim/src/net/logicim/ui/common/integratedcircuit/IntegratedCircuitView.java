@@ -69,14 +69,14 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    IC removed = simulationIntegratedCircuits.get(subcircuitSimulation);
-    if (removed == null)
+    IC removedIntegratedCircuit = simulationIntegratedCircuits.get(subcircuitSimulation);
+    if (removedIntegratedCircuit == null)
     {
       throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
     destroyPortViewComponents(subcircuitSimulation);
     Circuit circuit = subcircuitSimulation.getCircuit();
-    circuit.remove(removed);
+    circuit.remove(removedIntegratedCircuit);
     simulationIntegratedCircuits.remove(subcircuitSimulation);
   }
 

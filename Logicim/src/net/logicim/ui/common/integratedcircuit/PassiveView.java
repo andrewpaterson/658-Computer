@@ -49,14 +49,14 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
-    PASSIVE removed = simulationPassives.get(subcircuitSimulation);
-    if (removed == null)
+    PASSIVE removedPassive = simulationPassives.get(subcircuitSimulation);
+    if (removedPassive == null)
     {
       throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
     }
     destroyPortViewComponents(subcircuitSimulation);
     Circuit circuit = subcircuitSimulation.getCircuit();
-    circuit.remove(removed);
+    circuit.remove(removedPassive);
     simulationPassives.remove(subcircuitSimulation);
   }
 

@@ -1,6 +1,5 @@
 package net.logicim.domain.common.wire;
 
-import net.common.SimulatorException;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
@@ -50,6 +49,11 @@ public class Trace
     {
       return 0;
     }
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1L;
   }
 
   public float getVoltage(long time)
@@ -204,11 +208,6 @@ public class Trace
   public long getId()
   {
     return id;
-  }
-
-  public static void resetNextId()
-  {
-    nextId = 1L;
   }
 }
 

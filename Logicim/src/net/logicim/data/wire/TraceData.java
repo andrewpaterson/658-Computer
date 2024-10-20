@@ -22,6 +22,7 @@ public class TraceData
 
   public TraceData()
   {
+    super();
   }
 
   @Override

@@ -355,7 +355,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   }
 
   @Override
-  public void disconnectViewAndDestroyAllComponents()
+  public void disconnectViewAndDestroyComponents()
   {
     for (PortView portView : portViews)
     {

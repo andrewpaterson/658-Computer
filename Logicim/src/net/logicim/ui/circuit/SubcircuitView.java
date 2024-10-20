@@ -389,18 +389,18 @@ public class SubcircuitView
       {
         if (connectionView == null)
         {
-          throw new SimulatorException("Connection on %s cannot be null.", staticView.toIdentifierString());
+          throw new SimulatorException("Connection on [%s] cannot be null.", staticView.toIdentifierString());
         }
         Int2D connectionPosition = connectionView.getGridPosition();
         if (connectionPosition == null)
         {
-          throw new SimulatorException("Position on connection on %s cannot be null.", staticView.toIdentifierString());
+          throw new SimulatorException("Position on connection on [%s] cannot be null.", staticView.toIdentifierString());
         }
 
         ConnectionView cacheConnectionView = connectionViewCache.getConnectionView(connectionPosition);
         if (cacheConnectionView != connectionView)
         {
-          throw new SimulatorException("%s connection (%s) must be equal to cache connection (%s).",
+          throw new SimulatorException("[%s] connection (%s) must be equal to cache connection (%s).",
                                        staticView.toIdentifierString(),
                                        Int2D.toString(connectionPosition),
                                        ConnectionView.toPositionString(cacheConnectionView));
@@ -418,8 +418,20 @@ public class SubcircuitView
 
     for (TraceView traceView : traceViews)
     {
-      viewConnectionViews.add(traceView.getStartConnection());
-      viewConnectionViews.add(traceView.getEndConnection());
+      ConnectionView startConnection = traceView.getStartConnection();
+      ConnectionView endConnection = traceView.getEndConnection();
+
+      if (startConnection == null)
+      {
+        throw new SimulatorException("Start Connection on [%s] cannot be null.", traceView.toIdentifierString());
+      }
+      if (endConnection == null)
+      {
+        throw new SimulatorException("End Connection on [%s] cannot be null.", traceView.toIdentifierString());
+      }
+
+      viewConnectionViews.add(startConnection);
+      viewConnectionViews.add(endConnection);
     }
 
     List<ConnectionView> viewConnectionViewsList = new ArrayList<>(viewConnectionViews);

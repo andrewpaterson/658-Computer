@@ -25,7 +25,7 @@ public class ConnectionView
   {
     if (parentView == null)
     {
-      throw new SimulatorException("ParentView must be provided.");
+      throw new SimulatorException("ParentView cannot be null.");
     }
 
     connectedComponents = new ArrayList<>();

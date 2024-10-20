@@ -61,6 +61,7 @@ import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 import net.logicim.ui.simulation.subcircuit.SubcircuitTopEditorSimulation;
 import net.logicim.ui.subcircuit.SubcircuitEditorList;
 import net.logicim.ui.subcircuit.SubcircuitListChangedListener;
+import net.logicim.ui.subcircuit.SubcircuitEditorListHolder;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -73,7 +74,8 @@ import static java.awt.event.MouseEvent.BUTTON1;
 import static net.logicim.ui.simulation.subcircuit.SubcircuitEditor.getTopSimulationNameName;
 
 public class Logicim
-    implements PanelSize
+    implements PanelSize,
+               SubcircuitEditorListHolder
 {
   public static final String MAIN_SUBCIRCUIT_TYPE_NAME = "Main";
 
@@ -1443,11 +1445,6 @@ public class Logicim
     }
   }
 
-  public List<SubcircuitEditor> getSubcircuitEditors()
-  {
-    return circuitEditor.getSubcircuitEditors();
-  }
-
   public List<String> getAllowedSubcircuitTypeNamesForSubcircuitInstance()
   {
     SubcircuitEditor currentSubcircuitEditor = getCurrentSubcircuitEditor();
@@ -1617,6 +1614,11 @@ public class Logicim
   public SubcircuitEditorList getSubcircuitEditorList()
   {
     return circuitEditor.getSubcircuitEditorList();
+  }
+
+  public List<SubcircuitEditor> getSubcircuitEditors()
+  {
+    return circuitEditor.getSubcircuitEditors();
   }
 
   public void notifySubcircuitListChanged()

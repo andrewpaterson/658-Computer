@@ -84,7 +84,6 @@ public class LogicimFrame
     ListenerHelper.addKeyAndContainerListenerRecursively(this, this, this);
 
     splitPane.requestFocus();
-    logicim.notifySubcircuitListChanged();
   }
 
   private JScrollPane createScrollPane(SubcircuitListPanel listPanel)

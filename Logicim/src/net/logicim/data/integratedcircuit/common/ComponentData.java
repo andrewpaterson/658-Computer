@@ -53,7 +53,7 @@ public abstract class ComponentData<T extends ComponentView<?>>
   public T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     T componentView = createComponentView(subcircuitEditor);
-    componentView.getOrCreateConnectionViews(subcircuitEditor.getCircuitSubcircuitView());
+    componentView.getOrCreateConnectionViews(subcircuitEditor.getInstanceSubcircuitView());
     return componentView;
   }
 
@@ -79,8 +79,11 @@ public abstract class ComponentData<T extends ComponentView<?>>
         if (j < multiPortSize)
         {
           PortData portData = multiPortData.ports.get(j);
-          Trace trace = circuitLoaders.getTraceLoader().create(portData.traceId);
-          port.connect(trace);
+          if (portData.traceId != 0)
+          {
+            Trace trace = circuitLoaders.getTraceLoader().create(portData.traceId);
+            port.connect(trace);
+          }
 
           loadPort(subcircuitSimulation, portData, port);
         }

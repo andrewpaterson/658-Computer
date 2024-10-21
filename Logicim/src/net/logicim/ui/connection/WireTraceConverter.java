@@ -147,7 +147,7 @@ public class WireTraceConverter
 
   private SubcircuitSimulation getSubcircuitSimulation(CircuitInstanceViewPath path)
   {
-    return paths.getSubcircuitSimulation(circuitSimulation, path);
+    return path.getSubcircuitSimulation(circuitSimulation);
   }
 
   private void addTrace(LocalMultiSimulationConnectionNet multiSimulationConnectionNet, Trace trace)

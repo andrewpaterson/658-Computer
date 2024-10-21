@@ -160,14 +160,5 @@ public class CircuitInstanceViewPaths
     return subcircuitSimulations;
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation, CircuitInstanceViewPath path)
-  {
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
-    if (subcircuitSimulation == null)
-    {
-      throw new SimulatorException("Path does not contain CircuitSimulation.");
-    }
-    return subcircuitSimulation;
-  }
 }
 

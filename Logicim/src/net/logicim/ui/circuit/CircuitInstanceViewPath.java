@@ -89,6 +89,11 @@ public class CircuitInstanceViewPath
     }
   }
 
+  public CircuitInstanceViewPath getPrevious()
+  {
+    return previous;
+  }
+
   public void setPrevious(CircuitInstanceViewPath path)
   {
     if ((previous == null) || (previous == path))
@@ -97,13 +102,8 @@ public class CircuitInstanceViewPath
     }
     else
     {
-      throw new SimulatorException("Previous path already set.");
+      throw new SimulatorException("Previous already set on Path [%s].", getDescription());
     }
-  }
-
-  public CircuitInstanceViewPath getPrevious()
-  {
-    return previous;
   }
 
   public void setNext(CircuitInstanceViewPath next)
@@ -117,14 +117,19 @@ public class CircuitInstanceViewPath
     SubcircuitSimulation existing = circuitSimulations.get(circuitSimulation);
     if (existing != null)
     {
-      throw new SimulatorException("SubcircuitSimulation already set for circuit CircuitSimulation.");
+      throw new SimulatorException("SubcircuitSimulation already set for circuit CircuitSimulation [%s] on Path [%s].", circuitSimulation.getDescription(), getDescription());
     }
     circuitSimulations.put(circuitSimulation, subcircuitSimulation);
   }
 
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
-    return circuitSimulations.get(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = circuitSimulations.get(circuitSimulation);
+    if (subcircuitSimulation == null)
+    {
+      throw new SimulatorException("Path [%s] does not contain CircuitSimulation [%s].", getDescription(), circuitSimulation.getDescription());
+    }
+    return subcircuitSimulation;
   }
 
   public String getDescription()

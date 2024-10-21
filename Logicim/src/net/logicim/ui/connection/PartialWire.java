@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 
 import java.util.List;
@@ -12,6 +13,18 @@ public class PartialWire
   public PartialWire(Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires)
   {
     this.connectedWires = connectedWires;
+  }
+
+  public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    for (CircuitInstanceViewPath path : connectedWires.keySet())
+    {
+      if (path.containsCircuitSimulation(circuitSimulation))
+      {
+        return true;
+      }
+    }
+    return false;
   }
 }
 

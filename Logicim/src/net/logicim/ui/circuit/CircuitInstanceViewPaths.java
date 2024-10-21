@@ -1,7 +1,6 @@
 package net.logicim.ui.circuit;
 
 import net.common.SimulatorException;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -44,7 +43,7 @@ public class CircuitInstanceViewPaths
     path.add(circuitInstanceView);
     paths.add(new CircuitInstanceViewPath(path));
 
-    SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
+    SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
     List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
@@ -88,7 +87,7 @@ public class CircuitInstanceViewPaths
       CircuitInstanceView secondLast = circuitInstanceViewPath.getSecondLast();
       if (secondLast != null)
       {
-        SubcircuitSimulations simulations = secondLast.getCircuitSubcircuitView().getSimulations();
+        SubcircuitSimulations simulations = secondLast.getInstanceSubcircuitView().getSimulations();
         for (SubcircuitSimulation simulation : simulations.getSubcircuitSimulations())
         {
           CircuitInstanceViewPath secondLastPath = subcircuitSimulations.get(simulation);
@@ -120,6 +119,19 @@ public class CircuitInstanceViewPaths
       }
     }
     throw new SimulatorException("Cannot get first path for [%s].", circuitInstanceView.getDescription());
+  }
+
+  public List<CircuitInstanceViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)
+  {
+    List<CircuitInstanceViewPath> result = new ArrayList<>();
+    for (CircuitInstanceViewPath path : paths)
+    {
+      if (path.endsWithSubcircuitView(subcircuitView))
+      {
+        result.add(path);
+      }
+    }
+    return result;
   }
 
   public CircuitInstanceViewPath getPath(CircuitInstanceViewPath circuitInstanceViewPath, CircuitInstanceView circuitInstanceView)

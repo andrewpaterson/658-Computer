@@ -31,7 +31,11 @@ public class WireListFinder
 
     this.paths = paths;
     this.splitterViewStack = new ArrayList<>();
-    this.splitterViewStack.add(new SplitterViewProcessStackItem(null, paths.getFirst(circuitInstanceView), inputConnectionView));
+    List<CircuitInstanceViewPath> pathsEndingInConnectionView = paths.getPathsEndingWithSubcircuitView(circuitInstanceView.getInstanceSubcircuitView());
+    for (CircuitInstanceViewPath circuitInstanceViewPath : pathsEndingInConnectionView)
+    {
+      this.splitterViewStack.add(new SplitterViewProcessStackItem(null, circuitInstanceViewPath, inputConnectionView));
+    }
     this.processedSubcircuitPinViews = new LinkedHashSet<>();
     this.processedSplitterViewConnections = new LinkedHashSet<>();
   }
@@ -172,7 +176,7 @@ public class WireListFinder
   private LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
                                                                                    ConnectionView inputConnectionView)
   {
-    LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
+    LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet(path);
 
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     localConnectionsToProcess.add(new ConnectionViewProcessStackItem(path, inputConnectionView));

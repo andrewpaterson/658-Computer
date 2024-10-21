@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 
@@ -40,9 +41,39 @@ public class WireList
     return partialWires;
   }
 
+  public List<PartialWire> getPartialWires(CircuitSimulation circuitSimulation)
+  {
+    List<PartialWire> result = new ArrayList<>();
+    for (PartialWire partialWire : partialWires)
+    {
+      if (partialWire.containsCircuitSimulation(circuitSimulation))
+      {
+        result.add(partialWire);
+      }
+    }
+    return result;
+  }
+
   public List<LocalMultiSimulationConnectionNet> getConnectionNets()
   {
     return connectionNets;
+  }
+
+  public List<LocalMultiSimulationConnectionNet> getConnectionNets(CircuitSimulation circuitSimulation)
+  {
+    List<LocalMultiSimulationConnectionNet> result = new ArrayList<>();
+    for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+    {
+      for (LocalConnectionNet localConnectionNet : connectionNet.localConnectionNets)
+      {
+        if (localConnectionNet.getPath().containsCircuitSimulation(circuitSimulation))
+        {
+          result.add(connectionNet);
+          break;
+        }
+      }
+    }
+    return result;
   }
 
   public List<ConnectionView> getConnectionViews()

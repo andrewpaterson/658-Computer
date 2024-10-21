@@ -21,8 +21,11 @@ public class LocalMultiSimulationConnectionNet
 
   protected List<ComponentViewPortNames> componentViewPortNamesList;  //These are the editor 'traces'.
 
-  public LocalMultiSimulationConnectionNet()
+  protected CircuitInstanceViewPath path;
+
+  public LocalMultiSimulationConnectionNet(CircuitInstanceViewPath path)
   {
+    this.path = path;
     this.localConnectionNets = new ArrayList<>();
     this.connectedComponents = new LinkedHashMap<>();
     this.connectedWires = new LinkedHashMap<>();
@@ -173,7 +176,8 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList, List<ComponentConnection<ComponentView<?>>> componentConnections)
+  private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList,
+                                               List<ComponentConnection<ComponentView<?>>> componentConnections)
   {
     for (ComponentConnection<ComponentView<?>> connectedComponent : componentConnections)
     {
@@ -250,6 +254,11 @@ public class LocalMultiSimulationConnectionNet
     }
 
     return result;
+  }
+
+  public CircuitInstanceViewPath getPath()
+  {
+    return path;
   }
 
   public String toString()

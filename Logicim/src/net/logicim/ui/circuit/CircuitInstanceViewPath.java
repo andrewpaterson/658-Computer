@@ -122,6 +122,11 @@ public class CircuitInstanceViewPath
     circuitSimulations.put(circuitSimulation, subcircuitSimulation);
   }
 
+  public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    return circuitSimulations.containsKey(circuitSimulation);
+  }
+
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
     SubcircuitSimulation subcircuitSimulation = circuitSimulations.get(circuitSimulation);
@@ -149,6 +154,28 @@ public class CircuitInstanceViewPath
       builder.append(circuitInstanceView.getDescription());
     }
     return builder.toString();
+  }
+
+  public boolean containsSubcircuitView(SubcircuitView subcircuitView)
+  {
+    for (CircuitInstanceView circuitInstanceView : path)
+    {
+      if (circuitInstanceView.getInstanceSubcircuitView() == subcircuitView)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean endsWithSubcircuitView(SubcircuitView subcircuitView)
+  {
+    CircuitInstanceView pathInstanceView = path.get(path.size() - 1);
+    if (pathInstanceView.getInstanceSubcircuitView() == subcircuitView)
+    {
+      return true;
+    }
+    return false;
   }
 }
 

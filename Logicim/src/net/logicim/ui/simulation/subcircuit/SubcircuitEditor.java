@@ -71,6 +71,11 @@ public class SubcircuitEditor
     this.setTypeName(typeName);
   }
 
+  public static void resetNextId()
+  {
+    nextId = 1;
+  }
+
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
     clearSelection();
@@ -452,6 +457,11 @@ public class SubcircuitEditor
     return subcircuitView.getTypeName();
   }
 
+  public void setTypeName(String subcircuitName)
+  {
+    subcircuitView.setTypeName(subcircuitName);
+  }
+
   public List<String> getTypeNameAsList()
   {
     return subcircuitView.getTypeNameAsList();
@@ -460,11 +470,6 @@ public class SubcircuitEditor
   public SubcircuitEditor getSubcircuitEditor(String subcircuitTypeName)
   {
     return getCircuitEditor().getSubcircuitEditor(subcircuitTypeName);
-  }
-
-  public void setTypeName(String subcircuitName)
-  {
-    subcircuitView.setTypeName(subcircuitName);
   }
 
   public List<String> getSubcircuitInstanceNames()
@@ -480,11 +485,6 @@ public class SubcircuitEditor
   public Set<StaticView<?>> findAllViewsOfClass(Class<? extends StaticView<?>> viewClass)
   {
     return subcircuitView.findAllViewsOfClass(viewClass);
-  }
-
-  public static void resetNextId()
-  {
-    nextId = 1;
   }
 
   @Override

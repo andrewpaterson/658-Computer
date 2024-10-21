@@ -226,7 +226,7 @@ public class SubcircuitView
     }
   }
 
-  public void deleteTraceViews(CircuitInstanceView circuitInstanceView, Set<TraceView> inputTraceViews)
+  public Set<TraceView> deleteTraceViews(CircuitInstanceView circuitInstanceView, Set<TraceView> inputTraceViews)
   {
     TraceViewFinder traceViewFinder = new TraceViewFinder();
     for (TraceView traceView : inputTraceViews)
@@ -246,10 +246,21 @@ public class SubcircuitView
     removeTraceViews(inputTraceViews);
 
     traceViewFinder.process();
-    createTraceViews(circuitInstanceView, new HashSet<>(), traceViewFinder.getTraceViews());
+    Set<TraceView> traceViews = traceViewFinder.getTraceViews();
+    Set<TraceView> newTraceViews;
+    if (traceViews.size() > 0)
+    {
+      newTraceViews = createTraceViews(circuitInstanceView, new HashSet<>(), traceViews);
+    }
+    else
+    {
+      newTraceViews = new LinkedHashSet<>();
+    }
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, nonTraceConnectionViews);
     fireConnectionEvents(updatedConnectionViews);
+
+    return newTraceViews;
   }
 
   public ConnectionView getOrAddConnectionView(Int2D position, View view)
@@ -810,11 +821,18 @@ public class SubcircuitView
     return connectionViews;
   }
 
-  public void enableStaticViews(List<StaticView<?>> staticViews)
+  public void enableViews(Collection<? extends View> views)
   {
-    for (StaticView<?> staticView : staticViews)
+    for (View view : views)
     {
-      staticView.enable();
+      if (!view.isEnabled())
+      {
+        view.enable();
+      }
+      else
+      {
+        throw new SimulatorException("SubcircuitView [%s] View [%s] is already enabled.", getTypeName());
+      }
     }
   }
 
@@ -909,7 +927,16 @@ public class SubcircuitView
 
     traceViewFinder.process();
 
-    return createTraceViews(circuitInstanceView, traceLineViews, traceViewFinder.getTraceViews());
+    Set<TraceView> traceViews = traceViewFinder.getTraceViews();
+    if ((traceViews.size() > 0) ||
+        (traceLineViews.size() > 0))
+    {
+      return createTraceViews(circuitInstanceView, traceLineViews, traceViews);
+    }
+    else
+    {
+      return new LinkedHashSet<>();
+    }
   }
 
   protected Set<TraceView> createTraceViews(CircuitInstanceView circuitInstanceView,
@@ -926,6 +953,8 @@ public class SubcircuitView
       Set<ConnectionView> traceViewsConnectionViews = getTraceViewsConnectionViews(traceViews);
       Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, traceViewsConnectionViews);
       fireConnectionEvents(updatedConnectionViews);
+
+      enableViews(traceViews);
     }
     return traceViews;
   }
@@ -1056,34 +1085,40 @@ public class SubcircuitView
       updatedConnectionViews.addAll(disconnectTraceViewAndDestroyComponents(traceView));
     }
 
-    createTraceViews(circuitInstanceView, new HashSet<>(), connectedOtherTraceViews);
+    if (connectedOtherTraceViews.size() > 0)
+    {
+      createTraceViews(circuitInstanceView, new HashSet<>(), connectedOtherTraceViews);
+    }
+
     fireConnectionEvents(updatedConnectionViews);
   }
 
   public List<View> doneMoveComponents(CircuitInstanceView circuitInstanceView,
-                                       List<StaticView<?>> componentViews,
+                                       List<StaticView<?>> staticViews,
                                        List<Line> newTraceViewLines,
                                        List<TraceView> removeTraceViews,
                                        Set<StaticView<?>> selectedViews)
   {
     removeTraceViews(new LinkedHashSet<>(removeTraceViews));
 
-    getOrCreateStaticViewConnections(componentViews);
-    Set<TraceView> existingTraceViews = getComponentConnectionTraceViews(componentViews);
+    getOrCreateStaticViewConnections(staticViews);
+    Set<TraceView> existingTraceViews = getComponentConnectionTraceViews(staticViews);
 
-    List<Line> existingLines = getTraceViewLines(existingTraceViews);
+    List<Line> existingTraceViewLines = getTraceViewLines(existingTraceViews);
     removeTraceViews(existingTraceViews);
 
-    enableStaticViews(componentViews);
+    enableViews(staticViews);
 
-    createComponentsForAllSimulations(componentViews);
+    createComponentsForAllSimulations(staticViews);
 
-    createTraceViews(circuitInstanceView, existingLines);
+    createTraceViews(circuitInstanceView, existingTraceViewLines);
     Set<TraceView> newTraceViews = createTraceViews(circuitInstanceView, newTraceViewLines);
 
-    simulationStarted(componentViews);
+    simulationStarted(staticViews);
 
-    return calculateNewSelection(componentViews, selectedViews, newTraceViews);
+    return calculateNewSelection(staticViews,
+                                 selectedViews,
+                                 newTraceViews);
   }
 
   protected Set<TraceView> getComponentConnectionTraceViews(List<StaticView<?>> componentViews)
@@ -1100,7 +1135,7 @@ public class SubcircuitView
 
   protected List<View> calculateNewSelection(List<StaticView<?>> staticViews,
                                              Set<StaticView<?>> selectedViews,
-                                             Set<TraceView> newTraces)
+                                             Set<TraceView> newTraceViews)
   {
     List<View> newSelection = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
@@ -1110,7 +1145,7 @@ public class SubcircuitView
         newSelection.add(staticView);
       }
     }
-    newSelection.addAll(newTraces);
+    newSelection.addAll(newTraceViews);
 
     return newSelection;
   }

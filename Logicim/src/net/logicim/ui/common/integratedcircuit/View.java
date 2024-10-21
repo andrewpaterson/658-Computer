@@ -29,6 +29,7 @@ public abstract class View
   public View(SubcircuitView containingSubcircuitView, long id)
   {
     this.containingSubcircuitView = containingSubcircuitView;
+    this.enabled = false;
     this.id = id;
     if (id >= nextId)
     {

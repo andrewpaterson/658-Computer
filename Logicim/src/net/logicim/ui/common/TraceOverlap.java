@@ -17,5 +17,13 @@ public class TraceOverlap
   {
     return traceView;
   }
+
+  public boolean isParallel()
+  {
+    return overlap == LineOverlap.Fully ||
+           overlap == LineOverlap.Start ||
+           overlap == LineOverlap.End ||
+           overlap == LineOverlap.Center;
+  }
 }
 

@@ -40,6 +40,8 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.*;
 
+import static net.logicim.ui.common.LineOverlap.getOverlap;
+
 public class SubcircuitView
 {
   protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
@@ -901,8 +903,14 @@ public class SubcircuitView
 
   public List<TraceOverlap> getTracesTouching(Line line)
   {
+    Set<TraceView> traceViews = getTraceViews();
+    return getTracesTouching(line, traceViews);
+  }
+
+  protected List<TraceOverlap> getTracesTouching(Line line, Set<TraceView> traceViews)
+  {
     List<TraceOverlap> overlaps = new ArrayList<>();
-    for (TraceView traceView : getTraceViews())
+    for (TraceView traceView : traceViews)
     {
       LineOverlap overlap = traceView.touches(line);
       if (overlap != LineOverlap.None)
@@ -1116,9 +1124,33 @@ public class SubcircuitView
 
     simulationStarted(staticViews);
 
+    Set<TraceView> selectedTraceViews = calculateSelectedTraceViews(newTraceViewLines, newTraceViews);
+
     return calculateNewSelection(staticViews,
                                  selectedViews,
-                                 newTraceViews);
+                                 selectedTraceViews);
+  }
+
+  protected Set<TraceView> calculateSelectedTraceViews(List<Line> newTraceViewLines, Set<TraceView> newTraceViews)
+  {
+    Set<TraceView> selectedTraceViews = new LinkedHashSet<>();
+    for (Line line : newTraceViewLines)
+    {
+      List<TraceOverlap> tracesTouching = getTracesTouching(line, newTraceViews);
+      for (TraceOverlap traceOverlap : tracesTouching)
+      {
+        if (traceOverlap.isParallel())
+        {
+          TraceView traceView = traceOverlap.getTraceView();
+          int overlap = getOverlap(line, traceView.getLine());
+          if (overlap > 0)
+          {
+            selectedTraceViews.add(traceView);
+          }
+        }
+      }
+    }
+    return selectedTraceViews;
   }
 
   protected Set<TraceView> getComponentConnectionTraceViews(List<StaticView<?>> componentViews)

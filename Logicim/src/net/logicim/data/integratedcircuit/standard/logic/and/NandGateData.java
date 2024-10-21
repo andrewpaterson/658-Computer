@@ -54,7 +54,7 @@ public class NandGateData
   @Override
   public NandGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new NandGateView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new NandGateView(subcircuitEditor.getInstanceSubcircuitView(),
                             position,
                             rotation,
                             new LogicGateProperties(name,

@@ -43,7 +43,7 @@ public class PositivePowerData
   @Override
   protected PositivePowerView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new PositivePowerView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new PositivePowerView(subcircuitEditor.getInstanceSubcircuitView(),
                                  position,
                                  rotation,
                                  new PositivePowerProperties(name, voltage));

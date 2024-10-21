@@ -77,7 +77,7 @@ public class SimulationLoader
 
   protected void addSubcircuitSimulation(SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
   {
-    subcircuitEditor.getCircuitSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
+    subcircuitEditor.getInstanceSubcircuitView().addSubcircuitSimulation(subcircuitSimulation);
     subcircuitSimulationsById.put(subcircuitSimulation.getId(), subcircuitSimulation);
   }
 

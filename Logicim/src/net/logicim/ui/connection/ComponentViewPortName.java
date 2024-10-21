@@ -9,7 +9,9 @@ public class ComponentViewPortName
   protected String portName;
   protected CircuitInstanceViewPath path;
 
-  public ComponentViewPortName(ComponentView<?> componentView, String portName, CircuitInstanceViewPath path)
+  public ComponentViewPortName(ComponentView<?> componentView,
+                               String portName,
+                               CircuitInstanceViewPath path)
   {
     this.componentView = componentView;
     this.portName = portName;

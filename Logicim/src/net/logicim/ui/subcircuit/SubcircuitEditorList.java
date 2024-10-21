@@ -61,7 +61,7 @@ public class SubcircuitEditorList
   {
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      if (subcircuitEditor.getCircuitSubcircuitView() == subcircuitView)
+      if (subcircuitEditor.getInstanceSubcircuitView() == subcircuitView)
       {
         return subcircuitEditor;
       }
@@ -148,7 +148,7 @@ public class SubcircuitEditorList
     List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      SubcircuitView circuitSubcircuitView = subcircuitEditor.getCircuitSubcircuitView();
+      SubcircuitView circuitSubcircuitView = subcircuitEditor.getInstanceSubcircuitView();
       subcircuitInstanceViews.addAll(circuitSubcircuitView.getSubcircuitInstanceViews(subcircuitView));
     }
     return subcircuitInstanceViews;

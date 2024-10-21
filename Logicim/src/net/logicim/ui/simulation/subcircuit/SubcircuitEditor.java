@@ -237,7 +237,7 @@ public class SubcircuitEditor
     return false;
   }
 
-  public SubcircuitView getCircuitSubcircuitView()
+  public SubcircuitView getInstanceSubcircuitView()
   {
     return subcircuitView;
   }

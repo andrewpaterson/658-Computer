@@ -32,7 +32,7 @@ public class CircuitEditorTest
 
     CircuitEditor circuitEditor = new CircuitEditor("Main");
     SubcircuitEditor subcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
-    SubcircuitView subcircuitView = subcircuitEditor.getCircuitSubcircuitView();
+    SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
     FamilyVoltageConfiguration voltageConfiguration = FamilyVoltageConfigurationStore.get("LVC");
     Family family = voltageConfiguration.getFamily();
     ClockView clockView = new ClockViewFactory().create(circuitEditor,

@@ -45,7 +45,7 @@ public class LabelData
   @Override
   public LabelView createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    return new LabelView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new LabelView(subcircuitEditor.getInstanceSubcircuitView(),
                          position,
                          rotation,
                          new LabelProperties(name,

@@ -530,13 +530,8 @@ public class SubcircuitInstanceView
   {
   }
 
-  public SubcircuitView getInstanceSubcircuitView()
-  {
-    return instanceSubcircuitView;
-  }
-
   @Override
-  public SubcircuitView getCircuitSubcircuitView()
+  public SubcircuitView getInstanceSubcircuitView()
   {
     return instanceSubcircuitView;
   }

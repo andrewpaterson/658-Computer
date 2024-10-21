@@ -54,7 +54,7 @@ public class XnorGateData
   @Override
   public XnorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new XnorGateView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new XnorGateView(subcircuitEditor.getInstanceSubcircuitView(),
                             position,
                             rotation,
                             new LogicGateProperties(name,

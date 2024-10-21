@@ -49,7 +49,7 @@ public class TraceData
 
   public TraceView createAndEnableTraceView(SubcircuitEditor subcircuitEditor)
   {
-    TraceView traceView = new TraceView(subcircuitEditor.getCircuitSubcircuitView(),
+    TraceView traceView = new TraceView(subcircuitEditor.getInstanceSubcircuitView(),
                                         start,
                                         end,
                                         true);

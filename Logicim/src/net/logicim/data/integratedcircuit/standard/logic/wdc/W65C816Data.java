@@ -50,7 +50,7 @@ public class W65C816Data
   @Override
   protected W65C816View createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new W65C816View(subcircuitEditor.getCircuitSubcircuitView(),
+    return new W65C816View(subcircuitEditor.getInstanceSubcircuitView(),
                            position,
                            rotation,
                            new W65C816Properties(name,

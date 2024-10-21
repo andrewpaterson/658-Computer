@@ -1499,9 +1499,9 @@ public class SubcircuitView
         throw new SimulatorException("SubcircuitView [%s] expected at least one circuit instance view.", getTypeName());
       }
       CircuitInstanceView circuitInstanceView = orderedTopDownCircuitInstanceViews.get(0);
-      if (circuitInstanceView.getCircuitSubcircuitView() != this)
+      if (circuitInstanceView.getInstanceSubcircuitView() != this)
       {
-        throw new SimulatorException("SubcircuitView [%s] does not match first circuit instance view [%s].", getTypeName(), circuitInstanceView.getCircuitSubcircuitView().getTypeName());
+        throw new SimulatorException("SubcircuitView [%s] does not match first circuit instance view [%s].", getTypeName(), circuitInstanceView.getInstanceSubcircuitView().getTypeName());
       }
 
       simulations.validate(orderedTopDownCircuitInstanceViews);

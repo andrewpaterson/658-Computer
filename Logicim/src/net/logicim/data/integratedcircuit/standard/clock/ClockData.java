@@ -57,7 +57,7 @@ public class ClockData
   @Override
   public ClockView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new ClockView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new ClockView(subcircuitEditor.getInstanceSubcircuitView(),
                          position,
                          rotation,
                          new ClockProperties(name,

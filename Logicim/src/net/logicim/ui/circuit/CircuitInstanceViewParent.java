@@ -15,7 +15,7 @@ public class CircuitInstanceViewParent
 
   public SubcircuitView getCircuitSubcircuitView()
   {
-    return view.getCircuitSubcircuitView();
+    return view.getInstanceSubcircuitView();
   }
 
   public String getId()

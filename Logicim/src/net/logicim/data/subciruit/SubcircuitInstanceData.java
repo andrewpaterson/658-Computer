@@ -58,8 +58,8 @@ public class SubcircuitInstanceData
   protected SubcircuitInstanceView createComponentView(SubcircuitEditor subcircuitEditor)
   {
     SubcircuitEditor instanceSubcircuitEditor = subcircuitEditor.getSubcircuitEditor(subcircuitTypeName);
-    return new SubcircuitInstanceView(subcircuitEditor.getCircuitSubcircuitView(),
-                                      instanceSubcircuitEditor.getCircuitSubcircuitView(),
+    return new SubcircuitInstanceView(subcircuitEditor.getInstanceSubcircuitView(),
+                                      instanceSubcircuitEditor.getInstanceSubcircuitView(),
                                       position,
                                       rotation,
                                       new SubcircuitInstanceProperties(name,

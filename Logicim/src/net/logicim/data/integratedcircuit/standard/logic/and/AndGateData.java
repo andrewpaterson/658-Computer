@@ -54,7 +54,7 @@ public class AndGateData
   @Override
   public AndGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new AndGateView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new AndGateView(subcircuitEditor.getInstanceSubcircuitView(),
                            position,
                            rotation,
                            new LogicGateProperties(name,

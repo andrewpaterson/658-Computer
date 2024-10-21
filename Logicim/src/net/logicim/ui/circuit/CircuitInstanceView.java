@@ -12,7 +12,7 @@ import java.util.Set;
 
 public interface CircuitInstanceView
 {
-  SubcircuitView getCircuitSubcircuitView();
+  SubcircuitView getInstanceSubcircuitView();
 
   String getDescription();
 

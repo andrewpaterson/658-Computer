@@ -54,7 +54,7 @@ public class NorGateData
   @Override
   public NorGateView createComponentView(SubcircuitEditor subcircuitEditor)
   {
-    return new NorGateView(subcircuitEditor.getCircuitSubcircuitView(),
+    return new NorGateView(subcircuitEditor.getInstanceSubcircuitView(),
                            position,
                            rotation,
                            new LogicGateProperties(name,

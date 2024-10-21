@@ -678,7 +678,7 @@ public class CircuitEditor
 
   public SubcircuitView getCurrentSubcircuitView()
   {
-    return getCurrentSubcircuitEditor().getCircuitSubcircuitView();
+    return getCurrentSubcircuitEditor().getInstanceSubcircuitView();
   }
 
   public SubcircuitEditor getCurrentSubcircuitEditor()
@@ -714,7 +714,7 @@ public class CircuitEditor
         }
       }
 
-      List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getCircuitSubcircuitView().getTopSimulations();
+      List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getInstanceSubcircuitView().getTopSimulations();
       if (!simulations.isEmpty())
       {
         setSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
@@ -798,7 +798,7 @@ public class CircuitEditor
 
   public SubcircuitTopSimulation addNewSimulation(String simulationName)
   {
-    return getCurrentSubcircuitEditor().getCircuitSubcircuitView().addNewSimulation(simulationName);
+    return getCurrentSubcircuitEditor().getInstanceSubcircuitView().addNewSimulation(simulationName);
   }
 
   public String getSubcircuitNameError(String subcircuitName)

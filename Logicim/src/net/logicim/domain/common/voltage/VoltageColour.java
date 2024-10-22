@@ -142,11 +142,20 @@ public abstract class VoltageColour
     int drivenPorts = 0;
     for (Port port : ports)
     {
-      float voltageOut = OutputPortHelper.getPortOutputVoltage(port, time);
-
-      if (!Float.isNaN(voltageOut))
+      Trace trace = port.getTrace();
+      float voltage;
+      if (trace != null)
       {
-        averageVoltageOut += voltageOut;
+        voltage = trace.getVoltage(time);
+      }
+      else
+      {
+        voltage = OutputPortHelper.getPortOutputVoltage(port, time);
+      }
+
+      if (!Float.isNaN(voltage))
+      {
+        averageVoltageOut += voltage;
         drivenPorts++;
       }
     }

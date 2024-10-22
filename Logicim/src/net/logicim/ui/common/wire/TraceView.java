@@ -84,7 +84,7 @@ public class TraceView
       return connections;
     }
 
-    boolean positionFallsOnTrace = isPositionOnTrace(x, y);
+    boolean positionFallsOnTrace = line.isPositionOn(x, y);
 
     if (positionFallsOnTrace)
     {
@@ -96,36 +96,19 @@ public class TraceView
     }
   }
 
-  private boolean isPositionOnTrace(Int2D gridPosition)
-  {
-    int x = gridPosition.x;
-    int y = gridPosition.y;
-    return isPositionOnTrace(x, y);
-  }
-
-  private boolean isPositionOnTrace(int x, int y)
-  {
-    return line.isPositionOn(x, y);
-  }
-
   public boolean contains(Int2D gridPosition)
   {
-    return isPositionOnTrace(gridPosition);
+    return line.isPositionOn(gridPosition.x, gridPosition.y);
   }
 
   public boolean contains(int x, int y)
   {
-    return isPositionOnTrace(x, y);
+    return line.isPositionOn(x, y);
   }
 
   public void getCenter(Int2D center)
   {
     line.getCenter(center);
-  }
-
-  public LineOverlap getOverlap(Line otherLine, boolean endInclusive)
-  {
-    return line.getOverlap(otherLine, endInclusive);
   }
 
   public ConnectionView getOpposite(ConnectionView connection)
@@ -310,22 +293,9 @@ public class TraceView
     line.set(start, end);
   }
 
-  public LineOverlap touches(Line line)
+  public LineOverlap touches(Line otherLine)
   {
-    LineOverlap overlap = getOverlap(line, true);
-    if (overlap != LineOverlap.None)
-    {
-      return overlap;
-    }
-    if (isPositionOnTrace(line.getStart()))
-    {
-      return LineOverlap.Orthogonal;
-    }
-    if (isPositionOnTrace(line.getEnd()))
-    {
-      return LineOverlap.Orthogonal;
-    }
-    return LineOverlap.None;
+    return line.touches(otherLine);
   }
 
   @Override

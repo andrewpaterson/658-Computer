@@ -901,7 +901,6 @@ public class SubcircuitView
 
   public List<TraceOverlap> getTracesTouching(Line line)
   {
-    Set<TraceView> traceViews = getTraceViews();
     return getTracesTouching(line, traceViews);
   }
 

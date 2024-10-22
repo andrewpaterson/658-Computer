@@ -28,8 +28,8 @@
                                     <element index="0" type="ListElementData">
                                       <value type="ValueData">
                                         <object type="TickEventData">
-                                          <time type="Long" x="40960"/>
-                                          <id type="Long" x="2"/>
+                                          <time type="Long" x="204800"/>
+                                          <id type="Long" x="54"/>
                                         </object>
                                       </value>
                                     </element>
@@ -68,12 +68,35 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="6"/>
-                                                <events size="0" type="ArrayList"/>
-                                                <output type="DriveEventData">
-                                                  <time type="Long" x="24933"/>
-                                                  <id type="Long" x="4"/>
-                                                  <voltage>3.1</voltage>
+                                                <traceId type="Long" x="9"/>
+                                                <events size="2" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="SlewEventData">
+                                                        <time type="Long" x="103884"/>
+                                                        <id type="Long" x="31"/>
+                                                        <startVoltage>0.2</startVoltage>
+                                                        <endVoltage>3.1</endVoltage>
+                                                        <slewTime type="Long" x="2969"/>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                  <element index="1" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="188773"/>
+                                                        <id type="Long" x="56"/>
+                                                        <voltage>3.1</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
+                                                <output type="SlewEventData">
+                                                  <time type="Long" x="185804"/>
+                                                  <id type="Long" x="55"/>
+                                                  <startVoltage>0.2</startVoltage>
+                                                  <endVoltage>3.1</endVoltage>
+                                                  <slewTime type="Long" x="2969"/>
                                                 </output>
                                               </object>
                                             </value>
@@ -146,7 +169,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="6"/>
+                                                <traceId type="Long" x="9"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -174,11 +197,41 @@
                                             <value type="ValueData">
                                               <object type="LogicPortData">
                                                 <traceId type="Long" x="0"/>
-                                                <events size="0" type="ArrayList"/>
+                                                <events size="3" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="28260"/>
+                                                        <id type="Long" x="7"/>
+                                                        <voltage>3.1</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                  <element index="1" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="90212"/>
+                                                        <id type="Long" x="29"/>
+                                                        <voltage>0.2</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                  <element index="2" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="SlewEventData">
+                                                        <time type="Long" x="189131"/>
+                                                        <id type="Long" x="58"/>
+                                                        <startVoltage>NaN</startVoltage>
+                                                        <endVoltage>3.1</endVoltage>
+                                                        <slewTime type="Long" x="-1"/>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
                                                 <output type="DriveEventData">
-                                                  <time type="Long" x="28260"/>
-                                                  <id type="Long" x="7"/>
-                                                  <voltage>3.1</voltage>
+                                                  <time type="Long" x="172132"/>
+                                                  <id type="Long" x="53"/>
+                                                  <voltage>0.2</voltage>
                                                 </output>
                                               </object>
                                             </value>
@@ -205,11 +258,11 @@
                   </element>
                 </statics>
                 <subcircuitInstances size="0" type="ArrayList"/>
-                <traces size="1" type="ArrayList">
+                <traces size="3" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
-                        <id type="Long" x="5"/>
+                        <id type="Long" x="8"/>
                         <simulationTraces size="1" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
@@ -217,12 +270,56 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-6</object>
+9</object>
                             </value>
                           </element>
                         </simulationTraces>
                         <start type="Int2D" x="-25" y="-5"/>
+                        <end type="Int2D" x="-23" y="-5"/>
+                        <enabled>true</enabled>
+                        <selected>true</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="1" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="9"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+9</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-23" y="-5"/>
                         <end type="Int2D" x="-21" y="-5"/>
+                        <enabled>true</enabled>
+                        <selected>true</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="2" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="10"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+9</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-23" y="-5"/>
+                        <end type="Int2D" x="-23" y="1"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
                       </object>
@@ -241,9 +338,9 @@
             <object type="CircuitSimulationData">
               <id type="Long" x="1"/>
               <timeline type="TimelineData">
-                <time type="Long" x="28672"/>
-                <previousEventTime type="Long" x="25291"/>
-                <eventTime type="Long" x="28260"/>
+                <time type="Long" x="188672"/>
+                <previousEventTime type="Long" x="185804"/>
+                <eventTime type="Long" x="187647"/>
               </timeline>
               <name>Top Main</name>
             </object>

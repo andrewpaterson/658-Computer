@@ -298,6 +298,39 @@ public class Line
     }
   }
 
+  public LineOverlap touches(Line otherLine)
+  {
+    LineOverlap overlap = getOverlap(otherLine, true);
+    if (overlap != LineOverlap.None)
+    {
+      return overlap;
+    }
+
+    overlap = touchesOrthogonal(otherLine);
+    if (overlap != LineOverlap.None)
+    {
+      return overlap;
+    }
+
+    return otherLine.touchesOrthogonal(this);
+  }
+
+  protected LineOverlap touchesOrthogonal(Line otherLine)
+  {
+    Int2D start = otherLine.getStart();
+    if (isPositionOn(start.x, start.y))
+    {
+      return LineOverlap.Orthogonal;
+    }
+
+    Int2D end = otherLine.getEnd();
+    if (isPositionOn(end.x, end.y))
+    {
+      return LineOverlap.Orthogonal;
+    }
+    return LineOverlap.None;
+  }
+
   public void getBoundingBoxInGridSpace(Float2D boundBoxPosition, Float2D boundBoxDimension)
   {
     int y1 = getMinimumY();

@@ -905,7 +905,7 @@ public class SubcircuitView
     return getTracesTouching(line, traceViews);
   }
 
-  protected List<TraceOverlap> getTracesTouching(Line line, Set<TraceView> traceViews)
+  protected List<TraceOverlap> getTracesTouching(Line line, Collection<TraceView> traceViews)
   {
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
@@ -1145,24 +1145,24 @@ public class SubcircuitView
 
     createComponentsForAllSimulations(staticViews);
 
-    createTraceViewsAndTraces(circuitInstanceView, existingTraceViewLines, nonTraceViewConnectionViews);
-    Set<TraceView> newTraceViews = createTraceViewsAndTraces(circuitInstanceView, newTraceViewLines, new ArrayList<>());
+    existingTraceViewLines.addAll(newTraceViewLines);
+    Set<TraceView> traceViews = createTraceViewsAndTraces(circuitInstanceView, existingTraceViewLines, nonTraceViewConnectionViews);
 
     simulationStarted(staticViews);
 
-    Set<TraceView> selectedTraceViews = calculateSelectedTraceViews(newTraceViewLines, newTraceViews);
+    Set<TraceView> selectedTraceViews = calculateSelectedTraceViews(newTraceViewLines, traceViews);
 
     return calculateNewSelection(staticViews,
                                  selectedViews,
                                  selectedTraceViews);
   }
 
-  protected Set<TraceView> calculateSelectedTraceViews(List<Line> newTraceViewLines, Set<TraceView> newTraceViews)
+  protected Set<TraceView> calculateSelectedTraceViews(List<Line> newTraceViewLines, Collection<TraceView> traceViews)
   {
     Set<TraceView> selectedTraceViews = new LinkedHashSet<>();
     for (Line line : newTraceViewLines)
     {
-      List<TraceOverlap> tracesTouching = getTracesTouching(line, newTraceViews);
+      List<TraceOverlap> tracesTouching = getTracesTouching(line, traceViews);
       for (TraceOverlap traceOverlap : tracesTouching)
       {
         if (traceOverlap.isParallel())

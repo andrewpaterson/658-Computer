@@ -4,12 +4,11 @@ import net.logicim.ui.common.ConnectionView;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class TraceViewConnectionViewSetsPair
 {
-  protected Set<TraceView> traceViews;
-  protected Set<ConnectionView> nonTraceConnectionViews;
+  protected LinkedHashSet<TraceView> traceViews;
+  protected LinkedHashSet<ConnectionView> nonTraceConnectionViews;
 
   public TraceViewConnectionViewSetsPair()
   {
@@ -27,12 +26,17 @@ public class TraceViewConnectionViewSetsPair
     nonTraceConnectionViews.add(connectionView);
   }
 
-  public Set<TraceView> getTraceViews()
+  public void add(TraceView traceView)
+  {
+    traceViews.add(traceView);
+  }
+
+  public LinkedHashSet<TraceView> getTraceViews()
   {
     return traceViews;
   }
 
-  public Set<ConnectionView> getNonTraceConnectionViews()
+  public LinkedHashSet<ConnectionView> getNonTraceConnectionViews()
   {
     return nonTraceConnectionViews;
   }

@@ -42,13 +42,13 @@ public class SubcircuitEditor
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
     this(new SubcircuitView(circuitEditor), typeName);
-    this.subcircuitView.createSubcircuitTopSimulation(getTopSimulationNameName(typeName));
+    this.subcircuitView.createSubcircuitTopSimulation(getTopSimulationName(typeName));
 
     id = nextId;
     nextId++;
   }
 
-  public static String getTopSimulationNameName(String typeName)
+  public static String getTopSimulationName(String typeName)
   {
     return "Top " + typeName;
   }

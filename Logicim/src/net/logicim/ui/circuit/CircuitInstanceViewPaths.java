@@ -11,25 +11,38 @@ import java.util.*;
 public class CircuitInstanceViewPaths
 {
   protected Set<CircuitInstanceViewPath> paths;
-  protected Map<SubcircuitSimulation, CircuitInstanceViewPath> subcircuitSimulations;
+  protected Map<SubcircuitSimulation, CircuitInstanceViewPath> subcircuitSimulationPaths;
+  protected Set<SubcircuitSimulation> subcircuitSimulations;
 
   public CircuitInstanceViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
     paths = new LinkedHashSet<>();
-    subcircuitSimulations = new LinkedHashMap<>();
+    subcircuitSimulationPaths = new LinkedHashMap<>();
+    subcircuitSimulations = new LinkedHashSet<>();
 
     process(subcircuitEditors);
   }
 
   protected void process(List<SubcircuitEditor> subcircuitEditors)
   {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    createPathsSet(subcircuitEditors);
+    createSimulationsSet();
+
+    if (subcircuitSimulations.size() != paths.size())
     {
-      addSubcircuitEditor(subcircuitEditor);
+      throw new SimulatorException("Expected simulations size [%s] and paths size [%s] to be equal.", subcircuitSimulations.size(), paths.size());
     }
 
     createSubcircuitSimulationMap();
     createPathLinks();
+  }
+
+  private void createPathsSet(List<SubcircuitEditor> subcircuitEditors)
+  {
+    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
+    {
+      addSubcircuitEditor(subcircuitEditor);
+    }
   }
 
   public void addSubcircuitEditor(SubcircuitEditor subcircuitEditor)
@@ -61,17 +74,17 @@ public class CircuitInstanceViewPaths
       List<? extends SubcircuitSimulation> subcircuitSimulations = pathLast.getPathSubcircuitSimulations();
       for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
       {
-        CircuitInstanceViewPath existing = this.subcircuitSimulations.get(subcircuitSimulation);
+        CircuitInstanceViewPath existing = subcircuitSimulationPaths.get(subcircuitSimulation);
         if (existing != null)
         {
           throw new SimulatorException("More than one subcircuit simulations exists.");
         }
 
-        this.subcircuitSimulations.put(subcircuitSimulation, circuitInstanceViewPath);
+        subcircuitSimulationPaths.put(subcircuitSimulation, circuitInstanceViewPath);
       }
     }
 
-    for (Map.Entry<SubcircuitSimulation, CircuitInstanceViewPath> entry : subcircuitSimulations.entrySet())
+    for (Map.Entry<SubcircuitSimulation, CircuitInstanceViewPath> entry : subcircuitSimulationPaths.entrySet())
     {
       SubcircuitSimulation subcircuitSimulation = entry.getKey();
       CircuitInstanceViewPath path = entry.getValue();
@@ -79,9 +92,18 @@ public class CircuitInstanceViewPaths
     }
   }
 
+  protected void createSimulationsSet()
+  {
+    for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
+    {
+      CircuitInstanceView pathLast = circuitInstanceViewPath.getLast();
+      subcircuitSimulations.addAll(pathLast.getPathSubcircuitSimulations());
+    }
+  }
+
   protected void createPathLinks()
   {
-    Collection<CircuitInstanceViewPath> circuitInstanceViewPaths = subcircuitSimulations.values();
+    Collection<CircuitInstanceViewPath> circuitInstanceViewPaths = subcircuitSimulationPaths.values();
     for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths)
     {
       CircuitInstanceView secondLast = circuitInstanceViewPath.getSecondLast();
@@ -90,7 +112,7 @@ public class CircuitInstanceViewPaths
         SubcircuitSimulations simulations = secondLast.getInstanceSubcircuitView().getSimulations();
         for (SubcircuitSimulation simulation : simulations.getSubcircuitSimulations())
         {
-          CircuitInstanceViewPath secondLastPath = subcircuitSimulations.get(simulation);
+          CircuitInstanceViewPath secondLastPath = subcircuitSimulationPaths.get(simulation);
           circuitInstanceViewPath.setPrevious(secondLastPath);
         }
       }
@@ -104,21 +126,6 @@ public class CircuitInstanceViewPaths
         previous.setNext(circuitInstanceViewPath);
       }
     }
-  }
-
-  public CircuitInstanceViewPath getFirst(CircuitInstanceView circuitInstanceView)
-  {
-    for (CircuitInstanceViewPath path : paths)
-    {
-      if (path.size() == 1)
-      {
-        if (path.getPath().get(0) == circuitInstanceView)
-        {
-          return path;
-        }
-      }
-    }
-    throw new SimulatorException("Cannot get first path for [%s].", circuitInstanceView.getDescription());
   }
 
   public List<CircuitInstanceViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)
@@ -167,9 +174,9 @@ public class CircuitInstanceViewPaths
     return paths;
   }
 
-  public Map<SubcircuitSimulation, CircuitInstanceViewPath> getSubcircuitSimulations()
+  public Map<SubcircuitSimulation, CircuitInstanceViewPath> getSubcircuitSimulationPaths()
   {
-    return subcircuitSimulations;
+    return subcircuitSimulationPaths;
   }
 
 }

@@ -71,7 +71,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
-import static net.logicim.ui.simulation.subcircuit.SubcircuitEditor.getTopSimulationNameName;
+import static net.logicim.ui.simulation.subcircuit.SubcircuitEditor.getTopSimulationName;
 
 public class Logicim
     implements PanelSize,
@@ -905,7 +905,7 @@ public class Logicim
     {
       SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
 
-      subcircuitView.createSubcircuitTopSimulation(getTopSimulationNameName(subcircuitView.getTypeName()));
+      subcircuitView.createSubcircuitTopSimulation(getTopSimulationName(subcircuitView.getTypeName()));
     }
 
     //xxx

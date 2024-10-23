@@ -4,6 +4,7 @@ import net.common.SimulatorException;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.common.util.StringUtil;
+import net.logicim.data.circuit.SubcircuitPinAlignment;
 import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
@@ -484,6 +485,23 @@ public class PinView
     if (updatedName)
     {
       labelView.setText(properties.name);
+    }
+
+    if (rotation.isEast())
+    {
+      properties.alignment = SubcircuitPinAlignment.RIGHT;
+    }
+    else if (rotation.isWest())
+    {
+      properties.alignment = SubcircuitPinAlignment.LEFT;
+    }
+    else if (rotation.isNorth())
+    {
+      properties.alignment = SubcircuitPinAlignment.TOP;
+    }
+    else if (rotation.isSouth())
+    {
+      properties.alignment = SubcircuitPinAlignment.BOTTOM;
     }
   }
 

@@ -43,17 +43,29 @@ public class SubcircuitPinView
     this.pinView = pinView;
     this.subcircuitInstanceView = subcircuitInstanceView;
     this.portView = null;
-    this.positionRelativeToIC = calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, 0.0f, -1.0f).cloneAsInt2D();
+    this.positionRelativeToIC = calculatePosition(positionRelativeToIC,
+                                                  horizontalAlignment,
+                                                  additionalRotations,
+                                                  0.0f,
+                                                  -1.0f).cloneAsInt2D();
     this.positionCache = new PointGridCache(positionRelativeToIC);
     this.textView = new TextView(subcircuitInstanceView,
-                                 calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, 0.0f, 0.5f),
+                                 calculatePosition(positionRelativeToIC,
+                                                   horizontalAlignment,
+                                                   additionalRotations,
+                                                   0.0f,
+                                                   0.5f),
                                  pinView.getName(),
                                  fontName,
                                  size,
                                  false,
                                  horizontalAlignment);
     this.textView.setRelativeRightRotations(additionalRotations);
-    this.shapeView = createPinShape(pinView, subcircuitInstanceView, positionRelativeToIC, horizontalAlignment, additionalRotations);
+    this.shapeView = createPinShape(pinView,
+                                    subcircuitInstanceView,
+                                    positionRelativeToIC,
+                                    horizontalAlignment,
+                                    additionalRotations);
 
     if (pinView.getProperties().clockNotch)
     {
@@ -68,15 +80,29 @@ public class SubcircuitPinView
     }
   }
 
-  protected ShapeView createPinShape(PinView pinView, SubcircuitInstanceView subcircuitInstanceView, Int2D positionRelativeToIC, HorizontalAlignment horizontalAlignment, int additionalRotations)
+  protected ShapeView createPinShape(PinView pinView,
+                                     SubcircuitInstanceView subcircuitInstanceView,
+                                     Int2D positionRelativeToIC,
+                                     HorizontalAlignment horizontalAlignment,
+                                     int additionalRotations)
   {
     if (!pinView.getProperties().inverting)
     {
-      return new LineView(subcircuitInstanceView, this.positionRelativeToIC, positionRelativeToIC);
+      return new LineView(subcircuitInstanceView,
+                          this.positionRelativeToIC,
+                          positionRelativeToIC);
     }
     else
     {
-      return new CircleView(subcircuitInstanceView, calculatePosition(positionRelativeToIC, horizontalAlignment, additionalRotations, 0.0f, -0.5f), 0.5f, true, false);
+      return new CircleView(subcircuitInstanceView,
+                            calculatePosition(positionRelativeToIC,
+                                              horizontalAlignment,
+                                              additionalRotations,
+                                              0.0f,
+                                              -0.5f),
+                            0.5f,
+                            true,
+                            false);
     }
   }
 
@@ -88,8 +114,7 @@ public class SubcircuitPinView
   {
     Float2D clone = new Float2D(positionRelativeToIC);
     Float2D offset2D = new Float2D(xOffset, yOffset * horizontalAlignment.getModifier());
-    Rotation rotation = Rotation.North;
-    rotation = rotation.rotateRight(additionalRotations);
+    Rotation rotation = Rotation.North.rotateRight(additionalRotations);
     rotation.transform(offset2D);
     clone.add(offset2D);
     return clone;
@@ -99,7 +124,9 @@ public class SubcircuitPinView
   {
     if (!positionCache.isValid())
     {
-      positionCache.update(positionRelativeToIC, subcircuitInstanceView.getRotation(), subcircuitInstanceView.getPosition());
+      positionCache.update(positionRelativeToIC,
+                           subcircuitInstanceView.getRotation(),
+                           subcircuitInstanceView.getPosition());
     }
   }
 

@@ -16,10 +16,12 @@ public class SubcircuitInstance
 {
   protected Map<String, List<TracePort>> namedPins;
   protected SubcircuitInstanceSimulation subcircuitInstanceSimulation;
+  protected SubcircuitObject subcircuitObject;
 
-  public SubcircuitInstance(Circuit circuit, String name)
+  public SubcircuitInstance(Circuit circuit, SubcircuitObject subcircuitObject, String name)
   {
     super(circuit, name);
+    this.subcircuitObject = subcircuitObject;
     this.namedPins = new LinkedHashMap<>();
   }
 
@@ -67,6 +69,11 @@ public class SubcircuitInstance
   public SubcircuitInstanceSimulation getSubcircuitInstanceSimulation()
   {
     return subcircuitInstanceSimulation;
+  }
+
+  public SubcircuitObject getSubcircuitObject()
+  {
+    return subcircuitObject;
   }
 }
 

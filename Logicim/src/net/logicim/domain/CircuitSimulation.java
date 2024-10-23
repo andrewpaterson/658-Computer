@@ -6,9 +6,6 @@ import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.Timeline;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-
-import java.util.Collection;
 
 public class CircuitSimulation
     implements Described
@@ -37,6 +34,11 @@ public class CircuitSimulation
     {
       nextId = id + 1;
     }
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
   }
 
   public Circuit getCircuit()
@@ -105,27 +107,10 @@ public class CircuitSimulation
     return new CircuitSimulationData(id, timelineData, name);
   }
 
-  public static void resetNextId()
-  {
-    nextId = 1;
-  }
-
   @Override
   public String toString()
   {
     return getDescription();
-  }
-
-  public static SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation, Collection<SubcircuitSimulation> subcircuitSimulations)
-  {
-    for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
-    {
-      if (subcircuitSimulation.getCircuitSimulation() == circuitSimulation)
-      {
-        return subcircuitSimulation;
-      }
-    }
-    return null;
   }
 }
 

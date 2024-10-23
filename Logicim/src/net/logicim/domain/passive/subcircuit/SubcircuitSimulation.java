@@ -31,6 +31,11 @@ public abstract class SubcircuitSimulation
     }
   }
 
+  public static void resetNextId()
+  {
+    nextId = 1;
+  }
+
   public Circuit getCircuit()
   {
     return circuitSimulation.getCircuit();
@@ -41,9 +46,43 @@ public abstract class SubcircuitSimulation
     return id;
   }
 
+  public void setId(long id)
+  {
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
+  }
+
   public String getDescription()
   {
-    return "Type [" + getType() + "] ID [" + id + "], CircuitSimulation [" + circuitSimulation.getDescription() + "]";
+    StringBuilder builder = new StringBuilder();
+
+    builder.append("Type[");
+    builder.append(getType());
+    builder.append("] ");
+
+    builder.append("ID[");
+    builder.append(id);
+    builder.append("] ");
+
+    builder.append("Simulation[");
+    if (circuitSimulation != null)
+    {
+      builder.append(circuitSimulation.getDescription());
+    }
+    builder.append("] ");
+
+    SubcircuitObject subcircuitObject = getSubcircuitObject();
+    if (subcircuitObject != null)
+    {
+      builder.append("Editor[");
+      builder.append(subcircuitObject.getTypeName());
+    }
+    builder.append("]");
+    return builder.toString();
+
   }
 
   public Simulation getSimulation()
@@ -81,35 +120,16 @@ public abstract class SubcircuitSimulation
     return circuitSimulation;
   }
 
-  public void setId(long id)
+  @Override
+  public String toString()
   {
-    this.id = id;
-    if (id >= nextId)
-    {
-      nextId = id + 1;
-    }
-  }
-
-  public static void resetNextId()
-  {
-    nextId = 1;
+    return getDescription();
   }
 
   protected abstract String getType();
 
   public abstract SubcircuitSimulationData save(long subcircuitEditorId);
 
-  @Override
-  public String toString()
-  {
-    if (circuitSimulation != null)
-    {
-      return circuitSimulation.getDescription();
-    }
-    else
-    {
-      return "";
-    }
-  }
+  public abstract SubcircuitObject getSubcircuitObject();
 }
 

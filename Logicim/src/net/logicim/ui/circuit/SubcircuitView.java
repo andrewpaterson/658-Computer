@@ -43,6 +43,7 @@ import java.util.*;
 import static net.logicim.ui.common.LineOverlap.getOverlap;
 
 public class SubcircuitView
+    implements SubcircuitObject
 {
   protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
 
@@ -1489,7 +1490,7 @@ public class SubcircuitView
   {
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
-      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(new CircuitSimulation(name));
+      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(this, new CircuitSimulation(name));
       addSubcircuitSimulation(subcircuitTopSimulation);
       return subcircuitTopSimulation;
     }

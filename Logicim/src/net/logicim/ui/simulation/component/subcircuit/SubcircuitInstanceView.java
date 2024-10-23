@@ -231,7 +231,9 @@ public class SubcircuitInstanceView
     validateCanCreateComponent(containingSubcircuitSimulation);
 
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
+                                                                   getInstanceSubcircuitView(),
+                                                                   properties.name);
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
@@ -260,10 +262,13 @@ public class SubcircuitInstanceView
   }
 
   //Called from SubcircuitInstanceData.
-  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstanceSimulation subcircuitInstanceSimulation)
+  public SubcircuitInstance createSubcircuitInstance(SubcircuitSimulation containingSubcircuitSimulation,
+                                                     SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
+                                                                   getInstanceSubcircuitView(),
+                                                                   properties.name);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
@@ -331,7 +336,7 @@ public class SubcircuitInstanceView
   @Override
   public String getDescription()
   {
-    return getType() + " " + getShortDescription();
+    return "Instance " + getShortDescription();
   }
 
   @Override

@@ -517,7 +517,7 @@ public class SubcircuitEditor
   @Override
   public String getDescription()
   {
-    return "Editor" + " " + getTypeName();
+    return "Editor " + getTypeName();
   }
 
   public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)

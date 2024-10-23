@@ -1,5 +1,6 @@
 package net.logicim.domain.passive.subcircuit;
 
+import net.common.util.StringUtil;
 import net.logicim.data.simulation.SubcircuitInstanceSimulationData;
 import net.logicim.domain.CircuitSimulation;
 
@@ -28,6 +29,12 @@ public class SubcircuitInstanceSimulation
                                                 circuitSimulation.getId());
   }
 
+  @Override
+  public SubcircuitObject getSubcircuitObject()
+  {
+    return subcircuitInstance.getSubcircuitObject();
+  }
+
   public void setSubcircuitInstance(SubcircuitInstance subcircuitInstance)
   {
     this.subcircuitInstance = subcircuitInstance;
@@ -36,7 +43,15 @@ public class SubcircuitInstanceSimulation
   @Override
   public String getDescription()
   {
-    return super.getDescription() + ", SubcircuitInstance [" + subcircuitInstance.getName() + "]";
+    String name = subcircuitInstance.getName();
+    if (StringUtil.isEmptyOrNull(name))
+    {
+      return super.getDescription();
+    }
+    else
+    {
+      return super.getDescription() + " Name[" + name + "]";
+    }
   }
 
   @Override

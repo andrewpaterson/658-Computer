@@ -72,6 +72,7 @@ public class SimulationLoader
       subcircuitSimulation = new SubcircuitTopSimulation(subcircuitEditor.getInstanceSubcircuitView(),
                                                          circuitSimulation,
                                                          subcircuitSimulationId);
+      circuitSimulation.setTopSimulation((SubcircuitTopSimulation) subcircuitSimulation);
       addSubcircuitSimulation(subcircuitEditor, subcircuitSimulation);
     }
     return subcircuitSimulation;

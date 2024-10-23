@@ -6,6 +6,7 @@ import net.logicim.data.simulation.CircuitSimulationData;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.Timeline;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 
 public class CircuitSimulation
     implements Described
@@ -16,6 +17,7 @@ public class CircuitSimulation
   protected Simulation simulation;
   protected long id;
   protected String name;
+  protected SubcircuitTopSimulation subcircuitTopSimulation;
 
   public CircuitSimulation(String name)
   {
@@ -111,6 +113,11 @@ public class CircuitSimulation
   public String toString()
   {
     return getDescription();
+  }
+
+  public void setTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation)
+  {
+    this.subcircuitTopSimulation = subcircuitTopSimulation;
   }
 }
 

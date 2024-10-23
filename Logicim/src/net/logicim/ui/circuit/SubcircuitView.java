@@ -1490,7 +1490,9 @@ public class SubcircuitView
   {
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
-      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(this, new CircuitSimulation(name));
+      CircuitSimulation circuitSimulation = new CircuitSimulation(name);
+      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(this, circuitSimulation);
+      circuitSimulation.setTopSimulation(subcircuitTopSimulation);
       addSubcircuitSimulation(subcircuitTopSimulation);
       return subcircuitTopSimulation;
     }

@@ -77,6 +77,11 @@ public class CircuitInstanceViewPath
     return path.get(path.size() - 1);
   }
 
+  public CircuitInstanceView getFirst()
+  {
+    return path.get(0);
+  }
+
   public CircuitInstanceView getSecondLast()
   {
     if (path.size() > 1)
@@ -125,6 +130,11 @@ public class CircuitInstanceViewPath
   public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
   {
     return circuitSimulations.containsKey(circuitSimulation);
+  }
+
+  public Map<CircuitSimulation, SubcircuitSimulation> getCircuitSimulations()
+  {
+    return circuitSimulations;
   }
 
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)

@@ -85,6 +85,16 @@ public abstract class SubcircuitSimulation
 
   }
 
+  public boolean isTop()
+  {
+    return false;
+  }
+
+  public boolean isInstance()
+  {
+    return false;
+  }
+
   public Simulation getSimulation()
   {
     return circuitSimulation.getSimulation();

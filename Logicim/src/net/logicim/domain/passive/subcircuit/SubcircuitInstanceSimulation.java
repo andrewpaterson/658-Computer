@@ -55,6 +55,12 @@ public class SubcircuitInstanceSimulation
   }
 
   @Override
+  public boolean isInstance()
+  {
+    return true;
+  }
+
+  @Override
   protected String getType()
   {
     return "Instance";

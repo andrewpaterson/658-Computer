@@ -357,7 +357,7 @@ public class SubcircuitInstanceView
   @Override
   public List<? extends SubcircuitSimulation> getPathSubcircuitSimulations()
   {
-    ArrayList<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
+    List<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
     Collection<SubcircuitInstance> subcircuitInstances = simulationSubcircuitInstances.values();
     for (SubcircuitInstance subcircuitInstance : subcircuitInstances)
     {

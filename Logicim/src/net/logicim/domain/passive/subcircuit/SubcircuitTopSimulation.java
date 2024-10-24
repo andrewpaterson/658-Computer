@@ -39,5 +39,11 @@ public class SubcircuitTopSimulation
   {
     return subcircuitObject;
   }
+
+  @Override
+  public boolean isTop()
+  {
+    return true;
+  }
 }
 

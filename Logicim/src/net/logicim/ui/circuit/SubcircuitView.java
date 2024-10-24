@@ -43,7 +43,6 @@ import java.util.*;
 import static net.logicim.ui.common.LineOverlap.getOverlap;
 
 public class SubcircuitView
-    implements SubcircuitObject
 {
   protected String typeName;  //The subcircuit instance name is on the SubcircuitInstanceView.
 
@@ -1486,12 +1485,12 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
-  public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
+  public SubcircuitTopSimulation createSubcircuitTopSimulation(SubcircuitObject subcircuitObject, String name)
   {
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
       CircuitSimulation circuitSimulation = new CircuitSimulation(name);
-      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(this, circuitSimulation);
+      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(subcircuitObject, circuitSimulation);
       circuitSimulation.setTopSimulation(subcircuitTopSimulation);
       addSubcircuitSimulation(subcircuitTopSimulation);
       return subcircuitTopSimulation;
@@ -1558,13 +1557,13 @@ public class SubcircuitView
     }
   }
 
-  public SubcircuitTopSimulation addNewSimulation(String simulationName)
+  public SubcircuitTopSimulation addNewSimulation(SubcircuitObject subcircuitObject, String simulationName)
   {
     List<SubcircuitTopSimulation> existingTopSimulations = getTopSimulations();
     SubcircuitTopSimulation startTopSimulation = existingTopSimulations.get(0);
 
     TraceToTraceMap traceMap = new TraceToTraceMap();
-    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(simulationName);
+    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(subcircuitObject, simulationName);
     recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap);
 
     return newSubcircuitTopSimulation;

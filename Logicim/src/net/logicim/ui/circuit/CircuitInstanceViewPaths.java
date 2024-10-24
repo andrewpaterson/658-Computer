@@ -4,7 +4,6 @@ import net.common.SimulatorException;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitObject;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
@@ -62,19 +61,25 @@ public class CircuitInstanceViewPaths
   public void addSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
     List<CircuitInstanceView> pathList = new ArrayList<>();
-    recurseFindPaths(subcircuitEditor, pathList);
+    recurseFindPaths(subcircuitEditor, pathList, null);
   }
 
-  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path)
+  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath)
   {
     path.add(circuitInstanceView);
-    paths.add(new CircuitInstanceViewPath(path));
+    CircuitInstanceViewPath circuitInstanceViewPath = new CircuitInstanceViewPath(path);
+    paths.add(circuitInstanceViewPath);
+
+    if (previousViewPath != null)
+    {
+      circuitInstanceViewPath.setPrevious(previousViewPath);
+    }
 
     SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
     List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      recurseFindPaths(subcircuitInstanceView, path);
+      recurseFindPaths(subcircuitInstanceView, path, circuitInstanceViewPath);
     }
     path.remove(path.size() - 1);
   }
@@ -137,9 +142,7 @@ public class CircuitInstanceViewPaths
       SubcircuitObject firstSubcircuitObject = subcircuitInstanceSimulation.getCircuitSimulation().getSubcircuitTopSimulation().getSubcircuitObject();
       CircuitInstanceView pathFirst = circuitInstanceViewPath.getFirst();
       SubcircuitObject lastSubcircuitObject = subcircuitInstanceSimulation.getSubcircuitObject();
-      SubcircuitView firstSubcircuitView = pathFirst.getInstanceSubcircuitView();
-      SubcircuitView lastSubcircuitView = pathLast.getInstanceSubcircuitView();
-      return (firstSubcircuitObject == firstSubcircuitView) && (lastSubcircuitObject == lastSubcircuitView);
+      return (firstSubcircuitObject == pathFirst) && (lastSubcircuitObject == pathLast);
     }
     else
     {
@@ -170,21 +173,6 @@ public class CircuitInstanceViewPaths
 
   protected void createPathLinks()
   {
-    Collection<CircuitInstanceViewPath> circuitInstanceViewPaths = subcircuitSimulationPaths.values();
-    for (CircuitInstanceViewPath circuitInstanceViewPath : circuitInstanceViewPaths)
-    {
-      CircuitInstanceView secondLast = circuitInstanceViewPath.getSecondLast();
-      if (secondLast != null)
-      {
-        SubcircuitSimulations simulations = secondLast.getInstanceSubcircuitView().getSimulations();
-        for (SubcircuitSimulation simulation : simulations.getSubcircuitSimulations())
-        {
-          CircuitInstanceViewPath secondLastPath = subcircuitSimulationPaths.get(simulation);
-          circuitInstanceViewPath.setPrevious(secondLastPath);
-        }
-      }
-    }
-
     for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
     {
       CircuitInstanceViewPath previous = circuitInstanceViewPath.getPrevious();

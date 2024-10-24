@@ -232,7 +232,7 @@ public class SubcircuitInstanceView
 
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
-                                                                   getInstanceSubcircuitView(),
+                                                                   this,
                                                                    properties.name);
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
@@ -267,7 +267,7 @@ public class SubcircuitInstanceView
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
-                                                                   getInstanceSubcircuitView(),
+                                                                   this,
                                                                    properties.name);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);

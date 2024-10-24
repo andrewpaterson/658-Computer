@@ -798,7 +798,8 @@ public class CircuitEditor
 
   public SubcircuitTopSimulation addNewSimulation(String simulationName)
   {
-    return getCurrentSubcircuitEditor().getInstanceSubcircuitView().addNewSimulation(simulationName);
+    SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
+    return subcircuitEditor.getInstanceSubcircuitView().addNewSimulation(subcircuitEditor, simulationName);
   }
 
   public String getSubcircuitNameError(String subcircuitName)

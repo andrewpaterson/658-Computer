@@ -42,7 +42,7 @@ public class SubcircuitEditor
   public SubcircuitEditor(CircuitEditor circuitEditor, String typeName)
   {
     this(new SubcircuitView(circuitEditor), typeName);
-    this.subcircuitView.createSubcircuitTopSimulation(getTopSimulationName(typeName));
+    this.subcircuitView.createSubcircuitTopSimulation(this, getTopSimulationName(typeName));
 
     id = nextId;
     nextId++;

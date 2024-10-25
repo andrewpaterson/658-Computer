@@ -29,15 +29,14 @@ public class SubcircuitInstanceSimulation
                                                 circuitSimulation.getId());
   }
 
-  @Override
-  public SubcircuitObject getSubcircuitObject()
-  {
-    return subcircuitInstance.getSubcircuitObject();
-  }
-
   public void setSubcircuitInstance(SubcircuitInstance subcircuitInstance)
   {
     this.subcircuitInstance = subcircuitInstance;
+  }
+
+  public SubcircuitInstance getSubcircuitInstance()
+  {
+    return subcircuitInstance;
   }
 
   @Override

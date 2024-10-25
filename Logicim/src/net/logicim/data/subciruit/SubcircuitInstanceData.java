@@ -72,7 +72,7 @@ public class SubcircuitInstanceData
   @Override
   public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
   {
-    throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponent() is not implemented.  Call createAndConnectComponent2() instead.");
+    throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponentDuringLoad() is not implemented.  Call createAndConnectComponent2() instead.");
   }
 
   public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,

@@ -231,9 +231,7 @@ public class SubcircuitInstanceView
     validateCanCreateComponent(containingSubcircuitSimulation);
 
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
-                                                                   this,
-                                                                   properties.name);
+    SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(), properties.name);
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = new SubcircuitInstanceSimulation(circuitSimulation, subcircuitInstance);
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
@@ -267,7 +265,6 @@ public class SubcircuitInstanceView
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(circuitSimulation.getCircuit(),
-                                                                   this,
                                                                    properties.name);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
@@ -340,7 +337,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public List<SubcircuitInstanceSimulation> getInnerSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  public List<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
     List<SubcircuitInstanceSimulation> result = new ArrayList<>();
     for (SubcircuitInstance subcircuitInstance : simulationSubcircuitInstances.values())
@@ -355,7 +352,21 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public List<? extends SubcircuitSimulation> getPathSubcircuitSimulations()
+  public SubcircuitSimulation getSubcircuitSimulationForParent(SubcircuitSimulation wantedParentSubcircuitSimulation)
+  {
+    for (Map.Entry<SubcircuitSimulation, SubcircuitInstance> entry : simulationSubcircuitInstances.entrySet())
+    {
+      if (wantedParentSubcircuitSimulation == entry.getKey())
+      {
+        SubcircuitInstance subcircuitInstance = entry.getValue();
+        return subcircuitInstance.getSubcircuitInstanceSimulation();
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public List<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations()
   {
     List<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
     Collection<SubcircuitInstance> subcircuitInstances = simulationSubcircuitInstances.values();

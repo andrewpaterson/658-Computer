@@ -1485,12 +1485,12 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
-  public SubcircuitTopSimulation createSubcircuitTopSimulation(SubcircuitObject subcircuitObject, String name)
+  public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
   {
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
     {
       CircuitSimulation circuitSimulation = new CircuitSimulation(name);
-      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(subcircuitObject, circuitSimulation);
+      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(circuitSimulation);
       circuitSimulation.setTopSimulation(subcircuitTopSimulation);
       addSubcircuitSimulation(subcircuitTopSimulation);
       return subcircuitTopSimulation;
@@ -1557,13 +1557,13 @@ public class SubcircuitView
     }
   }
 
-  public SubcircuitTopSimulation addNewSimulation(SubcircuitObject subcircuitObject, String simulationName)
+  public SubcircuitTopSimulation addNewSimulation(String simulationName)
   {
     List<SubcircuitTopSimulation> existingTopSimulations = getTopSimulations();
     SubcircuitTopSimulation startTopSimulation = existingTopSimulations.get(0);
 
     TraceToTraceMap traceMap = new TraceToTraceMap();
-    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(subcircuitObject, simulationName);
+    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(simulationName);
     recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap);
 
     return newSubcircuitTopSimulation;
@@ -1587,8 +1587,8 @@ public class SubcircuitView
     List<SubcircuitInstanceView> subcircuitInstanceViews = getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = subcircuitInstanceView.getInnerSubcircuitSimulations(existingCircuitSimulation);
-      for (SubcircuitInstanceSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
+      List<? extends SubcircuitSimulation> innerSubcircuitSimulations = subcircuitInstanceView.getInstanceSubcircuitSimulations(existingCircuitSimulation);
+      for (SubcircuitSimulation innerSubcircuitSimulation : innerSubcircuitSimulations)
       {
         SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createComponent(newSimulation);
         newSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();

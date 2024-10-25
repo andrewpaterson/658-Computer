@@ -74,13 +74,6 @@ public abstract class SubcircuitSimulation
     }
     builder.append("] ");
 
-    SubcircuitObject subcircuitObject = getSubcircuitObject();
-    if (subcircuitObject != null)
-    {
-      builder.append("Editor[");
-      builder.append(subcircuitObject.getTypeName());
-    }
-    builder.append("]");
     return builder.toString();
 
   }
@@ -139,7 +132,5 @@ public abstract class SubcircuitSimulation
   protected abstract String getType();
 
   public abstract SubcircuitSimulationData save(long subcircuitEditorId);
-
-  public abstract SubcircuitObject getSubcircuitObject();
 }
 

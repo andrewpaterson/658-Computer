@@ -130,7 +130,7 @@ public class SubcircuitSimulations
       int depth = 0;
       for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
       {
-        List<SubcircuitInstanceSimulation> innerSubcircuitSimulations = circuitInstanceView.getInnerSubcircuitSimulations(circuitSimulation);
+        List<? extends SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations(circuitSimulation);
 
         if (innerSubcircuitSimulations.isEmpty() && depth > 0)
         {

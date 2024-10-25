@@ -14,6 +14,7 @@ public class SubcircuitListPanel
 {
   public SubcircuitListPanel(ListSelectionListener simulatorFrame, Logicim editor)
   {
+    super();
     SubcircuitListModel subcircuitListModel = new SubcircuitListModel(editor);
     setModel(subcircuitListModel);
     setMinimumSize(new Dimension(0, 0));
@@ -21,6 +22,9 @@ public class SubcircuitListPanel
     addListSelectionListener(simulatorFrame);
 
     editor.addSubcircuitListChangedListener(this);
+
+    InputMap inputMap = getInputMap();
+    inputMap.setParent(new InputMap());
   }
 
   @Override

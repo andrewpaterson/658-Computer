@@ -242,7 +242,7 @@ public class SubcircuitInstanceView
     subcircuitInstance.reset(circuitSimulation.getSimulation());
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
-    //instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
+    instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
 
     return subcircuitInstance;
   }

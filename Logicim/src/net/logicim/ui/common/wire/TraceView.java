@@ -253,7 +253,12 @@ public class TraceView
   @Override
   public String getDescription()
   {
-    return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ")";
+    return "Trace (" + getStartPosition() + ") to (" + getEndPosition() + ") length (" + getLength() + ")";
+  }
+
+  private int getLength()
+  {
+    return line.getLength();
   }
 
   protected Color getTraceColour(SubcircuitSimulation subcircuitSimulation)
@@ -313,6 +318,12 @@ public class TraceView
   public WireViewComp getWireViewComp()
   {
     return wireView;
+  }
+
+  @Override
+  public String toString()
+  {
+    return getDescription();
   }
 }
 

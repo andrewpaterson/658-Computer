@@ -401,5 +401,23 @@ public class Line
       }
     }
   }
+
+  public int getLength()
+  {
+    if (isEastWest())
+    {
+      return getMaximumX() - getMinimumX();
+    }
+    else if (isNorthSouth())
+    {
+      return getMaximumY() - getMinimumY();
+    }
+    else
+    {
+      double x = getMaximumX() - getMinimumX();
+      double y = getMaximumX() - getMinimumX();
+      return (int) Math.round(Math.sqrt(x * x + y * y));
+    }
+  }
 }
 

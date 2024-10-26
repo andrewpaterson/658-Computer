@@ -7,6 +7,7 @@ import net.logicim.data.common.SaveData;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.panels.*;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import net.logicim.ui.subcircuit.SimulationListPanel;
 import net.logicim.ui.subcircuit.SubcircuitListPanel;
 import net.logicim.ui.util.GridBagUtil;
 import net.logicim.ui.util.WindowSizer;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
+import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 
 public class LogicimFrame
     extends JFrame
@@ -36,6 +38,9 @@ public class LogicimFrame
   protected SelectedInfoPanel selectedInfoPanel;
   protected CircuitInfoPanel circuitInfoPanel;
   protected SubcircuitListPanel subcircuitListPanel;
+  protected SimulationListPanel simulationListPanel;
+  protected JSplitPane verticalSplitPane;
+  protected JSplitPane horizontalSplitPane;
 
   public LogicimFrame() throws HeadlessException
   {
@@ -48,19 +53,23 @@ public class LogicimFrame
     selectedInfoPanel = new SelectedInfoPanel(this);
     circuitInfoPanel = new CircuitInfoPanel(this, logicim);
     subcircuitListPanel = new SubcircuitListPanel(this, logicim);
+    simulationListPanel = new SimulationListPanel(this, logicim);
 
-    JSplitPane splitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), createSurroundPanel(simulatorPanel));
-    splitPane.setBorder(BorderFactory.createEmptyBorder());
-    splitPane.setDividerLocation(120);
+    verticalSplitPane = new JSplitPane(VERTICAL_SPLIT, createSurroundPanel(simulatorPanel), createSurroundPanel(createScrollPane(simulationListPanel)));
+    verticalSplitPane.setBorder(BorderFactory.createEmptyBorder());
+    verticalSplitPane.setResizeWeight(1);
+    horizontalSplitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), verticalSplitPane);
+    horizontalSplitPane.setBorder(BorderFactory.createEmptyBorder());
+    horizontalSplitPane.setDividerLocation(120);
 
     setLayout(new GridBagLayout());
-    add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));  // Toolbar row
+    add(toolbarPanel, GridBagUtil.gridBagConstraints(0, 0, 1, 0, HORIZONTAL, 3, 1));      // Toolbar row
 
-    add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));          // Display settings
-    add(splitPane, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));              // Simulator panel
-    add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));          // Object creation
+    add(displayPanel, GridBagUtil.gridBagConstraints(0, 1, 0, 1, VERTICAL));              // Display settings
+    add(horizontalSplitPane, GridBagUtil.gridBagConstraints(1, 1, 1, 1, BOTH));                     // Simulator panel
+    add(creationPanel, GridBagUtil.gridBagConstraints(2, 1, 0, 1, VERTICAL));             // Object creation
 
-    add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1));  // Selected object info row
+    add(selectedInfoPanel, GridBagUtil.gridBagConstraints(0, 2, 1, 0, HORIZONTAL, 3, 1)); // Selected object info row
     add(circuitInfoPanel, GridBagUtil.gridBagConstraints(0, 3, 1, 0, HORIZONTAL, 3, 1));  // Simulation info row
 
     JMenuBar menuBar;
@@ -83,10 +92,10 @@ public class LogicimFrame
 
     ListenerHelper.addKeyAndContainerListenerRecursively(this, this, this);
 
-    splitPane.requestFocus();
+    horizontalSplitPane.requestFocus();
   }
 
-  private JScrollPane createScrollPane(SubcircuitListPanel listPanel)
+  private JScrollPane createScrollPane(Component listPanel)
   {
     JScrollPane scrollPane = new JScrollPane(listPanel);
     scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -161,6 +170,7 @@ public class LogicimFrame
   @Override
   public void windowOpened(WindowEvent e)
   {
+    verticalSplitPane.setDividerLocation(horizontalSplitPane.getHeight() - 40);
   }
 
   @Override

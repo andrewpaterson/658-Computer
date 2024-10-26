@@ -1506,6 +1506,11 @@ public class SubcircuitView
     return simulations.getSubcircuitSimulations(circuitSimulation);
   }
 
+  public List<? extends SubcircuitSimulation> getSubcircuitSimulations()
+  {
+    return simulations.getSubcircuitSimulations();
+  }
+
   public SubcircuitSimulations getSimulations()
   {
     return simulations;

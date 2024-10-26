@@ -484,7 +484,7 @@ public class Logicim
           }
 
           InformationPanel informationPanel = informationPanelFactory.createInformationPanel(graphics, viewport, infoWidth, infoHeight);
-          informationPanel.drawDetails(circuitEditor.getSubcircuitSimulation(), x, y);
+          informationPanel.drawDetails(circuitEditor.getCurrentSubcircuitSimulation(), x, y);
         }
 
         graphics.setFont(font);
@@ -832,7 +832,7 @@ public class Logicim
 
   public void resetCurrentSimulation()
   {
-    SubcircuitSimulation subcircuitSimulation = circuitEditor.getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
     CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     circuitSimulation.reset(circuitSimulation);
   }
@@ -1431,7 +1431,7 @@ public class Logicim
       if (staticView instanceof SubcircuitInstanceView)
       {
         SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
-        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(circuitEditor.getSubcircuitSimulation());
+        SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(circuitEditor.getCurrentSubcircuitSimulation());
         SubcircuitInstanceSimulation instanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
         SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
         discardEdit();
@@ -1472,7 +1472,7 @@ public class Logicim
 
   public SubcircuitSimulation getSubcircuitSimulation()
   {
-    return circuitEditor.getSubcircuitSimulation();
+    return circuitEditor.getCurrentSubcircuitSimulation();
   }
 
   public int getSimulationCount()
@@ -1629,7 +1629,7 @@ public class Logicim
   @Override
   public SubcircuitSimulation getCurrentSimulation()
   {
-    return circuitEditor.getSubcircuitSimulation();
+    return circuitEditor.getCurrentSubcircuitSimulation();
   }
 
   public void notifySubcircuitListChanged()

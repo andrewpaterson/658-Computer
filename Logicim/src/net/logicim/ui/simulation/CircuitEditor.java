@@ -88,7 +88,7 @@ public class CircuitEditor
       views = getAllCurrentViews();
     }
 
-    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = getCurrentSubcircuitSimulation();
     for (View view : views)
     {
       view.paint(graphics, viewport, subcircuitSimulation);
@@ -97,7 +97,7 @@ public class CircuitEditor
 
   public Circuit getCircuit()
   {
-    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = getCurrentSubcircuitSimulation();
     if (subcircuitSimulation != null)
     {
       return subcircuitSimulation.getCircuit();
@@ -147,7 +147,7 @@ public class CircuitEditor
 
   public void runSimultaneous()
   {
-    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = getCurrentSubcircuitSimulation();
     if (subcircuitSimulation != null)
     {
       subcircuitSimulation.runSimultaneous();
@@ -156,10 +156,10 @@ public class CircuitEditor
 
   public void runToTime(long timeForward)
   {
-    SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = getCurrentSubcircuitSimulation();
     if (subcircuitSimulation != null)
     {
-      getSubcircuitSimulation().runToTime(timeForward);
+      getCurrentSubcircuitSimulation().runToTime(timeForward);
     }
   }
 
@@ -671,7 +671,7 @@ public class CircuitEditor
     getCurrentSubcircuitEditor().deleteStaticViews(staticViews);
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation()
+  public SubcircuitSimulation getCurrentSubcircuitSimulation()
   {
     return currentSubcircuitSimulation;
   }

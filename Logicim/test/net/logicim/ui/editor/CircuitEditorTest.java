@@ -45,7 +45,7 @@ public class CircuitEditorTest
                                                                             100 * Units.MHz,
                                                                             false));
 
-    SubcircuitSimulation subcircuitSimulation = circuitEditor.getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
     clockView.createComponent(subcircuitSimulation);
     clockView.simulationStarted();
 

@@ -4,7 +4,7 @@ import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.editor.*;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
@@ -24,7 +24,7 @@ import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
 public class EditorActionsFactory
 {
-  public static void create(Logicim editor, SimulatorPanel panel)
+  public static void create(Logicim editor, LogicimPanel panel)
   {
     editor.addAction(StopEditAction.NAME, new StopEditAction(editor));
     editor.addAction(RunOneEventAction.NAME, new RunOneEventAction(editor));

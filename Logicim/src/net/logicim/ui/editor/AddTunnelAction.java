@@ -1,19 +1,19 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class AddTunnelAction
     extends SimulatorEditorAction
 {
   public static final String NAME = "Add Tunnel";
 
-  protected SimulatorPanel simulatorPanel;
+  protected LogicimPanel logicimPanel;
 
-  public AddTunnelAction(Logicim editor, SimulatorPanel simulatorPanel)
+  public AddTunnelAction(Logicim editor, LogicimPanel logicimPanel)
   {
     super(editor);
-    this.simulatorPanel = simulatorPanel;
+    this.logicimPanel = logicimPanel;
   }
 
   @Override

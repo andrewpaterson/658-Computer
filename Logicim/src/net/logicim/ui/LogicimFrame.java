@@ -31,7 +31,7 @@ public class LogicimFrame
                ContainerListener,
                ListSelectionListener
 {
-  protected SimulatorPanel simulatorPanel;
+  protected LogicimPanel logicimPanel;
   protected ToolbarPanel toolbarPanel;
   protected DisplayPanel displayPanel;
   protected CreationPanel creationPanel;
@@ -46,7 +46,7 @@ public class LogicimFrame
   {
     Logicim logicim = new Logicim();
 
-    simulatorPanel = new SimulatorPanel(this, logicim);
+    logicimPanel = new LogicimPanel(this, logicim);
     toolbarPanel = new ToolbarPanel(this, logicim);
     displayPanel = new DisplayPanel(this, logicim);
     creationPanel = new CreationPanel(this, logicim);
@@ -55,7 +55,7 @@ public class LogicimFrame
     subcircuitListPanel = new SubcircuitListPanel(this, logicim);
     simulationListPanel = new SimulationListPanel(this, logicim);
 
-    verticalSplitPane = new JSplitPane(VERTICAL_SPLIT, createSurroundPanel(simulatorPanel), createSurroundPanel(createScrollPane(simulationListPanel)));
+    verticalSplitPane = new JSplitPane(VERTICAL_SPLIT, createSurroundPanel(logicimPanel), createSurroundPanel(createScrollPane(simulationListPanel)));
     verticalSplitPane.setBorder(BorderFactory.createEmptyBorder());
     verticalSplitPane.setResizeWeight(1);
     horizontalSplitPane = new JSplitPane(HORIZONTAL_SPLIT, createSurroundPanel(createScrollPane(subcircuitListPanel)), verticalSplitPane);
@@ -95,6 +95,38 @@ public class LogicimFrame
     horizontalSplitPane.requestFocus();
   }
 
+  public static void main(String[] args)
+  {
+    ensureDataConstructors();
+    ensureEnumStores();
+
+    LogicimFrame logicimFrame = new LogicimFrame();
+
+    logicimFrame.setTitle("Logicim");
+    logicimFrame.setMinimumSize(new Dimension(320, 240));
+    logicimFrame.setVisible(true);
+
+    WindowSizer.setPercentageOfScreenSize(logicimFrame, 65.0, 65.0);
+    WindowSizer.centre(logicimFrame);
+
+    logicimFrame.loop();
+  }
+
+  protected static void ensureEnumStores()
+  {
+    EnumStore.getInstance();
+  }
+
+  protected static void ensureDataConstructors()
+  {
+    List<Class<SaveData>> classes = SaveDataClassStore.getInstance().findAll();
+    for (Class<SaveData> aClass : classes)
+    {
+      ClassInspector classInspector = ClassInspector.forClass(aClass);
+      classInspector.newInstance();
+    }
+  }
+
   private JScrollPane createScrollPane(Component listPanel)
   {
     JScrollPane scrollPane = new JScrollPane(listPanel);
@@ -113,41 +145,9 @@ public class LogicimFrame
     return panel;
   }
 
-  public static void main(String[] args)
-  {
-    ensureDataConstructors();
-    ensureEnumStores();
-
-    LogicimFrame logicimFrame = new LogicimFrame();
-
-    logicimFrame.setTitle("Logicim");
-    logicimFrame.setMinimumSize(new Dimension(320, 240));
-    logicimFrame.setVisible(true);
-
-    WindowSizer.setPercentageOfScreenSize(logicimFrame, 65.0, 65.0);
-    WindowSizer.centre(logicimFrame);
-
-    logicimFrame.loop();
-  }
-
   private void loop()
   {
-    simulatorPanel.loop();
-  }
-
-  protected static void ensureEnumStores()
-  {
-    EnumStore.getInstance();
-  }
-
-  protected static void ensureDataConstructors()
-  {
-    List<Class<SaveData>> classes = SaveDataClassStore.getInstance().findAll();
-    for (Class<SaveData> aClass : classes)
-    {
-      ClassInspector classInspector = ClassInspector.forClass(aClass);
-      classInspector.newInstance();
-    }
+    logicimPanel.loop();
   }
 
   @Override
@@ -158,25 +158,29 @@ public class LogicimFrame
   @Override
   public void keyPressed(KeyEvent e)
   {
-    simulatorPanel.keyPressed(e);
+    logicimPanel.keyPressed(e);
   }
 
   @Override
   public void keyReleased(KeyEvent e)
   {
-    simulatorPanel.keyReleased(e);
+    logicimPanel.keyReleased(e);
   }
 
   @Override
   public void windowOpened(WindowEvent e)
   {
-    verticalSplitPane.setDividerLocation(horizontalSplitPane.getHeight() - 40);
+    Font font = simulationListPanel.getFont();
+    FontMetrics fontMetrics = simulationListPanel.getFontMetrics(font);
+    int cellHeight = fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent();
+    cellHeight += 5;
+    verticalSplitPane.setDividerLocation(horizontalSplitPane.getHeight() - cellHeight * 4);
   }
 
   @Override
   public void windowClosing(WindowEvent e)
   {
-    simulatorPanel.windowClosing();
+    logicimPanel.windowClosing();
   }
 
   @Override
@@ -221,7 +225,7 @@ public class LogicimFrame
     if (!e.getValueIsAdjusting())
     {
       SubcircuitEditor editor = subcircuitListPanel.getSelectedValue();
-      simulatorPanel.setCurrentSubcircuitEditor(editor);
+      logicimPanel.setCurrentSubcircuitEditor(editor);
     }
   }
 }

@@ -1,19 +1,19 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class AddLabelAction
     extends SimulatorEditorAction
 {
   public static final String NAME = "Add Label";
 
-  protected SimulatorPanel simulatorPanel;
+  protected LogicimPanel logicimPanel;
 
-  public AddLabelAction(Logicim editor, SimulatorPanel simulatorPanel)
+  public AddLabelAction(Logicim editor, LogicimPanel logicimPanel)
   {
     super(editor);
-    this.simulatorPanel = simulatorPanel;
+    this.logicimPanel = logicimPanel;
   }
 
   @Override

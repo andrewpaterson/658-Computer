@@ -10,7 +10,8 @@ import java.awt.*;
 
 public class SimulationListPanel
     extends JList<SubcircuitSimulation>
-    implements SimulationListChangedListener
+    implements SimulationListChangedListener,
+               SubcircuitListChangedListener
 {
   public SimulationListPanel(ListSelectionListener simulatorFrame, Logicim editor)
   {
@@ -22,6 +23,7 @@ public class SimulationListPanel
     addListSelectionListener(simulatorFrame);
 
     editor.addSimulationListChangedListener(this);
+    editor.addSubcircuitListChangedListener(this);
 
     InputMap inputMap = getInputMap();
     inputMap.setParent(new InputMap());
@@ -29,6 +31,17 @@ public class SimulationListPanel
 
   @Override
   public void simulationListChanged()
+  {
+    simulationChanges();
+  }
+
+  @Override
+  public void subcircuitListChanged()
+  {
+    simulationChanges();
+  }
+
+  protected void simulationChanges()
   {
     SwingUtilities.invokeLater(new Runnable()
     {
@@ -43,6 +56,8 @@ public class SimulationListPanel
         ListSelectionListener[] listSelectionListeners = removeListSelectionListeners();
         setSelectedIndex(index);
         addListSelectionListeners(listSelectionListeners);
+
+        ensureIndexIsVisible(index);
       }
     });
   }

@@ -1,19 +1,19 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class AddPowerAction
     extends SimulatorEditorAction
 {
   public static final String NAME = "Add Power";
 
-  protected SimulatorPanel simulatorPanel;
+  protected LogicimPanel logicimPanel;
 
-  public AddPowerAction(Logicim editor, SimulatorPanel simulatorPanel)
+  public AddPowerAction(Logicim editor, LogicimPanel logicimPanel)
   {
     super(editor);
-    this.simulatorPanel = simulatorPanel;
+    this.logicimPanel = logicimPanel;
   }
 
   @Override

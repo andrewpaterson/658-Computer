@@ -1,16 +1,16 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class SaveSimulationAction
     extends EditorAction
 {
   public static final String NAME = "Save Project";
 
-  private SimulatorPanel panel;
+  private LogicimPanel panel;
 
-  public SaveSimulationAction(Logicim editor, SimulatorPanel panel)
+  public SaveSimulationAction(Logicim editor, LogicimPanel panel)
   {
     super(editor);
     this.panel = panel;

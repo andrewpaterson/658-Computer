@@ -57,18 +57,6 @@ public class SubcircuitEditorList
     return subcircuitEditors.indexOf(subcircuitEditor);
   }
 
-  private SubcircuitEditor getSubcircuitEditor(SubcircuitView subcircuitView)
-  {
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      if (subcircuitEditor.getInstanceSubcircuitView() == subcircuitView)
-      {
-        return subcircuitEditor;
-      }
-    }
-    throw new SimulatorException("Could not get subcircuit editor for subcircuit view [%s].", subcircuitView.getTypeName());
-  }
-
   public String getSubcircuitNameError(String subcircuitName)
   {
     if (StringUtil.isEmptyOrNull(subcircuitName))

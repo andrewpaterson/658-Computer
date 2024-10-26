@@ -1,19 +1,19 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class AddSplitterAction
     extends SimulatorEditorAction
 {
   public static final String NAME = "Add Splitter";
 
-  protected SimulatorPanel simulatorPanel;
+  protected LogicimPanel logicimPanel;
 
-  public AddSplitterAction(Logicim editor, SimulatorPanel simulatorPanel)
+  public AddSplitterAction(Logicim editor, LogicimPanel logicimPanel)
   {
     super(editor);
-    this.simulatorPanel = simulatorPanel;
+    this.logicimPanel = logicimPanel;
   }
 
   @Override

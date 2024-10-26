@@ -1,16 +1,16 @@
 package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
-import net.logicim.ui.panels.SimulatorPanel;
+import net.logicim.ui.panels.LogicimPanel;
 
 public class LoadSimulationAction
     extends EditorAction
 {
   public static final String NAME = "Load Project";
 
-  private SimulatorPanel panel;
+  private LogicimPanel panel;
 
-  public LoadSimulationAction(Logicim editor, SimulatorPanel panel)
+  public LoadSimulationAction(Logicim editor, LogicimPanel panel)
   {
     super(editor);
     this.panel = panel;

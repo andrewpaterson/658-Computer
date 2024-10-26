@@ -40,7 +40,6 @@ import net.logicim.ui.simulation.component.passive.power.GroundViewFactory;
 import net.logicim.ui.simulation.component.passive.power.PositivePowerViewFactory;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterViewFactory;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
-import net.logicim.ui.subcircuit.SubcircuitEditorList;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -52,7 +51,7 @@ import static net.logicim.domain.common.Units.nS_IN_mS;
 import static net.logicim.file.writer.ReflectiveWriter.EDITOR_DATA_TAG_NAME;
 import static net.logicim.file.writer.ReflectiveWriter.LOGICIM_DOC_NAME;
 
-public class SimulatorPanel
+public class LogicimPanel
     extends JPanel
     implements MouseListener,
                ComponentListener,
@@ -67,7 +66,7 @@ public class SimulatorPanel
   protected Logicim logicim;
   protected JFrame frame;
 
-  public SimulatorPanel(JFrame frame, Logicim logicim)
+  public LogicimPanel(JFrame frame, Logicim logicim)
   {
     this.frame = frame;
     running = false;
@@ -106,9 +105,9 @@ public class SimulatorPanel
     addMouseWheelListener(this);
   }
 
-  private void addActions(SimulatorPanel simulatorPanel)
+  private void addActions(LogicimPanel logicimPanel)
   {
-    EditorActionsFactory.create(logicim, simulatorPanel);
+    EditorActionsFactory.create(logicim, logicimPanel);
     KeyInputsFactory.create(logicim);
     ComponentDoubleClickInputsFactory.create(logicim);
     logicim.validateInputActions();

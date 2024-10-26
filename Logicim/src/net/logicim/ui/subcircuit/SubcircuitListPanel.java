@@ -43,6 +43,8 @@ public class SubcircuitListPanel
         ListSelectionListener[] listSelectionListeners = removeListSelectionListeners();
         setSelectedIndex(index);
         addListSelectionListeners(listSelectionListeners);
+
+        ensureIndexIsVisible(index);
       }
     });
   }

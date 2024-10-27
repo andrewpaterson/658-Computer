@@ -23,7 +23,7 @@ public class CircuitInfoPanel
 
     List<JComponent> components = new ArrayList<>();
     components.add(createLeft(editor, new SubcircuitInfo(editor), 200));
-    components.add(createLeft(editor, new SimulationInfo(editor), 200));
+    components.add(createLeft(editor, new SimulationInfo(editor), 400));
 
     components.add(new JPanel());
 

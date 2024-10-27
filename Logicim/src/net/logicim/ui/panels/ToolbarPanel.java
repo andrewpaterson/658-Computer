@@ -26,7 +26,6 @@ public class ToolbarPanel
     components.add(createHorizontalButtonInput(editor, SAVE, SaveSimulationAction.NAME));
     components.add(new JSeparator(JSeparator.VERTICAL));
     components.add(createHorizontalButtonInput(editor, SIMULATION_NEW, NewSimulationAction.NAME));
-    components.add(createHorizontalButtonInput(editor, SIMULATION_SELECT, SelectSimulationAction.NAME));
     components.add(createHorizontalButtonInput(editor, SIMULATION_RESET, ResetSimulationAction.NAME));
     components.add(createHorizontalButtonInput(editor, SIMULATION_RUN, RunSimulationAction.NAME));
     components.add(createHorizontalButtonInput(editor, SIMULATION_PAUSE, PauseSimulationAction.NAME));

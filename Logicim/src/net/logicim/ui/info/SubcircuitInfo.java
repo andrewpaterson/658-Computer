@@ -18,7 +18,7 @@ public class SubcircuitInfo
     if (subcircuitEditor != null)
     {
       String typeName = subcircuitEditor.getTypeName();
-      return String.format(" Subcircuit %s ", typeName);
+      return String.format(" Subcircuit: %s ", typeName);
     }
     else
     {

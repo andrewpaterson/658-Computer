@@ -77,7 +77,7 @@ public class IconLoader
   public static final String ZOOM_FIT_SELECTION = "zoom_selection_24.png";
   public static final String POINT_VIEW = "grid_24.png";
   public static final String VIEW_SIMULATION_TREE = "simulation_tree_24.png";
-  public static final String SIMULATION_SELECT = "array_24.png";
+  //public static final String SIMULATION_SELECT = "array_24.png";
   public static final String SIMULATION_NEW = "new_simulation_24.png";
 
   private static IconLoader instance = null;
@@ -156,7 +156,6 @@ public class IconLoader
     createIcons(imageFileMap, ZOOM_FIT_SELECTION);
     createIcons(imageFileMap, POINT_VIEW);
     createIcons(imageFileMap, VIEW_SIMULATION_TREE);
-    createIcons(imageFileMap, SIMULATION_SELECT);
     createIcons(imageFileMap, SIMULATION_NEW);
   }
 

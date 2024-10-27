@@ -320,16 +320,16 @@ public class Logicim
 
   protected void setSubcircuitParameters(String typeName)
   {
-    SubcircuitViewParameters subcircuitViewParameters = this.subcircuitViewParameters.get(typeName);
-    if (subcircuitViewParameters == null)
+    SubcircuitViewParameters parameters = this.subcircuitViewParameters.get(typeName);
+    if (parameters == null)
     {
-      this.subcircuitViewParameters.put(typeName,
+      subcircuitViewParameters.put(typeName,
                                         new SubcircuitViewParameters(viewport.getPosition().clone(),
                                                                      viewport.getZoom()));
     }
     else
     {
-      subcircuitViewParameters.set(viewport.getPosition().clone(),
+      parameters.set(viewport.getPosition().clone(),
                                    viewport.getZoom());
     }
   }
@@ -1033,7 +1033,7 @@ public class Logicim
     subcircuitViewParameters = loadSubcircuitViewParameters(editorData);
     subcircuitBookmarks = loadSubcircuitBookmarks(editorData);
 
-    setViewportParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
+    setSubcircuitViewParameters(circuitEditor.getCurrentSubcircuitEditor().getTypeName());
 
     drawPointGrid = editorData.drawPointGrid;
 
@@ -1308,7 +1308,7 @@ public class Logicim
   public void newSimulationAction(String simulationName)
   {
     SubcircuitTopSimulation topSimulation = circuitEditor.addNewSimulation(simulationName);
-    circuitEditor.setSubcircuitSimulation(getCurrentSubcircuitEditor(), topSimulation);
+    circuitEditor.setCurrentSubcircuitSimulation(getCurrentSubcircuitEditor(), topSimulation);
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)
@@ -1336,11 +1336,11 @@ public class Logicim
     }
   }
 
-  private void setViewportParameters(String subcircuitTypeName)
+  private void setSubcircuitViewParameters(String subcircuitTypeName)
   {
     if (!StringUtil.isEmptyOrNull(subcircuitTypeName))
     {
-      SubcircuitViewParameters parameters = this.subcircuitViewParameters.get(subcircuitTypeName);
+      SubcircuitViewParameters parameters = subcircuitViewParameters.get(subcircuitTypeName);
       if (parameters != null)
       {
         viewport.setParameters(parameters.getPosition(), parameters.getZoom());
@@ -1367,7 +1367,7 @@ public class Logicim
       discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor);
-      setViewportParameters(subcircuitTypeName);
+      setSubcircuitViewParameters(subcircuitTypeName);
       updateHighlighted();
     }
   }
@@ -1379,7 +1379,7 @@ public class Logicim
       discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoPreviousSubcircuit();
-      setViewportParameters(subcircuitTypeName);
+      setSubcircuitViewParameters(subcircuitTypeName);
       updateHighlighted();
     }
   }
@@ -1391,8 +1391,18 @@ public class Logicim
       discardEdit();
 
       String subcircuitTypeName = circuitEditor.gotoNextSubcircuit();
-      setViewportParameters(subcircuitTypeName);
+      setSubcircuitViewParameters(subcircuitTypeName);
       updateHighlighted();
+    }
+  }
+
+  public void gotoSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  {
+    if (subcircuitSimulation != null)
+    {
+      discardEdit();
+
+      circuitEditor.setCurrentSubcircuitSimulation(getCurrentSubcircuitEditor(), subcircuitSimulation);
     }
   }
 
@@ -1438,7 +1448,7 @@ public class Logicim
 
         SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(instanceSubcircuitView.getTypeName());
         String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, instanceSimulation);
-        setViewportParameters(subcircuitTypeName);
+        setSubcircuitViewParameters(subcircuitTypeName);
         updateHighlighted();
       }
     }
@@ -1475,9 +1485,9 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitSimulation();
   }
 
-  public int getSimulationCount()
+  public int getCircuitSimulationCount()
   {
-    return circuitEditor.getSubcircuitTopSimulations().size();
+    return circuitEditor.getCircuitSimulations().size();
   }
 
   public List<SubcircuitTopEditorSimulation> getSubcircuitTopSimulations()
@@ -1512,11 +1522,6 @@ public class Logicim
   public void setRunning(boolean running)
   {
     simulationSpeed.setRunning(running);
-  }
-
-  public void setCurrentSimulation(SubcircuitSimulation subcircuitSimulation)
-  {
-    this.circuitEditor.setSubcircuitSimulation(subcircuitSimulation);
   }
 
   public void addAction(String name, EditorAction action)

@@ -3,6 +3,7 @@ package net.logicim.ui.panels;
 import net.common.util.FileUtil;
 import net.logicim.data.editor.EditorData;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.file.reader.LogicimFileReader;
 import net.logicim.file.writer.LogicimFileWriter;
 import net.logicim.ui.Logicim;
@@ -20,7 +21,6 @@ import net.logicim.ui.input.event.MouseWheelEvent;
 import net.logicim.ui.input.event.*;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.NewSimulationDialog;
-import net.logicim.ui.simulation.SelectSimulationDialog;
 import net.logicim.ui.simulation.ShowSimulationsDialog;
 import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
@@ -351,12 +351,6 @@ public class LogicimPanel
     new EditorDialogHelper().showDialog(showSimulationsDialog);
   }
 
-  public void selectSimulation()
-  {
-    SelectSimulationDialog selectSimulationDialog = new SelectSimulationDialog(getFrame(), logicim);
-    new EditorDialogHelper().showDialog(selectSimulationDialog);
-  }
-
   public void newSimulation()
   {
     if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
@@ -437,6 +431,11 @@ public class LogicimPanel
   public void setCurrentSubcircuitEditor(SubcircuitEditor editor)
   {
     logicim.gotoSubcircuit(editor);
+  }
+
+  public void setCurrentSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
+  {
+    logicim.gotoSubcircuitSimulation(subcircuitSimulation);
   }
 }
 

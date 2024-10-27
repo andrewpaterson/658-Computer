@@ -92,7 +92,6 @@ public class KeyInputsFactory
       editor.addKeyInput(new KeyInput(editor.getAction(PlaceSubcircuitAction.name(i)), KeyEvent.VK_0 + i, Up, Up, Down));
     }
 
-    editor.addKeyInput(new KeyInput(editor.getAction(SelectSimulationAction.NAME), KeyEvent.VK_S, Down, Up, Down));
     editor.addKeyInput(new KeyInput(editor.getAction(NewSimulationAction.NAME), KeyEvent.VK_S, Down, Down, Down));
   }
 

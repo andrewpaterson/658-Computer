@@ -97,7 +97,6 @@ public class EditorActionsFactory
 
     editor.addAction(TogglePointViewAction.NAME, new TogglePointViewAction(editor));
     editor.addAction(ViewSimulationTreeAction.NAME, new ViewSimulationTreeAction(editor, panel));
-    editor.addAction(SelectSimulationAction.NAME, new SelectSimulationAction(editor, panel));
     editor.addAction(NewSimulationAction.NAME, new NewSimulationAction(editor, panel));
 
     editor.addAction(AddComponentAction.NAME, new AddComponentAction(editor, panel));

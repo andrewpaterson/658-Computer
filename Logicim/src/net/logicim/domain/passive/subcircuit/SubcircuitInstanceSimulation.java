@@ -34,11 +34,6 @@ public class SubcircuitInstanceSimulation
     this.subcircuitInstance = subcircuitInstance;
   }
 
-  public SubcircuitInstance getSubcircuitInstance()
-  {
-    return subcircuitInstance;
-  }
-
   @Override
   public String getDescription()
   {

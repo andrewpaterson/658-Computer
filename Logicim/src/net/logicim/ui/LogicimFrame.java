@@ -4,6 +4,7 @@ import net.common.reflect.ClassInspector;
 import net.common.reflect.EnumStore;
 import net.logicim.data.SaveDataClassStore;
 import net.logicim.data.common.SaveData;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.panels.*;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
@@ -224,8 +225,16 @@ public class LogicimFrame
   {
     if (!e.getValueIsAdjusting())
     {
-      SubcircuitEditor editor = subcircuitListPanel.getSelectedValue();
-      logicimPanel.setCurrentSubcircuitEditor(editor);
+      if (e.getSource() == subcircuitListPanel)
+      {
+        SubcircuitEditor editor = subcircuitListPanel.getSelectedValue();
+        logicimPanel.setCurrentSubcircuitEditor(editor);
+      }
+      else if (e.getSource() == simulationListPanel)
+      {
+        SubcircuitSimulation subcircuitSimulation = simulationListPanel.getSelectedValue();
+        logicimPanel.setCurrentSubcircuitSimulation(subcircuitSimulation);
+      }
     }
   }
 }

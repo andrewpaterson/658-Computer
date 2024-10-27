@@ -17,17 +17,17 @@ public class SimulationInfo
   public String getInfo()
   {
     SubcircuitSimulation subcircuitSimulation = editor.getSubcircuitSimulation();
-    CircuitSimulation currentSimulation = null;
+    CircuitSimulation circuitSimulation = null;
     if (subcircuitSimulation != null)
     {
-      currentSimulation = subcircuitSimulation.getCircuitSimulation();
+      circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     }
 
     String description;
-    if (currentSimulation != null)
+    if (circuitSimulation != null)
     {
-      String name = currentSimulation.getName();
-      long id = currentSimulation.getId();
+      String name = circuitSimulation.getName();
+      long id = circuitSimulation.getId();
       if (StringUtil.isEmptyOrNull(name))
       {
         description = "" + id;
@@ -41,7 +41,7 @@ public class SimulationInfo
     {
       description = "";
     }
-    return String.format(" Simulation %s of %s", description, editor.getSimulationCount());
+    return String.format(" Circuit Simulation: %s of %s", description, editor.getCircuitSimulationCount());
   }
 }
 

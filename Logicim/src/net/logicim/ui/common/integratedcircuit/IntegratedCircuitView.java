@@ -155,7 +155,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     return simulationEventData;
   }
 
-  @SuppressWarnings("unchecked")
   protected <STATE extends State> STATE saveState(IC integratedCircuit)
   {
     if (integratedCircuit.isStateless())

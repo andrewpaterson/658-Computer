@@ -332,11 +332,11 @@ public class SubcircuitView
       Set<SubcircuitSimulation> componentSubcircuitSimulations = portView.getPortSubcircuitSimulations();
       if (!simulationSubcircuitSimulations.containsAll(componentSubcircuitSimulations))
       {
-        throw new SimulatorException("Subcircuit view [%s] simulations (of count [%s]) do not contain all port view [%s] simulations (of count [%s]).",
+        throw new SimulatorException("Subcircuit view [%s] simulations (of count [%s]) do not contain all Port View [%s] simulations (of count [%s]).",
                                      getTypeName(),
                                      simulationSubcircuitSimulations.size(),
                                      portView.getDescription(),
-                                     componentSubcircuitSimulations);
+                                     componentSubcircuitSimulations.size());
       }
     }
   }
@@ -1098,14 +1098,20 @@ public class SubcircuitView
 
     for (StaticView<?> staticView : staticViews)
     {
-      staticView.disable();
-      disconnectStaticViewAndDestroyComponents(staticView);
+      if (staticView.isEnabled())
+      {
+        staticView.disable();
+        disconnectStaticViewAndDestroyComponents(staticView);
+      }
     }
 
     for (TraceView traceView : traceViews)
     {
-      traceView.disable();
-      disconnectTraceViewAndDestroyComponents(traceView);
+      if (traceView.isEnabled())
+      {
+        traceView.disable();
+        disconnectTraceViewAndDestroyComponents(traceView);
+      }
     }
 
     LinkedHashSet<ConnectionView> nonTraceConnectionViews = pair.getNonTraceConnectionViews();
@@ -1434,7 +1440,9 @@ public class SubcircuitView
 
   public void destroySubcircuitInstanceComponentsAndSimulations(SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
-    destroyComponents(getStaticViews(), traceViews, subcircuitInstanceSimulation);
+    destroyComponents(getStaticViews(),
+                      traceViews,
+                      subcircuitInstanceSimulation);
 
     simulations.remove(subcircuitInstanceSimulation);
   }

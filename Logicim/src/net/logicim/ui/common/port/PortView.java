@@ -205,7 +205,7 @@ public class PortView
     }
   }
 
-  public void disconnectViewAndDestroyAllComponents()
+  public void disconnectViewAndDestroyComponents()
   {
     destroyAllComponents();
     connection = null;

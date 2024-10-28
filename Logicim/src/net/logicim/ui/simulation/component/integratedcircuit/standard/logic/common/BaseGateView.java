@@ -56,6 +56,5 @@ public abstract class BaseGateView<IC extends IntegratedCircuit<?, ?>, PROPERTIE
       return 1.5f + i;
     }
   }
-
 }
 

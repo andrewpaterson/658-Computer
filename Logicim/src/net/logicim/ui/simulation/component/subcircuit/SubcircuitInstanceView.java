@@ -449,10 +449,11 @@ public class SubcircuitInstanceView
     }
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = removedSubcircuitInstance.getSubcircuitInstanceSimulation();
     instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(subcircuitInstanceSimulation);
+    destroyPortViewComponents(subcircuitSimulation);
 
     Circuit circuit = subcircuitSimulation.getCircuit();
     circuit.remove(removedSubcircuitInstance);
-    simulationSubcircuitInstances.remove(subcircuitInstanceSimulation);
+    simulationSubcircuitInstances.remove(subcircuitSimulation);
   }
 
   @Override
@@ -472,6 +473,7 @@ public class SubcircuitInstanceView
       Circuit circuit = subcircuitSimulation.getCircuit();
       circuit.remove(removed);
     }
+
     simulationSubcircuitInstances.clear();
   }
 

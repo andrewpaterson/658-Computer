@@ -359,7 +359,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     for (PortView portView : portViews)
     {
-      portView.disconnectViewAndDestroyAllComponents();
+      portView.disconnectViewAndDestroyComponents();
     }
     destroyAllComponents();
   }

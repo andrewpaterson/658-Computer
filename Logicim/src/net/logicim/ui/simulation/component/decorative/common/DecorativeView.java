@@ -34,6 +34,11 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
+  public void validate()
+  {
+  }
+
+  @Override
   public void simulationStarted()
   {
   }

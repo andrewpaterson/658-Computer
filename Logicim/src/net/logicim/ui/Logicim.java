@@ -1113,8 +1113,8 @@ public class Logicim
 
   public void pushUndo()
   {
-    undoStack.push(save());
     circuitEditor.validate();
+    undoStack.push(save());
   }
 
   public void undo()

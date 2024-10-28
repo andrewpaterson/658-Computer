@@ -48,6 +48,19 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     super.finaliseView();
   }
 
+  @Override
+  public void validate()
+  {
+    if (!isEnabled())
+    {
+      Set<SubcircuitSimulation> simulations = getComponentSubcircuitSimulations();
+      if (!simulations.isEmpty())
+      {
+        throw new SimulatorException("%s [%s] is disabled but has [%s] Simulations.", getClass().getSimpleName(), getDescription(), simulations.size());
+      }
+    }
+  }
+
   private void rotatePortsByRelativeRight()
   {
     for (PortView portView : portViews)

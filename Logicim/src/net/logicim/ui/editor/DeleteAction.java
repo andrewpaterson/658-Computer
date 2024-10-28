@@ -17,7 +17,6 @@ public class DeleteAction
   public void executeEditorAction()
   {
     boolean componentDeleted = editor.editActionDeleteComponentIfPossible();
-    editor.getCircuitEditor().validate();
     if (componentDeleted)
     {
       CircuitEditor circuitEditor = editor.getCircuitEditor();

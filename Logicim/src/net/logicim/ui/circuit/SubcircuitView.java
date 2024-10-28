@@ -285,10 +285,21 @@ public class SubcircuitView
   public void validate()
   {
     validateConnectionViews();
+    validateStaticViews();
     validateTracesContainOnlyCurrentViews();
     validateTunnelViews();
 
     validateComponentSimulations();
+  }
+
+  private void validateStaticViews()
+  {
+    StaticViewIterator iterator = staticViewIterator();
+    while (iterator.hasNext())
+    {
+      StaticView<?> staticView = iterator.next();
+      staticView.validate();
+    }
   }
 
   protected void validateComponentSimulations()

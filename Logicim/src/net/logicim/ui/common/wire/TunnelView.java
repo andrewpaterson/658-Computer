@@ -256,6 +256,11 @@ public class TunnelView
     enabled = false;
   }
 
+  @Override
+  public void validate()
+  {
+  }
+
   public TunnelData save(boolean selected)
   {
     Map<Long, long[]> simulationTraces = wireView.save();

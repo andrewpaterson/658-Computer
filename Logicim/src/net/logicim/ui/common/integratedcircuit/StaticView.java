@@ -286,6 +286,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
       shape.setRelativeRightRotations(relativeRightRotations);
     }
   }
+  public abstract void validate();
 
   public abstract void clampProperties(PROPERTIES newProperties);
 

@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -21,11 +22,8 @@ public class LocalMultiSimulationConnectionNet
 
   protected List<ComponentViewPortNames> componentViewPortNamesList;  //These are the editor 'traces'.
 
-  protected CircuitInstanceViewPath path;
-
-  public LocalMultiSimulationConnectionNet(CircuitInstanceViewPath path)
+  public LocalMultiSimulationConnectionNet()
   {
-    this.path = path;
     this.localConnectionNets = new ArrayList<>();
     this.connectedComponents = new LinkedHashMap<>();
     this.connectedWires = new LinkedHashMap<>();
@@ -256,11 +254,6 @@ public class LocalMultiSimulationConnectionNet
     return result;
   }
 
-  public CircuitInstanceViewPath getPath()
-  {
-    return path;
-  }
-
   public String toString()
   {
     StringBuilder builder = new StringBuilder();
@@ -277,6 +270,22 @@ public class LocalMultiSimulationConnectionNet
     }
 
     return builder.toString();
+  }
+
+  public Set<ComponentViewPortNames> getLocalWires(CircuitSimulation circuitSimulation)
+  {
+    LinkedHashSet<ComponentViewPortNames> result = new LinkedHashSet<>();
+    for (ComponentViewPortNames componentViewPortNames : componentViewPortNamesList)
+    {
+      for (ComponentViewPortName componentViewPortName : componentViewPortNames.getConnectedPortIndices())
+      {
+        if (componentViewPortName.getPath().containsCircuitSimulation(circuitSimulation))
+        {
+          result.add(componentViewPortNames);
+        }
+      }
+    }
+    return result;
   }
 }
 

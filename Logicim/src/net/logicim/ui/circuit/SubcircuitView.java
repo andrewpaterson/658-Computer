@@ -817,10 +817,10 @@ public class SubcircuitView
     return connectionViews;
   }
 
-  public List<ConnectionView> getConnectionViews(List<StaticView<?>> staticViews,
+  public Set<ConnectionView> getConnectionViews(List<StaticView<?>> staticViews,
                                                  Set<TraceView> traceViews)
   {
-    List<ConnectionView> connectionViews = new ArrayList<>();
+    Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> staticView : staticViews)
     {
       connectionViews.addAll(staticView.getConnectionViews());
@@ -1498,7 +1498,7 @@ public class SubcircuitView
   public void createTracesForSubcircuitInstanceView(CircuitInstanceView circuitInstanceView)
   {
     List<StaticView<?>> staticViews = getStaticViews();
-    List<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
+    Set<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, connectionViews);
     fireConnectionEvents(updatedConnectionViews);

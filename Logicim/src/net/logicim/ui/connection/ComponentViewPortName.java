@@ -42,5 +42,16 @@ public class ComponentViewPortName
   {
     return this.portName.equals(portName);
   }
+
+  public boolean equals(ComponentView<?> componentView, String portName, CircuitInstanceViewPath path)
+  {
+    if ((this.componentView == componentView) &&
+        this.portName.equals(portName) &&
+        (this.path == path))
+    {
+      return true;
+    }
+    return false;
+  }
 }
 

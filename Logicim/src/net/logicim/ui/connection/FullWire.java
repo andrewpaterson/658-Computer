@@ -28,20 +28,14 @@ public class FullWire
     portIndexStack.addAll(componentViewPortNames.getSplitterPortIndices());
   }
 
-  public Set<ComponentViewPortNames> getLocalWires()
-  {
-    return localWires;
-  }
-
   public Set<ComponentViewPortNames> getLocalWires(CircuitSimulation circuitSimulation)
   {
     Set<ComponentViewPortNames> result = new LinkedHashSet<>();
     for (ComponentViewPortNames localWire : localWires)
     {
-      if (localWire.getMultiSimulationConnectionNet().getPath().containsCircuitSimulation(circuitSimulation))
-      {
-        result.add(localWire);
-      }
+      LocalMultiSimulationConnectionNet multiSimulationConnectionNet = localWire.getMultiSimulationConnectionNet();
+      Set<ComponentViewPortNames> componentViewPortNames = multiSimulationConnectionNet.getLocalWires(circuitSimulation);
+      result.addAll(componentViewPortNames);
     }
     return result;
   }

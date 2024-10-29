@@ -176,7 +176,7 @@ public class WireListFinder
   private LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(CircuitInstanceViewPath path,
                                                                                    ConnectionView inputConnectionView)
   {
-    LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet(path);
+    LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
 
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     localConnectionsToProcess.add(new ConnectionViewProcessStackItem(path, inputConnectionView));
@@ -203,7 +203,7 @@ public class WireListFinder
     List<ConnectionViewProcessStackItem> subcircuitInstanceViewItemsToProcess = createConnectionViewStackItemsForSubcircuitInstanceViews(localConnectionNet.subcircuitInstanceViews, connectionViewProcessStackItem.circuitInstanceViewPath);
     localConnectionsToProcess.addAll(subcircuitInstanceViewItemsToProcess);
 
-    List<ConnectionViewProcessStackItem> pinViewItemsToProcess = createConnectionViewStackItemsForPinVies(connectionViewProcessStackItem, localConnectionNet.pinViews);
+    List<ConnectionViewProcessStackItem> pinViewItemsToProcess = createConnectionViewStackItemsForPinViews(connectionViewProcessStackItem, localConnectionNet.pinViews);
     localConnectionsToProcess.addAll(pinViewItemsToProcess);
   }
 
@@ -231,7 +231,7 @@ public class WireListFinder
     return localConnectionsToProcess;
   }
 
-  private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForPinVies(ConnectionViewProcessStackItem connectionViewProcessStackItem, List<ComponentConnection<PinView>> pinViews)
+  private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForPinViews(ConnectionViewProcessStackItem connectionViewProcessStackItem, List<ComponentConnection<PinView>> pinViews)
   {
     CircuitInstanceViewPath path = connectionViewProcessStackItem.circuitInstanceViewPath;
 

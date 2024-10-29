@@ -22,8 +22,23 @@ public class ComponentViewPortNames
                       String portName,
                       CircuitInstanceViewPath path)
   {
-    ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName, path);
-    connectedPortIndices.add(componentViewPortName);
+    if (!contains(componentView, portName, path))
+    {
+      ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName, path);
+      connectedPortIndices.add(componentViewPortName);
+    }
+  }
+
+  protected boolean contains(ComponentView<?> componentView, String portName, CircuitInstanceViewPath path)
+  {
+    for (ComponentViewPortName componentViewPortName : connectedPortIndices)
+    {
+      if (componentViewPortName.equals(componentView, portName, path))
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   public List<ComponentViewPortName> getConnectedPortIndices()

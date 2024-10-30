@@ -4,6 +4,7 @@ import net.common.SimulatorException;
 import net.common.collection.linkedlist.LinkedList;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
+import net.common.util.StringUtil;
 import net.logicim.data.port.common.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
@@ -425,23 +426,6 @@ public class PortView
     return portNames.size();
   }
 
-  public Port getPort(SubcircuitSimulation subcircuitSimulation, int index)
-  {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
-    if (ports != null)
-    {
-      if (index < ports.size())
-      {
-        return ports.get(index);
-      }
-      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Index greater than ports size [%s].", index, subcircuitSimulation.getDescription(), ports.size());
-    }
-    else
-    {
-      throw new SimulatorException("Cannot get port index [%s] for simulation [%s].  Ports returned null.", index, subcircuitSimulation.getDescription());
-    }
-  }
-
   public String getText()
   {
     return text;
@@ -501,10 +485,10 @@ public class PortView
     return new LinkedHashSet<>(simulationPorts.keySet());
   }
 
-  public PortView placate()
+  @Override
+  public String toString()
   {
-    return this;
-    //This method does nothing and exists only to placate IntelliJ Idea.
+    return StringUtil.commaSeparateList(portNames) + " " + owner.getDescription();
   }
 }
 

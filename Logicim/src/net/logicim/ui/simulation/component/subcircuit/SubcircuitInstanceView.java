@@ -241,7 +241,7 @@ public class SubcircuitInstanceView
     return subcircuitInstance;
   }
 
-  public void oops(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
+  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
     SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
@@ -251,6 +251,10 @@ public class SubcircuitInstanceView
     subcircuitInstance.reset(circuitSimulation.getSimulation());
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
+  }
+
+  public void createTracesForSubcircuitInstanceView()
+  {
     instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
   }
 

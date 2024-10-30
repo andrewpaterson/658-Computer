@@ -873,7 +873,13 @@ public class SubcircuitView
       for (SubcircuitInstanceCreation creation : creations)
       {
         SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-        subcircuitInstanceView.oops(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+        subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+      }
+
+      for (SubcircuitInstanceCreation creation : creations)
+      {
+        SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+        subcircuitInstanceView.createTracesForSubcircuitInstanceView();
       }
     }
   }
@@ -1520,7 +1526,12 @@ public class SubcircuitView
     for (SubcircuitInstanceCreation creation : creations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.oops(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+    }
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
     }
 
     simulationStarted(staticViews, subcircuitSimulation);
@@ -1659,7 +1670,13 @@ public class SubcircuitView
     for (SubcircuitInstanceCreation creation : creations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.oops(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+    }
+
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
     }
   }
 

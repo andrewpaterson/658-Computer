@@ -54,11 +54,6 @@ public class WireList
     return result;
   }
 
-  public List<LocalMultiSimulationConnectionNet> getConnectionNets()
-  {
-    return connectionNets;
-  }
-
   public List<LocalMultiSimulationConnectionNet> getConnectionNets(CircuitSimulation circuitSimulation)
   {
     List<LocalMultiSimulationConnectionNet> result = new ArrayList<>();

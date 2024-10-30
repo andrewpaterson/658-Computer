@@ -14,7 +14,7 @@ import java.util.*;
 
 public class LocalMultiSimulationConnectionNet
 {
-  protected List<LocalConnectionNet> localConnectionNets;
+  protected Set<LocalConnectionNet> localConnectionNets;
 
   protected Map<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
   protected Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires;
@@ -24,20 +24,15 @@ public class LocalMultiSimulationConnectionNet
 
   public LocalMultiSimulationConnectionNet()
   {
-    this.localConnectionNets = new ArrayList<>();
+    this.localConnectionNets = new LinkedHashSet<>();
     this.connectedComponents = new LinkedHashMap<>();
     this.connectedWires = new LinkedHashMap<>();
     this.pinViews = new ArrayList<>();
   }
 
-  public void add(LocalConnectionNet localConnectionNet)
-  {
-    localConnectionNets.add(localConnectionNet);
-  }
-
   public void process()
   {
-    int minimumPorts = calculateMinimumPorts(localConnectionNets);
+    int minimumPorts = calculateLocalConnectionNetMinimumPorts(localConnectionNets);
 
     if (isValid(minimumPorts))
     {
@@ -52,6 +47,11 @@ public class LocalMultiSimulationConnectionNet
 
       findConnections(localConnectionNets);
     }
+  }
+
+  public void add(LocalConnectionNet localConnectionNet)
+  {
+    localConnectionNets.add(localConnectionNet);
   }
 
   private boolean isValid(int minimumPorts)
@@ -69,13 +69,13 @@ public class LocalMultiSimulationConnectionNet
     return componentViewPortNames;
   }
 
-  private int calculateMinimumPorts(List<LocalConnectionNet> localConnectionNets)
+  private int calculateLocalConnectionNetMinimumPorts(Collection<LocalConnectionNet> localConnectionNets)
   {
     int minimumPorts = Integer.MAX_VALUE;
     for (LocalConnectionNet localConnectionNet : localConnectionNets)
     {
-      Set<ConnectionView> connectionViews = localConnectionNet.getConnectionViews();
-      int currentMinimumPorts = calculateMinimumPorts(connectionViews);
+      List<ConnectionView> connectionViews = localConnectionNet.getConnectionViews();
+      int currentMinimumPorts = calculateConnectionViewMinimumPorts(connectionViews);
       if (!isValid(currentMinimumPorts))
       {
         minimumPorts = Integer.MAX_VALUE;
@@ -92,7 +92,7 @@ public class LocalMultiSimulationConnectionNet
     return minimumPorts;
   }
 
-  protected int calculateMinimumPorts(Collection<ConnectionView> connections)
+  protected int calculateConnectionViewMinimumPorts(Collection<ConnectionView> connections)
   {
     int minimumPorts = Integer.MAX_VALUE;
     Set<PortView> portViews = PortViewFinder.findPortViews(connections);
@@ -110,11 +110,11 @@ public class LocalMultiSimulationConnectionNet
     return minimumPorts;
   }
 
-  protected void findConnections(List<LocalConnectionNet> localConnectionNets)
+  protected void findConnections(Collection<LocalConnectionNet> localConnectionNets)
   {
     for (LocalConnectionNet localConnectionNet : localConnectionNets)
     {
-      Set<ConnectionView> connections = localConnectionNet.getConnectionViews();
+      List<ConnectionView> connections = localConnectionNet.getConnectionViews();
       CircuitInstanceViewPath path = localConnectionNet.getPath();
       for (ConnectionView connectionView : connections)
       {
@@ -179,8 +179,8 @@ public class LocalMultiSimulationConnectionNet
   {
     for (ComponentConnection<ComponentView<?>> connectedComponent : componentConnections)
     {
-      ComponentView<?> componentView = connectedComponent.getComponent();
-      ConnectionView connectionView = connectedComponent.getConnection();
+      ComponentView<?> componentView = connectedComponent.getComponentView();
+      ConnectionView connectionView = connectedComponent.getConnectionView();
       CircuitInstanceViewPath path = connectedComponent.getPath();
 
       PortView portView = componentView.getPortView(connectionView);
@@ -229,7 +229,7 @@ public class LocalMultiSimulationConnectionNet
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)
       {
-        ConnectionView connectionView = componentConnection.connection;
+        ConnectionView connectionView = componentConnection.connectionView;
         connectionViews.add(connectionView);
       }
     }
@@ -263,8 +263,8 @@ public class LocalMultiSimulationConnectionNet
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)
       {
-        ConnectionView connectionView = componentConnection.connection;
-        ComponentView<?> componentView = componentConnection.component;
+        ConnectionView connectionView = componentConnection.connectionView;
+        ComponentView<?> componentView = componentConnection.componentView;
         builder.append(componentView.getType() + " (" + connectionView.getGridPosition() + ")@" + System.identityHashCode(connectionView) + "\n");
       }
     }

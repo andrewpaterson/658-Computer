@@ -186,6 +186,7 @@ public class WireListFinder
       ConnectionViewProcessStackItem connectionViewProcessStackItem = localConnectionsToProcess.remove(0);
       processLocalConnections(connectionViewProcessStackItem, localConnectionsToProcess, localMultiSimulationConnectionNet);
     }
+
     return localMultiSimulationConnectionNet;
   }
 
@@ -193,9 +194,8 @@ public class WireListFinder
                                        List<ConnectionViewProcessStackItem> localConnectionsToProcess,
                                        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet)
   {
-    LocalConnectionNet localConnectionNet = new LocalConnectionNet(connectionViewProcessStackItem.circuitInstanceViewPath);
+    LocalConnectionNet localConnectionNet = new LocalConnectionNet(connectionViewProcessStackItem.circuitInstanceViewPath, connectionViewProcessStackItem.inputConnectionView);
     localMultiSimulationConnectionNet.add(localConnectionNet);
-    localConnectionNet.process(connectionViewProcessStackItem.inputConnectionView);
 
     List<SplitterViewProcessStackItem> splitterViewComponentConnections = createSplitterViewStackItemsForLocalConnectionNet(localConnectionNet);
     splitterViewStack.addAll(splitterViewComponentConnections);
@@ -212,18 +212,18 @@ public class WireListFinder
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     for (ComponentConnection<SubcircuitInstanceView> subcircuitInstanceViewConnection : subcircuitInstanceViews)
     {
-      SubcircuitInstanceView subcircuitInstanceView = subcircuitInstanceViewConnection.component;
+      SubcircuitInstanceView subcircuitInstanceView = subcircuitInstanceViewConnection.componentView;
 
-      SubcircuitPinView subcircuitPinView = subcircuitInstanceView.getSubcircuitPinView(subcircuitInstanceViewConnection.connection);
+      SubcircuitPinView subcircuitPinView = subcircuitInstanceView.getSubcircuitPinView(subcircuitInstanceViewConnection.connectionView);
       if (subcircuitPinView == null)
       {
         throw new SimulatorException("Subcircuit pin view is [null] for subcircuit instance view [%s] connection [%s].",
                                      subcircuitInstanceView.getDescription(),
-                                     subcircuitInstanceViewConnection.connection.toString());
+                                     subcircuitInstanceViewConnection.connectionView.toString());
       }
       processedSubcircuitPinViews.add(subcircuitPinView);
 
-      ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, subcircuitInstanceViewConnection.connection);
+      ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, subcircuitInstanceViewConnection.connectionView);
 
       CircuitInstanceViewPath newPath = paths.getPath(circuitInstanceViewPath, subcircuitInstanceView);
       localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, pinConnection));
@@ -238,7 +238,7 @@ public class WireListFinder
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     for (ComponentConnection<PinView> pinViewConnection : pinViews)
     {
-      PinView pinView = pinViewConnection.component;
+      PinView pinView = pinViewConnection.componentView;
       List<SubcircuitPinView> subcircuitPinViews = pinView.getSubcircuitPinViews();
       for (SubcircuitPinView subcircuitPinView : subcircuitPinViews)
       {
@@ -277,7 +277,7 @@ public class WireListFinder
 
     for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
-      List<SplitterViewProcessStackItem> splitterViewConnectionList = createSplitterViewConnections(splitterViewConnection.component, connectionNet.path);
+      List<SplitterViewProcessStackItem> splitterViewConnectionList = createSplitterViewConnections(splitterViewConnection.componentView, connectionNet.path);
       splitterComponentsConnections.addAll(splitterViewConnectionList);
     }
 
@@ -305,7 +305,7 @@ public class WireListFinder
   {
     for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
-      processedSplitterViewConnections.add(splitterViewConnection.connection);
+      processedSplitterViewConnections.add(splitterViewConnection.connectionView);
     }
   }
 }

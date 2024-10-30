@@ -3,6 +3,7 @@ package net.logicim.ui.circuit;
 import net.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.simulation.component.common.InstanceView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CircuitInstanceViewPath
+    implements Comparable<CircuitInstanceViewPath>
 {
   protected List<CircuitInstanceView> path;
   protected Map<CircuitSimulation, SubcircuitSimulation> circuitSimulations;
@@ -186,6 +188,29 @@ public class CircuitInstanceViewPath
       return true;
     }
     return false;
+  }
+
+  @Override
+  public int compareTo(CircuitInstanceViewPath other)
+  {
+    int result = Integer.compare(path.size(), other.path.size());
+    if (result != 0)
+    {
+      return result;
+    }
+
+    int length = path.size();
+    for (int i = 0; i < length; i++)
+    {
+      InstanceView circuitInstanceViewThis = (InstanceView) path.get(i);
+      InstanceView circuitInstanceViewOther = (InstanceView) other.path.get(i);
+      result = circuitInstanceViewThis.compareTo(circuitInstanceViewOther);
+      if (result != 0)
+      {
+        return result;
+      }
+    }
+    return 0;
   }
 }
 

@@ -7,60 +7,78 @@ import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LocalConnectionNet
 {
   protected CircuitInstanceViewPath path;
-  protected Set<ConnectionView> connectionViews;
+  protected List<ConnectionView> connectionViews;
 
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(CircuitInstanceViewPath path)
+  public LocalConnectionNet(CircuitInstanceViewPath path, ConnectionView inputConnectionView)
   {
     this.path = path;
 
-    this.subcircuitInstanceViews = new ArrayList<>();
-    this.pinViews = new ArrayList<>();
-    this.splitterViews = new ArrayList<>();
+    HashSet<ConnectionView> connectionViewSet = new HashSet<>();
+    HashSet<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViewSet = new HashSet<>();
+    HashSet<ComponentConnection<PinView>> pinViewSet = new HashSet<>();
+    HashSet<ComponentConnection<SplitterView>> splitterViewSet = new HashSet<>();
 
-    this.connectionViews = new LinkedHashSet<>();
+    process(inputConnectionView,
+            connectionViewSet,
+            subcircuitInstanceViewSet,
+            pinViewSet,
+            splitterViewSet);
+
+    this.connectionViews = new ArrayList<>(connectionViewSet);
+    Collections.sort(connectionViews);
+
+    this.subcircuitInstanceViews = new ArrayList<>(subcircuitInstanceViewSet);
+    Collections.sort(subcircuitInstanceViews);
+
+    this.pinViews = new ArrayList<>(pinViewSet);
+    Collections.sort(pinViews);
+
+    this.splitterViews = new ArrayList<>(splitterViewSet);
+    Collections.sort(splitterViews);
   }
 
-  protected void process(ConnectionView inputConnectionView)
+  private void process(ConnectionView inputConnectionView,
+                         Set<ConnectionView> connectionViewSet,
+                         Set<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViewSet,
+                         Set<ComponentConnection<PinView>> pinViewSet,
+                         Set<ComponentConnection<SplitterView>> splitterViewSet)
   {
     ConnectionFinder connectionFinder = new ConnectionFinder();
     connectionFinder.addConnection(inputConnectionView);
     connectionFinder.process();
-    this.connectionViews.addAll(connectionFinder.getConnections());
+    connectionViewSet.addAll(connectionFinder.getConnections());
 
-    for (ConnectionView connectionView : connectionViews)
+    for (ConnectionView connectionView : connectionViewSet)
     {
       List<View> localConnected = connectionView.getConnectedComponents();
       for (View connectedView : localConnected)
       {
         if (connectedView instanceof SubcircuitInstanceView)
         {
-          subcircuitInstanceViews.add(new ComponentConnection<>(path, (SubcircuitInstanceView) connectedView, connectionView));
+          subcircuitInstanceViewSet.add(new ComponentConnection<>(path, (SubcircuitInstanceView) connectedView, connectionView));
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViews.add(new ComponentConnection<>(path, (SplitterView) connectedView, connectionView));
+          splitterViewSet.add(new ComponentConnection<>(path, (SplitterView) connectedView, connectionView));
         }
         else if (connectedView instanceof PinView)
         {
-          pinViews.add(new ComponentConnection<>(path, (PinView) connectedView, connectionView));
+          pinViewSet.add(new ComponentConnection<>(path, (PinView) connectedView, connectionView));
         }
       }
     }
   }
 
-  public Set<ConnectionView> getConnectionViews()
+  public List<ConnectionView> getConnectionViews()
   {
     return connectionViews;
   }
@@ -73,6 +91,52 @@ public class LocalConnectionNet
   public CircuitInstanceViewPath getPath()
   {
     return path;
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash(path,
+                        connectionViews,
+                        subcircuitInstanceViews,
+                        pinViews,
+                        splitterViews);
+  }
+
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof LocalConnectionNet))
+    {
+      return false;
+    }
+
+    LocalConnectionNet other = (LocalConnectionNet) obj;
+    if (path != other.path)
+    {
+      return false;
+    }
+
+    if (!connectionViews.equals(other.connectionViews))
+    {
+      return false;
+    }
+
+    if (!splitterViews.equals(other.splitterViews))
+    {
+      return false;
+    }
+
+    if (!pinViews.equals(other.pinViews))
+    {
+      return false;
+    }
+
+    if (!subcircuitInstanceViews.equals(other.subcircuitInstanceViews))
+    {
+      return false;
+    }
+
+    return true;
   }
 }
 

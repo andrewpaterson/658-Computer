@@ -31,6 +31,7 @@ import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
 import net.logicim.ui.shape.text.TextView;
+import net.logicim.ui.simulation.component.common.InstanceView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitPinView;
@@ -45,7 +46,6 @@ import static net.logicim.domain.common.wire.TraceValue.*;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>
-    implements Comparable<PinView>
 {
   public static int FONT_SIZE = 10;
 
@@ -457,16 +457,29 @@ public class PinView
   }
 
   @Override
-  public int compareTo(PinView o)
+  public int compareTo(InstanceView obj)
   {
-    PinProperties otherProperties = o.properties;
+    if (!(obj instanceof PinView))
+    {
+      return super.compareTo(obj);
+    }
+
+    PinView other = (PinView) obj;
+    PinProperties otherProperties = other.properties;
     int result = Integer.compare(properties.weight, otherProperties.weight);
     if (result != 0)
     {
       return result;
     }
 
-    return properties.name.compareTo(otherProperties.name);
+    result = properties.name.compareTo(otherProperties.name);
+    if (result != 0)
+    {
+      return result;
+    }
+
+    result = super.compareTo(other);
+    return result;
   }
 
   public TextView getLabelView()

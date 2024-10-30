@@ -18,6 +18,8 @@ import net.logicim.ui.common.ShapeHolder;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
+import net.logicim.ui.simulation.component.common.InstanceView;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.awt.*;
 import java.util.List;
@@ -25,7 +27,8 @@ import java.util.*;
 
 public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     extends StaticView<PROPERTIES>
-    implements ShapeHolder
+    implements ShapeHolder,
+               InstanceView
 {
   protected List<PortView> portViews;
 
@@ -474,6 +477,24 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     else
     {
       return name;
+    }
+  }
+
+  @Override
+  public int compareTo(InstanceView obj)
+  {
+    if (obj instanceof SubcircuitEditor)
+    {
+      return 1;
+    }
+    else if (obj instanceof ComponentView)
+    {
+      ComponentView other = (ComponentView) obj;
+      return Long.compare(id, other.id);
+    }
+    else
+    {
+      throw new SimulatorException("Don't know how to compare [%s] to [%s].", this.getClass().getSimpleName(), obj.getClass().getSimpleName());
     }
   }
 

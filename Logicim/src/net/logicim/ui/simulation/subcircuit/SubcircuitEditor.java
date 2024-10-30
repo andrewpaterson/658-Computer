@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.subcircuit;
 
+import net.common.SimulatorException;
 import net.common.geometry.Line;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
@@ -16,6 +17,7 @@ import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
@@ -24,6 +26,7 @@ import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.CircuitLoaders;
 import net.logicim.ui.simulation.DataViewMap;
 import net.logicim.ui.simulation.StaticViewIterator;
+import net.logicim.ui.simulation.component.common.InstanceView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.selection.Selection;
 
@@ -31,7 +34,8 @@ import java.util.*;
 
 public class SubcircuitEditor
     implements CircuitInstanceView,
-               Described
+               Described,
+               InstanceView
 {
   public static long nextId = 1L;
 
@@ -544,6 +548,24 @@ public class SubcircuitEditor
   {
     List<CircuitInstanceView> orderedTopDownCircuitInstanceViews = getOrderedCircuitInstanceViews();
     subcircuitView.validateSimulations(orderedTopDownCircuitInstanceViews);
+  }
+
+  @Override
+  public int compareTo(InstanceView obj)
+  {
+    if (obj instanceof ComponentView)
+    {
+      return -1;
+    }
+    else if (obj instanceof SubcircuitEditor)
+    {
+      SubcircuitEditor other = (SubcircuitEditor) obj;
+      return Long.compare(id, other.id);
+    }
+    else
+    {
+      throw new SimulatorException("Don't know how to compare [%s] to [%s].", this.getClass().getSimpleName(), obj.getClass().getSimpleName());
+    }
   }
 }
 

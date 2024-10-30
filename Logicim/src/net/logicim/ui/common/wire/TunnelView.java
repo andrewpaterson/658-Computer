@@ -232,12 +232,6 @@ public class TunnelView
   }
 
   @Override
-  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
-  {
-    return new ArrayList<>();
-  }
-
-  @Override
   public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
   {
     wireView.destroyComponent(subcircuitSimulation);

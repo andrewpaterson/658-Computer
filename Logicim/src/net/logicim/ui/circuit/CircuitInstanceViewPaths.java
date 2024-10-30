@@ -84,6 +84,8 @@ public class CircuitInstanceViewPaths
         path.addSubcircuitSimulation(neededParentSimulation);
       }
     }
+
+    System.out.println(String.format("Paths [%s], Simulations [%s]", paths.size(), subcircuitSimulationPaths.size()));
   }
 
   private void createPathsSet(List<SubcircuitEditor> subcircuitEditors)

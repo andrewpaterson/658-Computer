@@ -7,7 +7,6 @@ import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
@@ -70,12 +69,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
     this.finalised = false;
   }
 
-  public void setRotation(Rotation rotation)
-  {
-    this.rotation = rotation;
-    invalidateCache();
-  }
-
   public void add(ShapeView shapeView)
   {
     shapes.add(shapeView);
@@ -89,6 +82,12 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public Rotation getRotation()
   {
     return rotation;
+  }
+
+  public void setRotation(Rotation rotation)
+  {
+    this.rotation = rotation;
+    invalidateCache();
   }
 
   protected void updateBoundingBoxFromShapes(BoundingBox boundingBox)
@@ -286,6 +285,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
       shape.setRelativeRightRotations(relativeRightRotations);
     }
   }
+
   public abstract void validate();
 
   public abstract void clampProperties(PROPERTIES newProperties);
@@ -293,8 +293,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
   public abstract ReflectiveData save(boolean selected);
 
   public abstract String getType();
-
-  public abstract List<? extends Component> createComponents(SubcircuitSimulations simulations);
 
   public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 

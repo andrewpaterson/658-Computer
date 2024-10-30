@@ -64,7 +64,11 @@ public class WireTraceConverter
           Port port = componentView.getPort(subcircuitSimulation, portName);
           if (port == null)
           {
-            throw new SimulatorException("Could not find Port [%s] on ComponentView [%s] for simulation [%s].", portName, componentView.getDescription(), subcircuitSimulation.getDescription());
+            throw new SimulatorException("Could not find Port [%s] on %s [%s] for simulation [%s].",
+                                         portName,
+                                         componentView.getClass().getSimpleName(),
+                                         componentView.getDescription(),
+                                         subcircuitSimulation.getDescription());
           }
           port.disconnect(simulation);
           port.connect(trace);

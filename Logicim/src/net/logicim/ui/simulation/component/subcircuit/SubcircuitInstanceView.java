@@ -236,27 +236,33 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.addSubcircuitSimulation(subcircuitInstanceSimulation);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
-    createTracePorts(subcircuitInstance);
     putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance);
+
+    return subcircuitInstance;
+  }
+
+  public void oops(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance)
+  {
+    CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+
+    createTracePorts(subcircuitInstance);
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
     subcircuitInstance.reset(circuitSimulation.getSimulation());
 
     instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation);
     instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
-
-    return subcircuitInstance;
   }
 
-  @Override
-  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
+  public List<SubcircuitInstanceCreation> createSubcircuitInstanceViewComponents(SubcircuitSimulations simulations)
   {
-    ArrayList<Component> result = new ArrayList<>();
+    ArrayList<SubcircuitInstanceCreation> creations = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
     {
-      SubcircuitInstance component = createComponent(subcircuitSimulation);
-      result.add(component);
+      SubcircuitInstance subcircuitInstance = createComponent(subcircuitSimulation);
+      creations.add(new SubcircuitInstanceCreation(this, subcircuitSimulation, subcircuitInstance));
     }
-    return result;
+    return creations;
   }
 
   //Called from SubcircuitInstanceData.
@@ -601,19 +607,6 @@ public class SubcircuitInstanceView
                                                  properties.width,
                                                  properties.height) +
            toSimulationsDebugString(simulationSubcircuitInstances.keySet());
-  }
-
-  public PinView getPinView(ConnectionView connection)
-  {
-    SubcircuitPinView subcircuitPinView = getSubcircuitPinView(connection);
-    if (subcircuitPinView != null)
-    {
-      return subcircuitPinView.getPinView();
-    }
-    else
-    {
-      return null;
-    }
   }
 
   public SubcircuitPinView getSubcircuitPinView(ConnectionView connection)

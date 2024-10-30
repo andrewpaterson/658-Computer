@@ -170,7 +170,8 @@ public class LocalMultiSimulationConnectionNet
   {
     for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
-      addPortToComponentViewPortNames(componentViewPortNamesList, entry.getValue());
+      List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
+      addPortToComponentViewPortNames(componentViewPortNamesList, componentConnections);
     }
   }
 

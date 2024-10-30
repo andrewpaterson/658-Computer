@@ -6,7 +6,6 @@ import net.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
-import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -19,6 +18,7 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.common.InstanceView;
+import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.awt.*;
@@ -415,9 +415,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public List<? extends Component> createComponents(SubcircuitSimulations simulations)
+  public List<? extends Component> createComponentViewComponents(SubcircuitSimulations simulations)
   {
-    validateNoComponents();  //Is it possible that components have been created by other SubcircuitSimulations than these simulations?
+    if (this instanceof SubcircuitInstanceView)
+    {
+      throw new SimulatorException("ComponentView.createComponentViewComponents() must not be called from SubcircuitInstanceView.");
+    }
+
+    validateNoComponents();
 
     ArrayList<Component> result = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
@@ -426,33 +431,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       result.add(component);
     }
     return result;
-  }
-
-  public SubcircuitSimulation getComponentSubcircuitSimulation(CircuitSimulation circuitSimulation)
-  {
-    Set<SubcircuitSimulation> componentSubcircuitSimulations = getComponentSubcircuitSimulations();
-    List<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : componentSubcircuitSimulations)
-    {
-      if (subcircuitSimulation.getCircuitSimulation() == circuitSimulation)
-      {
-        subcircuitSimulations.add(subcircuitSimulation);
-      }
-    }
-
-    if (subcircuitSimulations.size() > 1)
-    {
-      throw new SimulatorException("Found more than 1 [%s] simulations for circuit [%s] on static view [%s].", subcircuitSimulations.size(), circuitSimulation.getDescription(), getDescription());
-    }
-
-    if (subcircuitSimulations.size() == 1)
-    {
-      return subcircuitSimulations.get(0);
-    }
-    else
-    {
-      return null;
-    }
   }
 
   public Port getPort(SubcircuitSimulation subcircuitSimulation, String portName)

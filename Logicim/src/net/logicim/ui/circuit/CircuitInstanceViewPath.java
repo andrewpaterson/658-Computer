@@ -84,18 +84,6 @@ public class CircuitInstanceViewPath
     return path.get(0);
   }
 
-  public CircuitInstanceView getSecondLast()
-  {
-    if (path.size() > 1)
-    {
-      return path.get(path.size() - 2);
-    }
-    else
-    {
-      return null;
-    }
-  }
-
   public CircuitInstanceViewPath getPrevious()
   {
     return previous;
@@ -166,18 +154,6 @@ public class CircuitInstanceViewPath
       builder.append(circuitInstanceView.getDescription());
     }
     return builder.toString();
-  }
-
-  public boolean containsSubcircuitView(SubcircuitView subcircuitView)
-  {
-    for (CircuitInstanceView circuitInstanceView : path)
-    {
-      if (circuitInstanceView.getInstanceSubcircuitView() == subcircuitView)
-      {
-        return true;
-      }
-    }
-    return false;
   }
 
   public boolean endsWithSubcircuitView(SubcircuitView subcircuitView)

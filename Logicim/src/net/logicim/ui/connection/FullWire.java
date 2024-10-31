@@ -39,5 +39,10 @@ public class FullWire
     }
     return result;
   }
+
+  public Set<ComponentViewPortNames> getLocalWires()
+  {
+    return localWires;
+  }
 }
 

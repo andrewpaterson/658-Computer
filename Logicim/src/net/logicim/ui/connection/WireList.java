@@ -3,6 +3,7 @@ package net.logicim.ui.connection;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
+import net.logicim.ui.common.integratedcircuit.ComponentView;
 
 import java.util.*;
 
@@ -34,11 +35,6 @@ public class WireList
   public List<FullWire> getFullWires()
   {
     return fullWires;
-  }
-
-  public List<PartialWire> getPartialWires()
-  {
-    return partialWires;
   }
 
   public List<PartialWire> getPartialWires(CircuitSimulation circuitSimulation)
@@ -89,6 +85,58 @@ public class WireList
       }
     }
     return new ArrayList<>(connectionViews);
+  }
+
+  @Override
+  public String toString()
+  {
+    StringBuilder builder = new StringBuilder("Connection Nets [");
+    builder.append(connectionNets.size());
+    builder.append("]\n");
+
+    Map<CircuitInstanceViewPath, List<ComponentViewPortName>> map = new LinkedHashMap<>();
+    for (FullWire fullWire : fullWires)
+    {
+      Set<ComponentViewPortNames> localWires = fullWire.getLocalWires();
+      for (ComponentViewPortNames localWire : localWires)
+      {
+        for (ComponentViewPortName connectedPortIndex : localWire.getConnectedPortIndices())
+        {
+          CircuitInstanceViewPath path = connectedPortIndex.getPath();
+          List<ComponentViewPortName> list = map.get(path);
+          if (list == null)
+          {
+            list = new ArrayList<>();
+            map.put(path, list);
+          }
+
+          list.add(connectedPortIndex);
+        }
+      }
+    }
+
+    for (Map.Entry<CircuitInstanceViewPath, List<ComponentViewPortName>> entry : map.entrySet())
+    {
+      CircuitInstanceViewPath path = entry.getKey();
+      List<ComponentViewPortName> componentViewPortNames = entry.getValue();
+      builder.append(path.getDescription());
+      builder.append("\n");
+
+      for (ComponentViewPortName componentViewPortName : componentViewPortNames)
+      {
+        builder.append("  ");
+        ComponentView componentView = componentViewPortName.getComponentView();
+        builder.append(componentView.getType());
+        builder.append(" ");
+        builder.append(componentView.getDescription());
+        builder.append(": ");
+        String portName = componentViewPortName.getPortName();
+        builder.append(portName);
+        builder.append("\n");
+      }
+    }
+
+    return builder.toString();
   }
 }
 

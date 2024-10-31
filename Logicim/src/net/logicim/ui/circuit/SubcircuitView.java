@@ -739,16 +739,16 @@ public class SubcircuitView
   }
 
   public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView,
-                                                            Collection<ConnectionView> connectionViews)
+                                                            Collection<ConnectionView> traceConnectionViews)
   {
     CircuitInstanceViewPaths paths = getCircuitEditor().createCircuitInstanceViewPaths();
 
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
-    if (connectionViews.size() > 0)
+    if (traceConnectionViews.size() > 0)
     {
-      validateConnectionViewsNotNull(connectionViews);
+      validateConnectionViewsNotNull(traceConnectionViews);
       Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(circuitInstanceView,
-                                                                                                         connectionViews,
+                                                                                                         traceConnectionViews,
                                                                                                          paths);
       allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
@@ -781,6 +781,7 @@ public class SubcircuitView
         {
           WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
           WireList wireList = wireListFinder.createWireList();
+          System.out.println(wireList.toString());
 
           for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
           {
@@ -993,24 +994,24 @@ public class SubcircuitView
     removeTraceViews(touchingTraceViews);
     Set<TraceView> traceViews = createTraceViews(traceLines);
 
-    Collection<ConnectionView> connectionViews = getTraceViewsConnectionViews(traceViews);
-    if (connectionViews.size() > 0)
+    Collection<ConnectionView> traceConnectionViews = getTraceViewsConnectionViews(traceViews);
+    if (traceConnectionViews.size() > 0)
     {
-      connectionViews.addAll(nonTraceViewConnectionViews);
+      traceConnectionViews.addAll(nonTraceViewConnectionViews);
     }
     else
     {
-      connectionViews = nonTraceViewConnectionViews;
+      traceConnectionViews = nonTraceViewConnectionViews;
     }
 
-    if (connectionViews.size() > 0)
+    if (traceConnectionViews.size() > 0)
     {
       if (traceViews.size() > 0)
       {
         enableViews(traceViews);
       }
 
-      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, connectionViews);
+      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, traceConnectionViews);
       fireConnectionEvents(updatedConnectionViews);
     }
     return traceViews;

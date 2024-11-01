@@ -941,7 +941,7 @@ public class SubcircuitView
     return getTracesTouching(line, traceViews);
   }
 
-  protected List<TraceOverlap> getTracesTouching(Line line, Collection<TraceView> traceViews)
+  private List<TraceOverlap> getTracesTouching(Line line, Collection<TraceView> traceViews)
   {
     List<TraceOverlap> overlaps = new ArrayList<>();
     for (TraceView traceView : traceViews)
@@ -1130,7 +1130,7 @@ public class SubcircuitView
                                   List<StaticView<?>> staticViews,
                                   List<TraceView> traceViews)
   {
-    TraceViewConnectionViewSetsPair pair = findImmediateConnectedTraceViews(staticViews, traceViews);
+    TraceViewConnectionViewSetsPair pair = findImmediateConnectedTraceViews(traceViews);
     LinkedHashSet<TraceView> connectedTraceViews = pair.getTraceViews();
 
     for (StaticView<?> staticView : staticViews)
@@ -1252,19 +1252,10 @@ public class SubcircuitView
     return newSelection;
   }
 
-  protected TraceViewConnectionViewSetsPair findImmediateConnectedTraceViews(List<StaticView<?>> staticViews, List<TraceView> traceViews)
+  protected TraceViewConnectionViewSetsPair findImmediateConnectedTraceViews(List<TraceView> traceViews)
   {
     Set<TraceView> traceViewSet = new HashSet<>(traceViews);
     TraceViewConnectionViewSetsPair pair = new TraceViewConnectionViewSetsPair();
-
-    for (StaticView<?> staticView : staticViews)
-    {
-      List<ConnectionView> connectionViews = staticView.getConnectionViews();
-      for (ConnectionView connectionView : connectionViews)
-      {
-        findImmediateConnectedTraceViews(traceViewSet, pair, connectionView);
-      }
-    }
 
     for (TraceView traceView : traceViews)
     {

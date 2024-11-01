@@ -395,14 +395,29 @@ public class SubcircuitView
             {
               throw new SimulatorException("Position on connection on %s cannot be null.", componentView.toIdentifierString());
             }
+
             if (!portPosition.equals(connectionPosition))
             {
-              throw new SimulatorException("%s port [%s] position (%s) must be equal to connection position (%s).",
+              throw new SimulatorException("%s Port View [%s] position (%s) must be equal to connection position (%s).",
                                            componentView.toIdentifierString(),
                                            portView.getText(),
                                            Int2D.toString(portPosition),
                                            Int2D.toString(connectionPosition));
             }
+
+            if (!connectionView.getConnectedComponents().contains(staticView))
+            {
+              throw new SimulatorException("Connection View [%s] does not contain %s.",
+                                           connectionView.toString(),
+                                           componentView.toIdentifierString());
+            }
+
+          }
+          else
+          {
+            throw new SimulatorException("%s Port View [%s] may not have a null connection.",
+                                         componentView.toIdentifierString(),
+                                         portView.getText());
           }
         }
       }
@@ -439,6 +454,22 @@ public class SubcircuitView
     for (ConnectionView cacheConnectionView : cacheConnectionViews)
     {
       cacheConnectionView.validateContainingSubcircuitViews(this);
+
+      List<View> connectedViews = cacheConnectionView.getConnectedComponents();
+      if (connectedViews.size() == 0)
+      {
+        throw new SimulatorException("Cached Connection View [%s] must be connected to at least one View.", cacheConnectionView.toString());
+      }
+
+      for (View componentView : connectedViews)
+      {
+        if (!componentView.getConnectionViews().contains(cacheConnectionView))
+        {
+          throw new SimulatorException("%s does not contain Connection View [%s].",
+                                       componentView.toIdentifierString(),
+                                       cacheConnectionView.toString());
+        }
+      }
     }
 
     for (TraceView traceView : traceViews)
@@ -470,7 +501,10 @@ public class SubcircuitView
 
     if (viewConnectionViews.size() != cacheConnectionViews.size())
     {
-      throw new SimulatorException("SubcircuitView [%s] has cached connection views size [%s] but View connection views size [%s].", getTypeName(), cacheConnectionViewsList.size(), viewConnectionViewsList.size());
+      throw new SimulatorException("SubcircuitView [%s] has cached connection views size [%s] but View connection views size [%s].",
+                                   getTypeName(),
+                                   cacheConnectionViewsList.size(),
+                                   viewConnectionViewsList.size());
     }
 
     for (int i = 0; i < viewConnectionViewsList.size(); i++)
@@ -480,7 +514,11 @@ public class SubcircuitView
 
       if (viewConnectionView != cacheConnectionView)
       {
-        throw new SimulatorException("SubcircuitView [%s] has cached connection view [%s] at index [%s] does not match view connection view [%s].", getTypeName(), cacheConnectionView.toString(), i, viewConnectionView.toString());
+        throw new SimulatorException("SubcircuitView [%s] has cached connection view [%s] at index [%s] does not match view connection view [%s].",
+                                     getTypeName(),
+                                     cacheConnectionView.toString(),
+                                     i,
+                                     viewConnectionView.toString());
       }
     }
   }

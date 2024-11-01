@@ -341,7 +341,8 @@ public class SubcircuitEditor
 
   public void createTraceViews(List<Line> newTraceViewLines)
   {
-    subcircuitView.createTraceViewsAndTraces(this, newTraceViewLines, new ArrayList<>());
+    Set<TraceView> newTraceViews = subcircuitView.createTraceViews(newTraceViewLines);
+    subcircuitView.createTracesForTraceViewsAndConnectionViews(this, new ArrayList<>(), newTraceViews);
   }
 
   public List<View> loadViews(List<TraceData> traces,

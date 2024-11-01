@@ -8,12 +8,12 @@ import java.util.List;
 public class TraceViewConnectionViewSetsPair
 {
   protected LinkedHashSet<TraceView> traceViews;
-  protected LinkedHashSet<ConnectionView> nonTraceConnectionViews;
+  protected LinkedHashSet<ConnectionView> nonTraceViewConnectionViews;
 
   public TraceViewConnectionViewSetsPair()
   {
     traceViews = new LinkedHashSet<>();
-    nonTraceConnectionViews = new LinkedHashSet<>();
+    nonTraceViewConnectionViews = new LinkedHashSet<>();
   }
 
   public void addAll(List<TraceView> traceViews)
@@ -23,7 +23,7 @@ public class TraceViewConnectionViewSetsPair
 
   public void add(ConnectionView connectionView)
   {
-    nonTraceConnectionViews.add(connectionView);
+    nonTraceViewConnectionViews.add(connectionView);
   }
 
   public void add(TraceView traceView)
@@ -36,9 +36,9 @@ public class TraceViewConnectionViewSetsPair
     return traceViews;
   }
 
-  public LinkedHashSet<ConnectionView> getNonTraceConnectionViews()
+  public LinkedHashSet<ConnectionView> getNonTraceViewConnectionViews()
   {
-    return nonTraceConnectionViews;
+    return nonTraceViewConnectionViews;
   }
 }
 

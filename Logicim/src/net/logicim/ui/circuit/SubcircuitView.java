@@ -1157,12 +1157,13 @@ public class SubcircuitView
     List<Line> existingTraceViewLines = getTraceViewLines(existingTraceViews);
     removeTraceViews(existingTraceViews);
 
+    existingTraceViewLines.addAll(newTraceViewLines);
+    Set<TraceView> newTraceViews = createTraceViews(existingTraceViewLines);
+
     enableViews(staticViews);
 
     createComponentsForAllSimulations(staticViews);
 
-    existingTraceViewLines.addAll(newTraceViewLines);
-    Set<TraceView> newTraceViews = createTraceViews(existingTraceViewLines);
     createTracesForTraceViewsAndConnectionViews(circuitInstanceView, nonTraceViewConnectionViews, newTraceViews);
 
     simulationStarted(staticViews);

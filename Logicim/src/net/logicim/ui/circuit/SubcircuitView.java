@@ -31,7 +31,6 @@ import net.logicim.ui.connection.WireTraceConverter;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.ConnectionViewCache;
-import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -773,27 +772,24 @@ public class SubcircuitView
                                                                                       CircuitInstanceViewPaths paths)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    for (ConnectionView connectionView : tracesConnectionViews)
     {
-      for (ConnectionView connectionView : tracesConnectionViews)
+      if (!updatedConnectionViews.contains(connectionView))
       {
-        if (!updatedConnectionViews.contains(connectionView))
+        if (connectionView.getConnectedComponents().size() > 0)
         {
-          if (connectionView.getConnectedComponents().size() > 0)
+          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
+          WireList wireList = wireListFinder.createWireList();
+          System.out.println(wireList.toString());
+
+          for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
           {
-            WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
-            WireList wireList = wireListFinder.createWireList();
-            System.out.println(wireList.toString());
-
-            for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
-            {
-              WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, paths);
-              wireTraceConverter.process();
-            }
-
-            List<ConnectionView> connectionNetConnectionViews = wireList.getConnectionViews();
-            updatedConnectionViews.addAll(connectionNetConnectionViews);
+            WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, paths);
+            wireTraceConverter.process();
           }
+
+          List<ConnectionView> connectionNetConnectionViews = wireList.getConnectionViews();
+          updatedConnectionViews.addAll(connectionNetConnectionViews);
         }
       }
     }
@@ -856,35 +852,32 @@ public class SubcircuitView
 
   private void createComponentsForAllSimulations(List<StaticView<?>> staticViews)
   {
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    for (StaticView<?> staticView : staticViews)
     {
-      List<SubcircuitInstanceCreation> creations = new ArrayList<>();
-      for (StaticView<?> staticView : staticViews)
+      if (staticView instanceof SubcircuitInstanceView)
       {
-        if (staticView instanceof SubcircuitInstanceView)
-        {
-          SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
-          List<SubcircuitInstanceCreation> simulationCreations = subcircuitInstanceView.createSubcircuitInstanceViewComponents(simulations);
-          creations.addAll(simulationCreations);
-        }
-        else if (staticView instanceof ComponentView)
-        {
-          ComponentView componentView = (ComponentView) staticView;
-          componentView.createComponentViewComponents(simulations);
-        }
+        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
+        List<SubcircuitInstanceCreation> simulationCreations = subcircuitInstanceView.createSubcircuitInstanceViewComponents(simulations);
+        creations.addAll(simulationCreations);
       }
+      else if (staticView instanceof ComponentView)
+      {
+        ComponentView componentView = (ComponentView) staticView;
+        componentView.createComponentViewComponents(simulations);
+      }
+    }
 
-      for (SubcircuitInstanceCreation creation : creations)
-      {
-        SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-        subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
-      }
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+    }
 
-      for (SubcircuitInstanceCreation creation : creations)
-      {
-        SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-        subcircuitInstanceView.createTracesForSubcircuitInstanceView();
-      }
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
     }
   }
 
@@ -1523,6 +1516,7 @@ public class SubcircuitView
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
       subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
     }
+
     for (SubcircuitInstanceCreation creation : creations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
@@ -1544,18 +1538,11 @@ public class SubcircuitView
 
   public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
   {
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
-    {
-      CircuitSimulation circuitSimulation = new CircuitSimulation(name);
-      SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(circuitSimulation);
-      circuitSimulation.setTopSimulation(subcircuitTopSimulation);
-      addSubcircuitSimulation(subcircuitTopSimulation);
-      return subcircuitTopSimulation;
-    }
-    else
-    {
-      return null;
-    }
+    CircuitSimulation circuitSimulation = new CircuitSimulation(name);
+    SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(circuitSimulation);
+    circuitSimulation.setTopSimulation(subcircuitTopSimulation);
+    addSubcircuitSimulation(subcircuitTopSimulation);
+    return subcircuitTopSimulation;
   }
 
   public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
@@ -1591,32 +1578,22 @@ public class SubcircuitView
   public void validateSimulations(List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
     Collection<SubcircuitTopSimulation> subcircuitTopSimulations = simulations.getSubcircuitTopSimulations();
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    if ((subcircuitTopSimulations.isEmpty()))
     {
-      if ((subcircuitTopSimulations.isEmpty()))
-      {
-        throw new SimulatorException("SubcircuitView [%s] expected at least one subcircuit top simulation.", getTypeName());
-      }
-
-      if (orderedTopDownCircuitInstanceViews.size() == 0)
-      {
-        throw new SimulatorException("SubcircuitView [%s] expected at least one circuit instance view.", getTypeName());
-      }
-      CircuitInstanceView circuitInstanceView = orderedTopDownCircuitInstanceViews.get(0);
-      if (circuitInstanceView.getInstanceSubcircuitView() != this)
-      {
-        throw new SimulatorException("SubcircuitView [%s] does not match first circuit instance view [%s].", getTypeName(), circuitInstanceView.getInstanceSubcircuitView().getTypeName());
-      }
-
-      simulations.validate(orderedTopDownCircuitInstanceViews);
+      throw new SimulatorException("SubcircuitView [%s] expected at least one subcircuit top simulation.", getTypeName());
     }
-    else
+
+    if (orderedTopDownCircuitInstanceViews.size() == 0)
     {
-      if (!subcircuitTopSimulations.isEmpty())
-      {
-        throw new SimulatorException("SubcircuitView [%s] expected no subcircuit top simulations.", getTypeName());
-      }
+      throw new SimulatorException("SubcircuitView [%s] expected at least one circuit instance view.", getTypeName());
     }
+    CircuitInstanceView circuitInstanceView = orderedTopDownCircuitInstanceViews.get(0);
+    if (circuitInstanceView.getInstanceSubcircuitView() != this)
+    {
+      throw new SimulatorException("SubcircuitView [%s] does not match first circuit instance view [%s].", getTypeName(), circuitInstanceView.getInstanceSubcircuitView().getTypeName());
+    }
+
+    simulations.validate(orderedTopDownCircuitInstanceViews);
   }
 
   public SubcircuitTopSimulation addNewSimulation(String simulationName)

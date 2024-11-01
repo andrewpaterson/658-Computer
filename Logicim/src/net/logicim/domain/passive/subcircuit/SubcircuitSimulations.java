@@ -3,7 +3,6 @@ package net.logicim.domain.passive.subcircuit;
 import net.common.SimulatorException;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
-import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.*;
 
@@ -124,38 +123,17 @@ public class SubcircuitSimulations
 
   protected void validateSubcircuitTopSimulation(SubcircuitTopSimulation subcircuitTopSimulation, List<CircuitInstanceView> orderedTopDownCircuitInstanceViews)
   {
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
+    int depth = 0;
+    for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
     {
-      CircuitSimulation circuitSimulation = subcircuitTopSimulation.getCircuitSimulation();
-      int depth = 0;
-      for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
+      List<? extends SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations(circuitSimulation);
+
+      if (innerSubcircuitSimulations.isEmpty() && depth > 0)
       {
-        List<? extends SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations(circuitSimulation);
-
-        if (innerSubcircuitSimulations.isEmpty() && depth > 0)
-        {
-          throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
-        }
-        depth++;
+        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
       }
-    }
-  }
-
-  public boolean hasSimulation(SubcircuitSimulation subcircuitSimulation)
-  {
-    if (subcircuitSimulation == null)
-    {
-      return false;
-    }
-
-    List<SubcircuitSimulation> subcircuitSimulations = simulations.get(subcircuitSimulation.getCircuitSimulation());
-    if (subcircuitSimulations != null)
-    {
-      return subcircuitSimulations.contains(subcircuitSimulation);
-    }
-    else
-    {
-      return false;
+      depth++;
     }
   }
 

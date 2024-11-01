@@ -15,7 +15,6 @@ public class HaltSimulationAction
   @Override
   public void executeEditorAction()
   {
-    editor.haltAndDestroySimulations();
   }
 
   @Override

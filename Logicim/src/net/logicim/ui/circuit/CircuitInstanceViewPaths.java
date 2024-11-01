@@ -20,7 +20,7 @@ public class CircuitInstanceViewPaths
     process(subcircuitEditors);
   }
 
-  protected void process(List<SubcircuitEditor> subcircuitEditors)
+  private void process(List<SubcircuitEditor> subcircuitEditors)
   {
     createPathsSet(subcircuitEditors);
     createSubcircuitSimulationPaths();
@@ -94,7 +94,7 @@ public class CircuitInstanceViewPaths
     }
   }
 
-  protected void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath)
+  private void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath)
   {
     path.add(circuitInstanceView);
     CircuitInstanceViewPath circuitInstanceViewPath = new CircuitInstanceViewPath(path);
@@ -114,7 +114,7 @@ public class CircuitInstanceViewPaths
     path.remove(path.size() - 1);
   }
 
-  protected void createPathLinks()
+  private void createPathLinks()
   {
     for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
     {
@@ -154,7 +154,7 @@ public class CircuitInstanceViewPaths
     return getPath(newPath);
   }
 
-  protected CircuitInstanceViewPath getPath(List<CircuitInstanceView> newPath)
+  private CircuitInstanceViewPath getPath(List<CircuitInstanceView> newPath)
   {
     for (CircuitInstanceViewPath path : paths)
     {

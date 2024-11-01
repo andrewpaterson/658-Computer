@@ -17,7 +17,6 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -50,7 +49,6 @@ import net.logicim.ui.placement.StatefulEdit;
 import net.logicim.ui.property.DefaultComponentProperties;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
-import net.logicim.ui.simulation.DebugGlobalEnvironment;
 import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -69,7 +67,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import static java.awt.event.MouseEvent.BUTTON1;
-import static net.logicim.ui.simulation.subcircuit.SubcircuitEditor.getTopSimulationName;
 
 public class Logicim
     implements PanelSize,
@@ -77,44 +74,30 @@ public class Logicim
                SimulationListHolder
 {
   public static final String MAIN_SUBCIRCUIT_TYPE_NAME = "Main";
-
-  private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
-
-  private int width;
-  private int height;
-
   protected Viewport viewport;
   protected EditorActions actions;
   protected InputActions inputActions;
   protected InfoLabels labels;
-
   protected MouseMotion mouseMotion;
   protected MouseButtons mouseButtons;
   protected MousePosition mousePosition;
-
   protected KeyboardButtons keyboardButtons;
-
   protected CircuitEditor circuitEditor;
-
   protected TraceView hoverTraceView;
   protected StaticView<?> hoverComponentView;
   protected ConnectionView hoverConnectionView;
-
   protected Edit edit;
-
   protected UndoStack undoStack;
-
   protected SimulationSpeed simulationSpeed;
-
   protected Rotation creationRotation;
-
   protected ClipboardData clipboard;
   protected long doubleClickInterval;
-
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
   protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
-
   protected boolean drawPointGrid;
+  private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
+  private int width;
+  private int height;
 
   public Logicim()
   {
@@ -324,13 +307,13 @@ public class Logicim
     if (parameters == null)
     {
       subcircuitViewParameters.put(typeName,
-                                        new SubcircuitViewParameters(viewport.getPosition().clone(),
-                                                                     viewport.getZoom()));
+                                   new SubcircuitViewParameters(viewport.getPosition().clone(),
+                                                                viewport.getZoom()));
     }
     else
     {
       parameters.set(viewport.getPosition().clone(),
-                                   viewport.getZoom());
+                     viewport.getZoom());
     }
   }
 
@@ -835,126 +818,6 @@ public class Logicim
     SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
     CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     circuitSimulation.reset(circuitSimulation);
-  }
-
-  public void haltAndDestroySimulations()
-  {
-    DebugGlobalEnvironment.getInstance().setEnableSimulationCreation(false);
-
-//    List<SubcircuitTopEditorSimulation> subcircuitTopSimulations = circuitEditor.getSubcircuitTopSimulations();
-//    List<SubcircuitEditor> subcircuitEditors = circuitEditor.getSubcircuitEditors();
-//    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-//    {
-//      subcircuitEditor.
-//    }
-//    for (SubcircuitTopEditorSimulation subcircuitTopSimulation : subcircuitTopSimulations)
-//    {
-//      su
-//    }
-//
-//    SubcircuitSimulation currentSubcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
-//    SubcircuitEditor currentSubcircuitEditor = circuitEditor.getCurrentSubcircuitEditor();
-//
-//    List<CircuitInstanceView> circuitInstanceViews = currentSubcircuitEditor.getOrderedCircuitInstanceViews();
-//    currentSubcircuitEditor.validateOnlyThisSubcircuitEditor(circuitInstanceViews);
-//
-//    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-//    {
-//      circuitInstanceView.destroyComponents(currentSubcircuitSimulation);
-//    }
-//
-//    Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();
-//    for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-//    {
-//      System.out.println(circuitInstanceView.toString());
-//
-//      if (circuitInstanceView instanceof SubcircuitEditor)
-//      {
-//        SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
-//        SubcircuitTopSimulation newSubcircuitTopSimulation = subcircuitView.createSubcircuitSimulation();
-//        subcircuitView.createComponents(newSubcircuitTopSimulation);
-//        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-//        for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
-//        {
-//          map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(newSubcircuitTopSimulation));
-//        }
-//      }
-//      else if (circuitInstanceView instanceof SubcircuitInstanceView)
-//      {
-//        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) circuitInstanceView;
-//        SubcircuitInstance subcircuitInstance = map.get(subcircuitInstanceView);
-//        SubcircuitSimulation subcircuitSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
-//        SubcircuitView subcircuitView = circuitInstanceView.getCircuitSubcircuitView();
-//        subcircuitView.createComponents(subcircuitSimulation);
-//        Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-//        for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
-//        {
-//          map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(subcircuitSimulation));
-//        }
-//      }
-//    }
-  }
-
-  public void createAndUnhaltSimulations()
-  {
-    DebugGlobalEnvironment.getInstance().setEnableSimulationCreation(true);
-
-    List<SubcircuitEditor> subcircuitEditors = circuitEditor.getSubcircuitEditors();
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
-
-      subcircuitView.createSubcircuitTopSimulation(getTopSimulationName(subcircuitView.getTypeName()));
-    }
-
-    //xxx
-    //circuitEditor.setSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
-
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      List<CircuitInstanceView> circuitInstanceViews = subcircuitEditor.getOrderedCircuitInstanceViews();
-      Map<SubcircuitInstanceView, SubcircuitInstance> map = new LinkedHashMap<>();
-      for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-      {
-        System.out.println(circuitInstanceView.toString());
-
-        SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
-        if (circuitInstanceView instanceof SubcircuitEditor)
-        {
-          SubcircuitTopSimulation subcircuitSimulation = subcircuitView.getSimulations().getSubcircuitTopSimulations().get(0);
-
-          subcircuitView.createComponentsForSubcircuitInstanceView(subcircuitSimulation);
-          Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-          for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
-          {
-            map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(subcircuitSimulation));
-          }
-        }
-        else if (circuitInstanceView instanceof SubcircuitInstanceView)
-        {
-          SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) circuitInstanceView;
-          SubcircuitInstance subcircuitInstance = map.get(subcircuitInstanceView);
-          SubcircuitSimulation subcircuitSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
-          subcircuitView.createComponentsForSubcircuitInstanceView(subcircuitSimulation);
-          Set<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.findAllSubcircuitInstanceViews();
-          for (SubcircuitInstanceView containedSubcircuitInstanceView : subcircuitInstanceViews)
-          {
-            map.put(containedSubcircuitInstanceView, containedSubcircuitInstanceView.getComponent(subcircuitSimulation));
-          }
-        }
-      }
-    }
-
-    for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
-    {
-      List<CircuitInstanceView> circuitInstanceViews = subcircuitEditor.getOrderedCircuitInstanceViews();
-
-      for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-      {
-        SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
-        subcircuitView.createTracesForSubcircuitInstanceView(circuitInstanceView);
-      }
-    }
   }
 
   public EditorData save()

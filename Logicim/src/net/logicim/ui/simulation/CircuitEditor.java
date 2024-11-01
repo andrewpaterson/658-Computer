@@ -4,7 +4,6 @@ import net.common.SimulatorException;
 import net.common.geometry.Line;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
-import net.common.util.FileUtil;
 import net.logicim.data.circuit.CircuitData;
 import net.logicim.data.circuit.LastSubcircuitSimulationData;
 import net.logicim.data.circuit.SubcircuitEditorData;
@@ -20,7 +19,6 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -355,10 +353,8 @@ public class CircuitEditor
     loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap);
 
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
-    {
-      setCurrentSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
-    }
+
+    setCurrentSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
     setCurrentSubcircuitEditor(subcircuitEditor);
 
     SwingUtilities.invokeLater(new Runnable()
@@ -693,34 +689,31 @@ public class CircuitEditor
 
   private void setSubcircuitSimulationForSubcircuitEditor(SubcircuitEditor newSubcircuitEditor, SubcircuitSimulation lastSubcircuitSimulation)
   {
-    if (DebugGlobalEnvironment.getInstance().isEnableSimulationCreation())
+    SubcircuitSimulation newSubcircuitSimulation = lastSubcircuitEditorSimulation.get(newSubcircuitEditor);
+    if (newSubcircuitSimulation != null)
     {
-      SubcircuitSimulation newSubcircuitSimulation = lastSubcircuitEditorSimulation.get(newSubcircuitEditor);
-      if (newSubcircuitSimulation != null)
+      setCurrentSubcircuitSimulation(newSubcircuitEditor, newSubcircuitSimulation);
+      return;
+    }
+    else if (lastSubcircuitSimulation != null)
+    {
+      CircuitSimulation circuitSimulation = lastSubcircuitSimulation.getCircuitSimulation();
+      Collection<SubcircuitSimulation> simulations = newSubcircuitEditor.getSubcircuitSimulations(circuitSimulation);
+      if (simulations.size() > 0)
       {
-        setCurrentSubcircuitSimulation(newSubcircuitEditor, newSubcircuitSimulation);
+        setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.iterator().next());
         return;
       }
-      else if (lastSubcircuitSimulation != null)
-      {
-        CircuitSimulation circuitSimulation = lastSubcircuitSimulation.getCircuitSimulation();
-        Collection<SubcircuitSimulation> simulations = newSubcircuitEditor.getSubcircuitSimulations(circuitSimulation);
-        if (simulations.size() > 0)
-        {
-          setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.iterator().next());
-          return;
-        }
-      }
+    }
 
-      List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getInstanceSubcircuitView().getTopSimulations();
-      if (!simulations.isEmpty())
-      {
-        setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
-      }
-      else
-      {
-        throw new SimulatorException("No top level simulation found for subcircuit editor.");
-      }
+    List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getInstanceSubcircuitView().getTopSimulations();
+    if (!simulations.isEmpty())
+    {
+      setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
+    }
+    else
+    {
+      throw new SimulatorException("No top level simulation found for subcircuit editor.");
     }
   }
 
@@ -810,7 +803,6 @@ public class CircuitEditor
     }
     return result;
   }
-
 
   public SubcircuitTopSimulation addNewSimulation(String simulationName)
   {

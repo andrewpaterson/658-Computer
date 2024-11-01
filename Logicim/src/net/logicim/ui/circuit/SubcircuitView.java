@@ -779,18 +779,21 @@ public class SubcircuitView
       {
         if (!updatedConnectionViews.contains(connectionView))
         {
-          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
-          WireList wireList = wireListFinder.createWireList();
-          System.out.println(wireList.toString());
-
-          for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+          if (connectionView.getConnectedComponents().size() > 0)
           {
-            WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, paths);
-            wireTraceConverter.process();
-          }
+            WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
+            WireList wireList = wireListFinder.createWireList();
+            System.out.println(wireList.toString());
 
-          List<ConnectionView> connectionNetConnectionViews = wireList.getConnectionViews();
-          updatedConnectionViews.addAll(connectionNetConnectionViews);
+            for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+            {
+              WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, paths);
+              wireTraceConverter.process();
+            }
+
+            List<ConnectionView> connectionNetConnectionViews = wireList.getConnectionViews();
+            updatedConnectionViews.addAll(connectionNetConnectionViews);
+          }
         }
       }
     }

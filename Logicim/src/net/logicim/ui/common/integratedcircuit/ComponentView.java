@@ -407,32 +407,6 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
 
-  protected void validateNoComponents()
-  {
-    if (getComponentSubcircuitSimulations().size() > 0)
-    {
-      throw new SimulatorException("Expected no simulations or components on [%s] but found [%s].", getDescription(), getComponentSubcircuitSimulations().size());
-    }
-  }
-
-  public List<? extends Component> createComponentViewComponents(SubcircuitSimulations simulations)
-  {
-    if (this instanceof SubcircuitInstanceView)
-    {
-      throw new SimulatorException("ComponentView.createComponentViewComponents() must not be called from SubcircuitInstanceView.");
-    }
-
-    validateNoComponents();
-
-    ArrayList<Component> result = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
-    {
-      Component component = createComponent(subcircuitSimulation);
-      result.add(component);
-    }
-    return result;
-  }
-
   public Port getPort(SubcircuitSimulation subcircuitSimulation, String portName)
   {
     Component component = getComponent(subcircuitSimulation);

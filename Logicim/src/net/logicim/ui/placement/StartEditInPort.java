@@ -34,7 +34,7 @@ public class StartEditInPort
   @Override
   public StatefulEdit move(float x, float y, Edit edit)
   {
-    return new WirePull(subcircuitSimulation);
+    return new WirePull();
   }
 
   @Override

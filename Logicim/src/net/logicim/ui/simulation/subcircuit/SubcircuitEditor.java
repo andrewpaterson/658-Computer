@@ -339,12 +339,6 @@ public class SubcircuitEditor
     validateSimulations();
   }
 
-  public void createTraceViews(List<Line> newTraceViewLines)
-  {
-    Set<TraceView> newTraceViews = subcircuitView.createTraceViews(newTraceViewLines);
-    subcircuitView.createTracesForTraceViewsAndConnectionViews(this, new ArrayList<>(), newTraceViews);
-  }
-
   public List<View> loadViews(List<TraceData> traces,
                               List<SubcircuitInstanceData> subcircuitInstances,
                               List<StaticData<?>> staticDatas,

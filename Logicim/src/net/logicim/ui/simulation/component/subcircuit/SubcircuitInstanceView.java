@@ -15,7 +15,6 @@ import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.Colours;
@@ -240,16 +239,14 @@ public class SubcircuitInstanceView
     return subcircuitInstance;
   }
 
-  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation containingSubcircuitSimulation, SubcircuitInstance subcircuitInstance, List<SubcircuitInstanceCreation> creations)
+  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation containingSubcircuitSimulation,
+                                                        SubcircuitInstance subcircuitInstance)
   {
     CircuitSimulation circuitSimulation = containingSubcircuitSimulation.getCircuitSimulation();
-    SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
 
     createTracePorts(subcircuitInstance);
     postCreateComponent(containingSubcircuitSimulation, subcircuitInstance);
     subcircuitInstance.reset(circuitSimulation.getSimulation());
-
-    instanceSubcircuitView.createComponentsForSubcircuitInstanceView(subcircuitInstanceSimulation, creations);
   }
 
   public void createTracesForSubcircuitInstanceView()
@@ -257,17 +254,12 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
   }
 
-  public List<SubcircuitInstanceCreation> createSubcircuitInstanceViewComponents(SubcircuitSimulations simulations)
+  public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(SubcircuitSimulation containingSubcircuitSimulation)
   {
-    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
-    {
-      SubcircuitInstance subcircuitInstance = createComponent(subcircuitSimulation);
-      creations.add(new SubcircuitInstanceCreation(this,
-                                                   subcircuitSimulation,
-                                                   subcircuitInstance));
-    }
-    return creations;
+    SubcircuitInstance subcircuitInstance = createComponent(containingSubcircuitSimulation);
+    return new SubcircuitInstanceCreation(this,
+                                          containingSubcircuitSimulation,
+                                          subcircuitInstance);
   }
 
   //Called from SubcircuitInstanceData.

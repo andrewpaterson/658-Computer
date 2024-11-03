@@ -2,11 +2,11 @@ package net.logicim.ui.placement;
 
 import net.common.geometry.Line;
 import net.common.type.Int2D;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.Edit;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.awt.*;
 
@@ -24,11 +24,8 @@ public class WirePull
   protected Int2D secondPosition;
   protected Int2D secondEnd;
 
-  private SubcircuitSimulation subcircuitSimulation;
-
-  public WirePull(SubcircuitSimulation subcircuitSimulation)
+  public WirePull()
   {
-    this.subcircuitSimulation = subcircuitSimulation;
     resetStart();
   }
 
@@ -65,7 +62,8 @@ public class WirePull
       Line firstLine = Line.createLine(firstPosition, middlePosition);
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
-      edit.getEditor().getCurrentSubcircuitEditor().createTraceViews(Line.lines(firstLine, secondLine));
+      SubcircuitEditor subcircuitEditor = edit.getEditor().getCurrentSubcircuitEditor();
+      subcircuitEditor.getInstanceSubcircuitView().createTraceViews(subcircuitEditor, Line.lines(firstLine, secondLine));
 
       edit.circuitUpdated();
     }

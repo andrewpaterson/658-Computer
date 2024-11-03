@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class PartialWire
 {
-  protected Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires;
+  protected Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires;
 
-  public PartialWire(Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires)
+  public PartialWire(Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires)
   {
     this.connectedWires = connectedWires;
   }

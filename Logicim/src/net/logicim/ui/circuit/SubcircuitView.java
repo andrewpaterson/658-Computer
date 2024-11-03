@@ -256,7 +256,9 @@ public class SubcircuitView
         nonTraceViewConnectionViews.size() > 0)
     {
       newTraceViews = createTraceViews(new HashSet<>(), traceViews);
-      createTracesForTraceViewsAndConnectionViews(circuitInstanceView, nonTraceViewConnectionViews, newTraceViews);
+      createTracesForTraceViewsAndConnectionViews(circuitInstanceView,
+                                                  nonTraceViewConnectionViews,
+                                                  newTraceViews);
     }
     else
     {
@@ -889,37 +891,6 @@ public class SubcircuitView
     }
   }
 
-  private void createComponentsForAllSimulations(List<StaticView<?>> staticViews)
-  {
-    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
-    for (StaticView<?> staticView : staticViews)
-    {
-      if (staticView instanceof SubcircuitInstanceView)
-      {
-        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
-        List<SubcircuitInstanceCreation> simulationCreations = subcircuitInstanceView.createSubcircuitInstanceViewComponents(simulations);
-        creations.addAll(simulationCreations);
-      }
-      else if (staticView instanceof ComponentView)
-      {
-        ComponentView componentView = (ComponentView) staticView;
-        componentView.createComponentViewComponents(simulations);
-      }
-    }
-
-    for (SubcircuitInstanceCreation creation : creations)
-    {
-      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
-    }
-
-    for (SubcircuitInstanceCreation creation : creations)
-    {
-      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
-    }
-  }
-
   public void simulationStarted(List<StaticView<?>> staticViews)
   {
     for (StaticView<?> staticView : staticViews)
@@ -1053,7 +1024,9 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public void createTracesForTraceViewsAndConnectionViews(CircuitInstanceView circuitInstanceView, Collection<ConnectionView> nonTraceViewConnectionViews, Set<TraceView> traceViews)
+  public void createTracesForTraceViewsAndConnectionViews(CircuitInstanceView circuitInstanceView,
+                                                          Collection<ConnectionView> nonTraceViewConnectionViews,
+                                                          Set<TraceView> traceViews)
   {
     Collection<ConnectionView> traceConnectionViews = getTraceViewsConnectionViews(traceViews);
     if (traceConnectionViews.size() > 0)
@@ -1175,7 +1148,9 @@ public class SubcircuitView
         nonTraceViewConnectionViews.size() > 0)
     {
       Set<TraceView> newTraceViews = createTraceViews(new HashSet<>(), connectedTraceViews);
-      createTracesForTraceViewsAndConnectionViews(circuitInstanceView, nonTraceViewConnectionViews, newTraceViews);
+      createTracesForTraceViewsAndConnectionViews(circuitInstanceView,
+                                                  nonTraceViewConnectionViews,
+                                                  newTraceViews);
     }
   }
 
@@ -1200,9 +1175,10 @@ public class SubcircuitView
 
     enableViews(staticViews);
 
-    createComponentsForAllSimulations(staticViews);
-
-    createTracesForTraceViewsAndConnectionViews(circuitInstanceView, nonTraceViewConnectionViews, newTraceViews);
+    createComponentsForAllSimulations(circuitInstanceView,
+                                      staticViews,
+                                      nonTraceViewConnectionViews,
+                                      newTraceViews);
 
     simulationStarted(staticViews);
 
@@ -1211,6 +1187,59 @@ public class SubcircuitView
     return calculateNewSelection(staticViews,
                                  selectedViews,
                                  selectedTraceViews);
+  }
+
+  private void createComponentsForAllSimulations(CircuitInstanceView circuitInstanceView,
+                                                 List<StaticView<?>> staticViews,
+                                                 Set<ConnectionView> nonTraceViewConnectionViews,
+                                                 Set<TraceView> traceViews)
+  {
+    List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
+    for (StaticView<?> staticView : staticViews)
+    {
+      if (staticView instanceof SubcircuitInstanceView)
+      {
+        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
+        List<SubcircuitInstanceCreation> simulationCreations = subcircuitInstanceView.createSubcircuitInstanceViewComponents(simulations);
+        localCreations.addAll(simulationCreations);
+      }
+      else if (staticView instanceof ComponentView)
+      {
+        ComponentView componentView = (ComponentView) staticView;
+        componentView.createComponentViewComponents(simulations);
+      }
+    }
+
+    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    for (SubcircuitInstanceCreation creation : localCreations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance(), creations);
+    }
+
+    creations.addAll(localCreations);
+
+    Collection<ConnectionView> traceConnectionViews = getTraceViewsConnectionViews(traceViews);
+    if (traceConnectionViews.size() > 0)
+    {
+      traceConnectionViews.addAll(nonTraceViewConnectionViews);
+    }
+    else
+    {
+      traceConnectionViews = nonTraceViewConnectionViews;
+    }
+
+    if (traceConnectionViews.size() > 0)
+    {
+      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, traceConnectionViews);
+      fireConnectionEvents(updatedConnectionViews);
+    }
+
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
+    }
   }
 
   protected Set<TraceView> calculateSelectedTraceViews(List<Line> newTraceViewLines, Collection<TraceView> traceViews)
@@ -1520,7 +1549,7 @@ public class SubcircuitView
     }
   }
 
-  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation subcircuitSimulation)
+  public void createComponentsForSubcircuitInstanceView(SubcircuitSimulation subcircuitSimulation, List<SubcircuitInstanceCreation> creations)
   {
     List<StaticView<?>> staticViews = getStaticViews(false);
     for (StaticView<?> staticView : staticViews)
@@ -1528,26 +1557,22 @@ public class SubcircuitView
       staticView.createComponent(subcircuitSimulation);
     }
 
-    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
       SubcircuitInstance subcircuitInstance = subcircuitInstanceView.createComponent(subcircuitSimulation);
-      creations.add(new SubcircuitInstanceCreation(subcircuitInstanceView,
-                                                   subcircuitSimulation,
-                                                   subcircuitInstance));
+      localCreations.add(new SubcircuitInstanceCreation(subcircuitInstanceView,
+                                                        subcircuitSimulation,
+                                                        subcircuitInstance));
     }
 
-    for (SubcircuitInstanceCreation creation : creations)
+    for (SubcircuitInstanceCreation creation : localCreations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance(), creations);
     }
 
-    for (SubcircuitInstanceCreation creation : creations)
-    {
-      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
-    }
+    creations.addAll(localCreations);
 
     simulationStarted(staticViews, subcircuitSimulation);
     simulationStarted(subcircuitInstanceViews, subcircuitSimulation);
@@ -1629,27 +1654,41 @@ public class SubcircuitView
 
     TraceToTraceMap traceMap = new TraceToTraceMap();
     SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(simulationName);
-    recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap);
+    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap, creations);
+
+    for (SubcircuitInstanceCreation creation : creations)
+    {
+      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
+      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
+    }
 
     return newSubcircuitTopSimulation;
   }
 
   protected void recurseAddNewSimulation(SubcircuitSimulation existingSimulation,
                                          SubcircuitSimulation newSimulation,
-                                         TraceToTraceMap traceMap)
+                                         TraceToTraceMap traceMap,
+                                         List<SubcircuitInstanceCreation> creations)
   {
     addSimulationToWires(existingSimulation, newSimulation, traceMap);
     addSimulationToPassives(existingSimulation, newSimulation, traceMap);
     addSimulationToIntegratedCircuits(existingSimulation, newSimulation, traceMap);
-    addSimulationToSubcircuitInstances(existingSimulation, newSimulation, traceMap);
+
+    addSimulationToSubcircuitInstances(existingSimulation,
+                                       newSimulation,
+                                       traceMap,
+                                       creations);
   }
 
   private void addSimulationToSubcircuitInstances(SubcircuitSimulation existingSimulation,
                                                   SubcircuitSimulation newSimulation,
-                                                  TraceToTraceMap traceMap)
+                                                  TraceToTraceMap traceMap,
+                                                  List<SubcircuitInstanceCreation> creations)
   {
     CircuitSimulation existingCircuitSimulation = existingSimulation.getCircuitSimulation();
-    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
+
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
       List<? extends SubcircuitSimulation> innerSubcircuitSimulations = subcircuitInstanceView.getInstanceSubcircuitSimulations(existingCircuitSimulation);
@@ -1660,22 +1699,29 @@ public class SubcircuitView
 
         SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
 
-        creations.add(new SubcircuitInstanceCreation(subcircuitInstanceView, newSimulation, subcircuitInstance));
-        instanceSubcircuitView.recurseAddNewSimulation(innerSubcircuitSimulation, newSimulation, traceMap);
+        localCreations.add(new SubcircuitInstanceCreation(subcircuitInstanceView,
+                                                          newSimulation,
+                                                          subcircuitInstance));
+        instanceSubcircuitView.recurseAddNewSimulation(innerSubcircuitSimulation,
+                                                       newSimulation,
+                                                       traceMap,
+                                                       creations);
       }
     }
 
-    for (SubcircuitInstanceCreation creation : creations)
+    for (SubcircuitInstanceCreation creation : localCreations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(), creation.getSubcircuitInstance());
+      subcircuitInstanceView.createComponentsForSubcircuitInstanceView(creation.getContainingSubcircuitSimulation(),
+                                                                       creation.getSubcircuitInstance(),
+                                                                       creations);
     }
 
-    for (SubcircuitInstanceCreation creation : creations)
-    {
-      SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
-    }
+    creations.addAll(localCreations);
+
+    List<StaticView<?>> staticViews = getStaticViews(false);
+    simulationStarted(staticViews, newSimulation);
+    simulationStarted(subcircuitInstanceViews, newSimulation);
   }
 
   private void addSimulationToIntegratedCircuits(SubcircuitSimulation existingSimulation,

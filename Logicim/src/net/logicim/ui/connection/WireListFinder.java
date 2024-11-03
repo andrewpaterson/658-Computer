@@ -79,7 +79,7 @@ public class WireListFinder
       }
       else
       {
-        Map<CircuitInstanceViewPath, List<WireConnection>> connectedWires = connectionNet.getConnectedWires();
+        Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
         if (connectedWires.size() > 0)
         {
           wireList.add(new PartialWire(connectedWires));

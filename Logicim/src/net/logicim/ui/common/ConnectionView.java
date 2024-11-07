@@ -202,5 +202,10 @@ public class ConnectionView
       }
     }
   }
+
+  public boolean isConcrete()
+  {
+    return true;
+  }
 }
 

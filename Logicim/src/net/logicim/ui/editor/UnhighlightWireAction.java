@@ -2,12 +2,12 @@ package net.logicim.ui.editor;
 
 import net.logicim.ui.Logicim;
 
-public class RegeneratePathsAction
+public class UnhighlightWireAction
     extends SimulatorEditorAction
 {
-  public static final String NAME = "Regenerate Connections";
+  public static final String NAME = "Un-highlight wire";
 
-  public RegeneratePathsAction(Logicim editor)
+  public UnhighlightWireAction(Logicim editor)
   {
     super(editor);
   }
@@ -15,7 +15,7 @@ public class RegeneratePathsAction
   @Override
   public void executeEditorAction()
   {
-    editor.getCircuitEditor().createCircuitInstanceViewPaths();
+    editor.unhighlightWire();
   }
 
   @Override

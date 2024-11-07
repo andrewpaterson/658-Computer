@@ -56,7 +56,7 @@ public class WireViewComp
 
   public List<ConnectionView> getConnections()
   {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    List<ConnectionView> connectionViews = new ArrayList<>();
     for (ConnectionView connection : connections)
     {
       if (connection != null)

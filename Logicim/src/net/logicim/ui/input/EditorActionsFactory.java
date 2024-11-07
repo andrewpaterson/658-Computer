@@ -86,7 +86,9 @@ public class EditorActionsFactory
     editor.addAction(EnterSubcircuitAction.NAME, new EnterSubcircuitAction(editor));
     editor.addAction(EditSubcircuitAction.NAME, new EditSubcircuitAction(editor, panel));
 
-    editor.addAction(RegeneratePathsAction.NAME, new RegeneratePathsAction(editor));
+    editor.addAction(HighlightWireAction.NAME, new HighlightWireAction(editor));
+    editor.addAction(UnhighlightWireAction.NAME, new UnhighlightWireAction(editor));
+    editor.addAction(ClearAllHighlightedWiresAction.NAME, new ClearAllHighlightedWiresAction(editor));
 
     for (int i = 1; i < 10; i++)
     {

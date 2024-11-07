@@ -560,6 +560,11 @@ public class Logicim
     return getCurrentSubcircuitEditor().getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
+  public TraceView getHoverTraceView()
+  {
+    return hoverTraceView;
+  }
+
   private StaticView<?> calculateHoverView(Int2D mousePosition)
   {
     return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
@@ -949,14 +954,9 @@ public class Logicim
     hoverConnectionView = null;
   }
 
-  public StaticView<?> getHoverComponentView()
-  {
-    return hoverComponentView;
-  }
-
   public StaticView<?> getComponent()
   {
-    StaticView<?> componentView = getHoverComponentView();
+    StaticView<?> componentView = hoverComponentView;
     if (componentView == null)
     {
       componentView = getCircuitEditor().getCurrentSubcircuitEditor().getSingleSelectionStaticView();
@@ -1516,6 +1516,46 @@ public class Logicim
   }
 
   public void addSimulationListChangedListener(SimulationListChangedListener simulationListChangedListener)
+  {
+
+  }
+
+  private List<ConnectionView> getHoverConnectionViews()
+  {
+    if ((hoverConnectionView != null) && (hoverConnectionView.isConcrete()))
+    {
+      List<ConnectionView> result = new ArrayList<>();
+      result.add(hoverConnectionView);
+      return result;
+    }
+    else if (hoverTraceView != null)
+    {
+      return hoverTraceView.getConnectionViews();
+    }
+    else if (hoverComponentView != null)
+    {
+      return hoverComponentView.getConnectionViews();
+    }
+    else
+    {
+      return new ArrayList<>();
+    }
+  }
+
+  public void highlightWire()
+  {
+    List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
+    for (ConnectionView connectionView : hoverConnectionViews)
+    {
+    }
+  }
+
+  public void unhighlightWire()
+  {
+
+  }
+
+  public void clearAllHighlightedWires()
   {
 
   }

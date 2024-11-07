@@ -21,6 +21,7 @@ public class HoverConnectionView
     return gridPosition;
   }
 
+  @Override
   public boolean isConcrete()
   {
     return false;

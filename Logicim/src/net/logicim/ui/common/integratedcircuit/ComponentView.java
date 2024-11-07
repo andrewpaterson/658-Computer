@@ -160,7 +160,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public List<ConnectionView> getConnectionViews()
   {
-    ArrayList<ConnectionView> connectionViews = new ArrayList<>();
+    List<ConnectionView> connectionViews = new ArrayList<>();
     for (PortView port : portViews)
     {
       ConnectionView connectionView = port.getConnection();

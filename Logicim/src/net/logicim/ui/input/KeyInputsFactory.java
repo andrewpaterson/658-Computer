@@ -83,7 +83,9 @@ public class KeyInputsFactory
     editor.addKeyInput(new KeyInput(editor.getAction(NavigateForwardSubcircuitAction.NAME), KeyEvent.VK_RIGHT, Down, Down, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(EditSubcircuitAction.NAME), KeyEvent.VK_E, Down, Up, Down));
 
-    editor.addKeyInput(new KeyInput(editor.getAction(RegeneratePathsAction.NAME), KeyEvent.VK_BACK_QUOTE, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(HighlightWireAction.NAME), KeyEvent.VK_BACK_QUOTE, Up, Up, Up));
+    editor.addKeyInput(new KeyInput(editor.getAction(UnhighlightWireAction.NAME), KeyEvent.VK_BACK_QUOTE, Up, Up, Down));
+    editor.addKeyInput(new KeyInput(editor.getAction(ClearAllHighlightedWiresAction.NAME), KeyEvent.VK_BACK_QUOTE, Down, Up, Down));
 
     for (int i = 1; i < 10; i++)
     {

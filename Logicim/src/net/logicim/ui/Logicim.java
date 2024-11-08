@@ -17,6 +17,8 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -25,6 +27,11 @@ import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
+import net.logicim.ui.common.wire.WireView;
+import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
+import net.logicim.ui.connection.WireList;
+import net.logicim.ui.connection.WireListFinder;
+import net.logicim.ui.connection.WireViewPathConnection;
 import net.logicim.ui.debugdetail.ComponentInformationPanelFactory;
 import net.logicim.ui.debugdetail.ConnectionInformationPanelFactory;
 import net.logicim.ui.debugdetail.InformationPanel;
@@ -1545,8 +1552,28 @@ public class Logicim
   public void highlightWire()
   {
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
+    SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
+    CircuitInstanceViewPaths paths = new CircuitInstanceViewPaths(getSubcircuitEditors());
     for (ConnectionView connectionView : hoverConnectionViews)
     {
+      WireListFinder wireListFinder = new WireListFinder(subcircuitEditor, connectionView, paths);
+      List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
+      for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
+      {
+        Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
+        for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
+        {
+          CircuitInstanceViewPath path = entry.getKey();
+          List<WireViewPathConnection> wireViewPathConnections = entry.getValue();
+          for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
+          {
+            WireView wireView = wireViewPathConnection.getWireView();
+            System.out.println(path.getDescription() + ": " + wireView.getDescription());
+          }
+        }
+      }
+      WireList wireList = wireListFinder.createWireList(connectionNets);
+      //System.out.println(wireList.toString());
     }
   }
 

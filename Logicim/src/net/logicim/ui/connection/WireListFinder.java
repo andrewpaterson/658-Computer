@@ -40,7 +40,7 @@ public class WireListFinder
     this.processedSplitterViewConnections = new LinkedHashSet<>();
   }
 
-  public WireList createWireList()
+  public List<LocalMultiSimulationConnectionNet> createConnectionNets()
   {
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
 
@@ -59,11 +59,10 @@ public class WireListFinder
     {
       localMultiSimulationConnectionNet.process();
     }
-
-    return createWireList(connectionNets);
+    return connectionNets;
   }
 
-  private WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
+  public WireList createWireList(List<LocalMultiSimulationConnectionNet> connectionNets)
   {
     Map<ComponentViewPortName, ComponentViewPortNames> totalPortWireMap = createSplitterPortMap(connectionNets);
 

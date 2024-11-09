@@ -22,7 +22,7 @@ public class CircuitInstanceViewPath
   public CircuitInstanceViewPath(List<CircuitInstanceView> path)
   {
     this.path = new ArrayList<>(path);
-    this.circuitSimulations = new LinkedHashMap<>();
+    this.circuitSimulations = null;
   }
 
   public boolean equalsPath(List<CircuitInstanceView> path)
@@ -42,6 +42,21 @@ public class CircuitInstanceViewPath
       }
       return true;
     }
+  }
+
+  @Override
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof CircuitInstanceViewPath))
+    {
+      return false;
+    }
+    if (obj == this)
+    {
+      return true;
+    }
+
+    return equalsPath(((CircuitInstanceViewPath) obj).getPath());
   }
 
   public List<CircuitInstanceView> getPath()
@@ -87,6 +102,11 @@ public class CircuitInstanceViewPath
   public CircuitInstanceViewPath getPrevious()
   {
     return previous;
+  }
+
+  public void clearPrevious()
+  {
+    previous = null;
   }
 
   public void setPrevious(CircuitInstanceViewPath path)
@@ -187,6 +207,16 @@ public class CircuitInstanceViewPath
       }
     }
     return 0;
+  }
+
+  public void clearCircuitSimulations()
+  {
+    this.circuitSimulations = new LinkedHashMap<>();
+  }
+
+  public CircuitInstanceViewPath getNext()
+  {
+    return next;
   }
 }
 

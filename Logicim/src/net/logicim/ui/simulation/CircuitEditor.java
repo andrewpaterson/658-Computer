@@ -19,6 +19,7 @@ import net.logicim.domain.common.event.Event;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.circuit.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -55,6 +56,8 @@ public class CircuitEditor
 
   protected DebugGlobalEnvironment globals;
 
+  protected CircuitInstanceViewPaths viewPaths;
+
   public CircuitEditor()
   {
     subcircuitEditorList = new SubcircuitEditorList();
@@ -66,6 +69,8 @@ public class CircuitEditor
     navigationStack = new NavigationStack();
 
     globals = new DebugGlobalEnvironment();
+
+    viewPaths = new CircuitInstanceViewPaths(subcircuitEditorList.findAll());
   }
 
   public CircuitEditor(String mainSubcircuitTypeName)
@@ -349,6 +354,8 @@ public class CircuitEditor
     validateLoadSimulationSubcircuitInstances(circuitData.subcircuitSimulations, loaders, subcircuitEditorMap, subcircuitEditorViews);
     loadViews(circuitData, loaders, subcircuitEditorMap, subcircuitEditorViews);
 
+    viewPaths = new CircuitInstanceViewPaths(getSubcircuitEditors());
+
     lastSubcircuitEditorSimulation = new LinkedHashMap<>();
     loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap);
 
@@ -559,7 +566,6 @@ public class CircuitEditor
 
   public void startMoveComponents(List<StaticView<?>> staticViews, List<TraceView> traceViews)
   {
-    System.out.println("CircuitEditor.startMoveComponents");
     getCurrentSubcircuitEditor().startMoveComponents(staticViews, traceViews);
   }
 
@@ -568,7 +574,6 @@ public class CircuitEditor
                                  Set<StaticView<?>> selectedViews,
                                  boolean newComponents)
   {
-    System.out.println("CircuitEditor.doneMoveComponents");
     List<Line> newTraceViewLines = SubcircuitView.getTraceViewLines(removeTraceViews);
 
     getCurrentSubcircuitEditor().doneMoveComponents(staticViews,
@@ -764,6 +769,97 @@ public class CircuitEditor
 
     setSubcircuitSimulationForSubcircuitEditor(subcircuitEditor, null);
     setCurrentSubcircuitEditor(subcircuitEditor);
+
+    viewPathsUpdate();
+  }
+
+  public void viewPathsUpdate()
+  {
+    CircuitInstanceViewPaths newViewPaths = new CircuitInstanceViewPaths(getSubcircuitEditors());
+
+    Map<CircuitInstanceViewPath, CircuitInstanceViewPath> newToExistingPaths = createNewPathToExistingPathMap(newViewPaths);
+
+    updateViewPaths(newViewPaths);
+
+    updatePathsLinks(newToExistingPaths);
+
+    validatePathLinks();
+  }
+
+  protected void validatePathLinks()
+  {
+    for (CircuitInstanceViewPath path : viewPaths.getPaths())
+    {
+      CircuitInstanceViewPath previous = path.getPrevious();
+      if (previous != null)
+      {
+        if (!viewPaths.getPaths().contains(previous))
+        {
+          throw new SimulatorException("View Paths does not contain Previous path [%s].", previous);
+        }
+      }
+      CircuitInstanceViewPath next = path.getNext();
+      if (next != null)
+      {
+        if (!viewPaths.getPaths().contains(next))
+        {
+          throw new SimulatorException("View Paths does not contain Next path [%s].", next);
+        }
+      }
+    }
+  }
+
+  protected void updateViewPaths(CircuitInstanceViewPaths newViewPaths)
+  {
+    for (CircuitInstanceViewPath newPath : newViewPaths.getPaths())
+    {
+      viewPaths.addIfNotPresent(newPath);
+    }
+
+    int length = viewPaths.getPaths().size();
+    for (int i = 0; i < length; i++)
+    {
+      CircuitInstanceViewPath existingPath = viewPaths.getPath(i);
+      if (!newViewPaths.contains(existingPath))
+      {
+        viewPaths.removePath(i);
+        i--;
+        length--;
+      }
+    }
+  }
+
+  protected void updatePathsLinks(Map<CircuitInstanceViewPath, CircuitInstanceViewPath> newToExistingPaths)
+  {
+    for (CircuitInstanceViewPath path : viewPaths.getPaths())
+    {
+      CircuitInstanceViewPath previous = path.getPrevious();
+      CircuitInstanceViewPath existingPath = newToExistingPaths.get(previous);
+      if (existingPath != null)
+      {
+        path.clearPrevious();
+        path.setPrevious(existingPath);
+      }
+
+      path.setNext(null);
+    }
+    viewPaths.createPathLinks();
+  }
+
+  protected Map<CircuitInstanceViewPath, CircuitInstanceViewPath> createNewPathToExistingPathMap(CircuitInstanceViewPaths newViewPaths)
+  {
+    Map<CircuitInstanceViewPath, CircuitInstanceViewPath> newToExistingPaths = new LinkedHashMap<>();
+    for (CircuitInstanceViewPath newPath : newViewPaths.getPaths())
+    {
+      for (CircuitInstanceViewPath existingPath : viewPaths.getPaths())
+      {
+        if (newPath.equals(existingPath))
+        {
+          newToExistingPaths.put(newPath, existingPath);
+        }
+      }
+    }
+    return newToExistingPaths;
   }
 
   public void circuitUpdated()
@@ -842,9 +938,9 @@ public class CircuitEditor
     return subcircuitEditorList;
   }
 
-  public CircuitInstanceViewPaths createCircuitInstanceViewPaths()
+  public CircuitInstanceViewPaths getViewPaths()
   {
-    return new CircuitInstanceViewPaths(getSubcircuitEditors());
+    return viewPaths;
   }
 }
 

@@ -7,7 +7,7 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.CircuitInstanceViewPaths;
+import net.logicim.ui.circuit.SubcircuitSimulationPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.wire.WireView;
 
@@ -16,18 +16,16 @@ import java.util.*;
 public class WireTraceConverter
 {
   protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
-  protected CircuitInstanceViewPaths paths;
   protected WireList wireList;
   protected CircuitInstanceViewPath startingCircuitInstanceViewPath;
   protected CircuitSimulation circuitSimulation;
 
   public WireTraceConverter(WireList wireList,
                             SubcircuitSimulation startingSubcircuitSimulation,
-                            CircuitInstanceViewPaths paths)
+                            SubcircuitSimulationPaths subcircuitSimulationPaths)
   {
-    this.paths = paths;
     this.wireList = wireList;
-    this.startingCircuitInstanceViewPath = paths.getSubcircuitSimulationPaths().get(startingSubcircuitSimulation);
+    this.startingCircuitInstanceViewPath = subcircuitSimulationPaths.getSubcircuitSimulationPaths().get(startingSubcircuitSimulation);
     this.circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
 
     this.localMultiSimulationConnectionNetMap = new HashMap<>();

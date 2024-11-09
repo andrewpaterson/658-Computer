@@ -81,6 +81,7 @@ public class Logicim
                SimulationListHolder
 {
   public static final String MAIN_SUBCIRCUIT_TYPE_NAME = "Main";
+
   protected Viewport viewport;
   protected EditorActions actions;
   protected InputActions inputActions;
@@ -102,9 +103,9 @@ public class Logicim
   protected Map<Integer, SubcircuitEditor> subcircuitBookmarks;
   protected Map<String, SubcircuitViewParameters> subcircuitViewParameters;
   protected boolean drawPointGrid;
-  private ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
-  private int width;
-  private int height;
+  protected ConcurrentLinkedDeque<SimulatorEditorEvent> inputEvents;
+  protected int width;
+  protected int height;
 
   public Logicim()
   {
@@ -1553,10 +1554,12 @@ public class Logicim
   {
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
-    CircuitInstanceViewPaths paths = new CircuitInstanceViewPaths(getSubcircuitEditors());
+    CircuitInstanceViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    System.out.println(viewPaths.toString());
+
     for (ConnectionView connectionView : hoverConnectionViews)
     {
-      WireListFinder wireListFinder = new WireListFinder(subcircuitEditor, connectionView, paths);
+      WireListFinder wireListFinder = new WireListFinder(subcircuitEditor, connectionView, viewPaths);
       List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
       for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
       {

@@ -207,6 +207,7 @@ public class SubcircuitView
       else if (componentView instanceof SubcircuitInstanceView)
       {
         removeSubcircuitInstanceView((SubcircuitInstanceView) componentView);
+        getCircuitEditor().viewPathsUpdate();
       }
       else if (componentView instanceof DecorativeView)
       {
@@ -776,7 +777,8 @@ public class SubcircuitView
   public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView,
                                                             Collection<ConnectionView> traceConnectionViews)
   {
-    CircuitInstanceViewPaths paths = getCircuitEditor().createCircuitInstanceViewPaths();
+    CircuitInstanceViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    SubcircuitSimulationPaths simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
 
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
     if (traceConnectionViews.size() > 0)
@@ -784,7 +786,8 @@ public class SubcircuitView
       validateConnectionViewsNotNull(traceConnectionViews);
       Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(circuitInstanceView,
                                                                                                          traceConnectionViews,
-                                                                                                         paths);
+                                                                                                         viewPaths,
+                                                                                                         simulationPaths);
       allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
 
@@ -805,7 +808,8 @@ public class SubcircuitView
 
   protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(CircuitInstanceView circuitInstanceView,
                                                                                       Collection<ConnectionView> tracesConnectionViews,
-                                                                                      CircuitInstanceViewPaths paths)
+                                                                                      CircuitInstanceViewPaths viewPaths,
+                                                                                      SubcircuitSimulationPaths simulationPaths)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tracesConnectionViews)
@@ -814,13 +818,13 @@ public class SubcircuitView
       {
         if (connectionView.getConnectedComponents().size() > 0)
         {
-          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, paths);
+          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, viewPaths);
           List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
           WireList wireList = wireListFinder.createWireList(connectionNets);
 
           for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
           {
-            WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, paths);
+            WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation, simulationPaths);
             wireTraceConverter.process();
           }
 

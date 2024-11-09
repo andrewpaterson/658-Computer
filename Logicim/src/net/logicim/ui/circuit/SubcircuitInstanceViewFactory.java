@@ -30,10 +30,11 @@ public class SubcircuitInstanceViewFactory
   {
     SubcircuitInstanceProperties defaultProperties = createDefaultProperties(circuitEditor.getCurrentSubcircuitEditor(), getViewClass(), true);
     defaultProperties.subcircuitTypeName = subcircuitTypeName;
-    return create(
-        circuitEditor, circuitEditor.getCurrentSubcircuitView(), position,
-        rotation,
-        defaultProperties);
+    return create(circuitEditor,
+                  circuitEditor.getCurrentSubcircuitView(),
+                  position,
+                  rotation,
+                  defaultProperties);
   }
 
   public void setSubcircuitTypeName(String subcircuitTypeName)
@@ -59,11 +60,13 @@ public class SubcircuitInstanceViewFactory
                                        SubcircuitInstanceProperties properties)
   {
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
-    return new SubcircuitInstanceView(containingSubcircuitView,
-                                      instanceSubcircuitEditor.getInstanceSubcircuitView(),
-                                      position,
-                                      rotation,
-                                      properties);
+    SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(containingSubcircuitView,
+                                                                               instanceSubcircuitEditor.getInstanceSubcircuitView(),
+                                                                               position,
+                                                                               rotation,
+                                                                               properties);
+    circuitEditor.viewPathsUpdate();
+    return subcircuitInstanceView;
   }
 
   @Override

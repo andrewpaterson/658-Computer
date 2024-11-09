@@ -1,101 +1,44 @@
 package net.logicim.ui.circuit;
 
 import net.common.SimulatorException;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CircuitInstanceViewPaths
 {
-  protected Set<CircuitInstanceViewPath> paths;
-  protected Map<SubcircuitSimulation, CircuitInstanceViewPath> subcircuitSimulationPaths;
+  protected List<CircuitInstanceViewPath> paths;
 
   public CircuitInstanceViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
-    paths = new LinkedHashSet<>();
-    subcircuitSimulationPaths = new LinkedHashMap<>();
+    paths = new ArrayList<>();
 
-    process(subcircuitEditors);
-  }
-
-  private void process(List<SubcircuitEditor> subcircuitEditors)
-  {
-    createPathsSet(subcircuitEditors);
-    createSubcircuitSimulationPaths();
+    createPaths(subcircuitEditors);
     createPathLinks();
   }
 
-  private void createSubcircuitSimulationPaths()
+  private void createPaths(List<SubcircuitEditor> subcircuitEditors)
   {
-    for (CircuitInstanceViewPath path : paths)
-    {
-      List<CircuitInstanceView> circuitInstanceViews = path.getPath();
 
-      SubcircuitSimulation neededParentSimulation = null;
-      for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
-      {
-        if (neededParentSimulation == null)
-        {
-          List<? extends SubcircuitSimulation> instanceSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations();
-          if (instanceSubcircuitSimulations.size() == 1)
-          {
-            SubcircuitSimulation subcircuitSimulation = instanceSubcircuitSimulations.get(0);
-            if (subcircuitSimulation.isTop())
-            {
-              neededParentSimulation = subcircuitSimulation;
-            }
-            else
-            {
-              throw new SimulatorException("The first parent Simulation [%s] must be a Top Simulation.", subcircuitSimulation.getDescription());
-            }
-          }
-          else
-          {
-            throw new SimulatorException("You need to deal with multiple CircuitSimulations still.");
-          }
-        }
-        else
-        {
-          SubcircuitSimulation subcircuitSimulation = circuitInstanceView.getSubcircuitSimulationForParent(neededParentSimulation);
-          if (subcircuitSimulation != null)
-          {
-            if (subcircuitSimulation.isInstance())
-            {
-              neededParentSimulation = subcircuitSimulation;
-            }
-            else
-            {
-              throw new SimulatorException("The child Simulation [%s] of parent Simulation [%s] must be an Instance Simulation.", subcircuitSimulation.getDescription(), neededParentSimulation.getDescription());
-            }
-          }
-          else
-          {
-            neededParentSimulation = null;
-            break;
-          }
-        }
-      }
-
-      if (neededParentSimulation != null)
-      {
-        subcircuitSimulationPaths.put(neededParentSimulation, path);
-        path.addSubcircuitSimulation(neededParentSimulation);
-      }
-    }
-  }
-
-  private void createPathsSet(List<SubcircuitEditor> subcircuitEditors)
-  {
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
-      recurseFindPaths(subcircuitEditor, new ArrayList<>(), null);
+      boolean depthExceeded = recurseFindPaths(subcircuitEditor, new ArrayList<>(), null, 0);
+      if (depthExceeded)
+      {
+        throw new SimulatorException("Maximum path depth [%s] exceeded.", 100);
+      }
     }
   }
 
-  private void recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath)
+  private boolean recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath, int depth)
   {
+    if (depth > 100)
+    {
+      return true;
+    }
+
     path.add(circuitInstanceView);
     CircuitInstanceViewPath circuitInstanceViewPath = new CircuitInstanceViewPath(path);
     paths.add(circuitInstanceViewPath);
@@ -109,12 +52,18 @@ public class CircuitInstanceViewPaths
     List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      recurseFindPaths(subcircuitInstanceView, path, circuitInstanceViewPath);
+      boolean depthExceeded = recurseFindPaths(subcircuitInstanceView, path, circuitInstanceViewPath, depth + 1);
+      if (depthExceeded)
+      {
+        return true;
+      }
     }
+
     path.remove(path.size() - 1);
+    return false;
   }
 
-  private void createPathLinks()
+  public void createPathLinks()
   {
     for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
     {
@@ -167,14 +116,56 @@ public class CircuitInstanceViewPaths
     throw new SimulatorException("Cannot find a path matching path");
   }
 
-  public Set<CircuitInstanceViewPath> getPaths()
+  public List<CircuitInstanceViewPath> getPaths()
   {
     return paths;
   }
 
-  public Map<SubcircuitSimulation, CircuitInstanceViewPath> getSubcircuitSimulationPaths()
+  @Override
+  public String toString()
   {
-    return subcircuitSimulationPaths;
+    StringBuilder builder = new StringBuilder();
+    for (CircuitInstanceViewPath path : paths)
+    {
+      builder.append(path.getDescription());
+      builder.append("\n");
+    }
+    return builder.toString();
+  }
+
+  public void addIfNotPresent(CircuitInstanceViewPath newPath)
+  {
+    for (CircuitInstanceViewPath path : paths)
+    {
+      if (path.equals(newPath))
+      {
+        return;
+      }
+    }
+
+    paths.add(newPath);
+  }
+
+  public boolean contains(CircuitInstanceViewPath newPath)
+  {
+    for (CircuitInstanceViewPath existingPath : paths)
+    {
+      if (existingPath.equals(newPath))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public CircuitInstanceViewPath getPath(int index)
+  {
+    return paths.get(index);
+  }
+
+  public void removePath(int index)
+  {
+    paths.remove(index);
   }
 }
 

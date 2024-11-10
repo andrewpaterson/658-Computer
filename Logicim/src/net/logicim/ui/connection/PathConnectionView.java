@@ -14,5 +14,11 @@ public class PathConnectionView
     this.path = path;
     this.connection = connection;
   }
+
+  public void clear()
+  {
+    path = null;
+    connection = null;
+  }
 }
 

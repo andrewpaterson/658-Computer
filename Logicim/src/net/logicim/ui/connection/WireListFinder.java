@@ -2,6 +2,7 @@ package net.logicim.ui.connection;
 
 import net.common.SimulatorException;
 import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;
@@ -16,7 +17,7 @@ import java.util.*;
 public class WireListFinder
 {
   protected CircuitInstanceViewPaths paths;
-  protected List<PathConnectionView> splitterViewStack;
+  protected List<PathConnectionView> pathConnectionViewStack;
   protected Set<SubcircuitPinView> processedSubcircuitPinViews;
   protected Set<ConnectionView> processedSplitterViewConnections;
 
@@ -30,11 +31,13 @@ public class WireListFinder
     }
 
     this.paths = paths;
-    this.splitterViewStack = new ArrayList<>();
-    List<CircuitInstanceViewPath> pathsEndingInConnectionView = paths.getPathsEndingWithSubcircuitView(circuitInstanceView.getInstanceSubcircuitView());
+    this.pathConnectionViewStack = new ArrayList<>();
+    SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
+    List<CircuitInstanceViewPath> pathsEndingInConnectionView = paths.getPathsEndingWithSubcircuitView(subcircuitView);
     for (CircuitInstanceViewPath circuitInstanceViewPath : pathsEndingInConnectionView)
     {
-      this.splitterViewStack.add(new PathConnectionView(circuitInstanceViewPath, inputConnectionView));
+      PathConnectionView pathConnectionView = subcircuitView.getPathConnection(circuitInstanceViewPath, inputConnectionView);
+      this.pathConnectionViewStack.add(pathConnectionView);
     }
     this.processedSubcircuitPinViews = new LinkedHashSet<>();
     this.processedSplitterViewConnections = new LinkedHashSet<>();
@@ -44,9 +47,9 @@ public class WireListFinder
   {
     List<LocalMultiSimulationConnectionNet> connectionNets = new ArrayList<>();
 
-    while (splitterViewStack.size() > 0)
+    while (pathConnectionViewStack.size() > 0)
     {
-      PathConnectionView pathConnectionView = splitterViewStack.remove(0);
+      PathConnectionView pathConnectionView = pathConnectionViewStack.remove(0);
       ConnectionView connectionView = pathConnectionView.connection;
       if (!processedSplitterViewConnections.contains(connectionView))
       {
@@ -201,7 +204,7 @@ public class WireListFinder
     localMultiSimulationConnectionNet.add(localConnectionNet);
 
     List<PathConnectionView> splitterViewComponentConnections = createSplitterViewStackItemsForLocalConnectionNet(localConnectionNet);
-    splitterViewStack.addAll(splitterViewComponentConnections);
+    pathConnectionViewStack.addAll(splitterViewComponentConnections);
 
     List<ConnectionViewProcessStackItem> subcircuitInstanceViewItemsToProcess = createConnectionViewStackItemsForSubcircuitInstanceViews(localConnectionNet.subcircuitInstanceViews, connectionViewProcessStackItem.circuitInstanceViewPath);
     localConnectionsToProcess.addAll(subcircuitInstanceViewItemsToProcess);
@@ -298,7 +301,9 @@ public class WireListFinder
       ConnectionView portConnectionView = portView.getConnection();
       if (!processedSplitterViewConnections.contains(portConnectionView))
       {
-        splitterComponentsConnections.add(new PathConnectionView(path, portConnectionView));
+        SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
+        PathConnectionView pathConnectionView = subcircuitView.getPathConnection(path, portConnectionView);
+        splitterComponentsConnections.add(pathConnectionView);
       }
     }
     return splitterComponentsConnections;

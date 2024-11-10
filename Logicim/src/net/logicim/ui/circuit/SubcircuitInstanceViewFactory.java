@@ -3,6 +3,7 @@ package net.logicim.ui.circuit;
 import net.common.type.Int2D;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.Logicim;
+import net.logicim.ui.circuit.path.UpdatedCircuitInstanceViewPaths;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
@@ -12,6 +13,7 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import javax.swing.*;
+import java.util.Set;
 
 public class SubcircuitInstanceViewFactory
     extends ViewFactory<SubcircuitInstanceView, SubcircuitInstanceProperties>
@@ -60,12 +62,19 @@ public class SubcircuitInstanceViewFactory
                                        SubcircuitInstanceProperties properties)
   {
     SubcircuitEditor instanceSubcircuitEditor = circuitEditor.getSubcircuitEditor(properties.subcircuitTypeName);
+    SubcircuitView instanceSubcircuitView = instanceSubcircuitEditor.getInstanceSubcircuitView();
     SubcircuitInstanceView subcircuitInstanceView = new SubcircuitInstanceView(containingSubcircuitView,
-                                                                               instanceSubcircuitEditor.getInstanceSubcircuitView(),
+                                                                               instanceSubcircuitView,
                                                                                position,
                                                                                rotation,
                                                                                properties);
-    circuitEditor.viewPathsUpdate();
+    UpdatedCircuitInstanceViewPaths updatedPaths = circuitEditor.viewPathsUpdate();
+
+    Set<SubcircuitView> updatedSubcircuitViews = updatedPaths.getSubcircuitViews();
+    for (SubcircuitView subcircuitView : updatedSubcircuitViews)
+    {
+      subcircuitView.pathsUpdated(updatedPaths);
+    }
     return subcircuitInstanceView;
   }
 

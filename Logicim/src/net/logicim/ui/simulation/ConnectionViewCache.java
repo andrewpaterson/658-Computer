@@ -2,8 +2,10 @@ package net.logicim.ui.simulation;
 
 import net.common.SimulatorException;
 import net.common.type.Int2D;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
+import net.logicim.ui.connection.PathConnectionView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,12 +16,15 @@ public class ConnectionViewCache
 {
   protected Map<Integer, Map<Integer, ConnectionView>> connectionViews;  //<X, <Y, Connection>>
 
+  protected Map<CircuitInstanceViewPath, Map<ConnectionView, PathConnectionView>> pathConnectionViews;
+
   public ConnectionViewCache()
   {
     connectionViews = new LinkedHashMap<>();
+    pathConnectionViews = new LinkedHashMap<>();
   }
 
-  public ConnectionView getOrAddConnectionView(Int2D position, View view)
+  public ConnectionView getOrAddConnectionView(List<CircuitInstanceViewPath> paths, Int2D position, View view)
   {
     ConnectionView connection = getConnectionView(position);
     if (connection != null)
@@ -29,7 +34,7 @@ public class ConnectionViewCache
     }
     else
     {
-      return addConnectionView(position, view);
+      return addConnectionView(paths, position, view);
     }
   }
 
@@ -38,7 +43,14 @@ public class ConnectionViewCache
     return getConnectionView(position.x, position.y);
   }
 
-  protected ConnectionView addConnectionView(Int2D position, View view)
+  protected ConnectionView addConnectionView(List<CircuitInstanceViewPath> paths, Int2D position, View view)
+  {
+    ConnectionView connectionView = cacheConnectionView(position, view);
+    cachePathConnectionView(paths, connectionView);
+    return connectionView;
+  }
+
+  private ConnectionView cacheConnectionView(Int2D position, View view)
   {
     Map<Integer, ConnectionView> connectionViewMap = connectionViews.get(position.x);
     if (connectionViewMap == null)
@@ -51,7 +63,36 @@ public class ConnectionViewCache
     return connectionView;
   }
 
-  public void removeConnectionView(View view, ConnectionView connectionView)
+  private void cachePathConnectionView(List<CircuitInstanceViewPath> paths, ConnectionView connectionView)
+  {
+    for (CircuitInstanceViewPath path : paths)
+    {
+      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+      if (connectionViewMap == null)
+      {
+        connectionViewMap = new LinkedHashMap<>();
+        pathConnectionViews.put(path, connectionViewMap);
+      }
+
+      PathConnectionView pathConnectionView = connectionViewMap.get(connectionView);
+      if (pathConnectionView == null)
+      {
+        pathConnectionView = new PathConnectionView(path, connectionView);
+        connectionViewMap.put(connectionView, pathConnectionView);
+      }
+    }
+  }
+
+  public void removeConnectionView(List<CircuitInstanceViewPath> paths, View view, ConnectionView connectionView)
+  {
+    boolean removed = removeConnectionView(view, connectionView);
+    if (removed)
+    {
+      removePathConnectionView(paths, connectionView);
+    }
+  }
+
+  protected boolean removeConnectionView(View view, ConnectionView connectionView)
   {
     connectionView.remove(view);
     if (connectionView.isConnectedComponentsEmpty())
@@ -68,15 +109,52 @@ public class ConnectionViewCache
           {
             connectionViews.remove(position.x);
           }
+          return true;
         }
         else
         {
-          throw new SimulatorException("Cannot remove connection that is not in the connection cache.");
+          if (cacheConnectionView != null)
+          {
+            throw new SimulatorException("Cannot remove Connection View [%s] that does not match cached Connection View [%s].", connectionView, cacheConnectionView);
+          }
+          else
+          {
+            throw new SimulatorException("Cannot remove Connection View [%s] that is not in the cache.", connectionView);
+          }
         }
       }
       else
       {
         throw new SimulatorException("Cannot remove connection that is not in the connection cache.");
+      }
+    }
+    return false;
+  }
+
+  private void removePathConnectionView(List<CircuitInstanceViewPath> paths, ConnectionView connectionView)
+  {
+    for (CircuitInstanceViewPath path : paths)
+    {
+      Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+      if (pathConnectionViewMap != null)
+      {
+        PathConnectionView pathConnectionView = pathConnectionViewMap.remove(connectionView);
+        if (pathConnectionView != null)
+        {
+          pathConnectionView.clear();
+          if (pathConnectionViewMap.size() == 0)
+          {
+            pathConnectionViews.remove(path);
+          }
+        }
+        else
+        {
+          throw new SimulatorException("Cannot remove path connection that is not in the path connection cache.");
+        }
+      }
+      else
+      {
+        throw new SimulatorException("Cannot remove path connection that is not in the path connection cache.");
       }
     }
   }
@@ -110,11 +188,11 @@ public class ConnectionViewCache
     }
   }
 
-  public void removeAll(View view, List<ConnectionView> connectionViews)
+  public void removeAll(List<CircuitInstanceViewPath> paths, View view, List<ConnectionView> connectionViews)
   {
     for (ConnectionView connectionView : connectionViews)
     {
-      removeConnectionView(view, connectionView);
+      removeConnectionView(paths, view, connectionView);
     }
   }
 
@@ -131,6 +209,59 @@ public class ConnectionViewCache
       }
     }
     return result;
+  }
+
+  public void addPaths(List<CircuitInstanceViewPath> newPaths)
+  {
+    for (CircuitInstanceViewPath path : newPaths)
+    {
+      if (pathConnectionViews.containsKey(path))
+      {
+        throw new SimulatorException("Cannot add new path [%s] into path connection cache.  It already exists.", path);
+      }
+
+      LinkedHashMap<ConnectionView, PathConnectionView> pathConnectionViewMap = new LinkedHashMap<>();
+      pathConnectionViews.put(path, pathConnectionViewMap);
+
+      for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
+      {
+        Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
+        for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
+        {
+          ConnectionView connectionView = yEntry.getValue();
+          PathConnectionView pathConnectionView = new PathConnectionView(path, connectionView);
+          pathConnectionViewMap.put(connectionView, pathConnectionView);
+        }
+      }
+    }
+  }
+
+  public void removePaths(List<CircuitInstanceViewPath> removedPaths)
+  {
+    for (CircuitInstanceViewPath path : removedPaths)
+    {
+      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+      if (connectionViewMap == null)
+      {
+        throw new SimulatorException("Cannot remove path [%s] that is not in the path connection cache.", path);
+      }
+
+      for (PathConnectionView pathConnectionView : connectionViewMap.values())
+      {
+        pathConnectionView.clear();
+      }
+      pathConnectionViews.remove(path);
+    }
+  }
+
+  public PathConnectionView getPathConnectionView(CircuitInstanceViewPath path, ConnectionView connectionView)
+  {
+    Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+    if (pathConnectionViewMap != null)
+    {
+      return pathConnectionViewMap.get(connectionView);
+    }
+    return null;
   }
 }
 

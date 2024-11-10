@@ -18,17 +18,16 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.*;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
+import net.logicim.ui.circuit.path.UpdatedCircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
 import net.logicim.ui.common.integratedcircuit.*;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.wire.*;
-import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
-import net.logicim.ui.connection.WireList;
-import net.logicim.ui.connection.WireListFinder;
-import net.logicim.ui.connection.WireTraceConverter;
+import net.logicim.ui.connection.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.ConnectionViewCache;
@@ -60,6 +59,7 @@ public class SubcircuitView
   protected SubcircuitSimulations simulations;
 
   protected ConnectionViewCache connectionViewCache;
+  protected List<CircuitInstanceViewPath> viewPaths;
 
   public SubcircuitView(CircuitEditor circuitEditor)
   {
@@ -74,6 +74,7 @@ public class SubcircuitView
     this.decorativeViews = new LinkedHashSet<>();
     this.connectionViewCache = new ConnectionViewCache();
     this.simulations = new SubcircuitSimulations();
+    this.viewPaths = new ArrayList<>();
   }
 
   public static List<Line> getTraceViewLines(Collection<TraceView> traceViews)
@@ -151,7 +152,7 @@ public class SubcircuitView
   public List<ConnectionView> disconnectTraceViewAndDestroyComponents(TraceView traceView)
   {
     List<ConnectionView> connectionViews = traceView.getConnectionViews();
-    connectionViewCache.removeAll(traceView, connectionViews);
+    connectionViewCache.removeAll(viewPaths, traceView, connectionViews);
     traceView.disconnectViewAndDestroyComponents();
     return connectionViews;
   }
@@ -169,7 +170,7 @@ public class SubcircuitView
       throw new SimulatorException("SubcircuitView [%s] cannot disconnect %s with [null] connections.", getTypeName(), staticView.toIdentifierString());
     }
 
-    connectionViewCache.removeAll(staticView, connectionViews);
+    connectionViewCache.removeAll(viewPaths, staticView, connectionViews);
     staticView.disconnectViewAndDestroyComponents();
 
     return connectionViews;
@@ -212,8 +213,12 @@ public class SubcircuitView
       }
       else if (componentView instanceof SubcircuitInstanceView)
       {
-        removeSubcircuitInstanceView((SubcircuitInstanceView) componentView);
-        getCircuitEditor().viewPathsUpdate();
+        SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) componentView;
+        SubcircuitView subcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
+        removeSubcircuitInstanceView(subcircuitInstanceView);
+
+        UpdatedCircuitInstanceViewPaths updatedPaths = getCircuitEditor().viewPathsUpdate();
+        subcircuitView.pathsUpdated(updatedPaths);
       }
       else if (componentView instanceof DecorativeView)
       {
@@ -231,6 +236,33 @@ public class SubcircuitView
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, connectionViews);
     fireConnectionEvents(updatedConnectionViews);
+  }
+
+  public void pathsUpdated(UpdatedCircuitInstanceViewPaths updatedPaths)
+  {
+    List<CircuitInstanceViewPath> newPaths = new ArrayList<>();
+    List<CircuitInstanceViewPath> removedPaths = new ArrayList<>();
+
+    for (CircuitInstanceViewPath newPath : updatedPaths.getNewPaths())
+    {
+      if (newPath.endsWithSubcircuitView(this))
+      {
+        viewPaths.add(newPath);
+        newPaths.add(newPath);
+      }
+    }
+
+    for (CircuitInstanceViewPath removedPath : updatedPaths.getRemovedPaths())
+    {
+      boolean removed = viewPaths.remove(removedPath);
+      if (removed)
+      {
+        removedPaths.add(removedPath);
+      }
+    }
+
+    connectionViewCache.addPaths(newPaths);
+    connectionViewCache.removePaths(removedPaths);
   }
 
   public void fireConnectionEvents(Set<ConnectionView> connectionViews)
@@ -272,7 +304,7 @@ public class SubcircuitView
 
   public ConnectionView getOrAddConnectionView(Int2D position, View view)
   {
-    return connectionViewCache.getOrAddConnectionView(position, view);
+    return connectionViewCache.getOrAddConnectionView(viewPaths, position, view);
   }
 
   public StaticViewIterator staticViewIterator()
@@ -1776,6 +1808,30 @@ public class SubcircuitView
   public CircuitEditor getCircuitEditor()
   {
     return circuitEditor;
+  }
+
+  public void setViewPaths(List<CircuitInstanceViewPath> viewPaths)
+  {
+    if (!this.viewPaths.isEmpty())
+    {
+      throw new SimulatorException("View Paths must be empty.");
+    }
+
+    this.viewPaths = viewPaths;
+    connectionViewCache.addPaths(viewPaths);
+  }
+
+  public PathConnectionView getPathConnection(CircuitInstanceViewPath path, ConnectionView connectionView)
+  {
+    PathConnectionView pathConnectionView = connectionViewCache.getPathConnectionView(path, connectionView);
+    if (pathConnectionView != null)
+    {
+      return pathConnectionView;
+    }
+    else
+    {
+      throw new SimulatorException("Cannot get Path Connection View for Path [%s] and Connection [%s].", path.toString(), connectionView.toString());
+    }
   }
 }
 

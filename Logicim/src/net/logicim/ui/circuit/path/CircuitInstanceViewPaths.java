@@ -6,8 +6,7 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CircuitInstanceViewPaths
 {
@@ -135,17 +134,18 @@ public class CircuitInstanceViewPaths
     return builder.toString();
   }
 
-  public void addIfNotPresent(CircuitInstanceViewPath newPath)
+  public boolean addIfNotPresent(CircuitInstanceViewPath newPath)
   {
     for (CircuitInstanceViewPath path : paths)
     {
       if (path.equals(newPath))
       {
-        return;
+        return false;
       }
     }
 
     paths.add(newPath);
+    return true;
   }
 
   public boolean contains(CircuitInstanceViewPath newPath)
@@ -168,6 +168,34 @@ public class CircuitInstanceViewPaths
   public void removePath(int index)
   {
     paths.remove(index);
+  }
+
+  public boolean matches(CircuitInstanceViewPaths other)
+  {
+    if (other.getPaths().size() != paths.size())
+    {
+      return false;
+    }
+
+    List<CircuitInstanceViewPath> otherPaths = new ArrayList<>(other.getPaths());
+    List<CircuitInstanceViewPath> thisPaths = new ArrayList<>(paths);
+
+    Collections.sort(otherPaths);
+    Collections.sort(thisPaths);
+
+    int count = thisPaths.size();
+    for (int i = 0; i < count; i++)
+    {
+      CircuitInstanceViewPath thisPath = thisPaths.get(i);
+      CircuitInstanceViewPath otherPath = otherPaths.get(i);
+
+      if (!thisPath.equals(otherPath))
+      {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
 

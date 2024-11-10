@@ -1,7 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;

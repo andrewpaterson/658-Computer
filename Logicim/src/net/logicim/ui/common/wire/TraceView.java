@@ -52,15 +52,15 @@ public class TraceView
     this.wireView = new WireViewComp();
     if (addConnections)
     {
-      addConnections(containingSubcircuitView, start, end);
+      addConnections(start, end);
     }
     containingSubcircuitView.addTraceView(this);
   }
 
-  protected void addConnections(SubcircuitView subcircuitView, Int2D start, Int2D end)
+  protected void addConnections(Int2D start, Int2D end)
   {
-    wireView.setStart(subcircuitView.getOrAddConnectionView(start, this));
-    wireView.setEnd(subcircuitView.getOrAddConnectionView(end, this));
+    wireView.setStart(containingSubcircuitView.getOrAddConnectionView(start, this));
+    wireView.setEnd(containingSubcircuitView.getOrAddConnectionView(end, this));
   }
 
   public ConnectionView getConnectionsInGrid(int x, int y)

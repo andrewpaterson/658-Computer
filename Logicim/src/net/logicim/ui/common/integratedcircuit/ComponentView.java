@@ -9,7 +9,6 @@ import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -18,7 +17,6 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.common.InstanceView;
-import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.awt.*;
@@ -113,14 +111,14 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     this.properties = properties;
   }
 
-  public List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView)
+  public List<ConnectionView> getOrCreateConnectionViews()
   {
     List<ConnectionView> connectionViews = new ArrayList<>();
     List<PortView> portViews = getPortViews();
     for (PortView portView : portViews)
     {
       Int2D portPosition = portView.getGridPosition();
-      ConnectionView connectionView = subcircuitView.getOrAddConnectionView(portPosition, this);
+      ConnectionView connectionView = containingSubcircuitView.getOrAddConnectionView(portPosition, this);
       portView.setConnection(connectionView);
       connectionViews.add(connectionView);
     }

@@ -2,8 +2,12 @@ package net.logicim.ui.circuit;
 
 import net.common.SimulatorException;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SubcircuitSimulationPaths
 {

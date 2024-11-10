@@ -1,4 +1,4 @@
-package net.logicim.ui.circuit;
+package net.logicim.ui.circuit.order;
 
 import net.common.dependency.Orderer;
 

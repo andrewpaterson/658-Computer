@@ -18,6 +18,7 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.*;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -114,6 +115,11 @@ public class SubcircuitView
     views.addAll(passiveViews);
     views.addAll(integratedCircuitViews);
     return views;
+  }
+
+  public List<TunnelView> getTunnelViews()
+  {
+    return new ArrayList<>(tunnelViews);
   }
 
   public List<WireView> getWireViews()
@@ -855,7 +861,7 @@ public class SubcircuitView
     List<ConnectionView> connectionViews = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
-      connectionViews.addAll(staticView.getOrCreateConnectionViews(this));
+      connectionViews.addAll(staticView.getOrCreateConnectionViews());
     }
     return connectionViews;
   }
@@ -1175,6 +1181,7 @@ public class SubcircuitView
 
     List<ComponentView<?>> componentViews = new ArrayList<>();
     List<SubcircuitInstanceView> subcircuitInstanceViews = new ArrayList<>();
+    List<TunnelView> tunnelViews = new ArrayList<>();
     for (StaticView<?> staticView : staticViews)
     {
       if (staticView instanceof SubcircuitInstanceView)
@@ -1184,6 +1191,10 @@ public class SubcircuitView
       else if (staticView instanceof ComponentView)
       {
         componentViews.add((ComponentView) staticView);
+      }
+      else if (staticView instanceof TunnelView)
+      {
+        tunnelViews.add((TunnelView) staticView);
       }
       else
       {
@@ -1196,7 +1207,8 @@ public class SubcircuitView
     recurseCreateComponents(creations,
                             (List) simulations.getSubcircuitSimulations(),
                             subcircuitInstanceViews,
-                            componentViews);
+                            componentViews,
+                            tunnelViews);
 
     for (SubcircuitInstanceCreation creation : creations)
     {
@@ -1218,7 +1230,8 @@ public class SubcircuitView
   protected void recurseCreateComponents(List<SubcircuitInstanceCreation> creations,
                                          List<SubcircuitSimulation> subcircuitSimulations,
                                          Collection<SubcircuitInstanceView> subcircuitInstanceViews,
-                                         List<ComponentView<?>> componentViews)
+                                         List<ComponentView<?>> componentViews,
+                                         List<TunnelView> tunnelViews)
   {
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
@@ -1226,6 +1239,11 @@ public class SubcircuitView
       for (ComponentView<?> componentView : componentViews)
       {
         componentView.createComponent(subcircuitSimulation);
+      }
+
+      for (TunnelView tunnelView : tunnelViews)
+      {
+        tunnelView.createComponent(subcircuitSimulation);
       }
 
       for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
@@ -1247,7 +1265,7 @@ public class SubcircuitView
       subcircuitView.recurseCreateComponents(creations,
                                              createListFromSubcircuitSimulation(subcircuitInstance.getSubcircuitInstanceSimulation()),
                                              subcircuitView.subcircuitInstanceViews,
-                                             subcircuitView.getComponentViews());
+                                             subcircuitView.getComponentViews(), tunnelViews);
     }
 
     creations.addAll(localCreations);
@@ -1695,7 +1713,8 @@ public class SubcircuitView
       subcircuitView.recurseCreateComponents(creations,
                                              createListFromSubcircuitSimulation(subcircuitInstance.getSubcircuitInstanceSimulation()),
                                              subcircuitView.subcircuitInstanceViews,
-                                             subcircuitView.getComponentViews());
+                                             subcircuitView.getComponentViews(),
+                                             subcircuitView.getTunnelViews());
     }
 
     creations.addAll(localCreations);

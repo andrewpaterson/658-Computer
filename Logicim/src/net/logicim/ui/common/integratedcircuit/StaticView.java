@@ -306,7 +306,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void simulationStarted(SubcircuitSimulation subcircuitSimulation);
 
-  public abstract List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView);
+  public abstract List<ConnectionView> getOrCreateConnectionViews();
 
   public String toDebugString()
   {

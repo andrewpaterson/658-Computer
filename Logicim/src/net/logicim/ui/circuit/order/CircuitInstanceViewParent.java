@@ -1,4 +1,7 @@
-package net.logicim.ui.circuit;
+package net.logicim.ui.circuit.order;
+
+import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.SubcircuitView;
 
 public class CircuitInstanceViewParent
 {

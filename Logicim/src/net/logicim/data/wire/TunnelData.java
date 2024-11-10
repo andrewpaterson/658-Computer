@@ -60,7 +60,7 @@ public class TunnelData
   public TunnelView createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
     TunnelView componentView = createComponentView(subcircuitEditor);
-    componentView.getOrCreateConnectionViews(subcircuitEditor.getInstanceSubcircuitView());
+    componentView.getOrCreateConnectionViews();
     return componentView;
   }
 

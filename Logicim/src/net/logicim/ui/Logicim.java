@@ -17,8 +17,8 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.CircuitInstanceViewPaths;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.clipboard.ClipboardData;
@@ -1555,7 +1555,6 @@ public class Logicim
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
     CircuitInstanceViewPaths viewPaths = getCircuitEditor().getViewPaths();
-    System.out.println(viewPaths.toString());
 
     for (ConnectionView connectionView : hoverConnectionViews)
     {

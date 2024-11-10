@@ -6,7 +6,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
 import net.logicim.ui.circuit.SubcircuitSimulationPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.wire.WireView;

@@ -3,6 +3,8 @@ package net.logicim.ui.circuit;
 import net.common.util.Counter;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.order.CircuitInstanceOrderer;
+import net.logicim.ui.circuit.order.CircuitInstanceViewParent;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;

@@ -127,17 +127,17 @@ public class TunnelView
     return f;
   }
 
-  public List<ConnectionView> getOrCreateConnectionViews(SubcircuitView subcircuitView)
+  public List<ConnectionView> getOrCreateConnectionViews()
   {
     updateGridCache();
 
     ArrayList<ConnectionView> connectionViews = new ArrayList<>();
-    ConnectionView startConnection = subcircuitView.getOrAddConnectionView((Int2D) startCache.getTransformedPosition(), this);
+    ConnectionView startConnection = containingSubcircuitView.getOrAddConnectionView((Int2D) startCache.getTransformedPosition(), this);
     wireView.setStart(startConnection);
     connectionViews.add(startConnection);
     if (properties.doubleSided)
     {
-      ConnectionView endConnection = subcircuitView.getOrAddConnectionView((Int2D) endCache.getTransformedPosition(), this);
+      ConnectionView endConnection = containingSubcircuitView.getOrAddConnectionView((Int2D) endCache.getTransformedPosition(), this);
       wireView.setEnd(endConnection);
       connectionViews.add(endConnection);
     }

@@ -7,10 +7,7 @@ import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.connection.PathConnectionView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConnectionViewCache
 {
@@ -262,6 +259,63 @@ public class ConnectionViewCache
       return pathConnectionViewMap.get(connectionView);
     }
     return null;
+  }
+
+  public void validatePathConnections(List<CircuitInstanceViewPath> paths)
+  {
+    for (CircuitInstanceViewPath path : paths)
+    {
+      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+      if (connectionViewMap == null)
+      {
+        throw new SimulatorException("View Connection Cache does not contain Subcircuit View Path [%s].", path);
+      }
+    }
+
+    Set<CircuitInstanceViewPath> pathsSet = new LinkedHashSet<>(paths);
+    for (CircuitInstanceViewPath path : pathConnectionViews.keySet())
+    {
+      if (!pathsSet.contains(path))
+      {
+        throw new SimulatorException("Subcircuit View does not contain View Connection Cache Path [%s].", path);
+      }
+    }
+
+    for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
+    {
+      Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
+      for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
+      {
+        ConnectionView connectionView = yEntry.getValue();
+        for (CircuitInstanceViewPath path : paths)
+        {
+          Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+          PathConnectionView pathConnectionView = pathConnectionViewMap.get(connectionView);
+          if (pathConnectionView == null)
+          {
+            throw new SimulatorException("Path [%s] connection view cache does contain Connection View [%s].", path.toString(), connectionView.toString());
+          }
+        }
+      }
+    }
+
+    for (Map.Entry<CircuitInstanceViewPath, Map<ConnectionView, PathConnectionView>> entry : pathConnectionViews.entrySet())
+    {
+      Map<ConnectionView, PathConnectionView> pathConnectionViewMap = entry.getValue();
+      for (ConnectionView pathConnectionView : pathConnectionViewMap.keySet())
+      {
+        Int2D gridPosition = pathConnectionView.getGridPosition();
+        ConnectionView cachedConnectionView = getConnectionView(gridPosition.getIntX(), gridPosition.getIntY());
+        if (cachedConnectionView == null)
+        {
+          throw new SimulatorException("Connection view cache does not contain Path cache connection view [%s].", pathConnectionView.toString());
+        }
+        else if (pathConnectionView != cachedConnectionView)
+        {
+          throw new SimulatorException("Connection view cache connection view [%s] does not contain Path cache connection view [%s].", cachedConnectionView.toString(), pathConnectionView.toString());
+        }
+      }
+    }
   }
 }
 

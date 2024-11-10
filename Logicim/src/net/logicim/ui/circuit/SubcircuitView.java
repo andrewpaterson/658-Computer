@@ -557,6 +557,8 @@ public class SubcircuitView
                                      viewConnectionView.toString());
       }
     }
+
+      connectionViewCache.validatePathConnections(viewPaths);
   }
 
   protected void validateTunnelViews()

@@ -86,12 +86,5 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   {
     return new ArrayList<>();
   }
-
-  @Override
-  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
-  {
-    DebugGlobalEnvironment.validateCanCreateComponent();
-    return null;
-  }
 }
 

@@ -448,6 +448,8 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
+  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
+
   public abstract String getComponentType();
 
   public abstract Set<SubcircuitSimulation> getComponentSubcircuitSimulations();

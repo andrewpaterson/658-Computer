@@ -1275,11 +1275,6 @@ public class SubcircuitView
         componentView.createComponent(subcircuitSimulation);
       }
 
-      for (TunnelView tunnelView : tunnelViews)
-      {
-        tunnelView.createComponent(subcircuitSimulation);
-      }
-
       for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
       {
         SubcircuitInstanceCreation creation = subcircuitInstanceView.createComponentInSubcircuitInstanceCreation(subcircuitSimulation);

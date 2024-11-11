@@ -294,8 +294,6 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract String getType();
 
-  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
-
   public abstract void disconnectViewAndDestroyComponents();
 
   public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);

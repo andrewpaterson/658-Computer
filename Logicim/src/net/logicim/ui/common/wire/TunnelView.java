@@ -4,10 +4,8 @@ import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
-import net.logicim.domain.common.Component;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -223,12 +221,6 @@ public class TunnelView
   @Override
   public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
   {
-  }
-
-  @Override
-  public Component createComponent(SubcircuitSimulation subcircuitSimulation)
-  {
-    return null;
   }
 
   @Override

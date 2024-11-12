@@ -32,7 +32,10 @@ public abstract class BaseXorGateView<IC extends IntegratedCircuit<?, ?>>
                          Rotation rotation,
                          LogicGateProperties properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(subcircuitView,
+          position,
+          rotation,
+          properties);
     createGraphics();
     createPortViews();
     finaliseView();

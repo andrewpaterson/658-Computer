@@ -144,11 +144,6 @@ public class CircuitInstanceViewPath
     return circuitSimulations.containsKey(circuitSimulation);
   }
 
-  public Map<CircuitSimulation, SubcircuitSimulation> getCircuitSimulations()
-  {
-    return circuitSimulations;
-  }
-
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
     SubcircuitSimulation subcircuitSimulation = circuitSimulations.get(circuitSimulation);

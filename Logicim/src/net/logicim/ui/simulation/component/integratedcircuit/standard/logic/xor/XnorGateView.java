@@ -18,7 +18,10 @@ public class XnorGateView
                       Rotation rotation,
                       LogicGateProperties properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(subcircuitView,
+          position,
+          rotation,
+          properties);
   }
 
   @Override

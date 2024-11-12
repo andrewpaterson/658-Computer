@@ -19,7 +19,10 @@ public class BufferView
                     Rotation rotation,
                     BufferProperties properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(subcircuitView,
+          position,
+          rotation,
+          properties);
   }
 
   @Override

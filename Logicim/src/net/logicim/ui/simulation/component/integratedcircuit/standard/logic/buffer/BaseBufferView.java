@@ -28,7 +28,10 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
                         Rotation rotation,
                         BufferProperties properties)
   {
-    super(subcircuitView, position, rotation, properties);
+    super(subcircuitView,
+          position,
+          rotation,
+          properties);
     polygons = null;
     createGraphics();
     createPortViews();

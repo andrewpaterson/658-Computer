@@ -36,7 +36,10 @@ public class OscilloscopeView
                           Rotation rotation,
                           OscilloscopeProperties properties)
   {
-    super(containingSubcircuitView, position, rotation, properties);
+    super(containingSubcircuitView,
+          position,
+          rotation,
+          properties);
     createGraphics();
     createPortViews();
     finaliseView();

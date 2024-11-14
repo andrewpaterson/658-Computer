@@ -47,15 +47,15 @@ public class LocalConnectionNet
   }
 
   private void process(ConnectionView inputConnectionView,
-                         Set<ConnectionView> connectionViewSet,
-                         Set<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViewSet,
-                         Set<ComponentConnection<PinView>> pinViewSet,
-                         Set<ComponentConnection<SplitterView>> splitterViewSet)
+                       Set<ConnectionView> connectionViewSet,
+                       Set<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViewSet,
+                       Set<ComponentConnection<PinView>> pinViewSet,
+                       Set<ComponentConnection<SplitterView>> splitterViewSet)
   {
-    ConnectionFinder connectionFinder = new ConnectionFinder();
-    connectionFinder.addConnection(inputConnectionView);
-    connectionFinder.process();
-    connectionViewSet.addAll(connectionFinder.getConnections());
+    ConnectionViewNetFinder finder = new ConnectionViewNetFinder();
+    finder.addConnectionToProcess(inputConnectionView);
+    finder.process();
+    connectionViewSet.addAll(finder.getConnections());
 
     for (ConnectionView connectionView : connectionViewSet)
     {

@@ -10,20 +10,22 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ConnectionFinder
+public class ConnectionViewNetFinder
 {
   protected List<ConnectionView> connectionsToProcess;
   protected Set<ConnectionView> connectionsNet;
+  protected Set<TraceView> traceViews;
 
-  public ConnectionFinder()
+  public ConnectionViewNetFinder()
   {
     connectionsToProcess = new ArrayList<>();
     connectionsNet = new LinkedHashSet<>();
+    traceViews = new LinkedHashSet<>();
   }
 
-  public void addConnection(ConnectionView connection)
+  public void addConnectionToProcess(ConnectionView connection)
   {
-    if (connection != null)
+    if (connection != null && !connectionsNet.contains(connection))
     {
       connectionsToProcess.add(connection);
     }
@@ -54,6 +56,13 @@ public class ConnectionFinder
     }
   }
 
+  protected void processTraceView(ConnectionView currentConnection, TraceView traceView)
+  {
+    ConnectionView connectionView = traceView.getOpposite(currentConnection);
+    addConnectionToProcess(connectionView);
+    traceViews.add(traceView);
+  }
+
   protected void processTunnelView(ConnectionView currentConnection, TunnelView tunnelView)
   {
     List<ConnectionView> tunnelConnections = tunnelView.getAllConnectedTunnelConnections();
@@ -66,18 +75,9 @@ public class ConnectionFinder
     }
   }
 
-  protected void processTraceView(ConnectionView currentConnection, TraceView traceView)
+  public Set<TraceView> getTraceViews()
   {
-    ConnectionView connectionView = traceView.getOpposite(currentConnection);
-    addConnectionToProcess(connectionView);
-  }
-
-  protected void addConnectionToProcess(ConnectionView connection)
-  {
-    if (connection != null && !connectionsNet.contains(connection))
-    {
-      connectionsToProcess.add(connection);
-    }
+    return traceViews;
   }
 
   public Set<ConnectionView> getConnections()

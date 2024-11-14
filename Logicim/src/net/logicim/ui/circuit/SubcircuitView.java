@@ -273,7 +273,7 @@ public class SubcircuitView
 
   public void deleteTraceViews(Set<TraceView> inputTraceViews)
   {
-    TraceViewFinder traceViewFinder = new TraceViewFinder();
+    ConnectionViewNetFinder finder = new ConnectionViewNetFinder();
     for (TraceView traceView : inputTraceViews)
     {
       List<TraceOverlap> tracesTouching = getTracesTouching(traceView.getLine());
@@ -282,7 +282,8 @@ public class SubcircuitView
         TraceView touchingTraceView = traceOverlap.getTraceView();
         if (!inputTraceViews.contains(touchingTraceView))
         {
-          traceViewFinder.add(touchingTraceView);
+          finder.addConnectionToProcess(touchingTraceView.getStartConnection());
+          finder.addConnectionToProcess(touchingTraceView.getEndConnection());
         }
       }
     }
@@ -290,9 +291,9 @@ public class SubcircuitView
     Set<ConnectionView> nonTraceViewConnectionViews = findNonTraceViewConnectionViews(inputTraceViews);
     removeTraceViews(inputTraceViews);
 
-    traceViewFinder.process();
+    finder.process();
 
-    Set<TraceView> connectedTraceViews = traceViewFinder.getTraceViews();
+    Set<TraceView> connectedTraceViews = finder.getTraceViews();
     Set<TraceView> newTraceViews = createTraceViews(new HashSet<>(), connectedTraceViews);
     createTracesForTraceViewsAndConnectionViews(subcircuitEditor, nonTraceViewConnectionViews, newTraceViews);
   }
@@ -989,19 +990,21 @@ public class SubcircuitView
 
   public Set<TraceView> createTraceViews(Collection<Line> traceLineViews)
   {
-    TraceViewFinder traceViewFinder = new TraceViewFinder();
+    ConnectionViewNetFinder finder = new ConnectionViewNetFinder();
     for (Line line : traceLineViews)
     {
       List<TraceOverlap> tracesTouching = getTracesTouching(line);
       for (TraceOverlap traceOverlap : tracesTouching)
       {
-        traceViewFinder.add(traceOverlap.getTraceView());
+        TraceView traceView = traceOverlap.getTraceView();
+        finder.addConnectionToProcess(traceView.getStartConnection());
+        finder.addConnectionToProcess(traceView.getEndConnection());
       }
     }
 
-    traceViewFinder.process();
+    finder.process();
 
-    Set<TraceView> traceViews = traceViewFinder.getTraceViews();
+    Set<TraceView> traceViews = finder.getTraceViews();
     if ((traceViews.size() > 0) ||
         (traceLineViews.size() > 0))
     {

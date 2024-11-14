@@ -17,15 +17,16 @@ public class WireViewComp
   protected List<ConnectionView> connections;
   protected Map<SubcircuitSimulation, List<Trace>> simulationTraces;
 
-  protected int width;
+  protected int busWidth;
 
   public WireViewComp()
   {
     connections = new ArrayList<>(2);
     connections.add(null);
     connections.add(null);
+
     this.simulationTraces = new LinkedHashMap<>();
-    this.width = 1;
+    this.busWidth = 1;
   }
 
   public void setStart(ConnectionView connectionView)
@@ -82,7 +83,7 @@ public class WireViewComp
 
   protected Stroke getTraceStroke(Viewport viewport)
   {
-    if (width == 1)
+    if (busWidth == 1)
     {
       return viewport.getZoomableStroke();
     }
@@ -119,17 +120,18 @@ public class WireViewComp
 
     simulationTraces.put(subcircuitSimulation, traces);
 
-    width = Integer.MAX_VALUE;
+    busWidth = Integer.MAX_VALUE;
     for (List<Trace> existing : simulationTraces.values())
     {
-      if (existing.size() < width)
+      if (existing.size() < busWidth)
       {
-        width = existing.size();
+        busWidth = existing.size();
       }
     }
-    if (width == Integer.MAX_VALUE)
+
+    if (busWidth == Integer.MAX_VALUE)
     {
-      width = 1;
+      busWidth = 1;
     }
   }
 

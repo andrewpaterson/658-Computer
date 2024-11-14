@@ -28,9 +28,9 @@ public class TunnelView
 {
   public static final int FONT_SIZE = 11;
 
-  protected Set<TunnelView> tunnels;
-
   protected WireViewComp wireView;
+
+  protected Set<TunnelView> tunnels;
 
   protected TextView textView;
   protected PolygonView polygonView;

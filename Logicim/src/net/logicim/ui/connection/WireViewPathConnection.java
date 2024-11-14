@@ -1,16 +1,16 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.wire.WireView;
 
 public class WireViewPathConnection
 {
-  protected CircuitInstanceViewPath path;
+  protected ViewPath path;
   protected WireView wireView;
   protected ConnectionView connectionView;
 
-  public WireViewPathConnection(CircuitInstanceViewPath path,
+  public WireViewPathConnection(ViewPath path,
                                 WireView wireView,
                                 ConnectionView connectionView)
   {
@@ -24,7 +24,7 @@ public class WireViewPathConnection
     return wireView;
   }
 
-  public CircuitInstanceViewPath getPath()
+  public ViewPath getPath()
   {
     return path;
   }

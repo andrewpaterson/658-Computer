@@ -6,7 +6,7 @@ import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.circuit.SubcircuitSimulationPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.wire.WireView;
@@ -17,7 +17,7 @@ public class WireTraceConverter
 {
   protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
   protected WireList wireList;
-  protected CircuitInstanceViewPath startingCircuitInstanceViewPath;
+  protected ViewPath startingViewPath;
   protected CircuitSimulation circuitSimulation;
 
   public WireTraceConverter(WireList wireList,
@@ -25,7 +25,7 @@ public class WireTraceConverter
                             SubcircuitSimulationPaths subcircuitSimulationPaths)
   {
     this.wireList = wireList;
-    this.startingCircuitInstanceViewPath = subcircuitSimulationPaths.getSubcircuitSimulationPaths().get(startingSubcircuitSimulation);
+    this.startingViewPath = subcircuitSimulationPaths.getSubcircuitSimulationPaths().get(startingSubcircuitSimulation);
     this.circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
 
     this.localMultiSimulationConnectionNetMap = new HashMap<>();
@@ -55,7 +55,7 @@ public class WireTraceConverter
         {
           ComponentView<?> componentView = connectedPortIndex.getComponentView();
           String portName = connectedPortIndex.getPortName();
-          CircuitInstanceViewPath path = connectedPortIndex.getPath();
+          ViewPath path = connectedPortIndex.getPath();
 
           SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
 
@@ -86,11 +86,11 @@ public class WireTraceConverter
       List<Trace> traces = connectionNetEntry.getValue();
 
       Set<WireView> processedWireViews = new HashSet<>();
-      Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
-      for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
+      Map<ViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
+      for (Map.Entry<ViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
       {
         List<WireViewPathConnection> wireViewPathConnections = wireEntry.getValue();
-        CircuitInstanceViewPath path = wireEntry.getKey();
+        ViewPath path = wireEntry.getKey();
         SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
         for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
         {
@@ -109,10 +109,10 @@ public class WireTraceConverter
   {
     for (PartialWire partialWire : wireList.getPartialWires(circuitSimulation))
     {
-      Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires = partialWire.connectedWires;
-      for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
+      Map<ViewPath, List<WireViewPathConnection>> connectedWires = partialWire.connectedWires;
+      for (Map.Entry<ViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
       {
-        CircuitInstanceViewPath path = wireEntry.getKey();
+        ViewPath path = wireEntry.getKey();
         List<WireViewPathConnection> wireViewPathConnections = wireEntry.getValue();
         for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
         {
@@ -126,9 +126,9 @@ public class WireTraceConverter
 
     for (LocalMultiSimulationConnectionNet connectionNet : wireList.getConnectionNets(circuitSimulation))
     {
-      for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> entry : connectionNet.getConnectedWires().entrySet())
+      for (Map.Entry<ViewPath, List<WireViewPathConnection>> entry : connectionNet.getConnectedWires().entrySet())
       {
-        CircuitInstanceViewPath path = entry.getKey();
+        ViewPath path = entry.getKey();
         List<WireViewPathConnection> wireViewPathConnections = entry.getValue();
         for (WireViewPathConnection connectedWire : wireViewPathConnections)
         {
@@ -140,7 +140,7 @@ public class WireTraceConverter
     }
   }
 
-  private SubcircuitSimulation getSubcircuitSimulation(CircuitInstanceViewPath path)
+  private SubcircuitSimulation getSubcircuitSimulation(ViewPath path)
   {
     return path.getSubcircuitSimulation(circuitSimulation);
   }

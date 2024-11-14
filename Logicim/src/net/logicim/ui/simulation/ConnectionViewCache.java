@@ -2,7 +2,7 @@ package net.logicim.ui.simulation;
 
 import net.common.SimulatorException;
 import net.common.type.Int2D;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.connection.PathConnectionView;
@@ -13,7 +13,7 @@ public class ConnectionViewCache
 {
   protected Map<Integer, Map<Integer, ConnectionView>> connectionViews;  //<X, <Y, Connection>>
 
-  protected Map<CircuitInstanceViewPath, Map<ConnectionView, PathConnectionView>> pathConnectionViews;
+  protected Map<ViewPath, Map<ConnectionView, PathConnectionView>> pathConnectionViews;
 
   public ConnectionViewCache()
   {
@@ -21,7 +21,7 @@ public class ConnectionViewCache
     pathConnectionViews = new LinkedHashMap<>();
   }
 
-  public ConnectionView getOrAddConnectionView(List<CircuitInstanceViewPath> paths, Int2D position, View view)
+  public ConnectionView getOrAddConnectionView(List<ViewPath> paths, Int2D position, View view)
   {
     ConnectionView connection = getConnectionView(position);
     if (connection != null)
@@ -40,7 +40,7 @@ public class ConnectionViewCache
     return getConnectionView(position.x, position.y);
   }
 
-  protected ConnectionView addConnectionView(List<CircuitInstanceViewPath> paths, Int2D position, View view)
+  protected ConnectionView addConnectionView(List<ViewPath> paths, Int2D position, View view)
   {
     ConnectionView connectionView = cacheConnectionView(position, view);
     cachePathConnectionView(paths, connectionView);
@@ -60,9 +60,9 @@ public class ConnectionViewCache
     return connectionView;
   }
 
-  private void cachePathConnectionView(List<CircuitInstanceViewPath> paths, ConnectionView connectionView)
+  private void cachePathConnectionView(List<ViewPath> paths, ConnectionView connectionView)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
       if (connectionViewMap == null)
@@ -80,7 +80,7 @@ public class ConnectionViewCache
     }
   }
 
-  public void removeConnectionView(List<CircuitInstanceViewPath> paths, View view, ConnectionView connectionView)
+  public void removeConnectionView(List<ViewPath> paths, View view, ConnectionView connectionView)
   {
     boolean removed = removeConnectionView(view, connectionView);
     if (removed)
@@ -128,9 +128,9 @@ public class ConnectionViewCache
     return false;
   }
 
-  private void removePathConnectionView(List<CircuitInstanceViewPath> paths, ConnectionView connectionView)
+  private void removePathConnectionView(List<ViewPath> paths, ConnectionView connectionView)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
       if (pathConnectionViewMap != null)
@@ -185,7 +185,7 @@ public class ConnectionViewCache
     }
   }
 
-  public void removeAll(List<CircuitInstanceViewPath> paths, View view, List<ConnectionView> connectionViews)
+  public void removeAll(List<ViewPath> paths, View view, List<ConnectionView> connectionViews)
   {
     for (ConnectionView connectionView : connectionViews)
     {
@@ -208,9 +208,9 @@ public class ConnectionViewCache
     return result;
   }
 
-  public void addPaths(List<CircuitInstanceViewPath> newPaths)
+  public void addPaths(List<ViewPath> newPaths)
   {
-    for (CircuitInstanceViewPath path : newPaths)
+    for (ViewPath path : newPaths)
     {
       if (pathConnectionViews.containsKey(path))
       {
@@ -233,9 +233,9 @@ public class ConnectionViewCache
     }
   }
 
-  public void removePaths(List<CircuitInstanceViewPath> removedPaths)
+  public void removePaths(List<ViewPath> removedPaths)
   {
-    for (CircuitInstanceViewPath path : removedPaths)
+    for (ViewPath path : removedPaths)
     {
       Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
       if (connectionViewMap == null)
@@ -251,7 +251,7 @@ public class ConnectionViewCache
     }
   }
 
-  public PathConnectionView getPathConnectionView(CircuitInstanceViewPath path, ConnectionView connectionView)
+  public PathConnectionView getPathConnectionView(ViewPath path, ConnectionView connectionView)
   {
     Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
     if (pathConnectionViewMap != null)
@@ -261,9 +261,9 @@ public class ConnectionViewCache
     return null;
   }
 
-  public void validatePathConnections(List<CircuitInstanceViewPath> paths)
+  public void validatePathConnections(List<ViewPath> paths)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
       if (connectionViewMap == null)
@@ -272,8 +272,8 @@ public class ConnectionViewCache
       }
     }
 
-    Set<CircuitInstanceViewPath> pathsSet = new LinkedHashSet<>(paths);
-    for (CircuitInstanceViewPath path : pathConnectionViews.keySet())
+    Set<ViewPath> pathsSet = new LinkedHashSet<>(paths);
+    for (ViewPath path : pathConnectionViews.keySet())
     {
       if (!pathsSet.contains(path))
       {
@@ -287,7 +287,7 @@ public class ConnectionViewCache
       for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
       {
         ConnectionView connectionView = yEntry.getValue();
-        for (CircuitInstanceViewPath path : paths)
+        for (ViewPath path : paths)
         {
           Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
           PathConnectionView pathConnectionView = pathConnectionViewMap.get(connectionView);
@@ -299,7 +299,7 @@ public class ConnectionViewCache
       }
     }
 
-    for (Map.Entry<CircuitInstanceViewPath, Map<ConnectionView, PathConnectionView>> entry : pathConnectionViews.entrySet())
+    for (Map.Entry<ViewPath, Map<ConnectionView, PathConnectionView>> entry : pathConnectionViews.entrySet())
     {
       Map<ConnectionView, PathConnectionView> pathConnectionViewMap = entry.getValue();
       for (ConnectionView pathConnectionView : pathConnectionViewMap.keySet())

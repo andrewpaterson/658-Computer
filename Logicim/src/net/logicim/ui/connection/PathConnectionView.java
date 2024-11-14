@@ -1,14 +1,14 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 
 public class PathConnectionView
 {
-  protected CircuitInstanceViewPath path;
+  protected ViewPath path;
   protected ConnectionView connection;
 
-  public PathConnectionView(CircuitInstanceViewPath path,
+  public PathConnectionView(ViewPath path,
                             ConnectionView connection)
   {
     this.path = path;

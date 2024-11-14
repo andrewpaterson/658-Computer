@@ -2,7 +2,7 @@ package net.logicim.ui.circuit;
 
 import net.common.SimulatorException;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -11,22 +11,22 @@ import java.util.Map;
 
 public class SubcircuitSimulationPaths
 {
-  protected Map<SubcircuitSimulation, CircuitInstanceViewPath> subcircuitSimulationPaths;
+  protected Map<SubcircuitSimulation, ViewPath> subcircuitSimulationPaths;
 
-  public SubcircuitSimulationPaths(Collection<CircuitInstanceViewPath> paths)
+  public SubcircuitSimulationPaths(Collection<ViewPath> paths)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       path.clearCircuitSimulations();
     }
     subcircuitSimulationPaths = createSubcircuitSimulationPaths(paths);
   }
 
-  private Map<SubcircuitSimulation, CircuitInstanceViewPath> createSubcircuitSimulationPaths(Collection<CircuitInstanceViewPath> paths)
+  private Map<SubcircuitSimulation, ViewPath> createSubcircuitSimulationPaths(Collection<ViewPath> paths)
   {
-    Map<SubcircuitSimulation, CircuitInstanceViewPath> subcircuitSimulationPaths = new LinkedHashMap<>();
+    Map<SubcircuitSimulation, ViewPath> subcircuitSimulationPaths = new LinkedHashMap<>();
 
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       List<CircuitInstanceView> circuitInstanceViews = path.getPath();
 
@@ -85,7 +85,7 @@ public class SubcircuitSimulationPaths
     return subcircuitSimulationPaths;
   }
 
-  public Map<SubcircuitSimulation, CircuitInstanceViewPath> getSubcircuitSimulationPaths()
+  public Map<SubcircuitSimulation, ViewPath> getSubcircuitSimulationPaths()
   {
     return subcircuitSimulationPaths;
   }

@@ -1,7 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.integratedcircuit.View;
@@ -16,8 +16,8 @@ public class LocalMultiSimulationConnectionNet
 {
   protected Set<LocalConnectionNet> localConnectionNets;
 
-  protected Map<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
-  protected Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires;
+  protected Map<ViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
+  protected Map<ViewPath, List<WireViewPathConnection>> connectedWires;
   protected List<ComponentConnection<PinView>> pinViews;
 
   protected List<ComponentViewPortNames> componentViewPortNamesList;  //These are the editor 'traces'.
@@ -115,7 +115,7 @@ public class LocalMultiSimulationConnectionNet
     for (LocalConnectionNet localConnectionNet : localConnectionNets)
     {
       List<ConnectionView> connections = localConnectionNet.getConnectionViews();
-      CircuitInstanceViewPath path = localConnectionNet.getPath();
+      ViewPath path = localConnectionNet.getPath();
       for (ConnectionView connectionView : connections)
       {
         List<View> localConnected = connectionView.getConnectedComponents();
@@ -140,7 +140,7 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  private void addConnectedWire(CircuitInstanceViewPath path,
+  private void addConnectedWire(ViewPath path,
                                 ConnectionView connectionView,
                                 WireView connectedView)
   {
@@ -153,7 +153,7 @@ public class LocalMultiSimulationConnectionNet
     wireViewPathConnections.add(new WireViewPathConnection(path, connectedView, connectionView));
   }
 
-  private void addConnectedComponent(CircuitInstanceViewPath path,
+  private void addConnectedComponent(ViewPath path,
                                      ConnectionView connectionView,
                                      ComponentView<?> componentView)
   {
@@ -168,7 +168,7 @@ public class LocalMultiSimulationConnectionNet
 
   protected void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList)
   {
-    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<ViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       addPortToComponentViewPortNames(componentViewPortNamesList, componentConnections);
@@ -182,7 +182,7 @@ public class LocalMultiSimulationConnectionNet
     {
       ComponentView<?> componentView = connectedComponent.getComponentView();
       ConnectionView connectionView = connectedComponent.getConnectionView();
-      CircuitInstanceViewPath path = connectedComponent.getPath();
+      ViewPath path = connectedComponent.getPath();
 
       PortView portView = componentView.getPortView(connectionView);
       List<String> portNames = portView.getPortNames();
@@ -197,7 +197,7 @@ public class LocalMultiSimulationConnectionNet
   private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList,
                                                ComponentView<?> componentView,
                                                List<String> portNames,
-                                               CircuitInstanceViewPath path)
+                                               ViewPath path)
   {
     for (int i = 0; i < componentViewPortNamesList.size(); i++)
     {
@@ -207,7 +207,7 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  public Map<CircuitInstanceViewPath, List<WireViewPathConnection>> getConnectedWires()
+  public Map<ViewPath, List<WireViewPathConnection>> getConnectedWires()
   {
     return connectedWires;
   }
@@ -217,13 +217,13 @@ public class LocalMultiSimulationConnectionNet
     return componentViewPortNamesList;
   }
 
-  public Map<CircuitInstanceViewPath, Set<ConnectionView>> getConnectionViews()
+  public Map<ViewPath, Set<ConnectionView>> getConnectionViews()
   {
-    LinkedHashMap<CircuitInstanceViewPath, Set<ConnectionView>> result = new LinkedHashMap<>();
+    LinkedHashMap<ViewPath, Set<ConnectionView>> result = new LinkedHashMap<>();
 
-    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<ViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
-      CircuitInstanceViewPath path = entry.getKey();
+      ViewPath path = entry.getKey();
       Set<ConnectionView> connectionViews = new LinkedHashSet<>();
       result.put(path, connectionViews);
 
@@ -235,9 +235,9 @@ public class LocalMultiSimulationConnectionNet
       }
     }
 
-    for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
+    for (Map.Entry<ViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
     {
-      CircuitInstanceViewPath path = entry.getKey();
+      ViewPath path = entry.getKey();
       Set<ConnectionView> connectionViews = result.get(path);
       if (connectionViews == null)
       {
@@ -259,7 +259,7 @@ public class LocalMultiSimulationConnectionNet
   {
     StringBuilder builder = new StringBuilder();
 
-    for (Map.Entry<CircuitInstanceViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
+    for (Map.Entry<ViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)

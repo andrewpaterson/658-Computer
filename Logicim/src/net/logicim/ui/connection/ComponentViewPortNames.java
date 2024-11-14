@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
 
@@ -20,7 +20,7 @@ public class ComponentViewPortNames
 
   public void addPort(ComponentView<?> componentView,
                       String portName,
-                      CircuitInstanceViewPath path)
+                      ViewPath path)
   {
     if (!contains(componentView, portName, path))
     {
@@ -29,7 +29,7 @@ public class ComponentViewPortNames
     }
   }
 
-  protected boolean contains(ComponentView<?> componentView, String portName, CircuitInstanceViewPath path)
+  protected boolean contains(ComponentView<?> componentView, String portName, ViewPath path)
   {
     for (ComponentViewPortName componentViewPortName : connectedPortIndices)
     {

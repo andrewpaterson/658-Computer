@@ -18,9 +18,9 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.*;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
-import net.logicim.ui.circuit.path.UpdatedCircuitInstanceViewPaths;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPaths;
+import net.logicim.ui.circuit.path.UpdatedViewPaths;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -60,7 +60,7 @@ public class SubcircuitView
   protected SubcircuitSimulations simulations;
 
   protected ConnectionViewCache connectionViewCache;
-  protected List<CircuitInstanceViewPath> viewPaths;
+  protected List<ViewPath> viewPaths;
 
   public SubcircuitView(CircuitEditor circuitEditor)
   {
@@ -214,7 +214,7 @@ public class SubcircuitView
         SubcircuitView subcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
         removeSubcircuitInstanceView(subcircuitInstanceView);
 
-        UpdatedCircuitInstanceViewPaths updatedPaths = getCircuitEditor().viewPathsUpdate();
+        UpdatedViewPaths updatedPaths = getCircuitEditor().viewPathsUpdate();
         subcircuitView.pathsUpdated(updatedPaths);
       }
       else if (componentView instanceof DecorativeView)
@@ -235,12 +235,12 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
-  public void pathsUpdated(UpdatedCircuitInstanceViewPaths updatedPaths)
+  public void pathsUpdated(UpdatedViewPaths updatedPaths)
   {
-    List<CircuitInstanceViewPath> newPaths = new ArrayList<>();
-    List<CircuitInstanceViewPath> removedPaths = new ArrayList<>();
+    List<ViewPath> newPaths = new ArrayList<>();
+    List<ViewPath> removedPaths = new ArrayList<>();
 
-    for (CircuitInstanceViewPath newPath : updatedPaths.getNewPaths())
+    for (ViewPath newPath : updatedPaths.getNewPaths())
     {
       if (newPath.endsWithSubcircuitView(this))
       {
@@ -249,7 +249,7 @@ public class SubcircuitView
       }
     }
 
-    for (CircuitInstanceViewPath removedPath : updatedPaths.getRemovedPaths())
+    for (ViewPath removedPath : updatedPaths.getRemovedPaths())
     {
       boolean removed = viewPaths.remove(removedPath);
       if (removed)
@@ -812,7 +812,7 @@ public class SubcircuitView
   public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView,
                                                             Collection<ConnectionView> traceConnectionViews)
   {
-    CircuitInstanceViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
     SubcircuitSimulationPaths simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
 
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
@@ -843,7 +843,7 @@ public class SubcircuitView
 
   protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(CircuitInstanceView circuitInstanceView,
                                                                                       Collection<ConnectionView> tracesConnectionViews,
-                                                                                      CircuitInstanceViewPaths viewPaths,
+                                                                                      ViewPaths viewPaths,
                                                                                       SubcircuitSimulationPaths simulationPaths)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
@@ -1256,8 +1256,8 @@ public class SubcircuitView
                                          List<ComponentView<?>> componentViews)
   {
     viewPaths.isEmpty();
-    CircuitInstanceViewPath xxx2 = null;
-    
+    ViewPath xxx2 = null;
+
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
     {
@@ -1701,7 +1701,7 @@ public class SubcircuitView
     CircuitSimulation existingCircuitSimulation = existingSimulation.getCircuitSimulation();
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
 
-    CircuitInstanceViewPath xxx2 = null;
+    ViewPath xxx2 = null;
 
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
@@ -1756,7 +1756,7 @@ public class SubcircuitView
                                              SubcircuitSimulation newSimulation,
                                              TraceToTraceMap traceMap)
   {
-    CircuitInstanceViewPath xxx2 = null;
+    ViewPath xxx2 = null;
 
     for (ComponentView<?> componentView : componentViews)
     {
@@ -1801,7 +1801,7 @@ public class SubcircuitView
     return circuitEditor;
   }
 
-  public void setViewPaths(List<CircuitInstanceViewPath> viewPaths)
+  public void setViewPaths(List<ViewPath> viewPaths)
   {
     if (!this.viewPaths.isEmpty())
     {
@@ -1817,7 +1817,7 @@ public class SubcircuitView
     this.subcircuitEditor = subcircuitEditor;
   }
 
-  public PathConnectionView getPathConnection(CircuitInstanceViewPath path, ConnectionView connectionView)
+  public PathConnectionView getPathConnection(ViewPath path, ConnectionView connectionView)
   {
     PathConnectionView pathConnectionView = connectionViewCache.getPathConnectionView(path, connectionView);
     if (pathConnectionView != null)

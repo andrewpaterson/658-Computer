@@ -6,11 +6,11 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class CircuitInstanceViewPathComponentSimulation<COMPONENT extends Component>
+public class ViewPathComponentSimulation<COMPONENT extends Component>
 {
-  protected Map<CircuitInstanceViewPath, Map<SubcircuitSimulation, COMPONENT>> map;
+  protected Map<ViewPath, Map<SubcircuitSimulation, COMPONENT>> map;
 
-  public CircuitInstanceViewPathComponentSimulation()
+  public ViewPathComponentSimulation()
   {
     this.map = new LinkedHashMap<>();
   }

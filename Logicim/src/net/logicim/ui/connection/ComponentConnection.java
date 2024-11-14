@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 
@@ -9,11 +9,11 @@ import java.util.Objects;
 public class ComponentConnection<T extends ComponentView>
   implements Comparable<ComponentConnection>
 {
-  protected CircuitInstanceViewPath path;
+  protected ViewPath path;
   protected T componentView;
   protected ConnectionView connectionView;
 
-  public ComponentConnection(CircuitInstanceViewPath path,
+  public ComponentConnection(ViewPath path,
                              T componentView,
                              ConnectionView connectionView)
   {
@@ -32,7 +32,7 @@ public class ComponentConnection<T extends ComponentView>
     return connectionView;
   }
 
-  public CircuitInstanceViewPath getPath()
+  public ViewPath getPath()
   {
     return path;
   }
@@ -59,7 +59,7 @@ public class ComponentConnection<T extends ComponentView>
                   other.connectionView);
   }
 
-  public boolean equals(CircuitInstanceViewPath path, T componentView, ConnectionView connectionView)
+  public boolean equals(ViewPath path, T componentView, ConnectionView connectionView)
   {
     return (this.path == path) &&
            (this.componentView == componentView) &&

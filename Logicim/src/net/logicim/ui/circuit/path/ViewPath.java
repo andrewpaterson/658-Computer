@@ -12,16 +12,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CircuitInstanceViewPath
-    implements Comparable<CircuitInstanceViewPath>
+public class ViewPath
+    implements Comparable<ViewPath>
 {
   protected List<CircuitInstanceView> path;
   protected Map<CircuitSimulation, SubcircuitSimulation> circuitSimulations;
 
-  protected CircuitInstanceViewPath previous;
-  protected CircuitInstanceViewPath next;
+  protected ViewPath previous;
+  protected ViewPath next;
 
-  public CircuitInstanceViewPath(List<CircuitInstanceView> path)
+  public ViewPath(List<CircuitInstanceView> path)
   {
     this.path = new ArrayList<>(path);
     this.circuitSimulations = null;
@@ -49,7 +49,7 @@ public class CircuitInstanceViewPath
   @Override
   public boolean equals(Object obj)
   {
-    if (!(obj instanceof CircuitInstanceViewPath))
+    if (!(obj instanceof ViewPath))
     {
       return false;
     }
@@ -58,7 +58,7 @@ public class CircuitInstanceViewPath
       return true;
     }
 
-    return equalsPath(((CircuitInstanceViewPath) obj).getPath());
+    return equalsPath(((ViewPath) obj).getPath());
   }
 
   public List<CircuitInstanceView> getPath()
@@ -101,7 +101,7 @@ public class CircuitInstanceViewPath
     return path.get(0);
   }
 
-  public CircuitInstanceViewPath getPrevious()
+  public ViewPath getPrevious()
   {
     return previous;
   }
@@ -111,7 +111,7 @@ public class CircuitInstanceViewPath
     previous = null;
   }
 
-  public void setPrevious(CircuitInstanceViewPath path)
+  public void setPrevious(ViewPath path)
   {
     if ((previous == null) || (previous == path))
     {
@@ -123,7 +123,7 @@ public class CircuitInstanceViewPath
     }
   }
 
-  public void setNext(CircuitInstanceViewPath next)
+  public void setNext(ViewPath next)
   {
     this.next = next;
   }
@@ -184,7 +184,7 @@ public class CircuitInstanceViewPath
   }
 
   @Override
-  public int compareTo(CircuitInstanceViewPath other)
+  public int compareTo(ViewPath other)
   {
     int result = Integer.compare(path.size(), other.path.size());
     if (result != 0)
@@ -211,7 +211,7 @@ public class CircuitInstanceViewPath
     this.circuitSimulations = new LinkedHashMap<>();
   }
 
-  public CircuitInstanceViewPath getNext()
+  public ViewPath getNext()
   {
     return next;
   }

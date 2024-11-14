@@ -8,7 +8,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
@@ -35,7 +35,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation, CircuitInstanceViewPath path)
+  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation, ViewPath path)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);

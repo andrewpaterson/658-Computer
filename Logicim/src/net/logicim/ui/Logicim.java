@@ -19,8 +19,8 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -1548,7 +1548,7 @@ public class Logicim
   {
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
-    CircuitInstanceViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
 
     for (ConnectionView connectionView : hoverConnectionViews)
     {
@@ -1556,10 +1556,10 @@ public class Logicim
       List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
       for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
       {
-        Map<CircuitInstanceViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
-        for (Map.Entry<CircuitInstanceViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
+        Map<ViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
+        for (Map.Entry<ViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
         {
-          CircuitInstanceViewPath path = entry.getKey();
+          ViewPath path = entry.getKey();
           List<WireViewPathConnection> wireViewPathConnections = entry.getValue();
           for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
           {

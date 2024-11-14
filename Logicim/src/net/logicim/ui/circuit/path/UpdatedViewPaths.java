@@ -6,38 +6,38 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UpdatedCircuitInstanceViewPaths
+public class UpdatedViewPaths
 {
-  protected List<CircuitInstanceViewPath> newPaths;
-  protected List<CircuitInstanceViewPath> removedPaths;
+  protected List<ViewPath> newPaths;
+  protected List<ViewPath> removedPaths;
   protected Set<SubcircuitView> subcircuitViews;
 
-  public UpdatedCircuitInstanceViewPaths(List<CircuitInstanceViewPath> newPaths, List<CircuitInstanceViewPath> removedPaths)
+  public UpdatedViewPaths(List<ViewPath> newPaths, List<ViewPath> removedPaths)
   {
 
     this.newPaths = newPaths;
     this.removedPaths = removedPaths;
 
     this.subcircuitViews = new LinkedHashSet<>();
-    for (CircuitInstanceViewPath path : newPaths)
+    for (ViewPath path : newPaths)
     {
       SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
       subcircuitViews.add(subcircuitView);
     }
 
-    for (CircuitInstanceViewPath path : removedPaths)
+    for (ViewPath path : removedPaths)
     {
       SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
       subcircuitViews.add(subcircuitView);
     }
   }
 
-  public List<CircuitInstanceViewPath> getNewPaths()
+  public List<ViewPath> getNewPaths()
   {
     return newPaths;
   }
 
-  public List<CircuitInstanceViewPath> getRemovedPaths()
+  public List<ViewPath> getRemovedPaths()
   {
     return removedPaths;
   }

@@ -1,6 +1,6 @@
 package net.logicim.ui.connection;
 
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
@@ -11,14 +11,14 @@ import java.util.*;
 
 public class LocalConnectionNet
 {
-  protected CircuitInstanceViewPath path;
+  protected ViewPath path;
   protected List<ConnectionView> connectionViews;
 
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(CircuitInstanceViewPath path, ConnectionView inputConnectionView)
+  public LocalConnectionNet(ViewPath path, ConnectionView inputConnectionView)
   {
     this.path = path;
 
@@ -88,7 +88,7 @@ public class LocalConnectionNet
     return splitterViews;
   }
 
-  public CircuitInstanceViewPath getPath()
+  public ViewPath getPath()
   {
     return path;
   }

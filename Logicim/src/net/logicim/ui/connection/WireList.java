@@ -1,7 +1,7 @@
 package net.logicim.ui.connection;
 
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 
@@ -72,7 +72,7 @@ public class WireList
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
     {
-      Map<CircuitInstanceViewPath, Set<ConnectionView>> iDontKnowWhatImDoing = connectionNet.getConnectionViews();
+      Map<ViewPath, Set<ConnectionView>> iDontKnowWhatImDoing = connectionNet.getConnectionViews();
 
       if (iDontKnowWhatImDoing.size() > 1)
       {
@@ -94,7 +94,7 @@ public class WireList
     builder.append(connectionNets.size());
     builder.append("]\n");
 
-    Map<CircuitInstanceViewPath, List<ComponentViewPortName>> map = new LinkedHashMap<>();
+    Map<ViewPath, List<ComponentViewPortName>> map = new LinkedHashMap<>();
     for (FullWire fullWire : fullWires)
     {
       Set<ComponentViewPortNames> localWires = fullWire.getLocalWires();
@@ -102,7 +102,7 @@ public class WireList
       {
         for (ComponentViewPortName connectedPortIndex : localWire.getConnectedPortIndices())
         {
-          CircuitInstanceViewPath path = connectedPortIndex.getPath();
+          ViewPath path = connectedPortIndex.getPath();
           List<ComponentViewPortName> list = map.get(path);
           if (list == null)
           {
@@ -115,9 +115,9 @@ public class WireList
       }
     }
 
-    for (Map.Entry<CircuitInstanceViewPath, List<ComponentViewPortName>> entry : map.entrySet())
+    for (Map.Entry<ViewPath, List<ComponentViewPortName>> entry : map.entrySet())
     {
-      CircuitInstanceViewPath path = entry.getKey();
+      ViewPath path = entry.getKey();
       List<ComponentViewPortName> componentViewPortNames = entry.getValue();
       builder.append(path.getDescription());
       builder.append("\n");

@@ -2,19 +2,19 @@ package net.logicim.ui.simulation.component.subcircuit;
 
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 
 public class SubcircuitInstanceCreation
 {
   protected SubcircuitInstanceView subcircuitInstanceView;
   protected SubcircuitSimulation containingSubcircuitSimulation;
   protected SubcircuitInstance subcircuitInstance;
-  protected CircuitInstanceViewPath path;
+  protected ViewPath path;
 
   public SubcircuitInstanceCreation(SubcircuitInstanceView subcircuitInstanceView,
                                     SubcircuitSimulation containingSubcircuitSimulation,
                                     SubcircuitInstance subcircuitInstance,
-                                    CircuitInstanceViewPath path)
+                                    ViewPath path)
   {
 
     this.subcircuitInstanceView = subcircuitInstanceView;
@@ -38,7 +38,7 @@ public class SubcircuitInstanceCreation
     return subcircuitInstance;
   }
 
-  public CircuitInstanceViewPath getPath()
+  public ViewPath getPath()
   {
     return path;
   }

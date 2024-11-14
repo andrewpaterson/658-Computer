@@ -8,11 +8,11 @@ import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.util.*;
 
-public class CircuitInstanceViewPaths
+public class ViewPaths
 {
-  protected List<CircuitInstanceViewPath> paths;
+  protected List<ViewPath> paths;
 
-  public CircuitInstanceViewPaths(List<SubcircuitEditor> subcircuitEditors)
+  public ViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
     paths = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class CircuitInstanceViewPaths
     }
   }
 
-  private boolean recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, CircuitInstanceViewPath previousViewPath, int depth)
+  private boolean recurseFindPaths(CircuitInstanceView circuitInstanceView, List<CircuitInstanceView> path, ViewPath previousViewPath, int depth)
   {
     if (depth > 100)
     {
@@ -41,19 +41,19 @@ public class CircuitInstanceViewPaths
     }
 
     path.add(circuitInstanceView);
-    CircuitInstanceViewPath circuitInstanceViewPath = new CircuitInstanceViewPath(path);
-    paths.add(circuitInstanceViewPath);
+    ViewPath viewPath = new ViewPath(path);
+    paths.add(viewPath);
 
     if (previousViewPath != null)
     {
-      circuitInstanceViewPath.setPrevious(previousViewPath);
+      viewPath.setPrevious(previousViewPath);
     }
 
     SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
     List<SubcircuitInstanceView> subcircuitInstanceViews = subcircuitView.getSubcircuitInstanceViews();
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      boolean depthExceeded = recurseFindPaths(subcircuitInstanceView, path, circuitInstanceViewPath, depth + 1);
+      boolean depthExceeded = recurseFindPaths(subcircuitInstanceView, path, viewPath, depth + 1);
       if (depthExceeded)
       {
         return true;
@@ -66,20 +66,20 @@ public class CircuitInstanceViewPaths
 
   public void createPathLinks()
   {
-    for (CircuitInstanceViewPath circuitInstanceViewPath : paths)
+    for (ViewPath viewPath : paths)
     {
-      CircuitInstanceViewPath previous = circuitInstanceViewPath.getPrevious();
+      ViewPath previous = viewPath.getPrevious();
       if (previous != null)
       {
-        previous.setNext(circuitInstanceViewPath);
+        previous.setNext(viewPath);
       }
     }
   }
 
-  public List<CircuitInstanceViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)
+  public List<ViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)
   {
-    List<CircuitInstanceViewPath> result = new ArrayList<>();
-    for (CircuitInstanceViewPath path : paths)
+    List<ViewPath> result = new ArrayList<>();
+    for (ViewPath path : paths)
     {
       if (path.endsWithSubcircuitView(subcircuitView))
       {
@@ -89,24 +89,24 @@ public class CircuitInstanceViewPaths
     return result;
   }
 
-  public CircuitInstanceViewPath getPath(CircuitInstanceViewPath circuitInstanceViewPath, CircuitInstanceView circuitInstanceView)
+  public ViewPath getPath(ViewPath viewPath, CircuitInstanceView circuitInstanceView)
   {
-    List<CircuitInstanceView> newPath = new ArrayList<>(circuitInstanceViewPath.path);
+    List<CircuitInstanceView> newPath = new ArrayList<>(viewPath.path);
     newPath.add(circuitInstanceView);
 
     return getPath(newPath);
   }
 
-  public CircuitInstanceViewPath getPathExceptLast(CircuitInstanceViewPath circuitInstanceViewPath)
+  public ViewPath getPathExceptLast(ViewPath viewPath)
   {
-    List<CircuitInstanceView> newPath = new ArrayList<>(circuitInstanceViewPath.path);
+    List<CircuitInstanceView> newPath = new ArrayList<>(viewPath.path);
     newPath.remove(newPath.size() - 1);
     return getPath(newPath);
   }
 
-  private CircuitInstanceViewPath getPath(List<CircuitInstanceView> newPath)
+  private ViewPath getPath(List<CircuitInstanceView> newPath)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       if (path.equalsPath(newPath))
       {
@@ -117,7 +117,7 @@ public class CircuitInstanceViewPaths
     throw new SimulatorException("Cannot find a path matching path");
   }
 
-  public List<CircuitInstanceViewPath> getPaths()
+  public List<ViewPath> getPaths()
   {
     return paths;
   }
@@ -126,7 +126,7 @@ public class CircuitInstanceViewPaths
   public String toString()
   {
     StringBuilder builder = new StringBuilder();
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       builder.append(path.getDescription());
       builder.append("\n");
@@ -134,9 +134,9 @@ public class CircuitInstanceViewPaths
     return builder.toString();
   }
 
-  public boolean addIfNotPresent(CircuitInstanceViewPath newPath)
+  public boolean addIfNotPresent(ViewPath newPath)
   {
-    for (CircuitInstanceViewPath path : paths)
+    for (ViewPath path : paths)
     {
       if (path.equals(newPath))
       {
@@ -148,9 +148,9 @@ public class CircuitInstanceViewPaths
     return true;
   }
 
-  public boolean contains(CircuitInstanceViewPath newPath)
+  public boolean contains(ViewPath newPath)
   {
-    for (CircuitInstanceViewPath existingPath : paths)
+    for (ViewPath existingPath : paths)
     {
       if (existingPath.equals(newPath))
       {
@@ -160,7 +160,7 @@ public class CircuitInstanceViewPaths
     return false;
   }
 
-  public CircuitInstanceViewPath getPath(int index)
+  public ViewPath getPath(int index)
   {
     return paths.get(index);
   }
@@ -170,15 +170,15 @@ public class CircuitInstanceViewPaths
     paths.remove(index);
   }
 
-  public boolean matches(CircuitInstanceViewPaths other)
+  public boolean matches(ViewPaths other)
   {
     if (other.getPaths().size() != paths.size())
     {
       return false;
     }
 
-    List<CircuitInstanceViewPath> otherPaths = new ArrayList<>(other.getPaths());
-    List<CircuitInstanceViewPath> thisPaths = new ArrayList<>(paths);
+    List<ViewPath> otherPaths = new ArrayList<>(other.getPaths());
+    List<ViewPath> thisPaths = new ArrayList<>(paths);
 
     Collections.sort(otherPaths);
     Collections.sort(thisPaths);
@@ -186,8 +186,8 @@ public class CircuitInstanceViewPaths
     int count = thisPaths.size();
     for (int i = 0; i < count; i++)
     {
-      CircuitInstanceViewPath thisPath = thisPaths.get(i);
-      CircuitInstanceViewPath otherPath = otherPaths.get(i);
+      ViewPath thisPath = thisPaths.get(i);
+      ViewPath otherPath = otherPaths.get(i);
 
       if (!thisPath.equals(otherPath))
       {

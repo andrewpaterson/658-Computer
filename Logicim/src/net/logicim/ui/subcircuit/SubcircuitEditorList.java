@@ -4,7 +4,7 @@ import net.common.SimulatorException;
 import net.common.util.StringUtil;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
@@ -168,13 +168,13 @@ public class SubcircuitEditorList
     return subcircuitListChangedListeners;
   }
 
-  public void setSubcircuitPaths(List<CircuitInstanceViewPath> viewPaths)
+  public void setSubcircuitPaths(List<ViewPath> viewPaths)
   {
     for (SubcircuitEditor subcircuitEditor : subcircuitEditors)
     {
       SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
-      List<CircuitInstanceViewPath> subcircuitPaths = new ArrayList<>();
-      for (CircuitInstanceViewPath path : viewPaths)
+      List<ViewPath> subcircuitPaths = new ArrayList<>();
+      for (ViewPath path : viewPaths)
       {
         if (path.endsWithSubcircuitView(subcircuitView))
         {

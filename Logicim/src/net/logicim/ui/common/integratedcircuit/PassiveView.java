@@ -35,7 +35,7 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation, ViewPath path)
+  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);

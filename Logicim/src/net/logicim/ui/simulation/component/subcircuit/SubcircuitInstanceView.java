@@ -17,7 +17,6 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -224,7 +223,7 @@ public class SubcircuitInstanceView
   }
 
   @Override
-  public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation, ViewPath path)
+  public SubcircuitInstance createComponent(SubcircuitSimulation containingSubcircuitSimulation)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(containingSubcircuitSimulation);
@@ -255,13 +254,13 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
   }
 
-  public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(SubcircuitSimulation containingSubcircuitSimulation, ViewPath path)
+  public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(SubcircuitSimulation containingSubcircuitSimulation)
   {
-    SubcircuitInstance subcircuitInstance = createComponent(containingSubcircuitSimulation, path);
+    SubcircuitInstance subcircuitInstance = createComponent(containingSubcircuitSimulation);
     return new SubcircuitInstanceCreation(this,
                                           containingSubcircuitSimulation,
-                                          subcircuitInstance,
-                                          path);
+                                          subcircuitInstance
+    );
   }
 
   //Called from SubcircuitInstanceData.

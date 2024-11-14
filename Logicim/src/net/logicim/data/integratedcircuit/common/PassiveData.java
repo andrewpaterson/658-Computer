@@ -3,7 +3,6 @@ package net.logicim.data.integratedcircuit.common;
 import net.common.type.Int2D;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.simulation.CircuitLoaders;
@@ -44,9 +43,7 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
                                                   CircuitLoaders circuitLoaders,
                                                   PASSIVE passive)
   {
-    ViewPath xxx2 = null;
-
-    passive.createComponent(containingSubcircuitSimulation, xxx2);
+    passive.createComponent(containingSubcircuitSimulation);
 
     loadPorts(containingSubcircuitSimulation, circuitLoaders, passive);
   }

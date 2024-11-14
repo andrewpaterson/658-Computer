@@ -21,8 +21,6 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.ViewPath;
-import net.logicim.ui.circuit.path.ViewPathComponentSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
@@ -35,7 +33,6 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     extends ComponentView<PROPERTIES>
 {
   protected Map<SubcircuitSimulation, IC> simulationIntegratedCircuits;
-  protected ViewPathComponentSimulation simulationIntegratedCircuits2;
 
   public IntegratedCircuitView(SubcircuitView containingSubcircuitView,
                                Int2D position,
@@ -52,10 +49,9 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
 
     simulationIntegratedCircuits = new LinkedHashMap<>();
-    simulationIntegratedCircuits2 = new ViewPathComponentSimulation();
   }
 
-  public IC createComponent(SubcircuitSimulation subcircuitSimulation, ViewPath path)
+  public IC createComponent(SubcircuitSimulation subcircuitSimulation)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);

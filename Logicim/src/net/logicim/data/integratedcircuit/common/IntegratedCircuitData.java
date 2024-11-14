@@ -18,7 +18,6 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.simulation.CircuitLoaders;
@@ -124,9 +123,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
                                                   CircuitLoaders circuitLoaders,
                                                   ICV integratedCircuitView)
   {
-    ViewPath xxx2 = null;
-
-    integratedCircuitView.createComponent(containingSubcircuitSimulation, xxx2);
+    integratedCircuitView.createComponent(containingSubcircuitSimulation);
 
     loadState(containingSubcircuitSimulation, integratedCircuitView);
     loadEvents(containingSubcircuitSimulation, integratedCircuitView);

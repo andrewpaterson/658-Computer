@@ -1255,20 +1255,17 @@ public class SubcircuitView
                                          List<SubcircuitInstanceView> subcircuitInstanceViews,
                                          List<ComponentView<?>> componentViews)
   {
-    viewPaths.isEmpty();
-    ViewPath xxx2 = null;
-
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
     for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
     {
       for (ComponentView<?> componentView : componentViews)
       {
-        componentView.createComponent(subcircuitSimulation, xxx2);
+        componentView.createComponent(subcircuitSimulation);
       }
 
       for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
       {
-        SubcircuitInstanceCreation creation = subcircuitInstanceView.createComponentInSubcircuitInstanceCreation(subcircuitSimulation, xxx2);
+        SubcircuitInstanceCreation creation = subcircuitInstanceView.createComponentInSubcircuitInstanceCreation(subcircuitSimulation);
         localCreations.add(creation);
       }
     }
@@ -1701,11 +1698,9 @@ public class SubcircuitView
     CircuitSimulation existingCircuitSimulation = existingSimulation.getCircuitSimulation();
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
 
-    ViewPath xxx2 = null;
-
     for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
     {
-      SubcircuitInstanceCreation creation = subcircuitInstanceView.createComponentInSubcircuitInstanceCreation(newSimulation, xxx2);
+      SubcircuitInstanceCreation creation = subcircuitInstanceView.createComponentInSubcircuitInstanceCreation(newSimulation);
       localCreations.add(creation);
     }
 
@@ -1756,12 +1751,10 @@ public class SubcircuitView
                                              SubcircuitSimulation newSimulation,
                                              TraceToTraceMap traceMap)
   {
-    ViewPath xxx2 = null;
-
     for (ComponentView<?> componentView : componentViews)
     {
       Component existingIntegratedCircuit = componentView.getComponent(existingSimulation);
-      Component newIntegratedCircuit = componentView.createComponent(newSimulation, xxx2);
+      Component newIntegratedCircuit = componentView.createComponent(newSimulation);
       connectPorts(existingIntegratedCircuit.getPorts(), newIntegratedCircuit.getPorts(), traceMap);
       newIntegratedCircuit.reset(newSimulation.getSimulation());
     }

@@ -10,7 +10,6 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
@@ -449,7 +448,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation, ViewPath path);
+  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
 
   public abstract String getComponentType();
 

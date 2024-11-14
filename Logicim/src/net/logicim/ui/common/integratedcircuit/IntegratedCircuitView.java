@@ -21,6 +21,8 @@ import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.power.PowerSource;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPathComponentSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
@@ -33,6 +35,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     extends ComponentView<PROPERTIES>
 {
   protected Map<SubcircuitSimulation, IC> simulationIntegratedCircuits;
+  protected CircuitInstanceViewPathComponentSimulation simulationIntegratedCircuits2;
 
   public IntegratedCircuitView(SubcircuitView containingSubcircuitView,
                                Int2D position,
@@ -49,15 +52,17 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
 
     simulationIntegratedCircuits = new LinkedHashMap<>();
+    simulationIntegratedCircuits2 = new CircuitInstanceViewPathComponentSimulation();
   }
 
-  public IC createComponent(SubcircuitSimulation subcircuitSimulation)
+  public IC createComponent(SubcircuitSimulation subcircuitSimulation, CircuitInstanceViewPath path)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
     validateCanCreateComponent(subcircuitSimulation);
 
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
     IC integratedCircuit = createIntegratedCircuit(subcircuitSimulation, familyVoltageConfiguration);
+    //simulationIntegratedCircuits2.put();
     simulationIntegratedCircuits.put(subcircuitSimulation, integratedCircuit);
 
     createPowerPortsIfNecessary(subcircuitSimulation, familyVoltageConfiguration);

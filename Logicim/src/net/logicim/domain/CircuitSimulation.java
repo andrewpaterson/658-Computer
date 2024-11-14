@@ -119,10 +119,5 @@ public class CircuitSimulation
   {
     this.subcircuitTopSimulation = subcircuitTopSimulation;
   }
-
-  public SubcircuitTopSimulation getSubcircuitTopSimulation()
-  {
-    return subcircuitTopSimulation;
-  }
 }
 

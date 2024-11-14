@@ -17,10 +17,10 @@ import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
-import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPath;
+import net.logicim.ui.circuit.path.CircuitInstanceViewPaths;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -568,11 +568,6 @@ public class Logicim
     return getCurrentSubcircuitEditor().getTraceViewInScreenSpace(viewport, mousePosition);
   }
 
-  public TraceView getHoverTraceView()
-  {
-    return hoverTraceView;
-  }
-
   private StaticView<?> calculateHoverView(Int2D mousePosition)
   {
     return circuitEditor.getComponentViewInScreenSpace(viewport, mousePosition);
@@ -750,7 +745,7 @@ public class Logicim
 
   public void toggleTunSimulation()
   {
-    boolean running = simulationSpeed.toggleTunSimulation();
+    simulationSpeed.toggleTunSimulation();
   }
 
   public boolean canDelete()
@@ -1147,7 +1142,7 @@ public class Logicim
     setSubcircuitParameters(subcircuitTypeName);
   }
 
-  public void deleteSubcircuitAction(String subcircuitTypeName, SubcircuitSimulation subcircuitSimulation)
+  public void deleteSubcircuitAction(String subcircuitTypeName)
   {
     subcircuitViewParameters.remove(subcircuitTypeName);
     List<Integer> bookmarkIds = new ArrayList<>(subcircuitBookmarks.keySet());
@@ -1169,8 +1164,7 @@ public class Logicim
         if (subcircuitInstanceView.getTypeName().equals(subcircuitTypeName))
         {
           SubcircuitView subcircuitView = subcircuitInstanceView.getContainingSubcircuitView();
-          subcircuitView.deleteStaticView(subcircuitEditor,
-                                          subcircuitInstanceView);
+          subcircuitView.deleteStaticView(subcircuitInstanceView);
         }
       }
     }

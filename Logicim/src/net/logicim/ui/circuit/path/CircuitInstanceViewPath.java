@@ -215,5 +215,10 @@ public class CircuitInstanceViewPath
   {
     return next;
   }
+
+  public List<SubcircuitSimulation> getSubcircuitSimulations()
+  {
+    return new ArrayList<>(circuitSimulations.values());
+  }
 }
 

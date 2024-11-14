@@ -1212,7 +1212,7 @@ public class SubcircuitView
     removeTraceViews(new ArrayList<>(removeTraceViews));
 
     List<ConnectionView> connectionViews = getOrCreateStaticViewConnections(staticViews);
-    TraceViewConnectionViewSetsPair pair = calculateTraceViewConnectionViewSets(connectionViews);
+    TraceViewConnectionViewSetsPair pair = findTraceViewsInGridSpaceConnectionViewSets(connectionViews);
     Set<TraceView> existingTraceViews = pair.getTraceViews();
     Set<ConnectionView> nonTraceViewConnectionViews = pair.getNonTraceViewConnectionViews();
 
@@ -1330,7 +1330,7 @@ public class SubcircuitView
     return selectedTraceViews;
   }
 
-  protected TraceViewConnectionViewSetsPair calculateTraceViewConnectionViewSets(List<ConnectionView> connectionViews)
+  protected TraceViewConnectionViewSetsPair findTraceViewsInGridSpaceConnectionViewSets(List<ConnectionView> connectionViews)
   {
     TraceViewConnectionViewSetsPair pair = new TraceViewConnectionViewSetsPair();
     for (ConnectionView connectionView : connectionViews)

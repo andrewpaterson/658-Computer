@@ -30,7 +30,7 @@ public class ConnectionView
 
     connectedComponents = new ArrayList<>();
     connectedComponents.add(parentView);
-    this.gridPosition = new Int2D(x, y);
+    gridPosition = new Int2D(x, y);
   }
 
   public static String toPositionString(ConnectionView connectionView)

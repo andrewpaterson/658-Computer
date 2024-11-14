@@ -11,11 +11,6 @@ public class HoverConnectionView
     super(view, x, y);
   }
 
-  public View getParent()
-  {
-    return connectedComponents.get(0);
-  }
-
   public Int2D getGridPosition()
   {
     return gridPosition;

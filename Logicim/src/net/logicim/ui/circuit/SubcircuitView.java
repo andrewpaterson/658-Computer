@@ -18,9 +18,9 @@ import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.*;
+import net.logicim.ui.circuit.path.UpdatedViewPaths;
 import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.circuit.path.ViewPaths;
-import net.logicim.ui.circuit.path.UpdatedViewPaths;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
 import net.logicim.ui.common.TraceOverlap;
@@ -287,7 +287,7 @@ public class SubcircuitView
       }
     }
 
-    Set<ConnectionView> nonTraceViewConnectionViews = findNonTraceViewConnections(inputTraceViews);
+    Set<ConnectionView> nonTraceViewConnectionViews = findNonTraceViewConnectionViews(inputTraceViews);
     removeTraceViews(inputTraceViews);
 
     traceViewFinder.process();
@@ -733,19 +733,19 @@ public class SubcircuitView
 
   protected void removeTraceView(TraceView traceView)
   {
-    if (!traceView.hasConnections())
+    synchronized (this)
     {
-      synchronized (this)
+      if (!traceView.hasConnections())
       {
         if (!traceViews.remove(traceView))
         {
           throw new SimulatorException("SubcircuitView [%s] cannot remove trace not in trace views.", getTypeName());
         }
       }
-    }
-    else
-    {
-      throw new SimulatorException("SubcircuitView [%s] cannot remove trace view with connections.", getTypeName());
+      else
+      {
+        throw new SimulatorException("SubcircuitView [%s] cannot remove trace view with connections.", getTypeName());
+      }
     }
   }
 
@@ -1066,7 +1066,7 @@ public class SubcircuitView
                                                           Collection<ConnectionView> nonTraceViewConnectionViews,
                                                           Set<TraceView> traceViews)
   {
-    Collection<ConnectionView> traceConnectionViews = getTraceViewsConnectionViews(traceViews);
+    Collection<ConnectionView> traceConnectionViews = findTraceViewConnectionViews(traceViews);
     if (traceConnectionViews.size() > 0)
     {
       traceConnectionViews.addAll(nonTraceViewConnectionViews);
@@ -1083,28 +1083,42 @@ public class SubcircuitView
     }
   }
 
-  protected Set<ConnectionView> findNonTraceViewConnections(Set<TraceView> inputTraceViews)
+  protected Set<ConnectionView> findNonTraceViewConnectionViews(Set<TraceView> inputTraceViews)
   {
     Set<ConnectionView> nonTraceConnectionViews = new LinkedHashSet<>();
-    for (TraceView inputTraceView : inputTraceViews)
+    int i = 0;
+    for (TraceView traceView : inputTraceViews)
     {
-      List<ConnectionView> connectionViews = inputTraceView.getConnectionViews();
-      for (ConnectionView connectionView : connectionViews)
+      if (!traceView.hasConnections())
       {
-        List<View> connectedComponents = connectionView.getConnectedComponents();
-        for (View connectedComponent : connectedComponents)
+        throw new SimulatorException("Cannot get a connection for a removed Trace.  Iteration [%s].", i);
+      }
+
+      ConnectionView connectionView = traceView.getStartConnection();
+      List<View> connectedComponents = connectionView.getConnectedComponents();
+      for (View connectedComponent : connectedComponents)
+      {
+        if (!(connectedComponent instanceof TraceView))
         {
-          if (!(connectedComponent instanceof TraceView))
-          {
-            nonTraceConnectionViews.add(connectionView);
-          }
+          nonTraceConnectionViews.add(connectionView);
         }
       }
+
+      connectionView = traceView.getEndConnection();
+      connectedComponents = connectionView.getConnectedComponents();
+      for (View connectedComponent : connectedComponents)
+      {
+        if (!(connectedComponent instanceof TraceView))
+        {
+          nonTraceConnectionViews.add(connectionView);
+        }
+      }
+      i++;
     }
     return nonTraceConnectionViews;
   }
 
-  protected Set<ConnectionView> getTraceViewsConnectionViews(Set<TraceView> traceViews)
+  protected Set<ConnectionView> findTraceViewConnectionViews(Set<TraceView> traceViews)
   {
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     int i = 0;

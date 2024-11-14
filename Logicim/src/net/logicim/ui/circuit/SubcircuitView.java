@@ -1624,13 +1624,13 @@ public class SubcircuitView
     fireConnectionEvents(updatedConnectionViews);
   }
 
-  public SubcircuitTopSimulation createSubcircuitTopSimulation(String name)
+  public CircuitSimulation createSubcircuitTopSimulation(String name)
   {
     CircuitSimulation circuitSimulation = new CircuitSimulation(name);
     SubcircuitTopSimulation subcircuitTopSimulation = new SubcircuitTopSimulation(circuitSimulation);
     circuitSimulation.setTopSimulation(subcircuitTopSimulation);
     addSubcircuitSimulation(subcircuitTopSimulation);
-    return subcircuitTopSimulation;
+    return circuitSimulation;
   }
 
   public List<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
@@ -1656,6 +1656,11 @@ public class SubcircuitView
       list.add(subcircuitSimulation);
     }
     return list;
+  }
+
+  public List<CircuitSimulation> getCircuitSimulations()
+  {
+    return new ArrayList<>(simulations.getCircuitSimulations());
   }
 
   public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
@@ -1684,15 +1689,15 @@ public class SubcircuitView
     simulations.validate(orderedTopDownCircuitInstanceViews);
   }
 
-  public SubcircuitTopSimulation addNewSimulation(String simulationName)
+  public CircuitSimulation addNewSimulation(String simulationName)
   {
     List<SubcircuitTopSimulation> existingTopSimulations = getTopSimulations();
     SubcircuitTopSimulation startTopSimulation = existingTopSimulations.get(0);
 
     TraceToTraceMap traceMap = new TraceToTraceMap();
-    SubcircuitTopSimulation newSubcircuitTopSimulation = createSubcircuitTopSimulation(simulationName);
+    CircuitSimulation newCircuitSimulation = createSubcircuitTopSimulation(simulationName);
     List<SubcircuitInstanceCreation> creations = new ArrayList<>();
-    recurseAddNewSimulation(startTopSimulation, newSubcircuitTopSimulation, traceMap, creations);
+    recurseAddNewSimulation(startTopSimulation, newCircuitSimulation.getSubcircuitTopSimulation(), traceMap, creations);
 
     for (SubcircuitInstanceCreation creation : creations)
     {
@@ -1700,7 +1705,7 @@ public class SubcircuitView
       subcircuitInstanceView.createTracesForSubcircuitInstanceView();
     }
 
-    return newSubcircuitTopSimulation;
+    return newCircuitSimulation;
   }
 
   protected void recurseAddNewSimulation(SubcircuitSimulation existingSimulation,
@@ -1820,6 +1825,19 @@ public class SubcircuitView
 
     this.viewPaths = viewPaths;
     connectionViewCache.addPaths(viewPaths);
+  }
+
+  public List<ViewPath> getViewPaths(CircuitSimulation circuitSimulation)
+  {
+    List<ViewPath> result = new ArrayList<>();
+    for (ViewPath viewPath : viewPaths)
+    {
+      if (viewPath.containsCircuitSimulation(circuitSimulation))
+      {
+        result.add(viewPath);
+      }
+    }
+    return result;
   }
 
   public void setSubcircuitEditor(CircuitInstanceView subcircuitEditor)

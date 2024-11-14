@@ -11,19 +11,25 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.simulation.*;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.subciruit.SubcircuitInstanceSimulationSimulationData;
+import net.logicim.data.subciruit.ViewPathData;
+import net.logicim.data.subciruit.ViewPathElementData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.common.event.Event;
+import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
+import net.logicim.ui.circuit.SubcircuitSimulationPaths;
 import net.logicim.ui.circuit.SubcircuitView;
-import net.logicim.ui.circuit.path.ViewPath;
-import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.circuit.path.UpdatedViewPaths;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.HoverConnectionView;
@@ -50,28 +56,30 @@ public class CircuitEditor
 {
   protected SubcircuitEditorList subcircuitEditorList;
 
-  protected SubcircuitSimulation currentSubcircuitSimulation;
-  protected Map<SubcircuitEditor, SubcircuitSimulation> lastSubcircuitEditorSimulation;
+  protected ViewPathCircuitSimulation currentPathSimulation;
+  protected Map<SubcircuitEditor, ViewPathCircuitSimulation> lastSubcircuitEditorPathSimulation;
 
   protected NavigationStack navigationStack;
 
   protected DebugGlobalEnvironment globals;
 
   protected ViewPaths viewPaths;
+  protected SubcircuitSimulationPaths simulationPaths;
 
   public CircuitEditor()
   {
     subcircuitEditorList = new SubcircuitEditorList();
     subcircuitEditorList.clear(true);
 
-    currentSubcircuitSimulation = null;
-    lastSubcircuitEditorSimulation = new LinkedHashMap<>();
+    currentPathSimulation = null;
+    lastSubcircuitEditorPathSimulation = new LinkedHashMap<>();
 
     navigationStack = new NavigationStack();
 
     globals = new DebugGlobalEnvironment();
 
     viewPaths = new ViewPaths(subcircuitEditorList.findAll());
+    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
   }
 
   public CircuitEditor(String mainSubcircuitTypeName)
@@ -223,13 +231,16 @@ public class CircuitEditor
       List<SubcircuitEditorData> subcircuitEditorDatas = saveSubcircuitEditors(orderedSubcircuitEditors);
 
       List<LastSubcircuitSimulationData> lastSubcircuitSimulationDatas = saveLastSubcircuitSimulations();
+      List<ViewPathData> viewPathDatas = saveViewPaths();
 
       return new CircuitData(subcircuitEditorDatas,
                              circuitSimulationDatas,
                              subcircuitSimulationDatas,
+                             viewPathDatas,
                              lastSubcircuitSimulationDatas,
                              getCurrentSubcircuitEditor().getId(),
-                             getCurrentSubcircuitSimulationId());
+                             getCurrentViewPathId(),
+                             getCurrentCircuitSimulationId());
     }
     else
     {
@@ -237,15 +248,58 @@ public class CircuitEditor
     }
   }
 
+  private List<ViewPathData> saveViewPaths()
+  {
+    ArrayList<ViewPathData> viewPathDatas = new ArrayList<>();
+    List<ViewPath> paths = viewPaths.getPaths();
+    for (ViewPath path : paths)
+    {
+      ArrayList<ViewPathElementData> elements = new ArrayList<>();
+      List<CircuitInstanceView> circuitInstanceViews = path.getPath();
+      for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+      {
+        elements.add(new ViewPathElementData(circuitInstanceView.getId(), circuitInstanceView.getType()));
+      }
+      long previousId = path.getPrevious() != null ? path.getPrevious().getId() : 0L;
+      long nextId = path.getNext() != null ? path.getNext().getId() : 0L;
+      viewPathDatas.add(new ViewPathData(path.getId(),
+                                         elements,
+                                         previousId,
+                                         nextId));
+    }
+    return viewPathDatas;
+  }
+
+  private long getCurrentViewPathId()
+  {
+    if (currentPathSimulation != null)
+    {
+      return currentPathSimulation.getViewPath().getId();
+    }
+    return 0L;
+  }
+
+  private long getCurrentCircuitSimulationId()
+  {
+    if (currentPathSimulation != null)
+    {
+      return currentPathSimulation.getCircuitSimulation().getId();
+    }
+    return 0L;
+  }
+
   private List<LastSubcircuitSimulationData> saveLastSubcircuitSimulations()
   {
     ArrayList<LastSubcircuitSimulationData> lastSubcircuitSimulationDatas = new ArrayList<>();
-    for (Map.Entry<SubcircuitEditor, SubcircuitSimulation> entry : lastSubcircuitEditorSimulation.entrySet())
+    for (Map.Entry<SubcircuitEditor, ViewPathCircuitSimulation> entry : lastSubcircuitEditorPathSimulation.entrySet())
     {
       SubcircuitEditor subcircuitEditor = entry.getKey();
-      SubcircuitSimulation subcircuitSimulation = entry.getValue();
-      lastSubcircuitSimulationDatas.add(new LastSubcircuitSimulationData(subcircuitEditor.getId(), subcircuitSimulation.getId()));
+      ViewPathCircuitSimulation pathCircuitSimulation = entry.getValue();
+      CircuitSimulation circuitSimulation = pathCircuitSimulation.getCircuitSimulation();
+      ViewPath viewPath = pathCircuitSimulation.getViewPath();
+      lastSubcircuitSimulationDatas.add(new LastSubcircuitSimulationData(subcircuitEditor.getId(), circuitSimulation.getId(), viewPath.getId()));
     }
+
     return lastSubcircuitSimulationDatas;
   }
 
@@ -295,18 +349,6 @@ public class CircuitEditor
     return subcircuitSimulationDatas;
   }
 
-  protected long getCurrentSubcircuitSimulationId()
-  {
-    if (currentSubcircuitSimulation != null)
-    {
-      return currentSubcircuitSimulation.getId();
-    }
-    else
-    {
-      return 0L;
-    }
-  }
-
   public ClipboardData copyViews(List<View> views)
   {
     ArrayList<StaticData<?>> componentDatas = new ArrayList<>();
@@ -338,32 +380,35 @@ public class CircuitEditor
   public void load(CircuitData circuitData)
   {
     CircuitLoaders loaders = new CircuitLoaders();
-    SimulationLoader simulationLoader = loaders.getSimulationLoader();
     SubcircuitEditor.resetNextId();
+    ViewPath.resetNextId();
     Event.resetNextId();
     View.resetNextId();
 
     navigationStack.clear();
     subcircuitEditorList.clear(false);
     Map<Long, SubcircuitEditor> subcircuitEditorMap = new HashMap<>();
+    Map<Long, StaticView<?>> staticMap = new HashMap<>();
     Map<SubcircuitEditor, DataViewMap> subcircuitEditorViews = new LinkedHashMap<>();
+    LinkedHashMap<Long, ViewPath> viewPathMap = new LinkedHashMap<>();
 
-    loadSubcircuitEditors(circuitData, subcircuitEditorMap, subcircuitEditorViews);
+    loadSubcircuitEditors(circuitData, subcircuitEditorMap, staticMap, subcircuitEditorViews);
     loadTimeline(circuitData, loaders);
-    loadSubcircuitSimulations(circuitData, loaders, simulationLoader, subcircuitEditorMap);
+    loadSubcircuitSimulations(circuitData, loaders, subcircuitEditorMap);
     loadSubcircuitInstances(loaders, subcircuitEditorViews);
     validateLoadSimulationSubcircuitInstances(circuitData.subcircuitSimulations, loaders, subcircuitEditorMap, subcircuitEditorViews);
     loadViews(circuitData, loaders, subcircuitEditorMap, subcircuitEditorViews);
 
-    viewPaths = new ViewPaths(getSubcircuitEditors());
+    loadViewPaths(circuitData, subcircuitEditorMap, staticMap, viewPathMap);
+    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
     subcircuitEditorList.setSubcircuitPaths(viewPaths.getPaths());
 
-    lastSubcircuitEditorSimulation = new LinkedHashMap<>();
-    loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap);
+    lastSubcircuitEditorPathSimulation = new LinkedHashMap<>();
+    loadLastSubcircuitEditorSimulation(circuitData, loaders, subcircuitEditorMap, viewPathMap);
 
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor(circuitData.currentSubcircuit);
 
-    setCurrentSubcircuitSimulation(subcircuitEditor, loaders.getSubcircuitSimulation(circuitData.currentSubcircuitSimulation));
+    setCurrentViewPathCircuitSimulation(subcircuitEditor, loadCurrentPathSimulation(circuitData, loaders, viewPathMap));
     setCurrentSubcircuitEditor(subcircuitEditor);
 
     SwingUtilities.invokeLater(new Runnable()
@@ -376,19 +421,75 @@ public class CircuitEditor
     });
   }
 
+  protected ViewPathCircuitSimulation loadCurrentPathSimulation(CircuitData circuitData, CircuitLoaders loaders, LinkedHashMap<Long, ViewPath> viewPathMap)
+  {
+    return new ViewPathCircuitSimulation(viewPathMap.get(circuitData.currentViewPath), loaders.simulationLoader.getCircuitSimulation(circuitData.currentCircuitSimulation));
+  }
+
+  private void loadViewPaths(CircuitData circuitData,
+                             Map<Long, SubcircuitEditor> subcircuitEditorMap,
+                             Map<Long, StaticView<?>> staticMap,
+                             Map<Long, ViewPath> viewPathMap)
+  {
+    List<ViewPathData> viewPathDatas = circuitData.viewPathDatas;
+    viewPaths = new ViewPaths();
+    for (ViewPathData viewPathData : viewPathDatas)
+    {
+      ArrayList<CircuitInstanceView> circuitInstanceViews = new ArrayList<>();
+      for (ViewPathElementData pathElementData : viewPathData.elements)
+      {
+        long id = pathElementData.id;
+        String type = pathElementData.type;
+        CircuitInstanceView circuitInstanceView = null;
+        switch (type)
+        {
+          case SubcircuitEditor.SUBCIRCUIT_EDITOR:
+            circuitInstanceView = subcircuitEditorMap.get(id);
+            break;
+          case SubcircuitInstanceView.SUBCIRCUIT_INSTANCE:
+            circuitInstanceView = (CircuitInstanceView) staticMap.get(id);
+            break;
+          default:
+            throw new SimulatorException("Cannot load CircuitInstanceView with Type [%s] and ID [%s].", type, id);
+        }
+        circuitInstanceViews.add(circuitInstanceView);
+      }
+      ViewPath viewPath = new ViewPath(viewPathData.id, circuitInstanceViews);
+      viewPaths.getPaths().add(viewPath);
+      viewPathMap.put(viewPathData.id, viewPath);
+    }
+
+    for (ViewPathData viewPathData : viewPathDatas)
+    {
+      ViewPath viewPath = viewPathMap.get(viewPathData.id);
+      ViewPath next = viewPathMap.get(viewPathData.prevId);
+      ViewPath previous = viewPathMap.get(viewPathData.nextId);
+      viewPath.setNext(next);
+      viewPath.setPrevious(previous);
+    }
+  }
+
   protected void loadLastSubcircuitEditorSimulation(CircuitData circuitData,
                                                     CircuitLoaders loaders,
-                                                    Map<Long, SubcircuitEditor> subcircuitEditorMap)
+                                                    Map<Long, SubcircuitEditor> subcircuitEditorMap, LinkedHashMap<Long, ViewPath> viewPathMap)
   {
     if (circuitData.lastSubcircuitSimulationDatas != null)
     {
       for (LastSubcircuitSimulationData data : circuitData.lastSubcircuitSimulationDatas)
       {
-        SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(data.subcircuitSimulation);
-        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(data.subcircuitEditor);
-        if ((subcircuitSimulation != null) && (subcircuitEditor != null))
+        ViewPathCircuitSimulation viewPathCircuitSimulation = loaders.getViewPathCircuitSimulation(data.viewPath, data.circuitSimulation);
+        if (viewPathCircuitSimulation == null)
         {
-          lastSubcircuitEditorSimulation.put(subcircuitEditor, subcircuitSimulation);
+          ViewPath viewPath = viewPathMap.get(data.viewPath);
+          CircuitSimulation circuitSimulation = loaders.getCircuitSimulation(data.circuitSimulation);
+          viewPathCircuitSimulation = new ViewPathCircuitSimulation(viewPath, circuitSimulation);
+          loaders.getViewPathLoader().put(viewPathCircuitSimulation);
+        }
+
+        SubcircuitEditor subcircuitEditor = subcircuitEditorMap.get(data.subcircuitEditor);
+        if ((viewPathCircuitSimulation != null) && (subcircuitEditor != null))
+        {
+          lastSubcircuitEditorPathSimulation.put(subcircuitEditor, viewPathCircuitSimulation);
         }
       }
     }
@@ -396,6 +497,7 @@ public class CircuitEditor
 
   protected void loadSubcircuitEditors(CircuitData circuitData,
                                        Map<Long, SubcircuitEditor> subcircuitEditorMap,
+                                       Map<Long, StaticView<?>> staticMap,
                                        Map<SubcircuitEditor, DataViewMap> subcircuitEditorViews)
   {
     for (SubcircuitEditorData subcircuitEditorData : circuitData.subcircuits)
@@ -407,6 +509,13 @@ public class CircuitEditor
       DataViewMap views = subcircuitEditor.loadSubcircuit(subcircuitEditorData.subcircuit, false, false);
 
       subcircuitEditorViews.put(subcircuitEditor, views);
+
+      for (Map.Entry<StaticData<?>, StaticView<?>> entry : views.staticViews.entrySet())
+      {
+        StaticData<?> data = entry.getKey();
+        StaticView<?> staticView = entry.getValue();
+        staticMap.put(data.id, staticView);
+      }
     }
   }
 
@@ -456,9 +565,9 @@ public class CircuitEditor
 
   protected void loadSubcircuitSimulations(CircuitData circuitData,
                                            CircuitLoaders loaders,
-                                           SimulationLoader simulationLoader,
                                            Map<Long, SubcircuitEditor> subcircuitEditorMap)
   {
+    SimulationLoader simulationLoader = loaders.getSimulationLoader();
     for (SubcircuitSimulationData subcircuitSimulationData : circuitData.subcircuitSimulations)
     {
       CircuitSimulation circuitSimulation = loaders.getCircuitSimulation(subcircuitSimulationData.circuitSimulation);
@@ -483,10 +592,10 @@ public class CircuitEditor
     }
   }
 
-  public void setCurrentSubcircuitSimulation(SubcircuitEditor newSubcircuitEditor, SubcircuitSimulation newSubcircuitSimulation)
+  public void setCurrentViewPathCircuitSimulation(SubcircuitEditor newSubcircuitEditor, ViewPathCircuitSimulation newSubcircuitSimulation)
   {
-    this.currentSubcircuitSimulation = newSubcircuitSimulation;
-    this.lastSubcircuitEditorSimulation.put(newSubcircuitEditor, newSubcircuitSimulation);
+    this.currentPathSimulation = newSubcircuitSimulation;
+    this.lastSubcircuitEditorPathSimulation.put(newSubcircuitEditor, newSubcircuitSimulation);
   }
 
   protected void validateLoadSimulationSubcircuitInstances(List<SubcircuitSimulationData> subcircuitSimulations,
@@ -693,7 +802,33 @@ public class CircuitEditor
 
   public SubcircuitSimulation getCurrentSubcircuitSimulation()
   {
-    return currentSubcircuitSimulation;
+    CircuitSimulation circuitSimulation = currentPathSimulation.getCircuitSimulation();
+    ViewPath viewPath = currentPathSimulation.getViewPath();
+    return viewPath.getSubcircuitSimulation(circuitSimulation);
+  }
+
+  public ViewPath getCurrentViewPath()
+  {
+    if (currentPathSimulation != null)
+    {
+      return currentPathSimulation.getViewPath();
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+  public CircuitSimulation getCurrentCircuitSimulation()
+  {
+    if (currentPathSimulation != null)
+    {
+      return currentPathSimulation.getCircuitSimulation();
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public SubcircuitView getCurrentSubcircuitView()
@@ -709,38 +844,41 @@ public class CircuitEditor
   public String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
     String editor = subcircuitEditorList.setSubcircuitEditor(subcircuitEditor, true);
-    navigationStack.push(new SubcircuitSimulationPair(subcircuitEditor, currentSubcircuitSimulation));
+    navigationStack.push(new SubcircuitSimulationPair(subcircuitEditor, currentPathSimulation));
     return editor;
   }
 
-  private void setSubcircuitSimulationForSubcircuitEditor(SubcircuitEditor newSubcircuitEditor, SubcircuitSimulation lastSubcircuitSimulation)
+  private void setSubcircuitSimulationForSubcircuitEditor(SubcircuitEditor newSubcircuitEditor, CircuitSimulation lastCircuitSimulation)
   {
-    SubcircuitSimulation newSubcircuitSimulation = lastSubcircuitEditorSimulation.get(newSubcircuitEditor);
-    if (newSubcircuitSimulation != null)
+    ViewPathCircuitSimulation newViewPathCircuitSimulation = lastSubcircuitEditorPathSimulation.get(newSubcircuitEditor);
+    SubcircuitView subcircuitView = newSubcircuitEditor.getInstanceSubcircuitView();
+    if (newViewPathCircuitSimulation != null)
     {
-      setCurrentSubcircuitSimulation(newSubcircuitEditor, newSubcircuitSimulation);
+      setCurrentViewPathCircuitSimulation(newSubcircuitEditor, newViewPathCircuitSimulation);
       return;
     }
-    else if (lastSubcircuitSimulation != null)
+    else if (lastCircuitSimulation != null)
     {
-      CircuitSimulation circuitSimulation = lastSubcircuitSimulation.getCircuitSimulation();
-      Collection<SubcircuitSimulation> simulations = newSubcircuitEditor.getSubcircuitSimulations(circuitSimulation);
-      if (simulations.size() > 0)
+      List<ViewPath> viewPaths = subcircuitView.getViewPaths(lastCircuitSimulation);
+      if (viewPaths.size() > 0)
       {
-        setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.iterator().next());
+        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPaths.iterator().next(), lastCircuitSimulation));
         return;
       }
     }
 
-    List<SubcircuitTopSimulation> simulations = newSubcircuitEditor.getInstanceSubcircuitView().getTopSimulations();
-    if (!simulations.isEmpty())
+    List<CircuitSimulation> circuitSimulations = subcircuitView.getCircuitSimulations();
+    for (CircuitSimulation circuitSimulation : circuitSimulations)
     {
-      setCurrentSubcircuitSimulation(newSubcircuitEditor, simulations.get(0));
+      List<ViewPath> viewPaths = subcircuitView.getViewPaths(circuitSimulation);
+      if (viewPaths.size() > 0)
+      {
+        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPaths.iterator().next(), circuitSimulation));
+        return;
+      }
     }
-    else
-    {
-      throw new SimulatorException("No top level simulation found for subcircuit editor.");
-    }
+
+    throw new SimulatorException("No top level simulation found for subcircuit editor.");
   }
 
   public boolean hasMultipleSubcircuits()
@@ -765,15 +903,13 @@ public class CircuitEditor
       return null;
     }
 
-    SubcircuitSimulation lastSubcircuitSimulation = this.currentSubcircuitSimulation;
-
-    setSubcircuitSimulationForSubcircuitEditor(newSubcircuitEditor, lastSubcircuitSimulation);
+    setSubcircuitSimulationForSubcircuitEditor(newSubcircuitEditor, currentPathSimulation.getCircuitSimulation());
     return setCurrentSubcircuitEditor(newSubcircuitEditor);
   }
 
-  public String gotoSubcircuit(SubcircuitEditor newSubcircuitEditor, SubcircuitInstanceSimulation instanceSimulation)
+  public String gotoSubcircuit(SubcircuitEditor newSubcircuitEditor, ViewPathCircuitSimulation viewPathCircuitSimulation)
   {
-    setCurrentSubcircuitSimulation(newSubcircuitEditor, instanceSimulation);
+    setCurrentViewPathCircuitSimulation(newSubcircuitEditor, viewPathCircuitSimulation);
     return setCurrentSubcircuitEditor(newSubcircuitEditor);
   }
 
@@ -788,12 +924,12 @@ public class CircuitEditor
     SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
     subcircuitEditorList.add(subcircuitEditor, true);
 
-    setSubcircuitSimulationForSubcircuitEditor(subcircuitEditor, null);
-    setCurrentSubcircuitEditor(subcircuitEditor);
-
     SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
     UpdatedViewPaths updatedPaths = viewPathsUpdate();
     subcircuitView.pathsUpdated(updatedPaths);
+
+    setSubcircuitSimulationForSubcircuitEditor(subcircuitEditor, null);
+    setCurrentSubcircuitEditor(subcircuitEditor);
   }
 
   public UpdatedViewPaths viewPathsUpdate()
@@ -807,6 +943,8 @@ public class CircuitEditor
     updatePathsLinks(newToExistingPaths);
 
     validatePathLinks();
+
+    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
 
     return updatedViewPaths;
   }
@@ -934,10 +1072,14 @@ public class CircuitEditor
     return result;
   }
 
-  public SubcircuitTopSimulation addNewSimulation(String simulationName)
+  public ViewPathCircuitSimulation addNewSimulation(String simulationName)
   {
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
-    return subcircuitEditor.getInstanceSubcircuitView().addNewSimulation(simulationName);
+
+    CircuitSimulation circuitSimulation = subcircuitEditor.getInstanceSubcircuitView().addNewSimulation(simulationName);
+    ViewPath path = getCurrentViewPath();
+
+    return new ViewPathCircuitSimulation(path, circuitSimulation);
   }
 
   public String getSubcircuitNameError(String subcircuitName)
@@ -950,7 +1092,7 @@ public class CircuitEditor
     SubcircuitSimulationPair pair = navigationStack.pop();
     if (pair != null)
     {
-      setCurrentSubcircuitSimulation(pair.subcircuitEditor, pair.subcircuitSimulation);
+      setCurrentViewPathCircuitSimulation(pair.subcircuitEditor, pair.pathCircuitSimulation);
       subcircuitEditorList.setSubcircuitEditor(pair.subcircuitEditor, true);
     }
     return false;
@@ -961,7 +1103,7 @@ public class CircuitEditor
     SubcircuitSimulationPair pair = navigationStack.unpop();
     if (pair != null)
     {
-      setCurrentSubcircuitSimulation(pair.subcircuitEditor, pair.subcircuitSimulation);
+      setCurrentViewPathCircuitSimulation(pair.subcircuitEditor, pair.pathCircuitSimulation);
       subcircuitEditorList.setSubcircuitEditor(pair.subcircuitEditor, true);
     }
     return false;
@@ -975,6 +1117,39 @@ public class CircuitEditor
   public ViewPaths getViewPaths()
   {
     return viewPaths;
+  }
+
+  public ViewPath getViewPath(CircuitSimulation circuitSimulation, SubcircuitInstance subcircuitInstance)
+  {
+    for (ViewPath path : viewPaths.getPaths())
+    {
+      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+      if (subcircuitSimulation != null)
+      {
+        if (subcircuitSimulation instanceof SubcircuitInstanceSimulation)
+        {
+          SubcircuitInstanceSimulation subcircuitInstanceSimulation = (SubcircuitInstanceSimulation) subcircuitSimulation;
+          if (subcircuitInstanceSimulation.getSubcircuitInstance() == subcircuitInstance)
+          {
+            return path;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  public ViewPath getViewPath(CircuitSimulation circuitSimulation, SubcircuitSimulation existingSubcircuitSimulation)
+  {
+    for (ViewPath path : viewPaths.getPaths())
+    {
+      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+      if (subcircuitSimulation == existingSubcircuitSimulation)
+      {
+        return path;
+      }
+    }
+    return null;
   }
 }
 

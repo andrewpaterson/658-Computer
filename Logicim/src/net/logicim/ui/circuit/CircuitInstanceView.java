@@ -59,5 +59,9 @@ public interface CircuitInstanceView
       recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
     }
   }
+
+  long getId();
+
+  String getType();
 }
 

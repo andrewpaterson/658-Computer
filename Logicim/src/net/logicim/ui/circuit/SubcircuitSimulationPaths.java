@@ -85,9 +85,9 @@ public class SubcircuitSimulationPaths
     return subcircuitSimulationPaths;
   }
 
-  public Map<SubcircuitSimulation, ViewPath> getSubcircuitSimulationPaths()
+  public ViewPath getViewPath(SubcircuitSimulation subcircuitSimulation)
   {
-    return subcircuitSimulationPaths;
+    return subcircuitSimulationPaths.get(subcircuitSimulation);
   }
 }
 

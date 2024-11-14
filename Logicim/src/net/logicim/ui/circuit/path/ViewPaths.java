@@ -12,6 +12,11 @@ public class ViewPaths
 {
   protected List<ViewPath> paths;
 
+  public ViewPaths()
+  {
+    this.paths = new ArrayList<>();
+  }
+
   public ViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
     paths = new ArrayList<>();

@@ -1,19 +1,23 @@
 package net.logicim.ui.simulation;
 
+import net.logicim.data.circuit.ViewPathCircuitSimulationLoader;
 import net.logicim.data.simulation.SimulationLoader;
 import net.logicim.data.wire.TraceLoader;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
 
 public class CircuitLoaders
 {
   public TraceLoader traceLoader;
   public SimulationLoader simulationLoader;
+  public ViewPathCircuitSimulationLoader viewPathLoader;
 
   public CircuitLoaders()
   {
     traceLoader = new TraceLoader();
     simulationLoader = new SimulationLoader();
+    viewPathLoader = new ViewPathCircuitSimulationLoader();
   }
 
   public CircuitSimulation getCircuitSimulation(long circuitSimulationId)
@@ -26,6 +30,11 @@ public class CircuitLoaders
     return simulationLoader.getSubcircuitSimulation(subcircuitSimulationId);
   }
 
+  public ViewPathCircuitSimulation getViewPathCircuitSimulation(long viewPathId, long circuitSimulationId)
+  {
+    return viewPathLoader.getViewPathCircuitSimulation(viewPathId, circuitSimulationId);
+  }
+
   public SimulationLoader getSimulationLoader()
   {
     return simulationLoader;
@@ -34,6 +43,11 @@ public class CircuitLoaders
   public TraceLoader getTraceLoader()
   {
     return traceLoader;
+  }
+
+  public ViewPathCircuitSimulationLoader getViewPathLoader()
+  {
+    return viewPathLoader;
   }
 }
 

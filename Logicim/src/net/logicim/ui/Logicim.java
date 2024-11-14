@@ -14,12 +14,11 @@ import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
 import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.clipboard.ClipboardData;
 import net.logicim.ui.common.*;
@@ -28,10 +27,7 @@ import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.common.wire.WireView;
-import net.logicim.ui.connection.LocalMultiSimulationConnectionNet;
-import net.logicim.ui.connection.WireList;
-import net.logicim.ui.connection.WireListFinder;
-import net.logicim.ui.connection.WireViewPathConnection;
+import net.logicim.ui.connection.*;
 import net.logicim.ui.debugdetail.ComponentInformationPanelFactory;
 import net.logicim.ui.debugdetail.ConnectionInformationPanelFactory;
 import net.logicim.ui.debugdetail.InformationPanel;
@@ -1172,8 +1168,8 @@ public class Logicim
 
   public void newSimulationAction(String simulationName)
   {
-    SubcircuitTopSimulation topSimulation = circuitEditor.addNewSimulation(simulationName);
-    circuitEditor.setCurrentSubcircuitSimulation(getCurrentSubcircuitEditor(), topSimulation);
+    ViewPathCircuitSimulation viewPathCircuitSimulation = circuitEditor.addNewSimulation(simulationName);
+    circuitEditor.setCurrentViewPathCircuitSimulation(getCurrentSubcircuitEditor(), viewPathCircuitSimulation);
   }
 
   public void renameSubcircuit(String oldSubcircuitTypeName, String newSubcircuitTypeName)
@@ -1267,7 +1263,10 @@ public class Logicim
     {
       discardEdit();
 
-      circuitEditor.setCurrentSubcircuitSimulation(getCurrentSubcircuitEditor(), subcircuitSimulation);
+      CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
+      ViewPath viewPath = circuitEditor.getViewPath(circuitSimulation, subcircuitSimulation);
+
+      circuitEditor.setCurrentViewPathCircuitSimulation(getCurrentSubcircuitEditor(), new ViewPathCircuitSimulation(viewPath, circuitSimulation));
     }
   }
 
@@ -1306,13 +1305,14 @@ public class Logicim
       if (staticView instanceof SubcircuitInstanceView)
       {
         SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
+        CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
         SubcircuitInstance subcircuitInstance = subcircuitInstanceView.getComponent(circuitEditor.getCurrentSubcircuitSimulation());
-        SubcircuitInstanceSimulation instanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+        ViewPath viewPath = getViewPath(circuitSimulation, subcircuitInstance);
         SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
         discardEdit();
 
         SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(instanceSubcircuitView.getTypeName());
-        String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, instanceSimulation);
+        String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, new ViewPathCircuitSimulation(viewPath, circuitSimulation));
         setSubcircuitViewParameters(subcircuitTypeName);
         updateHighlighted();
       }
@@ -1548,7 +1548,10 @@ public class Logicim
   {
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
+    ViewPath currentViewPath = getCurrentViewPath();
     ViewPaths viewPaths = getCircuitEditor().getViewPaths();
+
+    WireFinder2 wireFinder = new WireFinder2(viewPaths, currentViewPath, hoverConnectionViews);
 
     for (ConnectionView connectionView : hoverConnectionViews)
     {
@@ -1571,6 +1574,16 @@ public class Logicim
       WireList wireList = wireListFinder.createWireList(connectionNets);
       //System.out.println(wireList.toString());
     }
+  }
+
+  private ViewPath getCurrentViewPath()
+  {
+    return circuitEditor.getCurrentViewPath();
+  }
+
+  private ViewPath getViewPath(CircuitSimulation circuitSimulation, SubcircuitInstance subcircuitInstance)
+  {
+    return circuitEditor.getViewPath(circuitSimulation, subcircuitInstance);
   }
 
   public void unhighlightWire()

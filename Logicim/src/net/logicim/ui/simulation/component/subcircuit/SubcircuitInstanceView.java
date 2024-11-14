@@ -40,6 +40,8 @@ public class SubcircuitInstanceView
     extends ComponentView<SubcircuitInstanceProperties>
     implements CircuitInstanceView
 {
+  public static final String SUBCIRCUIT_INSTANCE = "Subcircuit";
+
   protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
   protected SubcircuitView instanceSubcircuitView;
@@ -326,7 +328,7 @@ public class SubcircuitInstanceView
   @Override
   public String getType()
   {
-    return "Subcircuit";
+    return SUBCIRCUIT_INSTANCE;
   }
 
   public String getTypeName()

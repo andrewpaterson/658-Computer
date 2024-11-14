@@ -39,6 +39,8 @@ public class SubcircuitEditor
 {
   public static long nextId = 1L;
 
+  public static final String SUBCIRCUIT_EDITOR = "Editor";
+
   protected Selection selection;
   protected SubcircuitView subcircuitView;
   protected long id;
@@ -481,6 +483,12 @@ public class SubcircuitEditor
     return id;
   }
 
+  @Override
+  public String getType()
+  {
+    return SUBCIRCUIT_EDITOR;
+  }
+
   public Set<StaticView<?>> findAllViewsOfClass(Class<? extends StaticView<?>> viewClass)
   {
     return subcircuitView.findAllViewsOfClass(viewClass);
@@ -528,15 +536,10 @@ public class SubcircuitEditor
     return result;
   }
 
-  public Collection<SubcircuitSimulation> getSubcircuitSimulations(CircuitSimulation circuitSimulation)
-  {
-    return subcircuitView.getSimulations().getSubcircuitSimulations(circuitSimulation);
-  }
-
   @Override
   public String getDescription()
   {
-    return "Editor " + getTypeName();
+    return getType() + " " + getTypeName();
   }
 
   public void validateSimulations()

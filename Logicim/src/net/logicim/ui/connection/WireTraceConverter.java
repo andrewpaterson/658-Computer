@@ -25,7 +25,7 @@ public class WireTraceConverter
                             SubcircuitSimulationPaths subcircuitSimulationPaths)
   {
     this.wireList = wireList;
-    this.startingViewPath = subcircuitSimulationPaths.getSubcircuitSimulationPaths().get(startingSubcircuitSimulation);
+    this.startingViewPath = subcircuitSimulationPaths.getViewPath(startingSubcircuitSimulation);
     this.circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
 
     this.localMultiSimulationConnectionNetMap = new HashMap<>();

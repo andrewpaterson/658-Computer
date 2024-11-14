@@ -6,16 +6,18 @@ public class LastSubcircuitSimulationData
     extends ReflectiveData
 {
   public long subcircuitEditor;
-  public long subcircuitSimulation;
+  public long circuitSimulation;
+  public long viewPath;
 
   public LastSubcircuitSimulationData()
   {
   }
 
-  public LastSubcircuitSimulationData(long subcircuitEditor, long subcircuitSimulation)
+  public LastSubcircuitSimulationData(long subcircuitEditor, long circuitSimulation, long viewPath)
   {
     this.subcircuitEditor = subcircuitEditor;
-    this.subcircuitSimulation = subcircuitSimulation;
+    this.circuitSimulation = circuitSimulation;
+    this.viewPath = viewPath;
   }
 }
 

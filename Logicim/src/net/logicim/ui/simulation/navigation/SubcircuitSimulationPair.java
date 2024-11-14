@@ -1,23 +1,24 @@
 package net.logicim.ui.simulation.navigation;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class SubcircuitSimulationPair
 {
+  xxx
   public SubcircuitEditor subcircuitEditor;
-  public SubcircuitSimulation subcircuitSimulation;
+  public ViewPathCircuitSimulation pathCircuitSimulation;
 
-  public SubcircuitSimulationPair(SubcircuitEditor subcircuitEditor, SubcircuitSimulation subcircuitSimulation)
+  public SubcircuitSimulationPair(SubcircuitEditor subcircuitEditor, ViewPathCircuitSimulation pathCircuitSimulation)
   {
     this.subcircuitEditor = subcircuitEditor;
-    this.subcircuitSimulation = subcircuitSimulation;
+    this.pathCircuitSimulation = pathCircuitSimulation;
   }
 
   public boolean equals(SubcircuitSimulationPair obj)
   {
     return subcircuitEditor == obj.subcircuitEditor &&
-           subcircuitSimulation == obj.subcircuitSimulation;
+           pathCircuitSimulation.equals(obj.pathCircuitSimulation);
   }
 }
 

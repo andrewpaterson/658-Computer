@@ -15,16 +15,34 @@ import java.util.Map;
 public class ViewPath
     implements Comparable<ViewPath>
 {
+  public static long nextId = 1L;
+
   protected List<CircuitInstanceView> path;
   protected Map<CircuitSimulation, SubcircuitSimulation> circuitSimulations;
+  protected long id;
 
   protected ViewPath previous;
   protected ViewPath next;
 
   public ViewPath(List<CircuitInstanceView> path)
   {
+    this(nextId++, path);
+  }
+
+  public ViewPath(long id, List<CircuitInstanceView> path)
+  {
     this.path = new ArrayList<>(path);
     this.circuitSimulations = null;
+    this.id = id;
+    if (id >= nextId)
+    {
+      nextId = id + 1;
+    }
+  }
+
+  public static void resetNextId()
+  {
+    nextId = 1;
   }
 
   public boolean equalsPath(List<CircuitInstanceView> path)
@@ -106,11 +124,6 @@ public class ViewPath
     return previous;
   }
 
-  public void clearPrevious()
-  {
-    previous = null;
-  }
-
   public void setPrevious(ViewPath path)
   {
     if ((previous == null) || (previous == path))
@@ -123,9 +136,9 @@ public class ViewPath
     }
   }
 
-  public void setNext(ViewPath next)
+  public void clearPrevious()
   {
-    this.next = next;
+    previous = null;
   }
 
   public void addSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation)
@@ -216,9 +229,19 @@ public class ViewPath
     return next;
   }
 
+  public void setNext(ViewPath next)
+  {
+    this.next = next;
+  }
+
   public List<SubcircuitSimulation> getSubcircuitSimulations()
   {
     return new ArrayList<>(circuitSimulations.values());
+  }
+
+  public long getId()
+  {
+    return id;
   }
 }
 

@@ -6,7 +6,6 @@ import net.logicim.domain.CircuitSimulation;
 public class SubcircuitTopSimulation
     extends SubcircuitSimulation
 {
-
   public SubcircuitTopSimulation(CircuitSimulation circuitSimulation)
   {
     super(circuitSimulation);

@@ -410,11 +410,16 @@ public class SubcircuitEditor
 
   public DataViewMap loadSubcircuit(SubcircuitData subcircuitData,
                                     boolean appendIds,
-                                    boolean newComponentPropertyStep)
+                                    boolean newComponentPropertyStep,
+                                    Map<Long, SubcircuitInstanceView> subcircuitInstanceViewMap)
   {
     Map<TraceData, TraceView> traceViews = loadTraceViews(subcircuitData.traces, appendIds);
     Map<StaticData<?>, StaticView<?>> staticViews = loadStaticViews(subcircuitData.statics, appendIds, newComponentPropertyStep);
     Map<SubcircuitInstanceData, SubcircuitInstanceView> subcircuitInstanceViews = loadSubcircuitInstances(subcircuitData.subcircuitInstances, appendIds, newComponentPropertyStep);
+    for (Map.Entry<SubcircuitInstanceData, SubcircuitInstanceView> entry : subcircuitInstanceViews.entrySet())
+    {
+      subcircuitInstanceViewMap.put(entry.getKey().id, entry.getValue());
+    }
 
     return new DataViewMap(traceViews, staticViews, subcircuitInstanceViews);
   }

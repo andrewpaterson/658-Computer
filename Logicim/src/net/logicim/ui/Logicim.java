@@ -1547,14 +1547,15 @@ public class Logicim
   public void highlightWire()
   {
     List<ConnectionView> hoverConnectionViews = getHoverConnectionViews();
-    SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
-    ViewPath currentViewPath = getCurrentViewPath();
-    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
-
-    WireFinder2 wireFinder = new WireFinder2(viewPaths, currentViewPath, hoverConnectionViews);
-
-    for (ConnectionView connectionView : hoverConnectionViews)
+    if (hoverConnectionViews.size() > 0)
     {
+      ConnectionView connectionView = hoverConnectionViews.get(0);
+      SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();
+      ViewPath currentViewPath = getCurrentViewPath();
+      ViewPaths viewPaths = getCircuitEditor().getViewPaths();
+
+      WireFinder2 wireFinder = new WireFinder2(viewPaths, currentViewPath, connectionView);
+
       WireListFinder wireListFinder = new WireListFinder(subcircuitEditor, connectionView, viewPaths);
       List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
       for (LocalMultiSimulationConnectionNet connectionNet : connectionNets)
@@ -1570,9 +1571,9 @@ public class Logicim
             System.out.println(path.getDescription() + ": " + wireView.getDescription());
           }
         }
+        WireList wireList = wireListFinder.createWireList(connectionNets);
+        //System.out.println(wireList.toString());
       }
-      WireList wireList = wireListFinder.createWireList(connectionNets);
-      //System.out.println(wireList.toString());
     }
   }
 

@@ -1,6 +1,9 @@
 package net.logicim.ui.circuit.path;
 
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.CircuitInstanceView;
+import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 public class ViewPathCircuitSimulation
 {
@@ -27,6 +30,13 @@ public class ViewPathCircuitSimulation
   {
     return (circuitSimulation == obj.circuitSimulation) &&
            (viewPath == obj.viewPath);
+  }
+
+  public SubcircuitEditor getSubcircuitEditor()
+  {
+    CircuitInstanceView last = viewPath.getLast();
+    SubcircuitView subcircuitView = last.getInstanceSubcircuitView();
+    return (SubcircuitEditor) subcircuitView.getSubcircuitEditor();
   }
 }
 

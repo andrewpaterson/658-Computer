@@ -40,7 +40,6 @@ import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.navigation.NavigationStack;
-import net.logicim.ui.simulation.navigation.SubcircuitSimulationPair;
 import net.logicim.ui.simulation.order.SubcircuitEditorOrderer;
 import net.logicim.ui.simulation.selection.Selection;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
@@ -400,7 +399,7 @@ public class CircuitEditor
     loadViews(circuitData, loaders, subcircuitEditorMap, subcircuitEditorViews);
 
     loadViewPaths(circuitData, subcircuitEditorMap, staticMap, viewPathMap);
-    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
+    updateSimulationPaths();
     subcircuitEditorList.setSubcircuitPaths(viewPaths.getPaths());
 
     lastSubcircuitEditorPathSimulation = new LinkedHashMap<>();
@@ -440,7 +439,7 @@ public class CircuitEditor
       {
         long id = pathElementData.id;
         String type = pathElementData.type;
-        CircuitInstanceView circuitInstanceView = null;
+        CircuitInstanceView circuitInstanceView;
         switch (type)
         {
           case SubcircuitEditor.SUBCIRCUIT_EDITOR:
@@ -844,7 +843,7 @@ public class CircuitEditor
   public String setCurrentSubcircuitEditor(SubcircuitEditor subcircuitEditor)
   {
     String editor = subcircuitEditorList.setSubcircuitEditor(subcircuitEditor, true);
-    navigationStack.push(new SubcircuitSimulationPair(subcircuitEditor, currentPathSimulation));
+    navigationStack.push(currentPathSimulation);
     return editor;
   }
 
@@ -944,9 +943,14 @@ public class CircuitEditor
 
     validatePathLinks();
 
-    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
+    updateSimulationPaths();
 
     return updatedViewPaths;
+  }
+
+  public void updateSimulationPaths()
+  {
+    simulationPaths = new SubcircuitSimulationPaths(viewPaths.getPaths());
   }
 
   protected void validatePathLinks()
@@ -1089,22 +1093,24 @@ public class CircuitEditor
 
   public boolean navigateBackwardSubcircuit()
   {
-    SubcircuitSimulationPair pair = navigationStack.pop();
-    if (pair != null)
+    ViewPathCircuitSimulation pathCircuitSimulation = navigationStack.pop();
+    if (pathCircuitSimulation != null)
     {
-      setCurrentViewPathCircuitSimulation(pair.subcircuitEditor, pair.pathCircuitSimulation);
-      subcircuitEditorList.setSubcircuitEditor(pair.subcircuitEditor, true);
+      SubcircuitEditor subcircuitEditor = pathCircuitSimulation.getSubcircuitEditor();
+      setCurrentViewPathCircuitSimulation(subcircuitEditor, pathCircuitSimulation);
+      subcircuitEditorList.setSubcircuitEditor(subcircuitEditor, true);
     }
     return false;
   }
 
   public boolean navigateForwardSubcircuit()
   {
-    SubcircuitSimulationPair pair = navigationStack.unpop();
-    if (pair != null)
+    ViewPathCircuitSimulation pathCircuitSimulation = navigationStack.unpop();
+    if (pathCircuitSimulation != null)
     {
-      setCurrentViewPathCircuitSimulation(pair.subcircuitEditor, pair.pathCircuitSimulation);
-      subcircuitEditorList.setSubcircuitEditor(pair.subcircuitEditor, true);
+      SubcircuitEditor subcircuitEditor = pathCircuitSimulation.getSubcircuitEditor();
+      setCurrentViewPathCircuitSimulation(subcircuitEditor, pathCircuitSimulation);
+      subcircuitEditorList.setSubcircuitEditor(subcircuitEditor, true);
     }
     return false;
   }
@@ -1123,7 +1129,7 @@ public class CircuitEditor
   {
     for (ViewPath path : viewPaths.getPaths())
     {
-      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulationOrNull(circuitSimulation);
       if (subcircuitSimulation != null)
       {
         if (subcircuitSimulation instanceof SubcircuitInstanceSimulation)
@@ -1143,7 +1149,7 @@ public class CircuitEditor
   {
     for (ViewPath path : viewPaths.getPaths())
     {
-      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+      SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulationOrNull(circuitSimulation);
       if (subcircuitSimulation == existingSubcircuitSimulation)
       {
         return path;

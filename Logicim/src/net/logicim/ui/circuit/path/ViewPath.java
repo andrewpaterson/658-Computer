@@ -157,6 +157,11 @@ public class ViewPath
     return circuitSimulations.containsKey(circuitSimulation);
   }
 
+  public SubcircuitSimulation getSubcircuitSimulationOrNull(CircuitSimulation circuitSimulation)
+  {
+    return circuitSimulations.get(circuitSimulation);
+  }
+
   public SubcircuitSimulation getSubcircuitSimulation(CircuitSimulation circuitSimulation)
   {
     SubcircuitSimulation subcircuitSimulation = circuitSimulations.get(circuitSimulation);

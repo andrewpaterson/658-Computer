@@ -1250,6 +1250,11 @@ public class SubcircuitView
                             subcircuitInstanceViews,
                             componentViews);
 
+    if (subcircuitInstanceViews.size() > 0)
+    {
+      circuitEditor.updateSimulationPaths();
+    }
+
     for (SubcircuitInstanceCreation creation : creations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
@@ -1856,6 +1861,11 @@ public class SubcircuitView
     {
       throw new SimulatorException("Cannot get Path Connection View for Path [%s] and Connection [%s].", path.toString(), connectionView.toString());
     }
+  }
+
+  public CircuitInstanceView getSubcircuitEditor()
+  {
+    return subcircuitEditor;
   }
 }
 

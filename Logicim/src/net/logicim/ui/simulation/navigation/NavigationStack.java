@@ -1,9 +1,10 @@
 package net.logicim.ui.simulation.navigation;
 
 import net.logicim.ui.Stack;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
 
 public class NavigationStack
-    extends Stack<SubcircuitSimulationPair>
+    extends Stack<ViewPathCircuitSimulation>
 {
   public NavigationStack()
   {
@@ -11,9 +12,9 @@ public class NavigationStack
   }
 
   @Override
-  public void push(SubcircuitSimulationPair subcircuitSimulationPair)
+  public void push(ViewPathCircuitSimulation subcircuitSimulationPair)
   {
-    SubcircuitSimulationPair peek = peek();
+    ViewPathCircuitSimulation peek = peek();
     if (peek != null && peek.equals(subcircuitSimulationPair))
     {
       return;

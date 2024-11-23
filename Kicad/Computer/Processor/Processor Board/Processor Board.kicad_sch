@@ -17960,7 +17960,7 @@
 				)
 			)
 			(property "Value" "W65C816 Debug"
-				(at 0 0 0)
+				(at 0 -124.46 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -17968,7 +17968,7 @@
 				)
 			)
 			(property "Footprint" "HCP65_Parts:HCP65_W65C816_Debug_Display"
-				(at 0 -124.46 0)
+				(at -0.635 -127 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -17986,7 +17986,7 @@
 				)
 			)
 			(property "Description" "W65C816 Debug"
-				(at 0 0 0)
+				(at 0 -129.54 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -18000,6 +18000,7 @@
 					(font
 						(size 1.27 1.27)
 					)
+					(hide yes)
 				)
 			)
 			(symbol "W65C816_Debug_Display_1_1"
@@ -22620,7 +22621,7 @@
 		)
 		(uuid "17329237-6097-4cd2-b293-53c766ed3b68")
 	)
-	(text "MPU Timer can be ommitted"
+	(text "MPU Timer (B10) can be ommitted"
 		(exclude_from_sim no)
 		(at 412.75 63.5 0)
 		(effects
@@ -22631,7 +22632,7 @@
 		)
 		(uuid "1d7eb55d-d8bd-46b6-99d2-5fd35e6d5926")
 	)
-	(text "MPU NMI can be ommitted"
+	(text "MPU NMI (B11) can be ommitted"
 		(exclude_from_sim no)
 		(at 480.06 73.66 0)
 		(effects
@@ -22642,7 +22643,7 @@
 		)
 		(uuid "274e2939-4484-4df8-8379-576cb2a9d762")
 	)
-	(text "Device Reset can be ommitted"
+	(text "If no devices connected then ommit\n  Device Reset (B3)"
 		(exclude_from_sim no)
 		(at 408.94 241.3 0)
 		(effects
@@ -22653,7 +22654,7 @@
 		)
 		(uuid "2a073b1d-521c-421d-b6c6-bfe6a4bbd0a9")
 	)
-	(text "Device Interrupts can be ommitted"
+	(text "If no devices connected then ommit\n  Device Interrupts (B3)"
 		(exclude_from_sim no)
 		(at 491.49 256.54 0)
 		(effects
@@ -22664,7 +22665,7 @@
 		)
 		(uuid "c58a8a87-cf51-46b8-853b-05b4b4275650")
 	)
-	(text "If Kernal Mode is required then include:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)\nand ommit:\n  resistors typing A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\n\nIf Kernal Mode is not required then include:\n  resistors typing A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\nand ommit:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)"
+	(text "If Kernal Mode is required then include:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)\nand ommit:\n  0Ω resistors tying A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\n\nIf Kernal Mode is not required then include:\n  0Ω resistors tying A0 to SA0 ... ~{RAM_{CS}} to S~{RAM_{CS}}\nand ommit:\n  Kernal Mode (B6)\n  Selector 12bit (B14)\n  Selector 12bit (B16)"
 		(exclude_from_sim no)
 		(at 116.84 360.68 0)
 		(effects
@@ -22675,7 +22676,7 @@
 		)
 		(uuid "dea66503-0a53-423b-9224-169f782545d9")
 	)
-	(text "Instruction Code can be ommitted"
+	(text "Instruction Code (B17) can be ommitted"
 		(exclude_from_sim no)
 		(at 411.48 396.24 0)
 		(effects
@@ -36852,7 +36853,7 @@
 			)
 		)
 		(property "Value" "W65C816 Debug"
-			(at 543.56 24.13 0)
+			(at 543.56 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36860,7 +36861,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_W65C816_Debug_Display"
-			(at 543.56 148.59 0)
+			(at 542.925 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36878,7 +36879,7 @@
 			)
 		)
 		(property "Description" "W65C816 Debug"
-			(at 543.56 24.13 0)
+			(at 543.56 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36892,6 +36893,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "1"

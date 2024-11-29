@@ -1,82 +1,165 @@
-(kicad_sch (version 20230121) (generator eeschema)
-
-  (uuid 606e5f12-93f8-4110-aca9-f5b3c6c023a1)
-
-  (paper "A4")
-
-  (lib_symbols
-  )
-
-
-  (sheet (at 133.35 49.53) (size 21.59 19.05) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 21bd4f05-f9b1-455d-a2ae-6ff9b33deae9)
-    (property "Sheetname" "Left Handed Bus 7-Segment" (at 133.35 48.8184 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Left_Handed_Bus 7_Segment.kicad_sch" (at 133.35 69.1646 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (instances
-      (project "Bus Tester"
-        (path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1" (page "4"))
-      )
-    )
-  )
-
-  (sheet (at 180.34 76.2) (size 21.59 19.05) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 3b61caf2-f5d9-4029-990b-ad0ebf83a17e)
-    (property "Sheetname" "Right Handed Bus LED" (at 180.34 75.4884 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Left_Handed_Bus.kicad_sch" (at 180.34 95.8346 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (instances
-      (project "Bus Tester"
-        (path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1" (page "3"))
-      )
-    )
-  )
-
-  (sheet (at 180.34 49.53) (size 21.59 19.05) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 79467c89-6694-4f82-9ddb-0e58aaa184f4)
-    (property "Sheetname" "Left Handed Bus LED" (at 180.34 48.8184 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Left_Handed_Bus.kicad_sch" (at 180.34 69.1646 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (instances
-      (project "Bus Tester"
-        (path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1" (page "2"))
-      )
-    )
-  )
-
-  (sheet (at 133.35 76.2) (size 21.59 19.05) (fields_autoplaced)
-    (stroke (width 0.1524) (type solid))
-    (fill (color 0 0 0 0.0000))
-    (uuid 910cd63c-1e2a-4060-a838-9ab9990bc436)
-    (property "Sheetname" "Right Handed Bus 7-Segment" (at 133.35 75.4884 0)
-      (effects (font (size 1.27 1.27)) (justify left bottom))
-    )
-    (property "Sheetfile" "Left_Handed_Bus 7_Segment.kicad_sch" (at 133.35 95.8346 0)
-      (effects (font (size 1.27 1.27)) (justify left top))
-    )
-    (instances
-      (project "Bus Tester"
-        (path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1" (page "5"))
-      )
-    )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
-  )
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "606e5f12-93f8-4110-aca9-f5b3c6c023a1")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 133.35 49.53)
+		(size 21.59 19.05)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "21bd4f05-f9b1-455d-a2ae-6ff9b33deae9")
+		(property "Sheetname" "Left Handed Bus 7-Segment"
+			(at 133.35 48.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Left_Handed_Bus 7_Segment.kicad_sch"
+			(at 133.35 69.1646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Bus Tester"
+				(path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 180.34 76.2)
+		(size 21.59 19.05)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "3b61caf2-f5d9-4029-990b-ad0ebf83a17e")
+		(property "Sheetname" "Right Handed Bus LED"
+			(at 180.34 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Left_Handed_Bus.kicad_sch"
+			(at 180.34 95.8346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Bus Tester"
+				(path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 180.34 49.53)
+		(size 21.59 19.05)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "79467c89-6694-4f82-9ddb-0e58aaa184f4")
+		(property "Sheetname" "Left Handed Bus LED"
+			(at 180.34 48.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Left_Handed_Bus.kicad_sch"
+			(at 180.34 69.1646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Bus Tester"
+				(path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 133.35 76.2)
+		(size 21.59 19.05)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "910cd63c-1e2a-4060-a838-9ab9990bc436")
+		(property "Sheetname" "Right Handed Bus 7-Segment"
+			(at 133.35 75.4884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Left_Handed_Bus 7_Segment.kicad_sch"
+			(at 133.35 95.8346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "Bus Tester"
+				(path "/606e5f12-93f8-4110-aca9-f5b3c6c023a1"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
 )

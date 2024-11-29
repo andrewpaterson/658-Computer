@@ -2,6 +2,497 @@
 	(version 20231120)
 	(generator "kicad_symbol_editor")
 	(generator_version "8.0")
+	(symbol "ATF16V8BQL-15XU"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 12.7 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "ATF16V8BQL-15XU"
+			(at 12.7 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
+			(at 20.32 -38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.microchip.com/mymicrochip/filehandler.aspx?ddocname=en589395"
+			(at 20.32 -40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "250 gate SPLD 15nS"
+			(at 12.7 -33.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.2"
+			(at 20.32 -43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Microchip"
+			(at 20.32 -45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "ATF16V8BQL-15XU"
+			(at 20.32 -48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "556-AF16V8BQL15XU"
+			(at 20.32 -50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/ATF16V8BQL-15XU?qs=2nyfZ6BV3ojQExtk%2F%2FdRRA%3D%3D"
+			(at 20.32 -53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "ATF16V8"
+			(at 12.7 -36.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "ATF16V8BQL-15XU_0_0"
+			(pin input line
+				(at 0 -22.86 0)
+				(length 5.08)
+				(name "IN9/~{OE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -5.08 180)
+				(length 5.08)
+				(name "I/O0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -7.62 180)
+				(length 5.08)
+				(name "I/O1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -10.16 180)
+				(length 5.08)
+				(name "I/O2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -12.7 180)
+				(length 5.08)
+				(name "I/O3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -15.24 180)
+				(length 5.08)
+				(name "I/O4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -17.78 180)
+				(length 5.08)
+				(name "I/O5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -20.32 180)
+				(length 5.08)
+				(name "I/O6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 25.4 -22.86 180)
+				(length 5.08)
+				(name "I/O7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "IN1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "IN2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "IN3/PD"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "IN4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -12.7 0)
+				(length 5.08)
+				(name "IN5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "IN6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -17.78 0)
+				(length 5.08)
+				(name "IN7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -20.32 0)
+				(length 5.08)
+				(name "IN8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "ATF16V8BQL-15XU_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -32.385) (xy 5.08 -32.385) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "ATF16V8BQL-15XU_1_0"
+			(pin input clock
+				(at 0 0 0)
+				(length 5.08)
+				(name "CLK/IN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -30.48 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
 	(symbol "ATF22V10C-10SU"
 		(pin_names
 			(offset 0.762)
@@ -27,7 +518,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOIC127P1032X265-24N"
-			(at 27.94 -37.465 0)
+			(at 18.415 -38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37,7 +528,7 @@
 			)
 		)
 		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/doc0735.pdf"
-			(at 27.94 -40.005 0)
+			(at 18.415 -41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55,7 +546,7 @@
 			)
 		)
 		(property "Height" "2.65"
-			(at 27.94 -45.085 0)
+			(at 18.415 -43.815 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -65,7 +556,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Microchip"
-			(at 27.94 -47.625 0)
+			(at 18.415 -46.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -75,7 +566,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "ATF22V10C-10SU"
-			(at 27.94 -50.165 0)
+			(at 18.415 -48.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -85,7 +576,7 @@
 			)
 		)
 		(property "Mouser Part Number" "556-ATF22V10C-10SU"
-			(at 27.94 -52.705 0)
+			(at 18.415 -51.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -95,7 +586,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/ATF22V10C-10SU?qs=5h0i3Kr%252BAn1OOXkPIe2X2A%3D%3D"
-			(at 27.94 -55.245 0)
+			(at 18.415 -53.975 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -105,16 +596,7 @@
 			)
 		)
 		(property "Silkscreen" "ATF22V10"
-			(at 12.7 -35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "EEPLD - Electronically Erasable Programmable Logic Devices 500 Gate, 5V, 24Pin"
-			(at 0 0 0)
+			(at 12.7 -36.195 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -144,7 +626,7 @@
 			(pin input line
 				(at 0 -22.86 0)
 				(length 5.08)
-				(name "IN8"
+				(name "IN9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -162,7 +644,7 @@
 			(pin input line
 				(at 0 -25.4 0)
 				(length 5.08)
-				(name "IN9"
+				(name "IN10"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -198,7 +680,7 @@
 			(pin input line
 				(at 0 -27.94 0)
 				(length 5.08)
-				(name "IN10"
+				(name "IN11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -213,8 +695,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -25.4 180)
+			(pin tri_state line
+				(at 25.4 -5.08 180)
 				(length 5.08)
 				(name "I/O0"
 					(effects
@@ -231,8 +713,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -22.86 180)
+			(pin tri_state line
+				(at 25.4 -7.62 180)
 				(length 5.08)
 				(name "I/O1"
 					(effects
@@ -249,8 +731,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -20.32 180)
+			(pin tri_state line
+				(at 25.4 -10.16 180)
 				(length 5.08)
 				(name "I/O2"
 					(effects
@@ -267,8 +749,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -17.78 180)
+			(pin tri_state line
+				(at 25.4 -12.7 180)
 				(length 5.08)
 				(name "I/O3"
 					(effects
@@ -285,7 +767,7 @@
 					)
 				)
 			)
-			(pin bidirectional line
+			(pin tri_state line
 				(at 25.4 -15.24 180)
 				(length 5.08)
 				(name "I/O4"
@@ -303,8 +785,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -12.7 180)
+			(pin tri_state line
+				(at 25.4 -17.78 180)
 				(length 5.08)
 				(name "I/O5"
 					(effects
@@ -324,7 +806,7 @@
 			(pin input line
 				(at 0 -2.54 0)
 				(length 5.08)
-				(name "IN0"
+				(name "IN1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -339,8 +821,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -10.16 180)
+			(pin tri_state line
+				(at 25.4 -20.32 180)
 				(length 5.08)
 				(name "I/O6"
 					(effects
@@ -357,8 +839,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -7.62 180)
+			(pin tri_state line
+				(at 25.4 -22.86 180)
 				(length 5.08)
 				(name "I/O7"
 					(effects
@@ -375,8 +857,8 @@
 					)
 				)
 			)
-			(pin bidirectional line
-				(at 25.4 -5.08 180)
+			(pin tri_state line
+				(at 25.4 -25.4 180)
 				(length 5.08)
 				(name "I/O8"
 					(effects
@@ -386,24 +868,6 @@
 					)
 				)
 				(number "22"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin bidirectional line
-				(at 25.4 -2.54 180)
-				(length 5.08)
-				(name "I/O9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "23"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -432,7 +896,7 @@
 			(pin input line
 				(at 0 -5.08 0)
 				(length 5.08)
-				(name "IN1"
+				(name "IN2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -450,7 +914,7 @@
 			(pin input line
 				(at 0 -7.62 0)
 				(length 5.08)
-				(name "IN2/PD"
+				(name "IN3/PD"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -468,7 +932,7 @@
 			(pin input line
 				(at 0 -10.16 0)
 				(length 5.08)
-				(name "IN3"
+				(name "IN4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -486,7 +950,7 @@
 			(pin input line
 				(at 0 -12.7 0)
 				(length 5.08)
-				(name "IN4"
+				(name "IN5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -504,7 +968,7 @@
 			(pin input line
 				(at 0 -15.24 0)
 				(length 5.08)
-				(name "IN5"
+				(name "IN6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -522,7 +986,7 @@
 			(pin input line
 				(at 0 -17.78 0)
 				(length 5.08)
-				(name "IN6"
+				(name "IN7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -540,7 +1004,7 @@
 			(pin input line
 				(at 0 -20.32 0)
 				(length 5.08)
-				(name "IN7"
+				(name "IN8"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -570,6 +1034,26 @@
 				)
 			)
 		)
+		(symbol "ATF22V10C-10SU_1_0"
+			(pin tri_state line
+				(at 25.4 -27.94 180)
+				(length 5.08)
+				(name "I/O9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
 	)
 	(symbol "ATF22V10C-5JX"
 		(pin_names
@@ -579,25 +1063,25 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "IC"
-			(at 23.495 16.51 0)
+			(at 12.7 5.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "ATF22V10C-5JX"
-			(at 23.495 13.97 0)
+			(at 12.7 3.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:PLCC127P1245X1245X457-28N"
-			(at 26.67 12.7 0)
+			(at 20.32 -46.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -607,7 +1091,7 @@
 			)
 		)
 		(property "Datasheet" "https://ww1.microchip.com/downloads/en/devicedoc/doc0735.pdf"
-			(at 26.67 10.16 0)
+			(at 20.32 -48.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -617,26 +1101,15 @@
 			)
 		)
 		(property "Description" "500 gate SPLD 5nS"
-			(at 23.495 -29.845 0)
+			(at 13.335 -41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Height" "4.572"
-			(at 26.67 5.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "556-AF22V10C-5JX"
-			(at 26.67 2.54 0)
+			(at 20.32 -51.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -646,7 +1119,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Microchip-Technology-Atmel/ATF22V10C-5JX?qs=b1J4i6otjZtnV41zWBDhdQ%3D%3D"
-			(at 26.67 0 0)
+			(at 20.32 -53.975 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -656,7 +1129,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Microchip"
-			(at 26.67 -2.54 0)
+			(at 20.32 -56.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -666,7 +1139,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "ATF22V10C-5JX"
-			(at 26.67 -5.08 0)
+			(at 20.32 -59.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -675,8 +1148,8 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "EEPLD - Electronically Erasable Programmable Logic Devices 500 GATE SPLD 5V 5NS"
-			(at 0 0 0)
+		(property "Silkscreen" "ATF22V10"
+			(at 12.7 -43.815 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -685,28 +1158,10 @@
 			)
 		)
 		(symbol "ATF22V10C-5JX_0_0"
-			(pin passive line
-				(at 15.24 17.78 270)
+			(pin input line
+				(at 0 -17.78 0)
 				(length 5.08)
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -12.7 0)
-				(length 5.08)
-				(name "IN6"
+				(name "IN7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -721,10 +1176,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -15.24 0)
+			(pin input line
+				(at 0 -20.32 0)
 				(length 5.08)
-				(name "IN7"
+				(name "IN8"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -739,10 +1194,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 7.62 -33.02 90)
+			(pin input line
+				(at 0 -22.86 0)
 				(length 5.08)
-				(name "IN8"
+				(name "IN9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -757,10 +1212,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 10.16 -33.02 90)
+			(pin input line
+				(at 0 -25.4 0)
 				(length 5.08)
-				(name "IN9"
+				(name "IN10"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -775,46 +1230,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 12.7 -33.02 90)
+			(pin input line
+				(at 0 -27.94 0)
 				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "14"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 15.24 -33.02 90)
-				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "15"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 17.78 -33.02 90)
-				(length 5.08)
-				(name "IN10"
+				(name "IN11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -829,8 +1248,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 20.32 -33.02 90)
+			(pin tri_state line
+				(at 25.4 -5.08 180)
 				(length 5.08)
 				(name "I/O0"
 					(effects
@@ -847,8 +1266,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 22.86 -33.02 90)
+			(pin tri_state line
+				(at 25.4 -7.62 180)
 				(length 5.08)
 				(name "I/O1"
 					(effects
@@ -865,8 +1284,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 -15.24 180)
+			(pin tri_state line
+				(at 25.4 -10.16 180)
 				(length 5.08)
 				(name "I/O2"
 					(effects
@@ -883,8 +1302,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 12.7 17.78 270)
+			(pin input clock
+				(at 0 0 0)
 				(length 5.08)
 				(name "CLK/IN"
 					(effects
@@ -901,8 +1320,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 -12.7 180)
+			(pin tri_state line
+				(at 25.4 -12.7 180)
 				(length 5.08)
 				(name "I/O3"
 					(effects
@@ -919,8 +1338,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 -10.16 180)
+			(pin tri_state line
+				(at 25.4 -15.24 180)
 				(length 5.08)
 				(name "I/O4"
 					(effects
@@ -937,26 +1356,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 -7.62 180)
-				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "22"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 30.48 -5.08 180)
+			(pin tri_state line
+				(at 25.4 -17.78 180)
 				(length 5.08)
 				(name "I/O5"
 					(effects
@@ -973,8 +1374,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 -2.54 180)
+			(pin tri_state line
+				(at 25.4 -20.32 180)
 				(length 5.08)
 				(name "I/O6"
 					(effects
@@ -991,8 +1392,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 30.48 0 180)
+			(pin tri_state line
+				(at 25.4 -22.86 180)
 				(length 5.08)
 				(name "I/O7"
 					(effects
@@ -1009,8 +1410,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 22.86 17.78 270)
+			(pin tri_state line
+				(at 25.4 -25.4 180)
 				(length 5.08)
 				(name "I/O8"
 					(effects
@@ -1027,8 +1428,8 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 20.32 17.78 270)
+			(pin tri_state line
+				(at 25.4 -27.94 180)
 				(length 5.08)
 				(name "I/O9"
 					(effects
@@ -1045,28 +1446,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 17.78 17.78 270)
+			(pin input line
+				(at 0 -2.54 0)
 				(length 5.08)
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "28"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 10.16 17.78 270)
-				(length 5.08)
-				(name "IN0"
+				(name "IN1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1081,10 +1464,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 7.62 17.78 270)
+			(pin input line
+				(at 0 -5.08 0)
 				(length 5.08)
-				(name "IN1"
+				(name "IN2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1099,10 +1482,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 0 0)
+			(pin input line
+				(at 0 -7.62 0)
 				(length 5.08)
-				(name "IN2/PD"
+				(name "IN3/PD"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1117,10 +1500,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -2.54 0)
+			(pin input line
+				(at 0 -10.16 0)
 				(length 5.08)
-				(name "IN3"
+				(name "IN4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1135,10 +1518,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -5.08 0)
+			(pin input line
+				(at 0 -12.7 0)
 				(length 5.08)
-				(name "IN4"
+				(name "IN5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1153,28 +1536,10 @@
 					)
 				)
 			)
-			(pin passive line
-				(at 0 -7.62 0)
+			(pin input line
+				(at 0 -15.24 0)
 				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 0 -10.16 0)
-				(length 5.08)
-				(name "IN5"
+				(name "IN6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -1193,7 +1558,7 @@
 		(symbol "ATF22V10C-5JX_0_1"
 			(polyline
 				(pts
-					(xy 5.08 12.7) (xy 25.4 12.7) (xy 25.4 -27.94) (xy 5.08 -27.94) (xy 5.08 12.7)
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -40.005) (xy 5.08 -40.005) (xy 5.08 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -1201,6 +1566,116 @@
 				)
 				(fill
 					(type background)
+				)
+			)
+		)
+		(symbol "ATF22V10C-5JX_1_0"
+			(pin passive line
+				(at 25.4 -2.54 180)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -35.56 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -33.02 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -38.1 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08) hide
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -30.48 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
 				)
 			)
 		)
@@ -3406,7 +3881,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "IC"
-			(at 19.685 5.715 0)
+			(at 20.32 5.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3414,7 +3889,7 @@
 			)
 		)
 		(property "Value" "SST39VF010-70-4I-NHE"
-			(at 19.685 3.175 0)
+			(at 20.32 3.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3501,7 +3976,7 @@
 			)
 		)
 		(property "Silkscreen" "SST39VF010-70"
-			(at 20.32 -68.58 0)
+			(at 20.32 -67.945 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4114,6 +4589,713 @@
 			)
 		)
 	)
+	(symbol "SST39VF010-70-4I-WHE"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 20.32 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SST39VF010-70-4I-WHE"
+			(at 20.32 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP50P1400X120-32N"
+			(at 38.735 -57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://ww1.microchip.com/downloads/en/DeviceDoc/20005023B.pdf"
+			(at 38.735 -59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "1 Mbit NOR Flash"
+			(at 20.32 -26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.2"
+			(at 38.735 -64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Microchip"
+			(at 38.735 -67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "SST39VF010-70-4I-WHE-T"
+			(at 38.735 -69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "579-39VF0107IWHET"
+			(at 38.735 -72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Microchip-Technology/SST39VF010-70-4I-WHE-T?qs=Ot24P6tC%2FQ4B9oZpWUm8VA%3D%3D"
+			(at 38.735 -74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "SST39VF010-70"
+			(at 20.955 -67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "SST39VF010-70-4I-WHE_0_0"
+			(pin input line
+				(at 0 -20.32 0)
+				(length 5.08)
+				(name "A11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "A16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "A15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -17.78 0)
+				(length 5.08)
+				(name "A12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -30.48 0)
+				(length 5.08)
+				(name "A7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -33.02 0)
+				(length 5.08)
+				(name "A6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -35.56 0)
+				(length 5.08)
+				(name "A5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -38.1 0)
+				(length 5.08)
+				(name "A4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -40.64 0)
+				(length 5.08)
+				(name "A3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -43.18 0)
+				(length 5.08)
+				(name "A2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -45.72 0)
+				(length 5.08)
+				(name "A1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -25.4 0)
+				(length 5.08)
+				(name "A9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -48.26 0)
+				(length 5.08)
+				(name "A0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 29.21 -58.42 90)
+				(length 5.08)
+				(name "DQ0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 26.67 -58.42 90)
+				(length 5.08)
+				(name "DQ1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 24.13 -58.42 90)
+				(length 5.08)
+				(name "DQ2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 21.59 -58.42 90)
+				(length 5.08)
+				(name "DQ3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 19.05 -58.42 90)
+				(length 5.08)
+				(name "DQ4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 16.51 -58.42 90)
+				(length 5.08)
+				(name "DQ5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 13.97 -58.42 90)
+				(length 5.08)
+				(name "DQ6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 11.43 -58.42 90)
+				(length 5.08)
+				(name "DQ7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -27.94 0)
+				(length 5.08)
+				(name "A8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -22.86 0)
+				(length 5.08)
+				(name "A10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "31"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "A13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -12.7 0)
+				(length 5.08)
+				(name "A14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "SST39VF010-70-4I-WHE_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -53.34) (xy 5.08 -53.34) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "SST39VF010-70-4I-WHE_1_0"
+			(pin passive line
+				(at 0 -50.8 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "~{CE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at 0 0 0)
+				(length 5.08)
+				(name "~{OE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "32"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 40.64 -5.08 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "~{WE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 0 180)
+				(length 5.08)
+				(name "3V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 40.64 -2.54 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
 	(symbol "TC7660EOA"
 		(pin_names
 			(offset 0.762)
@@ -4216,37 +5398,8 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "TC7660EOA"
-			(at 24.765 -41.275 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/tc7660eoa/microchip-technology?region=nac"
-			(at 24.765 -43.815 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 		(property "Silkscreen" "TC7660"
 			(at 12.7 6.985 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Microchip TC7660EOA, Charge Pump Inverting 20mA 10 kHz, -1.5  -10 V, 8-Pin, SOIC"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)

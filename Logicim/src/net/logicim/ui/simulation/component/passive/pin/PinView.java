@@ -272,12 +272,12 @@ public class PinView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
 
     Color color = graphics.getColor();
@@ -297,10 +297,10 @@ public class PinView
 
     TraceValue[] values = null;
     long time = circuitSimulation.getTime();
-    Pin passive = simulationPassives.get(path, circuitSimulation);
+    Pin passive = simulationPassives.get(viewPath, circuitSimulation);
     if (passive != null)
     {
-      values = port.getValue(path,
+      values = port.getValue(viewPath,
                              circuitSimulation,
                              familyVoltageConfiguration,
                              passive.getVCC(time));
@@ -312,7 +312,7 @@ public class PinView
 
     paintPorts(graphics,
                viewport,
-               path,
+               viewPath,
                circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);

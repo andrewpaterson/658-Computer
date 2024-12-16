@@ -8,7 +8,6 @@ import net.logicim.ui.common.integratedcircuit.View;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.common.port.PortViewFinder;
 import net.logicim.ui.common.wire.WireView;
-import net.logicim.ui.simulation.component.passive.pin.PinView;
 
 import java.util.*;
 
@@ -18,7 +17,6 @@ public class LocalMultiSimulationConnectionNet
 
   protected Map<ViewPath, List<ComponentConnection<ComponentView<?>>>> connectedComponents;
   protected Map<ViewPath, List<WireViewPathConnection>> connectedWires;
-  protected List<ComponentConnection<PinView>> pinViews;
 
   protected List<ComponentViewPortNames> componentViewPortNamesList;  //These are the editor 'traces'.
 
@@ -27,7 +25,6 @@ public class LocalMultiSimulationConnectionNet
     this.localConnectionNets = new LinkedHashSet<>();
     this.connectedComponents = new LinkedHashMap<>();
     this.connectedWires = new LinkedHashMap<>();
-    this.pinViews = new ArrayList<>();
   }
 
   public void process()
@@ -123,13 +120,7 @@ public class LocalMultiSimulationConnectionNet
         {
           if (connectedView instanceof ComponentView)
           {
-            ComponentView<?> componentView = (ComponentView<?>) connectedView;
-            if (connectedView instanceof PinView)
-            {
-              pinViews.add(new ComponentConnection<>(path, (PinView) connectedView, connectionView));
-            }
-
-            addConnectedComponent(path, connectionView, componentView);
+            addConnectedComponent(path, connectionView, (ComponentView<?>) connectedView);
           }
           else if (connectedView instanceof WireView)
           {
@@ -140,9 +131,9 @@ public class LocalMultiSimulationConnectionNet
     }
   }
 
-  private void addConnectedWire(ViewPath path,
-                                ConnectionView connectionView,
-                                WireView connectedView)
+  private WireViewPathConnection addConnectedWire(ViewPath path,
+                                                  ConnectionView connectionView,
+                                                  WireView connectedView)
   {
     List<WireViewPathConnection> wireViewPathConnections = connectedWires.get(path);
     if (wireViewPathConnections == null)
@@ -150,12 +141,14 @@ public class LocalMultiSimulationConnectionNet
       wireViewPathConnections = new ArrayList<>();
       connectedWires.put(path, wireViewPathConnections);
     }
-    wireViewPathConnections.add(new WireViewPathConnection(path, connectedView, connectionView));
+    WireViewPathConnection wireViewPathConnection = new WireViewPathConnection(path, connectedView, connectionView);
+    wireViewPathConnections.add(wireViewPathConnection);
+    return wireViewPathConnection;
   }
 
-  private void addConnectedComponent(ViewPath path,
-                                     ConnectionView connectionView,
-                                     ComponentView<?> componentView)
+  private ComponentConnection<ComponentView<?>> addConnectedComponent(ViewPath path,
+                                                                      ConnectionView connectionView,
+                                                                      ComponentView<?> componentView)
   {
     List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(path);
     if (componentConnections == null)
@@ -163,7 +156,9 @@ public class LocalMultiSimulationConnectionNet
       componentConnections = new ArrayList<>();
       connectedComponents.put(path, componentConnections);
     }
-    componentConnections.add(new ComponentConnection<>(path, componentView, connectionView));
+    ComponentConnection<ComponentView<?>> componentConnection = new ComponentConnection<>(path, componentView, connectionView);
+    componentConnections.add(componentConnection);
+    return componentConnection;
   }
 
   protected void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList)

@@ -1,6 +1,7 @@
 package net.logicim.ui.debugdetail;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Viewport;
 
@@ -13,7 +14,10 @@ public abstract class InformationPanel
   protected int width;
   protected int height;
 
-  public InformationPanel(Graphics2D graphics, Viewport viewport, int width, int height)
+  public InformationPanel(Graphics2D graphics,
+                          Viewport viewport,
+                          int width,
+                          int height)
   {
     this.graphics = graphics;
     this.viewport = viewport;
@@ -21,7 +25,10 @@ public abstract class InformationPanel
     this.height = height;
   }
 
-  public void drawDetails(SubcircuitSimulation subcircuitSimulation, int left, int top)
+  public void drawDetails(ViewPath path,
+                          CircuitSimulation circuitSimulation,
+                          int left,
+                          int top)
   {
     graphics.setColor(Colours.getInstance().getInfoBackground());
     graphics.fillRect(left, top, width, height);
@@ -36,7 +43,11 @@ public abstract class InformationPanel
     int yOffset = top + 10 + metrics.getAscent();
     int xOffset = left + 10;
 
-    paintDetail(subcircuitSimulation, fontHeight, xOffset, yOffset);
+    paintDetail(path,
+                circuitSimulation,
+                fontHeight,
+                xOffset,
+                yOffset);
 
     graphics.setClip(clip);
   }
@@ -69,5 +80,5 @@ public abstract class InformationPanel
     return first;
   }
 
-  protected abstract void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y);
+  protected abstract void paintDetail(ViewPath path, CircuitSimulation circuitSimulation, int fontHeight, int x, int y);
 }

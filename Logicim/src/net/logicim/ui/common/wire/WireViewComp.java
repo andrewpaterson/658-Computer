@@ -1,9 +1,13 @@
 package net.logicim.ui.common.wire;
 
 import net.common.SimulatorException;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.Traces;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathComponentSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -15,7 +19,7 @@ import java.util.*;
 public class WireViewComp
 {
   protected List<ConnectionView> connections;
-  protected Map<SubcircuitSimulation, List<Trace>> simulationTraces;
+  protected ViewPathComponentSimulation<Traces> simulationWires;
 
   protected int busWidth;
 
@@ -25,7 +29,7 @@ public class WireViewComp
     connections.add(null);
     connections.add(null);
 
-    this.simulationTraces = new LinkedHashMap<>();
+    this.simulationWires = new ViewPathComponentSimulation();
     this.busWidth = 1;
   }
 
@@ -72,13 +76,14 @@ public class WireViewComp
   {
     if (subcircuitSimulation != null)
     {
-      List<Trace> traces = simulationTraces.get(subcircuitSimulation);
-      return VoltageColour.getColourForTraces(Colours.getInstance(), traces, subcircuitSimulation.getTime());
+      Traces traces = simulationWires.getComponentSlow(subcircuitSimulation);
+      if (traces != null)
+      {
+        return VoltageColour.getColourForTraces(Colours.getInstance(), traces.getTraces(), subcircuitSimulation.getTime());
+      }
     }
-    else
-    {
-      return Colours.getInstance().getDisconnectedTrace();
-    }
+
+    return Colours.getInstance().getDisconnectedTrace();
   }
 
   protected Stroke getTraceStroke(Viewport viewport)
@@ -96,36 +101,54 @@ public class WireViewComp
   protected Map<Long, long[]> save()
   {
     Map<Long, long[]> simulationTraces = new LinkedHashMap<>();
-    for (Map.Entry<SubcircuitSimulation, List<Trace>> entry : this.simulationTraces.entrySet())
+    Set<Map.Entry<ViewPath, Map<CircuitSimulation, Traces>>> entries = this.simulationWires.getEntrySet();
+    for (Map.Entry<ViewPath, Map<CircuitSimulation, Traces>> pathEntry : entries)
     {
-      SubcircuitSimulation simulation = entry.getKey();
-      List<Trace> traces = entry.getValue();
-      long[] ids = new long[traces.size()];
-      simulationTraces.put(simulation.getId(), ids);
-      for (int i = 0; i < traces.size(); i++)
+      Map<CircuitSimulation, Traces> circuitSimulations = pathEntry.getValue();
+      for (Map.Entry<CircuitSimulation, Traces> circuitSimulationEntry : circuitSimulations.entrySet())
       {
-        Trace trace = traces.get(i);
-        ids[i] = Trace.getId(trace);
+        Traces traces = circuitSimulationEntry.getValue();
+        SubcircuitSimulation containingSubcircuitSimulation = traces.getContainingSubcircuitSimulation();
+        saveTraceIds(simulationTraces, traces, containingSubcircuitSimulation);
       }
     }
+
     return simulationTraces;
   }
 
-  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
+  private void saveTraceIds(Map<Long, long[]> simulationTraces, Traces traces, SubcircuitSimulation simulation)
   {
-    if (simulationTraces.get(subcircuitSimulation) != null)
+    List<Trace> traceList = traces.getTraces();
+    long[] ids = new long[traceList.size()];
+    simulationTraces.put(simulation.getId(), ids);
+    for (int i = 0; i < traceList.size(); i++)
+    {
+      Trace trace = traceList.get(i);
+      ids[i] = Trace.getId(trace);
+    }
+  }
+
+  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
+  {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    if (simulationWires.get(path, circuitSimulation) != null)
     {
       throw new SimulatorException("Cannot connect traces.  Already connected.");
     }
+    simulationWires.put(path, circuitSimulation, new Traces(traces, subcircuitSimulation));
 
-    simulationTraces.put(subcircuitSimulation, traces);
+    busWidth = calculateBusWidth();
+  }
 
-    busWidth = Integer.MAX_VALUE;
-    for (List<Trace> existing : simulationTraces.values())
+  protected int calculateBusWidth()
+  {
+    int busWidth = Integer.MAX_VALUE;
+    List<Traces> traceList = simulationWires.getComponents();
+    for (Traces traces : traceList)
     {
-      if (existing.size() < busWidth)
+      if (traces.size() < busWidth)
       {
-        busWidth = existing.size();
+        busWidth = traces.size();
       }
     }
 
@@ -133,6 +156,7 @@ public class WireViewComp
     {
       busWidth = 1;
     }
+    return busWidth;
   }
 
   public void disconnectViewAndDestroyComponents()
@@ -145,24 +169,24 @@ public class WireViewComp
     destroyAllComponents();
   }
 
-  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
+  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    return simulationTraces.get(subcircuitSimulation);
+    return simulationWires.get(path, circuitSimulation);
   }
 
-  public Set<SubcircuitSimulation> getWireSubcircuitSimulations()
+  public Set<? extends SubcircuitSimulation> getWireSubcircuitSimulations()
   {
-    return new LinkedHashSet<>(simulationTraces.keySet());
+    return simulationWires.getSimulations();
   }
 
   public void destroyAllComponents()
   {
-    simulationTraces.clear();
+    simulationWires.clear();
   }
 
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    simulationTraces.remove(subcircuitSimulation);
+    simulationWires.remove(path, circuitSimulation);
   }
 }
 

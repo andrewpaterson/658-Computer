@@ -16,7 +16,10 @@ public class ViewPathData
   {
   }
 
-  public ViewPathData(long id, List<ViewPathElementData> elements, long prevId, long nextId)
+  public ViewPathData(long id,
+                      List<ViewPathElementData> elements,
+                      long prevId,
+                      long nextId)
   {
     this.id = id;
     this.elements = elements;

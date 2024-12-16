@@ -22,11 +22,12 @@ public class SubcircuitInstanceSimulation
   }
 
   @Override
-  public SubcircuitInstanceSimulationData save(long subcircuitEditorId)
+  public SubcircuitInstanceSimulationData save(long subcircuitEditorId, long viewPathId)
   {
-    return new SubcircuitInstanceSimulationData(getId(),
+    return new SubcircuitInstanceSimulationData(viewPathId,
                                                 subcircuitEditorId,
-                                                circuitSimulation.getId());
+                                                circuitSimulation.getId(),
+                                                getId());
   }
 
   public void setSubcircuitInstance(SubcircuitInstance subcircuitInstance)

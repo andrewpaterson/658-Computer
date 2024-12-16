@@ -8,14 +8,18 @@ import net.common.util.StringUtil;
 import net.logicim.data.port.common.*;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.port.event.PortOutputEventData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.*;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.port.event.Ports;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathComponentSimulation;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
@@ -42,7 +46,7 @@ public class PortView
 
   protected PortViewGridCache gridCache;
   protected List<String> portNames;
-  protected Map<SubcircuitSimulation, List<? extends Port>> simulationPorts;
+  protected ViewPathComponentSimulation<Ports> simulationPorts;
 
   public PortView(ComponentView<?> componentView,
                   String portName,
@@ -65,7 +69,21 @@ public class PortView
     this.bubbleDiameter = 0.9f;
     this.connection = null;
     this.gridCache = new PortViewGridCache();
-    this.simulationPorts = new LinkedHashMap<>();
+    this.simulationPorts = new ViewPathComponentSimulation<>();
+  }
+
+  protected static List<String> singlePort(String portName)
+  {
+    if (portName != null)
+    {
+      ArrayList<String> ports = new ArrayList<>(1);
+      ports.add(portName);
+      return ports;
+    }
+    else
+    {
+      return null;
+    }
   }
 
   public PortView setInverting(boolean inverting, Rotation facing)
@@ -86,12 +104,6 @@ public class PortView
   public PortView setDrawClock(boolean drawClock)
   {
     this.clockNotch = drawClock;
-    return this;
-  }
-
-  public PortView setText(String text)
-  {
-    this.text = text;
     return this;
   }
 
@@ -152,7 +164,8 @@ public class PortView
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
     updateGridCache();
 
@@ -182,27 +195,13 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      Color color = getPortColour(subcircuitSimulation);
+      Color color = getPortColour(path, circuitSimulation);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,
                         y - lineWidth,
                         lineWidth * 2,
                         lineWidth * 2);
-    }
-  }
-
-  protected static List<String> singlePort(String portName)
-  {
-    if (portName != null)
-    {
-      ArrayList<String> ports = new ArrayList<>(1);
-      ports.add(portName);
-      return ports;
-    }
-    else
-    {
-      return null;
     }
   }
 
@@ -214,69 +213,70 @@ public class PortView
 
   protected void destroyAllComponents()
   {
-    for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
+    for (Ports ports : simulationPorts.getComponents())
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
-      List<? extends Port> ports = entry.getValue();
-      if (ports != null)
-      {
-        for (Port port : ports)
-        {
-          port.disconnect(subcircuitSimulation.getSimulation());
-        }
-      }
+      ports.disconnect();
     }
     simulationPorts.clear();
   }
 
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
+    Ports ports = simulationPorts.get(path, circuitSimulation);
     if (ports != null)
     {
-      for (Port port : ports)
-      {
-        port.disconnect(subcircuitSimulation.getSimulation());
-      }
-      simulationPorts.remove(subcircuitSimulation);
+      ports.disconnect();
+      simulationPorts.remove(path, circuitSimulation);
     }
   }
 
   public SimulationMultiPortData save()
   {
     SimulationMultiPortData simulationMultiPortData = new SimulationMultiPortData();
-
-    for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
+    Set<Map.Entry<ViewPath, Map<CircuitSimulation, Ports>>> entries = simulationPorts.getEntrySet();
+    for (Map.Entry<ViewPath, Map<CircuitSimulation, Ports>> pathEntry : entries)
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
-      List<? extends Port> ports = entry.getValue();
-      ArrayList<PortData> portDatas = new ArrayList<>();
-      for (Port port : ports)
+      Map<CircuitSimulation, Ports> circuitSimulations = pathEntry.getValue();
+      for (Map.Entry<CircuitSimulation, Ports> circuitSimulationEntry : circuitSimulations.entrySet())
       {
-        if (port instanceof LogicPort)
-        {
-          portDatas.add(saveLogicPort((LogicPort) port));
-        }
-        else if (port instanceof PowerInPort)
-        {
-          portDatas.add(savePowerInPort((PowerInPort) port));
-        }
-        else if (port instanceof PowerOutPort)
-        {
-          portDatas.add(savePowerOutPort((PowerOutPort) port));
-        }
-        else if (port instanceof TracePort)
-        {
-          portDatas.add(saveTracePort((TracePort) port));
-        }
-        else
-        {
-          throw new SimulatorException("implement saving for [%s] ports.", port.getClass().getSimpleName());
-        }
+        Ports ports = circuitSimulationEntry.getValue();
+        SubcircuitSimulation containingSubcircuitSimulation = ports.getContainingSubcircuitSimulation();
+        ArrayList<PortData> portDatas = savePortDatas(ports);
+        simulationMultiPortData.add(containingSubcircuitSimulation.getId(), new MultiPortData(portDatas));
       }
-      simulationMultiPortData.add(subcircuitSimulation.getId(), new MultiPortData(portDatas));
     }
+
     return simulationMultiPortData;
+  }
+
+  protected ArrayList<PortData> savePortDatas(Ports ports)
+  {
+    ArrayList<PortData> portDatas = new ArrayList<>();
+    List<Port> portList = ports.getPorts();
+    for (Port port : portList)
+    {
+      if (port instanceof LogicPort)
+      {
+        portDatas.add(saveLogicPort((LogicPort) port));
+      }
+      else if (port instanceof PowerInPort)
+      {
+        portDatas.add(savePowerInPort((PowerInPort) port));
+      }
+      else if (port instanceof PowerOutPort)
+      {
+        portDatas.add(savePowerOutPort((PowerOutPort) port));
+      }
+      else if (port instanceof TracePort)
+      {
+        portDatas.add(saveTracePort((TracePort) port));
+      }
+      else
+      {
+        throw new SimulatorException("implement saving for [%s] ports.", port.getClass().getSimpleName());
+      }
+    }
+    return portDatas;
   }
 
   protected PowerOutPortData savePowerOutPort(PowerOutPort powerOutPort)
@@ -320,14 +320,15 @@ public class PortView
     return new LogicPortData(eventDatas, portOutputEventData, logicPort.getTraceId());
   }
 
-  protected Color getPortColour(SubcircuitSimulation subcircuitSimulation)
+  protected Color getPortColour(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    if (!allTracePorts(subcircuitSimulation))
+    if (!allTracePorts(path, circuitSimulation))
     {
-      List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
+      Ports ports = simulationPorts.get(path, circuitSimulation);
       if (ports != null)
       {
-        return VoltageColour.getColorForPorts(Colours.getInstance(), ports, subcircuitSimulation.getTime());
+        SubcircuitSimulation subcircuitSimulation = ports.getContainingSubcircuitSimulation();
+        return VoltageColour.getColorForPorts(Colours.getInstance(), ports.getPorts(), subcircuitSimulation.getTime());
       }
       else
       {
@@ -336,16 +337,17 @@ public class PortView
     }
     else
     {
-      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(subcircuitSimulation), subcircuitSimulation.getTime());
+      long time = circuitSimulation.getTime();
+      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(path, circuitSimulation), time);
     }
   }
 
-  private boolean allTracePorts(SubcircuitSimulation subcircuitSimulation)
+  private boolean allTracePorts(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
+    Ports ports = simulationPorts.get(path, circuitSimulation);
     if (ports != null)
     {
-      for (Port port : ports)
+      for (Port port : ports.getPorts())
       {
         if (!(port instanceof TracePort))
         {
@@ -357,13 +359,13 @@ public class PortView
     return false;
   }
 
-  private List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
+  private List<Trace> getTraces(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
+    Ports ports = simulationPorts.get(path, circuitSimulation);
     if (ports != null)
     {
       List<Trace> traces = new ArrayList<>(ports.size());
-      for (Port port : ports)
+      for (Port port : ports.getPorts())
       {
         Trace trace = port.getTrace();
         if (trace != null)
@@ -381,27 +383,25 @@ public class PortView
 
   public void traceConnected()
   {
-    for (Map.Entry<SubcircuitSimulation, List<? extends Port>> entry : simulationPorts.entrySet())
+    for (Ports ports : simulationPorts.getComponents())
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
-      List<? extends Port> ports = entry.getValue();
-      if (ports != null)
-      {
-        for (Port port : ports)
+      SubcircuitSimulation subcircuitSimulation = ports.getContainingSubcircuitSimulation();
+        for (Port port : ports.getPorts())
         {
           if (port.getTrace() != null)
           {
             port.traceConnected(subcircuitSimulation.getSimulation());
-          }
         }
       }
     }
   }
 
-  public boolean containsPort(SubcircuitSimulation subcircuitSimulation, Port port)
+  public boolean containsPort(ViewPath path,
+                              CircuitSimulation circuitSimulation,
+                              Port port)
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
-    for (Port otherPort : ports)
+    Ports ports = simulationPorts.get(path, circuitSimulation);
+    for (Port otherPort : ports.getPorts())
     {
       if (otherPort == port)
       {
@@ -411,14 +411,9 @@ public class PortView
     return false;
   }
 
-  public List<? extends Port> getPorts(SubcircuitSimulation subcircuitSimulation)
+  public Ports getPorts(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    return simulationPorts.get(subcircuitSimulation);
-  }
-
-  public Map<SubcircuitSimulation, List<? extends Port>> getPorts()
-  {
-    return simulationPorts;
+    return simulationPorts.get(path, circuitSimulation);
   }
 
   public int numberOfPorts()
@@ -431,16 +426,24 @@ public class PortView
     return text;
   }
 
-  public TraceValue[] getValue(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration voltageConfiguration, float vcc)
+  public PortView setText(String text)
   {
-    List<? extends Port> ports = simulationPorts.get(subcircuitSimulation);
-    TraceValue[] traceValues = new TraceValue[ports.size()];
-    for (int i = 0; i < ports.size(); i++)
+    this.text = text;
+    return this;
+  }
+
+  public TraceValue[] getValue(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration voltageConfiguration, float vcc)
+  {
+    Ports ports = simulationPorts.get(path, circuitSimulation);
+    int size = ports.size();
+    TraceValue[] traceValues = new TraceValue[size];
+    List<Port> portList = ports.getPorts();
+    for (int i = 0; i < size; i++)
     {
-      Port port = ports.get(i);
+      Port port =  portList.get(i);
       if (port != null && port.getTrace() != null)
       {
-        float voltage = port.getTrace().getVoltage(subcircuitSimulation.getTime());
+        float voltage = port.getTrace().getVoltage(circuitSimulation.getTime());
         traceValues[i] = voltageConfiguration.getValue(voltage, vcc);
       }
       else
@@ -456,16 +459,9 @@ public class PortView
     return portNames;
   }
 
-  public void addPorts(SubcircuitSimulation subcircuitSimulation, List<Port> ports)
+  public void addPorts(ViewPath path, CircuitSimulation circuitSimulation, Ports ports)
   {
-    if (simulationPorts.containsKey(subcircuitSimulation))
-    {
-      throw new SimulatorException("Ports have already been added for simulation [%s].", subcircuitSimulation.getDescription());
-    }
-    else
-    {
-      simulationPorts.put(subcircuitSimulation, ports);
-    }
+    simulationPorts.put(path, circuitSimulation, ports);
   }
 
   public String getDescription()
@@ -480,9 +476,9 @@ public class PortView
     }
   }
 
-  public Set<SubcircuitSimulation> getPortSubcircuitSimulations()
+  public Set<? extends SubcircuitSimulation> getPortSubcircuitSimulations()
   {
-    return new LinkedHashSet<>(simulationPorts.keySet());
+    return simulationPorts.getSimulations();
   }
 
   @Override

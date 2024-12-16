@@ -72,9 +72,9 @@ public class OscilloscopeView
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Oscilloscope createIntegratedCircuit(ViewPath viewPath, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new Oscilloscope(containingSubcircuitSimulation,
                             properties.name,
                             new OscilloscopePins(properties.inputCount),
@@ -87,10 +87,10 @@ public class OscilloscopeView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, path, circuitSimulation);
+    super.paint(graphics, viewport, viewPath, circuitSimulation);
 
     if ((frameView != null))
     {
@@ -101,7 +101,7 @@ public class OscilloscopeView
 
       rectangleView.paint(graphics, viewport);
 
-      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(path,circuitSimulation);
+      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(viewPath, circuitSimulation);
       if (integratedCircuit != null)
       {
         OscilloscopeState state = integratedCircuit.getState();
@@ -174,7 +174,7 @@ public class OscilloscopeView
       }
       paintPorts(graphics,
                  viewport,
-                 path,
+                 viewPath,
                  circuitSimulation);
 
       graphics.setStroke(stroke);

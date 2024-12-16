@@ -60,12 +60,12 @@ public abstract class ComponentData<COMPONENT_VIEW extends ComponentView<?>>
     return componentView;
   }
 
-  protected void loadPorts(ViewPath path,
+  protected void loadPorts(ViewPath viewPath,
                            CircuitSimulation circuitSimulation,
                            CircuitLoaders circuitLoaders,
                            COMPONENT_VIEW componentView)
   {
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
     {
@@ -79,7 +79,7 @@ public abstract class ComponentData<COMPONENT_VIEW extends ComponentView<?>>
       }
 
       int multiPortSize = multiPortData.ports.size();
-      Ports ports = portView.getPorts(path, circuitSimulation);
+      Ports ports = portView.getPorts(viewPath, circuitSimulation);
       List<Port> portList = ports.getPorts();
       int size = portList.size();
       for (int j = 0; j < size; j++)

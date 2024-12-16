@@ -352,15 +352,15 @@ public class W65C816View
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, path, circuitSimulation);
+    super.paint(graphics, viewport, viewPath, circuitSimulation);
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
-    W65C816 w65c816 = simulationIntegratedCircuits.get(path, circuitSimulation);
+    W65C816 w65c816 = simulationIntegratedCircuits.get(viewPath, circuitSimulation);
     if (w65c816 != null)
     {
       opCodeName.setText(w65c816.getOpcodeMnemonicString());
@@ -413,7 +413,7 @@ public class W65C816View
       label.paint(graphics, viewport);
     }
 
-    paintPorts(graphics, viewport, path, circuitSimulation);
+    paintPorts(graphics, viewport, viewPath, circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);
@@ -439,11 +439,11 @@ public class W65C816View
   }
 
   @Override
-  protected W65C816 createIntegratedCircuit(ViewPath path,
+  protected W65C816 createIntegratedCircuit(ViewPath viewPath,
                                             CircuitSimulation circuitSimulation,
                                             FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new W65C816(containingSubcircuitSimulation,
                        properties.name,
                        new W65C816Pins(familyVoltageConfiguration));

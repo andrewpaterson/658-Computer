@@ -13,22 +13,22 @@ public class SubcircuitSimulationPaths
 {
   protected Map<SubcircuitSimulation, ViewPath> subcircuitSimulationPaths;
 
-  public SubcircuitSimulationPaths(Collection<ViewPath> paths)
+  public SubcircuitSimulationPaths(Collection<ViewPath> viewPaths)
   {
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      path.clearCircuitSimulations();
+      viewPath.clearCircuitSimulations();
     }
-    subcircuitSimulationPaths = createSubcircuitSimulationPaths(paths);
+    subcircuitSimulationPaths = createSubcircuitSimulationPaths(viewPaths);
   }
 
-  private Map<SubcircuitSimulation, ViewPath> createSubcircuitSimulationPaths(Collection<ViewPath> paths)
+  private Map<SubcircuitSimulation, ViewPath> createSubcircuitSimulationPaths(Collection<ViewPath> viewPaths)
   {
     Map<SubcircuitSimulation, ViewPath> subcircuitSimulationPaths = new LinkedHashMap<>();
 
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      List<CircuitInstanceView> circuitInstanceViews = path.getPath();
+      List<CircuitInstanceView> circuitInstanceViews = viewPath.getPath();
 
       SubcircuitSimulation neededParentSimulation = null;
       for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
@@ -55,7 +55,7 @@ public class SubcircuitSimulationPaths
         }
         else
         {
-          SubcircuitSimulation subcircuitSimulation = circuitInstanceView.getSubcircuitSimulationForParent(neededParentSimulation);
+          SubcircuitSimulation subcircuitSimulation = circuitInstanceView.getSubcircuitInstanceSimulationForParent(neededParentSimulation);
           if (subcircuitSimulation != null)
           {
             if (subcircuitSimulation.isInstance())
@@ -77,8 +77,8 @@ public class SubcircuitSimulationPaths
 
       if (neededParentSimulation != null)
       {
-        subcircuitSimulationPaths.put(neededParentSimulation, path);
-        path.addSubcircuitSimulation(neededParentSimulation);
+        subcircuitSimulationPaths.put(neededParentSimulation, viewPath);
+        viewPath.addSubcircuitSimulation(neededParentSimulation);
       }
     }
 

@@ -212,7 +212,7 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     if (!finalised)
@@ -297,13 +297,13 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disconnectViewAndDestroyComponents();
 
-  public abstract void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation);
+  public abstract void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation);
 
   public abstract void destroyAllComponents();
 
   public abstract void simulationStarted(CircuitSimulation circuitSimulation);
 
-  public abstract void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation);
+  public abstract void simulationStarted(ViewPath viewPath, CircuitSimulation circuitSimulation);
 
   public abstract List<ConnectionView> getOrCreateConnectionViews();
 

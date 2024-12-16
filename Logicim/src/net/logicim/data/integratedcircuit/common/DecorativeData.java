@@ -29,7 +29,9 @@ public abstract class DecorativeData<T extends DecorativeView<?>>
           selected);
   }
 
-  public void createAndConnectComponentDuringLoad(ViewPath path, CircuitSimulation circuitSimulation, CircuitLoaders circuitLoaders,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
+                                                  CircuitSimulation circuitSimulation,
+                                                  CircuitLoaders circuitLoaders,
                                                   T componentView)
   {
   }

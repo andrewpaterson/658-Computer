@@ -8,16 +8,16 @@ import java.util.Map;
 
 public class ViewPathCircuitSimulationLoader
 {
-  Map<Long, Map<Long, ViewPathCircuitSimulation>> viewPathMap;
+  public Map<Long, Map<Long, ViewPathCircuitSimulation>> viewPathCircuitSimulationMap;
 
   public ViewPathCircuitSimulationLoader()
   {
-    viewPathMap = new LinkedHashMap<>();
+    viewPathCircuitSimulationMap = new LinkedHashMap<>();
   }
 
   public ViewPathCircuitSimulation getViewPathCircuitSimulation(long viewPathId, long circuitSimulationId)
   {
-    Map<Long, ViewPathCircuitSimulation> circuitSimulationMap = viewPathMap.get(viewPathId);
+    Map<Long, ViewPathCircuitSimulation> circuitSimulationMap = viewPathCircuitSimulationMap.get(viewPathId);
     if (circuitSimulationMap != null)
     {
       return circuitSimulationMap.get(circuitSimulationId);
@@ -30,11 +30,11 @@ public class ViewPathCircuitSimulationLoader
     long viewPathId = viewPathCircuitSimulation.getViewPath().getId();
     long circuitSimulationId = viewPathCircuitSimulation.getCircuitSimulation().getId();
 
-    Map<Long, ViewPathCircuitSimulation> circuitSimulationMap = viewPathMap.get(viewPathId);
+    Map<Long, ViewPathCircuitSimulation> circuitSimulationMap = viewPathCircuitSimulationMap.get(viewPathId);
     if (circuitSimulationMap == null)
     {
       circuitSimulationMap = new LinkedHashMap<>();
-      viewPathMap.put(viewPathId, circuitSimulationMap);
+      viewPathCircuitSimulationMap.put(viewPathId, circuitSimulationMap);
     }
 
     ViewPathCircuitSimulation existingViewPathCircuitSimulation = circuitSimulationMap.get(circuitSimulationId);
@@ -46,7 +46,7 @@ public class ViewPathCircuitSimulationLoader
     {
       if (!existingViewPathCircuitSimulation.equals(viewPathCircuitSimulation))
       {
-        throw new SimulatorException("A View path circuit simulation already exists.");
+        throw new SimulatorException("A View Path Circuit Simulation already exists.");
       }
     }
   }

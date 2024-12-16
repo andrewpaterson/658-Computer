@@ -43,19 +43,19 @@ public class TunnelData
     this.doubleSided = doubleSided;
   }
 
-  public void createAndConnectComponentDuringLoad(ViewPath path,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
                                                   CircuitSimulation circuitSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   TunnelView tunnelView)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     long[] traces = simulationTraces.get(containingSubcircuitSimulation.getId());
     if (traces == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", containingSubcircuitSimulation.getDescription());
     }
 
-    tunnelView.wireConnectDuringLoad(path,
+    tunnelView.wireConnectDuringLoad(viewPath,
                                      circuitSimulation,
                                      circuitLoaders.getTraceLoader(),
                                      traces);

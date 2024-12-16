@@ -42,7 +42,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation)
+  public void simulationStarted(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
   }
 
@@ -70,7 +70,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
   }
 

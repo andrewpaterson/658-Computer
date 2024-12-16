@@ -4,8 +4,9 @@ import net.common.SimulatorException;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstanceSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitLoaders;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
@@ -70,19 +71,26 @@ public class SubcircuitInstanceData
   }
 
   @Override
-  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation, CircuitLoaders circuitLoaders, SubcircuitInstanceView componentView)
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
+                                                  CircuitSimulation circuitSimulation,
+                                                  CircuitLoaders circuitLoaders,
+                                                  SubcircuitInstanceView componentView)
   {
     throw new SimulatorException("SubcircuitInstanceData.createAndConnectComponentDuringLoad() is not implemented.  Call createAndConnectComponent2() instead.");
   }
 
-  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
+                                                  CircuitSimulation circuitSimulation,
                                                   SubcircuitInstanceSimulation subcircuitInstanceSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   SubcircuitInstanceView componentView)
   {
-    componentView.createSubcircuitInstance(containingSubcircuitSimulation, subcircuitInstanceSimulation);
+    componentView.createSubcircuitInstance(viewPath, circuitSimulation, subcircuitInstanceSimulation);
 
-    loadPorts(containingSubcircuitSimulation, circuitLoaders, componentView);
+    loadPorts(viewPath,
+              circuitSimulation,
+              circuitLoaders,
+              componentView);
   }
 
   @Override
@@ -91,7 +99,7 @@ public class SubcircuitInstanceData
     //Might want to optimise this a bit.
     for (SubcircuitInstanceSimulationSimulationData subcircuitInstanceSimulation : subcircuitInstanceSimulations)
     {
-      if (subcircuitInstanceSimulation.containingSimulation == id)
+      if (subcircuitInstanceSimulation.containingSubcircuitSimulation == id)
       {
         return true;
       }

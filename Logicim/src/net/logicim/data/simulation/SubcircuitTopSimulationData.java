@@ -7,13 +7,15 @@ public class SubcircuitTopSimulationData
   {
   }
 
-  public SubcircuitTopSimulationData(long subcircuitSimulationId,
+  public SubcircuitTopSimulationData(long viewPath,
                                      long subcircuitEditorId,
-                                     long circuitSimulationId)
+                                     long circuitSimulationId,
+                                     long subcircuitSimulation)
   {
-    super(subcircuitSimulationId,
+    super(viewPath,
           subcircuitEditorId,
-          circuitSimulationId);
+          circuitSimulationId,
+          subcircuitSimulation);
   }
 }
 

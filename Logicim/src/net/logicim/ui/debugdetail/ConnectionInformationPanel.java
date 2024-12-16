@@ -1,9 +1,13 @@
 package net.logicim.ui.debugdetail;
 
 import net.common.util.StringUtil;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.Ports;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.Traces;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.HoverConnectionView;
 import net.logicim.ui.common.Viewport;
@@ -15,6 +19,7 @@ import net.logicim.ui.common.wire.TunnelView;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Set;
 
 public class ConnectionInformationPanel
     extends InformationPanel
@@ -32,7 +37,7 @@ public class ConnectionInformationPanel
   }
 
   @Override
-  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y)
+  protected void paintDetail(ViewPath path, CircuitSimulation circuitSimulation, int fontHeight, int x, int y)
   {
     int ySpacing = fontHeight / 2;
 
@@ -46,7 +51,7 @@ public class ConnectionInformationPanel
     {
       String componentString = connectedView.getType() +
                                getComponentNameString(connectedView) +
-                               getComponentDetailString(subcircuitSimulation, connectedView);
+                               getComponentDetailString(path, circuitSimulation, connectedView);
 
       y = drawMultilineString(fontHeight,
                               x,
@@ -70,7 +75,8 @@ public class ConnectionInformationPanel
         PortView portView = componentView.getPortView(connectionView);
         if (portView != null)
         {
-          String simulationsString = componentView.toSimulationsDebugString(portView.getPorts().keySet());
+          Set<? extends SubcircuitSimulation> subcircuitSimulations = portView.getPortSubcircuitSimulations();
+          String simulationsString = componentView.toSimulationsDebugString(subcircuitSimulations);
           y = drawMultilineString(fontHeight,
                                   x,
                                   y,
@@ -80,24 +86,24 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String getComponentDetailString(SubcircuitSimulation subcircuitSimulation, View connectedComponent)
+  private String getComponentDetailString(ViewPath path, CircuitSimulation circuitSimulation, View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
-      return toTraceDetailString(subcircuitSimulation, (TraceView) connectedComponent);
+      return toTraceDetailString(path, circuitSimulation, (TraceView) connectedComponent);
     }
     else if (connectedComponent instanceof ComponentView)
     {
-      return toComponentDetailString(subcircuitSimulation, (ComponentView<?>) connectedComponent);
+      return toComponentDetailString(path, circuitSimulation, (ComponentView<?>) connectedComponent);
     }
     else if (connectedComponent instanceof TunnelView)
     {
-      return toTunnelDetailString(subcircuitSimulation, (TunnelView) connectedComponent);
+      return toTunnelDetailString(path, circuitSimulation, (TunnelView) connectedComponent);
     }
     return "";
   }
 
-  private String toComponentDetailString(SubcircuitSimulation subcircuitSimulation, ComponentView<?> componentView)
+  private String toComponentDetailString(ViewPath path, CircuitSimulation circuitSimulation, ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -109,10 +115,10 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    List<? extends Port> ports = portView.getPorts(subcircuitSimulation);
+    Ports ports = portView.getPorts(path, circuitSimulation);
     if (ports != null)
     {
-      for (Port port : ports)
+      for (Port port : ports.getPorts())
       {
         String portName = port.getName();
         if (StringUtil.isEmptyOrNull(portName))
@@ -142,11 +148,11 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(SubcircuitSimulation subcircuitSimulation, TraceView traceView)
+  private String toTraceDetailString(ViewPath path, CircuitSimulation circuitSimulation, TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = traceView.getTraces(subcircuitSimulation);
+    Traces traces = traceView.getTraces(path, circuitSimulation);
     if (traces != null)
     {
       boolean multiline = traces.size() > 8;
@@ -157,7 +163,7 @@ public class ConnectionInformationPanel
 
       boolean first = true;
       int count = 0;
-      for (Trace trace : traces)
+      for (Trace trace : traces.getTraces())
       {
         first = appendComma(builder, first);
         builder.append(trace.getId());
@@ -173,11 +179,11 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(SubcircuitSimulation subcircuitSimulation, TunnelView tunnelView)
+  private String toTunnelDetailString(ViewPath path, CircuitSimulation circuitSimulation, TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    List<Trace> traces = tunnelView.getTraces(subcircuitSimulation);
+    Traces traces = tunnelView.getTraces(path, circuitSimulation);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {
@@ -186,7 +192,7 @@ public class ConnectionInformationPanel
 
     boolean first = true;
     int count = 0;
-    for (Trace trace : traces)
+    for (Trace trace : traces.getTraces())
     {
       first = appendComma(builder, first);
       builder.append(trace.getId());

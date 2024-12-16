@@ -7,6 +7,7 @@ import net.logicim.domain.common.port.PortType;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,11 @@ public class Pin
   protected PowerInPort vcc;
   protected PowerInPort vss;
 
-  public Pin(Circuit circuit, String name, int portCount)
+  public Pin(SubcircuitSimulation containingSubcircuitSimulation,
+             String name,
+             int portCount)
   {
-    super(circuit, name);
+    super(containingSubcircuitSimulation, name);
     tracePorts = new ArrayList<>();
     for (int i = 0; i < portCount; i++)
     {

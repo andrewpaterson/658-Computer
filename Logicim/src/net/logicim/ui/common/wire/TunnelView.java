@@ -162,9 +162,9 @@ public class TunnelView
 
   @Override
   public void paint(Graphics2D graphics,
-                    Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation)
+                    Viewport viewport, ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, path, circuitSimulation);
+    super.paint(graphics, viewport, viewPath, circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -220,14 +220,14 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation)
+  public void simulationStarted(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
   }
 
   @Override
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    wireView.destroyComponent(path, circuitSimulation);
+    wireView.destroyComponent(viewPath, circuitSimulation);
   }
 
   @Override

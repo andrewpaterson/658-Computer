@@ -1,6 +1,7 @@
 package net.logicim.ui.debugdetail;
 
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 
@@ -11,14 +12,22 @@ public class ComponentInformationPanel
 {
   private StaticView<?> componentView;
 
-  public ComponentInformationPanel(StaticView<?> componentView, Graphics2D graphics, Viewport viewport, int width, int height)
+  public ComponentInformationPanel(StaticView<?> componentView,
+                                   Graphics2D graphics,
+                                   Viewport viewport,
+                                   int width,
+                                   int height)
   {
     super(graphics, viewport, width, height);
     this.componentView = componentView;
   }
 
   @Override
-  protected void paintDetail(SubcircuitSimulation subcircuitSimulation, int fontHeight, int x, int y)
+  protected void paintDetail(ViewPath path,
+                             CircuitSimulation circuitSimulation,
+                             int fontHeight,
+                             int x,
+                             int y)
   {
 
     y = drawMultilineString(fontHeight, x, y, " < " + componentView.getClass().getSimpleName() + " >");

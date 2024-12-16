@@ -34,9 +34,9 @@ public class NorGateView
   }
 
   @Override
-  protected NorGate createIntegratedCircuit(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected NorGate createIntegratedCircuit(ViewPath viewPath, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new NorGate(containingSubcircuitSimulation,
                        properties.name,
                        new OrGatePins(properties.inputWidth * properties.inputCount,

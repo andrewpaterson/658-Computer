@@ -7,7 +7,6 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.path.ViewPath;
-import net.logicim.ui.circuit.SubcircuitSimulationPaths;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.wire.WireView;
 
@@ -17,15 +16,11 @@ public class WireTraceConverter
 {
   protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
   protected WireList wireList;
-  protected ViewPath startingViewPath;
   protected CircuitSimulation circuitSimulation;
 
-  public WireTraceConverter(WireList wireList,
-                            SubcircuitSimulation startingSubcircuitSimulation,
-                            SubcircuitSimulationPaths subcircuitSimulationPaths)
+  public WireTraceConverter(WireList wireList, SubcircuitSimulation startingSubcircuitSimulation)
   {
     this.wireList = wireList;
-    this.startingViewPath = subcircuitSimulationPaths.getViewPath(startingSubcircuitSimulation);
     this.circuitSimulation = startingSubcircuitSimulation.getCircuitSimulation();
 
     this.localMultiSimulationConnectionNetMap = new HashMap<>();
@@ -50,6 +45,7 @@ public class WireTraceConverter
       Set<ComponentViewPortNames> localWires = fullWire.getLocalWires(circuitSimulation);
       for (ComponentViewPortNames localWire : localWires)
       {
+
         List<ComponentViewPortName> connectedPortIndices = localWire.getConnectedPortIndices();
         for (ComponentViewPortName connectedPortIndex : connectedPortIndices)
         {
@@ -59,7 +55,7 @@ public class WireTraceConverter
 
           SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
 
-          Port port = componentView.getPort(subcircuitSimulation, portName);
+          Port port = componentView.getPort(portName, path, circuitSimulation);
           if (port == null)
           {
             throw new SimulatorException("Could not find Port [%s] on %s [%s] for simulation [%s].",
@@ -90,14 +86,12 @@ public class WireTraceConverter
       for (Map.Entry<ViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
       {
         List<WireViewPathConnection> wireViewPathConnections = wireEntry.getValue();
-        ViewPath path = wireEntry.getKey();
-        SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
         for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
         {
           WireView wireView = wireViewPathConnection.getWireView();
           if (!processedWireViews.contains(wireView))
           {
-            wireView.connectTraces(subcircuitSimulation, traces);
+            wireView.connectTraces(wireViewPathConnection.getPath(), circuitSimulation, traces);
             processedWireViews.add(wireView);
           }
         }
@@ -118,8 +112,7 @@ public class WireTraceConverter
         {
           WireView wireView = wireViewPathConnection.getWireView();
 
-          SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
-          wireView.destroyComponent(subcircuitSimulation);
+          wireView.destroyComponent(path, circuitSimulation);
         }
       }
     }
@@ -133,8 +126,7 @@ public class WireTraceConverter
         for (WireViewPathConnection connectedWire : wireViewPathConnections)
         {
           WireView wireView = connectedWire.wireView;
-          SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(path);
-          wireView.destroyComponent(subcircuitSimulation);
+          wireView.destroyComponent(path, circuitSimulation);
         }
       }
     }

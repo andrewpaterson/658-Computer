@@ -35,11 +35,11 @@ public class InverterView
   }
 
   @Override
-  protected Inverter createIntegratedCircuit(ViewPath path,
+  protected Inverter createIntegratedCircuit(ViewPath viewPath,
                                              CircuitSimulation circuitSimulation,
                                              FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new Inverter(containingSubcircuitSimulation,
                         properties.name,
                         new BufferPins(properties.inputWidth * properties.inputCount,

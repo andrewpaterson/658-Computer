@@ -23,11 +23,12 @@ public class SubcircuitTopSimulation
   }
 
   @Override
-  public SubcircuitTopSimulationData save(long subcircuitEditorId)
+  public SubcircuitTopSimulationData save(long subcircuitEditorId, long viewPathId)
   {
-    return new SubcircuitTopSimulationData(getId(),
+    return new SubcircuitTopSimulationData(viewPathId,
                                            subcircuitEditorId,
-                                           circuitSimulation.getId());
+                                           circuitSimulation.getId(),
+                                           getId());
   }
 
   @Override

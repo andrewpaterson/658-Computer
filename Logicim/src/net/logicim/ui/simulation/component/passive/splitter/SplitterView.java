@@ -316,12 +316,12 @@ public class SplitterView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
 
     Color color = graphics.getColor();
@@ -336,7 +336,7 @@ public class SplitterView
 
     paintPorts(graphics,
                viewport,
-               path,
+               viewPath,
                circuitSimulation);
 
     for (TextView textView : textViews)

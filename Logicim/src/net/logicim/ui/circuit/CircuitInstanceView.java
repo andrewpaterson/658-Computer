@@ -8,6 +8,7 @@ import net.logicim.ui.circuit.order.CircuitInstanceViewParent;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -17,11 +18,11 @@ public interface CircuitInstanceView
 
   String getDescription();
 
-  List<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations(CircuitSimulation circuitSimulation);
+  Collection<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations(CircuitSimulation circuitSimulation);
 
   List<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations();
 
-  SubcircuitSimulation getSubcircuitSimulationForParent(SubcircuitSimulation parentSubcircuitSimulation);
+  SubcircuitSimulation getSubcircuitInstanceSimulationForParent(SubcircuitSimulation parentSubcircuitSimulation);
 
   default List<CircuitInstanceView> getOrderedCircuitInstanceViews()
   {

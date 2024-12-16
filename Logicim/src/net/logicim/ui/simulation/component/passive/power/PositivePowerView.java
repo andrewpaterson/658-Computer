@@ -108,12 +108,12 @@ public class PositivePowerView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
 
     Color color = graphics.getColor();
@@ -126,7 +126,7 @@ public class PositivePowerView
 
     paintPorts(graphics,
                viewport,
-               path,
+               viewPath,
                circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);

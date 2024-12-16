@@ -89,11 +89,11 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
   }
 
-  protected void loadEvents(ViewPath path,
+  protected void loadEvents(ViewPath viewPath,
                             CircuitSimulation circuitSimulation,
                             ICV integratedCircuitView)
   {
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(subcircuitSimulation.getId());
     if (integratedCircuitEventData == null)
     {
@@ -101,7 +101,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
     for (IntegratedCircuitEventData<?> eventData : integratedCircuitEventData)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(path, circuitSimulation);
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(viewPath, circuitSimulation);
       eventData.create(integratedCircuit, subcircuitSimulation.getTimeline());
     }
   }
@@ -124,25 +124,25 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  public void createAndConnectComponentDuringLoad(ViewPath path,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
                                                   CircuitSimulation circuitSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   ICV integratedCircuitView)
   {
-    integratedCircuitView.createComponent(path, circuitSimulation);
+    integratedCircuitView.createComponent(viewPath, circuitSimulation);
 
-    loadState(path, circuitSimulation, integratedCircuitView);
-    loadEvents(path, circuitSimulation, integratedCircuitView);
-    loadPorts(path, circuitSimulation, circuitLoaders, integratedCircuitView);
+    loadState(viewPath, circuitSimulation, integratedCircuitView);
+    loadEvents(viewPath, circuitSimulation, integratedCircuitView);
+    loadPorts(viewPath, circuitSimulation, circuitLoaders, integratedCircuitView);
   }
 
-  private void loadState(ViewPath path,
+  private void loadState(ViewPath viewPath,
                          CircuitSimulation circuitSimulation,
                          ICV integratedCircuitView)
   {
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     STATE state = getState(subcircuitSimulation.getId());
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(path, circuitSimulation);
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(viewPath, circuitSimulation);
     integratedCircuit.setState(state);
   }
 

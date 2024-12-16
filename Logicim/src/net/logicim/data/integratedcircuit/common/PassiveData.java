@@ -40,14 +40,14 @@ public abstract class PassiveData<PASSIVE extends PassiveView<?, ?>>
   }
 
   @Override
-  public void createAndConnectComponentDuringLoad(ViewPath path,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
                                                   CircuitSimulation circuitSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   PASSIVE passive)
   {
-    passive.createComponent(path, circuitSimulation);
+    passive.createComponent(viewPath, circuitSimulation);
 
-    loadPorts(path,
+    loadPorts(viewPath,
               circuitSimulation,
               circuitLoaders,
               passive);

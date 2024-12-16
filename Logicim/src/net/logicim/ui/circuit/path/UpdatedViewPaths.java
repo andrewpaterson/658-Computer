@@ -14,20 +14,19 @@ public class UpdatedViewPaths
 
   public UpdatedViewPaths(List<ViewPath> newPaths, List<ViewPath> removedPaths)
   {
-
     this.newPaths = newPaths;
     this.removedPaths = removedPaths;
 
     this.subcircuitViews = new LinkedHashSet<>();
-    for (ViewPath path : newPaths)
+    for (ViewPath viewPath : newPaths)
     {
-      SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
+      SubcircuitView subcircuitView = viewPath.getLast().getInstanceSubcircuitView();
       subcircuitViews.add(subcircuitView);
     }
 
-    for (ViewPath path : removedPaths)
+    for (ViewPath viewPath : removedPaths)
     {
-      SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
+      SubcircuitView subcircuitView = viewPath.getLast().getInstanceSubcircuitView();
       subcircuitViews.add(subcircuitView);
     }
   }

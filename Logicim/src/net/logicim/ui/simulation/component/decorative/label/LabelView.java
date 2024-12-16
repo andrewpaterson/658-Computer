@@ -81,12 +81,12 @@ public class LabelView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
 
     Color color = graphics.getColor();

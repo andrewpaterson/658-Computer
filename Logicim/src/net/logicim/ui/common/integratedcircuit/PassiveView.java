@@ -36,33 +36,33 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE createComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public PASSIVE createComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
-    validateCanCreateComponent(path, circuitSimulation);
+    validateCanCreateComponent(viewPath, circuitSimulation);
 
-    PASSIVE passive = createPassive(path, circuitSimulation);
-    simulationPassives.put(path, circuitSimulation, passive);
+    PASSIVE passive = createPassive(viewPath, circuitSimulation);
+    simulationPassives.put(viewPath, circuitSimulation, passive);
 
-    postCreateComponent(path, circuitSimulation, passive);
+    postCreateComponent(viewPath, circuitSimulation, passive);
     return passive;
   }
 
   @Override
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    PASSIVE removedPassive = simulationPassives.get(path, circuitSimulation);
+    PASSIVE removedPassive = simulationPassives.get(viewPath, circuitSimulation);
     if (removedPassive == null)
     {
       throw new SimulatorException("[%s] could not find a component for Path [%s] for Simulation [%s].",
                                    getDescription(),
-                                   path.getDescription(),
+                                   viewPath.getDescription(),
                                    circuitSimulation.getDescription());
     }
-    destroyPortViewComponents(path, circuitSimulation);
+    destroyPortViewComponents(viewPath, circuitSimulation);
     Circuit circuit = circuitSimulation.getCircuit();
     circuit.remove(removedPassive);
-    simulationPassives.remove(path, circuitSimulation);
+    simulationPassives.remove(viewPath, circuitSimulation);
   }
 
   @Override
@@ -113,9 +113,9 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
-  public PASSIVE getComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public PASSIVE getComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    return simulationPassives.get(path, circuitSimulation);
+    return simulationPassives.get(viewPath, circuitSimulation);
   }
 
   protected Set<Long> saveSimulationPassives()

@@ -3,7 +3,9 @@ package net.logicim.data.wire;
 import net.common.SimulatorException;
 import net.common.type.Int2D;
 import net.logicim.data.common.ViewData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
@@ -65,17 +67,22 @@ public class TraceData
     return traceView;
   }
 
-  public void createAndConnectComponentDuringLoad(SubcircuitSimulation subcircuitSimulation,
+  public void createAndConnectComponentDuringLoad(ViewPath viewPath,
+                                                  CircuitSimulation circuitSimulation,
                                                   TraceLoader traceLoader,
                                                   TraceView traceView)
   {
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     long[] traces = simulationTraces.get(subcircuitSimulation.getId());
     if (traces == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", subcircuitSimulation.getDescription());
     }
 
-    traceView.wireConnectDuringLoad(subcircuitSimulation, traceLoader, traces);
+    traceView.wireConnectDuringLoad(viewPath,
+                                    circuitSimulation,
+                                    traceLoader,
+                                    traces);
   }
 }
 

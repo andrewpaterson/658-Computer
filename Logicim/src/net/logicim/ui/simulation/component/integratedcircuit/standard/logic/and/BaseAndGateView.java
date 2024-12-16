@@ -60,12 +60,12 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
     if ((arcViewFront != null) && (rectangleViewBack != null))
     {
@@ -79,7 +79,7 @@ public abstract class BaseAndGateView<IC extends IntegratedCircuit<?, ?>>
       lineView3.paint(graphics, viewport);
       paintPorts(graphics,
                  viewport,
-                 path,
+                 viewPath,
                  circuitSimulation);
 
       graphics.setStroke(stroke);

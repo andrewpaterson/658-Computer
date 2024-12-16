@@ -26,13 +26,20 @@ public class ViewPath
 
   public ViewPath(List<CircuitInstanceView> path)
   {
-    this(nextId++, path);
+    this(nextId++, path, null);
   }
 
   public ViewPath(long id, List<CircuitInstanceView> path)
   {
+    this(id, path, new LinkedHashMap<>());
+  }
+
+  protected ViewPath(long id,
+                     List<CircuitInstanceView> path,
+                     Map<CircuitSimulation, SubcircuitSimulation> circuitSimulations)
+  {
     this.path = new ArrayList<>(path);
-    this.circuitSimulations = null;
+    this.circuitSimulations = circuitSimulations;
     this.id = id;
     if (id >= nextId)
     {
@@ -92,6 +99,11 @@ public class ViewPath
   @Override
   public String toString()
   {
+    return toPathString(path);
+  }
+
+  public static String toPathString(List<CircuitInstanceView> path)
+  {
     StringBuilder builder = new StringBuilder();
     boolean first = true;
     for (CircuitInstanceView circuitInstanceView : path)
@@ -124,11 +136,11 @@ public class ViewPath
     return previous;
   }
 
-  public void setPrevious(ViewPath path)
+  public void setPrevious(ViewPath viewPath)
   {
-    if ((previous == null) || (previous == path))
+    if ((previous == null) || (previous == viewPath))
     {
-      previous = path;
+      previous = viewPath;
     }
     else
     {
@@ -236,6 +248,10 @@ public class ViewPath
 
   public void setNext(ViewPath next)
   {
+    if ((this.next != null) && (this.next != next))
+    {
+      throw new SimulatorException("You need to think about this.  Remove if not hit.");
+    }
     this.next = next;
   }
 
@@ -244,9 +260,19 @@ public class ViewPath
     return new ArrayList<>(circuitSimulations.values());
   }
 
+  public List<CircuitSimulation> getCircuitSimulation()
+  {
+    return new ArrayList<>(circuitSimulations.keySet());
+  }
+
   public long getId()
   {
     return id;
+  }
+
+  public void clearNext()
+  {
+    this.next = null;
   }
 }
 

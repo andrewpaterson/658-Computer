@@ -113,7 +113,6 @@ public class SubcircuitSimulations
     if (subcircuitTopSimulations.size() < 1)
     {
       throw new SimulatorException("Expected at least one top subcircuit simulation.");
-
     }
     for (SubcircuitTopSimulation subcircuitTopSimulation : subcircuitTopSimulations)
     {
@@ -127,11 +126,13 @@ public class SubcircuitSimulations
     int depth = 0;
     for (CircuitInstanceView circuitInstanceView : orderedTopDownCircuitInstanceViews)
     {
-      List<? extends SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations(circuitSimulation);
+      Collection<? extends SubcircuitSimulation> innerSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations(circuitSimulation);
 
       if (innerSubcircuitSimulations.isEmpty() && depth > 0)
       {
-        throw new SimulatorException("Expected at least one instance simulation for circuit simulation[%s] in circuit instance view [%s].", circuitSimulation.getDescription(), circuitInstanceView.getDescription());
+        throw new SimulatorException("Expected at least one instance simulation for Circuit Simulation [%s] in Circuit Instance View [%s].",
+                                     circuitSimulation.getDescription(),
+                                     circuitInstanceView.getDescription());
       }
       depth++;
     }

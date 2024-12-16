@@ -217,17 +217,20 @@ public class ConnectionViewCache
         throw new SimulatorException("Cannot add new path [%s] into path connection cache.  It already exists.", path);
       }
 
-      LinkedHashMap<ConnectionView, PathConnectionView> pathConnectionViewMap = new LinkedHashMap<>();
-      pathConnectionViews.put(path, pathConnectionViewMap);
-
-      for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
+      if (connectionViews.size() > 0)
       {
-        Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
-        for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
+        LinkedHashMap<ConnectionView, PathConnectionView> pathConnectionViewMap = new LinkedHashMap<>();
+        pathConnectionViews.put(path, pathConnectionViewMap);
+
+        for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
         {
-          ConnectionView connectionView = yEntry.getValue();
-          PathConnectionView pathConnectionView = new PathConnectionView(path, connectionView);
-          pathConnectionViewMap.put(connectionView, pathConnectionView);
+          Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
+          for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
+          {
+            ConnectionView connectionView = yEntry.getValue();
+            PathConnectionView pathConnectionView = new PathConnectionView(path, connectionView);
+            pathConnectionViewMap.put(connectionView, pathConnectionView);
+          }
         }
       }
     }
@@ -263,57 +266,66 @@ public class ConnectionViewCache
 
   public void validatePathConnections(List<ViewPath> paths)
   {
-    for (ViewPath path : paths)
+    if (connectionViews.size() > 0)
     {
-      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
-      if (connectionViewMap == null)
+      for (ViewPath path : paths)
       {
-        throw new SimulatorException("View Connection Cache does not contain Subcircuit View Path [%s].", path);
-      }
-    }
-
-    Set<ViewPath> pathsSet = new LinkedHashSet<>(paths);
-    for (ViewPath path : pathConnectionViews.keySet())
-    {
-      if (!pathsSet.contains(path))
-      {
-        throw new SimulatorException("Subcircuit View does not contain View Connection Cache Path [%s].", path);
-      }
-    }
-
-    for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
-    {
-      Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
-      for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
-      {
-        ConnectionView connectionView = yEntry.getValue();
-        for (ViewPath path : paths)
+        Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+        if (connectionViewMap == null)
         {
-          Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
-          PathConnectionView pathConnectionView = pathConnectionViewMap.get(connectionView);
-          if (pathConnectionView == null)
+          throw new SimulatorException("View Connection Cache does not contain Subcircuit View Path [%s].", path);
+        }
+      }
+
+      Set<ViewPath> pathsSet = new LinkedHashSet<>(paths);
+      for (ViewPath path : pathConnectionViews.keySet())
+      {
+        if (!pathsSet.contains(path))
+        {
+          throw new SimulatorException("Subcircuit View does not contain View Connection Cache Path [%s].", path);
+        }
+      }
+
+      for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
+      {
+        Map<Integer, ConnectionView> connectionViewMap = xEntry.getValue();
+        for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
+        {
+          ConnectionView connectionView = yEntry.getValue();
+          for (ViewPath path : paths)
           {
-            throw new SimulatorException("Path [%s] connection view cache does contain Connection View [%s].", path.toString(), connectionView.toString());
+            Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+            PathConnectionView pathConnectionView = pathConnectionViewMap.get(connectionView);
+            if (pathConnectionView == null)
+            {
+              throw new SimulatorException("Path [%s] connection view cache does contain Connection View [%s].", path.toString(), connectionView.toString());
+            }
+          }
+        }
+      }
+      for (Map.Entry<ViewPath, Map<ConnectionView, PathConnectionView>> entry : pathConnectionViews.entrySet())
+      {
+        Map<ConnectionView, PathConnectionView> pathConnectionViewMap = entry.getValue();
+        for (ConnectionView pathConnectionView : pathConnectionViewMap.keySet())
+        {
+          Int2D gridPosition = pathConnectionView.getGridPosition();
+          ConnectionView cachedConnectionView = getConnectionView(gridPosition.getIntX(), gridPosition.getIntY());
+          if (cachedConnectionView == null)
+          {
+            throw new SimulatorException("Connection view cache does not contain Path cache connection view [%s].", pathConnectionView.toString());
+          }
+          else if (pathConnectionView != cachedConnectionView)
+          {
+            throw new SimulatorException("Connection view cache connection view [%s] does not contain Path cache connection view [%s].", cachedConnectionView.toString(), pathConnectionView.toString());
           }
         }
       }
     }
-
-    for (Map.Entry<ViewPath, Map<ConnectionView, PathConnectionView>> entry : pathConnectionViews.entrySet())
+    else
     {
-      Map<ConnectionView, PathConnectionView> pathConnectionViewMap = entry.getValue();
-      for (ConnectionView pathConnectionView : pathConnectionViewMap.keySet())
+      if (!pathConnectionViews.isEmpty())
       {
-        Int2D gridPosition = pathConnectionView.getGridPosition();
-        ConnectionView cachedConnectionView = getConnectionView(gridPosition.getIntX(), gridPosition.getIntY());
-        if (cachedConnectionView == null)
-        {
-          throw new SimulatorException("Connection view cache does not contain Path cache connection view [%s].", pathConnectionView.toString());
-        }
-        else if (pathConnectionView != cachedConnectionView)
-        {
-          throw new SimulatorException("Connection view cache connection view [%s] does not contain Path cache connection view [%s].", cachedConnectionView.toString(), pathConnectionView.toString());
-        }
+        throw new SimulatorException("Connection view path cache should be empty when there are [0] connections.");
       }
     }
   }

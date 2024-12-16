@@ -15,6 +15,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
@@ -424,9 +425,10 @@ public class SubcircuitEditor
     return new DataViewMap(traceViews, staticViews, subcircuitInstanceViews);
   }
 
-  public void loadTraces(DataViewMap dataViewMap, SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders)
+  public void loadTraces(DataViewMap dataViewMap, ViewPath path, CircuitSimulation circuitSimulation, CircuitLoaders circuitLoaders)
   {
     Map<TraceData, TraceView> traceViews = dataViewMap.traceViews;
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     for (Map.Entry<TraceData, TraceView> entry : traceViews.entrySet())
     {
       TraceData data = entry.getKey();
@@ -435,15 +437,20 @@ public class SubcircuitEditor
         TraceView traceView = entry.getValue();
         SubcircuitEditorLoadDataHelper.loadViewData(traceView,
                                                     data,
-                                                    subcircuitSimulation,
+                                                    path,
+                                                    circuitSimulation,
                                                     circuitLoaders.getTraceLoader());
       }
     }
   }
 
-  public void loadStatics(DataViewMap dataViewMap, SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders)
+  public void loadStatics(DataViewMap dataViewMap,
+                          ViewPath path,
+                          CircuitSimulation circuitSimulation,
+                          CircuitLoaders circuitLoaders)
   {
     Map<StaticData<?>, StaticView<?>> staticViews = dataViewMap.staticViews;
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     for (Map.Entry<StaticData<?>, StaticView<?>> entry : staticViews.entrySet())
     {
       StaticData<?> data = entry.getKey();
@@ -452,7 +459,8 @@ public class SubcircuitEditor
         StaticView<?> staticView = entry.getValue();
         SubcircuitEditorLoadDataHelper.loadViewData(staticView,
                                                     data,
-                                                    subcircuitSimulation,
+                                                    path,
+                                                    circuitSimulation,
                                                     circuitLoaders);
       }
     }
@@ -516,7 +524,7 @@ public class SubcircuitEditor
   }
 
   @Override
-  public SubcircuitSimulation getSubcircuitSimulationForParent(SubcircuitSimulation parentSubcircuitSimulation)
+  public SubcircuitSimulation getSubcircuitInstanceSimulationForParent(SubcircuitSimulation parentSubcircuitSimulation)
   {
     return null;
   }
@@ -527,7 +535,7 @@ public class SubcircuitEditor
     return subcircuitView.getSimulations().getSubcircuitTopSimulations();
   }
 
-  public List<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations(CircuitSimulation circuitSimulation)
+  public Collection<? extends SubcircuitSimulation> getInstanceSubcircuitSimulations(CircuitSimulation circuitSimulation)
   {
     List<SubcircuitSimulation> result = new ArrayList<>();
     List<SubcircuitTopSimulation> subcircuitTopSimulations = subcircuitView.getSimulations().getSubcircuitTopSimulations();

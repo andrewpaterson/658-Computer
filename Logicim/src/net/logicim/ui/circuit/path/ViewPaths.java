@@ -6,20 +6,22 @@ import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ViewPaths
 {
-  protected List<ViewPath> paths;
+  protected List<ViewPath> viewPaths;
 
   public ViewPaths()
   {
-    this.paths = new ArrayList<>();
+    this.viewPaths = new ArrayList<>();
   }
 
   public ViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
-    paths = new ArrayList<>();
+    viewPaths = new ArrayList<>();
 
     createPaths(subcircuitEditors);
     createPathLinks();
@@ -47,7 +49,7 @@ public class ViewPaths
 
     path.add(circuitInstanceView);
     ViewPath viewPath = new ViewPath(path);
-    paths.add(viewPath);
+    viewPaths.add(viewPath);
 
     if (previousViewPath != null)
     {
@@ -71,7 +73,7 @@ public class ViewPaths
 
   public void createPathLinks()
   {
-    for (ViewPath viewPath : paths)
+    for (ViewPath viewPath : viewPaths)
     {
       ViewPath previous = viewPath.getPrevious();
       if (previous != null)
@@ -84,11 +86,11 @@ public class ViewPaths
   public List<ViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)
   {
     List<ViewPath> result = new ArrayList<>();
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      if (path.endsWithSubcircuitView(subcircuitView))
+      if (viewPath.endsWithSubcircuitView(subcircuitView))
       {
-        result.add(path);
+        result.add(viewPath);
       }
     }
     return result;
@@ -111,7 +113,7 @@ public class ViewPaths
 
   private ViewPath getPath(List<CircuitInstanceView> newPath)
   {
-    for (ViewPath path : paths)
+    for (ViewPath path : viewPaths)
     {
       if (path.equalsPath(newPath))
       {
@@ -119,21 +121,21 @@ public class ViewPaths
       }
     }
 
-    throw new SimulatorException("Cannot find a path matching path");
+    throw new SimulatorException("Cannot find a path matching path [%s].", ViewPath.toPathString(newPath));
   }
 
-  public List<ViewPath> getPaths()
+  public List<ViewPath> getViewPaths()
   {
-    return paths;
+    return viewPaths;
   }
 
   @Override
   public String toString()
   {
     StringBuilder builder = new StringBuilder();
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      builder.append(path.getDescription());
+      builder.append(viewPath.getDescription());
       builder.append("\n");
     }
     return builder.toString();
@@ -141,21 +143,21 @@ public class ViewPaths
 
   public boolean addIfNotPresent(ViewPath newPath)
   {
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      if (path.equals(newPath))
+      if (viewPath.equals(newPath))
       {
         return false;
       }
     }
 
-    paths.add(newPath);
+    viewPaths.add(newPath);
     return true;
   }
 
   public boolean contains(ViewPath newPath)
   {
-    for (ViewPath existingPath : paths)
+    for (ViewPath existingPath : viewPaths)
     {
       if (existingPath.equals(newPath))
       {
@@ -167,23 +169,23 @@ public class ViewPaths
 
   public ViewPath getPath(int index)
   {
-    return paths.get(index);
+    return viewPaths.get(index);
   }
 
   public void removePath(int index)
   {
-    paths.remove(index);
+    viewPaths.remove(index);
   }
 
   public boolean matches(ViewPaths other)
   {
-    if (other.getPaths().size() != paths.size())
+    if (other.getViewPaths().size() != viewPaths.size())
     {
       return false;
     }
 
-    List<ViewPath> otherPaths = new ArrayList<>(other.getPaths());
-    List<ViewPath> thisPaths = new ArrayList<>(paths);
+    List<ViewPath> otherPaths = new ArrayList<>(other.getViewPaths());
+    List<ViewPath> thisPaths = new ArrayList<>(viewPaths);
 
     Collections.sort(otherPaths);
     Collections.sort(thisPaths);

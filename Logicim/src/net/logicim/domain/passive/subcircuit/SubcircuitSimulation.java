@@ -131,6 +131,6 @@ public abstract class SubcircuitSimulation
 
   protected abstract String getType();
 
-  public abstract SubcircuitSimulationData save(long subcircuitEditorId);
+  public abstract SubcircuitSimulationData save(long subcircuitEditorId, long viewPathId);
 }
 

@@ -34,9 +34,9 @@ public class XnorGateView
   }
 
   @Override
-  protected XnorGate createIntegratedCircuit(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected XnorGate createIntegratedCircuit(ViewPath viewPath, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new XnorGate(containingSubcircuitSimulation,
                         properties.name,
                         new XorGatePins(properties.inputWidth * properties.inputCount,

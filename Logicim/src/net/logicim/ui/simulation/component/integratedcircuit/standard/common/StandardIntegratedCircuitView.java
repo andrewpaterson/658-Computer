@@ -76,12 +76,12 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     super.paint(graphics,
                 viewport,
-                path,
+                viewPath,
                 circuitSimulation);
 
     if (vccLine != null)

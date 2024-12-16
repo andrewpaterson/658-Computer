@@ -4,15 +4,16 @@ import net.common.SimulatorException;
 import net.common.type.Int2D;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.PassiveData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Circuit;
 import net.logicim.domain.passive.common.Passive;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathComponentSimulation;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +21,7 @@ import java.util.Set;
 public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends ComponentProperties>
     extends ComponentView<PROPERTIES>
 {
-  protected Map<SubcircuitSimulation, PASSIVE> simulationPassives;
+  protected ViewPathComponentSimulation<PASSIVE> simulationPassives;
 
   public PassiveView(SubcircuitView containingSubcircuitView,
                      Int2D position,
@@ -31,45 +32,53 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
           position,
           rotation,
           properties);
-    this.simulationPassives = new LinkedHashMap<>();
+    this.simulationPassives = new ViewPathComponentSimulation<>();
   }
 
   @Override
-  public PASSIVE createComponent(SubcircuitSimulation subcircuitSimulation)
+  public PASSIVE createComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
     DebugGlobalEnvironment.validateCanCreateComponent();
-    validateCanCreateComponent(subcircuitSimulation);
+    validateCanCreateComponent(path, circuitSimulation);
 
-    PASSIVE passive = createPassive(subcircuitSimulation);
-    simulationPassives.put(subcircuitSimulation, passive);
+    PASSIVE passive = createPassive(path, circuitSimulation);
+    simulationPassives.put(path, circuitSimulation, passive);
 
-    postCreateComponent(subcircuitSimulation, passive);
+    postCreateComponent(path, circuitSimulation, passive);
     return passive;
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    PASSIVE removedPassive = simulationPassives.get(subcircuitSimulation);
+    PASSIVE removedPassive = simulationPassives.get(path, circuitSimulation);
     if (removedPassive == null)
     {
-      throw new SimulatorException("[%s] could not find a component for simulation [%s].", getDescription(), subcircuitSimulation.getDescription());
+      throw new SimulatorException("[%s] could not find a component for Path [%s] for Simulation [%s].",
+                                   getDescription(),
+                                   path.getDescription(),
+                                   circuitSimulation.getDescription());
     }
-    destroyPortViewComponents(subcircuitSimulation);
-    Circuit circuit = subcircuitSimulation.getCircuit();
+    destroyPortViewComponents(path, circuitSimulation);
+    Circuit circuit = circuitSimulation.getCircuit();
     circuit.remove(removedPassive);
-    simulationPassives.remove(subcircuitSimulation);
+    simulationPassives.remove(path, circuitSimulation);
   }
 
   @Override
   public void destroyAllComponents()
   {
-    for (Map.Entry<SubcircuitSimulation, PASSIVE> entry : simulationPassives.entrySet())
+    for (Map.Entry<ViewPath, Map<CircuitSimulation, PASSIVE>> pathEntry : simulationPassives.getEntrySet())
     {
-      SubcircuitSimulation subcircuitSimulation = entry.getKey();
-      PASSIVE removed = entry.getValue();
-      Circuit circuit = subcircuitSimulation.getCircuit();
-      circuit.remove(removed);
+      Map<CircuitSimulation, PASSIVE> simulationMap = pathEntry.getValue();
+      Set<Map.Entry<CircuitSimulation, PASSIVE>> simulationEntry = simulationMap.entrySet();
+      for (Map.Entry<CircuitSimulation, PASSIVE> entry : simulationEntry)
+      {
+        CircuitSimulation circuitSimulation = entry.getKey();
+        PASSIVE passive = entry.getValue();
+        Circuit circuit = circuitSimulation.getCircuit();
+        circuit.remove(passive);
+      }
     }
     simulationPassives.clear();
   }
@@ -82,44 +91,52 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
   }
 
   @Override
+  public ViewPathComponentSimulation<PASSIVE> getViewPathComponentSimulation()
+  {
+    return simulationPassives;
+  }
+
+  @Override
   public String getComponentType()
   {
-    for (PASSIVE passive : simulationPassives.values())
+    if (simulationPassives != null)
     {
-      return passive.getType();
+      return simulationPassives.getComponentType();
     }
     return "";
   }
 
   @Override
-  public Set<SubcircuitSimulation> getComponentSubcircuitSimulations()
+  public Set<? extends SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
-    return simulationPassives.keySet();
+    return simulationPassives.getSimulations();
   }
 
-  public PASSIVE getComponent(SubcircuitSimulation subcircuitSimulation)
+  @Override
+  public PASSIVE getComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    return simulationPassives.get(subcircuitSimulation);
+    return simulationPassives.get(path, circuitSimulation);
   }
 
   protected Set<Long> saveSimulationPassives()
   {
-    LinkedHashSet<Long> simulations = new LinkedHashSet<>();
-    for (SubcircuitSimulation subcircuitSimulation : simulationPassives.keySet())
+    LinkedHashSet<Long> simulationIDs = new LinkedHashSet<>();
+    Set<? extends SubcircuitSimulation> simulations = simulationPassives.getSimulations();
+    for (SubcircuitSimulation subcircuitSimulation : simulations)
     {
-      simulations.add(subcircuitSimulation.getId());
+      simulationIDs.add(subcircuitSimulation.getId());
     }
-    return simulations;
+    return simulationIDs;
   }
 
   @Override
   public String toDebugString()
   {
-    return super.toDebugString() + String.format("Name [%s]\n", properties.name) + toSimulationsDebugString(simulationPassives.keySet());
+    return super.toDebugString() + String.format("Name [%s]\n", properties.name) + toSimulationsDebugString(simulationPassives.getSimulations());
   }
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive(SubcircuitSimulation subcircuitSimulation);
+  protected abstract PASSIVE createPassive(ViewPath path, CircuitSimulation circuitSimulation);
 }
 

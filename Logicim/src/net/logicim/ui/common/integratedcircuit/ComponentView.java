@@ -6,10 +6,15 @@ import net.common.util.StringUtil;
 import net.logicim.data.common.properties.ComponentProperties;
 import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.CircuitElement;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.common.port.event.Ports;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathComponentSimulation;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.ShapeHolder;
@@ -54,7 +59,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   {
     if (!isEnabled())
     {
-      Set<SubcircuitSimulation> simulations = getComponentSubcircuitSimulations();
+      Set<? extends SubcircuitSimulation> simulations = getComponentSubcircuitSimulations();
       if (!simulations.isEmpty())
       {
         throw new SimulatorException("%s [%s] is disabled but has [%s] Simulations.", getClass().getSimpleName(), getDescription(), simulations.size());
@@ -125,11 +130,15 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return connectionViews;
   }
 
-  public PortView getPortView(SubcircuitSimulation subcircuitSimulation, Port port)
+  public PortView getPortView(ViewPath path,
+                              CircuitSimulation circuitSimulation,
+                              Port port)
   {
     for (PortView portView : portViews)
     {
-      if (portView.containsPort(subcircuitSimulation, port))
+      if (portView.containsPort(path,
+                                circuitSimulation,
+                                port))
       {
         return portView;
       }
@@ -137,11 +146,17 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     return null;
   }
 
-  protected void paintPorts(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation)
+  protected void paintPorts(Graphics2D graphics,
+                            Viewport viewport,
+                            ViewPath path,
+                            CircuitSimulation circuitSimulation)
   {
     for (PortView portView : portViews)
     {
-      portView.paint(graphics, viewport, subcircuitSimulation);
+      portView.paint(graphics,
+                     viewport,
+                     path,
+                     circuitSimulation);
     }
   }
 
@@ -242,7 +257,10 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validatePorts(SubcircuitSimulation subcircuitSimulation, List<Port> ports, List<PortView> portViews)
+  protected void validatePorts(ViewPath path,
+                               CircuitSimulation circuitSimulation,
+                               List<Port> ports,
+                               List<PortView> portViews)
   {
     if ((ports.size() > 0) && (portViews.size() == 0))
     {
@@ -250,18 +268,24 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
 
     validateAtLeastOnePort(portViews);
-    validateNoMissingPorts(subcircuitSimulation, ports);
+    validateNoMissingPorts(path,
+                           circuitSimulation,
+                           ports);
     validateNoDuplicatePorts(ports);
   }
 
-  protected void validateNoMissingPorts(SubcircuitSimulation subcircuitSimulation, List<Port> ports)
+  protected void validateNoMissingPorts(ViewPath path,
+                                        CircuitSimulation circuitSimulation,
+                                        List<Port> ports)
   {
     List<Port> missing = new ArrayList<>();
     for (Port port : ports)
     {
       if (port.isLogicPort())
       {
-        PortView portView = getPortView(subcircuitSimulation, port);
+        PortView portView = getPortView(path,
+                                        circuitSimulation,
+                                        port);
         if (portView == null)
         {
           missing.add(port);
@@ -300,25 +324,27 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  protected void validateCanCreateComponent(SubcircuitSimulation subcircuitSimulation)
+  protected void validateCanCreateComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     if (subcircuitSimulation == null)
     {
       throw new SimulatorException("Cannot create component with simulation [null] for %s, [%s].", getClass().getSimpleName(), getDescription());
     }
 
-    Component component = getComponent(subcircuitSimulation);
+    Component component = getComponent(path, circuitSimulation);
     if (component != null)
     {
       throw new SimulatorException("[%s] component has already been created for simulation [%s] for %s [%s].", component.getDescription(), subcircuitSimulation.getDescription(), getClass().getSimpleName(), getDescription());
     }
   }
 
-  protected void validateComponent(SubcircuitSimulation subcircuitSimulation)
+  protected void validateComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     if (subcircuitSimulation != null)
     {
-      Component component = getComponent(subcircuitSimulation);
+      Component component = getComponent(path, circuitSimulation);
       if (component == null)
       {
         throw new SimulatorException("Component configured in simulation [%s] on [%s].  Call create().",
@@ -327,26 +353,32 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       }
     }
 
-    validatePorts(subcircuitSimulation);
+    validatePorts(path, circuitSimulation);
   }
 
-  protected void validatePorts(SubcircuitSimulation subcircuitSimulation)
+  protected void validatePorts(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(subcircuitSimulation);
+    Component component = getComponent(path, circuitSimulation);
     if (component != null)
     {
-      validatePorts(subcircuitSimulation, component.getPorts(), portViews);
+      validatePorts(path,
+                    circuitSimulation,
+                    component.getPorts(),
+                    portViews);
     }
   }
 
-  protected void postCreateComponent(SubcircuitSimulation subcircuitSimulation, Component component)
+  protected void postCreateComponent(ViewPath path,
+                                     CircuitSimulation circuitSimulation,
+                                     Component component)
   {
-    addPortsToPortViews(subcircuitSimulation, component);
-    validateComponent(subcircuitSimulation);
+    addPortsToPortViews(path, circuitSimulation, component);
+    validateComponent(path, circuitSimulation);
   }
 
-  private void addPortsToPortViews(SubcircuitSimulation subcircuitSimulation, Component component)
+  private void addPortsToPortViews(ViewPath path, CircuitSimulation circuitSimulation, Component component)
   {
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     List<PortView> portViews = getPortViews();
     for (PortView portView : portViews)
     {
@@ -364,7 +396,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
           throw new SimulatorException("Cannot find port named [%s].", portName);
         }
       }
-      portView.addPorts(subcircuitSimulation, ports);
+      portView.addPorts(path, circuitSimulation, new Ports(ports, containingSubcircuitSimulation));
     }
   }
 
@@ -378,36 +410,35 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     destroyAllComponents();
   }
 
-  protected void destroyPortViewComponents(SubcircuitSimulation subcircuitSimulation)
+  protected void destroyPortViewComponents(ViewPath path, CircuitSimulation circuitSimulation)
   {
     for (PortView portView : portViews)
     {
-      portView.destroyComponent(subcircuitSimulation);
+      portView.destroyComponent(path, circuitSimulation);
     }
   }
 
   @Override
-  public void simulationStarted()
+  public void simulationStarted(CircuitSimulation circuitSimulation)
   {
-    for (SubcircuitSimulation subcircuitSimulation : getComponentSubcircuitSimulations())
+    Map<SubcircuitSimulation, ? extends CircuitElement> components = getViewPathComponentSimulation().getSubcircuitSimulationComponents(circuitSimulation);
+    for (Map.Entry<SubcircuitSimulation, ? extends CircuitElement> entry : components.entrySet())
     {
-      Component component = getComponent(subcircuitSimulation);
-      component.reset(subcircuitSimulation.getSimulation());
+      Component component = (Component) entry.getValue();
+      component.reset(circuitSimulation.getSimulation());
     }
   }
 
   @Override
-  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  public void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(subcircuitSimulation);
-    component.reset(subcircuitSimulation.getSimulation());
+    Component component = getComponent(path, circuitSimulation);
+    component.reset(circuitSimulation.getSimulation());
   }
 
-  public abstract Component getComponent(SubcircuitSimulation subcircuitSimulation);
-
-  public Port getPort(SubcircuitSimulation subcircuitSimulation, String portName)
+  public Port getPort(String portName, ViewPath path, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(subcircuitSimulation);
+    Component component = getComponent(path, circuitSimulation);
     if (component != null)
     {
       return component.getPort(portName);
@@ -448,11 +479,15 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     }
   }
 
-  public abstract Component createComponent(SubcircuitSimulation subcircuitSimulation);
+  public abstract ViewPathComponentSimulation<?> getViewPathComponentSimulation();
+
+  public abstract Component getComponent(ViewPath path, CircuitSimulation circuitSimulation);
+
+  public abstract Component createComponent(ViewPath path, CircuitSimulation circuitSimulation);
 
   public abstract String getComponentType();
 
-  public abstract Set<SubcircuitSimulation> getComponentSubcircuitSimulations();
+  public abstract Set<? extends SubcircuitSimulation> getComponentSubcircuitSimulations();
 
   public abstract ComponentData<?> save(boolean selected);
 

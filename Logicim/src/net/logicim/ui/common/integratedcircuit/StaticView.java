@@ -5,9 +5,9 @@ import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.common.properties.ComponentProperties;
-import net.logicim.domain.common.Component;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.*;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.common.ShapeView;
@@ -212,7 +212,8 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
     if (!finalised)
     {
@@ -296,13 +297,13 @@ public abstract class StaticView<PROPERTIES extends ComponentProperties>
 
   public abstract void disconnectViewAndDestroyComponents();
 
-  public abstract void destroyComponent(SubcircuitSimulation subcircuitSimulation);
+  public abstract void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation);
 
   public abstract void destroyAllComponents();
 
-  public abstract void simulationStarted();
+  public abstract void simulationStarted(CircuitSimulation circuitSimulation);
 
-  public abstract void simulationStarted(SubcircuitSimulation subcircuitSimulation);
+  public abstract void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation);
 
   public abstract List<ConnectionView> getOrCreateConnectionViews();
 

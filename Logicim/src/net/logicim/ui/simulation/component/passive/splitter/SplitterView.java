@@ -6,9 +6,11 @@ import net.common.type.Int2D;
 import net.logicim.data.passive.wire.SplitterAppearance;
 import net.logicim.data.passive.wire.SplitterData;
 import net.logicim.data.passive.wire.SplitterProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Splitter;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
@@ -314,9 +316,13 @@ public class SplitterView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics,
+                viewport,
+                path,
+                circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -328,7 +334,10 @@ public class SplitterView
     }
     rectangleView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, subcircuitSimulation);
+    paintPorts(graphics,
+               viewport,
+               path,
+               circuitSimulation);
 
     for (TextView textView : textViews)
     {
@@ -365,10 +374,11 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive(SubcircuitSimulation subcircuitSimulation)
+  protected Splitter createPassive(ViewPath path, CircuitSimulation circuitSimulation)
   {
     List<String> startPortNames = getStartPortNames();
-    return new Splitter(subcircuitSimulation.getCircuit(),
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    return new Splitter(containingSubcircuitSimulation,
                         properties.name,
                         startPortNames,
                         getEndPortNames());

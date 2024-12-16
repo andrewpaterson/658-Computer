@@ -11,6 +11,7 @@ import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.data.simulation.SimulationStateData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
@@ -18,6 +19,7 @@ import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.simulation.CircuitLoaders;
@@ -87,8 +89,11 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
   }
 
-  protected void loadEvents(SubcircuitSimulation subcircuitSimulation, ICV integratedCircuitView)
+  protected void loadEvents(ViewPath path,
+                            CircuitSimulation circuitSimulation,
+                            ICV integratedCircuitView)
   {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     List<? extends IntegratedCircuitEventData<?>> integratedCircuitEventData = getIntegratedCircuitEventDataList(subcircuitSimulation.getId());
     if (integratedCircuitEventData == null)
     {
@@ -96,7 +101,7 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
     }
     for (IntegratedCircuitEventData<?> eventData : integratedCircuitEventData)
     {
-      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
+      IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(path, circuitSimulation);
       eventData.create(integratedCircuit, subcircuitSimulation.getTimeline());
     }
   }
@@ -119,21 +124,25 @@ public abstract class IntegratedCircuitData<ICV extends IntegratedCircuitView<?,
   }
 
   @Override
-  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+  public void createAndConnectComponentDuringLoad(ViewPath path,
+                                                  CircuitSimulation circuitSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   ICV integratedCircuitView)
   {
-    integratedCircuitView.createComponent(containingSubcircuitSimulation);
+    integratedCircuitView.createComponent(path, circuitSimulation);
 
-    loadState(containingSubcircuitSimulation, integratedCircuitView);
-    loadEvents(containingSubcircuitSimulation, integratedCircuitView);
-    loadPorts(containingSubcircuitSimulation, circuitLoaders, integratedCircuitView);
+    loadState(path, circuitSimulation, integratedCircuitView);
+    loadEvents(path, circuitSimulation, integratedCircuitView);
+    loadPorts(path, circuitSimulation, circuitLoaders, integratedCircuitView);
   }
 
-  private void loadState(SubcircuitSimulation subcircuitSimulation, ICV integratedCircuitView)
+  private void loadState(ViewPath path,
+                         CircuitSimulation circuitSimulation,
+                         ICV integratedCircuitView)
   {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     STATE state = getState(subcircuitSimulation.getId());
-    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(subcircuitSimulation);
+    IntegratedCircuit<?, ?> integratedCircuit = integratedCircuitView.getComponent(path, circuitSimulation);
     integratedCircuit.setState(state);
   }
 

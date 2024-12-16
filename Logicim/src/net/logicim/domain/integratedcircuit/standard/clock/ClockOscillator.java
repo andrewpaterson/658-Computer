@@ -2,12 +2,12 @@ package net.logicim.domain.integratedcircuit.standard.clock;
 
 import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import static net.logicim.domain.common.LongTime.frequencyToTime;
 
@@ -20,21 +20,23 @@ public class ClockOscillator
   protected long initialisationTime;
   protected long fullTicks;
 
-  public ClockOscillator(Circuit circuit,
+  public ClockOscillator(SubcircuitSimulation containingSubcircuitSimulation,
                          String name,
                          ClockOscillatorPins pins,
                          float frequency)
   {
-    this(circuit,
+    this(containingSubcircuitSimulation,
          name,
          pins,
          frequency,
          frequencyToTime(frequency) / 2);
   }
 
-  public ClockOscillator(Circuit circuit, String name, ClockOscillatorPins pins, float frequency, long initialisationTime)
+  public ClockOscillator(SubcircuitSimulation containingSubcircuitSimulation, String name, ClockOscillatorPins pins, float frequency, long initialisationTime)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
     this.halfCycleTime = frequencyToTime(frequency) / 2;
     this.initialisationTime = initialisationTime;
     this.fullTicks = 0;

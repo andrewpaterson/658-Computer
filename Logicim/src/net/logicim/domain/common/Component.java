@@ -3,11 +3,12 @@ package net.logicim.domain.common;
 import net.common.util.StringUtil;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.port.Port;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
 public interface Component
-    extends Described
+    extends CircuitElement
 {
   List<Port> getPorts();
 
@@ -22,6 +23,8 @@ public interface Component
   String getName();
 
   Port getPort(String portName);
+
+  Circuit getCircuit();
 
   default String getDescription()
   {

@@ -1,9 +1,11 @@
 package net.logicim.ui.common.integratedcircuit;
 
 import net.common.type.Int2D;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.Described;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Viewport;
 
@@ -58,7 +60,7 @@ public abstract class View
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
-  public abstract void paint(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation);
+  public abstract void paint(Graphics2D graphics, Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation);
 
   public abstract String getName();
 

@@ -4,8 +4,9 @@ import net.common.type.Int2D;
 import net.logicim.data.common.ReflectiveData;
 import net.logicim.data.decorative.label.LabelProperties;
 import net.logicim.data.integratedcircuit.decorative.LabelData;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.shape.rectangle.RectangleView;
@@ -80,9 +81,13 @@ public class LabelView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics,
+                viewport,
+                path,
+                circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();

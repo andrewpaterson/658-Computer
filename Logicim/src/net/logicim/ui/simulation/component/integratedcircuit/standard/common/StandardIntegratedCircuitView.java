@@ -2,14 +2,15 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.common.propagation.VoltageConfiguration;
 import net.logicim.domain.passive.power.PowerPinNames;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
@@ -75,9 +76,13 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics,
+                viewport,
+                path,
+                circuitSimulation);
 
     if (vccLine != null)
     {

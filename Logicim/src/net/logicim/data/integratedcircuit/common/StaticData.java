@@ -2,13 +2,14 @@ package net.logicim.data.integratedcircuit.common;
 
 import net.common.type.Int2D;
 import net.logicim.data.common.ViewData;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.CircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.simulation.CircuitLoaders;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
-public abstract class StaticData<T extends StaticView<?>>
+public abstract class StaticData<STATIC_VIEW extends StaticView<?>>
     extends ViewData
 {
   public String name;
@@ -36,9 +37,9 @@ public abstract class StaticData<T extends StaticView<?>>
     this.selected = selected;
   }
 
-  public T createAndEnableStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public STATIC_VIEW createAndEnableStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    T staticView = createStaticView(subcircuitEditor, newComponentPropertyStep);
+    STATIC_VIEW staticView = createStaticView(subcircuitEditor, newComponentPropertyStep);
 
     if (enabled)
     {
@@ -52,10 +53,11 @@ public abstract class StaticData<T extends StaticView<?>>
     return staticView;
   }
 
-  public abstract T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
+  public abstract STATIC_VIEW createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep);
 
-  public abstract void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+  public abstract void createAndConnectComponentDuringLoad(ViewPath path,
+                                                           CircuitSimulation circuitSimulation,
                                                            CircuitLoaders circuitLoaders,
-                                                           T componentView);
+                                                           STATIC_VIEW componentView);
 }
 

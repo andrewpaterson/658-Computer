@@ -4,12 +4,14 @@ import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.integratedcircuit.standard.logic.wdc.W65C816Data;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816Pins;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816State;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -38,7 +40,7 @@ public class W65C816View
   protected List<PortView> rightPorts;
   protected List<TextView> labels;
   protected List<RectangleView> rectangles;
-  
+
   protected TextView opCodeName;
   protected TextView opCodeNumber;
   protected TextView cycle;
@@ -348,14 +350,17 @@ public class W65C816View
   }
 
   @Override
-  public void paint(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation)
+  public void paint(Graphics2D graphics,
+                    Viewport viewport,
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics, viewport, path, circuitSimulation);
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
     Font font = graphics.getFont();
 
-    W65C816 w65c816 = getComponent(subcircuitSimulation);
+    W65C816 w65c816 = simulationIntegratedCircuits.get(path, circuitSimulation);
     if (w65c816 != null)
     {
       opCodeName.setText(w65c816.getOpcodeMnemonicString());
@@ -408,7 +413,7 @@ public class W65C816View
       label.paint(graphics, viewport);
     }
 
-    paintPorts(graphics, viewport, subcircuitSimulation);
+    paintPorts(graphics, viewport, path, circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);
@@ -434,9 +439,12 @@ public class W65C816View
   }
 
   @Override
-  protected W65C816 createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected W65C816 createIntegratedCircuit(ViewPath path,
+                                            CircuitSimulation circuitSimulation,
+                                            FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new W65C816(subcircuitSimulation.getCircuit(),
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    return new W65C816(containingSubcircuitSimulation,
                        properties.name,
                        new W65C816Pins(familyVoltageConfiguration));
   }
@@ -457,7 +465,6 @@ public class W65C816View
                            properties.explicitPowerPorts);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected W65C816State saveState(W65C816 integratedCircuit)
   {

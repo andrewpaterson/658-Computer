@@ -7,12 +7,15 @@ import net.logicim.data.port.common.MultiPortData;
 import net.logicim.data.port.common.PortData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.data.port.event.PortEventData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.PortEvent;
 import net.logicim.domain.common.port.event.PortOutputEvent;
+import net.logicim.domain.common.port.event.Ports;
 import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.common.port.PortView;
@@ -23,8 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ComponentData<T extends ComponentView<?>>
-    extends StaticData<T>
+public abstract class ComponentData<COMPONENT_VIEW extends ComponentView<?>>
+    extends StaticData<COMPONENT_VIEW>
 {
   protected List<SimulationMultiPortData> ports;
 
@@ -50,15 +53,19 @@ public abstract class ComponentData<T extends ComponentView<?>>
   }
 
   @Override
-  public T createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
+  public COMPONENT_VIEW createStaticView(SubcircuitEditor subcircuitEditor, boolean newComponentPropertyStep)
   {
-    T componentView = createComponentView(subcircuitEditor);
+    COMPONENT_VIEW componentView = createComponentView(subcircuitEditor);
     componentView.getOrCreateConnectionViews();
     return componentView;
   }
 
-  protected void loadPorts(SubcircuitSimulation subcircuitSimulation, CircuitLoaders circuitLoaders, T componentView)
+  protected void loadPorts(ViewPath path,
+                           CircuitSimulation circuitSimulation,
+                           CircuitLoaders circuitLoaders,
+                           COMPONENT_VIEW componentView)
   {
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     List<PortView> portViews = componentView.getPortViews();
     for (int i = 0; i < ports.size(); i++)
     {
@@ -72,10 +79,12 @@ public abstract class ComponentData<T extends ComponentView<?>>
       }
 
       int multiPortSize = multiPortData.ports.size();
-      List<? extends Port> ports = portView.getPorts(subcircuitSimulation);
-      for (int j = 0; j < ports.size(); j++)
+      Ports ports = portView.getPorts(path, circuitSimulation);
+      List<Port> portList = ports.getPorts();
+      int size = portList.size();
+      for (int j = 0; j < size; j++)
       {
-        Port port = ports.get(j);
+        Port port = portList.get(j);
         if (j < multiPortSize)
         {
           PortData portData = multiPortData.ports.get(j);
@@ -130,6 +139,6 @@ public abstract class ComponentData<T extends ComponentView<?>>
     }
   }
 
-  protected abstract T createComponentView(SubcircuitEditor subcircuitEditor);
+  protected abstract COMPONENT_VIEW createComponentView(SubcircuitEditor subcircuitEditor);
 }
 

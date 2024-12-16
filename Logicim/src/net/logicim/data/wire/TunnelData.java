@@ -4,7 +4,9 @@ import net.common.SimulatorException;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.passive.wire.TunnelProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.wire.TunnelView;
 import net.logicim.ui.simulation.CircuitLoaders;
@@ -41,17 +43,20 @@ public class TunnelData
     this.doubleSided = doubleSided;
   }
 
-  public void createAndConnectComponentDuringLoad(SubcircuitSimulation containingSubcircuitSimulation,
+  public void createAndConnectComponentDuringLoad(ViewPath path,
+                                                  CircuitSimulation circuitSimulation,
                                                   CircuitLoaders circuitLoaders,
                                                   TunnelView tunnelView)
   {
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     long[] traces = simulationTraces.get(containingSubcircuitSimulation.getId());
     if (traces == null)
     {
       throw new SimulatorException("Cannot find trace IDs for Circuit Simulation [%s].", containingSubcircuitSimulation.getDescription());
     }
 
-    tunnelView.wireConnectDuringLoad(containingSubcircuitSimulation,
+    tunnelView.wireConnectDuringLoad(path,
+                                     circuitSimulation,
                                      circuitLoaders.getTraceLoader(),
                                      traces);
   }

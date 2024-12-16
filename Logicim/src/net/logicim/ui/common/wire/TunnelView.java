@@ -4,9 +4,11 @@ import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.data.wire.TunnelData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
+import net.logicim.domain.common.wire.Traces;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -160,10 +162,9 @@ public class TunnelView
 
   @Override
   public void paint(Graphics2D graphics,
-                    Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics, viewport, path, circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -214,19 +215,19 @@ public class TunnelView
   }
 
   @Override
-  public void simulationStarted()
+  public void simulationStarted(CircuitSimulation circuitSimulation)
   {
   }
 
   @Override
-  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  public void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation)
   {
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    wireView.destroyComponent(subcircuitSimulation);
+    wireView.destroyComponent(path, circuitSimulation);
   }
 
   @Override
@@ -261,9 +262,10 @@ public class TunnelView
                           properties.doubleSided);
   }
 
-  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
+  @Override
+  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(subcircuitSimulation, traces);
+    wireView.connectTraces(path, circuitSimulation, traces);
   }
 
   @Override
@@ -273,9 +275,9 @@ public class TunnelView
   }
 
   @Override
-  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
+  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    return wireView.getTraces(subcircuitSimulation);
+    return wireView.getTraces(path, circuitSimulation);
   }
 
   public boolean isRemoved()

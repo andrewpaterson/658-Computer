@@ -3,9 +3,12 @@ package net.logicim.ui.common.wire;
 import net.common.geometry.Line;
 import net.common.type.Int2D;
 import net.logicim.data.wire.TraceData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.Traces;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.*;
 import net.logicim.ui.common.integratedcircuit.View;
 
@@ -200,9 +203,11 @@ public class TraceView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
     graphics.setStroke(getTraceStroke(viewport));
+    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
     Color color = getTraceColour(subcircuitSimulation);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
@@ -278,9 +283,9 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(SubcircuitSimulation subcircuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(subcircuitSimulation, traces);
+    wireView.connectTraces(path, circuitSimulation, traces);
   }
 
   public void disconnectViewAndDestroyComponents()
@@ -288,9 +293,9 @@ public class TraceView
     wireView.disconnectViewAndDestroyComponents();
   }
 
-  public List<Trace> getTraces(SubcircuitSimulation subcircuitSimulation)
+  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    return wireView.getTraces(subcircuitSimulation);
+    return wireView.getTraces(path, circuitSimulation);
   }
 
   public void setLine(Int2D start, Int2D end)
@@ -310,9 +315,9 @@ public class TraceView
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    wireView.destroyComponent(subcircuitSimulation);
+    wireView.destroyComponent(path, circuitSimulation);
   }
 
   public WireViewComp getWireViewComp()

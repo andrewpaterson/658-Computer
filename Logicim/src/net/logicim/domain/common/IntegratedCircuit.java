@@ -9,28 +9,31 @@ import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.state.Stateless;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
 public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     implements Component
 {
-  protected Circuit circuit;
+  protected SubcircuitSimulation containingSubcircuitSimulation;
   protected PINS pins;
   protected STATE state;
   protected String name;
 
   protected LinkedList<IntegratedCircuitEvent> events;
 
-  public IntegratedCircuit(Circuit circuit, String name, PINS pins)
+  public IntegratedCircuit(SubcircuitSimulation containingSubcircuitSimulation,
+                           String name,
+                           PINS pins)
   {
-    this.circuit = circuit;
+    this.containingSubcircuitSimulation = containingSubcircuitSimulation;
     this.name = name;
     this.pins = pins;
     this.pins.setIntegratedCircuit(this);
     this.state = null;
     this.events = new LinkedList<>();
-    circuit.add(this);
+    getCircuit().add(this);
   }
 
   public PINS getPins()
@@ -166,6 +169,17 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
     reset();
     simulationStarted(simulation);
+  }
+
+  @Override
+  public Circuit getCircuit()
+  {
+    return containingSubcircuitSimulation.getCircuit();
+  }
+
+  public SubcircuitSimulation getContainingSubcircuitSimulation()
+  {
+    return containingSubcircuitSimulation;
   }
 
   public abstract void simulationStarted(Simulation simulation);

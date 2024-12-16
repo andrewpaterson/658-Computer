@@ -5,6 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.TracePort;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,12 @@ public class Splitter
   public List<TracePort> startPorts;
   public List<TracePort> endPorts;
 
-  public Splitter(Circuit circuit,
+  public Splitter(SubcircuitSimulation containingSubcircuitSimulation,
                   String name,
                   List<String> startPortNames,
                   List<String> endPortNames)
   {
-    super(circuit, name);
+    super(containingSubcircuitSimulation, name);
 
     startPorts = new ArrayList<>(startPortNames.size());
     for (String portName : startPortNames)
@@ -49,11 +50,6 @@ public class Splitter
   @Override
   public void disconnect(Simulation simulation)
   {
-  }
-
-  public List<TracePort> getStartPorts()
-  {
-    return startPorts;
   }
 }
 

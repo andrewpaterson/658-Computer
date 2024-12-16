@@ -6,6 +6,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.Component;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortHolder;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
@@ -13,14 +14,14 @@ public abstract class Passive
     extends PortHolder
     implements Component
 {
-  protected Circuit circuit;
+  protected SubcircuitSimulation containingSubcircuitSimulation;
   protected String name;
 
-  public Passive(Circuit circuit, String name)
+  public Passive(SubcircuitSimulation containingSubcircuitSimulation, String name)
   {
-    this.circuit = circuit;
+    this.containingSubcircuitSimulation = containingSubcircuitSimulation;
     this.name = name;
-    circuit.add(this);
+    getCircuit().add(this);
   }
 
   @Override
@@ -73,6 +74,17 @@ public abstract class Passive
   {
     reset();
     simulationStarted(simulation);
+  }
+
+  public Circuit getCircuit()
+  {
+    return containingSubcircuitSimulation.getCircuit();
+  }
+
+  @Override
+  public SubcircuitSimulation getContainingSubcircuitSimulation()
+  {
+    return containingSubcircuitSimulation;
   }
 
   public abstract String getType();

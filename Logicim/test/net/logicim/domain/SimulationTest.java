@@ -24,6 +24,7 @@ import net.logicim.domain.integratedcircuit.standard.logic.buffer.BufferPins;
 import net.logicim.domain.integratedcircuit.standard.logic.buffer.Inverter;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
+import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.Map;
@@ -37,29 +38,32 @@ public class SimulationTest
 {
   private static void testInverterEvents()
   {
-    Circuit circuit = new Circuit();
-    TestPower testPower = new TestPower(circuit, 3.3f);
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
+    SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
+    Simulation simulation = circuitSimulation.getSimulation();
+
+    TestPower testPower = new TestPower(subcircuitSimulation, 3.3f);
 
     Trace constantTrace = new Trace();
     Trace outputTrace = new Trace();
-    Constant constant = new Constant(circuit, "Constant", new ConstantPins(new TestVoltageConfiguration(testPower.getVCC(),
-                                                                                                        0.8f,
-                                                                                                        2.0f,
-                                                                                                        testPower.getGND(),
-                                                                                                        testPower.getVCC(),
-                                                                                                        (int) nanosecondsToTime(2.0f),
-                                                                                                        (int) nanosecondsToTime(2.0f))),
+    Constant constant = new Constant(subcircuitSimulation, "Constant", new ConstantPins(new TestVoltageConfiguration(testPower.getVCC(),
+                                                                                                                     0.8f,
+                                                                                                                     2.0f,
+                                                                                                                     testPower.getGND(),
+                                                                                                                     testPower.getVCC(),
+                                                                                                                     (int) nanosecondsToTime(2.0f),
+                                                                                                                     (int) nanosecondsToTime(2.0f))),
                                      (int) nanosecondsToTime(1), 1);
     constant.getPins().getOutput().connect(constantTrace);
     testPower.connect(constant);
 
-    Inverter inverter = new Inverter(circuit, "Not", new BufferPins(1, new TestVoltageConfiguration(testPower.getVCC(),
-                                                                                                    0.8f,
-                                                                                                    2.0f,
-                                                                                                    testPower.getGND(),
-                                                                                                    testPower.getVCC(),
-                                                                                                    (int) nanosecondsToTime(2.5f),
-                                                                                                    (int) nanosecondsToTime(2.5f))));
+    Inverter inverter = new Inverter(subcircuitSimulation, "Not", new BufferPins(1, new TestVoltageConfiguration(testPower.getVCC(),
+                                                                                                                 0.8f,
+                                                                                                                 2.0f,
+                                                                                                                 testPower.getGND(),
+                                                                                                                 testPower.getVCC(),
+                                                                                                                 (int) nanosecondsToTime(2.5f),
+                                                                                                                 (int) nanosecondsToTime(2.5f))));
     inverter.getPins().getInputs().get(0).connect(constantTrace);
     inverter.getPins().getOutputs().get(0).connect(outputTrace);
     testPower.connect(inverter);
@@ -67,9 +71,6 @@ public class SimulationTest
     LogicPort constantOutput = (LogicPort) constant.getPort("Output");
     LogicPort inverterInput = (LogicPort) inverter.getPort("Input");
     LogicPort inverterOutput = (LogicPort) inverter.getPort("Output");
-
-    CircuitSimulation circuitSimulation = new CircuitSimulation("");
-    Simulation simulation = circuitSimulation.getSimulation();
 
     constant.reset(simulation);
     inverter.reset(simulation);
@@ -171,12 +172,15 @@ public class SimulationTest
 
   private static void testInverterLevels()
   {
-    Circuit circuit = new Circuit();
-    TestPower testPower = new TestPower(circuit, 3.3f);
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
+    SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
+    Simulation simulation = circuitSimulation.getSimulation();
+
+    TestPower testPower = new TestPower(subcircuitSimulation, 3.3f);
 
     Trace connectingTrace = new Trace();
     Trace outputTrace = new Trace();
-    Constant constant = new Constant(circuit,
+    Constant constant = new Constant(subcircuitSimulation,
                                      "Constant",
                                      new ConstantPins(new TestVoltageConfiguration(testPower.getVCC(),
                                                                                    0.8f,
@@ -190,7 +194,7 @@ public class SimulationTest
     constant.getPins().getOutput().connect(connectingTrace);
     testPower.connect(constant);
 
-    Inverter inverter = new Inverter(circuit,
+    Inverter inverter = new Inverter(subcircuitSimulation,
                                      "Not",
                                      new BufferPins(1,
                                                     new TestVoltageConfiguration(testPower.getVCC(),
@@ -204,13 +208,9 @@ public class SimulationTest
     inverter.getPins().getOutputs().get(0).connect(outputTrace);
     testPower.connect(inverter);
 
-    CircuitSimulation circuitSimulation = new CircuitSimulation("");
-    Simulation simulation = circuitSimulation.getSimulation();
-
     constant.reset(simulation);
     inverter.reset(simulation);
 
-    boolean processedEvent = true;
     StringBuilder builder = new StringBuilder();
     int step = 10;
     while (step > 0)
@@ -218,7 +218,7 @@ public class SimulationTest
       String connectingVoltage = connectingTrace.getVoltageString(simulation.getTime());
       String outputVoltage = outputTrace.getVoltageString(simulation.getTime());
       builder.append(connectingVoltage).append(" ").append(outputVoltage).append("\n");
-      processedEvent = simulation.runToTime(100);
+      boolean processedEvent = simulation.runToTime(100);
       if (!processedEvent)
       {
         step--;
@@ -284,11 +284,14 @@ public class SimulationTest
 
   private static void testClockOscillator()
   {
-    Circuit circuit = new Circuit();
-    TestPower testPower = new TestPower(circuit, 3.3f);
+    CircuitSimulation circuitSimulation = new CircuitSimulation("");
+    SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
+    Simulation simulation = circuitSimulation.getSimulation();
+
+    TestPower testPower = new TestPower(subcircuitSimulation, 3.3f);
 
     float frequency = 180 * MHz;
-    ClockOscillator clock1 = new ClockOscillator(circuit,
+    ClockOscillator clock1 = new ClockOscillator(subcircuitSimulation,
                                                  frequency + "Mhz",
                                                  new ClockOscillatorPins(new TestVoltageConfiguration(testPower.getVCC(),
                                                                                                       0.8f,
@@ -301,7 +304,7 @@ public class SimulationTest
                                                  (long) (frequencyToTime(frequency) * 0.5f));
     testPower.connect(clock1);
 
-    ClockOscillator clock2 = new ClockOscillator(circuit,
+    ClockOscillator clock2 = new ClockOscillator(subcircuitSimulation,
                                                  frequency + "Mhz",
                                                  new ClockOscillatorPins(new TestVoltageConfiguration(testPower.getVCC(),
                                                                                                       0.8f,
@@ -314,7 +317,7 @@ public class SimulationTest
                                                  (long) (frequencyToTime(frequency) * 0.6f));
     testPower.connect(clock2);
 
-    OrGate orGate = new OrGate(circuit,
+    OrGate orGate = new OrGate(subcircuitSimulation,
                                "Or",
                                new OrGatePins(2, new TestVoltageConfiguration(testPower.getVCC(),
                                                                               0.8f,
@@ -335,9 +338,6 @@ public class SimulationTest
     orGate.getPins().getInput(0).connect(clock1Trace);
     orGate.getPins().getInput(1).connect(clock2Trace);
     orGate.getPins().getOutput().connect(outputTrace);
-
-    CircuitSimulation circuitSimulation = new CircuitSimulation("");
-    Simulation simulation = circuitSimulation.getSimulation();
 
     clock1.reset(simulation);
     clock2.reset(simulation);

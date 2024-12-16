@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.voltage.VoltageColour;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillator;
@@ -10,6 +11,7 @@ import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorPins;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -72,9 +74,12 @@ public class ClockView
   }
 
   @Override
-  protected ClockOscillator createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected ClockOscillator createIntegratedCircuit(ViewPath path,
+                                                    CircuitSimulation circuitSimulation,
+                                                    FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new ClockOscillator(subcircuitSimulation.getCircuit(),
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    return new ClockOscillator(containingSubcircuitSimulation,
                                properties.name,
                                new ClockOscillatorPins(familyVoltageConfiguration,
                                                        properties.inverseOut),
@@ -84,9 +89,10 @@ public class ClockView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics, viewport, path, circuitSimulation);
 
     Stroke stroke = graphics.getStroke();
     Color color = graphics.getColor();
@@ -95,33 +101,30 @@ public class ClockView
     {
       rectangle.paint(graphics, viewport);
 
-      paintClockWaveform(graphics, viewport, subcircuitSimulation);
+      paintClockWaveform(graphics, viewport, path, circuitSimulation);
     }
-    paintPorts(graphics, viewport, subcircuitSimulation);
+    paintPorts(graphics, viewport, path, circuitSimulation);
 
     graphics.setStroke(stroke);
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, SubcircuitSimulation subcircuitSimulation)
+  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation)
   {
-    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(subcircuitSimulation);
+    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(path, circuitSimulation);
     Color clockColor = Colours.getInstance().getDisconnectedTrace();
-    if (subcircuitSimulation != null)
+    long time = circuitSimulation.getTime();
+    if (integratedCircuit != null)
     {
-      long time = subcircuitSimulation.getTime();
-      if (integratedCircuit != null)
+      ClockOscillatorState state = integratedCircuit.getState();
+      if (state != null)
       {
-        ClockOscillatorState state = integratedCircuit.getState();
-        if (state != null)
-        {
-          float voltage = integratedCircuit.getInternalVoltage(time);
-          clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
-        }
-        else
-        {
-          clockColor = Colours.getInstance().getDisconnectedTrace();
-        }
+        float voltage = integratedCircuit.getInternalVoltage(time);
+        clockColor = VoltageColour.getColourForVoltage(Colours.getInstance(), voltage);
+      }
+      else
+      {
+        clockColor = Colours.getInstance().getDisconnectedTrace();
       }
     }
 
@@ -192,7 +195,6 @@ public class ClockView
                          properties.explicitPowerPorts);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected ClockOscillatorState saveState(ClockOscillator integratedCircuit)
   {

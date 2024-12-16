@@ -1,7 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
@@ -10,6 +9,7 @@ import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.DataOperation;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import static net.common.util.StringUtil.*;
 
@@ -18,9 +18,13 @@ public class W65C816
 {
   public static final String TYPE = "W65C816 Microprocessor";
 
-  public W65C816(Circuit circuit, String name, W65C816Pins pins)
+  public W65C816(SubcircuitSimulation containingSubcircuitSimulation,
+                 String name,
+                 W65C816Pins pins)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
   }
 
   public W65C816Pins getPins()
@@ -740,14 +744,14 @@ public class W65C816
     return Integer.toString(state.getCycle());
   }
 
-  public void setData(int data)
-  {
-    state.setData(data);
-  }
-
   public int getData()
   {
     return state.getData();
+  }
+
+  public void setData(int data)
+  {
+    state.setData(data);
   }
 
   @Override

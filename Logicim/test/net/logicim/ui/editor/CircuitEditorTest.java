@@ -12,6 +12,7 @@ import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.simulation.CircuitEditor;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
@@ -45,12 +46,12 @@ public class CircuitEditorTest
                                                                             100 * Units.MHz,
                                                                             false));
 
-    SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
+    CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
+    ViewPath viewPath = circuitEditor.getCurrentViewPath();
 
-    clockView.createComponent(subcircuitSimulation);
-    clockView.simulationStarted();
+    clockView.createComponent(viewPath, circuitSimulation);
+    clockView.simulationStarted(circuitSimulation);
 
-    CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
     Timeline timeline = circuitSimulation.getSimulation().getTimeline();
     validateEquals(0L, timeline.getTime());
     Map<Long, SimultaneousEvents> eventsByTime = timeline.getAllEvents();

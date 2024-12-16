@@ -1,13 +1,13 @@
 package net.logicim.domain.integratedcircuit.extra;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.voltage.VoltageRepresentation;
 import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class Oscilloscope
   protected int samplesPerDiv;
   protected VoltageRepresentation colours;
 
-  public Oscilloscope(Circuit circuit,
+  public Oscilloscope(SubcircuitSimulation containingSubcircuitSimulation,
                       String name,
                       OscilloscopePins pins,
                       float sampleFrequency,
@@ -32,7 +32,9 @@ public class Oscilloscope
                       int samplesPerDiv,
                       VoltageRepresentation colours)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
     this.sampleFrequency = sampleFrequency;
     this.sampleTime = frequencyToTime(sampleFrequency);
     this.numberOfDivsWide = numberOfDivsWide;

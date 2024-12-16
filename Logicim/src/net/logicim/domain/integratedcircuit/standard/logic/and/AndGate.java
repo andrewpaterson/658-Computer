@@ -1,11 +1,11 @@
 package net.logicim.domain.integratedcircuit.standard.logic.and;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
@@ -14,9 +14,13 @@ public class AndGate
 {
   public static final String TYPE = "AND Gate";
 
-  public AndGate(Circuit circuit, String name, AndGatePins pins)
+  public AndGate(SubcircuitSimulation containingSubcircuitSimulation,
+                 String name,
+                 AndGatePins pins)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
   }
 
   @Override

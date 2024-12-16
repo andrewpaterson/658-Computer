@@ -1,11 +1,11 @@
 package net.logicim.domain.integratedcircuit.standard.logic.or;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
@@ -14,9 +14,13 @@ public class OrGate
 {
   public static final String TYPE = "OR Gate";
 
-  public OrGate(Circuit circuit, String name, OrGatePins pins)
+  public OrGate(SubcircuitSimulation containingSubcircuitSimulation,
+                String name,
+                OrGatePins pins)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
   }
 
   @Override

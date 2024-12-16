@@ -3,9 +3,10 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buf
 import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.logic.buffer.BufferProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.IntegratedCircuit;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
@@ -89,9 +90,10 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics, viewport, path, circuitSimulation);
 
     if (polygons != null)
     {
@@ -102,7 +104,10 @@ public abstract class BaseBufferView<IC extends IntegratedCircuit<?, ?>>
       {
         polygon.paint(graphics, viewport);
       }
-      paintPorts(graphics, viewport, subcircuitSimulation);
+      paintPorts(graphics,
+                 viewport,
+                 path,
+                 circuitSimulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);

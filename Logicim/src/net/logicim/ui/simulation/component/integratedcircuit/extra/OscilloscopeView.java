@@ -5,12 +5,14 @@ import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.IntegratedCircuitData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeData;
 import net.logicim.data.integratedcircuit.extra.OscilloscopeProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.integratedcircuit.extra.Oscilloscope;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopePins;
 import net.logicim.domain.integratedcircuit.extra.OscilloscopeState;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -70,9 +72,10 @@ public class OscilloscopeView
   }
 
   @Override
-  protected Oscilloscope createIntegratedCircuit(SubcircuitSimulation subcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
+  protected Oscilloscope createIntegratedCircuit(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration)
   {
-    return new Oscilloscope(subcircuitSimulation.getCircuit(),
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    return new Oscilloscope(containingSubcircuitSimulation,
                             properties.name,
                             new OscilloscopePins(properties.inputCount),
                             properties.samplingFrequency_Hz,
@@ -84,9 +87,10 @@ public class OscilloscopeView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics, viewport, path, circuitSimulation);
 
     if ((frameView != null))
     {
@@ -97,7 +101,7 @@ public class OscilloscopeView
 
       rectangleView.paint(graphics, viewport);
 
-      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(subcircuitSimulation);
+      Oscilloscope integratedCircuit = simulationIntegratedCircuits.get(path,circuitSimulation);
       if (integratedCircuit != null)
       {
         OscilloscopeState state = integratedCircuit.getState();
@@ -168,7 +172,10 @@ public class OscilloscopeView
           }
         }
       }
-      paintPorts(graphics, viewport, subcircuitSimulation);
+      paintPorts(graphics,
+                 viewport,
+                 path,
+                 circuitSimulation);
 
       graphics.setStroke(stroke);
       graphics.setColor(color);
@@ -221,7 +228,6 @@ public class OscilloscopeView
     return false;
   }
 
-  @SuppressWarnings("unchecked")
   public OscilloscopeState saveState(Oscilloscope integratedCircuit)
   {
     OscilloscopeState state = integratedCircuit.getState();

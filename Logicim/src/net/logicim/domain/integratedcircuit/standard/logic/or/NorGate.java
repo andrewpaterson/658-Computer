@@ -1,15 +1,19 @@
 package net.logicim.domain.integratedcircuit.standard.logic.or;
 
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 public class NorGate
     extends OrGate
 {
   public static final String TYPE = "NOR Gate";
 
-  public NorGate(Circuit circuit, String name, OrGatePins pins)
+  public NorGate(SubcircuitSimulation containingSubcircuitSimulation,
+                 String name,
+                 OrGatePins pins)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
   }
 
   @Override

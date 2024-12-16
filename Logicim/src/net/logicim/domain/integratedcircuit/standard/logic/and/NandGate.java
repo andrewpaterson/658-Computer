@@ -1,15 +1,19 @@
 package net.logicim.domain.integratedcircuit.standard.logic.and;
 
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 public class NandGate
     extends AndGate
 {
   public static final String TYPE = "NAND Gate";
 
-  public NandGate(Circuit circuit, String name, AndGatePins pins)
+  public NandGate(SubcircuitSimulation containingSubcircuitSimulation,
+                  String name,
+                  AndGatePins pins)
   {
-    super(circuit, name, pins);
+    super(containingSubcircuitSimulation,
+          name,
+          pins);
   }
 
   @Override

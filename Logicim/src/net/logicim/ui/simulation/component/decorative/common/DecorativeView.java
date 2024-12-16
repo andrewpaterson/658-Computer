@@ -2,14 +2,12 @@ package net.logicim.ui.simulation.component.decorative.common;
 
 import net.common.type.Int2D;
 import net.logicim.data.decorative.common.DecorativeProperties;
-import net.logicim.domain.common.Component;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
-import net.logicim.ui.simulation.DebugGlobalEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,12 +37,12 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void simulationStarted()
+  public void simulationStarted(CircuitSimulation circuitSimulation)
   {
   }
 
   @Override
-  public void simulationStarted(SubcircuitSimulation subcircuitSimulation)
+  public void simulationStarted(ViewPath path, CircuitSimulation circuitSimulation)
   {
   }
 
@@ -72,7 +70,7 @@ public abstract class DecorativeView<T extends DecorativeProperties>
   }
 
   @Override
-  public void destroyComponent(SubcircuitSimulation subcircuitSimulation)
+  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
   {
   }
 

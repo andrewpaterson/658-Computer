@@ -5,6 +5,7 @@ import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerOutPort;
 import net.logicim.domain.passive.common.Passive;
+import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import static net.logicim.domain.passive.power.PowerPinNames.POWER;
 
@@ -13,9 +14,11 @@ public class PowerSource
 {
   protected PowerOutPort powerOutPort;
 
-  public PowerSource(Circuit circuit, String name, float voltage)
+  public PowerSource(SubcircuitSimulation containingSubcircuitSimulation,
+                     String name,
+                     float voltage)
   {
-    super(circuit, name);
+    super(containingSubcircuitSimulation, name);
     powerOutPort = new PowerOutPort(POWER, this, voltage);
   }
 

@@ -10,7 +10,7 @@ import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
-import net.logicim.domain.common.Circuit;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -23,6 +23,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.wire.Pin;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFinder;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -216,32 +217,35 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(SubcircuitSimulation subcircuitSimulation)
+  protected Pin createPassive(ViewPath path, CircuitSimulation circuitSimulation)
   {
-    Pin pin = new Pin(subcircuitSimulation.getCircuit(),
+    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    Pin pin = new Pin(containingSubcircuitSimulation,
                       properties.name,
                       properties.bitWidth);
     if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
     {
-      createPowerPorts(subcircuitSimulation.getCircuit(), familyVoltageConfiguration, pin);
+      createPowerPorts(containingSubcircuitSimulation,
+                       familyVoltageConfiguration,
+                       pin);
     }
     return pin;
   }
 
-  protected void createPowerPorts(Circuit circuit, FamilyVoltageConfiguration familyVoltageConfiguration, Pin pin)
+  protected void createPowerPorts(SubcircuitSimulation containingSubcircuitSimulation, FamilyVoltageConfiguration familyVoltageConfiguration, Pin pin)
   {
     VoltageConfiguration voltageConfiguration = familyVoltageConfiguration.getDefaultVoltageConfiguration(DefaultLogicLevels.get());
 
     Trace vccTrace = new Trace();
     pin.getVoltageCommon().connect(vccTrace);
 
-    PowerSource vccPowerSource = new PowerSource(circuit, "", voltageConfiguration.getVcc());
+    PowerSource vccPowerSource = new PowerSource(containingSubcircuitSimulation, "", voltageConfiguration.getVcc());
     vccPowerSource.getPowerOutPort().connect(vccTrace);
 
     Trace gndTrace = new Trace();
     pin.getVoltageGround().connect(gndTrace);
 
-    PowerSource gndPowerSource = new PowerSource(circuit, "", 0);
+    PowerSource gndPowerSource = new PowerSource(containingSubcircuitSimulation, "", 0);
     gndPowerSource.getPowerOutPort().connect(gndTrace);
   }
 
@@ -268,9 +272,13 @@ public class PinView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics,
+                viewport,
+                path,
+                circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -288,21 +296,24 @@ public class PinView
     FamilyVoltageConfiguration familyVoltageConfiguration = FamilyVoltageConfigurationStore.get(properties.family);
 
     TraceValue[] values = null;
-    if (subcircuitSimulation != null)
+    long time = circuitSimulation.getTime();
+    Pin passive = simulationPassives.get(path, circuitSimulation);
+    if (passive != null)
     {
-      long time = subcircuitSimulation.getTime();
-      Pin passive = getComponent(subcircuitSimulation);
-      if (passive != null)
-      {
-        values = port.getValue(subcircuitSimulation, familyVoltageConfiguration, passive.getVCC(time));
-      }
+      values = port.getValue(path,
+                             circuitSimulation,
+                             familyVoltageConfiguration,
+                             passive.getVCC(time));
     }
 
     dataView.setText(getStringValue(values));
     dataView.paint(graphics, viewport);
     labelView.paint(graphics, viewport);
 
-    paintPorts(graphics, viewport, subcircuitSimulation);
+    paintPorts(graphics,
+               viewport,
+               path,
+               circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

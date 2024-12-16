@@ -4,10 +4,11 @@ import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.passive.power.PositivePowerData;
 import net.logicim.data.passive.power.PositivePowerProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.voltage.Voltage;
 import net.logicim.domain.passive.power.PowerPinNames;
-import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
@@ -41,8 +42,21 @@ public class PositivePowerView
     float yTop = 0.4f;
     float yBottom = -1f;
     float radius = 0.9f;
-    rectangle = new RectangleView(this, new Float2D(-radius, yBottom + 0.4f), new Float2D(radius, yTop), true, true);
-    polygonView = new PolygonView(this, getFillColour(), true, true, 2.0f, new Float2D(0, 1), new Float2D(radius, yTop), new Float2D(radius, yBottom), new Float2D(-radius, yBottom), new Float2D(-radius, yTop));
+    rectangle = new RectangleView(this,
+                                  new Float2D(-radius, yBottom + 0.4f),
+                                  new Float2D(radius, yTop),
+                                  true,
+                                  true);
+    polygonView = new PolygonView(this,
+                                  getFillColour(),
+                                  true,
+                                  true,
+                                  2.0f,
+                                  new Float2D(0, 1),
+                                  new Float2D(radius, yTop),
+                                  new Float2D(radius, yBottom),
+                                  new Float2D(-radius, yBottom),
+                                  new Float2D(-radius, yTop));
   }
 
   private Color getFillColour()
@@ -66,7 +80,9 @@ public class PositivePowerView
   @Override
   protected void createPortViews()
   {
-    new PortView(this, PowerPinNames.POWER, new Int2D(0, 1));
+    new PortView(this,
+                 PowerPinNames.POWER,
+                 new Int2D(0, 1));
   }
 
   @Override
@@ -92,9 +108,13 @@ public class PositivePowerView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    SubcircuitSimulation subcircuitSimulation)
+                    ViewPath path,
+                    CircuitSimulation circuitSimulation)
   {
-    super.paint(graphics, viewport, subcircuitSimulation);
+    super.paint(graphics,
+                viewport,
+                path,
+                circuitSimulation);
 
     Color color = graphics.getColor();
     Stroke stroke = graphics.getStroke();
@@ -104,7 +124,10 @@ public class PositivePowerView
 
     drawCenteredString(graphics, viewport, Voltage.toVoltageString(properties.voltage_V, false));
 
-    paintPorts(graphics, viewport, subcircuitSimulation);
+    paintPorts(graphics,
+               viewport,
+               path,
+               circuitSimulation);
     graphics.setColor(color);
     graphics.setStroke(stroke);
     graphics.setFont(font);

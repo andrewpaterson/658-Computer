@@ -17,7 +17,7 @@
                           <family>LVC</family>
                         </family>
                         <events type="SimulationIntegratedCircuitEventData">
-                          <simulationIntegratedCircuitEventData size="2" type="LinkedHashMap">
+                          <simulationIntegratedCircuitEventData size="3" type="LinkedHashMap">
                             <element index="0" type="MapElementData">
                               <key type="KeyData">
                                 <object type="Long" x="2"/>
@@ -38,10 +38,20 @@
                                 </object>
                               </value>
                             </element>
+                            <element index="2" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="4"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="MultiIntegratedCircuitEventData">
+                                  <integratedCircuitEventData size="0" type="ArrayList"/>
+                                </object>
+                              </value>
+                            </element>
                           </simulationIntegratedCircuitEventData>
                         </events>
                         <state type="SimulationStateData">
-                          <simulationStateData size="2" type="LinkedHashMap">
+                          <simulationStateData size="3" type="LinkedHashMap">
                             <element index="0" type="MapElementData">
                               <key type="KeyData">
                                 <object type="Long" x="2"/>
@@ -53,6 +63,14 @@
                             <element index="1" type="MapElementData">
                               <key type="KeyData">
                                 <object type="Long" x="3"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="Stateless"/>
+                              </value>
+                            </element>
+                            <element index="2" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="4"/>
                               </key>
                               <value type="ValueData">
                                 <object type="Stateless"/>
@@ -64,7 +82,7 @@
                           <element index="0" type="ListElementData">
                             <value type="ValueData">
                               <object type="SimulationMultiPortData">
-                                <simulationMultiPortData size="2" type="LinkedHashMap">
+                                <simulationMultiPortData size="3" type="LinkedHashMap">
                                   <element index="0" type="MapElementData">
                                     <key type="KeyData">
                                       <object type="Long" x="2"/>
@@ -75,7 +93,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="37"/>
+                                                <traceId type="Long" x="70"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -94,8 +112,37 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="45"/>
+                                                <traceId type="Long" x="77"/>
                                                 <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                  <element index="2" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="4"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="129"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="TransitionEventData">
+                                                        <time type="Long" x="372479"/>
+                                                        <id type="Long" x="1299"/>
+                                                        <voltage>0.8</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
                                               </object>
                                             </value>
                                           </element>
@@ -110,7 +157,7 @@
                           <element index="1" type="ListElementData">
                             <value type="ValueData">
                               <object type="SimulationMultiPortData">
-                                <simulationMultiPortData size="2" type="LinkedHashMap">
+                                <simulationMultiPortData size="3" type="LinkedHashMap">
                                   <element index="0" type="MapElementData">
                                     <key type="KeyData">
                                       <object type="Long" x="2"/>
@@ -121,7 +168,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="41"/>
+                                                <traceId type="Long" x="79"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -140,11 +187,55 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="47"/>
-                                                <events size="0" type="ArrayList"/>
+                                                <traceId type="Long" x="96"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="175971"/>
+                                                        <id type="Long" x="113"/>
+                                                        <voltage>3.1</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
                                                 <output type="DriveEventData">
-                                                  <time type="Long" x="72547"/>
-                                                  <id type="Long" x="28"/>
+                                                  <time type="Long" x="359267"/>
+                                                  <id type="Long" x="1209"/>
+                                                  <voltage>0.2</voltage>
+                                                </output>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                  <element index="2" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="4"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="97"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="172132"/>
+                                                        <id type="Long" x="110"/>
+                                                        <voltage>3.1</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
+                                                <output type="DriveEventData">
+                                                  <time type="Long" x="355940"/>
+                                                  <id type="Long" x="1185"/>
                                                   <voltage>0.2</voltage>
                                                 </output>
                                               </object>
@@ -173,7 +264,7 @@
                   <element index="1" type="ListElementData">
                     <value type="ValueData">
                       <object type="PinData">
-                        <simulation size="2" type="LinkedHashSet">
+                        <simulation size="3" type="LinkedHashSet">
                           <element index="0" type="SetElementData">
                             <value type="ValueData">
                               <object type="Long" x="2"/>
@@ -184,12 +275,17 @@
                               <object type="Long" x="3"/>
                             </value>
                           </element>
+                          <element index="2" type="SetElementData">
+                            <value type="ValueData">
+                              <object type="Long" x="4"/>
+                            </value>
+                          </element>
                         </simulation>
                         <ports size="1" type="ArrayList">
                           <element index="0" type="ListElementData">
                             <value type="ValueData">
                               <object type="SimulationMultiPortData">
-                                <simulationMultiPortData size="2" type="LinkedHashMap">
+                                <simulationMultiPortData size="3" type="LinkedHashMap">
                                   <element index="0" type="MapElementData">
                                     <key type="KeyData">
                                       <object type="Long" x="2"/>
@@ -200,7 +296,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="37"/>
+                                                <traceId type="Long" x="70"/>
                                               </object>
                                             </value>
                                           </element>
@@ -218,7 +314,25 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="45"/>
+                                                <traceId type="Long" x="77"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                  <element index="2" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="4"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="TracePortData">
+                                                <traceId type="Long" x="129"/>
                                               </object>
                                             </value>
                                           </element>
@@ -254,7 +368,7 @@
                   <element index="2" type="ListElementData">
                     <value type="ValueData">
                       <object type="PinData">
-                        <simulation size="2" type="LinkedHashSet">
+                        <simulation size="3" type="LinkedHashSet">
                           <element index="0" type="SetElementData">
                             <value type="ValueData">
                               <object type="Long" x="2"/>
@@ -265,12 +379,17 @@
                               <object type="Long" x="3"/>
                             </value>
                           </element>
+                          <element index="2" type="SetElementData">
+                            <value type="ValueData">
+                              <object type="Long" x="4"/>
+                            </value>
+                          </element>
                         </simulation>
                         <ports size="1" type="ArrayList">
                           <element index="0" type="ListElementData">
                             <value type="ValueData">
                               <object type="SimulationMultiPortData">
-                                <simulationMultiPortData size="2" type="LinkedHashMap">
+                                <simulationMultiPortData size="3" type="LinkedHashMap">
                                   <element index="0" type="MapElementData">
                                     <key type="KeyData">
                                       <object type="Long" x="2"/>
@@ -281,7 +400,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="41"/>
+                                                <traceId type="Long" x="79"/>
                                               </object>
                                             </value>
                                           </element>
@@ -299,7 +418,25 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="47"/>
+                                                <traceId type="Long" x="96"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                  <element index="2" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="4"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="TracePortData">
+                                                <traceId type="Long" x="97"/>
                                               </object>
                                             </value>
                                           </element>
@@ -339,14 +476,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="14"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-37</object>
+70</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -355,7 +492,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-45</object>
+77</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -370,14 +516,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="15"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-37</object>
+70</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -386,7 +532,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-45</object>
+77</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -401,14 +556,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="16"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-37</object>
+70</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -417,7 +572,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-45</object>
+77</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -432,14 +596,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="27"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-41</object>
+79</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -448,7 +612,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-47</object>
+96</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+97</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -463,14 +636,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="28"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-41</object>
+79</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -479,7 +652,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-47</object>
+96</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+97</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -494,14 +676,14 @@
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="29"/>
-                        <simulationTraces size="2" type="LinkedHashMap">
+                        <simulationTraces size="3" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
                               <object type="Long" x="2"/>
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-41</object>
+79</object>
                             </value>
                           </element>
                           <element index="1" type="MapElementData">
@@ -510,7 +692,16 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-47</object>
+96</object>
+                            </value>
+                          </element>
+                          <element index="2" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="4"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+97</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -532,7 +723,7 @@
             <object type="SubcircuitEditorData">
               <id type="Long" x="1"/>
               <subcircuit type="SubcircuitData">
-                <statics size="2" type="ArrayList">
+                <statics size="4" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="ClockData">
@@ -552,8 +743,8 @@
                                     <element index="0" type="ListElementData">
                                       <value type="ValueData">
                                         <object type="TickEventData">
-                                          <time type="Long" x="81920"/>
-                                          <id type="Long" x="20"/>
+                                          <time type="Long" x="389120"/>
+                                          <id type="Long" x="1286"/>
                                         </object>
                                       </value>
                                     </element>
@@ -571,7 +762,7 @@
                               </key>
                               <value type="ValueData">
                                 <object type="ClockOscillatorState">
-                                  <state>true</state>
+                                  <state>false</state>
                                 </object>
                               </value>
                             </element>
@@ -592,12 +783,24 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="7"/>
-                                                <events size="0" type="ArrayList"/>
-                                                <output type="DriveEventData">
-                                                  <time type="Long" x="65893"/>
-                                                  <id type="Long" x="22"/>
-                                                  <voltage>3.1</voltage>
+                                                <traceId type="Long" x="129"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="373093"/>
+                                                        <id type="Long" x="1297"/>
+                                                        <voltage>0.2</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
+                                                <output type="SlewEventData">
+                                                  <time type="Long" x="370124"/>
+                                                  <id type="Long" x="1287"/>
+                                                  <startVoltage>3.1</startVoltage>
+                                                  <endVoltage>0.2</endVoltage>
+                                                  <slewTime type="Long" x="2969"/>
                                                 </output>
                                               </object>
                                             </value>
@@ -670,7 +873,134 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="7"/>
+                                                <traceId type="Long" x="129"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="TransitionEventData">
+                                                        <time type="Long" x="372479"/>
+                                                        <id type="Long" x="1298"/>
+                                                        <voltage>0.8</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                          <element index="1" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="77"/>
+                                                <events size="1" type="ArrayList">
+                                                  <element index="0" type="ListElementData">
+                                                    <value type="ValueData">
+                                                      <object type="DriveEventData">
+                                                        <time type="Long" x="172132"/>
+                                                        <id type="Long" x="106"/>
+                                                        <voltage>0.2</voltage>
+                                                      </object>
+                                                    </value>
+                                                  </element>
+                                                </events>
+                                                <output type="DriveEventData">
+                                                  <time type="Long" x="355940"/>
+                                                  <id type="Long" x="1183"/>
+                                                  <voltage>3.1</voltage>
+                                                </output>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                        </ports>
+                        <name/>
+                        <position type="Int2D" x="-28" y="4"/>
+                        <rotation rotation="West" type="Rotation"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                        <id type="Long" x="3"/>
+                        <inputCount type="Integer" x="1"/>
+                        <inputWidth type="Integer" x="1"/>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="2" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="AndGateData">
+                        <inputCount type="Integer" x="2"/>
+                        <inputWidth type="Integer" x="1"/>
+                        <explicitPowerPorts>false</explicitPowerPorts>
+                        <family type="Family">
+                          <family>LVC</family>
+                        </family>
+                        <events type="SimulationIntegratedCircuitEventData">
+                          <simulationIntegratedCircuitEventData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="MultiIntegratedCircuitEventData">
+                                  <integratedCircuitEventData size="0" type="ArrayList"/>
+                                </object>
+                              </value>
+                            </element>
+                          </simulationIntegratedCircuitEventData>
+                        </events>
+                        <state type="SimulationStateData">
+                          <simulationStateData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="Stateless"/>
+                              </value>
+                            </element>
+                          </simulationStateData>
+                        </state>
+                        <ports size="3" type="ArrayList">
+                          <element index="0" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="97"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -697,12 +1027,39 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="45"/>
+                                                <traceId type="Long" x="96"/>
+                                                <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                          <element index="2" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="125"/>
                                                 <events size="0" type="ArrayList"/>
                                                 <output type="DriveEventData">
-                                                  <time type="Long" x="69220"/>
-                                                  <id type="Long" x="25"/>
-                                                  <voltage>3.1</voltage>
+                                                  <time type="Long" x="360138"/>
+                                                  <id type="Long" x="1235"/>
+                                                  <voltage>0.2</voltage>
                                                 </output>
                                               </object>
                                             </value>
@@ -717,18 +1074,382 @@
                           </element>
                         </ports>
                         <name/>
-                        <position type="Int2D" x="-28" y="4"/>
+                        <position type="Int2D" x="-8" y="0"/>
                         <rotation rotation="West" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
-                        <id type="Long" x="3"/>
-                        <inputCount type="Integer" x="1"/>
-                        <inputWidth type="Integer" x="1"/>
+                        <id type="Long" x="45"/>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="3" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="OscilloscopeData">
+                        <family type="Family">
+                          <family>LVC</family>
+                        </family>
+                        <events type="SimulationIntegratedCircuitEventData">
+                          <simulationIntegratedCircuitEventData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="MultiIntegratedCircuitEventData">
+                                  <integratedCircuitEventData size="1" type="ArrayList">
+                                    <element index="0" type="ListElementData">
+                                      <value type="ValueData">
+                                        <object type="TickEventData">
+                                          <time type="Long" x="370548"/>
+                                          <id type="Long" x="1301"/>
+                                        </object>
+                                      </value>
+                                    </element>
+                                  </integratedCircuitEventData>
+                                </object>
+                              </value>
+                            </element>
+                          </simulationIntegratedCircuitEventData>
+                        </events>
+                        <state type="SimulationStateData">
+                          <simulationStateData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="OscilloscopeState">
+                                  <sampleCount type="Integer" x="960"/>
+                                  <minVoltage length="2" type="float[][]">
+                                    <array0 length="960" type="float[]">
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.28693163,0.4529808,0.61902994,0.7850791,0.95112836,1.1171775,1.2832266,1.4492759,1.615325,1.7813742,1.9474233,2.1134725,2.2795217,2.445571,2.6116202,2.7776692,2.9437182,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9945097,2.8284605,2.6624115,2.4963624,2.330313,2.164264,1.9982148,1.8321657,1.6661165,1.5000675,1.3340181,1.1679691,1.0019197,0.83587074,0.66982144,0.5037723,0.33772308,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.29669923,0.4627484,0.62879753,0.7948467,0.96089596,1.1269451,1.2929941,1.4590434,1.6250925,1.7911417,1.957191,2.12324,2.2892892,2.4553382,2.6213875,2.7874367,2.953486,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9847424,2.818693,2.652644,2.486595,2.3205457,2.1544964,1.9884472,1.8223981,1.6563488,1.4902997,1.3242506,1.1582013,0.99215215,0.8261031,0.6600538,0.49400473,
+0.32795548,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.30646682,0.472516,0.6385652,0.80461437,0.97066355,1.1367126,1.3027618,1.4688109,1.6348602,1.8009093,1.9669585,2.1330075,2.299057,2.465106,2.631155,2.7972043,2.9632535,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9749746,2.8089254,2.6428764,2.4768271,2.310778,2.1447287,1.9786797,1.8126305,1.6465813,1.4805322,1.3144829,1.1484338,0.98238456,0.8163355,0.6502862,
+0.48423713,0.31818786,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.3162344,0.4822836,0.6483327,0.81438196,0.9804311,1.1464802,1.3125294,1.4785786,1.6446278,1.8106769,1.9767263,2.1427753,2.3088245,2.4748735,2.6409228,2.806972,
+2.973021,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.965207,2.7991576,2.6331086,2.4670596,2.3010104,2.134961,1.968912,1.8028629,1.6368136,1.4707645,1.3047154,1.1386663,0.972617,0.80656785,
+0.6405186,0.4744695,0.30842027,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2</array0>
+                                    <array1 length="960" type="float[]">
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.017952,2.851903,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.34065342,0.5067026,0.6727518,0.83880097,1.0048501,1.1708992,1.3369484,1.5029975,1.6690469,1.8350959,
+2.001145,2.1671944,2.3332434,2.4992926,2.6653416,2.8313909,2.99744,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.0374873,2.871438,2.705389,2.5393398,2.3732908,2.2072413,2.0411923,1.8751429,1.7090938,1.5430448,
+1.3769956,1.2109464,1.0448972,0.8788481,0.7127989,0.5467498,0.38070047,0.2146514,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.350421,0.5164702,0.6825193,0.84856856,1.0146177,1.1806669,1.346716,1.5127652,1.6788144,
+1.8448635,2.0109127,2.176962,2.343011,2.5090604,2.6751094,2.8411586,3.0072076,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.0277197,2.8616707,2.6956215,2.529572,2.363523,2.197474,2.0314248,1.8653754,1.6993263,
+1.5332773,1.3672279,1.2011789,1.0351295,0.8690805,0.70303124,0.5369822,0.37093288,0.20488381,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.3601886,0.5262378,0.69228697,0.8583361,1.0243852,1.1904345,1.3564836,1.5225328,
+1.6885818,1.8546312,2.0206802,2.1867297,2.3527787,2.5188277,2.684877,2.8509262,3.0169754,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1</array1>
+                                  </minVoltage>
+                                  <maxVoltage length="2" type="float[][]">
+                                    <array0 length="960" type="float[]">
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.28693163,0.4529808,0.61902994,0.7850791,0.95112836,1.1171775,1.2832266,1.4492759,1.615325,1.7813742,1.9474233,2.1134725,2.2795217,2.445571,2.6116202,2.7776692,2.9437182,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9945097,2.8284605,2.6624115,2.4963624,2.330313,2.164264,1.9982148,1.8321657,1.6661165,1.5000675,1.3340181,1.1679691,1.0019197,0.83587074,0.66982144,0.5037723,0.33772308,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.29669923,0.4627484,0.62879753,0.7948467,0.96089596,1.1269451,1.2929941,1.4590434,1.6250925,1.7911417,1.957191,2.12324,2.2892892,2.4553382,2.6213875,2.7874367,2.953486,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9847424,2.818693,2.652644,2.486595,2.3205457,2.1544964,1.9884472,1.8223981,1.6563488,1.4902997,1.3242506,1.1582013,0.99215215,0.8261031,0.6600538,0.49400473,
+0.32795548,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.30646682,0.472516,0.6385652,0.80461437,0.97066355,1.1367126,1.3027618,1.4688109,1.6348602,1.8009093,1.9669585,2.1330075,2.299057,2.465106,2.631155,2.7972043,2.9632535,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.9749746,2.8089254,2.6428764,2.4768271,2.310778,2.1447287,1.9786797,1.8126305,1.6465813,1.4805322,1.3144829,1.1484338,0.98238456,0.8163355,0.6502862,
+0.48423713,0.31818786,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.3162344,0.4822836,0.6483327,0.81438196,0.9804311,1.1464802,1.3125294,1.4785786,1.6446278,1.8106769,1.9767263,2.1427753,2.3088245,2.4748735,2.6409228,2.806972,
+2.973021,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,2.965207,2.7991576,2.6331086,2.4670596,2.3010104,2.134961,1.968912,1.8028629,1.6368136,1.4707645,1.3047154,1.1386663,0.972617,0.80656785,
+0.6405186,0.4744695,0.30842027,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2</array0>
+                                    <array1 length="960" type="float[]">
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.017952,2.851903,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.34065342,0.5067026,0.6727518,0.83880097,1.0048501,1.1708992,1.3369484,1.5029975,1.6690469,1.8350959,
+2.001145,2.1671944,2.3332434,2.4992926,2.6653416,2.8313909,2.99744,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.0374873,2.871438,2.705389,2.5393398,2.3732908,2.2072413,2.0411923,1.8751429,1.7090938,1.5430448,
+1.3769956,1.2109464,1.0448972,0.8788481,0.7127989,0.5467498,0.38070047,0.2146514,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.350421,0.5164702,0.6825193,0.84856856,1.0146177,1.1806669,1.346716,1.5127652,1.6788144,
+1.8448635,2.0109127,2.176962,2.343011,2.5090604,2.6751094,2.8411586,3.0072076,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.0277197,2.8616707,2.6956215,2.529572,2.363523,2.197474,2.0314248,1.8653754,1.6993263,
+1.5332773,1.3672279,1.2011789,1.0351295,0.8690805,0.70303124,0.5369822,0.37093288,0.20488381,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,
+0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.3601886,0.5262378,0.69228697,0.8583361,1.0243852,1.1904345,1.3564836,1.5225328,
+1.6885818,1.8546312,2.0206802,2.1867297,2.3527787,2.5188277,2.684877,2.8509262,3.0169754,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,
+3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1,3.1</array1>
+                                  </maxVoltage>
+                                  <colour length="2" type="int[][]">
+                                    <array0 length="960" type="int[]">
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16760576,-16758528,-16757504,-16755456,-16753408,-16752384,-16750336,-16748288,-16747520,-16745472,-16743424,-16742400,-16740352,-16738304,-16737280,-16735232,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16735232,-16736256,-16738304,-16740352,-16741376,-16743424,-16745472,-16746496,-16748288,-16749312,-16751360,-16753408,-16754432,-16756480,-16758528,-16759552,-16761600,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16760576,-16758528,-16757504,-16755456,-16753408,-16752384,-16750336,-16748288,-16747520,-16745472,-16743424,-16742400,-16740352,-16738304,-16737280,-16735232,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16735232,-16736256,-16738304,-16740352,-16741376,-16743424,-16745472,-16746496,-16748288,-16750336,-16751360,-16753408,-16755456,-16756480,-16758528,-16760576,
+-16761600,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16761600,-16760576,-16758528,-16756480,-16755456,-16753408,-16751360,-16750336,-16748288,-16746496,-16745472,-16743424,-16742400,-16740352,-16738304,-16737280,-16735232,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16735232,-16736256,-16738304,-16740352,-16741376,-16743424,-16745472,-16746496,-16748288,-16750336,-16751360,-16753408,-16755456,-16756480,-16758528,
+-16760576,-16761600,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16761600,-16760576,-16758528,-16756480,-16755456,-16753408,-16751360,-16750336,-16748288,-16746496,-16745472,-16743424,-16741376,-16740352,-16738304,-16736256,
+-16735232,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16735232,-16737280,-16738304,-16740352,-16741376,-16743424,-16745472,-16746496,-16748288,-16750336,-16751360,-16753408,-16755456,-16756480,
+-16758528,-16760576,-16761600,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624</array0>
+                                    <array1 length="960" type="int[]">
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16734208,-16736256,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,
+-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-9545126,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16761600,-16759552,-16758528,-16756480,-16754432,-16753408,-16751360,-16749312,-16748288,-16746496,
+-16744448,-16743424,-16741376,-16740352,-16738304,-16736256,-16735232,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16734208,-16736256,-16737280,-16739328,-16741376,-16742400,-16744448,-16746496,-16747520,-16749312,
+-16751360,-16752384,-16754432,-16756480,-16757504,-16759552,-16761600,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16761600,-16759552,-16758528,-16756480,-16754432,-16753408,-16751360,-16749312,-16748288,
+-16746496,-16744448,-16743424,-16741376,-16739328,-16738304,-16736256,-16734208,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16734208,-16736256,-16738304,-16739328,-16741376,-16743424,-16744448,-16746496,-16748288,
+-16749312,-16751360,-16752384,-16754432,-16756480,-16757504,-16759552,-16761600,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,
+-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16762624,-16761600,-16759552,-16758528,-16756480,-16754432,-16753408,-16751360,-16749312,
+-16748288,-16746496,-16744448,-16743424,-16741376,-16739328,-16738304,-16736256,-16734208,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,
+-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184,-16733184</array1>
+                                  </colour>
+                                  <tickPosition type="Integer" x="17"/>
+                                </object>
+                              </value>
+                            </element>
+                          </simulationStateData>
+                        </state>
+                        <ports size="2" type="ArrayList">
+                          <element index="0" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="125"/>
+                                                <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                          <element index="1" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="129"/>
+                                                <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                        </ports>
+                        <name/>
+                        <position type="Int2D" x="-3" y="0"/>
+                        <rotation rotation="Cannot" type="Rotation"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                        <id type="Long" x="56"/>
+                        <inputCount type="Integer" x="2"/>
+                        <numberOfDivsWide type="Integer" x="32"/>
+                        <samplesPerDiv type="Integer" x="30"/>
+                        <divHeightInGrids type="Integer" x="4"/>
+                        <sampleFrequency>6.0E9</sampleFrequency>
                       </object>
                     </value>
                   </element>
                 </statics>
-                <subcircuitInstances size="1" type="ArrayList">
+                <subcircuitInstances size="2" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="SubcircuitInstanceData">
@@ -747,7 +1468,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="45"/>
+                                                <traceId type="Long" x="77"/>
                                               </object>
                                             </value>
                                           </element>
@@ -773,7 +1494,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="47"/>
+                                                <traceId type="Long" x="96"/>
                                               </object>
                                             </value>
                                           </element>
@@ -811,31 +1532,91 @@
                       </object>
                     </value>
                   </element>
-                </subcircuitInstances>
-                <traces size="4" type="ArrayList">
-                  <element index="0" type="ListElementData">
+                  <element index="1" type="ListElementData">
                     <value type="ValueData">
-                      <object type="TraceData">
-                        <id type="Long" x="4"/>
-                        <simulationTraces size="1" type="LinkedHashMap">
-                          <element index="0" type="MapElementData">
-                            <key type="KeyData">
-                              <object type="Long" x="1"/>
-                            </key>
+                      <object type="SubcircuitInstanceData">
+                        <ports size="2" type="ArrayList">
+                          <element index="0" type="ListElementData">
                             <value type="ValueData">
-                              <object length="1" type="long[]">
-7</object>
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="TracePortData">
+                                                <traceId type="Long" x="129"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
                             </value>
                           </element>
-                        </simulationTraces>
-                        <start type="Int2D" x="-32" y="4"/>
-                        <end type="Int2D" x="-29" y="4"/>
+                          <element index="1" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="TracePortData">
+                                                <traceId type="Long" x="97"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                        </ports>
+                        <name/>
+                        <position type="Int2D" x="-21" y="-1"/>
+                        <rotation rotation="West" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
+                        <id type="Long" x="40"/>
+                        <subcircuitTypeName>Mid</subcircuitTypeName>
+                        <comment/>
+                        <width type="Integer" x="0"/>
+                        <height type="Integer" x="0"/>
+                        <subcircuitInstanceSimulations size="1" type="ArrayList">
+                          <element index="0" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SubcircuitInstanceSimulationSimulationData">
+                                <containingSubcircuitSimulation type="Long" x="1"/>
+                                <circuitSimulation type="Long" x="1"/>
+                                <instanceSubcircuitSSimulation type="Long" x="4"/>
+                                <viewPath type="Long" x="1"/>
+                              </object>
+                            </value>
+                          </element>
+                        </subcircuitInstanceSimulations>
                       </object>
                     </value>
                   </element>
-                  <element index="1" type="ListElementData">
+                </subcircuitInstances>
+                <traces size="14" type="ArrayList">
+                  <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
                         <id type="Long" x="31"/>
@@ -846,7 +1627,7 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-45</object>
+77</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -857,10 +1638,10 @@
                       </object>
                     </value>
                   </element>
-                  <element index="2" type="ListElementData">
+                  <element index="1" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
-                        <id type="Long" x="32"/>
+                        <id type="Long" x="46"/>
                         <simulationTraces size="1" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
@@ -868,7 +1649,29 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-47</object>
+96</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-9" y="1"/>
+                        <end type="Int2D" x="-12" y="1"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="2" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="47"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+96</object>
                             </value>
                           </element>
                         </simulationTraces>
@@ -882,7 +1685,7 @@
                   <element index="3" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
-                        <id type="Long" x="33"/>
+                        <id type="Long" x="48"/>
                         <simulationTraces size="1" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
@@ -890,12 +1693,232 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-47</object>
+96</object>
                             </value>
                           </element>
                         </simulationTraces>
                         <start type="Int2D" x="-12" y="4"/>
                         <end type="Int2D" x="-12" y="1"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="4" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="49"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+97</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-9" y="-1"/>
+                        <end type="Int2D" x="-16" y="-1"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="5" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="57"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+125</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-6" y="0"/>
+                        <end type="Int2D" x="-3" y="0"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="6" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="66"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-30" y="7"/>
+                        <end type="Int2D" x="-9" y="7"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="7" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="67"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-3" y="4"/>
+                        <end type="Int2D" x="-9" y="4"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="8" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="68"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-32" y="4"/>
+                        <end type="Int2D" x="-30" y="4"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="9" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="69"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-30" y="4"/>
+                        <end type="Int2D" x="-29" y="4"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="10" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="70"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-25" y="-1"/>
+                        <end type="Int2D" x="-30" y="-1"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="11" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="71"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-30" y="-1"/>
+                        <end type="Int2D" x="-30" y="4"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="12" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="72"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-30" y="4"/>
+                        <end type="Int2D" x="-30" y="7"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="13" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="73"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+129</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-9" y="4"/>
+                        <end type="Int2D" x="-9" y="7"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
                       </object>
@@ -927,16 +1950,16 @@
             <object type="CircuitSimulationData">
               <id type="Long" x="1"/>
               <timeline type="TimelineData">
-                <time type="Long" x="79360"/>
-                <previousEventTime type="Long" x="69578"/>
-                <eventTime type="Long" x="72547"/>
+                <time type="Long" x="370432"/>
+                <previousEventTime type="Long" x="370208"/>
+                <eventTime type="Long" x="370378"/>
               </timeline>
               <name>Top Main</name>
             </object>
           </value>
         </element>
       </circuitSimulations>
-      <subcircuitSimulations size="3" type="ArrayList">
+      <subcircuitSimulations size="4" type="ArrayList">
         <element index="0" type="ListElementData">
           <value type="ValueData">
             <object type="SubcircuitTopSimulationData">
@@ -959,6 +1982,16 @@
         </element>
         <element index="2" type="ListElementData">
           <value type="ValueData">
+            <object type="SubcircuitInstanceSimulationData">
+              <viewPath type="Long" x="35"/>
+              <subcircuitEditor type="Long" x="2"/>
+              <circuitSimulation type="Long" x="1"/>
+              <subcircuitSimulation type="Long" x="4"/>
+            </object>
+          </value>
+        </element>
+        <element index="3" type="ListElementData">
+          <value type="ValueData">
             <object type="SubcircuitTopSimulationData">
               <viewPath type="Long" x="1"/>
               <subcircuitEditor type="Long" x="1"/>
@@ -968,7 +2001,7 @@
           </value>
         </element>
       </subcircuitSimulations>
-      <viewPathDatas size="3" type="ArrayList">
+      <viewPathDatas size="4" type="ArrayList">
         <element index="0" type="ListElementData">
           <value type="ValueData">
             <object type="ViewPathData">
@@ -1061,6 +2094,42 @@
             </object>
           </value>
         </element>
+        <element index="3" type="ListElementData">
+          <value type="ValueData">
+            <object type="ViewPathData">
+              <id type="Long" x="35"/>
+              <elements size="2" type="ArrayList">
+                <element index="0" type="ListElementData">
+                  <value type="ValueData">
+                    <object type="ViewPathElementData">
+                      <id type="Long" x="1"/>
+                      <type>Editor</type>
+                    </object>
+                  </value>
+                </element>
+                <element index="1" type="ListElementData">
+                  <value type="ValueData">
+                    <object type="ViewPathElementData">
+                      <id type="Long" x="40"/>
+                      <type>Subcircuit</type>
+                    </object>
+                  </value>
+                </element>
+              </elements>
+              <prevId type="Long" x="1"/>
+              <circuitSimulations size="1" type="LinkedHashMap">
+                <element index="0" type="MapElementData">
+                  <key type="KeyData">
+                    <object type="Long" x="1"/>
+                  </key>
+                  <value type="ValueData">
+                    <object type="Long" x="4"/>
+                  </value>
+                </element>
+              </circuitSimulations>
+            </object>
+          </value>
+        </element>
       </viewPathDatas>
       <lastSubcircuitSimulationDatas size="2" type="ArrayList">
         <element index="0" type="ListElementData">
@@ -1087,7 +2156,7 @@
       <currentCircuitSimulation type="Long" x="1"/>
     </circuit>
     <defaultRunTimeStep type="Long" x="256"/>
-    <runTimeStep type="Long" x="256"/>
+    <runTimeStep type="Long" x="1024"/>
     <running>true</running>
     <creationRotation rotation="West" type="Rotation"/>
     <subcircuitBookmarks size="1" type="ArrayList">

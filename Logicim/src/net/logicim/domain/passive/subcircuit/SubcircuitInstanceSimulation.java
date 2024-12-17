@@ -43,7 +43,11 @@ public class SubcircuitInstanceSimulation
   @Override
   public String getDescription()
   {
-    String name = subcircuitInstance.getName();
+    String name = null;
+    if (subcircuitInstance !=  null)
+    {
+      name = subcircuitInstance.getName();
+    }
     if (StringUtil.isEmptyOrNull(name))
     {
       return super.getDescription();

@@ -252,20 +252,28 @@ public class CircuitEditor
   {
     ArrayList<ViewPathData> viewPathDatas = new ArrayList<>();
     List<ViewPath> paths = viewPaths.getViewPaths();
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : paths)
     {
       ArrayList<ViewPathElementData> elements = new ArrayList<>();
-      List<CircuitInstanceView> circuitInstanceViews = path.getPath();
+      List<CircuitInstanceView> circuitInstanceViews = viewPath.getPath();
       for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
       {
         elements.add(new ViewPathElementData(circuitInstanceView.getId(), circuitInstanceView.getType()));
       }
-      long previousId = path.getPrevious() != null ? path.getPrevious().getId() : 0L;
-      long nextId = path.getNext() != null ? path.getNext().getId() : 0L;
-      viewPathDatas.add(new ViewPathData(path.getId(),
+      long previousId = viewPath.getPrevious() != null ? viewPath.getPrevious().getId() : 0L;
+
+      Map<Long, Long> circuitSimulationIds = new LinkedHashMap<>();
+      for (Map.Entry<CircuitSimulation, SubcircuitSimulation> entry : viewPath.getCircuitSimulations())
+      {
+        long circuitSimulationId = entry.getKey().getId();
+        long subcircuitSimulationId = entry.getValue().getId();
+        circuitSimulationIds.put(circuitSimulationId, subcircuitSimulationId);
+      }
+
+      viewPathDatas.add(new ViewPathData(viewPath.getId(),
                                          elements,
                                          previousId,
-                                         nextId));
+                                         circuitSimulationIds));
     }
     return viewPathDatas;
   }
@@ -398,6 +406,7 @@ public class CircuitEditor
     loadTimeline(circuitData, loaders);
     loadViewPaths(circuitData, subcircuitEditorMap, subcircuitInstanceViewMap, viewPathMap);
     loadSubcircuitSimulations(circuitData, loaders, subcircuitEditorMap, viewPathMap);
+    loadViewPathSubcircuitSimulations(circuitData, loaders, viewPathMap);
     loadSubcircuitInstances(loaders, subcircuitEditorViews);
     validateLoadSimulationSubcircuitInstances(circuitData.subcircuitSimulations, loaders, subcircuitEditorMap, subcircuitEditorViews);
     updateSimulationPaths();
@@ -424,11 +433,31 @@ public class CircuitEditor
     });
   }
 
+  protected void loadViewPathSubcircuitSimulations(CircuitData circuitData, CircuitLoaders loaders, Map<Long, ViewPath> viewPathMap)
+  {
+    for (ViewPathData viewPathData : circuitData.viewPathDatas)
+    {
+      for (Map.Entry<Long, Long> entry : viewPathData.circuitSimulations.entrySet())
+      {
+        long circuitSimulationId = entry.getKey();
+        long subcircuitSimulationId = entry.getValue();
+        long viewPathId = viewPathData.id;
+
+        CircuitSimulation circuitSimulation = loaders.getCircuitSimulation(circuitSimulationId);
+        ViewPath viewPath = viewPathMap.get(viewPathId);
+        SubcircuitSimulation subcircuitSimulation = loaders.getSubcircuitSimulation(subcircuitSimulationId);
+        viewPath.putDuringLoad(circuitSimulation, subcircuitSimulation);
+      }
+    }
+  }
+
   protected ViewPathCircuitSimulation loadCurrentPathSimulation(CircuitData circuitData,
                                                                 CircuitLoaders loaders,
                                                                 Map<Long, ViewPath> viewPathMap)
   {
-    return new ViewPathCircuitSimulation(viewPathMap.get(circuitData.currentViewPath), loaders.simulationLoader.getCircuitSimulation(circuitData.currentCircuitSimulation));
+    ViewPath viewPath = viewPathMap.get(circuitData.currentViewPath);
+    CircuitSimulation circuitSimulation = loaders.simulationLoader.getCircuitSimulation(circuitData.currentCircuitSimulation);
+    return new ViewPathCircuitSimulation(viewPath, circuitSimulation);
   }
 
   private void loadViewPaths(CircuitData circuitData,
@@ -472,9 +501,7 @@ public class CircuitEditor
     for (ViewPathData viewPathData : viewPathDatas)
     {
       ViewPath viewPath = viewPathMap.get(viewPathData.id);
-      ViewPath next = viewPathMap.get(viewPathData.prevId);
-      ViewPath previous = viewPathMap.get(viewPathData.nextId);
-      viewPath.setNext(next);
+      ViewPath previous = viewPathMap.get(viewPathData.prevId);
       viewPath.setPrevious(previous);
     }
   }
@@ -886,7 +913,8 @@ public class CircuitEditor
       List<ViewPath> viewPaths = subcircuitView.getViewPaths(lastCircuitSimulation);
       if (viewPaths.size() > 0)
       {
-        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPaths.iterator().next(), lastCircuitSimulation));
+        ViewPath viewPath = viewPaths.iterator().next();
+        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPath, lastCircuitSimulation));
         return;
       }
     }
@@ -897,7 +925,8 @@ public class CircuitEditor
       List<ViewPath> viewPaths = subcircuitView.getViewPaths(circuitSimulation);
       if (viewPaths.size() > 0)
       {
-        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPaths.iterator().next(), circuitSimulation));
+        ViewPath viewPath = viewPaths.iterator().next();
+        setCurrentViewPathCircuitSimulation(newSubcircuitEditor, new ViewPathCircuitSimulation(viewPath, circuitSimulation));
         return;
       }
     }
@@ -990,14 +1019,6 @@ public class CircuitEditor
           throw new SimulatorException("View Paths does not contain Previous path [%s].", previous);
         }
       }
-      ViewPath next = path.getNext();
-      if (next != null)
-      {
-        if (!viewPaths.getViewPaths().contains(next))
-        {
-          throw new SimulatorException("View Paths does not contain Next path [%s].", next);
-        }
-      }
     }
   }
 
@@ -1041,10 +1062,7 @@ public class CircuitEditor
         path.clearPrevious();
         path.setPrevious(existingPath);
       }
-
-      path.clearNext();
     }
-    viewPaths.createPathLinks();
   }
 
   protected Map<ViewPath, ViewPath> createNewPathToExistingPathMap(ViewPaths newViewPaths)

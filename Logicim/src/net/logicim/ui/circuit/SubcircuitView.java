@@ -22,6 +22,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.circuit.path.UpdatedViewPaths;
 import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPathCircuitSimulation;
 import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.LineOverlap;
@@ -39,9 +40,9 @@ import net.logicim.ui.simulation.ConnectionViewCache;
 import net.logicim.ui.simulation.StaticViewIterator;
 import net.logicim.ui.simulation.component.decorative.common.DecorativeView;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
-import net.logicim.ui.simulation.component.subcircuit.ComponentShit;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceCreation;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
+import net.logicim.ui.simulation.component.subcircuit.ViewPathComponents;
 
 import java.util.*;
 
@@ -1229,11 +1230,11 @@ public class SubcircuitView
       }
     }
 
-    List<ComponentShit> componentShits = new ArrayList<>();
+    List<ViewPathComponents> viewPathComponents = new ArrayList<>();
     CircuitEditor circuitEditor = getCircuitEditor();
-    componentShits.add(new ComponentShit(circuitEditor.getCurrentCircuitSimulation(),
-                                         circuitEditor.getCurrentViewPath(),
-                                         componentViews));
+    ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(circuitEditor.getCurrentViewPath(), circuitEditor.getCurrentCircuitSimulation());
+    viewPathComponents.add(new ViewPathComponents(viewPathCircuitSimulation,
+                                                  componentViews));
 
     List<SubcircuitInstanceCreation> creations = new ArrayList<>();
     for (ViewPath viewPath : viewPaths)
@@ -1241,11 +1242,11 @@ public class SubcircuitView
       List<CircuitSimulation> circuitSimulationList = viewPath.getCircuitSimulation();
       for (CircuitSimulation circuitSimulation : circuitSimulationList)
       {
-        recurseDoViewPathShit(creations,
-                              componentShits,
-                              viewPath,
-                              circuitSimulation,
-                              subcircuitInstanceViews
+        recurseFindSubcircuitInstanceCreations(creations,
+                                               viewPathComponents,
+                                               viewPath,
+                                               circuitSimulation,
+                                               subcircuitInstanceViews
         );
       }
     }
@@ -1255,7 +1256,7 @@ public class SubcircuitView
       this.circuitEditor.updateSimulationPaths();
     }
 
-    createComponents(creations, componentShits);
+    createComponents(creations, viewPathComponents);
 
     for (SubcircuitInstanceCreation creation : creations)
     {
@@ -1274,11 +1275,11 @@ public class SubcircuitView
                                  selectedTraceViews);
   }
 
-  protected void recurseDoViewPathShit(List<SubcircuitInstanceCreation> creations,
-                                       List<ComponentShit> componentShits,
-                                       ViewPath viewPath,
-                                       CircuitSimulation circuitSimulation,
-                                       List<SubcircuitInstanceView> subcircuitInstanceViews)
+  protected void recurseFindSubcircuitInstanceCreations(List<SubcircuitInstanceCreation> creations,
+                                                        List<ViewPathComponents> viewPathComponentsList,
+                                                        ViewPath viewPath,
+                                                        CircuitSimulation circuitSimulation,
+                                                        List<SubcircuitInstanceView> subcircuitInstanceViews)
   {
     List<SubcircuitInstanceCreation> localCreations = new ArrayList<>();
 
@@ -1288,30 +1289,34 @@ public class SubcircuitView
       localCreations.add(creation);
     }
 
+    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
+
     for (SubcircuitInstanceCreation creation : localCreations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
       SubcircuitView subcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
 
-      componentShits.add(new ComponentShit(circuitSimulation, viewPath.getNext(), subcircuitView.getComponentViews()));
-      subcircuitView.recurseDoViewPathShit(creations,
-                                           componentShits,
-                                           viewPath.getNext(),
-                                           circuitSimulation,
-                                           subcircuitView.getSubcircuitInstanceViews());
+      ViewPath nextViewPath = viewPaths.getPath(viewPath, subcircuitInstanceView);
+      ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(nextViewPath, circuitSimulation);
+      viewPathComponentsList.add(new ViewPathComponents(viewPathCircuitSimulation, subcircuitView.getComponentViews()));
+      subcircuitView.recurseFindSubcircuitInstanceCreations(creations,
+                                                            viewPathComponentsList,
+                                                            nextViewPath,
+                                                            circuitSimulation,
+                                                            subcircuitView.getSubcircuitInstanceViews());
     }
 
     creations.addAll(localCreations);
   }
 
   protected void createComponents(List<SubcircuitInstanceCreation> creations,
-                                  List<ComponentShit> componentShits)
+                                  List<ViewPathComponents> viewPathComponentsList)
   {
-    for (ComponentShit componentShit : componentShits)
+    for (ViewPathComponents viewPathComponents : viewPathComponentsList)
     {
-      CircuitSimulation circuitSimulation = componentShit.getCircuitSimulation();
-      ViewPath viewPath = componentShit.getViewPath();
-      for (ComponentView<?> componentView : componentShit.getComponentViews())
+      CircuitSimulation circuitSimulation = viewPathComponents.getCircuitSimulation();
+      ViewPath viewPath = viewPathComponents.getViewPath();
+      for (ComponentView<?> componentView : viewPathComponents.getComponentViews())
       {
         componentView.createComponent(viewPath, circuitSimulation);
       }
@@ -1335,11 +1340,11 @@ public class SubcircuitView
       subcircuitInstanceView.simulationStarted(viewPath, circuitSimulation);
     }
 
-    for (ComponentShit componentShit : componentShits)
+    for (ViewPathComponents viewPathComponents : viewPathComponentsList)
     {
-      ViewPath viewPath = componentShit.getViewPath();
-      CircuitSimulation circuitSimulation = componentShit.getCircuitSimulation();
-      for (ComponentView<?> componentView : componentShit.getComponentViews())
+      ViewPath viewPath = viewPathComponents.getViewPath();
+      CircuitSimulation circuitSimulation = viewPathComponents.getCircuitSimulation();
+      for (ComponentView<?> componentView : viewPathComponents.getComponentViews())
       {
         componentView.simulationStarted(viewPath, circuitSimulation);
       }

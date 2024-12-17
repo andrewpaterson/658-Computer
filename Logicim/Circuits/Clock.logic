@@ -8,7 +8,7 @@
             <object type="SubcircuitEditorData">
               <id type="Long" x="1"/>
               <subcircuit type="SubcircuitData">
-                <statics size="1" type="ArrayList">
+                <statics size="2" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="ClockData">
@@ -28,8 +28,8 @@
                                     <element index="0" type="ListElementData">
                                       <value type="ValueData">
                                         <object type="TickEventData">
-                                          <time type="Long" x="143360"/>
-                                          <id type="Long" x="17"/>
+                                          <time type="Long" x="20480"/>
+                                          <id type="Long" x="1"/>
                                         </object>
                                       </value>
                                     </element>
@@ -68,23 +68,8 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="4"/>
-                                                <events size="1" type="ArrayList">
-                                                  <element index="0" type="ListElementData">
-                                                    <value type="ValueData">
-                                                      <object type="DriveEventData">
-                                                        <time type="Long" x="106853"/>
-                                                        <id type="Long" x="16"/>
-                                                        <voltage>3.1</voltage>
-                                                      </object>
-                                                    </value>
-                                                  </element>
-                                                </events>
-                                                <output type="DriveEventData">
-                                                  <time type="Long" x="127333"/>
-                                                  <id type="Long" x="19"/>
-                                                  <voltage>0.2</voltage>
-                                                </output>
+                                                <traceId type="Long" x="7"/>
+                                                <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
                                           </element>
@@ -98,7 +83,7 @@
                           </element>
                         </ports>
                         <name/>
-                        <position type="Int2D" x="-41" y="-9"/>
+                        <position type="Int2D" x="-33" y="4"/>
                         <rotation rotation="West" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
@@ -108,13 +93,113 @@
                       </object>
                     </value>
                   </element>
+                  <element index="1" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="BufferData">
+                        <explicitPowerPorts>false</explicitPowerPorts>
+                        <family type="Family">
+                          <family>LVC</family>
+                        </family>
+                        <events type="SimulationIntegratedCircuitEventData">
+                          <simulationIntegratedCircuitEventData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="MultiIntegratedCircuitEventData">
+                                  <integratedCircuitEventData size="0" type="ArrayList"/>
+                                </object>
+                              </value>
+                            </element>
+                          </simulationIntegratedCircuitEventData>
+                        </events>
+                        <state type="SimulationStateData">
+                          <simulationStateData size="1" type="LinkedHashMap">
+                            <element index="0" type="MapElementData">
+                              <key type="KeyData">
+                                <object type="Long" x="1"/>
+                              </key>
+                              <value type="ValueData">
+                                <object type="Stateless"/>
+                              </value>
+                            </element>
+                          </simulationStateData>
+                        </state>
+                        <ports size="2" type="ArrayList">
+                          <element index="0" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="7"/>
+                                                <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                          <element index="1" type="ListElementData">
+                            <value type="ValueData">
+                              <object type="SimulationMultiPortData">
+                                <simulationMultiPortData size="1" type="LinkedHashMap">
+                                  <element index="0" type="MapElementData">
+                                    <key type="KeyData">
+                                      <object type="Long" x="1"/>
+                                    </key>
+                                    <value type="ValueData">
+                                      <object type="MultiPortData">
+                                        <ports size="1" type="ArrayList">
+                                          <element index="0" type="ListElementData">
+                                            <value type="ValueData">
+                                              <object type="LogicPortData">
+                                                <traceId type="Long" x="9"/>
+                                                <events size="0" type="ArrayList"/>
+                                              </object>
+                                            </value>
+                                          </element>
+                                        </ports>
+                                      </object>
+                                    </value>
+                                  </element>
+                                </simulationMultiPortData>
+                              </object>
+                            </value>
+                          </element>
+                        </ports>
+                        <name/>
+                        <position type="Int2D" x="-28" y="4"/>
+                        <rotation rotation="West" type="Rotation"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                        <id type="Long" x="3"/>
+                        <inputCount type="Integer" x="1"/>
+                        <inputWidth type="Integer" x="1"/>
+                      </object>
+                    </value>
+                  </element>
                 </statics>
                 <subcircuitInstances size="0" type="ArrayList"/>
-                <traces size="1" type="ArrayList">
+                <traces size="2" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
-                        <id type="Long" x="2"/>
+                        <id type="Long" x="4"/>
                         <simulationTraces size="1" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
@@ -122,12 +207,34 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-4</object>
+7</object>
                             </value>
                           </element>
                         </simulationTraces>
-                        <start type="Int2D" x="-40" y="-9"/>
-                        <end type="Int2D" x="-34" y="-9"/>
+                        <start type="Int2D" x="-32" y="4"/>
+                        <end type="Int2D" x="-29" y="4"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="1" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="5"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="1"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+9</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-27" y="4"/>
+                        <end type="Int2D" x="-25" y="4"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
                       </object>
@@ -193,7 +300,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="23"/>
+                                                <traceId type="Long" x="21"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -220,7 +327,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="LogicPortData">
-                                                <traceId type="Long" x="31"/>
+                                                <traceId type="Long" x="30"/>
                                                 <events size="0" type="ArrayList"/>
                                               </object>
                                             </value>
@@ -235,11 +342,11 @@
                           </element>
                         </ports>
                         <name/>
-                        <position type="Int2D" x="-21" y="-11"/>
+                        <position type="Int2D" x="-35" y="-11"/>
                         <rotation rotation="West" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
-                        <id type="Long" x="6"/>
+                        <id type="Long" x="13"/>
                         <inputWidth type="Integer" x="1"/>
                         <inputCount type="Integer" x="1"/>
                       </object>
@@ -270,7 +377,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="23"/>
+                                                <traceId type="Long" x="21"/>
                                               </object>
                                             </value>
                                           </element>
@@ -283,12 +390,12 @@
                             </value>
                           </element>
                         </ports>
-                        <name>IN</name>
-                        <position type="Int2D" x="-27" y="-11"/>
+                        <name>In</name>
+                        <position type="Int2D" x="-42" y="-10"/>
                         <rotation rotation="West" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
-                        <id type="Long" x="4"/>
+                        <id type="Long" x="6"/>
                         <bitWidth type="Integer" x="1"/>
                         <family type="Family">
                           <family>LVC</family>
@@ -328,7 +435,7 @@
                                           <element index="0" type="ListElementData">
                                             <value type="ValueData">
                                               <object type="TracePortData">
-                                                <traceId type="Long" x="31"/>
+                                                <traceId type="Long" x="30"/>
                                               </object>
                                             </value>
                                           </element>
@@ -341,12 +448,12 @@
                             </value>
                           </element>
                         </ports>
-                        <name>OUT</name>
-                        <position type="Int2D" x="-14" y="-11"/>
+                        <name>Out</name>
+                        <position type="Int2D" x="-28" y="-10"/>
                         <rotation rotation="East" type="Rotation"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
-                        <id type="Long" x="9"/>
+                        <id type="Long" x="22"/>
                         <bitWidth type="Integer" x="1"/>
                         <family type="Family">
                           <family>LVC</family>
@@ -363,7 +470,7 @@
                   </element>
                 </statics>
                 <subcircuitInstances size="0" type="ArrayList"/>
-                <traces size="2" type="ArrayList">
+                <traces size="6" type="ArrayList">
                   <element index="0" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
@@ -375,12 +482,12 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-23</object>
+21</object>
                             </value>
                           </element>
                         </simulationTraces>
-                        <start type="Int2D" x="-27" y="-11"/>
-                        <end type="Int2D" x="-22" y="-11"/>
+                        <start type="Int2D" x="-36" y="-11"/>
+                        <end type="Int2D" x="-38" y="-11"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
                       </object>
@@ -389,7 +496,7 @@
                   <element index="1" type="ListElementData">
                     <value type="ValueData">
                       <object type="TraceData">
-                        <id type="Long" x="19"/>
+                        <id type="Long" x="15"/>
                         <simulationTraces size="1" type="LinkedHashMap">
                           <element index="0" type="MapElementData">
                             <key type="KeyData">
@@ -397,12 +504,100 @@
                             </key>
                             <value type="ValueData">
                               <object length="1" type="long[]">
-31</object>
+21</object>
                             </value>
                           </element>
                         </simulationTraces>
-                        <start type="Int2D" x="-19" y="-11"/>
-                        <end type="Int2D" x="-14" y="-11"/>
+                        <start type="Int2D" x="-42" y="-10"/>
+                        <end type="Int2D" x="-38" y="-10"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="2" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="16"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="2"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+21</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-38" y="-10"/>
+                        <end type="Int2D" x="-38" y="-11"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="3" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="27"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="2"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+30</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-31" y="-10"/>
+                        <end type="Int2D" x="-28" y="-10"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="4" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="28"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="2"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+30</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-33" y="-11"/>
+                        <end type="Int2D" x="-31" y="-11"/>
+                        <enabled>true</enabled>
+                        <selected>false</selected>
+                      </object>
+                    </value>
+                  </element>
+                  <element index="5" type="ListElementData">
+                    <value type="ValueData">
+                      <object type="TraceData">
+                        <id type="Long" x="29"/>
+                        <simulationTraces size="1" type="LinkedHashMap">
+                          <element index="0" type="MapElementData">
+                            <key type="KeyData">
+                              <object type="Long" x="2"/>
+                            </key>
+                            <value type="ValueData">
+                              <object length="1" type="long[]">
+30</object>
+                            </value>
+                          </element>
+                        </simulationTraces>
+                        <start type="Int2D" x="-31" y="-11"/>
+                        <end type="Int2D" x="-31" y="-10"/>
                         <enabled>true</enabled>
                         <selected>false</selected>
                       </object>
@@ -410,7 +605,7 @@
                   </element>
                 </traces>
               </subcircuit>
-              <typeName>Middle</typeName>
+              <typeName>Mid</typeName>
             </object>
           </value>
         </element>
@@ -421,9 +616,9 @@
             <object type="CircuitSimulationData">
               <id type="Long" x="1"/>
               <timeline type="TimelineData">
-                <time type="Long" x="136192"/>
-                <previousEventTime type="Long" x="124364"/>
-                <eventTime type="Long" x="127333"/>
+                <time type="Long" x="0"/>
+                <previousEventTime type="Long" x="0"/>
+                <eventTime type="Long" x="0"/>
               </timeline>
               <name>Top Main</name>
             </object>
@@ -434,11 +629,11 @@
             <object type="CircuitSimulationData">
               <id type="Long" x="2"/>
               <timeline type="TimelineData">
-                <time type="Long" x="223744"/>
+                <time type="Long" x="0"/>
                 <previousEventTime type="Long" x="0"/>
                 <eventTime type="Long" x="0"/>
               </timeline>
-              <name>Top Middle</name>
+              <name>Top Mid</name>
             </object>
           </value>
         </element>
@@ -457,7 +652,7 @@
         <element index="1" type="ListElementData">
           <value type="ValueData">
             <object type="SubcircuitTopSimulationData">
-              <viewPath type="Long" x="4"/>
+              <viewPath type="Long" x="8"/>
               <subcircuitEditor type="Long" x="2"/>
               <circuitSimulation type="Long" x="2"/>
               <subcircuitSimulation type="Long" x="2"/>
@@ -481,14 +676,23 @@
                 </element>
               </elements>
               <prevId type="Long" x="0"/>
-              <nextId type="Long" x="0"/>
+              <circuitSimulations size="1" type="LinkedHashMap">
+                <element index="0" type="MapElementData">
+                  <key type="KeyData">
+                    <object type="Long" x="1"/>
+                  </key>
+                  <value type="ValueData">
+                    <object type="Long" x="1"/>
+                  </value>
+                </element>
+              </circuitSimulations>
             </object>
           </value>
         </element>
         <element index="1" type="ListElementData">
           <value type="ValueData">
             <object type="ViewPathData">
-              <id type="Long" x="4"/>
+              <id type="Long" x="8"/>
               <elements size="1" type="ArrayList">
                 <element index="0" type="ListElementData">
                   <value type="ValueData">
@@ -500,7 +704,16 @@
                 </element>
               </elements>
               <prevId type="Long" x="0"/>
-              <nextId type="Long" x="0"/>
+              <circuitSimulations size="1" type="LinkedHashMap">
+                <element index="0" type="MapElementData">
+                  <key type="KeyData">
+                    <object type="Long" x="2"/>
+                  </key>
+                  <value type="ValueData">
+                    <object type="Long" x="2"/>
+                  </value>
+                </element>
+              </circuitSimulations>
             </object>
           </value>
         </element>
@@ -520,7 +733,7 @@
             <object type="LastSubcircuitSimulationData">
               <subcircuitEditor type="Long" x="2"/>
               <circuitSimulation type="Long" x="2"/>
-              <viewPath type="Long" x="4"/>
+              <viewPath type="Long" x="8"/>
             </object>
           </value>
         </element>
@@ -531,14 +744,14 @@
     </circuit>
     <defaultRunTimeStep type="Long" x="256"/>
     <runTimeStep type="Long" x="256"/>
-    <running>true</running>
-    <creationRotation rotation="East" type="Rotation"/>
+    <running>false</running>
+    <creationRotation rotation="West" type="Rotation"/>
     <subcircuitBookmarks size="1" type="ArrayList">
       <element index="0" type="ListElementData">
         <value type="ValueData">
           <object type="BookmarkData">
             <bookmarkKey type="Integer" x="1"/>
-            <subcircuitTypeName>Middle</subcircuitTypeName>
+            <subcircuitTypeName>Mid</subcircuitTypeName>
           </object>
         </value>
       </element>
@@ -556,7 +769,7 @@
       <element index="1" type="ListElementData">
         <value type="ValueData">
           <object type="SubcircuitParameterData">
-            <subcircuitTypeName>Middle</subcircuitTypeName>
+            <subcircuitTypeName>Mid</subcircuitTypeName>
             <position type="Float2D" x="0.0" y="0.0"/>
             <zoom>1.0</zoom>
           </object>

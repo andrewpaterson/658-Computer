@@ -7,10 +7,7 @@ import net.logicim.ui.circuit.CircuitInstanceView;
 import net.logicim.ui.circuit.SubcircuitView;
 import net.logicim.ui.simulation.component.common.InstanceView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ViewPath
     implements Comparable<ViewPath>
@@ -22,7 +19,6 @@ public class ViewPath
   protected long id;
 
   protected ViewPath previous;
-  protected ViewPath next;
 
   public ViewPath(List<CircuitInstanceView> path)
   {
@@ -41,6 +37,8 @@ public class ViewPath
     this.path = new ArrayList<>(path);
     this.circuitSimulations = circuitSimulations;
     this.id = id;
+    this.previous = null;
+
     if (id >= nextId)
     {
       nextId = id + 1;
@@ -50,6 +48,25 @@ public class ViewPath
   public static void resetNextId()
   {
     nextId = 1;
+  }
+
+  public static String toPathString(List<CircuitInstanceView> path)
+  {
+    StringBuilder builder = new StringBuilder();
+    boolean first = true;
+    for (CircuitInstanceView circuitInstanceView : path)
+    {
+      if (!first)
+      {
+        builder.append(" - ");
+      }
+      else
+      {
+        first = false;
+      }
+      builder.append(circuitInstanceView.getDescription());
+    }
+    return builder.toString();
   }
 
   public boolean equalsPath(List<CircuitInstanceView> path)
@@ -100,25 +117,6 @@ public class ViewPath
   public String toString()
   {
     return toPathString(path);
-  }
-
-  public static String toPathString(List<CircuitInstanceView> path)
-  {
-    StringBuilder builder = new StringBuilder();
-    boolean first = true;
-    for (CircuitInstanceView circuitInstanceView : path)
-    {
-      if (!first)
-      {
-        builder.append(" - ");
-      }
-      else
-      {
-        first = false;
-      }
-      builder.append(circuitInstanceView.getDescription());
-    }
-    return builder.toString();
   }
 
   public CircuitInstanceView getLast()
@@ -241,20 +239,6 @@ public class ViewPath
     this.circuitSimulations = new LinkedHashMap<>();
   }
 
-  public ViewPath getNext()
-  {
-    return next;
-  }
-
-  public void setNext(ViewPath next)
-  {
-    if ((this.next != null) && (this.next != next))
-    {
-      throw new SimulatorException("You need to think about this.  Remove if not hit.");
-    }
-    this.next = next;
-  }
-
   public List<SubcircuitSimulation> getSubcircuitSimulations()
   {
     return new ArrayList<>(circuitSimulations.values());
@@ -270,9 +254,18 @@ public class ViewPath
     return id;
   }
 
-  public void clearNext()
+  public Set<Map.Entry<CircuitSimulation, SubcircuitSimulation>> getCircuitSimulations()
   {
-    this.next = null;
+    return circuitSimulations.entrySet();
+  }
+
+  public void putDuringLoad(CircuitSimulation circuitSimulation, SubcircuitSimulation subcircuitSimulation)
+  {
+    SubcircuitSimulation existing = circuitSimulations.put(circuitSimulation, subcircuitSimulation);
+    if (existing != null)
+    {
+      throw new SimulatorException("CircuitSimulation [%s] already set on Path [%s].", circuitSimulation.getDescription(), this.getDescription());
+    }
   }
 }
 

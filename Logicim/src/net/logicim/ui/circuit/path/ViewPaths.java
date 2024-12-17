@@ -24,7 +24,6 @@ public class ViewPaths
     viewPaths = new ArrayList<>();
 
     createPaths(subcircuitEditors);
-    createPathLinks();
   }
 
   private void createPaths(List<SubcircuitEditor> subcircuitEditors)
@@ -69,18 +68,6 @@ public class ViewPaths
 
     path.remove(path.size() - 1);
     return false;
-  }
-
-  public void createPathLinks()
-  {
-    for (ViewPath viewPath : viewPaths)
-    {
-      ViewPath previous = viewPath.getPrevious();
-      if (previous != null)
-      {
-        previous.setNext(viewPath);
-      }
-    }
   }
 
   public List<ViewPath> getPathsEndingWithSubcircuitView(SubcircuitView subcircuitView)

@@ -3,6 +3,7 @@ package net.logicim.data.subciruit;
 import net.logicim.data.common.ReflectiveData;
 
 import java.util.List;
+import java.util.Map;
 
 public class ViewPathData
     extends ReflectiveData
@@ -10,7 +11,7 @@ public class ViewPathData
   public long id;
   public List<ViewPathElementData> elements;
   public long prevId;
-  public long nextId;
+  public Map<Long, Long> circuitSimulations;
 
   public ViewPathData()
   {
@@ -19,12 +20,12 @@ public class ViewPathData
   public ViewPathData(long id,
                       List<ViewPathElementData> elements,
                       long prevId,
-                      long nextId)
+                      Map<Long, Long> circuitSimulations)
   {
     this.id = id;
     this.elements = elements;
     this.prevId = prevId;
-    this.nextId = nextId;
+    this.circuitSimulations = circuitSimulations;
   }
 }
 

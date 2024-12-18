@@ -174,11 +174,11 @@ public class SubcircuitEditorList
     {
       SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
       List<ViewPath> subcircuitPaths = new ArrayList<>();
-      for (ViewPath path : viewPaths)
+      for (ViewPath viewPath : viewPaths)
       {
-        if (path.endsWithSubcircuitView(subcircuitView))
+        if (viewPath.endsWithSubcircuitView(subcircuitView))
         {
-          subcircuitPaths.add(path);
+          subcircuitPaths.add(viewPath);
         }
       }
       subcircuitView.setViewPaths(subcircuitPaths);

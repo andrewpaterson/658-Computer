@@ -425,10 +425,10 @@ public class SubcircuitEditor
     return new DataViewMap(traceViews, staticViews, subcircuitInstanceViews);
   }
 
-  public void loadTraces(DataViewMap dataViewMap, ViewPath path, CircuitSimulation circuitSimulation, CircuitLoaders circuitLoaders)
+  public void loadTraces(DataViewMap dataViewMap, ViewPath viewPath, CircuitSimulation circuitSimulation, CircuitLoaders circuitLoaders)
   {
     Map<TraceData, TraceView> traceViews = dataViewMap.traceViews;
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     for (Map.Entry<TraceData, TraceView> entry : traceViews.entrySet())
     {
       TraceData data = entry.getKey();
@@ -437,7 +437,7 @@ public class SubcircuitEditor
         TraceView traceView = entry.getValue();
         SubcircuitEditorLoadDataHelper.loadViewData(traceView,
                                                     data,
-                                                    path,
+                                                    viewPath,
                                                     circuitSimulation,
                                                     circuitLoaders.getTraceLoader());
       }
@@ -445,12 +445,12 @@ public class SubcircuitEditor
   }
 
   public void loadStatics(DataViewMap dataViewMap,
-                          ViewPath path,
+                          ViewPath viewPath,
                           CircuitSimulation circuitSimulation,
                           CircuitLoaders circuitLoaders)
   {
     Map<StaticData<?>, StaticView<?>> staticViews = dataViewMap.staticViews;
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     for (Map.Entry<StaticData<?>, StaticView<?>> entry : staticViews.entrySet())
     {
       StaticData<?> data = entry.getKey();
@@ -459,7 +459,7 @@ public class SubcircuitEditor
         StaticView<?> staticView = entry.getValue();
         SubcircuitEditorLoadDataHelper.loadViewData(staticView,
                                                     data,
-                                                    path,
+                                                    viewPath,
                                                     circuitSimulation,
                                                     circuitLoaders);
       }

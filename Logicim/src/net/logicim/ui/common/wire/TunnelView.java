@@ -263,9 +263,9 @@ public class TunnelView
   }
 
   @Override
-  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(path, circuitSimulation, traces);
+    wireView.connectTraces(viewPath, circuitSimulation, traces);
   }
 
   @Override
@@ -275,9 +275,9 @@ public class TunnelView
   }
 
   @Override
-  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
+  public Traces getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    return wireView.getTraces(path, circuitSimulation);
+    return wireView.getTraces(viewPath, circuitSimulation);
   }
 
   public boolean isRemoved()

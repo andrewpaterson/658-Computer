@@ -37,7 +37,11 @@ public class ConnectionInformationPanel
   }
 
   @Override
-  protected void paintDetail(ViewPath path, CircuitSimulation circuitSimulation, int fontHeight, int x, int y)
+  protected void paintDetail(ViewPath viewPath,
+                             CircuitSimulation circuitSimulation,
+                             int fontHeight,
+                             int x,
+                             int y)
   {
     int ySpacing = fontHeight / 2;
 
@@ -51,7 +55,7 @@ public class ConnectionInformationPanel
     {
       String componentString = connectedView.getType() +
                                getComponentNameString(connectedView) +
-                               getComponentDetailString(path, circuitSimulation, connectedView);
+                               getComponentDetailString(viewPath, circuitSimulation, connectedView);
 
       y = drawMultilineString(fontHeight,
                               x,
@@ -86,24 +90,28 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String getComponentDetailString(ViewPath path, CircuitSimulation circuitSimulation, View connectedComponent)
+  private String getComponentDetailString(ViewPath viewPath,
+                                          CircuitSimulation circuitSimulation,
+                                          View connectedComponent)
   {
     if (connectedComponent instanceof TraceView)
     {
-      return toTraceDetailString(path, circuitSimulation, (TraceView) connectedComponent);
+      return toTraceDetailString(viewPath, circuitSimulation, (TraceView) connectedComponent);
     }
     else if (connectedComponent instanceof ComponentView)
     {
-      return toComponentDetailString(path, circuitSimulation, (ComponentView<?>) connectedComponent);
+      return toComponentDetailString(viewPath, circuitSimulation, (ComponentView<?>) connectedComponent);
     }
     else if (connectedComponent instanceof TunnelView)
     {
-      return toTunnelDetailString(path, circuitSimulation, (TunnelView) connectedComponent);
+      return toTunnelDetailString(viewPath, circuitSimulation, (TunnelView) connectedComponent);
     }
     return "";
   }
 
-  private String toComponentDetailString(ViewPath path, CircuitSimulation circuitSimulation, ComponentView<?> componentView)
+  private String toComponentDetailString(ViewPath viewPath,
+                                         CircuitSimulation circuitSimulation,
+                                         ComponentView<?> componentView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
@@ -115,7 +123,7 @@ public class ConnectionInformationPanel
       builder.append("\n" + padding + text);
       padding += "    ";
     }
-    Ports ports = portView.getPorts(path, circuitSimulation);
+    Ports ports = portView.getPorts(viewPath, circuitSimulation);
     if (ports != null)
     {
       for (Port port : ports.getPorts())
@@ -148,11 +156,13 @@ public class ConnectionInformationPanel
     }
   }
 
-  private String toTraceDetailString(ViewPath path, CircuitSimulation circuitSimulation, TraceView traceView)
+  private String toTraceDetailString(ViewPath viewPath,
+                                     CircuitSimulation circuitSimulation,
+                                     TraceView traceView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    Traces traces = traceView.getTraces(path, circuitSimulation);
+    Traces traces = traceView.getTraces(viewPath, circuitSimulation);
     if (traces != null)
     {
       boolean multiline = traces.size() > 8;
@@ -179,11 +189,13 @@ public class ConnectionInformationPanel
     return builder.toString();
   }
 
-  private String toTunnelDetailString(ViewPath path, CircuitSimulation circuitSimulation, TunnelView tunnelView)
+  private String toTunnelDetailString(ViewPath viewPath,
+                                      CircuitSimulation circuitSimulation,
+                                      TunnelView tunnelView)
   {
     StringBuilder builder = new StringBuilder();
     builder.append(" ");
-    Traces traces = tunnelView.getTraces(path, circuitSimulation);
+    Traces traces = tunnelView.getTraces(viewPath, circuitSimulation);
     boolean multiline = traces.size() > 8;
     if (multiline)
     {

@@ -20,20 +20,20 @@ public class ComponentViewPortNames
 
   public void addPort(ComponentView<?> componentView,
                       String portName,
-                      ViewPath path)
+                      ViewPath viewPath)
   {
-    if (!contains(componentView, portName, path))
+    if (!contains(componentView, portName, viewPath))
     {
-      ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName, path);
+      ComponentViewPortName componentViewPortName = new ComponentViewPortName(componentView, portName, viewPath);
       connectedPortIndices.add(componentViewPortName);
     }
   }
 
-  protected boolean contains(ComponentView<?> componentView, String portName, ViewPath path)
+  protected boolean contains(ComponentView<?> componentView, String portName, ViewPath viewPath)
   {
     for (ComponentViewPortName componentViewPortName : connectedPortIndices)
     {
-      if (componentViewPortName.equals(componentView, portName, path))
+      if (componentViewPortName.equals(componentView, portName, viewPath))
       {
         return true;
       }

@@ -244,12 +244,12 @@ public class SubcircuitInstanceView
     return subcircuitInstance;
   }
 
-  public void createComponentsForSubcircuitInstanceView(ViewPath path,
+  public void createComponentsForSubcircuitInstanceView(ViewPath viewPath,
                                                         CircuitSimulation circuitSimulation,
                                                         SubcircuitInstance subcircuitInstance)
   {
     createTracePorts(subcircuitInstance);
-    postCreateComponent(path, circuitSimulation, subcircuitInstance);
+    postCreateComponent(viewPath, circuitSimulation, subcircuitInstance);
     subcircuitInstance.reset(circuitSimulation.getSimulation());
   }
 
@@ -258,13 +258,13 @@ public class SubcircuitInstanceView
     instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
   }
 
-  public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(ViewPath path, CircuitSimulation circuitSimulation)
+  public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
-    SubcircuitInstance subcircuitInstance = createComponent(path, circuitSimulation);
-    simulationSubcircuitInstances.get(path, circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitInstance subcircuitInstance = createComponent(viewPath, circuitSimulation);
+    simulationSubcircuitInstances.get(viewPath, circuitSimulation);
     return new SubcircuitInstanceCreation(this,
-                                          path,
+                                          viewPath,
                                           circuitSimulation,
                                           containingSubcircuitSimulation,
                                           subcircuitInstance
@@ -272,18 +272,18 @@ public class SubcircuitInstanceView
   }
 
   //Called from SubcircuitInstanceData.
-  public SubcircuitInstance createSubcircuitInstance(ViewPath path,
+  public SubcircuitInstance createSubcircuitInstance(ViewPath viewPath,
                                                      CircuitSimulation circuitSimulation,
                                                      SubcircuitInstanceSimulation subcircuitInstanceSimulation)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     SubcircuitInstance subcircuitInstance = new SubcircuitInstance(containingSubcircuitSimulation, properties.name);
     subcircuitInstanceSimulation.setSubcircuitInstance(subcircuitInstance);
     subcircuitInstance.setSubcircuitInstanceSimulation(subcircuitInstanceSimulation);
 
     createTracePorts(subcircuitInstance);
-    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance, path, circuitSimulation);
-    postCreateComponent(path, circuitSimulation, subcircuitInstance);
+    putContainingSubcircuitSimulation(containingSubcircuitSimulation, subcircuitInstance, viewPath, circuitSimulation);
+    postCreateComponent(viewPath, circuitSimulation, subcircuitInstance);
 
     return subcircuitInstance;
   }
@@ -307,15 +307,15 @@ public class SubcircuitInstanceView
 
   protected void putContainingSubcircuitSimulation(SubcircuitSimulation subcircuitSimulation,
                                                    SubcircuitInstance subcircuitInstance,
-                                                   ViewPath path,
+                                                   ViewPath viewPath,
                                                    CircuitSimulation circuitSimulation)
   {
-    if (simulationSubcircuitInstances.get(path, circuitSimulation) != null)
+    if (simulationSubcircuitInstances.get(viewPath, circuitSimulation) != null)
     {
       throw new SimulatorException("A subcircuit instance [%s] for simulation [%s] already exists.", subcircuitInstance.getDescription(), subcircuitSimulation.getDescription());
     }
 
-    simulationSubcircuitInstances.put(path, circuitSimulation, subcircuitInstance);
+    simulationSubcircuitInstances.put(viewPath, circuitSimulation, subcircuitInstance);
   }
 
   private List<String> getPinPortNames(PinView pinView)
@@ -483,8 +483,8 @@ public class SubcircuitInstanceView
     Set<Map.Entry<ViewPath, Map<CircuitSimulation, SubcircuitInstance>>> entrySet = simulationSubcircuitInstances.getEntrySet();
     for (Map.Entry<ViewPath, Map<CircuitSimulation, SubcircuitInstance>> pathEntry : entrySet)
     {
-      ViewPath path = pathEntry.getKey();
-      ViewPath fullPath = viewPaths.getPath(path, this);
+      ViewPath viewPath = pathEntry.getKey();
+      ViewPath fullPath = viewPaths.getPath(viewPath, this);
 
       Map<CircuitSimulation, SubcircuitInstance> map = pathEntry.getValue();
       for (CircuitSimulation circuitSimulation : map.keySet())
@@ -598,7 +598,7 @@ public class SubcircuitInstanceView
     for (Map.Entry<ViewPath, Map<CircuitSimulation, SubcircuitInstance>> pathEntry : entries)
     {
       Map<CircuitSimulation, SubcircuitInstance> circuitSimulations = pathEntry.getValue();
-      ViewPath path = pathEntry.getKey();
+      ViewPath viewPath = pathEntry.getKey();
       for (Map.Entry<CircuitSimulation, SubcircuitInstance> circuitSimulationEntry : circuitSimulations.entrySet())
       {
         SubcircuitInstance subcircuitInstance = circuitSimulationEntry.getValue();
@@ -607,7 +607,7 @@ public class SubcircuitInstanceView
         SubcircuitSimulation containingSubcircuitSimulation = subcircuitInstance.getContainingSubcircuitSimulation();
         result.add(new SubcircuitInstanceSimulationSimulationData(containingSubcircuitSimulation.getId(),
                                                                   instanceSubcircuitSimulation.getId(),
-                                                                  path.getId(),
+                                                                  viewPath.getId(),
                                                                   circuitSimulation.getId()));
       }
     }

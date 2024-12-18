@@ -11,16 +11,16 @@ import java.util.*;
 
 public class LocalConnectionNet
 {
-  protected ViewPath path;
+  protected ViewPath viewPath;
   protected List<ConnectionView> connectionViews;
 
   protected List<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViews;
   protected List<ComponentConnection<PinView>> pinViews;
   protected List<ComponentConnection<SplitterView>> splitterViews;
 
-  public LocalConnectionNet(ViewPath path, ConnectionView inputConnectionView)
+  public LocalConnectionNet(ViewPath viewPath, ConnectionView inputConnectionView)
   {
-    this.path = path;
+    this.viewPath = viewPath;
 
     HashSet<ConnectionView> connectionViewSet = new HashSet<>();
     HashSet<ComponentConnection<SubcircuitInstanceView>> subcircuitInstanceViewSet = new HashSet<>();
@@ -64,15 +64,15 @@ public class LocalConnectionNet
       {
         if (connectedView instanceof SubcircuitInstanceView)
         {
-          subcircuitInstanceViewSet.add(new ComponentConnection<>(path, (SubcircuitInstanceView) connectedView, connectionView));
+          subcircuitInstanceViewSet.add(new ComponentConnection<>(viewPath, (SubcircuitInstanceView) connectedView, connectionView));
         }
         else if (connectedView instanceof SplitterView)
         {
-          splitterViewSet.add(new ComponentConnection<>(path, (SplitterView) connectedView, connectionView));
+          splitterViewSet.add(new ComponentConnection<>(viewPath, (SplitterView) connectedView, connectionView));
         }
         else if (connectedView instanceof PinView)
         {
-          pinViewSet.add(new ComponentConnection<>(path, (PinView) connectedView, connectionView));
+          pinViewSet.add(new ComponentConnection<>(viewPath, (PinView) connectedView, connectionView));
         }
       }
     }
@@ -88,15 +88,15 @@ public class LocalConnectionNet
     return splitterViews;
   }
 
-  public ViewPath getPath()
+  public ViewPath getViewPath()
   {
-    return path;
+    return viewPath;
   }
 
   @Override
   public int hashCode()
   {
-    return Objects.hash(path,
+    return Objects.hash(viewPath,
                         connectionViews,
                         subcircuitInstanceViews,
                         pinViews,
@@ -111,7 +111,7 @@ public class LocalConnectionNet
     }
 
     LocalConnectionNet other = (LocalConnectionNet) obj;
-    if (path != other.path)
+    if (viewPath != other.viewPath)
     {
       return false;
     }

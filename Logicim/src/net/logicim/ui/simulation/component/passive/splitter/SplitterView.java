@@ -374,10 +374,10 @@ public class SplitterView
   }
 
   @Override
-  protected Splitter createPassive(ViewPath path, CircuitSimulation circuitSimulation)
+  protected Splitter createPassive(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
     List<String> startPortNames = getStartPortNames();
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     return new Splitter(containingSubcircuitSimulation,
                         properties.name,
                         startPortNames,

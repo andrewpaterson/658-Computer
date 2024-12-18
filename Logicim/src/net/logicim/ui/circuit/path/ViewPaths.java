@@ -100,11 +100,11 @@ public class ViewPaths
 
   private ViewPath getPath(List<CircuitInstanceView> newPath)
   {
-    for (ViewPath path : viewPaths)
+    for (ViewPath viewPath : viewPaths)
     {
-      if (path.equalsPath(newPath))
+      if (viewPath.equalsPath(newPath))
       {
-        return path;
+        return viewPath;
       }
     }
 

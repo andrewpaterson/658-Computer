@@ -6,15 +6,15 @@ import net.logicim.ui.common.wire.WireView;
 
 public class WireViewPathConnection
 {
-  protected ViewPath path;
+  protected ViewPath viewPath;
   protected WireView wireView;
   protected ConnectionView connectionView;
 
-  public WireViewPathConnection(ViewPath path,
+  public WireViewPathConnection(ViewPath viewPath,
                                 WireView wireView,
                                 ConnectionView connectionView)
   {
-    this.path = path;
+    this.viewPath = viewPath;
     this.wireView = wireView;
     this.connectionView = connectionView;
   }
@@ -24,9 +24,9 @@ public class WireViewPathConnection
     return wireView;
   }
 
-  public ViewPath getPath()
+  public ViewPath getViewPath()
   {
-    return path;
+    return viewPath;
   }
 }
 

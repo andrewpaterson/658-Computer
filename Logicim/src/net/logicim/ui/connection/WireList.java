@@ -57,7 +57,7 @@ public class WireList
     {
       for (LocalConnectionNet localConnectionNet : connectionNet.localConnectionNets)
       {
-        if (localConnectionNet.getPath().containsCircuitSimulation(circuitSimulation))
+        if (localConnectionNet.getViewPath().containsCircuitSimulation(circuitSimulation))
         {
           result.add(connectionNet);
           break;
@@ -102,12 +102,12 @@ public class WireList
       {
         for (ComponentViewPortName connectedPortIndex : localWire.getConnectedPortIndices())
         {
-          ViewPath path = connectedPortIndex.getPath();
-          List<ComponentViewPortName> list = map.get(path);
+          ViewPath viewPath = connectedPortIndex.getViewPath();
+          List<ComponentViewPortName> list = map.get(viewPath);
           if (list == null)
           {
             list = new ArrayList<>();
-            map.put(path, list);
+            map.put(viewPath, list);
           }
 
           list.add(connectedPortIndex);
@@ -117,9 +117,9 @@ public class WireList
 
     for (Map.Entry<ViewPath, List<ComponentViewPortName>> entry : map.entrySet())
     {
-      ViewPath path = entry.getKey();
+      ViewPath viewPath = entry.getKey();
       List<ComponentViewPortName> componentViewPortNames = entry.getValue();
-      builder.append(path.getDescription());
+      builder.append(viewPath.getDescription());
       builder.append("\n");
 
       for (ComponentViewPortName componentViewPortName : componentViewPortNames)

@@ -60,21 +60,21 @@ public class ConnectionViewCache
     return connectionView;
   }
 
-  private void cachePathConnectionView(List<ViewPath> paths, ConnectionView connectionView)
+  private void cachePathConnectionView(List<ViewPath> viewPaths, ConnectionView connectionView)
   {
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(viewPath);
       if (connectionViewMap == null)
       {
         connectionViewMap = new LinkedHashMap<>();
-        pathConnectionViews.put(path, connectionViewMap);
+        pathConnectionViews.put(viewPath, connectionViewMap);
       }
 
       PathConnectionView pathConnectionView = connectionViewMap.get(connectionView);
       if (pathConnectionView == null)
       {
-        pathConnectionView = new PathConnectionView(path, connectionView);
+        pathConnectionView = new PathConnectionView(viewPath, connectionView);
         connectionViewMap.put(connectionView, pathConnectionView);
       }
     }
@@ -128,11 +128,11 @@ public class ConnectionViewCache
     return false;
   }
 
-  private void removePathConnectionView(List<ViewPath> paths, ConnectionView connectionView)
+  private void removePathConnectionView(List<ViewPath> viewPaths, ConnectionView connectionView)
   {
-    for (ViewPath path : paths)
+    for (ViewPath viewPath : viewPaths)
     {
-      Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+      Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(viewPath);
       if (pathConnectionViewMap != null)
       {
         PathConnectionView pathConnectionView = pathConnectionViewMap.remove(connectionView);
@@ -141,7 +141,7 @@ public class ConnectionViewCache
           pathConnectionView.clear();
           if (pathConnectionViewMap.size() == 0)
           {
-            pathConnectionViews.remove(path);
+            pathConnectionViews.remove(viewPath);
           }
         }
         else
@@ -208,19 +208,19 @@ public class ConnectionViewCache
     return result;
   }
 
-  public void addPaths(List<ViewPath> newPaths)
+  public void addPaths(List<ViewPath> newViewPaths)
   {
-    for (ViewPath path : newPaths)
+    for (ViewPath viewPath : newViewPaths)
     {
-      if (pathConnectionViews.containsKey(path))
+      if (pathConnectionViews.containsKey(viewPath))
       {
-        throw new SimulatorException("Cannot add new path [%s] into path connection cache.  It already exists.", path);
+        throw new SimulatorException("Cannot add new path [%s] into path connection cache.  It already exists.", viewPath);
       }
 
       if (connectionViews.size() > 0)
       {
         LinkedHashMap<ConnectionView, PathConnectionView> pathConnectionViewMap = new LinkedHashMap<>();
-        pathConnectionViews.put(path, pathConnectionViewMap);
+        pathConnectionViews.put(viewPath, pathConnectionViewMap);
 
         for (Map.Entry<Integer, Map<Integer, ConnectionView>> xEntry : connectionViews.entrySet())
         {
@@ -228,7 +228,7 @@ public class ConnectionViewCache
           for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
           {
             ConnectionView connectionView = yEntry.getValue();
-            PathConnectionView pathConnectionView = new PathConnectionView(path, connectionView);
+            PathConnectionView pathConnectionView = new PathConnectionView(viewPath, connectionView);
             pathConnectionViewMap.put(connectionView, pathConnectionView);
           }
         }
@@ -236,27 +236,27 @@ public class ConnectionViewCache
     }
   }
 
-  public void removePaths(List<ViewPath> removedPaths)
+  public void removePaths(List<ViewPath> removedViewPaths)
   {
-    for (ViewPath path : removedPaths)
+    for (ViewPath viewPath : removedViewPaths)
     {
-      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+      Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(viewPath);
       if (connectionViewMap == null)
       {
-        throw new SimulatorException("Cannot remove path [%s] that is not in the path connection cache.", path);
+        throw new SimulatorException("Cannot remove path [%s] that is not in the path connection cache.", viewPath);
       }
 
       for (PathConnectionView pathConnectionView : connectionViewMap.values())
       {
         pathConnectionView.clear();
       }
-      pathConnectionViews.remove(path);
+      pathConnectionViews.remove(viewPath);
     }
   }
 
-  public PathConnectionView getPathConnectionView(ViewPath path, ConnectionView connectionView)
+  public PathConnectionView getPathConnectionView(ViewPath viewPath, ConnectionView connectionView)
   {
-    Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+    Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(viewPath);
     if (pathConnectionViewMap != null)
     {
       return pathConnectionViewMap.get(connectionView);
@@ -264,25 +264,25 @@ public class ConnectionViewCache
     return null;
   }
 
-  public void validatePathConnections(List<ViewPath> paths)
+  public void validatePathConnections(List<ViewPath> viewPaths)
   {
     if (connectionViews.size() > 0)
     {
-      for (ViewPath path : paths)
+      for (ViewPath viewPath : viewPaths)
       {
-        Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(path);
+        Map<ConnectionView, PathConnectionView> connectionViewMap = pathConnectionViews.get(viewPath);
         if (connectionViewMap == null)
         {
-          throw new SimulatorException("View Connection Cache does not contain Subcircuit View Path [%s].", path);
+          throw new SimulatorException("View Connection Cache does not contain Subcircuit View Path [%s].", viewPath);
         }
       }
 
-      Set<ViewPath> pathsSet = new LinkedHashSet<>(paths);
-      for (ViewPath path : pathConnectionViews.keySet())
+      Set<ViewPath> pathsSet = new LinkedHashSet<>(viewPaths);
+      for (ViewPath viewPath : pathConnectionViews.keySet())
       {
-        if (!pathsSet.contains(path))
+        if (!pathsSet.contains(viewPath))
         {
-          throw new SimulatorException("Subcircuit View does not contain View Connection Cache Path [%s].", path);
+          throw new SimulatorException("Subcircuit View does not contain View Connection Cache Path [%s].", viewPath);
         }
       }
 
@@ -292,13 +292,13 @@ public class ConnectionViewCache
         for (Map.Entry<Integer, ConnectionView> yEntry : connectionViewMap.entrySet())
         {
           ConnectionView connectionView = yEntry.getValue();
-          for (ViewPath path : paths)
+          for (ViewPath viewPath : viewPaths)
           {
-            Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(path);
+            Map<ConnectionView, PathConnectionView> pathConnectionViewMap = pathConnectionViews.get(viewPath);
             PathConnectionView pathConnectionView = pathConnectionViewMap.get(connectionView);
             if (pathConnectionView == null)
             {
-              throw new SimulatorException("Path [%s] connection view cache does contain Connection View [%s].", path.toString(), connectionView.toString());
+              throw new SimulatorException("Path [%s] connection view cache does contain Connection View [%s].", viewPath.toString(), connectionView.toString());
             }
           }
         }

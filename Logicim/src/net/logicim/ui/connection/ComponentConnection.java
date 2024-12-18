@@ -9,15 +9,15 @@ import java.util.Objects;
 public class ComponentConnection<T extends ComponentView>
   implements Comparable<ComponentConnection>
 {
-  protected ViewPath path;
+  protected ViewPath viewPath;
   protected T componentView;
   protected ConnectionView connectionView;
 
-  public ComponentConnection(ViewPath path,
+  public ComponentConnection(ViewPath viewPath,
                              T componentView,
                              ConnectionView connectionView)
   {
-    this.path = path;
+    this.viewPath = viewPath;
     this.componentView = componentView;
     this.connectionView = connectionView;
   }
@@ -32,15 +32,15 @@ public class ComponentConnection<T extends ComponentView>
     return connectionView;
   }
 
-  public ViewPath getPath()
+  public ViewPath getViewPath()
   {
-    return path;
+    return viewPath;
   }
 
   @Override
   public int hashCode()
   {
-    return Objects.hash(path,
+    return Objects.hash(viewPath,
                         componentView,
                         connectionView);
   }
@@ -54,14 +54,14 @@ public class ComponentConnection<T extends ComponentView>
     }
 
     ComponentConnection<T> other = (ComponentConnection<T>) obj;
-    return equals(other.path,
+    return equals(other.viewPath,
                   other.componentView,
                   other.connectionView);
   }
 
-  public boolean equals(ViewPath path, T componentView, ConnectionView connectionView)
+  public boolean equals(ViewPath viewPath, T componentView, ConnectionView connectionView)
   {
-    return (this.path == path) &&
+    return (this.viewPath == viewPath) &&
            (this.componentView == componentView) &&
            (this.connectionView == connectionView);
   }
@@ -69,7 +69,7 @@ public class ComponentConnection<T extends ComponentView>
   @Override
   public int compareTo(ComponentConnection other)
   {
-    int result = path.compareTo(other.path);
+    int result = viewPath.compareTo(other.viewPath);
     if (result != 0)
     {
       return result;

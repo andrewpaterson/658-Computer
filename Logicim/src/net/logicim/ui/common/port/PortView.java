@@ -164,7 +164,7 @@ public class PortView
 
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     updateGridCache();
@@ -195,7 +195,7 @@ public class PortView
       int y = viewport.transformGridToScreenSpaceY(gridPosition.y);
       int lineWidth = (int) (viewport.getCircleRadius() * viewport.getConnectionSize());
 
-      Color color = getPortColour(path, circuitSimulation);
+      Color color = getPortColour(viewPath, circuitSimulation);
 
       graphics.setColor(color);
       graphics.fillOval(x - lineWidth,
@@ -220,13 +220,13 @@ public class PortView
     simulationPorts.clear();
   }
 
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Ports ports = simulationPorts.get(path, circuitSimulation);
+    Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     if (ports != null)
     {
       ports.disconnect();
-      simulationPorts.remove(path, circuitSimulation);
+      simulationPorts.remove(viewPath, circuitSimulation);
     }
   }
 
@@ -320,11 +320,11 @@ public class PortView
     return new LogicPortData(eventDatas, portOutputEventData, logicPort.getTraceId());
   }
 
-  protected Color getPortColour(ViewPath path, CircuitSimulation circuitSimulation)
+  protected Color getPortColour(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    if (!allTracePorts(path, circuitSimulation))
+    if (!allTracePorts(viewPath, circuitSimulation))
     {
-      Ports ports = simulationPorts.get(path, circuitSimulation);
+      Ports ports = simulationPorts.get(viewPath, circuitSimulation);
       if (ports != null)
       {
         SubcircuitSimulation subcircuitSimulation = ports.getContainingSubcircuitSimulation();
@@ -338,13 +338,13 @@ public class PortView
     else
     {
       long time = circuitSimulation.getTime();
-      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(path, circuitSimulation), time);
+      return VoltageColour.getColourForTraces(Colours.getInstance(), getTraces(viewPath, circuitSimulation), time);
     }
   }
 
-  private boolean allTracePorts(ViewPath path, CircuitSimulation circuitSimulation)
+  private boolean allTracePorts(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Ports ports = simulationPorts.get(path, circuitSimulation);
+    Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     if (ports != null)
     {
       for (Port port : ports.getPorts())
@@ -359,9 +359,9 @@ public class PortView
     return false;
   }
 
-  private List<Trace> getTraces(ViewPath path, CircuitSimulation circuitSimulation)
+  private List<Trace> getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Ports ports = simulationPorts.get(path, circuitSimulation);
+    Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     if (ports != null)
     {
       List<Trace> traces = new ArrayList<>(ports.size());
@@ -396,11 +396,11 @@ public class PortView
     }
   }
 
-  public boolean containsPort(ViewPath path,
+  public boolean containsPort(ViewPath viewPath,
                               CircuitSimulation circuitSimulation,
                               Port port)
   {
-    Ports ports = simulationPorts.get(path, circuitSimulation);
+    Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     for (Port otherPort : ports.getPorts())
     {
       if (otherPort == port)
@@ -411,9 +411,9 @@ public class PortView
     return false;
   }
 
-  public Ports getPorts(ViewPath path, CircuitSimulation circuitSimulation)
+  public Ports getPorts(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    return simulationPorts.get(path, circuitSimulation);
+    return simulationPorts.get(viewPath, circuitSimulation);
   }
 
   public int numberOfPorts()
@@ -432,9 +432,12 @@ public class PortView
     return this;
   }
 
-  public TraceValue[] getValue(ViewPath path, CircuitSimulation circuitSimulation, FamilyVoltageConfiguration voltageConfiguration, float vcc)
+  public TraceValue[] getValue(ViewPath viewPath,
+                               CircuitSimulation circuitSimulation,
+                               FamilyVoltageConfiguration voltageConfiguration,
+                               float vcc)
   {
-    Ports ports = simulationPorts.get(path, circuitSimulation);
+    Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     int size = ports.size();
     TraceValue[] traceValues = new TraceValue[size];
     List<Port> portList = ports.getPorts();
@@ -459,9 +462,9 @@ public class PortView
     return portNames;
   }
 
-  public void addPorts(ViewPath path, CircuitSimulation circuitSimulation, Ports ports)
+  public void addPorts(ViewPath viewPath, CircuitSimulation circuitSimulation, Ports ports)
   {
-    simulationPorts.put(path, circuitSimulation, ports);
+    simulationPorts.put(viewPath, circuitSimulation, ports);
   }
 
   public String getDescription()

@@ -23,7 +23,7 @@ public class ComponentInformationPanel
   }
 
   @Override
-  protected void paintDetail(ViewPath path,
+  protected void paintDetail(ViewPath viewPath,
                              CircuitSimulation circuitSimulation,
                              int fontHeight,
                              int x,

@@ -53,7 +53,7 @@ public class WireListFinder
       ConnectionView connectionView = pathConnectionView.connection;
       if (!processedSplitterViewConnections.contains(connectionView))
       {
-        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = processLocalMultiSimulationConnections(pathConnectionView.path, connectionView);
+        LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = processLocalMultiSimulationConnections(pathConnectionView.viewPath, connectionView);
         connectionNets.add(localMultiSimulationConnectionNet);
       }
     }
@@ -179,13 +179,13 @@ public class WireListFinder
     return totalPortWireMap;
   }
 
-  private LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(ViewPath path,
+  private LocalMultiSimulationConnectionNet processLocalMultiSimulationConnections(ViewPath viewPath,
                                                                                    ConnectionView inputConnectionView)
   {
     LocalMultiSimulationConnectionNet localMultiSimulationConnectionNet = new LocalMultiSimulationConnectionNet();
 
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
-    localConnectionsToProcess.add(new ConnectionViewProcessStackItem(path, inputConnectionView));
+    localConnectionsToProcess.add(new ConnectionViewProcessStackItem(viewPath, inputConnectionView));
 
     while (localConnectionsToProcess.size() > 0)
     {
@@ -239,7 +239,7 @@ public class WireListFinder
 
   private List<ConnectionViewProcessStackItem> createConnectionViewStackItemsForPinViews(ConnectionViewProcessStackItem connectionViewProcessStackItem, List<ComponentConnection<PinView>> pinViews)
   {
-    ViewPath path = connectionViewProcessStackItem.viewPath;
+    ViewPath viewPath = connectionViewProcessStackItem.viewPath;
 
     List<ConnectionViewProcessStackItem> localConnectionsToProcess = new ArrayList<>();
     for (ComponentConnection<PinView> pinViewConnection : pinViews)
@@ -248,7 +248,7 @@ public class WireListFinder
       List<SubcircuitPinView> subcircuitPinViews = pinView.getSubcircuitPinViews();
       for (SubcircuitPinView subcircuitPinView : subcircuitPinViews)
       {
-        CircuitInstanceView pathLast = path.getLast();
+        CircuitInstanceView pathLast = viewPath.getLast();
         if (subcircuitPinView.getSubcircuitInstanceView() == pathLast)
         {
           //I'm not sure this check is good enough for partial wires and splitter views.
@@ -257,7 +257,7 @@ public class WireListFinder
             processedSubcircuitPinViews.add(subcircuitPinView);
 
             ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
-            ViewPath newPath = paths.getPathExceptLast(path);
+            ViewPath newPath = paths.getPathExceptLast(viewPath);
             localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, subcircuitInstanceConnection));
           }
         }
@@ -283,7 +283,7 @@ public class WireListFinder
 
     for (ComponentConnection<SplitterView> splitterViewConnection : splitterViews)
     {
-      List<PathConnectionView> splitterViewConnectionList = createSplitterViewConnections(splitterViewConnection.componentView, connectionNet.path);
+      List<PathConnectionView> splitterViewConnectionList = createSplitterViewConnections(splitterViewConnection.componentView, connectionNet.viewPath);
       splitterComponentsConnections.addAll(splitterViewConnectionList);
     }
 
@@ -291,7 +291,7 @@ public class WireListFinder
   }
 
   private List<PathConnectionView> createSplitterViewConnections(SplitterView splitterView,
-                                                                 ViewPath path)
+                                                                 ViewPath viewPath)
   {
     List<PathConnectionView> splitterComponentsConnections = new ArrayList<>();
 
@@ -301,8 +301,8 @@ public class WireListFinder
       ConnectionView portConnectionView = portView.getConnection();
       if (!processedSplitterViewConnections.contains(portConnectionView))
       {
-        SubcircuitView subcircuitView = path.getLast().getInstanceSubcircuitView();
-        PathConnectionView pathConnectionView = subcircuitView.getPathConnection(path, portConnectionView);
+        SubcircuitView subcircuitView = viewPath.getLast().getInstanceSubcircuitView();
+        PathConnectionView pathConnectionView = subcircuitView.getPathConnection(viewPath, portConnectionView);
         splitterComponentsConnections.add(pathConnectionView);
       }
     }

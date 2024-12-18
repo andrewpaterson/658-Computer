@@ -137,6 +137,6 @@ public abstract class PassiveView<PASSIVE extends Passive, PROPERTIES extends Co
 
   public abstract PassiveData<?> save(boolean selected);
 
-  protected abstract PASSIVE createPassive(ViewPath path, CircuitSimulation circuitSimulation);
+  protected abstract PASSIVE createPassive(ViewPath viewPath, CircuitSimulation circuitSimulation);
 }
 

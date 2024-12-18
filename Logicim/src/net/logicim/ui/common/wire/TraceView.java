@@ -203,11 +203,11 @@ public class TraceView
   @Override
   public void paint(Graphics2D graphics,
                     Viewport viewport,
-                    ViewPath path,
+                    ViewPath viewPath,
                     CircuitSimulation circuitSimulation)
   {
     graphics.setStroke(getTraceStroke(viewport));
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     Color color = getTraceColour(subcircuitSimulation);
     graphics.setColor(color);
     int x1 = viewport.transformGridToScreenSpaceX(line.getStart().x);
@@ -283,9 +283,9 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
   {
-    wireView.connectTraces(path, circuitSimulation, traces);
+    wireView.connectTraces(viewPath, circuitSimulation, traces);
   }
 
   public void disconnectViewAndDestroyComponents()
@@ -293,9 +293,9 @@ public class TraceView
     wireView.disconnectViewAndDestroyComponents();
   }
 
-  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
+  public Traces getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    return wireView.getTraces(path, circuitSimulation);
+    return wireView.getTraces(viewPath, circuitSimulation);
   }
 
   public void setLine(Int2D start, Int2D end)
@@ -315,9 +315,9 @@ public class TraceView
   }
 
   @Override
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    wireView.destroyComponent(path, circuitSimulation);
+    wireView.destroyComponent(viewPath, circuitSimulation);
   }
 
   public WireViewComp getWireViewComp()

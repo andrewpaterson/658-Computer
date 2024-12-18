@@ -60,7 +60,7 @@ public abstract class View
 
   public abstract void paintSelected(Graphics2D graphics, Viewport viewport);
 
-  public abstract void paint(Graphics2D graphics, Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation);
+  public abstract void paint(Graphics2D graphics, Viewport viewport, ViewPath viewPath, CircuitSimulation circuitSimulation);
 
   public abstract String getName();
 

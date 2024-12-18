@@ -109,9 +109,12 @@ public class ClockView
     graphics.setColor(color);
   }
 
-  private void paintClockWaveform(Graphics2D graphics, Viewport viewport, ViewPath path, CircuitSimulation circuitSimulation)
+  private void paintClockWaveform(Graphics2D graphics,
+                                  Viewport viewport,
+                                  ViewPath viewPath,
+                                  CircuitSimulation circuitSimulation)
   {
-    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(path, circuitSimulation);
+    ClockOscillator integratedCircuit = simulationIntegratedCircuits.get(viewPath, circuitSimulation);
     Color clockColor = Colours.getInstance().getDisconnectedTrace();
     long time = circuitSimulation.getTime();
     if (integratedCircuit != null)

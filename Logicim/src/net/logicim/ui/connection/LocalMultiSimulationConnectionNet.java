@@ -112,7 +112,7 @@ public class LocalMultiSimulationConnectionNet
     for (LocalConnectionNet localConnectionNet : localConnectionNets)
     {
       List<ConnectionView> connections = localConnectionNet.getConnectionViews();
-      ViewPath path = localConnectionNet.getPath();
+      ViewPath viewPath = localConnectionNet.getViewPath();
       for (ConnectionView connectionView : connections)
       {
         List<View> localConnected = connectionView.getConnectedComponents();
@@ -120,43 +120,49 @@ public class LocalMultiSimulationConnectionNet
         {
           if (connectedView instanceof ComponentView)
           {
-            addConnectedComponent(path, connectionView, (ComponentView<?>) connectedView);
+            addConnectedComponent(viewPath,
+                                  connectionView,
+                                  (ComponentView<?>) connectedView);
           }
           else if (connectedView instanceof WireView)
           {
-            addConnectedWire(path, connectionView, (WireView) connectedView);
+            addConnectedWire(viewPath,
+                             connectionView,
+                             (WireView) connectedView);
           }
         }
       }
     }
   }
 
-  private WireViewPathConnection addConnectedWire(ViewPath path,
+  private WireViewPathConnection addConnectedWire(ViewPath viewPath,
                                                   ConnectionView connectionView,
                                                   WireView connectedView)
   {
-    List<WireViewPathConnection> wireViewPathConnections = connectedWires.get(path);
+    List<WireViewPathConnection> wireViewPathConnections = connectedWires.get(viewPath);
     if (wireViewPathConnections == null)
     {
       wireViewPathConnections = new ArrayList<>();
-      connectedWires.put(path, wireViewPathConnections);
+      connectedWires.put(viewPath, wireViewPathConnections);
     }
-    WireViewPathConnection wireViewPathConnection = new WireViewPathConnection(path, connectedView, connectionView);
+    WireViewPathConnection wireViewPathConnection = new WireViewPathConnection(viewPath,
+                                                                               connectedView,
+                                                                               connectionView);
     wireViewPathConnections.add(wireViewPathConnection);
     return wireViewPathConnection;
   }
 
-  private ComponentConnection<ComponentView<?>> addConnectedComponent(ViewPath path,
+  private ComponentConnection<ComponentView<?>> addConnectedComponent(ViewPath viewPath,
                                                                       ConnectionView connectionView,
                                                                       ComponentView<?> componentView)
   {
-    List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(path);
+    List<ComponentConnection<ComponentView<?>>> componentConnections = connectedComponents.get(viewPath);
     if (componentConnections == null)
     {
       componentConnections = new ArrayList<>();
-      connectedComponents.put(path, componentConnections);
+      connectedComponents.put(viewPath, componentConnections);
     }
-    ComponentConnection<ComponentView<?>> componentConnection = new ComponentConnection<>(path, componentView, connectionView);
+    ComponentConnection<ComponentView<?>> componentConnection = new ComponentConnection<>(viewPath, componentView, connectionView);
     componentConnections.add(componentConnection);
     return componentConnection;
   }
@@ -177,7 +183,7 @@ public class LocalMultiSimulationConnectionNet
     {
       ComponentView<?> componentView = connectedComponent.getComponentView();
       ConnectionView connectionView = connectedComponent.getConnectionView();
-      ViewPath path = connectedComponent.getPath();
+      ViewPath viewPath = connectedComponent.getViewPath();
 
       PortView portView = componentView.getPortView(connectionView);
       List<String> portNames = portView.getPortNames();
@@ -185,20 +191,20 @@ public class LocalMultiSimulationConnectionNet
       addPortToComponentViewPortNames(componentViewPortNamesList,
                                       componentView,
                                       portNames,
-                                      path);
+                                      viewPath);
     }
   }
 
   private void addPortToComponentViewPortNames(List<ComponentViewPortNames> componentViewPortNamesList,
                                                ComponentView<?> componentView,
                                                List<String> portNames,
-                                               ViewPath path)
+                                               ViewPath viewPath)
   {
     for (int i = 0; i < componentViewPortNamesList.size(); i++)
     {
       String portName = portNames.get(i);
       ComponentViewPortNames componentViewPortNames = componentViewPortNamesList.get(i);
-      componentViewPortNames.addPort(componentView, portName, path);
+      componentViewPortNames.addPort(componentView, portName, viewPath);
     }
   }
 
@@ -218,9 +224,9 @@ public class LocalMultiSimulationConnectionNet
 
     for (Map.Entry<ViewPath, List<ComponentConnection<ComponentView<?>>>> entry : connectedComponents.entrySet())
     {
-      ViewPath path = entry.getKey();
+      ViewPath viewPath = entry.getKey();
       Set<ConnectionView> connectionViews = new LinkedHashSet<>();
-      result.put(path, connectionViews);
+      result.put(viewPath, connectionViews);
 
       List<ComponentConnection<ComponentView<?>>> componentConnections = entry.getValue();
       for (ComponentConnection<ComponentView<?>> componentConnection : componentConnections)
@@ -232,12 +238,12 @@ public class LocalMultiSimulationConnectionNet
 
     for (Map.Entry<ViewPath, List<WireViewPathConnection>> entry : connectedWires.entrySet())
     {
-      ViewPath path = entry.getKey();
-      Set<ConnectionView> connectionViews = result.get(path);
+      ViewPath viewPath = entry.getKey();
+      Set<ConnectionView> connectionViews = result.get(viewPath);
       if (connectionViews == null)
       {
         connectionViews = new LinkedHashSet<>();
-        result.put(path, connectionViews);
+        result.put(viewPath, connectionViews);
       }
 
       List<WireViewPathConnection> wireViewPathConnections = entry.getValue();
@@ -275,7 +281,7 @@ public class LocalMultiSimulationConnectionNet
     {
       for (ComponentViewPortName componentViewPortName : componentViewPortNames.getConnectedPortIndices())
       {
-        if (componentViewPortName.getPath().containsCircuitSimulation(circuitSimulation))
+        if (componentViewPortName.getViewPath().containsCircuitSimulation(circuitSimulation))
         {
           result.add(componentViewPortNames);
         }

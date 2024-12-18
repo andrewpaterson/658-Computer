@@ -17,9 +17,9 @@ public class PartialWire
 
   public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
   {
-    for (ViewPath path : connectedWires.keySet())
+    for (ViewPath viewPath : connectedWires.keySet())
     {
-      if (path.containsCircuitSimulation(circuitSimulation))
+      if (viewPath.containsCircuitSimulation(circuitSimulation))
       {
         return true;
       }

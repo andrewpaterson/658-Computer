@@ -128,14 +128,14 @@ public class WireViewComp
     }
   }
 
-  public void connectTraces(ViewPath path, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
   {
-    SubcircuitSimulation subcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
-    if (simulationWires.get(path, circuitSimulation) != null)
+    SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
+    if (simulationWires.get(viewPath, circuitSimulation) != null)
     {
       throw new SimulatorException("Cannot connect traces.  Already connected.");
     }
-    simulationWires.put(path, circuitSimulation, new Traces(traces, subcircuitSimulation));
+    simulationWires.put(viewPath, circuitSimulation, new Traces(traces, subcircuitSimulation));
 
     busWidth = calculateBusWidth();
   }
@@ -169,9 +169,9 @@ public class WireViewComp
     destroyAllComponents();
   }
 
-  public Traces getTraces(ViewPath path, CircuitSimulation circuitSimulation)
+  public Traces getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    return simulationWires.get(path, circuitSimulation);
+    return simulationWires.get(viewPath, circuitSimulation);
   }
 
   public Set<? extends SubcircuitSimulation> getWireSubcircuitSimulations()
@@ -184,9 +184,9 @@ public class WireViewComp
     simulationWires.clear();
   }
 
-  public void destroyComponent(ViewPath path, CircuitSimulation circuitSimulation)
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    simulationWires.remove(path, circuitSimulation);
+    simulationWires.remove(viewPath, circuitSimulation);
   }
 }
 

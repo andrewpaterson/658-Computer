@@ -5,19 +5,18 @@ import net.logicim.ui.common.ConnectionView;
 
 public class PathConnectionView
 {
-  protected ViewPath path;
+  protected ViewPath viewPath;
   protected ConnectionView connection;
 
-  public PathConnectionView(ViewPath path,
-                            ConnectionView connection)
+  public PathConnectionView(ViewPath viewPath, ConnectionView connection)
   {
-    this.path = path;
+    this.viewPath = viewPath;
     this.connection = connection;
   }
 
   public void clear()
   {
-    path = null;
+    viewPath = null;
     connection = null;
   }
 }

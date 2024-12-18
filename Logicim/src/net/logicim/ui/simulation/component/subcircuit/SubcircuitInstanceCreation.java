@@ -8,20 +8,20 @@ import net.logicim.ui.circuit.path.ViewPath;
 public class SubcircuitInstanceCreation
 {
   protected SubcircuitInstanceView subcircuitInstanceView;
-  protected ViewPath path;
+  protected ViewPath viewPath;
   protected CircuitSimulation circuitSimulation;
   protected SubcircuitSimulation containingSubcircuitSimulation;
   protected SubcircuitInstance subcircuitInstance;
 
   public SubcircuitInstanceCreation(SubcircuitInstanceView subcircuitInstanceView,
-                                    ViewPath path,
+                                    ViewPath viewPath,
                                     CircuitSimulation circuitSimulation,
                                     SubcircuitSimulation containingSubcircuitSimulation,
                                     SubcircuitInstance subcircuitInstance)
   {
 
     this.subcircuitInstanceView = subcircuitInstanceView;
-    this.path = path;
+    this.viewPath = viewPath;
     this.circuitSimulation = circuitSimulation;
     this.containingSubcircuitSimulation = containingSubcircuitSimulation;
     this.subcircuitInstance = subcircuitInstance;
@@ -44,7 +44,7 @@ public class SubcircuitInstanceCreation
 
   public ViewPath getViewPath()
   {
-    return path;
+    return viewPath;
   }
 
   public CircuitSimulation getCircuitSimulation()

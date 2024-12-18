@@ -217,9 +217,9 @@ public class PinView
   }
 
   @Override
-  protected Pin createPassive(ViewPath path, CircuitSimulation circuitSimulation)
+  protected Pin createPassive(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    SubcircuitSimulation containingSubcircuitSimulation = path.getSubcircuitSimulation(circuitSimulation);
+    SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     Pin pin = new Pin(containingSubcircuitSimulation,
                       properties.name,
                       properties.bitWidth);

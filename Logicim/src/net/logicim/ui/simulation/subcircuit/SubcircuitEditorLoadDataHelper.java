@@ -14,11 +14,11 @@ public abstract class SubcircuitEditorLoadDataHelper
 {
   public static void loadViewData(TraceView view,
                                   TraceData data,
-                                  ViewPath path,
+                                  ViewPath viewPath,
                                   CircuitSimulation circuitSimulation,
                                   TraceLoader traceLoader)
   {
-    data.createAndConnectComponentDuringLoad(path,
+    data.createAndConnectComponentDuringLoad(viewPath,
                                              circuitSimulation,
                                              traceLoader,
                                              view);
@@ -26,11 +26,11 @@ public abstract class SubcircuitEditorLoadDataHelper
 
   public static void loadViewData(StaticView view,
                                   StaticData data,
-                                  ViewPath path,
+                                  ViewPath viewPath,
                                   CircuitSimulation circuitSimulation,
                                   CircuitLoaders circuitLoaders)
   {
-    data.createAndConnectComponentDuringLoad(path, circuitSimulation, circuitLoaders, view);
+    data.createAndConnectComponentDuringLoad(viewPath, circuitSimulation, circuitLoaders, view);
   }
 }
 

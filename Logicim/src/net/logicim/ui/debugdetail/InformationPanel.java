@@ -25,7 +25,7 @@ public abstract class InformationPanel
     this.height = height;
   }
 
-  public void drawDetails(ViewPath path,
+  public void drawDetails(ViewPath viewPath,
                           CircuitSimulation circuitSimulation,
                           int left,
                           int top)
@@ -43,7 +43,7 @@ public abstract class InformationPanel
     int yOffset = top + 10 + metrics.getAscent();
     int xOffset = left + 10;
 
-    paintDetail(path,
+    paintDetail(viewPath,
                 circuitSimulation,
                 fontHeight,
                 xOffset,
@@ -80,5 +80,9 @@ public abstract class InformationPanel
     return first;
   }
 
-  protected abstract void paintDetail(ViewPath path, CircuitSimulation circuitSimulation, int fontHeight, int x, int y);
+  protected abstract void paintDetail(ViewPath viewPath,
+                                      CircuitSimulation circuitSimulation,
+                                      int fontHeight,
+                                      int x,
+                                      int y);
 }

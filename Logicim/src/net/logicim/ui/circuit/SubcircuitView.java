@@ -14,8 +14,6 @@ import net.logicim.data.integratedcircuit.common.StaticData;
 import net.logicim.data.subciruit.SubcircuitInstanceData;
 import net.logicim.data.wire.TraceData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.common.port.Port;
-import net.logicim.domain.common.wire.Trace;
 import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulations;
@@ -1231,7 +1229,6 @@ public class SubcircuitView
     }
 
     List<ViewPathComponents> viewPathComponents = new ArrayList<>();
-    CircuitEditor circuitEditor = getCircuitEditor();
     ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(circuitEditor.getCurrentViewPath(), circuitEditor.getCurrentCircuitSimulation());
     viewPathComponents.add(new ViewPathComponents(viewPathCircuitSimulation,
                                                   componentViews));
@@ -1253,7 +1250,7 @@ public class SubcircuitView
 
     if (subcircuitInstanceViews.size() > 0)
     {
-      this.circuitEditor.updateSimulationPaths();
+      circuitEditor.updateSimulationPaths();
     }
 
     createComponents(creations, viewPathComponents);
@@ -1730,35 +1727,9 @@ public class SubcircuitView
     throw new SimulatorException();
   }
 
-  private void connectPorts(List<Port> existingPorts, List<Port> newPorts, TraceToTraceMap traceMap)
-  {
-    for (int i = 0; i < newPorts.size(); i++)
-    {
-      Port existingPort = existingPorts.get(i);
-      if (existingPort.isExplicit())
-      {
-        Port newPort = newPorts.get(i);
-        Trace existingTrace = existingPort.getTrace();
-        Trace newTrace = traceMap.makeTrace(existingTrace);
-        newPort.connect(newTrace);
-      }
-    }
-  }
-
   public CircuitEditor getCircuitEditor()
   {
     return circuitEditor;
-  }
-
-  public void setViewPaths(List<ViewPath> viewPaths)
-  {
-    if (!this.viewPaths.isEmpty())
-    {
-      throw new SimulatorException("View Paths must be empty.");
-    }
-
-    this.viewPaths = viewPaths;
-    connectionViewCache.addPaths(viewPaths);
   }
 
   public List<ViewPath> getViewPaths(CircuitSimulation circuitSimulation)
@@ -1797,6 +1768,17 @@ public class SubcircuitView
   public void setSubcircuitEditor(CircuitInstanceView subcircuitEditor)
   {
     this.subcircuitEditor = subcircuitEditor;
+  }
+
+  public void setViewPaths(List<ViewPath> viewPaths)
+  {
+    if (!this.viewPaths.isEmpty())
+    {
+      throw new SimulatorException("View Paths must be empty.");
+    }
+
+    this.viewPaths = viewPaths;
+    connectionViewCache.addPaths(viewPaths);
   }
 }
 

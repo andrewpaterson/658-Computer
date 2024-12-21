@@ -28,14 +28,14 @@ public class SubcircuitSimulationPaths
 
     for (ViewPath viewPath : viewPaths)
     {
-      List<CircuitInstanceView> circuitInstanceViews = viewPath.getPath();
+      List<CircuitInstanceView> path = viewPath.getPath();
 
       SubcircuitSimulation neededParentSimulation = null;
-      for (CircuitInstanceView circuitInstanceView : circuitInstanceViews)
+      for (CircuitInstanceView pathInstanceView : path)
       {
         if (neededParentSimulation == null)
         {
-          List<? extends SubcircuitSimulation> instanceSubcircuitSimulations = circuitInstanceView.getInstanceSubcircuitSimulations();
+          List<? extends SubcircuitSimulation> instanceSubcircuitSimulations = pathInstanceView.getInstanceSubcircuitSimulations();
           if (instanceSubcircuitSimulations.size() == 1)
           {
             SubcircuitSimulation subcircuitSimulation = instanceSubcircuitSimulations.get(0);
@@ -55,7 +55,7 @@ public class SubcircuitSimulationPaths
         }
         else
         {
-          SubcircuitSimulation subcircuitSimulation = circuitInstanceView.getSubcircuitInstanceSimulationForParent(neededParentSimulation);
+          SubcircuitSimulation subcircuitSimulation = pathInstanceView.getSubcircuitInstanceSimulationForParent(neededParentSimulation);
           if (subcircuitSimulation != null)
           {
             if (subcircuitSimulation.isInstance())

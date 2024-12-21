@@ -100,7 +100,11 @@ public class ViewPathComponentSimulation<COMPONENT extends CircuitElement>
     for (Map.Entry<ViewPath, Map<CircuitSimulation, COMPONENT>> pathEntry : map.entrySet())
     {
       ViewPath viewPath = pathEntry.getKey();
-      result.add(viewPath.getSubcircuitSimulation(circuitSimulation));
+      SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulationOrNull(circuitSimulation);
+      if (subcircuitSimulation != null)
+      {
+        result.add(subcircuitSimulation);
+      }
     }
     return result;
   }

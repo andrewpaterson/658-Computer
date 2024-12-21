@@ -45,7 +45,6 @@ public class SubcircuitInstanceView
 {
   public static final String SUBCIRCUIT_INSTANCE = "Subcircuit";
 
-  protected boolean subcircuitComponentsCreated;
   protected List<SubcircuitPinView> pinViews;
   protected SubcircuitView instanceSubcircuitView;
 
@@ -67,7 +66,6 @@ public class SubcircuitInstanceView
           rotation,
           properties);
     this.instanceSubcircuitView = instanceSubcircuitView;
-    this.subcircuitComponentsCreated = false;
     this.pinViews = new ArrayList<>();
     this.simulationSubcircuitInstances = new ViewPathComponentSimulation<>();
 
@@ -260,9 +258,14 @@ public class SubcircuitInstanceView
 
   public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
+    ViewPath thisViewPath = getViewPaths().getPath(viewPath, this);
+
     SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     SubcircuitInstance subcircuitInstance = createComponent(viewPath, circuitSimulation);
-    simulationSubcircuitInstances.get(viewPath, circuitSimulation);
+
+    SubcircuitInstanceSimulation subcircuitInstanceSimulation = subcircuitInstance.getSubcircuitInstanceSimulation();
+    thisViewPath.addSubcircuitSimulation(subcircuitInstanceSimulation);
+
     return new SubcircuitInstanceCreation(this,
                                           viewPath,
                                           circuitSimulation,
@@ -686,6 +689,11 @@ public class SubcircuitInstanceView
   public Set<? extends SubcircuitSimulation> getComponentSubcircuitSimulations()
   {
     return simulationSubcircuitInstances.getSimulations();
+  }
+
+  public ViewPaths getViewPaths()
+  {
+    return getInstanceSubcircuitView().getCircuitEditor().getViewPaths();
   }
 }
 

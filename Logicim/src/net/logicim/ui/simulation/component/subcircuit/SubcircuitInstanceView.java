@@ -472,7 +472,9 @@ public class SubcircuitInstanceView
                                    viewPath.getDescription(),
                                    circuitSimulation.getDescription());
     }
-    instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(viewPath, circuitSimulation);
+
+    ViewPath nextViewPath = getViewPaths().getPath(viewPath, this);
+    instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(nextViewPath, circuitSimulation);
     destroyPortViewComponents(viewPath, circuitSimulation);
     Circuit circuit = circuitSimulation.getCircuit();
     circuit.remove(removedSubcircuitInstance);

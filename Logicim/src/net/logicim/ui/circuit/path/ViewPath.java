@@ -254,6 +254,11 @@ public class ViewPath
     return id;
   }
 
+  public void setEmptyId()
+  {
+    this.id = 0;
+  }
+
   public Set<Map.Entry<CircuitSimulation, SubcircuitSimulation>> getCircuitSimulations()
   {
     return circuitSimulations.entrySet();

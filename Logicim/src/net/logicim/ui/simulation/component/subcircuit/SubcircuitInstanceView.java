@@ -251,14 +251,9 @@ public class SubcircuitInstanceView
     subcircuitInstance.reset(circuitSimulation.getSimulation());
   }
 
-  public void createTracesForSubcircuitInstanceView()
-  {
-    instanceSubcircuitView.createTracesForSubcircuitInstanceView(this);
-  }
-
   public SubcircuitInstanceCreation createComponentInSubcircuitInstanceCreation(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    ViewPath thisViewPath = getViewPaths().getPath(viewPath, this);
+    ViewPath thisViewPath = getViewPaths().getViewPath(viewPath, this);
 
     SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     SubcircuitInstance subcircuitInstance = createComponent(viewPath, circuitSimulation);
@@ -473,7 +468,7 @@ public class SubcircuitInstanceView
                                    circuitSimulation.getDescription());
     }
 
-    ViewPath nextViewPath = getViewPaths().getPath(viewPath, this);
+    ViewPath nextViewPath = getViewPaths().getViewPath(viewPath, this);
     instanceSubcircuitView.destroySubcircuitInstanceComponentsAndSimulations(nextViewPath, circuitSimulation);
     destroyPortViewComponents(viewPath, circuitSimulation);
     Circuit circuit = circuitSimulation.getCircuit();
@@ -489,7 +484,7 @@ public class SubcircuitInstanceView
     for (Map.Entry<ViewPath, Map<CircuitSimulation, SubcircuitInstance>> pathEntry : entrySet)
     {
       ViewPath viewPath = pathEntry.getKey();
-      ViewPath fullPath = viewPaths.getPath(viewPath, this);
+      ViewPath fullPath = viewPaths.getViewPath(viewPath, this);
 
       Map<CircuitSimulation, SubcircuitInstance> map = pathEntry.getValue();
       for (CircuitSimulation circuitSimulation : map.keySet())

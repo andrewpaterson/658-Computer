@@ -13,15 +13,18 @@ import java.util.List;
 public class ViewPaths
 {
   protected List<ViewPath> viewPaths;
+  protected ViewPath emptyPath;
 
   public ViewPaths()
   {
-    this.viewPaths = new ArrayList<>();
+    viewPaths = new ArrayList<>();
+    emptyPath = new ViewPath(new ArrayList<>());
+    emptyPath.setEmptyId();
   }
 
   public ViewPaths(List<SubcircuitEditor> subcircuitEditors)
   {
-    viewPaths = new ArrayList<>();
+    this();
 
     createPaths(subcircuitEditors);
   }
@@ -83,22 +86,22 @@ public class ViewPaths
     return result;
   }
 
-  public ViewPath getPath(ViewPath viewPath, CircuitInstanceView circuitInstanceView)
+  public ViewPath getViewPath(ViewPath viewPath, CircuitInstanceView circuitInstanceView)
   {
     List<CircuitInstanceView> newPath = new ArrayList<>(viewPath.path);
     newPath.add(circuitInstanceView);
 
-    return getPath(newPath);
+    return getViewPath(newPath);
   }
 
   public ViewPath getPathExceptLast(ViewPath viewPath)
   {
     List<CircuitInstanceView> newPath = new ArrayList<>(viewPath.path);
     newPath.remove(newPath.size() - 1);
-    return getPath(newPath);
+    return getViewPath(newPath);
   }
 
-  private ViewPath getPath(List<CircuitInstanceView> newPath)
+  private ViewPath getViewPath(List<CircuitInstanceView> newPath)
   {
     for (ViewPath viewPath : viewPaths)
     {
@@ -154,7 +157,7 @@ public class ViewPaths
     return false;
   }
 
-  public ViewPath getPath(int index)
+  public ViewPath getViewPath(int index)
   {
     return viewPaths.get(index);
   }
@@ -190,6 +193,11 @@ public class ViewPaths
     }
 
     return true;
+  }
+
+  public ViewPath getEmptyPath()
+  {
+    return emptyPath;
   }
 }
 

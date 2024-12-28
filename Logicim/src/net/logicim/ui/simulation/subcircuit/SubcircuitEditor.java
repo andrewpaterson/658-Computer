@@ -331,11 +331,6 @@ public class SubcircuitEditor
     return subcircuitView.getConnection(x, y);
   }
 
-  public void deleteComponentView(StaticView<?> staticView)
-  {
-    subcircuitView.deleteStaticView(staticView);
-  }
-
   public void validate()
   {
     subcircuitView.validate();

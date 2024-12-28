@@ -21,7 +21,7 @@ public class WireListFinder
   protected Set<SubcircuitPinView> processedSubcircuitPinViews;
   protected Set<ConnectionView> processedSplitterViewConnections;
 
-  public WireListFinder(CircuitInstanceView circuitInstanceView,
+  public WireListFinder(ViewPath viewPath,
                         ConnectionView inputConnectionView,
                         ViewPaths paths)
   {
@@ -32,13 +32,10 @@ public class WireListFinder
 
     this.paths = paths;
     this.pathConnectionViewStack = new ArrayList<>();
+    CircuitInstanceView circuitInstanceView = viewPath.getLast();
     SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
-    List<ViewPath> pathsEndingInConnectionView = paths.getPathsEndingWithSubcircuitView(subcircuitView);
-    for (ViewPath viewPath : pathsEndingInConnectionView)
-    {
-      PathConnectionView pathConnectionView = subcircuitView.getPathConnection(viewPath, inputConnectionView);
-      this.pathConnectionViewStack.add(pathConnectionView);
-    }
+    PathConnectionView pathConnectionView = subcircuitView.getPathConnection(viewPath, inputConnectionView);
+    this.pathConnectionViewStack.add(pathConnectionView);
     this.processedSubcircuitPinViews = new LinkedHashSet<>();
     this.processedSplitterViewConnections = new LinkedHashSet<>();
   }
@@ -231,7 +228,7 @@ public class WireListFinder
 
       ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, subcircuitInstanceViewConnection.connectionView);
 
-      ViewPath newPath = paths.getPath(viewPath, subcircuitInstanceView);
+      ViewPath newPath = paths.getViewPath(viewPath, subcircuitInstanceView);
       localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, pinConnection));
     }
     return localConnectionsToProcess;

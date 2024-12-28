@@ -3,12 +3,18 @@ package net.logicim.ui.placement;
 import net.common.geometry.Line;
 import net.common.type.Int2D;
 import net.logicim.ui.Edit;
+import net.logicim.ui.circuit.SubcircuitView;
+import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.wire.TraceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class WirePull
     extends StatefulEdit
@@ -63,10 +69,23 @@ public class WirePull
       Line secondLine = Line.createLine(middlePosition, secondPosition);
 
       SubcircuitEditor subcircuitEditor = edit.getEditor().getCurrentSubcircuitEditor();
-      subcircuitEditor.getInstanceSubcircuitView().createTraceViews2(Line.lines(firstLine, secondLine));
+      createTraceViews(subcircuitEditor, Line.lines(firstLine, secondLine));
 
       edit.circuitUpdated();
     }
+  }
+
+  public Set<TraceView> createTraceViews(SubcircuitEditor subcircuitEditor, List<Line> newTraceViewLines)
+  {
+    ViewPaths viewPaths = subcircuitEditor.getCircuitEditor().getViewPaths();
+
+    SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
+    Set<TraceView> newTraceViews = subcircuitView.createTraceViews(newTraceViewLines);
+    subcircuitView.createTracesForTraceViewsAndConnectionViews(viewPaths.getEmptyPath(),
+                                                               subcircuitEditor,
+                                                               new ArrayList<>(),
+                                                               newTraceViews);
+    return newTraceViews;
   }
 
   @Override

@@ -228,7 +228,9 @@ public class SubcircuitView
       }
     }
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(subcircuitEditor, connectionViews);
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+                                                                                subcircuitEditor,
+                                                                                connectionViews);
     fireConnectionEvents(updatedConnectionViews);
   }
 
@@ -292,7 +294,10 @@ public class SubcircuitView
 
     Set<TraceView> connectedTraceViews = finder.getTraceViews();
     Set<TraceView> newTraceViews = createTraceViews(new HashSet<>(), connectedTraceViews);
-    createTracesForTraceViewsAndConnectionViews(subcircuitEditor, nonTraceViewConnectionViews, newTraceViews);
+    createTracesForTraceViewsAndConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+                                                subcircuitEditor,
+                                                nonTraceViewConnectionViews,
+                                                newTraceViews);
   }
 
   public ConnectionView getOrAddConnectionView(Int2D position, View view)
@@ -807,19 +812,17 @@ public class SubcircuitView
     return connectionViewCache.getConnectionView(x, y);
   }
 
-  public Set<ConnectionView> createTracesForConnectionViews(CircuitInstanceView circuitInstanceView,
+  public Set<ConnectionView> createTracesForConnectionViews(ViewPath parentViewPath,
+                                                            CircuitInstanceView circuitInstanceView,
                                                             Collection<ConnectionView> traceConnectionViews)
   {
-    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
-
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
     if (traceConnectionViews.size() > 0)
     {
       validateConnectionViewsNotNull(traceConnectionViews);
-      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(circuitInstanceView,
-                                                                                                         traceConnectionViews,
-                                                                                                         viewPaths
-      );
+      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViewsForSubcircuitSimulation(parentViewPath,
+                                                                                                         circuitInstanceView,
+                                                                                                         traceConnectionViews);
       allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
 
@@ -838,10 +841,13 @@ public class SubcircuitView
     }
   }
 
-  protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(CircuitInstanceView circuitInstanceView,
-                                                                                      Collection<ConnectionView> tracesConnectionViews,
-                                                                                      ViewPaths viewPaths)
+  protected Set<ConnectionView> createTracesForConnectionViewsForSubcircuitSimulation(ViewPath parentViewPath,
+                                                                                      CircuitInstanceView circuitInstanceView,
+                                                                                      Collection<ConnectionView> tracesConnectionViews)
   {
+    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    ViewPath viewPath = viewPaths.getViewPath(parentViewPath, circuitInstanceView);
+
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tracesConnectionViews)
     {
@@ -849,7 +855,7 @@ public class SubcircuitView
       {
         if (connectionView.getConnectedComponents().size() > 0)
         {
-          WireListFinder wireListFinder = new WireListFinder(circuitInstanceView, connectionView, viewPaths);
+          WireListFinder wireListFinder = new WireListFinder(viewPath, connectionView, viewPaths);
           List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
           WireList wireList = wireListFinder.createWireList(connectionNets);
 
@@ -1000,15 +1006,6 @@ public class SubcircuitView
     }
   }
 
-  public Set<TraceView> createTraceViews2(List<Line> newTraceViewLines)
-  {
-    Set<TraceView> newTraceViews = createTraceViews(newTraceViewLines);
-    createTracesForTraceViewsAndConnectionViews(subcircuitEditor,
-                                                new ArrayList<>(),
-                                                newTraceViews);
-    return newTraceViews;
-  }
-
   protected Set<TraceView> createTraceViews(Collection<Line> newTraceViewLines, Collection<TraceView> touchingTraceViews)
   {
     Set<Line> traceViewLines = new LinkedHashSet<>(newTraceViewLines);
@@ -1049,7 +1046,8 @@ public class SubcircuitView
     return traceViews;
   }
 
-  public void createTracesForTraceViewsAndConnectionViews(CircuitInstanceView circuitInstanceView,
+  public void createTracesForTraceViewsAndConnectionViews(ViewPath parentViewPath,
+                                                          CircuitInstanceView circuitInstanceView,
                                                           Collection<ConnectionView> nonTraceViewConnectionViews,
                                                           Set<TraceView> traceViews)
   {
@@ -1065,7 +1063,9 @@ public class SubcircuitView
 
     if (traceConnectionViews.size() > 0)
     {
-      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, traceConnectionViews);
+      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(parentViewPath,
+                                                                                  circuitInstanceView,
+                                                                                  traceConnectionViews);
       fireConnectionEvents(updatedConnectionViews);
     }
   }
@@ -1183,7 +1183,8 @@ public class SubcircuitView
 
     LinkedHashSet<ConnectionView> nonTraceViewConnectionViews = pair.getNonTraceViewConnectionViews();
     Set<TraceView> newTraceViews = createTraceViews(new HashSet<>(), connectedTraceViews);
-    createTracesForTraceViewsAndConnectionViews(subcircuitEditor,
+    createTracesForTraceViewsAndConnectionViews(circuitEditor.getViewPaths().getEmptyPath(),
+                                                subcircuitEditor,
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);
   }
@@ -1229,7 +1230,8 @@ public class SubcircuitView
     }
 
     List<ViewPathComponents> viewPathComponents = new ArrayList<>();
-    ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(circuitEditor.getCurrentViewPath(), circuitEditor.getCurrentCircuitSimulation());
+    ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(circuitEditor.getCurrentViewPath(),
+                                                                                        circuitEditor.getCurrentCircuitSimulation());
     viewPathComponents.add(new ViewPathComponents(viewPathCircuitSimulation,
                                                   componentViews));
 
@@ -1257,12 +1259,14 @@ public class SubcircuitView
 
     for (SubcircuitInstanceCreation creation : creations)
     {
+      SubcircuitView subcircuitView = creation.getSubcircuitInstanceView().getInstanceSubcircuitView();
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
-      subcircuitInstanceView.createTracesForSubcircuitInstanceView();
+      subcircuitView.createTracesForSubcircuitInstanceView(creation.getViewPath(), subcircuitInstanceView);
     }
 
     Set<TraceView> newTraceViews = createTraceViews(existingTraceViewLines);
-    createTracesForTraceViewsAndConnectionViews(subcircuitEditor,
+    createTracesForTraceViewsAndConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+                                                subcircuitEditor,
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);
 
@@ -1293,7 +1297,7 @@ public class SubcircuitView
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
       SubcircuitView subcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
 
-      ViewPath nextViewPath = viewPaths.getPath(viewPath, subcircuitInstanceView);
+      ViewPath nextViewPath = viewPaths.getViewPath(viewPath, subcircuitInstanceView);
       ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(nextViewPath, circuitSimulation);
       viewPathComponentsList.add(new ViewPathComponents(viewPathCircuitSimulation, subcircuitView.getComponentViews()));
       subcircuitView.recurseFindSubcircuitInstanceCreations(creations,
@@ -1658,12 +1662,14 @@ public class SubcircuitView
     }
   }
 
-  public void createTracesForSubcircuitInstanceView(CircuitInstanceView circuitInstanceView)
+  public void createTracesForSubcircuitInstanceView(ViewPath parentViewPath, SubcircuitInstanceView subcircuitInstanceView)
   {
     List<StaticView<?>> staticViews = getStaticViews();
     Set<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(circuitInstanceView, connectionViews);
+    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(parentViewPath,
+                                                                                subcircuitInstanceView,
+                                                                                connectionViews);
     fireConnectionEvents(updatedConnectionViews);
   }
 

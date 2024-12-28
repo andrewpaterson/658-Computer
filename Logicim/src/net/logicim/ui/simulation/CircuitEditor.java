@@ -815,12 +815,8 @@ public class CircuitEditor
 
   public void deleteComponentView(StaticView<?> staticView)
   {
-    deleteComponentView(staticView, getCurrentSubcircuitEditor());
-  }
-
-  public void deleteComponentView(StaticView<?> staticView, SubcircuitEditor subcircuitEditor)
-  {
-    subcircuitEditor.deleteComponentView(staticView);
+    SubcircuitView subcircuitView = getCurrentSubcircuitEditor().getInstanceSubcircuitView();
+    subcircuitView.deleteStaticView(staticView);
   }
 
   public void validate()
@@ -1046,10 +1042,10 @@ public class CircuitEditor
     int length = viewPaths.getViewPaths().size();
     for (int i = 0; i < length; i++)
     {
-      ViewPath existingPath = viewPaths.getPath(i);
-      if (!newViewPaths.contains(existingPath))
+      ViewPath existingViewPath = viewPaths.getViewPath(i);
+      if (!newViewPaths.contains(existingViewPath))
       {
-        removedPaths.add(existingPath);
+        removedPaths.add(existingViewPath);
         viewPaths.removePath(i);
         i--;
         length--;

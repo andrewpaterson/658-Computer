@@ -28,5 +28,10 @@ public class WireViewPathConnection
   {
     return viewPath;
   }
+
+  public ConnectionView getConnectionView()
+  {
+    return connectionView;
+  }
 }
 

@@ -16,7 +16,7 @@ public class SimulationInfo
   @Override
   public String getInfo()
   {
-    SubcircuitSimulation subcircuitSimulation = editor.getSubcircuitSimulation();
+    SubcircuitSimulation subcircuitSimulation = editor.getCurrentSubcircuitSimulation();
     CircuitSimulation circuitSimulation = null;
     if (subcircuitSimulation != null)
     {

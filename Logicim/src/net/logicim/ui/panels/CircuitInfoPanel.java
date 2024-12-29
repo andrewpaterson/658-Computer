@@ -23,13 +23,14 @@ public class CircuitInfoPanel
 
     List<JComponent> components = new ArrayList<>();
     components.add(createLeft(editor, new SubcircuitInfo(editor), 200));
-    components.add(createLeft(editor, new SimulationInfo(editor), 400));
+    components.add(createLeft(editor, new SimulationInfo(editor), 300));
+    components.add(createLeft(editor, new ViewPathInfo(editor), 800));
 
     components.add(new JPanel());
 
-    components.add(createRight(editor, new MouseXInfo(editor)));
-    components.add(createRight(editor, new MouseYInfo(editor)));
-    components.add(createRight(editor, new ZoomInfo(editor)));
+    components.add(createRight(editor, new MouseXInfo(editor), 80));
+    components.add(createRight(editor, new MouseYInfo(editor), 80));
+    components.add(createRight(editor, new ZoomInfo(editor), 80));
 
     int x = 0;
     for (JComponent component : components)
@@ -46,10 +47,10 @@ public class CircuitInfoPanel
     }
   }
 
-  protected JLabel createRight(Logicim editor, InfoLabel infoLabel)
+  protected JLabel createRight(Logicim editor, InfoLabel infoLabel, int width)
   {
     JLabel label = infoLabel.getLabel();
-    label.setMinimumSize(new Dimension(80, 16));
+    label.setMinimumSize(new Dimension(width, 16));
     label.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Colours.getInstance().getPanelInfoBorder()));
     editor.addInfoLabel(infoLabel);
     return label;

@@ -13,7 +13,6 @@ import net.logicim.data.editor.DefaultComponentPropertiesData;
 import net.logicim.data.editor.EditorData;
 import net.logicim.data.editor.SubcircuitParameterData;
 import net.logicim.domain.CircuitSimulation;
-import net.logicim.domain.passive.subcircuit.SubcircuitInstance;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.SubcircuitInstanceViewFactory;
 import net.logicim.ui.circuit.SubcircuitView;
@@ -206,7 +205,7 @@ public class Logicim
             }
             else if ((hoverConnectionView != null))
             {
-              edit = new StartEditInPort(keyboardButtons, getSubcircuitSimulation());
+              edit = new StartEditInPort(keyboardButtons, getCurrentSubcircuitSimulation());
             }
             else
             {
@@ -1311,13 +1310,14 @@ public class Logicim
       if (staticView instanceof SubcircuitInstanceView)
       {
         SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) staticView;
-        CircuitSimulation circuitSimulation = circuitEditor.getCurrentCircuitSimulation();
-        ViewPath viewPath = circuitEditor.getViewPaths().getViewPath(getCurrentViewPath(), subcircuitInstanceView);
+        CircuitSimulation currentCircuitSimulation = circuitEditor.getCurrentCircuitSimulation();
+        ViewPath currentViewPath = circuitEditor.getCurrentViewPath();
+        ViewPath viewPath = circuitEditor.getViewPaths().getViewPath(currentViewPath, subcircuitInstanceView);
         SubcircuitView instanceSubcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
         discardEdit();
 
         SubcircuitEditor subcircuitEditor = circuitEditor.getSubcircuitEditor(instanceSubcircuitView.getTypeName());
-        String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, new ViewPathCircuitSimulation(viewPath, circuitSimulation));
+        String subcircuitTypeName = circuitEditor.gotoSubcircuit(subcircuitEditor, new ViewPathCircuitSimulation(viewPath, currentCircuitSimulation));
         setSubcircuitViewParameters(subcircuitTypeName);
         updateHighlighted();
       }
@@ -1350,7 +1350,7 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitEditor();
   }
 
-  public SubcircuitSimulation getSubcircuitSimulation()
+  public SubcircuitSimulation getCurrentSubcircuitSimulation()
   {
     return circuitEditor.getCurrentSubcircuitSimulation();
   }
@@ -1507,6 +1507,13 @@ public class Logicim
     return circuitEditor.getCurrentSubcircuitSimulation();
   }
 
+
+  public ViewPath getCurrentViewPath()
+  {
+    return circuitEditor.getCurrentViewPath();
+  }
+
+
   public void notifySubcircuitListChanged()
   {
     getSubcircuitEditorList().notifySubcircuitListChanged(true);
@@ -1570,18 +1577,14 @@ public class Logicim
           for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
           {
             WireView wireView = wireViewPathConnection.getWireView();
-            System.out.println(viewPath.getDescription() + ": " + wireView.getDescription());
+            ConnectionView wireConnectionView = wireViewPathConnection.getConnectionView();
+//            System.out.println("Path [" + viewPath.getDescription() + "]:  Wire [" + wireView.getDescription() + "],  Connection [" + wireConnectionView.toString() + "]");
           }
         }
         WireList wireList = wireListFinder.createWireList(connectionNets);
-        //System.out.println(wireList.toString());
+        System.out.println(wireList.toString());
       }
     }
-  }
-
-  private ViewPath getCurrentViewPath()
-  {
-    return circuitEditor.getCurrentViewPath();
   }
 
   public void unhighlightWire()

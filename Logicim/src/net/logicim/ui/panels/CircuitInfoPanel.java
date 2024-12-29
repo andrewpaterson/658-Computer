@@ -28,9 +28,9 @@ public class CircuitInfoPanel
 
     components.add(new JPanel());
 
-    components.add(createRight(editor, new MouseXInfo(editor), 80));
-    components.add(createRight(editor, new MouseYInfo(editor), 80));
-    components.add(createRight(editor, new ZoomInfo(editor), 80));
+    components.add(createRight(editor, new MouseXInfo(editor), 60));
+    components.add(createRight(editor, new MouseYInfo(editor), 60));
+    components.add(createRight(editor, new ZoomInfo(editor), 44));
 
     int x = 0;
     for (JComponent component : components)

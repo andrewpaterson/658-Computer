@@ -13,7 +13,7 @@ public class ZoomInfo
   @Override
   public String getInfo()
   {
-    return String.format(" Z %.2f ", editor.getZoom()).replace(',', '.');
+    return String.format(" Z %.1f ", editor.getZoom()).replace(',', '.');
   }
 }
 

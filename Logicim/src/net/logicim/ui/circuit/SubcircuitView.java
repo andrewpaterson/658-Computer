@@ -1187,6 +1187,14 @@ public class SubcircuitView
                                                 subcircuitEditor,
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);
+
+    UpdatedViewPaths updatedPaths = circuitEditor.viewPathsUpdate();
+
+    Set<SubcircuitView> updatedSubcircuitViews = updatedPaths.getSubcircuitViews();
+    for (SubcircuitView subcircuitView : updatedSubcircuitViews)
+    {
+      subcircuitView.pathsUpdated(updatedPaths);
+    }
   }
 
   public List<View> doneMoveComponents(List<StaticView<?>> staticViews,

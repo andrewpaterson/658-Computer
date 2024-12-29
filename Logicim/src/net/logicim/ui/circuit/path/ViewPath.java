@@ -244,7 +244,7 @@ public class ViewPath
     return new ArrayList<>(circuitSimulations.values());
   }
 
-  public List<CircuitSimulation> getCircuitSimulation()
+  public List<CircuitSimulation> getCircuitSimulations()
   {
     return new ArrayList<>(circuitSimulations.keySet());
   }
@@ -259,7 +259,7 @@ public class ViewPath
     this.id = 0;
   }
 
-  public Set<Map.Entry<CircuitSimulation, SubcircuitSimulation>> getCircuitSimulations()
+  public Set<Map.Entry<CircuitSimulation, SubcircuitSimulation>> getCircuitSimulationsEntrySet()
   {
     return circuitSimulations.entrySet();
   }

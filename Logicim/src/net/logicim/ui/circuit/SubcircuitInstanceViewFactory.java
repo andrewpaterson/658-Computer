@@ -3,7 +3,6 @@ package net.logicim.ui.circuit;
 import net.common.type.Int2D;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
 import net.logicim.ui.Logicim;
-import net.logicim.ui.circuit.path.UpdatedViewPaths;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.property.PropertyEditorDialog;
@@ -13,7 +12,6 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
 import javax.swing.*;
-import java.util.Set;
 
 public class SubcircuitInstanceViewFactory
     extends ViewFactory<SubcircuitInstanceView, SubcircuitInstanceProperties>
@@ -68,13 +66,8 @@ public class SubcircuitInstanceViewFactory
                                                                                position,
                                                                                rotation,
                                                                                properties);
-    UpdatedViewPaths updatedPaths = circuitEditor.viewPathsUpdate();
+    circuitEditor.updateViewPaths();
 
-    Set<SubcircuitView> updatedSubcircuitViews = updatedPaths.getSubcircuitViews();
-    for (SubcircuitView subcircuitView : updatedSubcircuitViews)
-    {
-      subcircuitView.pathsUpdated(updatedPaths);
-    }
     return subcircuitInstanceView;
   }
 

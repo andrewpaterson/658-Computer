@@ -179,6 +179,7 @@ public class SubcircuitView
 
   public void deleteStaticViews(List<StaticView<?>> staticViews)
   {
+    List<SubcircuitInstanceView> removedSubcircuitInstanceViews = new ArrayList<>();
     Set<ConnectionView> connectionViews = new LinkedHashSet<>();
     for (StaticView<?> componentView : staticViews)
     {
@@ -208,11 +209,8 @@ public class SubcircuitView
       else if (componentView instanceof SubcircuitInstanceView)
       {
         SubcircuitInstanceView subcircuitInstanceView = (SubcircuitInstanceView) componentView;
-        SubcircuitView subcircuitView = subcircuitInstanceView.getInstanceSubcircuitView();
         removeSubcircuitInstanceView(subcircuitInstanceView);
-
-        UpdatedViewPaths updatedPaths = getCircuitEditor().viewPathsUpdate();
-        subcircuitView.pathsUpdated(updatedPaths);
+        removedSubcircuitInstanceViews.add(subcircuitInstanceView);
       }
       else if (componentView instanceof DecorativeView)
       {
@@ -226,6 +224,11 @@ public class SubcircuitView
       {
         throw new SimulatorException("Cannot delete view of class [%s].", componentView.getClass().getSimpleName());
       }
+    }
+
+    if (removedSubcircuitInstanceViews.size() > 0)
+    {
+      getCircuitEditor().updateViewPaths();
     }
 
     Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
@@ -294,7 +297,7 @@ public class SubcircuitView
 
     Set<TraceView> connectedTraceViews = finder.getTraceViews();
     Set<TraceView> newTraceViews = createTraceViews(new HashSet<>(), connectedTraceViews);
-    createTracesForTraceViewsAndConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+    createTracesForTraceViewsAndConnectionViews(circuitEditor.getViewPaths().getEmptyPath(),
                                                 subcircuitEditor,
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);
@@ -321,12 +324,26 @@ public class SubcircuitView
 
   public void validate()
   {
+    validateViewPaths();
     validateConnectionViews();
     validateStaticViews();
     validateTracesContainOnlyCurrentViews();
     validateTunnelViews();
 
     validateComponentSimulations();
+  }
+
+  private void validateViewPaths()
+  {
+    Set<ViewPath> pathsEndingWithSubcircuitView = new LinkedHashSet<>(circuitEditor.getViewPaths().getPathsEndingWithSubcircuitView(this));
+    boolean result = pathsEndingWithSubcircuitView.equals(new HashSet<>(viewPaths));
+    if (!result)
+    {
+      throw new SimulatorException("Subcircuit View [%s] View Paths [%s] does not match Circuit Editor View Paths ending [%s] in Subcircuit View.",
+                                   getTypeName(),
+                                   viewPaths.size(),
+                                   pathsEndingWithSubcircuitView.size());
+    }
   }
 
   private void validateStaticViews()
@@ -1188,13 +1205,7 @@ public class SubcircuitView
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);
 
-    UpdatedViewPaths updatedPaths = circuitEditor.viewPathsUpdate();
-
-    Set<SubcircuitView> updatedSubcircuitViews = updatedPaths.getSubcircuitViews();
-    for (SubcircuitView subcircuitView : updatedSubcircuitViews)
-    {
-      subcircuitView.pathsUpdated(updatedPaths);
-    }
+    circuitEditor.updateViewPaths();
   }
 
   public List<View> doneMoveComponents(List<StaticView<?>> staticViews,
@@ -1238,15 +1249,20 @@ public class SubcircuitView
     }
 
     List<ViewPathComponents> viewPathComponents = new ArrayList<>();
-    ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(circuitEditor.getCurrentViewPath(),
-                                                                                        circuitEditor.getCurrentCircuitSimulation());
-    viewPathComponents.add(new ViewPathComponents(viewPathCircuitSimulation,
-                                                  componentViews));
+
+    for (ViewPath viewPath : viewPaths)
+    {
+      for (CircuitSimulation circuitSimulation : viewPath.getCircuitSimulations())
+      {
+        ViewPathCircuitSimulation viewPathCircuitSimulation = new ViewPathCircuitSimulation(viewPath, circuitSimulation);
+        viewPathComponents.add(new ViewPathComponents(viewPathCircuitSimulation, componentViews));
+      }
+    }
 
     List<SubcircuitInstanceCreation> creations = new ArrayList<>();
     for (ViewPath viewPath : viewPaths)
     {
-      List<CircuitSimulation> circuitSimulationList = viewPath.getCircuitSimulation();
+      List<CircuitSimulation> circuitSimulationList = viewPath.getCircuitSimulations();
       for (CircuitSimulation circuitSimulation : circuitSimulationList)
       {
         recurseFindSubcircuitInstanceCreations(creations,
@@ -1273,7 +1289,7 @@ public class SubcircuitView
     }
 
     Set<TraceView> newTraceViews = createTraceViews(existingTraceViewLines);
-    createTracesForTraceViewsAndConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+    createTracesForTraceViewsAndConnectionViews(circuitEditor.getViewPaths().getEmptyPath(),
                                                 subcircuitEditor,
                                                 nonTraceViewConnectionViews,
                                                 newTraceViews);

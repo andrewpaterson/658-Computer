@@ -267,7 +267,7 @@ public class CircuitEditor
       long previousId = viewPath.getPrevious() != null ? viewPath.getPrevious().getId() : 0L;
 
       Map<Long, Long> circuitSimulationIds = new LinkedHashMap<>();
-      for (Map.Entry<CircuitSimulation, SubcircuitSimulation> entry : viewPath.getCircuitSimulations())
+      for (Map.Entry<CircuitSimulation, SubcircuitSimulation> entry : viewPath.getCircuitSimulationsEntrySet())
       {
         long circuitSimulationId = entry.getKey().getId();
         long subcircuitSimulationId = entry.getValue().getId();
@@ -981,15 +981,13 @@ public class CircuitEditor
     SubcircuitEditor subcircuitEditor = new SubcircuitEditor(this, subcircuitName);
     subcircuitEditorList.add(subcircuitEditor, true);
 
-    SubcircuitView subcircuitView = subcircuitEditor.getInstanceSubcircuitView();
-    UpdatedViewPaths updatedPaths = viewPathsUpdate();
-    subcircuitView.pathsUpdated(updatedPaths);
+    updateViewPaths();
 
     setSubcircuitSimulationForSubcircuitEditor(subcircuitEditor, null);
     setCurrentSubcircuitEditor(subcircuitEditor);
   }
 
-  public UpdatedViewPaths viewPathsUpdate()
+  public UpdatedViewPaths calculateUpdatedViewPaths()
   {
     ViewPaths newViewPaths = new ViewPaths(getSubcircuitEditors());
 
@@ -1004,6 +1002,17 @@ public class CircuitEditor
     updateSimulationPaths();
 
     return updatedViewPaths;
+  }
+
+  public void updateViewPaths()
+  {
+    UpdatedViewPaths updatedPaths = calculateUpdatedViewPaths();
+
+    Set<SubcircuitView> updatedSubcircuitViews = updatedPaths.getSubcircuitViews();
+    for (SubcircuitView subcircuitView : updatedSubcircuitViews)
+    {
+      subcircuitView.pathsUpdated(updatedPaths);
+    }
   }
 
   public void updateSimulationPaths()

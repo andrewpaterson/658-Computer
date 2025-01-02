@@ -783,12 +783,12 @@
 	(footprint "HCP65_Parts:HCP65_Daughter_PS2_Board"
 		(layer "F.Cu")
 		(uuid "06677746-61b7-435f-9675-4ec7f84b3628")
-		(at 45.72 20.32)
+		(at 45.72 203.2)
 		(property "Reference" "HDB1"
 			(at 0 -0.889 0)
 			(unlocked yes)
 			(layer "F.SilkS")
-			(uuid "d1a264d2-5260-4584-807c-6b66c1ea757e")
+			(uuid "81f04748-247c-4bfa-9ab6-f889717accd3")
 			(effects
 				(font
 					(size 1 1)
@@ -800,7 +800,7 @@
 			(at 0 1 0)
 			(unlocked yes)
 			(layer "F.Fab")
-			(uuid "6f212de3-efaf-409d-9e46-4af964a0d4aa")
+			(uuid "da0c0b76-eb6e-4b6e-a6d3-939b328f42fb")
 			(effects
 				(font
 					(size 1 1)
@@ -813,7 +813,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "93195101-1b63-4fab-a80d-e26833aab7ad")
+			(uuid "e442b020-b242-476b-b806-cea771a4b2b6")
 			(effects
 				(font
 					(size 1 1)
@@ -826,7 +826,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "5ef54424-fc86-499a-ba47-a25d9b59c144")
+			(uuid "b0b6441e-bbbd-4aee-8d10-cb18bf0fb14c")
 			(effects
 				(font
 					(size 1 1)
@@ -839,7 +839,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6c3ac550-9bce-492a-a02f-beda4bee3e81")
+			(uuid "970c076b-e8ed-4d39-9fe9-9c6aa1af6318")
 			(effects
 				(font
 					(size 1 1)
@@ -860,7 +860,7 @@
 			)
 			(fill solid)
 			(layer "F.SilkS")
-			(uuid "cb55219d-d01c-4dc0-ae37-edba8ccffbbb")
+			(uuid "04b14b48-8832-4ade-9058-ea002b17102e")
 		)
 		(model "${_658_COMPUTER_}/Computer/PS2/PS2 Board/PS2 Board.step"
 			(offset
@@ -2461,6 +2461,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Video_Memory_Board"
+		(layer "F.Cu")
+		(uuid "28d1b190-c2d3-4b23-a1f5-3f9d42f6a0aa")
+		(at 45.72 50.8)
+		(property "Reference" "HDB8"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "f42c057f-67b3-4488-8cdd-7b63e8b8d312")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Video Memory Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "d9a26b9e-312d-451d-b8b5-9332b36f0913")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Memory_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "66d20781-de6c-4a1f-855d-a35c867b1dd4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "073f0101-ae84-410f-8074-61a7cf5c78a5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a2717922-79a4-474b-9233-bd981eb04760")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/aa221cd3-ff7b-4eb4-a677-ea7eb5b261ad")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "3e140213-6c17-45be-8305-708c36975007")
+		)
+		(model "${_658_COMPUTER_}/Computer/Video/Video Board - Memory/Video Board - Memory.step"
+			(offset
+				(xyz -24.13 -7.62 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "SamacSys_Parts:395098520350"
 		(layer "F.Cu")
 		(uuid "339fce57-d3b3-4533-9ee4-b0df4a67c58d")
@@ -3888,6 +3982,100 @@
 			)
 			(rotate
 				(xyz 0 0 -90)
+			)
+		)
+	)
+	(footprint "HCP65_Parts:HCP65_Daughter_SD_Card_Board"
+		(layer "F.Cu")
+		(uuid "39c14d4e-9d04-4b13-bf0c-3c7be88ee884")
+		(at 45.72 20.32)
+		(property "Reference" "HDB6"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "518d32d6-42de-4709-a673-9f72b68342c5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "SD Card Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "e6fd1762-2b2f-49c0-9e23-20f12d8540d5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_SD_Card_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "547182ef-fd26-4556-9808-81db7ef3bd21")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2e670ade-0420-4912-b0a3-2841b1e2fcb2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ba93549a-b198-4546-a08a-9b1575a01e5d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/8873d9a7-dbac-4b49-bb2e-3270ee256cdb")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "82ec59af-6826-4391-9bed-ba86c9b1a98a")
+		)
+		(model "${_658_COMPUTER_}/Computer/SD Card/SD Card Board/SD Card Board.step"
+			(offset
+				(xyz -24.13 0 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
 			)
 		)
 	)
@@ -7080,6 +7268,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Audio_Board"
+		(layer "F.Cu")
+		(uuid "52cb9b94-e47c-4f5a-802f-1486b9fb16a3")
+		(at 45.72 147.32)
+		(property "Reference" "HDB2"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "d9803154-3f8d-46e1-9c32-f7003ef95bd8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Audio Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "af489abe-80dc-4445-80ae-07b5f7e2a1ad")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Audio_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e4bbff97-75d9-464c-8998-6017760998bb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ebd62ab6-e70e-4338-bc81-9dace32754ed")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e3bdc703-f799-4f81-850a-94ab5301e823")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/99704425-dfcc-49a0-9642-865022034bd6")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "6fd3d8ee-3f75-4954-ba66-d83dc2b2c840")
+		)
+		(model "${_658_COMPUTER_}/Computer/Audio/Audio Board/Audio Board.step"
+			(offset
+				(xyz -24.13 0 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "SamacSys_Parts:R_0805"
 		(layer "F.Cu")
 		(uuid "577a4182-3e05-4f16-b865-c912a818039b")
@@ -8982,6 +9264,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Processor_Board"
+		(layer "F.Cu")
+		(uuid "6d531593-883c-4035-9125-56e35589cb92")
+		(at 45.72 83.82)
+		(property "Reference" "HDB5"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "a266bfa5-aebc-43d5-9a23-eecb746c4fde")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Processor Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "ea336d37-42c3-4596-b768-015398f4b64b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Processor_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2c4ca4f6-295d-43af-a4f7-a7cc1087c194")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c728ee0e-7a04-44ae-97b7-4586ab10cd9a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "eedf5615-7ba7-4a76-9f9d-fe971b914577")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/f951b343-e7db-4dae-b441-e6f4f5c530b5")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "f6f8935e-c644-4807-83b2-4cc9e794f5a0")
+		)
+		(model "${_658_COMPUTER_}/Computer/Processor/Processor Board/Processor Board.step"
+			(offset
+				(xyz -24.13 0 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "HCP65_Parts:HCP65_Main_Memory_Abort"
 		(layer "F.Cu")
 		(uuid "73bda565-1049-4c05-a913-9d8da7c1757c")
@@ -9595,6 +9971,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Memory_Board"
+		(layer "F.Cu")
+		(uuid "7b4cabde-6c91-454a-8f3b-af54b20d438d")
+		(at 45.72 116.84)
+		(property "Reference" "HDB4"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "d2202c38-eb35-4bb0-997d-c431e0f55a21")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Memory Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "5e360356-7edd-4ee7-b0e6-c3c7f261cff1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Memory_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5f5583ec-95fa-4b68-ba96-cd73d362a6a4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0613321b-de37-4dff-a834-118555a5ede7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2221f30e-bcdc-4cfa-9f97-13ca5187bf7f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/bdbb53bd-5a4c-4f9d-856d-3a192ef9e8f3")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "d6d65aa4-f30e-49b6-87fc-b1e5d400795b")
+		)
+		(model "${_658_COMPUTER_}/Computer/Memory/Memory Board/Memory Board.step"
+			(offset
+				(xyz -24.13 0 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "SamacSys_Parts:R_0805"
 		(layer "F.Cu")
 		(uuid "969a8c3e-8132-47ae-abff-fe3b29dfd480")
@@ -9978,6 +10448,100 @@
 			(pinfunction "1")
 			(pintype "passive")
 			(uuid "e072110d-9586-40bb-9d7f-d492d6ec4daf")
+		)
+	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Video_Signals_Board"
+		(layer "F.Cu")
+		(uuid "9a9fafb2-c130-45dc-8b97-22cdc9190033")
+		(at 45.72 50.8)
+		(property "Reference" "HDB7"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "2494105d-5c15-425e-9b17-98fad03b3b4a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Video Signals Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "56147c50-9dd1-4645-994c-453b2977d02c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Signals_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b2a5ccbf-737e-4873-a0af-4ce34bdf7a25")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a918a871-9662-44a1-aaae-8f108a6c0b83")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "12f63f71-6386-4ec3-8f1f-33fd63a2b703")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/2620fda0-326e-4438-b7a3-b5a7055fabb8")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "895ab818-9128-4c14-b14a-de6e72f78d4d")
+		)
+		(model "${_658_COMPUTER_}/Computer/Video/Video Board - Signals/Video Board - Signals.step"
+			(offset
+				(xyz -24.13 0 152)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
 		)
 	)
 	(footprint "SamacSys_Parts:395098520350"
@@ -12479,10 +13043,10 @@
 	(footprint "SamacSys_Parts:LED_D5.0mm"
 		(layer "F.Cu")
 		(uuid "a7d99de5-afb7-4d25-be41-b90b626813c3")
-		(at 22.86 22.86 180)
+		(at 264.16 33.02)
 		(tags "LED diameter 5.0mm 2 pins")
 		(property "Reference" "LED2"
-			(at 1.27 -3.683 180)
+			(at 1.27 -3.683 0)
 			(layer "F.SilkS")
 			(uuid "f0c3b210-926d-48e6-b143-cce90c407488")
 			(effects
@@ -12493,7 +13057,7 @@
 			)
 		)
 		(property "Value" "Red"
-			(at 1.27 3.96 180)
+			(at 1.27 3.96 0)
 			(layer "F.Fab")
 			(uuid "c3fcfb35-3b68-46ff-a442-7059319d7654")
 			(effects
@@ -12504,7 +13068,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
-			(at 1.27 4.953 180)
+			(at 1.27 4.953 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -12517,7 +13081,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 180)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -12530,7 +13094,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 180)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -12558,17 +13122,6 @@
 			(uuid "2ad0659e-64c8-49a3-919f-35436f3d0ef5")
 		)
 		(fp_arc
-			(start 4.26 -0.000462)
-			(mid 2.072002 2.880433)
-			(end -1.29 1.54483)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "91d2d33f-10f7-4516-8183-3c8aebb5328c")
-		)
-		(fp_arc
 			(start -1.29 -1.54483)
 			(mid 2.072002 -2.880433)
 			(end 4.26 0.000462)
@@ -12578,6 +13131,17 @@
 			)
 			(layer "F.SilkS")
 			(uuid "91db82d4-3018-4ddb-905e-449d8c1a7a21")
+		)
+		(fp_arc
+			(start 4.26 -0.000462)
+			(mid 2.072002 2.880433)
+			(end -1.29 1.54483)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "91d2d33f-10f7-4516-8183-3c8aebb5328c")
 		)
 		(fp_circle
 			(center 1.27 0)
@@ -12634,7 +13198,7 @@
 			(uuid "9b61f422-c3ce-467e-b350-e5347ee6e052")
 		)
 		(pad "1" thru_hole rect
-			(at 0 0 180)
+			(at 0 0)
 			(size 1.5 1.5)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -12645,7 +13209,7 @@
 			(uuid "6676045a-9a85-4beb-93be-fcb03dff39db")
 		)
 		(pad "2" thru_hole circle
-			(at 2.54 0 180)
+			(at 2.54 0)
 			(size 1.5 1.5)
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
@@ -13767,7 +14331,7 @@
 	(footprint "SamacSys_Parts:R_0805"
 		(layer "F.Cu")
 		(uuid "b09149ce-01f3-403c-afa0-1946c5147382")
-		(at 27.5825 22.87 -90)
+		(at 264.16 38.1 -90)
 		(descr "Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R3"
@@ -13782,7 +14346,7 @@
 			)
 		)
 		(property "Value" "10KΩ"
-			(at 0 2.032 -90)
+			(at 0 2.032 90)
 			(layer "F.SilkS")
 			(uuid "95d1d371-a6ed-4a9f-8c7b-e44484a1aac5")
 			(effects
@@ -13793,7 +14357,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "22d98137-bccb-4975-bb2a-633b859557fa")
@@ -13805,7 +14369,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2595e96b-c3e8-4446-8160-72c3d0af1f36")
@@ -13817,7 +14381,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 -90)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "659e23fc-bad9-4f98-a3d9-e4c15b92a0a1")
@@ -13933,7 +14497,7 @@
 			(uuid "1be5b92a-a810-44ef-953f-18097c151a09")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.921 -90)
+			(at 0 2.921 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d9fb020f-97af-43bc-8d95-078e71ed2384")
@@ -19869,6 +20433,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Blitter_Board"
+		(layer "F.Cu")
+		(uuid "d1c6c5d4-a742-4b3f-b098-1f7b03718523")
+		(at 45.72 172.72)
+		(property "Reference" "HDB3"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "294e3432-43a6-402b-90c8-4f9b6d7fe160")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Blitter Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "d9ebe80d-78bb-4c7a-b7a2-80c41dd4d734")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Blitter_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "da8dda44-a525-49de-98eb-d152ccd048ff")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1bb2cf7e-4074-4289-af7f-0e13fb464ad5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "83fd39e4-7ebd-409e-8ad7-2aad08d4a532")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/751c85a4-46dd-4a84-b287-7cc15b9b89c3")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "67da4fe7-c545-40c2-9a41-82d0917ff5a0")
+		)
+		(model "${_658_COMPUTER_}/Computer/Blitter/Blitter Board/Blitter Board.step"
+			(offset
+				(xyz -24.13 0 83)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "HCP65_Parts:HCP65_Main_Memory_Channel"
 		(layer "F.Cu")
 		(uuid "d1d8aaee-57b9-4e19-a9a2-ebf9eb142818")
@@ -24036,6 +24694,14 @@
 		(uuid "14267b3c-939f-45fb-9368-8f01fc020b31")
 	)
 	(segment
+		(start 264.16 43.18)
+		(end 265.0725 42.2675)
+		(width 1)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "144f09df-3c9f-4d89-82cc-90c12d415439")
+	)
+	(segment
 		(start 39.37 103.151)
 		(end 42.92275 99.59825)
 		(width 1)
@@ -24220,14 +24886,6 @@
 		(uuid "41ccfc54-c342-4091-9a03-84cb46ee2c97")
 	)
 	(segment
-		(start 41.46645 38.92455)
-		(end 28.495 25.9531)
-		(width 1)
-		(layer "F.Cu")
-		(net 1)
-		(uuid "42eeb59b-2afb-45f4-8b9d-d142603a4307")
-	)
-	(segment
 		(start 62.1117 74.42)
 		(end 62.1117 74.8117)
 		(width 1)
@@ -24268,14 +24926,6 @@
 		(uuid "4cb0a722-9f4f-471e-8ebc-1cd8413af837")
 	)
 	(segment
-		(start 28.495 25.9531)
-		(end 28.495 22.86)
-		(width 1)
-		(layer "F.Cu")
-		(net 1)
-		(uuid "4d44b64d-3496-4e8f-adfa-9c4e343c2832")
-	)
-	(segment
 		(start 39.37 104.8)
 		(end 39.37 103.151)
 		(width 1)
@@ -24290,6 +24940,14 @@
 		(layer "F.Cu")
 		(net 1)
 		(uuid "55209b85-bd45-4a4b-b051-dd1a27050fc1")
+	)
+	(segment
+		(start 265.0725 42.2675)
+		(end 265.0725 38.09)
+		(width 1)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "58f40528-9a37-41c8-8ddb-b222620e88cc")
 	)
 	(segment
 		(start 192.405 85.344)
@@ -24514,6 +25172,14 @@
 		(layer "F.Cu")
 		(net 1)
 		(uuid "b287d9a6-71a2-44e2-843b-5b5e467ff180")
+	)
+	(segment
+		(start 264.16 50.8)
+		(end 264.16 43.18)
+		(width 1)
+		(layer "F.Cu")
+		(net 1)
+		(uuid "b647041d-648d-49fb-8b07-b5663823af22")
 	)
 	(segment
 		(start 38.735 141.6416)
@@ -27572,20 +28238,20 @@
 		(uuid "15b5c6ca-81b0-44f9-ad7b-f787c3ade980")
 	)
 	(segment
-		(start 20.32 34.14)
-		(end 21.74 35.56)
-		(width 1)
-		(layer "B.Cu")
-		(net 2)
-		(uuid "16667f85-c20a-43a6-b078-3897be9a9516")
-	)
-	(segment
 		(start 42.418 206.502)
 		(end 43.406 207.49)
 		(width 1)
 		(layer "B.Cu")
 		(net 2)
 		(uuid "16f866c6-e8b4-4e0d-8709-fd852c005362")
+	)
+	(segment
+		(start 263.906 38.1)
+		(end 266.7 35.306)
+		(width 1)
+		(layer "B.Cu")
+		(net 2)
+		(uuid "17c4b4b9-960e-4f74-9abf-1ca8e451d5bb")
 	)
 	(segment
 		(start 47.72 95.3965)
@@ -28252,6 +28918,14 @@
 		(uuid "7d12cf2d-488e-4a9d-b86e-e67ccd65beab")
 	)
 	(segment
+		(start 246.38 50.8)
+		(end 259.08 38.1)
+		(width 1)
+		(layer "B.Cu")
+		(net 2)
+		(uuid "7f5dea8f-2558-49d9-af1a-02b77286fb47")
+	)
+	(segment
 		(start 43.952 36.693)
 		(end 43.952 49.032)
 		(width 1)
@@ -28636,6 +29310,14 @@
 		(uuid "c4a288bd-3935-40a7-b41c-75bdddc1deda")
 	)
 	(segment
+		(start 259.08 38.1)
+		(end 263.906 38.1)
+		(width 1)
+		(layer "B.Cu")
+		(net 2)
+		(uuid "c4c33e3e-d517-40f6-9931-4a521b0afc08")
+	)
+	(segment
 		(start 95.25 107.95)
 		(end 95.25 104.401)
 		(width 1)
@@ -28780,20 +29462,20 @@
 		(uuid "d388739a-f607-40c4-a2aa-792cbd035cca")
 	)
 	(segment
-		(start 20.32 22.86)
-		(end 20.32 34.14)
-		(width 1)
-		(layer "B.Cu")
-		(net 2)
-		(uuid "d464bd0c-81d7-4085-a36f-839497c8a826")
-	)
-	(segment
 		(start 77.209 98.171)
 		(end 77.209 95.885)
 		(width 1)
 		(layer "B.Cu")
 		(net 2)
 		(uuid "d6cdcbeb-e4a6-4a66-b14f-f2491e13ed1a")
+	)
+	(segment
+		(start 266.7 35.306)
+		(end 266.7 33.02)
+		(width 1)
+		(layer "B.Cu")
+		(net 2)
+		(uuid "d7f86e54-9112-4db6-8957-59d528511483")
 	)
 	(segment
 		(start 202.565 74.295)
@@ -41372,12 +42054,28 @@
 		(uuid "d56af327-dc87-42a3-96a4-c34466ce88c1")
 	)
 	(segment
-		(start 22.86 22.86)
-		(end 26.67 22.86)
+		(start 264.16 33.02)
+		(end 264.16 34.9015)
 		(width 0.2)
 		(layer "F.Cu")
 		(net 147)
-		(uuid "f7498cf9-6213-42a4-b3eb-ebe6d6f66d5f")
+		(uuid "1a36fae7-9950-4781-ac48-341c81f86a70")
+	)
+	(segment
+		(start 264.16 34.9015)
+		(end 263.2475 35.814)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 147)
+		(uuid "4b82a67e-6a05-41fc-b51b-b91dff28ff8c")
+	)
+	(segment
+		(start 263.2475 38.09)
+		(end 263.2475 35.814)
+		(width 0.2)
+		(layer "F.Cu")
+		(net 147)
+		(uuid "94fe49da-5e2d-4435-8d1e-6f0f8ad2ee7c")
 	)
 	(segment
 		(start 27.94 48.26)

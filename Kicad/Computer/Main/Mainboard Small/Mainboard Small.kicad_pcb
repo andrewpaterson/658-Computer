@@ -780,6 +780,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_PS2_Board"
+		(layer "F.Cu")
+		(uuid "06677746-61b7-435f-9675-4ec7f84b3628")
+		(at 45.72 20.32)
+		(property "Reference" "HDB1"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "d1a264d2-5260-4584-807c-6b66c1ea757e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "PS2 Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "6f212de3-efaf-409d-9e46-4af964a0d4aa")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_PS2_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "93195101-1b63-4fab-a80d-e26833aab7ad")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5ef54424-fc86-499a-ba47-a25d9b59c144")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6c3ac550-9bce-492a-a02f-beda4bee3e81")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/328d0cb3-2bd1-4cfb-aac8-f430a85c701a")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "cb55219d-d01c-4dc0-ae37-edba8ccffbbb")
+		)
+		(model "${_658_COMPUTER_}/Computer/PS2/PS2 Board/PS2 Board.step"
+			(offset
+				(xyz -24.13 0 83)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "SamacSys_Parts:LD1117S33C"
 		(layer "F.Cu")
 		(uuid "08fddbca-193d-416f-a3e5-1955701e6c45")
@@ -1360,9 +1454,9 @@
 		(descr "FQP47P06_1")
 		(tags "MOSFET (P-Channel)")
 		(property "Reference" "Q1"
-			(at 2.54 -2.032 0)
+			(at 2.54 -2.032 180)
 			(layer "F.SilkS")
-			(uuid "acf175ac-7cc4-43c6-a0b4-0a40a2502b2a")
+			(uuid "e6cfe6c9-2207-46a7-b2a6-f82beb9d4338")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1371,10 +1465,10 @@
 			)
 		)
 		(property "Value" "FQP47P06"
-			(at 0 3.936999 0)
+			(at 0 3.937 180)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "c1c38ba5-1f30-4f12-b2bb-52f81c599bc4")
+			(uuid "b6ce6c47-61b1-4c27-b124-0ad5316b2bf6")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1383,10 +1477,10 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:TO254P483X1016X2261-3P"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2ccc6cac-9ecc-4b05-8008-82f9d33ce5f4")
+			(uuid "f20f73b2-b398-4d7c-9a69-f14fcc3e7f7f")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1395,10 +1489,10 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/FQP47P06-D.pdf"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1160610b-5ff1-48e7-b01f-4d900bbe76bf")
+			(uuid "aa8de96e-6e01-4144-857c-4a0ad5bf1f8c")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1407,10 +1501,10 @@
 			)
 		)
 		(property "Description" "Trans MOSFET P-CH 60V 47A 3-Pin TO-220"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "393be27c-328f-4739-80d9-d71392c183ed")
+			(uuid "d192a19f-85ad-414c-8ecf-e2c621847c19")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1419,9 +1513,9 @@
 			)
 		)
 		(property "Silkscreen" "FQP47P06"
-			(at 2.54 2.286 0)
+			(at 2.54 2.286 180)
 			(layer "F.SilkS")
-			(uuid "4b52e5dc-5910-435a-af1b-ac0cac9394a8")
+			(uuid "43bc2a35-95d7-4769-806f-68dd05cb5966")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -1434,7 +1528,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e00911de-0cf4-43e5-ae32-813430aa078d")
+			(uuid "8c1ed79e-25ca-48c6-84a7-b071146adbbb")
 			(effects
 				(font
 					(size 1 1)
@@ -1447,7 +1541,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f6412b98-ff6f-4996-9f22-dc665dc136a2")
+			(uuid "69a08fea-a2ad-49c3-9b72-24bc9390323b")
 			(effects
 				(font
 					(size 1 1)
@@ -1460,7 +1554,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "52423800-b816-491a-818f-4adb4844399a")
+			(uuid "6a4bfd6b-5710-421d-8251-6ee11f453837")
 			(effects
 				(font
 					(size 1 1)
@@ -1473,7 +1567,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4b9921f1-3195-473f-b3d5-e11e9b115efd")
+			(uuid "8c72a9a8-b66b-4b0f-b540-88979537244d")
 			(effects
 				(font
 					(size 1 1)
@@ -1486,7 +1580,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "df17e095-3c56-46b8-b3bf-70a90f93829c")
+			(uuid "7d5d6bc4-5c32-4360-b296-c729d9dfae23")
 			(effects
 				(font
 					(size 1 1)
@@ -1499,54 +1593,54 @@
 		(sheetfile "Mainboard Small.kicad_sch")
 		(attr through_hole)
 		(fp_line
-			(start 7.875 1.604999)
-			(end 7.875 -3.224999)
+			(start 7.875 1.605)
+			(end 7.875 -3.225)
 			(stroke
 				(width 0.2)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "05e1ff8a-f575-4332-88d6-6b516f135c7f")
+			(uuid "4afdfb51-2c86-4959-b828-7182a33eecbf")
 		)
 		(fp_line
-			(start 7.875 -3.224999)
+			(start 7.875 -3.225)
 			(end -2.795 -3.225)
 			(stroke
 				(width 0.2)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ead40d05-90af-4952-8d8c-a0bee3926221")
+			(uuid "4c09fbd5-0b2b-41fe-bba5-5017182ffdd3")
 		)
 		(fp_line
 			(start -2.795 -3.225)
-			(end -2.794999 0)
+			(end -2.795 0)
 			(stroke
 				(width 0.2)
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "e1975186-6c8f-4bfe-bc05-555a57c4de59")
+			(uuid "bedb1452-9e35-4bb3-8fd2-0f3ed759b553")
 		)
 		(fp_line
-			(start 8.125001 1.855)
+			(start 8.125 1.855)
 			(end -3.045 1.855)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "097065de-cf05-4094-b904-9ba60b6e3550")
+			(uuid "b6569501-aa47-4629-b880-4bd988a342fe")
 		)
 		(fp_line
-			(start 8.125001 -3.475)
-			(end 8.125001 1.855)
+			(start 8.125 -3.475)
+			(end 8.125 1.855)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "cdc04482-1075-4860-9636-0f9dec025c25")
+			(uuid "0fb89666-b4c2-432b-913d-b5dbcde846ca")
 		)
 		(fp_line
 			(start -3.045 1.855)
@@ -1556,37 +1650,37 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "99aa76d8-5c2a-4ebe-a566-7013eb22abe1")
+			(uuid "357a4656-2536-42f6-8c1c-275bc0114937")
 		)
 		(fp_line
 			(start -3.045 -3.475)
-			(end 8.125001 -3.475)
+			(end 8.125 -3.475)
 			(stroke
 				(width 0.05)
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "3d5920b5-df47-4a11-8165-5197b71b9bd4")
+			(uuid "f61af24c-68d6-44df-96a4-ed0d87a76583")
 		)
 		(fp_line
-			(start 7.875 1.604999)
+			(start 7.875 1.605)
 			(end -2.795 1.605)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "978c0eed-eb36-4448-a417-c164de16c142")
+			(uuid "4c95392b-e202-4616-9ff3-87357386ff81")
 		)
 		(fp_line
-			(start 7.875 -3.224999)
-			(end 7.875 1.604999)
+			(start 7.875 -3.225)
+			(end 7.875 1.605)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "f514aac3-5bb7-478a-aa2f-ac8afea6148b")
+			(uuid "81c5c8b0-124e-4c3d-b4ab-82b5f72141d5")
 		)
 		(fp_line
 			(start -2.795 1.605)
@@ -1596,7 +1690,7 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "053924d2-e712-4791-b8af-d2660d17ad1a")
+			(uuid "a708d3d7-be01-409d-b85c-be6fb3d6d2ee")
 		)
 		(fp_line
 			(start -2.795 -1.955)
@@ -1606,17 +1700,17 @@
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "870def26-c47e-47b6-a36e-6b97e4ee6b41")
+			(uuid "49e2d1d8-0781-46e2-9990-e61830ae4b7e")
 		)
 		(fp_line
 			(start -2.795 -3.225)
-			(end 7.875 -3.224999)
+			(end 7.875 -3.225)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "834a4f2f-b442-4c4d-aae8-c09c4cb94b0c")
+			(uuid "a39fe176-40e8-4f96-8cf8-8ff8d7bfd45e")
 		)
 		(pad "1" thru_hole rect
 			(at 0 0 180)
@@ -1626,7 +1720,7 @@
 			(remove_unused_layers no)
 			(net 473 "/9.1V")
 			(pintype "passive")
-			(uuid "5e8f4b35-d0e6-457d-98ae-d09b1127ea99")
+			(uuid "c9b3eea2-8b86-4e0c-ac2b-4985ad80ca67")
 		)
 		(pad "2" thru_hole circle
 			(at 2.54 0 180)
@@ -1636,17 +1730,17 @@
 			(remove_unused_layers no)
 			(net 472 "Net-(Q1-Pad2)")
 			(pintype "passive")
-			(uuid "44b1e586-b1ef-4138-85b2-85229b5a1d38")
+			(uuid "4f5e3bc6-6ebb-493a-b9cd-d40374907deb")
 		)
 		(pad "3" thru_hole circle
-			(at 5.079999 0 180)
+			(at 5.08 0 180)
 			(size 2.085 2.085)
 			(drill 1.39)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 30 "/12V")
 			(pintype "passive")
-			(uuid "90b15960-386f-483f-a36e-d88fdbbd08ef")
+			(uuid "007612d8-5d4d-4a43-9ee9-26457f0f1062")
 		)
 		(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/FQP47P06.stp"
 			(offset
@@ -6734,6 +6828,71 @@
 			(effects
 				(font
 					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac257fdd-1e0c-4dc0-a548-0de00c288a7f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7866d4ad-f2fa-45ef-b7b8-5190878e99d2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "BZX84-C56,215"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "168abbe2-5147-4256-aca6-e2eb08a41a43")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fa801073-de25-4a33-addf-a4a687a4ce1c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "84fcf596-d20e-4bf8-aade-1166a99d3dc4")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -23183,7 +23342,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

@@ -2193,6 +2193,63 @@
 				)
 			)
 		)
+		(symbol "HCP65:HCP65_Daughter_Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "HDB"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Place holder"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "HCP65 Daughter Board place holder"
+				(at 0 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "HCP65 Daughter Board"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "HCP65:LED"
 			(pin_numbers hide)
 			(pin_names
@@ -20615,6 +20672,67 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:HCP65_Daughter_Board")
+		(at 179.07 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "328d0cb3-2bd1-4cfb-aac8-f430a85c701a")
+		(property "Reference" "HDB1"
+			(at 179.07 352.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PS2 Board"
+			(at 179.07 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_PS2_Board"
+			(at 179.07 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 179.07 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 179.07 356.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "HDB1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:Main_Memory_Abort")
 		(at 494.03 109.22 0)
 		(unit 1)
@@ -23031,6 +23149,67 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "MPU0")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:HCP65_Daughter_Board")
+		(at 179.07 359.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99704425-dfcc-49a0-9642-865022034bd6")
+		(property "Reference" "HDB2"
+			(at 179.07 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Audio Board"
+			(at 179.07 359.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Audio_Board"
+			(at 179.07 359.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 179.07 359.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 179.07 361.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "HDB2")
 					(unit 1)
 				)
 			)

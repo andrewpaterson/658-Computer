@@ -231,10 +231,9 @@ public class SubcircuitView
       getCircuitEditor().updateViewPaths();
     }
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
-                                                                                subcircuitEditor,
-                                                                                connectionViews);
-    fireConnectionEvents(updatedConnectionViews);
+    createTracesForConnectionViews(getCircuitEditor().getViewPaths().getEmptyPath(),
+                                   subcircuitEditor,
+                                   connectionViews);
   }
 
   public void pathsUpdated(UpdatedViewPaths updatedPaths)
@@ -843,8 +842,8 @@ public class SubcircuitView
       allUpdatedConnectionViews.addAll(updatedConnectionViews);
     }
 
-    // allUpdatedConnectionViews are returned for fireConnectionEvents.  Simulations that were already connected (is that possible?) should not fireConnectionEvents.  You should validate this on firing.
-    return allUpdatedConnectionViews;
+    // allUpdatedConnectionViews are for fireConnectionEvents.  Simulations that were already connected (is that possible?) should not fireConnectionEvents.  You should validate this on firing.
+    fireConnectionEvents(allUpdatedConnectionViews);
   }
 
   protected void validateConnectionViewsNotNull(Collection<ConnectionView> tracesConnectionViews)
@@ -1080,10 +1079,9 @@ public class SubcircuitView
 
     if (traceConnectionViews.size() > 0)
     {
-      Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(parentViewPath,
-                                                                                  circuitInstanceView,
-                                                                                  traceConnectionViews);
-      fireConnectionEvents(updatedConnectionViews);
+      createTracesForConnectionViews(parentViewPath,
+                                     circuitInstanceView,
+                                     traceConnectionViews);
     }
   }
 
@@ -1259,6 +1257,7 @@ public class SubcircuitView
       }
     }
 
+    xxx
     List<SubcircuitInstanceCreation> creations = new ArrayList<>();
     for (ViewPath viewPath : viewPaths)
     {
@@ -1691,10 +1690,9 @@ public class SubcircuitView
     List<StaticView<?>> staticViews = getStaticViews();
     Set<ConnectionView> connectionViews = getConnectionViews(staticViews, traceViews);
 
-    Set<ConnectionView> updatedConnectionViews = createTracesForConnectionViews(parentViewPath,
-                                                                                subcircuitInstanceView,
-                                                                                connectionViews);
-    fireConnectionEvents(updatedConnectionViews);
+    createTracesForConnectionViews(parentViewPath,
+                                   subcircuitInstanceView,
+                                   connectionViews);
   }
 
   public CircuitSimulation createSubcircuitTopSimulation(String name)

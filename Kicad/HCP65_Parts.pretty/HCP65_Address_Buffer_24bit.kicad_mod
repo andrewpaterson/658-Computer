@@ -245,18 +245,6 @@
 		(layer "F.CrtYd")
 		(uuid "aa136522-97fe-4c53-8094-5e9258117daa")
 	)
-	(fp_text user "${REFERENCE}"
-		(at 7.62 32.004 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "c3762e05-5ced-4eae-b037-f5affbe29799")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
 	(pad "1" thru_hole circle
 		(at 0 0)
 		(size 1.5 1.5)
@@ -705,9 +693,9 @@
 		(remove_unused_layers no)
 		(uuid "12806dff-a3c5-4984-a07a-c1406fbfde37")
 	)
-	(model "${_658_COMPUTER_}/Computer/Component Boards/Address Buffer 24bit/Address Buffer 24bit.step"
+	(model "${_658_COMPUTER_}/Computer/Component Boards/Address Buffer 24bit/Address Buffer 24bit.wrl"
 		(offset
-			(xyz 0 0 0)
+			(xyz 0 0 3)
 		)
 		(scale
 			(xyz 1 1 1)

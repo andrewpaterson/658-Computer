@@ -80,6 +80,7 @@
         "footprint_type_mismatch": "error",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "warning",
         "item_on_disabled_layer": "error",
@@ -237,7 +238,11 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "lib_symbol_issues|2425700|1778000|fee962b2-5fc2-4f9d-b4b6-3ffa290dd26c|00000000-0000-0000-0000-000000000000|||",
+      "lib_symbol_issues|2425700|2133600|2c03dea3-7f71-4718-abef-35ed339694b0|00000000-0000-0000-0000-000000000000|||",
+      "lib_symbol_issues|317500|2159000|dc10d646-83cc-4639-aa43-508422b21f13|00000000-0000-0000-0000-000000000000|||"
+    ],
     "meta": {
       "version": 0
     },
@@ -492,12 +497,13 @@
       "specctra_dsn": "",
       "step": "HCP65 Kernal Mode.step",
       "svg": "",
-      "vrml": ""
+      "vrml": "HCP65 Kernal Mode.wrl"
     },
     "page_layout_descr_file": ""
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",

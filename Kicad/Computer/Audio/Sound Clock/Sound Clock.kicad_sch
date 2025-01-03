@@ -1705,6 +1705,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC138APW-Q100J"
 			(pin_names
 				(offset 0.762)
@@ -1730,7 +1789,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-				(at 28.575 -30.48 0)
+				(at 29.21 -31.115 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1740,7 +1799,7 @@
 				)
 			)
 			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-				(at 28.575 -33.02 0)
+				(at 29.21 -33.655 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1758,7 +1817,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 28.575 -38.1 0)
+				(at 29.21 -38.735 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1768,7 +1827,7 @@
 				)
 			)
 			(property "Mouser Part Number" "771-74LVC138APWQ100J"
-				(at 28.575 -40.64 0)
+				(at 29.21 -41.275 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1778,7 +1837,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-				(at 28.575 -43.18 0)
+				(at 29.21 -43.815 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1788,7 +1847,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Nexperia"
-				(at 28.575 -45.72 0)
+				(at 29.21 -46.355 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1798,7 +1857,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-				(at 28.575 -48.26 0)
+				(at 29.21 -48.895 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1808,20 +1867,12 @@
 				)
 			)
 			(property "Silkscreen" "74LVC138"
-				(at 12.7 -27.305 0)
+				(at 29.21 -36.195 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -3106,20 +3157,12 @@
 				)
 			)
 			(property "Silkscreen" "'1G08"
-				(at 12.7 -10.795 0)
+				(at 24.13 -17.145 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "NEXPERIA - 74LVC1G08GV,125 - LOGIC, AND GATE, DUAL I/P, SC-74A-5"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -7066,20 +7109,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G08"
-			(at 217.17 108.585 0)
+			(at 228.6 114.935 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "NEXPERIA - 74LVC1G08GV,125 - LOGIC, AND GATE, DUAL I/P, SC-74A-5"
-			(at 204.47 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -7439,7 +7474,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 194.945 121.285 0)
+			(at 195.58 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7449,7 +7484,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 194.945 123.825 0)
+			(at 195.58 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7467,7 +7502,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 194.945 128.905 0)
+			(at 195.58 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7477,7 +7512,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 194.945 131.445 0)
+			(at 195.58 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7487,7 +7522,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 194.945 133.985 0)
+			(at 195.58 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7497,7 +7532,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 194.945 136.525 0)
+			(at 195.58 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7507,7 +7542,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 194.945 139.065 0)
+			(at 195.58 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7517,20 +7552,12 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 179.07 118.11 0)
+			(at 195.58 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 166.37 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -7878,6 +7905,68 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 33.02 113.03 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a54b2229-f0e2-4f16-b07f-4c3025f2432e")
+		(property "Reference" "J1"
+			(at 33.02 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x16"
+			(at 33.02 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
+			(at 33.02 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 33.02 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Sound Clock"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Nexperia:74LVC163PW,118")
 		(at 115.57 91.44 0)
 		(unit 1)
@@ -8057,6 +8146,67 @@
 			(project "Sound Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "IC8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 33.02 118.11 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b44e6c2f-47a6-40a6-b8af-5ab34b9fc2bd")
+		(property "Reference" "J3"
+			(at 33.02 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x16"
+			(at 33.02 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
+			(at 33.02 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 27.94 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 33.02 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Sound Clock"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
 					(unit 1)
 				)
 			)

@@ -2124,6 +2124,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "ISSI:IS61C256AL-12TLI"
 			(pin_names
 				(offset 0.762)
@@ -3473,7 +3532,7 @@
 		(uuid "01ca11f7-227d-4a93-9bf8-94b625ec9d3e")
 	)
 	(label "GND"
-		(at 102.87 180.34 0)
+		(at 96.52 173.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3924,7 +3983,7 @@
 		(uuid "79c6dd8d-5fba-4f4d-9842-9a37afba8414")
 	)
 	(label "3.3V"
-		(at 82.55 180.34 180)
+		(at 76.2 173.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4023,7 +4082,7 @@
 		(uuid "9678ed4f-0767-40e4-bd9c-05de0bac3557")
 	)
 	(label "GND"
-		(at 87.63 180.34 0)
+		(at 81.28 173.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4067,7 +4126,7 @@
 		(uuid "a93dd30b-1160-42e9-8a85-d0d919f5b3d1")
 	)
 	(label "GND"
-		(at 72.39 180.34 0)
+		(at 66.04 173.99 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4210,7 +4269,7 @@
 		(uuid "c4aebcf1-d045-4e5d-bbcc-ab267d035221")
 	)
 	(label "3.3V"
-		(at 97.79 180.34 180)
+		(at 91.44 173.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4287,7 +4346,7 @@
 		(uuid "d65de3bb-ace7-450f-949f-b78efeb0f5e4")
 	)
 	(label "5V"
-		(at 67.31 180.34 180)
+		(at 60.96 173.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5211,6 +5270,67 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 54.61 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "13796fc1-60e2-4844-b962-8056eab38df3")
+		(property "Reference" "J3"
+			(at 54.61 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 54.61 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 54.61 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 49.53 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Memory 32KB with Output"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Diodes_Inc:74LVC245AT20")
 		(at 104.14 109.22 0)
 		(unit 1)
@@ -5606,7 +5726,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 97.79 180.34 0)
+		(at 91.44 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5614,7 +5734,7 @@
 		(dnp no)
 		(uuid "3d7b159f-aa9d-44bf-baba-57a7d966ac79")
 		(property "Reference" "C3"
-			(at 100.076 177.8 0)
+			(at 93.726 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5622,7 +5742,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 100.33 182.88 0)
+			(at 93.98 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5630,7 +5750,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 114.554 187.96 0)
+			(at 108.204 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5639,7 +5759,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 100.0125 180.0225 90)
+			(at 93.6625 173.6725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5648,7 +5768,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 97.79 180.34 0)
+			(at 91.44 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5699,7 +5819,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 67.31 180.34 0)
+		(at 60.96 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5707,7 +5827,7 @@
 		(dnp no)
 		(uuid "3e2e63c4-c46a-42e7-bc63-f6d3973043e1")
 		(property "Reference" "C1"
-			(at 69.596 177.8 0)
+			(at 63.246 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5715,7 +5835,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 69.85 182.88 0)
+			(at 63.5 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5723,7 +5843,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 84.074 187.96 0)
+			(at 77.724 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5732,7 +5852,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 69.5325 180.0225 90)
+			(at 63.1825 173.6725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5741,7 +5861,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 67.31 180.34 0)
+			(at 60.96 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5792,7 +5912,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 82.55 180.34 0)
+		(at 76.2 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5800,7 +5920,7 @@
 		(dnp no)
 		(uuid "483b455c-5033-4b7e-b0a9-692aa33ecaf9")
 		(property "Reference" "C2"
-			(at 84.836 177.8 0)
+			(at 78.486 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5808,7 +5928,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 85.09 182.88 0)
+			(at 78.74 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5816,7 +5936,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 99.314 187.96 0)
+			(at 92.964 181.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5825,7 +5945,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 84.7725 180.0225 90)
+			(at 78.4225 173.6725 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5834,7 +5954,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 82.55 180.34 0)
+			(at 76.2 173.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6652,6 +6772,68 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 54.61 39.37 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dfa3668a-de21-4cf8-be1e-79fdbdb12964")
+		(property "Reference" "J2"
+			(at 54.61 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 54.61 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 54.61 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 59.69 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 54.61 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Memory 32KB with Output"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J2")
 					(unit 1)
 				)
 			)

@@ -1625,6 +1625,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC16373ADL,118"
 			(pin_names
 				(offset 0.762)
@@ -3176,7 +3235,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOT65P210X110-6N"
-				(at 22.86 -14.605 0)
+				(at 22.86 -13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3186,7 +3245,7 @@
 				)
 			)
 			(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc1g332"
-				(at 22.86 -17.145 0)
+				(at 22.86 -16.51 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3204,7 +3263,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 22.86 -17.78 0)
+				(at 22.86 -19.05 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3214,7 +3273,7 @@
 				)
 			)
 			(property "Mouser Part Number" "595-SN74LVC1G332DCKR"
-				(at 22.86 -24.765 0)
+				(at 22.86 -24.13 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3224,7 +3283,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC1G332DCKR?qs=nqigI8dpoHJbC41czqKUfw%3D%3D"
-				(at 22.86 -27.305 0)
+				(at 22.86 -26.67 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3234,7 +3293,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Texas Instruments"
-				(at 22.86 -29.845 0)
+				(at 22.86 -29.21 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3244,7 +3303,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "SN74LVC1G332DCKR"
-				(at 22.86 -32.385 0)
+				(at 22.86 -31.75 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3254,20 +3313,12 @@
 				)
 			)
 			(property "Silkscreen" "'1G332"
-				(at 12.7 -12.7 0)
+				(at 22.86 -21.59 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Single 3-Input Positive-OR Gate"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -3319,24 +3370,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 25.4 -2.54 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3500,6 +3533,26 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+			)
+			(symbol "SN74LVC1G332DCKR_1_0"
+				(pin output line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -5796,7 +5849,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT65P210X110-6N"
-			(at 220.98 92.075 0)
+			(at 220.98 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5806,7 +5859,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc1g332"
-			(at 220.98 94.615 0)
+			(at 220.98 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5824,7 +5877,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 220.98 95.25 0)
+			(at 220.98 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5834,7 +5887,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74LVC1G332DCKR"
-			(at 220.98 102.235 0)
+			(at 220.98 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5844,7 +5897,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC1G332DCKR?qs=nqigI8dpoHJbC41czqKUfw%3D%3D"
-			(at 220.98 104.775 0)
+			(at 220.98 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5854,7 +5907,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 220.98 107.315 0)
+			(at 220.98 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5864,7 +5917,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74LVC1G332DCKR"
-			(at 220.98 109.855 0)
+			(at 220.98 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5874,20 +5927,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G332"
-			(at 210.82 90.17 0)
+			(at 220.98 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Single 3-Input Positive-OR Gate"
-			(at 198.12 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5913,6 +5958,68 @@
 			(project "Comparator 16bit"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "IC4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 55.88 45.72 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "658cf978-29ad-4ee6-a518-20a59eb02f33")
+		(property "Reference" "J1"
+			(at 55.88 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 55.88 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 55.88 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 60.96 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 55.88 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Comparator 16bit"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -6382,6 +6489,67 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 55.88 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "aaef77bf-673e-4f14-bda4-f83ca0a5f283")
+		(property "Reference" "J3"
+			(at 55.88 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 55.88 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 55.88 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 50.8 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 55.88 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Comparator 16bit"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
 					(unit 1)
 				)
 			)

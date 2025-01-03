@@ -1433,6 +1433,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC244APW,118"
 			(pin_names
 				(offset 0.762)
@@ -1477,7 +1536,15 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
+			(property "Description" "8-bit buffer"
+				(at 12.7 -28.575 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.1"
 				(at 22.86 -34.29 0)
 				(effects
 					(font
@@ -1487,7 +1554,7 @@
 					(hide yes)
 				)
 			)
-			(property "Height" "1.1"
+			(property "Manufacturer_Name" "Nexperia"
 				(at 22.86 -36.83 0)
 				(effects
 					(font
@@ -1497,7 +1564,7 @@
 					(hide yes)
 				)
 			)
-			(property "Manufacturer_Name" "Nexperia"
+			(property "Manufacturer_Part_Number" "74LVC244APW,118"
 				(at 22.86 -39.37 0)
 				(effects
 					(font
@@ -1507,7 +1574,7 @@
 					(hide yes)
 				)
 			)
-			(property "Manufacturer_Part_Number" "74LVC244APW,118"
+			(property "Mouser Part Number" "771-74LVC244APW-T"
 				(at 22.86 -41.91 0)
 				(effects
 					(font
@@ -1517,7 +1584,7 @@
 					(hide yes)
 				)
 			)
-			(property "Mouser Part Number" "771-74LVC244APW-T"
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
 				(at 22.86 -44.45 0)
 				(effects
 					(font
@@ -1527,31 +1594,13 @@
 					(hide yes)
 				)
 			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
+			(property "Silkscreen" "74LVC244"
 				(at 22.86 -46.99 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "74LVC244"
-				(at 12.7 -28.575 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
 					(hide yes)
 				)
 			)
@@ -4434,6 +4483,129 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 73.66 82.55 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "277b4f72-8848-45de-9c71-bd105c11d6d8")
+		(property "Reference" "J2"
+			(at 73.66 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x12"
+			(at 73.66 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x12_P2.54mm_Vertical"
+			(at 73.66 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 78.74 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 73.66 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Clock Hold Standard"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 73.66 87.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4a143fd2-a427-43e2-98dd-970a73221833")
+		(property "Reference" "J3"
+			(at 73.66 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x12"
+			(at 73.66 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x12_P2.54mm_Vertical"
+			(at 73.66 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 68.58 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 73.66 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Clock Hold Standard"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Nexperia:74LVC244APW,118")
 		(at 133.35 53.34 0)
 		(unit 1)
@@ -4479,7 +4651,15 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
+		(property "Description" "8-bit buffer"
+			(at 146.05 81.915 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
 			(at 156.21 87.63 0)
 			(effects
 				(font
@@ -4489,7 +4669,7 @@
 				(hide yes)
 			)
 		)
-		(property "Height" "1.1"
+		(property "Manufacturer_Name" "Nexperia"
 			(at 156.21 90.17 0)
 			(effects
 				(font
@@ -4499,7 +4679,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Name" "Nexperia"
+		(property "Manufacturer_Part_Number" "74LVC244APW,118"
 			(at 156.21 92.71 0)
 			(effects
 				(font
@@ -4509,7 +4689,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "74LVC244APW,118"
+		(property "Mouser Part Number" "771-74LVC244APW-T"
 			(at 156.21 95.25 0)
 			(effects
 				(font
@@ -4519,7 +4699,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "771-74LVC244APW-T"
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
 			(at 156.21 97.79 0)
 			(effects
 				(font
@@ -4529,31 +4709,13 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
+		(property "Silkscreen" "74LVC244"
 			(at 156.21 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC244"
-			(at 146.05 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
-			(at 133.35 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -4961,7 +5123,15 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
+		(property "Description" "8-bit buffer"
+			(at 146.05 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
 			(at 156.21 134.62 0)
 			(effects
 				(font
@@ -4971,7 +5141,7 @@
 				(hide yes)
 			)
 		)
-		(property "Height" "1.1"
+		(property "Manufacturer_Name" "Nexperia"
 			(at 156.21 137.16 0)
 			(effects
 				(font
@@ -4981,7 +5151,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Name" "Nexperia"
+		(property "Manufacturer_Part_Number" "74LVC244APW,118"
 			(at 156.21 139.7 0)
 			(effects
 				(font
@@ -4991,7 +5161,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "74LVC244APW,118"
+		(property "Mouser Part Number" "771-74LVC244APW-T"
 			(at 156.21 142.24 0)
 			(effects
 				(font
@@ -5001,7 +5171,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "771-74LVC244APW-T"
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
 			(at 156.21 144.78 0)
 			(effects
 				(font
@@ -5011,31 +5181,13 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
+		(property "Silkscreen" "74LVC244"
 			(at 156.21 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC244"
-			(at 146.05 128.905 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
-			(at 133.35 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)

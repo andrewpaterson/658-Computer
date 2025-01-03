@@ -35,7 +35,7 @@
 		(uuid "890ee0f6-8d5c-49a8-a41d-2e6b116ef3eb")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
@@ -47,7 +47,7 @@
 		(uuid "0df377f8-899c-4668-ac46-e4e772cad953")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
@@ -59,7 +59,18 @@
 		(uuid "2f6833d1-881b-4bb2-80b5-3f76bbe3229b")
 		(effects
 			(font
-				(size 1.27 1.27)
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Silkscreen}"
+		(at 0 3.81 0)
+		(layer "F.SilkS")
+		(uuid "78da54d7-2ffb-4eca-be10-c13687307731")
+		(effects
+			(font
+				(size 0.635 0.635)
 				(thickness 0.15)
 			)
 		)
@@ -206,17 +217,6 @@
 		)
 		(layer "F.Fab")
 		(uuid "e61f9007-cec5-417e-8a8f-32827b7ae651")
-	)
-	(fp_text user "${Silkscreen}"
-		(at 0 3.81 0)
-		(layer "F.SilkS")
-		(uuid "ea987871-f1c2-4776-9cc1-1faedf14e6d5")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 6.096 0)

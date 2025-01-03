@@ -1161,6 +1161,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC08APW,112_Multi"
 			(pin_names
 				(offset 0.762)
@@ -2083,13 +2142,13 @@
 		)
 	)
 	(junction
-		(at 35.56 181.61)
+		(at 54.61 146.05)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "413af9fc-5730-4581-bcd6-4066802553e7")
 	)
 	(junction
-		(at 64.77 181.61)
+		(at 83.82 146.05)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b483095b-b3f1-413b-bfdc-dd45b3a6b7a0")
@@ -2103,7 +2162,7 @@
 		(uuid "15378ef1-3c9e-4f30-9a9f-f6a7e20f1e0c")
 	)
 	(no_connect
-		(at 60.96 186.69)
+		(at 80.01 151.13)
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
 	(no_connect
@@ -2166,7 +2225,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 186.69) (xy 64.77 181.61)
+			(xy 83.82 151.13) (xy 83.82 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2196,7 +2255,7 @@
 	)
 	(wire
 		(pts
-			(xy 20.32 181.61) (xy 35.56 181.61)
+			(xy 39.37 146.05) (xy 54.61 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2216,7 +2275,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 181.61) (xy 35.56 184.15)
+			(xy 54.61 146.05) (xy 54.61 148.59)
 		)
 		(stroke
 			(width 0)
@@ -2236,7 +2295,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 181.61) (xy 64.77 181.61)
+			(xy 80.01 146.05) (xy 83.82 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2266,7 +2325,7 @@
 	)
 	(wire
 		(pts
-			(xy 20.32 181.61) (xy 20.32 186.69)
+			(xy 39.37 146.05) (xy 39.37 151.13)
 		)
 		(stroke
 			(width 0)
@@ -2306,7 +2365,7 @@
 	)
 	(wire
 		(pts
-			(xy 20.32 186.69) (xy 21.59 186.69)
+			(xy 39.37 151.13) (xy 40.64 151.13)
 		)
 		(stroke
 			(width 0)
@@ -2316,7 +2375,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 181.61) (xy 69.85 181.61)
+			(xy 83.82 146.05) (xy 88.9 146.05)
 		)
 		(stroke
 			(width 0)
@@ -2391,7 +2450,7 @@
 		(uuid "1df2740b-e43b-425b-9c74-09d1b221b6b6")
 	)
 	(label "GND"
-		(at 125.73 185.42 0)
+		(at 109.22 148.59 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2402,7 +2461,7 @@
 		(uuid "1ed7e251-ee3a-4b26-ad86-dbc231958bdd")
 	)
 	(label "GND"
-		(at 69.85 186.69 0)
+		(at 88.9 151.13 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2435,7 +2494,7 @@
 		(uuid "3979a32c-480c-4ef3-935e-577343a92df3")
 	)
 	(label "3.3V"
-		(at 120.65 185.42 180)
+		(at 104.14 148.59 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2468,7 +2527,7 @@
 		(uuid "4630d459-dc0d-42b9-9096-122d7c53ca06")
 	)
 	(label "GND"
-		(at 26.67 186.69 0)
+		(at 45.72 151.13 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2479,7 +2538,7 @@
 		(uuid "47a447a5-df4b-4ed7-a925-ccbc4a7d8442")
 	)
 	(label "5V"
-		(at 20.32 181.61 180)
+		(at 39.37 146.05 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2589,7 +2648,7 @@
 		(uuid "605e3480-9bf7-460f-bd6d-1a3f475be0f2")
 	)
 	(label "GND"
-		(at 35.56 186.69 180)
+		(at 54.61 151.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2743,7 +2802,7 @@
 		(uuid "a26b91f5-7c0e-4921-8fca-9510927c720e")
 	)
 	(label "3.3V"
-		(at 135.89 185.42 180)
+		(at 119.38 148.59 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2820,7 +2879,7 @@
 		(uuid "b01e0b1f-7314-4201-bd0e-6ffc2272b530")
 	)
 	(label "3.3V"
-		(at 69.85 181.61 0)
+		(at 88.9 146.05 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2853,7 +2912,7 @@
 		(uuid "b973a5f4-9a38-49c8-b560-ef5e8da9669a")
 	)
 	(label "GND"
-		(at 140.97 185.42 0)
+		(at 124.46 148.59 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3114,32 +3173,33 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 120.65 185.42 0)
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 64.77 74.93 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "239c8f01-70ef-439c-958d-0dfd823bbc38")
-		(property "Reference" "C2"
-			(at 122.936 182.88 0)
+		(uuid "1781eac1-bfea-4602-98c7-6c33eb4c5c59")
+		(property "Reference" "J2"
+			(at 64.77 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1μF"
-			(at 123.19 187.96 0)
+		(property "Value" "Pin_Header_01x12"
+			(at 64.77 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 137.414 193.04 0)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x12_P2.54mm_Vertical"
+			(at 64.77 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3147,8 +3207,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 122.8725 185.1025 90)
+		(property "Datasheet" "~"
+			(at 69.85 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3157,7 +3217,68 @@
 			)
 		)
 		(property "Description" ""
-			(at 120.65 185.42 0)
+			(at 64.77 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Sound Address Decode"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 104.14 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "239c8f01-70ef-439c-958d-0dfd823bbc38")
+		(property "Reference" "C2"
+			(at 106.426 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 106.68 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 120.904 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.3625 148.2725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 104.14 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3553,32 +3674,32 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 135.89 185.42 0)
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 64.77 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "46190e12-bfc9-4ecf-9e40-179da2026de4")
-		(property "Reference" "C3"
-			(at 138.176 182.88 0)
+		(uuid "40581615-3669-41c2-b0cf-0b06b433720e")
+		(property "Reference" "J3"
+			(at 64.77 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1μF"
-			(at 138.43 187.96 0)
+		(property "Value" "Pin_Header_01x12"
+			(at 64.77 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 152.654 193.04 0)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x12_P2.54mm_Vertical"
+			(at 64.77 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3586,8 +3707,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 138.1125 185.1025 90)
+		(property "Datasheet" "~"
+			(at 59.69 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3596,7 +3717,68 @@
 			)
 		)
 		(property "Description" ""
-			(at 135.89 185.42 0)
+			(at 64.77 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Sound Address Decode"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 119.38 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "46190e12-bfc9-4ecf-9e40-179da2026de4")
+		(property "Reference" "C3"
+			(at 121.666 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 121.92 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 136.144 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 121.6025 148.2725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 119.38 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3647,7 +3829,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 21.59 186.69 0)
+		(at 40.64 151.13 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3655,7 +3837,7 @@
 		(dnp no)
 		(uuid "917f04ae-f97d-4894-bd1f-ee221fa78eea")
 		(property "Reference" "C8"
-			(at 23.876 184.15 0)
+			(at 42.926 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3663,7 +3845,7 @@
 			)
 		)
 		(property "Value" "10µF"
-			(at 21.59 189.23 0)
+			(at 40.64 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3672,7 +3854,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 38.354 194.31 0)
+			(at 57.404 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3681,7 +3863,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 23.8125 186.3725 90)
+			(at 42.8625 150.8125 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3690,7 +3872,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 21.59 186.69 0)
+			(at 40.64 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3741,7 +3923,7 @@
 	)
 	(symbol
 		(lib_id "Diodes_Inc:AP7365-33WG-7")
-		(at 35.56 181.61 0)
+		(at 54.61 146.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3749,7 +3931,7 @@
 		(dnp no)
 		(uuid "b4ee3465-e6d3-4314-a2ec-3e4d6aa12bf0")
 		(property "Reference" "IC5"
-			(at 48.26 176.53 0)
+			(at 67.31 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3757,7 +3939,7 @@
 			)
 		)
 		(property "Value" "AP7365-33WG-7"
-			(at 48.26 178.435 0)
+			(at 67.31 142.875 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3766,7 +3948,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
-			(at 57.15 196.215 0)
+			(at 76.2 160.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3776,7 +3958,7 @@
 			)
 		)
 		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
-			(at 57.15 198.755 0)
+			(at 76.2 163.195 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3786,7 +3968,7 @@
 			)
 		)
 		(property "Description" "3.3V LDO voltage regulator"
-			(at 48.26 189.865 0)
+			(at 67.31 154.305 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3794,7 +3976,7 @@
 			)
 		)
 		(property "Height" "1.3"
-			(at 57.15 201.295 0)
+			(at 76.2 165.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3804,7 +3986,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Diodes Inc."
-			(at 57.15 203.835 0)
+			(at 76.2 168.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3814,7 +3996,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "AP7365-33WG-7"
-			(at 57.15 206.375 0)
+			(at 76.2 170.815 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3824,7 +4006,7 @@
 			)
 		)
 		(property "Mouser Part Number" "621-AP7365-33WG-7"
-			(at 57.15 208.915 0)
+			(at 76.2 173.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3834,7 +4016,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
-			(at 57.15 211.455 0)
+			(at 76.2 175.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3844,7 +4026,7 @@
 			)
 		)
 		(property "Arrow Part Number" "AP7365-33WG-7"
-			(at 57.15 213.995 0)
+			(at 76.2 178.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3854,7 +4036,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
-			(at 57.15 216.535 0)
+			(at 76.2 180.975 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3864,7 +4046,7 @@
 			)
 		)
 		(property "Silkscreen" "AP7365"
-			(at 57.15 193.675 0)
+			(at 76.2 158.115 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3925,7 +4107,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 64.77 186.69 0)
+		(at 83.82 151.13 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3933,7 +4115,7 @@
 		(dnp no)
 		(uuid "ca8a3ba5-4963-4a20-bcbe-311314889adc")
 		(property "Reference" "C9"
-			(at 67.056 184.15 0)
+			(at 86.106 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3941,7 +4123,7 @@
 			)
 		)
 		(property "Value" "10µF"
-			(at 64.77 189.23 0)
+			(at 83.82 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3950,7 +4132,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 81.534 194.31 0)
+			(at 100.584 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3959,7 +4141,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.9925 186.3725 90)
+			(at 86.0425 150.8125 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3968,7 +4150,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 64.77 186.69 0)
+			(at 83.82 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -1151,16 +1151,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-				(at 21.59 -37.592 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
 			(symbol "AP7365-33WG-7_0_0"
 				(pin passive line
 					(at 0 -5.08 0)
@@ -1403,6 +1393,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC138APW-Q100J"
 			(pin_names
 				(offset 0.762)
@@ -1428,7 +1477,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-				(at 28.575 -30.48 0)
+				(at 29.21 -31.115 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1438,7 +1487,7 @@
 				)
 			)
 			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-				(at 28.575 -33.02 0)
+				(at 29.21 -33.655 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1456,7 +1505,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 28.575 -38.1 0)
+				(at 29.21 -38.735 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1466,7 +1515,7 @@
 				)
 			)
 			(property "Mouser Part Number" "771-74LVC138APWQ100J"
-				(at 28.575 -40.64 0)
+				(at 29.21 -41.275 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1476,7 +1525,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-				(at 28.575 -43.18 0)
+				(at 29.21 -43.815 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1486,7 +1535,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Nexperia"
-				(at 28.575 -45.72 0)
+				(at 29.21 -46.355 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1496,7 +1545,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-				(at 28.575 -48.26 0)
+				(at 29.21 -48.895 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1506,20 +1555,12 @@
 				)
 			)
 			(property "Silkscreen" "74LVC138"
-				(at 12.7 -27.305 0)
+				(at 29.21 -36.195 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -2753,7 +2794,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOIC127P600X175-14N"
-				(at 21.59 -19.685 0)
+				(at 21.59 -20.32 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2763,7 +2804,7 @@
 				)
 			)
 			(property "Datasheet" "https://docs.rs-online.com/5e2e/0900766b812cf5b5.pdf"
-				(at 21.59 -22.225 0)
+				(at 21.59 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2781,7 +2822,7 @@
 				)
 			)
 			(property "Height" "1.75"
-				(at 21.59 -27.305 0)
+				(at 21.59 -27.94 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2791,7 +2832,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "onsemi"
-				(at 21.59 -29.845 0)
+				(at 21.59 -30.48 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2801,7 +2842,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "74VHCT14AM"
-				(at 21.59 -32.385 0)
+				(at 21.59 -33.02 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2811,7 +2852,7 @@
 				)
 			)
 			(property "Mouser Part Number" "512-74VHCT14AM"
-				(at 21.59 -34.925 0)
+				(at 21.59 -35.56 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2821,7 +2862,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=512-74VHCT14AM"
-				(at 21.59 -37.465 0)
+				(at 21.59 -38.1 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2831,20 +2872,12 @@
 				)
 			)
 			(property "Silkscreen" "74VHCT14"
-				(at 13.335 -20.955 0)
+				(at 21.59 -25.4 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Inverters Hex Schmitt Inverter"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -5461,6 +5494,68 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 54.61 59.69 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "362bda68-3d14-443f-bb90-5fa343787e9c")
+		(property "Reference" "J1"
+			(at 54.61 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x16"
+			(at 54.61 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
+			(at 54.61 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 59.69 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 54.61 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "SNES Controller Clock"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "ON_Semiconductor:74VHCT14AM")
 		(at 217.17 64.77 0)
 		(unit 1)
@@ -5487,7 +5582,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOIC127P600X175-14N"
-			(at 238.76 84.455 0)
+			(at 238.76 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5497,7 +5592,7 @@
 			)
 		)
 		(property "Datasheet" "https://docs.rs-online.com/5e2e/0900766b812cf5b5.pdf"
-			(at 238.76 86.995 0)
+			(at 238.76 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5515,7 +5610,7 @@
 			)
 		)
 		(property "Height" "1.75"
-			(at 238.76 92.075 0)
+			(at 238.76 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5525,7 +5620,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "onsemi"
-			(at 238.76 94.615 0)
+			(at 238.76 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5535,7 +5630,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74VHCT14AM"
-			(at 238.76 97.155 0)
+			(at 238.76 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5545,7 +5640,7 @@
 			)
 		)
 		(property "Mouser Part Number" "512-74VHCT14AM"
-			(at 238.76 99.695 0)
+			(at 238.76 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5555,7 +5650,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=512-74VHCT14AM"
-			(at 238.76 102.235 0)
+			(at 238.76 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5565,20 +5660,12 @@
 			)
 		)
 		(property "Silkscreen" "74VHCT14"
-			(at 230.505 85.725 0)
+			(at 238.76 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Inverters Hex Schmitt Inverter"
-			(at 217.17 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5666,7 +5753,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 235.585 132.715 0)
+			(at 236.22 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5676,7 +5763,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 235.585 135.255 0)
+			(at 236.22 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5694,7 +5781,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 235.585 140.335 0)
+			(at 236.22 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5704,7 +5791,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 235.585 142.875 0)
+			(at 236.22 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5714,7 +5801,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 235.585 145.415 0)
+			(at 236.22 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5724,7 +5811,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 235.585 147.955 0)
+			(at 236.22 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5734,7 +5821,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 235.585 150.495 0)
+			(at 236.22 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5744,20 +5831,12 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 219.71 129.54 0)
+			(at 236.22 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 207.01 102.235 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5886,6 +5965,67 @@
 			(project "SNES Controller Clock"
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
 					(reference "C9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 54.61 64.77 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "79f05b6c-ff56-458e-b7e9-27712ce1a288")
+		(property "Reference" "J3"
+			(at 54.61 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x16"
+			(at 54.61 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
+			(at 54.61 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 49.53 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 54.61 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "SNES Controller Clock"
+				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -6090,16 +6230,6 @@
 		)
 		(property "Silkscreen" "AP7365"
 			(at 113.03 159.385 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "DiodesZetex AP7365-33WG-7, LDO Voltage Regulator, 600mA, 3.3 V +/-2%, 2  6 Vin, 5-Pin SOT-25"
-			(at 113.03 184.912 0)
 			(effects
 				(font
 					(size 1.27 1.27)

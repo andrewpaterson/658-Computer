@@ -8888,100 +8888,6 @@
 			)
 		)
 	)
-	(footprint "HCP65_Parts:HCP65_Daughter_Processor_Board"
-		(layer "F.Cu")
-		(uuid "6d531593-883c-4035-9125-56e35589cb92")
-		(at 45.72 83.82)
-		(property "Reference" "HDB5"
-			(at 0 -0.889 0)
-			(unlocked yes)
-			(layer "F.SilkS")
-			(uuid "0221a4d7-ae19-4745-8cf8-b50c805ccc8c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "Processor Board"
-			(at 0 1 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(uuid "a85c69b3-e5bb-4da6-b00a-3a38df4688a6")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Processor_Board"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "f4fb2e5e-b3f2-4c02-90c2-545728e94dff")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b8f4c960-aca1-4b62-85d1-e7a68d7d005e")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" "HCP65 Daughter Board place holder"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "95578730-0b61-4b0b-8a84-ac638b3a7e8e")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(path "/f951b343-e7db-4dae-b441-e6f4f5c530b5")
-		(sheetname "Root")
-		(sheetfile "Mainboard Small.kicad_sch")
-		(attr through_hole)
-		(fp_circle
-			(center 0 0)
-			(end 0.127 0)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(fill solid)
-			(layer "F.SilkS")
-			(uuid "555bcab9-2735-492d-83c1-7efdf2b9243e")
-		)
-		(model "${_658_COMPUTER_}/Computer/Processor/Processor Board/Processor Board.wrl"
-			(offset
-				(xyz 0 0.2 12)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz -90 0 0)
-			)
-		)
-	)
 	(footprint "HCP65_Parts:HCP65_Main_Memory_Abort"
 		(layer "F.Cu")
 		(uuid "73bda565-1049-4c05-a913-9d8da7c1757c")
@@ -20960,7 +20866,7 @@
 			(layer "F.SilkS")
 			(uuid "bf0076dd-8a32-4a25-9a0f-ab795af4796d")
 		)
-		(model "${_658_COMPUTER_}/Computer/Graphics/Graphics Board/Graphics Board.wrl"
+		(model "${_658_COMPUTER_}/Computer/LCD/LCD Board/LCD Board.wrl"
 			(offset
 				(xyz 0 0.2 12)
 			)
@@ -23436,7 +23342,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252453 -1.848189)
+			(mid 16.25245 -1.848186)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

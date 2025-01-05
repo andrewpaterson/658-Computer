@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|25373606|91948001|3e308885-b150-4835-b85b-e1ecfbcf9bd5|df207ad1-38d5-4cb9-8fe6-da65d3d0e6ce"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -526,19 +524,19 @@
       },
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       }
     ]
   },
@@ -552,7 +550,7 @@
       "specctra_dsn": "",
       "step": "UART Board.step",
       "svg": "",
-      "vrml": ""
+      "vrml": "UART Board.wrl"
     },
     "page_layout_descr_file": ""
   },

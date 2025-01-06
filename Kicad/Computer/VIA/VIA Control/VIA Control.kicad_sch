@@ -2089,6 +2089,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC08APW,112"
 			(pin_names
 				(offset 0.762)
@@ -2193,15 +2252,6 @@
 			)
 			(property "Silkscreen" "74LVC08"
 				(at 12.7 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2887,7 +2937,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-				(at 28.575 -30.48 0)
+				(at 29.21 -31.115 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2897,7 +2947,7 @@
 				)
 			)
 			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-				(at 28.575 -33.02 0)
+				(at 29.21 -33.655 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2915,7 +2965,7 @@
 				)
 			)
 			(property "Height" "1.1"
-				(at 28.575 -38.1 0)
+				(at 29.21 -38.735 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2925,7 +2975,7 @@
 				)
 			)
 			(property "Mouser Part Number" "771-74LVC138APWQ100J"
-				(at 28.575 -40.64 0)
+				(at 29.21 -41.275 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2935,7 +2985,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-				(at 28.575 -43.18 0)
+				(at 29.21 -43.815 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2945,7 +2995,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Nexperia"
-				(at 28.575 -45.72 0)
+				(at 29.21 -46.355 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2955,7 +3005,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-				(at 28.575 -48.26 0)
+				(at 29.21 -48.895 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2965,20 +3015,12 @@
 				)
 			)
 			(property "Silkscreen" "74LVC138"
-				(at 12.7 -27.305 0)
+				(at 29.21 -36.195 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -3333,7 +3375,15 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
+			(property "Description" "8-bit buffer"
+				(at 12.7 -28.575 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.1"
 				(at 22.86 -34.29 0)
 				(effects
 					(font
@@ -3343,7 +3393,7 @@
 					(hide yes)
 				)
 			)
-			(property "Height" "1.1"
+			(property "Manufacturer_Name" "Nexperia"
 				(at 22.86 -36.83 0)
 				(effects
 					(font
@@ -3353,7 +3403,7 @@
 					(hide yes)
 				)
 			)
-			(property "Manufacturer_Name" "Nexperia"
+			(property "Manufacturer_Part_Number" "74LVC244APW,118"
 				(at 22.86 -39.37 0)
 				(effects
 					(font
@@ -3363,7 +3413,7 @@
 					(hide yes)
 				)
 			)
-			(property "Manufacturer_Part_Number" "74LVC244APW,118"
+			(property "Mouser Part Number" "771-74LVC244APW-T"
 				(at 22.86 -41.91 0)
 				(effects
 					(font
@@ -3373,7 +3423,7 @@
 					(hide yes)
 				)
 			)
-			(property "Mouser Part Number" "771-74LVC244APW-T"
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
 				(at 22.86 -44.45 0)
 				(effects
 					(font
@@ -3383,31 +3433,13 @@
 					(hide yes)
 				)
 			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
+			(property "Silkscreen" "74LVC244"
 				(at 22.86 -46.99 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "74LVC244"
-				(at 12.7 -28.575 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
 					(hide yes)
 				)
 			)
@@ -9789,7 +9821,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 112.395 127.635 0)
+			(at 113.03 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9799,7 +9831,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 112.395 130.175 0)
+			(at 113.03 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9817,7 +9849,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 112.395 135.255 0)
+			(at 113.03 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9827,7 +9859,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 112.395 137.795 0)
+			(at 113.03 138.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9837,7 +9869,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 112.395 140.335 0)
+			(at 113.03 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9847,7 +9879,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 112.395 142.875 0)
+			(at 113.03 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9857,7 +9889,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 112.395 145.415 0)
+			(at 113.03 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9867,20 +9899,12 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 96.52 124.46 0)
+			(at 113.03 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 83.82 97.155 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -10233,7 +10257,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 112.395 89.535 0)
+			(at 113.03 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10243,7 +10267,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 112.395 92.075 0)
+			(at 113.03 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10261,7 +10285,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 112.395 97.155 0)
+			(at 113.03 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10271,7 +10295,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 112.395 99.695 0)
+			(at 113.03 100.33 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10281,7 +10305,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 112.395 102.235 0)
+			(at 113.03 102.87 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10291,7 +10315,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 112.395 104.775 0)
+			(at 113.03 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10301,7 +10325,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 112.395 107.315 0)
+			(at 113.03 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10311,20 +10335,12 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 96.52 86.36 0)
+			(at 113.03 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 83.82 59.055 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -10796,15 +10812,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-			(at 187.96 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f5d57610-a298-434f-a8c5-834acd3d0ae1")
 		)
@@ -10938,6 +10945,67 @@
 				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/7a3cf7a7-1338-45ec-94b3-74ce69cc8e1e"
 					(reference "C42")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 41.91 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4560348e-528a-4c9d-88c5-6b8cac75af17")
+		(property "Reference" "J2"
+			(at 41.91 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x28"
+			(at 41.91 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x28_P2.54mm_Vertical"
+			(at 41.91 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 36.83 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 41.91 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "VIA Control"
+				(path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
+					(reference "J2")
 					(unit 1)
 				)
 			)
@@ -11215,6 +11283,67 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 41.91 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4ed296a0-edfd-429b-94af-7488dc5ee6b3")
+		(property "Reference" "J1"
+			(at 41.91 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x28"
+			(at 41.91 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x28_P2.54mm_Vertical"
+			(at 41.91 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 36.83 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 41.91 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "VIA Control"
+				(path "/582a2c40-9bf2-463e-b0f7-d7ac5e4fbba5"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:C_0805")
 		(at 165.1 172.72 0)
 		(unit 1)
@@ -11394,7 +11523,15 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
+		(property "Description" "8-bit buffer"
+			(at 226.06 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
 			(at 236.22 113.03 0)
 			(effects
 				(font
@@ -11404,7 +11541,7 @@
 				(hide yes)
 			)
 		)
-		(property "Height" "1.1"
+		(property "Manufacturer_Name" "Nexperia"
 			(at 236.22 115.57 0)
 			(effects
 				(font
@@ -11414,7 +11551,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Name" "Nexperia"
+		(property "Manufacturer_Part_Number" "74LVC244APW,118"
 			(at 236.22 118.11 0)
 			(effects
 				(font
@@ -11424,7 +11561,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer_Part_Number" "74LVC244APW,118"
+		(property "Mouser Part Number" "771-74LVC244APW-T"
 			(at 236.22 120.65 0)
 			(effects
 				(font
@@ -11434,7 +11571,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Part Number" "771-74LVC244APW-T"
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
 			(at 236.22 123.19 0)
 			(effects
 				(font
@@ -11444,31 +11581,13 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC244APW118?qs=me8TqzrmIYXA4kTVlk0VcA%3D%3D"
+		(property "Silkscreen" "74LVC244"
 			(at 236.22 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC244"
-			(at 226.06 107.315 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC(H)244A - Octal buffer/line driver; 3-state@en-us"
-			(at 213.36 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -11815,15 +11934,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "NXP 74LVC08APW,112, Quad 2-Input AND Logic Gate, 1.2  3.6 V, 14-Pin TSSOP"
-			(at 238.76 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2d13b719-2926-486e-8845-c1f8dbab9120")
 		)
@@ -11902,7 +12012,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 112.395 53.975 0)
+			(at 113.03 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11912,7 +12022,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 112.395 56.515 0)
+			(at 113.03 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11930,7 +12040,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 112.395 61.595 0)
+			(at 113.03 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11940,7 +12050,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 112.395 64.135 0)
+			(at 113.03 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11950,7 +12060,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 112.395 66.675 0)
+			(at 113.03 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11960,7 +12070,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 112.395 69.215 0)
+			(at 113.03 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11970,7 +12080,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 112.395 71.755 0)
+			(at 113.03 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11980,20 +12090,12 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 96.52 50.8 0)
+			(at 113.03 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "74LVC138A-Q100 - 3-to-8 line decoder/demultiplexer; inverting@en-us"
-			(at 83.82 23.495 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)

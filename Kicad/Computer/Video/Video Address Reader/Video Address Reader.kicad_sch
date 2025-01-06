@@ -1625,6 +1625,65 @@
 				)
 			)
 		)
+		(symbol "HCP65:Pin_Header_01x32"
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Pin_Header_01x32"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:PinHeader_1x32_P2.54mm_Vertical"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at -5.08 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
 		(symbol "Nexperia:74LVC1G08GV,125"
 			(pin_names
 				(offset 0.762)
@@ -1749,11 +1808,12 @@
 				)
 			)
 			(property "Silkscreen" "'1G08"
-				(at 12.7 -10.795 0)
+				(at 24.13 -17.145 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -2484,7 +2544,7 @@
 				)
 			)
 			(property "Footprint" "SamacSys_Parts:SOP50P310X90-8N"
-				(at 20.574 -16.764 0)
+				(at 20.32 -16.51 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2494,7 +2554,7 @@
 				)
 			)
 			(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc3g04"
-				(at 20.574 -19.304 0)
+				(at 20.32 -19.05 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2512,7 +2572,7 @@
 				)
 			)
 			(property "Height" "0.9"
-				(at 20.574 -24.384 0)
+				(at 20.32 -24.13 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2522,7 +2582,7 @@
 				)
 			)
 			(property "Manufacturer_Name" "Texas Instruments"
-				(at 20.574 -26.924 0)
+				(at 20.32 -26.67 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2532,7 +2592,7 @@
 				)
 			)
 			(property "Manufacturer_Part_Number" "SN74LVC3G04DCUR"
-				(at 20.574 -29.464 0)
+				(at 20.32 -29.21 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2542,7 +2602,7 @@
 				)
 			)
 			(property "Mouser Part Number" "595-SN74LVC3G04DCUR"
-				(at 20.574 -32.004 0)
+				(at 20.32 -31.75 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2552,7 +2612,7 @@
 				)
 			)
 			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC3G04DCUR?qs=vxEfx8VrU7ChLh1GswJlmg%3D%3D"
-				(at 20.574 -34.544 0)
+				(at 20.32 -34.29 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -2561,21 +2621,13 @@
 					(hide yes)
 				)
 			)
-			(property "Silkscreen" "74LVC3G04"
-				(at 12.7 -13.335 0)
+			(property "Silkscreen" "'3G04"
+				(at 20.32 -21.59 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "TRIPLE INVERTER GATE"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -5017,7 +5069,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP50P310X90-8N"
-			(at 153.924 65.024 0)
+			(at 153.67 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5027,7 +5079,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74lvc3g04"
-			(at 153.924 67.564 0)
+			(at 153.67 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5045,7 +5097,7 @@
 			)
 		)
 		(property "Height" "0.9"
-			(at 153.924 72.644 0)
+			(at 153.67 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5055,7 +5107,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 153.924 75.184 0)
+			(at 153.67 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5065,7 +5117,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74LVC3G04DCUR"
-			(at 153.924 77.724 0)
+			(at 153.67 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5075,7 +5127,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74LVC3G04DCUR"
-			(at 153.924 80.264 0)
+			(at 153.67 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5085,7 +5137,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74LVC3G04DCUR?qs=vxEfx8VrU7ChLh1GswJlmg%3D%3D"
-			(at 153.924 82.804 0)
+			(at 153.67 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5094,21 +5146,13 @@
 				(hide yes)
 			)
 		)
-		(property "Silkscreen" "74LVC3G04"
-			(at 146.05 61.595 0)
+		(property "Silkscreen" "'3G04"
+			(at 153.67 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "TRIPLE INVERTER GATE"
-			(at 133.35 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5528,6 +5572,67 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 52.07 97.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "946c17ab-29d2-47c7-862d-d087f6b885ec")
+		(property "Reference" "J3"
+			(at 52.07 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 52.07 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 52.07 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 46.99 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 52.07 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Video Address Reader"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Nexperia:74LVC1G08GV,125")
 		(at 203.2 45.72 0)
 		(unit 1)
@@ -5653,11 +5758,12 @@
 			)
 		)
 		(property "Silkscreen" "'1G08"
-			(at 215.9 56.515 0)
+			(at 227.33 62.865 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -5690,6 +5796,68 @@
 				)
 				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
 					(reference "IC18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:Pin_Header_01x32")
+		(at 52.07 92.71 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b1588c1e-c10d-487f-932c-9ef35e3dbea3")
+		(property "Reference" "J2"
+			(at 52.07 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 52.07 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+			(at 52.07 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 52.07 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Video Address Reader"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "J2")
 					(unit 1)
 				)
 			)

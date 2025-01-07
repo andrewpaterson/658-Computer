@@ -23118,7 +23118,7 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_Daughter_VIA_Board"
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Memory_Board"
 			(at 179.07 359.41 0)
 			(effects
 				(font
@@ -23986,6 +23986,67 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "DEV4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:HCP65_Daughter_Board")
+		(at 179.07 364.49 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d11dea24-27f9-450c-a4d7-8c8e359c9607")
+		(property "Reference" "HDB1"
+			(at 179.07 362.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Daughter Board"
+			(at 179.07 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Signals_Board"
+			(at 179.07 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 179.07 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 179.07 366.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "HDB1")
 					(unit 1)
 				)
 			)

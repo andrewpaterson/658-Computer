@@ -1353,6 +1353,100 @@
 			)
 		)
 	)
+	(footprint "HCP65_Parts:HCP65_Daughter_Video_Signals_Board"
+		(layer "F.Cu")
+		(uuid "0bc787d1-a05d-4d4f-b701-089ef5ed9d84")
+		(at 45.72 50.8)
+		(property "Reference" "HDB1"
+			(at 0 -0.889 0)
+			(unlocked yes)
+			(layer "F.SilkS")
+			(uuid "70ad607a-62b2-4caa-8ff8-e2ea6fb6a300")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "Daughter Board"
+			(at 0 1 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(uuid "2fb573f2-90bb-4b1c-8565-6f4c9a9ad6ab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Signals_Board"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7964c28b-aa8d-4f9b-b71e-68b8464ee904")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "339e5707-8d18-49cf-a6c6-f21e37345494")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "HCP65 Daughter Board place holder"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6a266d8d-ce41-43f4-b8e2-b5772d9421af")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/d11dea24-27f9-450c-a4d7-8c8e359c9607")
+		(sheetname "Root")
+		(sheetfile "Mainboard Small.kicad_sch")
+		(attr through_hole)
+		(fp_circle
+			(center 0 0)
+			(end 0.127 0)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(fill solid)
+			(layer "F.SilkS")
+			(uuid "afc62526-4950-4a97-86a5-7ce5e902d52f")
+		)
+		(model "${_658_COMPUTER_}/Computer/Video/Video Board - Signals/Video Board - Signals.wrl"
+			(offset
+				(xyz 0 0.2 12)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz -90 0 0)
+			)
+		)
+	)
 	(footprint "SamacSys_Parts:TO254P483X1016X2261-3P"
 		(layer "F.Cu")
 		(uuid "1a01c2e1-04df-4c11-9c66-81aa72997faa")
@@ -20784,15 +20878,15 @@
 			)
 		)
 	)
-	(footprint "HCP65_Parts:HCP65_Daughter_VIA_Board"
+	(footprint "HCP65_Parts:HCP65_Daughter_Video_Memory_Board"
 		(layer "F.Cu")
-		(uuid "f0a96cf6-6e5b-493a-b60b-c19091162a05")
+		(uuid "e2f69046-9edf-4a36-a34d-90d6fbf35370")
 		(at 45.72 50.8)
 		(property "Reference" "HDB2"
 			(at 0 -0.889 0)
 			(unlocked yes)
 			(layer "F.SilkS")
-			(uuid "760d584a-32ca-4f2a-a3ee-b4b179f885ba")
+			(uuid "41048375-d2eb-4dd9-a40d-7cb39ac2bb8f")
 			(effects
 				(font
 					(size 1 1)
@@ -20804,7 +20898,7 @@
 			(at 0 1 0)
 			(unlocked yes)
 			(layer "F.Fab")
-			(uuid "fd81d9b2-8359-4aa0-ad63-e1a864814268")
+			(uuid "c4fd0755-4ba0-4d78-9b47-f79aa35da2dd")
 			(effects
 				(font
 					(size 1 1)
@@ -20812,12 +20906,12 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_Daughter_VIA_Board"
+		(property "Footprint" "HCP65_Parts:HCP65_Daughter_Video_Memory_Board"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "720f362e-8e5d-46f9-a7a6-298c0b1e9f09")
+			(uuid "ef98ba07-0242-4c86-b649-cf78b1f73c98")
 			(effects
 				(font
 					(size 1 1)
@@ -20830,7 +20924,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f18d131b-7e9d-4d90-a2ad-b9b57b14215c")
+			(uuid "899bfad7-7766-4a4a-a1a6-df1514142fde")
 			(effects
 				(font
 					(size 1 1)
@@ -20843,7 +20937,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "72bf5c1b-e79b-468d-bc8d-88226103b768")
+			(uuid "b8de332f-9f93-43e8-9b32-7a23521678d6")
 			(effects
 				(font
 					(size 1 1)
@@ -20864,11 +20958,11 @@
 			)
 			(fill solid)
 			(layer "F.SilkS")
-			(uuid "c0b30e79-61fc-4e95-a66b-5ef9020ebdcb")
+			(uuid "44f92e9e-2101-4159-8495-05577aec0ecd")
 		)
-		(model "${_658_COMPUTER_}/Computer/VIA/VIA Board/VIA Board.wrl"
+		(model "${_658_COMPUTER_}/Computer/Video/Video Board - Memory/Video Board - Memory.wrl"
 			(offset
-				(xyz 0 0.2 12)
+				(xyz 0 -12.8 12)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -23342,7 +23436,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

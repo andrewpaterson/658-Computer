@@ -182,8 +182,7 @@
       "track_widths": [
         0.0,
         0.2,
-        0.38,
-        1.0
+        0.38
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -497,15 +496,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "GND"
+        "pattern": "*GND"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*12V*"
       }
     ]
   },
@@ -521,7 +524,7 @@
       "svg": "",
       "vrml": "Status Device Board.wrl"
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,

@@ -337,6 +337,641 @@
 			)
 		)
 	)
+	(symbol "BQ4802LYPWR"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 20.955 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BQ4802LYPWR"
+			(at 20.955 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SOP65P640X120-28N"
+			(at 40.64 -50.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/gpn/BQ4802LY"
+			(at 40.64 -52.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Parallel RTC"
+			(at 20.955 -17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.2"
+			(at 40.64 -57.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Texas Instruments"
+			(at 40.64 -60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "BQ4802LYPWR"
+			(at 40.64 -62.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "595-BQ4802LYPWR"
+			(at 40.64 -65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/BQ4802LYPWR?qs=YxwvVplHM%2FkKUAU8m2Z2MQ%3D%3D"
+			(at 40.64 -67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "BQ4802LY"
+			(at 20.32 -51.435 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "BQ4802LYPWR_0_0"
+			(pin passive line
+				(at 40.64 -30.48 180)
+				(length 5.08)
+				(name "VOUT"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -15.24 0)
+				(length 5.08)
+				(name "A0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 29.21 -43.18 90)
+				(length 5.08)
+				(name "DQ0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 26.67 -43.18 90)
+				(length 5.08)
+				(name "DQ1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 24.13 -43.18 90)
+				(length 5.08)
+				(name "DQ2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 21.59 -43.18 90)
+				(length 5.08)
+				(name "DQ3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 19.05 -43.18 90)
+				(length 5.08)
+				(name "DQ4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 16.51 -43.18 90)
+				(length 5.08)
+				(name "DQ5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 13.97 -43.18 90)
+				(length 5.08)
+				(name "DQ6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 11.43 -43.18 90)
+				(length 5.08)
+				(name "DQ7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -27.94 0)
+				(length 5.08)
+				(name "X1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "~{CS}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "21"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "~{OE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -20.32 0)
+				(length 5.08)
+				(name "WDI"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 -2.54 180)
+				(length 5.08)
+				(name "BC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -5.08 0)
+				(length 5.08)
+				(name "~{WE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -30.48 0)
+				(length 5.08)
+				(name "X2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 -12.7 180)
+				(length 5.08)
+				(name "~{WDO}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 -10.16 180)
+				(length 5.08)
+				(name "~{INT}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 -7.62 180)
+				(length 5.08)
+				(name "~{RST}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "A3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "A2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -12.7 0)
+				(length 5.08)
+				(name "A1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "BQ4802LYPWR_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -38.1) (xy 5.08 -38.1) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "BQ4802LYPWR_1_0"
+			(pin passive line
+				(at 0 -33.02 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -35.56 0)
+				(length 5.08) hide
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 -15.24 180)
+				(length 5.08)
+				(name "~{CE}_{OUT}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -22.86 0)
+				(length 5.08)
+				(name "~{CE}_{IN}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 40.64 0 180)
+				(length 5.08) hide
+				(name "3V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
 	(symbol "CD74HC244M96"
 		(pin_names
 			(offset 0.762)
@@ -456,15 +1091,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "High Speed CMOS Logic Non-Inverting Octal Buffers/Line Drivers with 3-State Outputs"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -947,35 +1573,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" ""
-			(at 1.27 -17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" ""
-			(at 1.27 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Buffers & Line Drivers Hi Sp CMOS Log Non- Inverting Octal"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "CD74HC244M96G4_0_0"
 			(pin input inverted
 				(at 0 0 0)
@@ -1455,35 +2052,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "CD74HCT40103M96"
-			(at 32.385 -50.165 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cd74hct40103m96/texas-instruments?region=nac"
-			(at 32.385 -52.705 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments CD74HCT40103M96, 8-stage, Binary Counter, Down Counter, 5V, 16-Pin SOIC"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "CD74HCT40103M96_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -1868,34 +2436,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "595-CD74HCT40105M"
-			(at 26.035 -45.085 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74HCT40105"
-			(at 12.7 -25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "High Speed CMOS Logic 4-Bit by 16-Word FIFO Register"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -2308,15 +2848,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "1-of-8 Decoder"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "CY74FCT138ATSOC_0_0"
 			(pin input line
 				(at 0 -17.145 0)
@@ -2720,15 +3251,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-Bit D/A Converter"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -3179,15 +3701,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Series 3-Terminal 500-mA Positive Voltage Regulators"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "LM78M05CT_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -3357,35 +3870,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "RS Part Number" "1218414"
-			(at 26.67 -10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "RS Price/Stock" "http//uk.rs-online.com/web/p/products/1218414"
-			(at 26.67 -12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Single Precision Timer"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -3661,15 +4145,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Timers & Support Products Precision"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "NE555DRG4_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -3939,16 +4414,6 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74ABT245BDBR, Bus Transceiver, 8-Bit Non-Inverting TTL, 5V, 20-Pin SSOP"
-			(at 24.13 -49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -4440,15 +4905,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "QUADRUPLE 3-STATE BUFFERS OE LOW"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74AHC125DBR_0_0"
 			(pin input inverted
 				(at 0 0 0)
@@ -4837,15 +5293,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74AHCT02PWR, NOR Quad 2 Input NOR, 4.5  5.5 V, 14-Pin TSSOP"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -5657,15 +6104,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Logic Gates Quadruple 2-Input Positive-AND Gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74AHCT08PWRG4_0_0"
 			(pin input line
 				(at 0 0 0)
@@ -6423,15 +6861,6 @@
 		)
 		(property "Silkscreen" "74AHCT132"
 			(at 12.7 -26.035 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74AHCT132PWR, NAND Quad 2 Input NAND Schmitt Trigger, 4.5  5.5 V, 14-Pin TSSOP"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7250,15 +7679,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "74AHCT74 - Dual D-type flip-flop with set and reset"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74AHCT74PWR_0_0"
 			(pin input inverted
 				(at 0 -7.62 0)
@@ -7629,35 +8049,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "SN74ALVC08PWR"
-			(at 25.4 -50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/sn74alvc08pwr/texas-instruments?region=nac"
-			(at 25.4 -53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74ALVC08PWR, AND Quad 2 Input AND, 1.65  3.6 V, 14-Pin TSSOP"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -8416,35 +8807,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" ""
-			(at 21.59 -17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" ""
-			(at 21.59 -20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Triple 3-Input Positive-NAND Gate"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74ALVC10PWR_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -9177,15 +9539,6 @@
 		)
 		(property "Silkscreen" "74CBT16233"
 			(at 12.7 -86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74CBT16233DL, Multiplexer Switch IC Octal 2:1 demultiplexer, multiplexer, 4.75  5.25 V"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10328,15 +10681,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Octal FET Bus Switch With -2 V Undershoot Protection"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74CBT3244CPWR_0_0"
 			(pin input line
 				(at 0 0 0)
@@ -10825,15 +11169,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "4-Bit 1-Of-2 FET Multiplexer/Demultiplexer with -2 V Undershoot Protection"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74CBT3257CPWR_0_0"
 			(pin input line
 				(at 0 -2.54 0)
@@ -11239,15 +11574,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual J-K Positive-Edge-Triggered Flip-Flops With Clear And Preset"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -11660,15 +11986,6 @@
 		)
 		(property "Silkscreen" "74F20"
 			(at 12.7 -25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual 4-input positive-NAND gates"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12340,15 +12657,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Logic Gates Dual 4-input Positive-NAND gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74F20DRE4_0_0"
 			(pin input line
 				(at 0 0 0)
@@ -12983,15 +13291,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Dual 4-input positive-AND gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74F21DR_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -13364,15 +13663,6 @@
 		)
 		(property "Silkscreen" "74F251"
 			(at 12.7 -24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "1-of-8 Data Selectors/Multiplexers With 3-State Outputs"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14465,15 +14755,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Dual 5-input positive-NOR gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74F260DR_Multi_0_0"
 			(pin passive line
 				(at 25.4 0 180)
@@ -14994,15 +15275,6 @@
 		)
 		(property "Silkscreen" "74F27"
 			(at 12.7 -27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Logic Gates Triple 3-Input Positive NOR Gates"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16183,15 +16455,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "8-input positive-NAND gates"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74F30DR_0_0"
 			(pin input line
 				(at 0 0 0)
@@ -16753,15 +17016,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Texas Instruments SN74F521DW, 8-Bit, Identity Comparator, Inverting, 4.5  5.5 V, 20-Pin SOIC"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74F521DW_0_0"
 			(pin input inverted
 				(at 0 0 0)
@@ -17245,15 +17499,6 @@
 		)
 		(property "Silkscreen" "74F521"
 			(at 12.7 -51.435 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-Bit Identity/Magnitude Comparators (P=Q) with Enable"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17750,15 +17995,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "8-line to 3-line priority encoder"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LS148NSR_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -18167,15 +18403,6 @@
 		)
 		(property "Silkscreen" "74LS670"
 			(at 12.7 -24.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Registers 4-by-4 register file With 3-State Outputs"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18592,15 +18819,6 @@
 		)
 		(property "Silkscreen" "74LS684"
 			(at 13.97 -29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "8-Bit Identity/Magnitude Comparators"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19095,15 +19313,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Serial-To-Parallel Interface"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LV8153PWR_0_0"
 			(pin passive line
 				(at 0 0 0)
@@ -19585,15 +19794,6 @@
 		)
 		(property "Silkscreen" "74LVC10"
 			(at 12.065 -28.575 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Triple 3-Input Positive-NAND Gate"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20340,15 +20540,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Triple 3-Input Positive-NAND Gate"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LVC10APWR_Multi_0_0"
 			(pin passive line
 				(at 25.4 0 180)
@@ -20837,15 +21028,6 @@
 		)
 		(property "Silkscreen" "74LVC14"
 			(at 12.7 -20.955 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "SN74LVC14APWRG4 - Hex inverting Schmitt trigger "
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21581,15 +21763,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "74LVC14A - Schmitt hex inverter"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LVC14APWRG4 _Multi_0_0"
 			(pin passive line
 				(at 25.4 2.54 180)
@@ -22037,16 +22210,6 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Texas Instruments SN74LVC1G10DBVR, NAND 3 Input NAND, 1.65  5.5 V, 6-Pin SOT-23"
-			(at 22.352 -18.288 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -24258,15 +24421,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Encoders, Decoders, Multiplexers & Demultiplexers Single 2-Line to 1-Line Data Selector/Multiplexer 8-VSSOP -40 to 85"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LVC2G157DCU3_0_0"
 			(pin input line
 				(at 0 -5.08 0)
@@ -25272,15 +25426,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "TRIPLE INVERTER GATE"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "SN74LVC3G04DCUR_Multi_0_0"
 			(pin passive line
 				(at 0 -2.54 0)
@@ -25610,15 +25755,6 @@
 		)
 		(property "Silkscreen" "74LVC543"
 			(at 12.7 -43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Octal Registered Transceiver With 3-State Outputs"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26199,15 +26335,6 @@
 		)
 		(property "Silkscreen" "74LVC86"
 			(at 12.7 -25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Quadruple 2-Input Exclusive-OR Gate"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27020,15 +27147,6 @@
 		)
 		(property "Silkscreen" "16C550"
 			(at 20.32 -30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Asynchronous Communications Element With Autoflow Control"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28023,15 +28141,6 @@
 		)
 		(property "Silkscreen" "16C752"
 			(at 20.32 -28.575 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual UART With 64-Byte FIFO"
-			(at 0 0 0)
 			(effects
 				(font
 					(size 1.27 1.27)

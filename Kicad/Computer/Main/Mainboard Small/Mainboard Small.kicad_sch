@@ -7606,6 +7606,109 @@
 				)
 			)
 		)
+		(symbol "HCP65:MountingHole_Pad"
+			(pin_numbers hide)
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_Pad"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 7.62 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*Pad*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_Pad_0_1"
+				(circle
+					(center 0 1.27)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_1_1"
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers hide)
 			(pin_names hide)
@@ -11569,6 +11672,17 @@
 		)
 		(uuid "0521cdc1-15c1-4e91-b030-043f2ce8b010")
 	)
+	(label "GND"
+		(at 85.09 303.53 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "054a1301-4c5a-4049-b89e-83cabc0dea64")
+	)
 	(label "~{Interrupt}_{Device}1"
 		(at 317.5 180.34 180)
 		(fields_autoplaced yes)
@@ -14506,6 +14620,17 @@
 		)
 		(uuid "50b48444-503e-404c-ad56-6e1febd86aaf")
 	)
+	(label "GND"
+		(at 73.66 303.53 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "51023632-d755-4e33-a8fa-c90b91ee9eb6")
+	)
 	(label "~{Memory Fail}"
 		(at 533.4 107.95 0)
 		(fields_autoplaced yes)
@@ -15044,6 +15169,17 @@
 			(justify left bottom)
 		)
 		(uuid "5ef8c76c-5ea5-4cc1-8e9c-1d864d5e8cd3")
+	)
+	(label "GND"
+		(at 96.52 303.53 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5f29e0e7-64ca-4ec5-a9bf-2cbc13ae6ee4")
 	)
 	(label "A19_{M}"
 		(at 340.36 134.62 0)
@@ -19401,6 +19537,17 @@
 		)
 		(uuid "def70a49-887f-4ccb-be59-4c78d3b7b235")
 	)
+	(label "GND"
+		(at 62.23 303.53 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "df5b15b3-3011-4ff2-b2dc-985f925479a8")
+	)
 	(label "A7_{M}"
 		(at 210.82 165.1 0)
 		(fields_autoplaced yes)
@@ -21053,6 +21200,71 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 96.52 300.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "162c49a1-a928-4eca-8f2b-2c80f9e42997")
+		(property "Reference" "H4"
+			(at 96.52 296.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 96.52 294.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 96.52 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 96.52 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4c800cbc-a281-4735-aebe-372a88100b22")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RS_Components:448-376")
 		(at 49.53 355.6 0)
 		(mirror y)
@@ -21955,6 +22167,71 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 85.09 300.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "40bebc6c-ac21-48cc-8cdd-5b696c751f2f")
+		(property "Reference" "H3"
+			(at 85.09 296.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 85.09 294.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 85.09 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 92.71 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 85.09 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "264764ef-a717-47a9-84f9-ff21b5703bbe")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:Status_Device_Board")
 		(at 157.48 261.62 0)
 		(unit 1)
@@ -22139,6 +22416,71 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 62.23 300.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4ba2f745-a1a4-46cd-b79b-e00140d2e3e9")
+		(property "Reference" "H1"
+			(at 62.23 296.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 62.23 294.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 62.23 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 69.85 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 62.23 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1485aec8-4920-4501-a904-f9294ed9ba39")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H1")
 					(unit 1)
 				)
 			)
@@ -24721,6 +25063,71 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 73.66 300.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "af1ef2cd-14e9-473b-a93f-408f52e090cc")
+		(property "Reference" "H2"
+			(at 73.66 296.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 73.66 294.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 73.66 311.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 81.28 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 73.66 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da77b3c4-000b-4126-b061-a06349ae7287")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H2")
 					(unit 1)
 				)
 			)

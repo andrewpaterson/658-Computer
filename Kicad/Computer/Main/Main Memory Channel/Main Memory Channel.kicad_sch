@@ -5,9 +5,9 @@
 	(uuid "337b5f72-8be1-4121-9dc6-479b565482b2")
 	(paper "A4")
 	(title_block
-		(title "MPU Timer")
-		(date "2024-02-22")
-		(rev "V1")
+		(title "Main Memory Channel")
+		(date "2025-01-09")
+		(rev "V0")
 	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_02x20_Counter_Clockwise"
@@ -3841,15 +3841,15 @@
 		(uuid "b483095b-b3f1-413b-bfdc-dd45b3a6b7a0")
 	)
 	(no_connect
-		(at 153.67 97.79)
+		(at 124.46 104.14)
 		(uuid "06813b22-467b-49a6-8a8e-c76bd3926fd2")
 	)
 	(no_connect
-		(at 153.67 62.23)
+		(at 124.46 68.58)
 		(uuid "07fb3d2f-0d93-4d3d-9294-67c4724d15da")
 	)
 	(no_connect
-		(at 153.67 105.41)
+		(at 124.46 111.76)
 		(uuid "1f171749-6649-4163-8918-61f436faf0ad")
 	)
 	(no_connect
@@ -3857,35 +3857,35 @@
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
 	(no_connect
-		(at 153.67 57.15)
+		(at 124.46 63.5)
 		(uuid "43d1de50-d2a1-4a93-98ca-e02225e895ff")
 	)
 	(no_connect
-		(at 153.67 102.87)
+		(at 124.46 109.22)
 		(uuid "adb4dde8-8105-4d84-9876-6506e3ea9bcf")
 	)
 	(no_connect
-		(at 193.04 52.07)
+		(at 163.83 58.42)
 		(uuid "bbc69a8f-13c3-42d6-b6ba-abbd1ca71cc4")
 	)
 	(no_connect
-		(at 153.67 95.25)
+		(at 124.46 101.6)
 		(uuid "c164a710-a935-43ac-a079-facd5c2edc33")
 	)
 	(no_connect
-		(at 153.67 59.69)
+		(at 124.46 66.04)
 		(uuid "db0b9cf4-fc8f-4233-aae3-04742a518114")
 	)
 	(no_connect
-		(at 153.67 64.77)
+		(at 124.46 71.12)
 		(uuid "deb92428-7fb2-43d6-baf8-c1fa6f951a9f")
 	)
 	(no_connect
-		(at 153.67 100.33)
+		(at 124.46 106.68)
 		(uuid "e6f5b2fd-4fbb-4928-84a9-45dca78526af")
 	)
 	(no_connect
-		(at 193.04 49.53)
+		(at 163.83 55.88)
 		(uuid "fa16a804-032e-411b-a130-8d53192432eb")
 	)
 	(wire
@@ -3900,6 +3900,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 66.04) (xy 204.47 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08101650-05e9-42eb-84d6-9a9fc4a28cf9")
+	)
+	(wire
+		(pts
 			(xy 49.53 74.93) (xy 48.26 74.93)
 		)
 		(stroke
@@ -3910,7 +3920,57 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 49.53) (xy 160.02 49.53)
+			(xy 213.36 106.68) (xy 210.82 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d03c322-57b7-41b7-9099-048fa9e003a4")
+	)
+	(wire
+		(pts
+			(xy 210.82 107.95) (xy 204.47 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0dd094d4-82d4-43dc-b2ae-b8dd7351acb2")
+	)
+	(wire
+		(pts
+			(xy 212.09 100.33) (xy 204.47 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ef37c76-fce9-4319-8743-62ef8c2d65ba")
+	)
+	(wire
+		(pts
+			(xy 212.09 63.5) (xy 204.47 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11433fcc-291d-4782-82ce-8751a4ca9363")
+	)
+	(wire
+		(pts
+			(xy 210.82 91.44) (xy 210.82 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1294018d-8b2a-45d6-8b91-a5e56532c2ed")
+	)
+	(wire
+		(pts
+			(xy 124.46 55.88) (xy 130.81 55.88)
 		)
 		(stroke
 			(width 0)
@@ -3920,7 +3980,17 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 54.61) (xy 167.64 54.61)
+			(xy 209.55 88.9) (xy 209.55 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c2786fc-59d6-4348-a427-b585bd84d8d7")
+	)
+	(wire
+		(pts
+			(xy 124.46 60.96) (xy 138.43 60.96)
 		)
 		(stroke
 			(width 0)
@@ -3937,6 +4007,26 @@
 			(type default)
 		)
 		(uuid "26219dd1-99de-4424-b167-2c7dcb1ebc12")
+	)
+	(wire
+		(pts
+			(xy 209.55 55.88) (xy 204.47 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26fad5cb-86a2-4536-a6b6-f1bd5e8b1341")
+	)
+	(wire
+		(pts
+			(xy 210.82 105.41) (xy 204.47 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28d2acb0-db66-45fb-a1c5-5086ebea9248")
 	)
 	(wire
 		(pts
@@ -3960,6 +4050,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 60.96) (xy 204.47 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39477833-f8b9-4639-8750-9ac0eb04c499")
+	)
+	(wire
+		(pts
 			(xy 34.29 69.85) (xy 35.56 69.85)
 		)
 		(stroke
@@ -3980,7 +4080,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 52.07) (xy 158.75 59.69)
+			(xy 129.54 58.42) (xy 129.54 66.04)
 		)
 		(stroke
 			(width 0)
@@ -3990,7 +4090,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 57.15) (xy 200.66 57.15)
+			(xy 163.83 63.5) (xy 171.45 63.5)
 		)
 		(stroke
 			(width 0)
@@ -4010,6 +4110,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 54.61) (xy 210.82 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ffdef8a-1e26-41be-a121-bcbeac9cfef1")
+	)
+	(wire
+		(pts
 			(xy 49.53 97.79) (xy 48.26 97.79)
 		)
 		(stroke
@@ -4017,6 +4127,16 @@
 			(type default)
 		)
 		(uuid "510ad36d-a442-4b7d-ba1d-99f0c0234089")
+	)
+	(wire
+		(pts
+			(xy 209.55 114.3) (xy 209.55 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "516c88ca-5111-440d-b210-1a35cc1ecbd4")
 	)
 	(wire
 		(pts
@@ -4030,6 +4150,16 @@
 	)
 	(wire
 		(pts
+			(xy 213.36 111.76) (xy 210.82 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "53cea52c-a7f4-4de9-b65c-2b62a975c8a2")
+	)
+	(wire
+		(pts
 			(xy 34.29 85.09) (xy 35.56 85.09)
 		)
 		(stroke
@@ -4037,6 +4167,16 @@
 			(type default)
 		)
 		(uuid "548bb98e-edfa-4ab3-8a24-e29b21ec57fb")
+	)
+	(wire
+		(pts
+			(xy 210.82 69.85) (xy 210.82 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "562f6b92-d7ad-4ac6-9b0f-1efdcdbad29e")
 	)
 	(wire
 		(pts
@@ -4050,6 +4190,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 95.25) (xy 204.47 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a1443e3-589e-4043-888c-1650b566b5c0")
+	)
+	(wire
+		(pts
 			(xy 49.53 77.47) (xy 48.26 77.47)
 		)
 		(stroke
@@ -4057,6 +4207,26 @@
 			(type default)
 		)
 		(uuid "5b3c7a73-beac-425a-a822-b900162f32e5")
+	)
+	(wire
+		(pts
+			(xy 209.55 92.71) (xy 204.47 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d3e29a6-ff59-499c-a583-8979993838ee")
+	)
+	(wire
+		(pts
+			(xy 213.36 74.93) (xy 210.82 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "629752c0-bc07-4a2a-8cb8-02090f3a595b")
 	)
 	(wire
 		(pts
@@ -4080,13 +4250,43 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 46.99) (xy 167.64 46.99)
+			(xy 213.36 91.44) (xy 210.82 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d568c51-099b-4e31-887f-fcfb935ca809")
+	)
+	(wire
+		(pts
+			(xy 213.36 88.9) (xy 209.55 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6db77b56-c4ae-41ec-af32-c9ef9c09f85b")
+	)
+	(wire
+		(pts
+			(xy 124.46 53.34) (xy 138.43 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "70872fcb-f14e-458f-b1f8-979069665b38")
+	)
+	(wire
+		(pts
+			(xy 209.55 52.07) (xy 209.55 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7b3d4f7a-41b3-4272-b6db-b72e419729d6")
 	)
 	(wire
 		(pts
@@ -4100,13 +4300,33 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 57.15) (xy 167.64 57.15)
+			(xy 212.09 62.23) (xy 212.09 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d9f268a-a777-4cc4-b268-05f77bc5d690")
+	)
+	(wire
+		(pts
+			(xy 130.81 63.5) (xy 138.43 63.5)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "7e0eca43-0df2-40ed-941b-5dc1e6c64127")
+	)
+	(wire
+		(pts
+			(xy 213.36 96.52) (xy 210.82 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "809ad641-365c-4108-a54a-32a6c06ba5d3")
 	)
 	(wire
 		(pts
@@ -4130,13 +4350,73 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 46.99) (xy 208.28 46.99)
+			(xy 163.83 53.34) (xy 179.07 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "840e671d-f9f1-440b-b480-e76d7d133679")
+	)
+	(wire
+		(pts
+			(xy 209.55 110.49) (xy 204.47 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "874d45a5-32ea-4013-aa94-51aaeddb6a3f")
+	)
+	(wire
+		(pts
+			(xy 213.36 104.14) (xy 212.09 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b699acb-77eb-4575-9e7d-ebb7a329de5a")
+	)
+	(wire
+		(pts
+			(xy 210.82 59.69) (xy 210.82 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c6cda6f-462e-4c91-924a-62e2ef1d34ce")
+	)
+	(wire
+		(pts
+			(xy 210.82 58.42) (xy 204.47 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8fbcbe9a-8958-4ef9-a967-5ae50d26018a")
+	)
+	(wire
+		(pts
+			(xy 210.82 68.58) (xy 204.47 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "93753239-386e-4220-ae16-59916539ae39")
+	)
+	(wire
+		(pts
+			(xy 212.09 104.14) (xy 212.09 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95c41250-8f87-4041-af42-dd7a18350883")
 	)
 	(wire
 		(pts
@@ -4150,6 +4430,26 @@
 	)
 	(wire
 		(pts
+			(xy 213.36 77.47) (xy 209.55 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c0bb30c-aeb8-462d-9497-c79c5b3f0064")
+	)
+	(wire
+		(pts
+			(xy 209.55 77.47) (xy 209.55 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cf10954-29e9-4f28-9690-a74baab53551")
+	)
+	(wire
+		(pts
 			(xy 49.53 102.87) (xy 48.26 102.87)
 		)
 		(stroke
@@ -4157,6 +4457,16 @@
 			(type default)
 		)
 		(uuid "9d9f2ba0-f353-43d5-b6dd-e598de945b2d")
+	)
+	(wire
+		(pts
+			(xy 210.82 97.79) (xy 204.47 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a67f7140-eebc-46f3-800b-c0c24cb932e4")
 	)
 	(wire
 		(pts
@@ -4180,7 +4490,7 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 59.69) (xy 167.64 59.69)
+			(xy 129.54 66.04) (xy 138.43 66.04)
 		)
 		(stroke
 			(width 0)
@@ -4190,7 +4500,27 @@
 	)
 	(wire
 		(pts
-			(xy 153.67 52.07) (xy 158.75 52.07)
+			(xy 213.36 99.06) (xy 212.09 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b42cfd46-a893-48d0-9e8e-5a6abe799f32")
+	)
+	(wire
+		(pts
+			(xy 213.36 52.07) (xy 209.55 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b695a4a2-47e8-4aa9-819d-01978183794b")
+	)
+	(wire
+		(pts
+			(xy 124.46 58.42) (xy 129.54 58.42)
 		)
 		(stroke
 			(width 0)
@@ -4220,6 +4550,46 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 96.52) (xy 210.82 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2cea33d-7b64-4c18-b0cc-3c9027e9d945")
+	)
+	(wire
+		(pts
+			(xy 213.36 54.61) (xy 210.82 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2cfd71b-d2cb-4cbd-8cc6-1016b947c1ac")
+	)
+	(wire
+		(pts
+			(xy 212.09 102.87) (xy 204.47 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c33705bb-a137-475d-9b8c-9aae41082527")
+	)
+	(wire
+		(pts
+			(xy 213.36 59.69) (xy 210.82 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c49c7aa5-3224-4374-8490-9b858a67de7a")
+	)
+	(wire
+		(pts
 			(xy 22.86 175.26) (xy 22.86 180.34)
 		)
 		(stroke
@@ -4230,7 +4600,17 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 49.53) (xy 160.02 57.15)
+			(xy 213.36 114.3) (xy 209.55 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c89f4730-5b39-414b-8aa3-5ea7d9b1e666")
+	)
+	(wire
+		(pts
+			(xy 130.81 55.88) (xy 130.81 63.5)
 		)
 		(stroke
 			(width 0)
@@ -4240,7 +4620,7 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 83.82) (xy 208.28 83.82)
+			(xy 171.45 90.17) (xy 179.07 90.17)
 		)
 		(stroke
 			(width 0)
@@ -4250,13 +4630,73 @@
 	)
 	(wire
 		(pts
-			(xy 200.66 57.15) (xy 200.66 83.82)
+			(xy 171.45 63.5) (xy 171.45 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "cedba467-05fd-4a88-87ff-48bdf6d4eaf2")
+	)
+	(wire
+		(pts
+			(xy 213.36 62.23) (xy 212.09 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6f749ff-f28c-4366-a9e4-404ee53b4410")
+	)
+	(wire
+		(pts
+			(xy 209.55 73.66) (xy 204.47 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da31e127-5120-4bcb-8526-2a258b99fab6")
+	)
+	(wire
+		(pts
+			(xy 210.82 74.93) (xy 210.82 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dffda778-1841-4722-8860-4b308a4b1d64")
+	)
+	(wire
+		(pts
+			(xy 213.36 69.85) (xy 210.82 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4ff8bd7-341b-48d3-9dbe-4d0933394db5")
+	)
+	(wire
+		(pts
+			(xy 210.82 106.68) (xy 210.82 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e89ef298-f229-440f-99d5-2ecdac58992b")
+	)
+	(wire
+		(pts
+			(xy 213.36 67.31) (xy 212.09 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8b54cff-e8be-4824-9480-5e3e35cb4e96")
 	)
 	(wire
 		(pts
@@ -4290,6 +4730,26 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 111.76) (xy 210.82 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef9fb89e-978f-48d9-b823-ab5e31ad7678")
+	)
+	(wire
+		(pts
+			(xy 212.09 67.31) (xy 212.09 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f44c652d-0ef6-466b-b878-6ced8e4018ea")
+	)
+	(wire
+		(pts
 			(xy 67.31 175.26) (xy 72.39 175.26)
 		)
 		(stroke
@@ -4310,6 +4770,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 71.12) (xy 204.47 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6743304-a3ab-4ae4-95d1-af6a83d85f58")
+	)
+	(wire
+		(pts
 			(xy 49.53 92.71) (xy 48.26 92.71)
 		)
 		(stroke
@@ -4318,8 +4788,39 @@
 		)
 		(uuid "f927c057-8758-4196-9b65-8dea419a6142")
 	)
+	(wire
+		(pts
+			(xy 212.09 99.06) (xy 212.09 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f97c267e-c99a-4dbc-9d27-1c4939192a96")
+	)
+	(text "Each of up to 8 device sockets can be mapped to a specific 4MB window;\nmade of two 2MB chips.\n\nA21, A22 and A23 encode 8 time 2MB sections of memory and conceptually\ngenerate enables for those 2MB chips.\n\nThe actual chip selects are instead remapped based off of the above\nencoded 2bit numbers."
+		(exclude_from_sim no)
+		(at 179.07 133.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f0b312b9-79de-4c4d-841e-867aeeb9de5f")
+	)
+	(text "2bit number selecting 4MB window\n(using a 139 decoder)"
+		(exclude_from_sim no)
+		(at 252.73 52.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f298125d-4354-4b03-aa4c-cf86144e09d3")
+	)
 	(label "Device_{(Y)} 2MB Select_{0}"
-		(at 233.68 99.06 0)
+		(at 213.36 106.68 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4330,7 +4831,7 @@
 		(uuid "00e997a1-2ebd-4f26-a682-b0133cc11812")
 	)
 	(label "GND"
-		(at 208.28 44.45 180)
+		(at 179.07 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4341,7 +4842,7 @@
 		(uuid "02bccf87-1006-4803-a799-29170ac7d2a2")
 	)
 	(label "WY_{0}"
-		(at 193.04 46.99 0)
+		(at 163.83 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4352,7 +4853,7 @@
 		(uuid "046f3ee7-8ad1-4732-a6a9-2635dfd4ac33")
 	)
 	(label "D5"
-		(at 208.28 99.06 180)
+		(at 179.07 105.41 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4363,7 +4864,7 @@
 		(uuid "05143df1-2f4e-4c55-87b5-ffa5d9029506")
 	)
 	(label "GND"
-		(at 128.27 64.77 180)
+		(at 99.06 71.12 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4374,7 +4875,7 @@
 		(uuid "05cc9f47-afd3-4dd6-8ca2-0a1b7e3e7af5")
 	)
 	(label "A0"
-		(at 128.27 59.69 180)
+		(at 99.06 66.04 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4385,7 +4886,7 @@
 		(uuid "0fa294b2-e772-4e12-a751-27e75f6de392")
 	)
 	(label "GND"
-		(at 128.27 102.87 180)
+		(at 99.06 109.22 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4396,7 +4897,7 @@
 		(uuid "13cb0b69-83f9-4d73-9272-57808af1a726")
 	)
 	(label "WY_{3}"
-		(at 193.04 54.61 0)
+		(at 163.83 60.96 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4407,7 +4908,7 @@
 		(uuid "17aba7ef-4963-4663-a66e-cfe003542912")
 	)
 	(label "D6"
-		(at 208.28 64.77 180)
+		(at 179.07 71.12 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4429,7 +4930,7 @@
 		(uuid "1ca5f05b-797a-42a4-bc0e-98856bf83cca")
 	)
 	(label "GND"
-		(at 128.27 110.49 180)
+		(at 99.06 116.84 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4440,7 +4941,7 @@
 		(uuid "1f0977b2-dcbe-4db5-a513-4ea57dcea381")
 	)
 	(label "Device_{(W)} 2MB Select_{1}"
-		(at 233.68 86.36 0)
+		(at 213.36 88.9 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4451,7 +4952,7 @@
 		(uuid "1f178679-5e10-4011-96bd-c55b9e1231c1")
 	)
 	(label "D1"
-		(at 208.28 88.9 180)
+		(at 179.07 95.25 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4473,7 +4974,7 @@
 		(uuid "25dfcd93-f368-4a5a-a9a6-6e9b0c979963")
 	)
 	(label "Device_{(S)} 2MB Select_{1}"
-		(at 233.68 49.53 0)
+		(at 213.36 52.07 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4495,7 +4996,7 @@
 		(uuid "2703f9d4-cbda-4d41-b75d-1696dd2e6090")
 	)
 	(label "GND"
-		(at 128.27 107.95 180)
+		(at 99.06 114.3 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4517,7 +5018,7 @@
 		(uuid "375a8be4-e00e-4224-a241-c4ebf97729e1")
 	)
 	(label "GND"
-		(at 208.28 69.85 180)
+		(at 179.07 76.2 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4528,7 +5029,7 @@
 		(uuid "386fd8ad-66df-46fc-a611-da3440b215b4")
 	)
 	(label "Device_{(T)} 2MB Select_{1}"
-		(at 233.68 54.61 0)
+		(at 213.36 59.69 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4539,7 +5040,7 @@
 		(uuid "42669c0f-0b80-49bb-bd54-f47be1fdaca9")
 	)
 	(label "WY_{1}"
-		(at 193.04 57.15 0)
+		(at 163.83 63.5 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4561,7 +5062,7 @@
 		(uuid "47a447a5-df4b-4ed7-a925-ccbc4a7d8442")
 	)
 	(label "D2"
-		(at 208.28 54.61 180)
+		(at 179.07 60.96 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4583,7 +5084,7 @@
 		(uuid "47d2502c-5742-4892-a601-e4d8b2225d2f")
 	)
 	(label "GND"
-		(at 128.27 95.25 180)
+		(at 99.06 101.6 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4594,7 +5095,7 @@
 		(uuid "4a116239-2fd8-436b-8ee5-86b3e170d369")
 	)
 	(label "GND"
-		(at 128.27 105.41 180)
+		(at 99.06 111.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4605,7 +5106,7 @@
 		(uuid "4aabd593-89b3-482c-b711-1b5ef107246f")
 	)
 	(label "3.3V"
-		(at 233.68 81.28 0)
+		(at 204.47 87.63 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4627,7 +5128,7 @@
 		(uuid "4fe86906-0599-49a6-8a4e-7223bad402b4")
 	)
 	(label "GND"
-		(at 167.64 62.23 180)
+		(at 138.43 68.58 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4638,7 +5139,7 @@
 		(uuid "500336f1-1413-4036-aabf-9b3c6468668b")
 	)
 	(label "3.3V"
-		(at 128.27 113.03 180)
+		(at 99.06 119.38 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4649,7 +5150,7 @@
 		(uuid "508e47f0-6709-4271-899d-9f51a9301b24")
 	)
 	(label "Device_{(V)} 2MB Select_{0}"
-		(at 233.68 67.31 0)
+		(at 213.36 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4660,7 +5161,7 @@
 		(uuid "51aceef5-2fcc-4749-bbc6-988b7c771a5d")
 	)
 	(label "3.3V"
-		(at 153.67 44.45 0)
+		(at 124.46 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4704,7 +5205,7 @@
 		(uuid "5a383a82-923a-48d7-8c07-b8b9fe23bb82")
 	)
 	(label "D0"
-		(at 208.28 86.36 180)
+		(at 179.07 92.71 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4715,7 +5216,7 @@
 		(uuid "5b4d1f2f-5841-40b4-b6a2-d94f462fd795")
 	)
 	(label "H1"
-		(at 153.67 110.49 0)
+		(at 124.46 116.84 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4737,7 +5238,7 @@
 		(uuid "60f2ef0b-8946-432b-ba1c-d834ef88b410")
 	)
 	(label "Device_{(U)} 2MB Select_{0}"
-		(at 233.68 62.23 0)
+		(at 213.36 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4748,7 +5249,7 @@
 		(uuid "65d55291-9d66-4381-9473-2ad4a38990f2")
 	)
 	(label "A1"
-		(at 128.27 57.15 180)
+		(at 99.06 63.5 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4759,7 +5260,7 @@
 		(uuid "676141e1-c918-406c-b7f6-53235d2e4329")
 	)
 	(label "~{Select}"
-		(at 128.27 90.17 180)
+		(at 99.06 96.52 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4770,7 +5271,7 @@
 		(uuid "67d37bd0-f6d0-4094-b342-8396dd547695")
 	)
 	(label "GND"
-		(at 167.64 52.07 180)
+		(at 138.43 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4781,7 +5282,7 @@
 		(uuid "68f4189f-cd9f-4052-b631-2efb073cd569")
 	)
 	(label "D1"
-		(at 208.28 52.07 180)
+		(at 179.07 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4792,7 +5293,7 @@
 		(uuid "6b652113-0ec4-4e25-aa77-f4737ba9b110")
 	)
 	(label "D7"
-		(at 208.28 67.31 180)
+		(at 179.07 73.66 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4803,7 +5304,7 @@
 		(uuid "6ec232b5-ec92-4a05-a212-3fadc707c733")
 	)
 	(label "~{WY_{3}}"
-		(at 153.67 54.61 0)
+		(at 124.46 60.96 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4814,7 +5315,7 @@
 		(uuid "723e9cfa-84b4-4098-8afe-1854ea4c3bfc")
 	)
 	(label "Device_{(S)} 2MB Select_{0}"
-		(at 233.68 52.07 0)
+		(at 213.36 54.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4825,7 +5326,7 @@
 		(uuid "73bc20f3-6ca5-4c25-81b6-15779a823159")
 	)
 	(label "Device_{(U)} 2MB Select_{1}"
-		(at 233.68 59.69 0)
+		(at 213.36 67.31 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4836,7 +5337,7 @@
 		(uuid "73dbcb96-31d6-4b06-9638-33b902567d3b")
 	)
 	(label "Device_{(T)} 2MB Select_{0}"
-		(at 233.68 57.15 0)
+		(at 213.36 62.23 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4847,7 +5348,7 @@
 		(uuid "7839de17-e3cd-4283-98a0-313317ea7393")
 	)
 	(label "D4"
-		(at 208.28 96.52 180)
+		(at 179.07 102.87 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4858,7 +5359,7 @@
 		(uuid "83fd09e7-7b6f-4b18-b6f0-c2b495287999")
 	)
 	(label "D4"
-		(at 208.28 59.69 180)
+		(at 179.07 66.04 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4869,7 +5370,7 @@
 		(uuid "86eebc73-a120-4fd2-8902-61a258e32a62")
 	)
 	(label "A2"
-		(at 128.27 54.61 180)
+		(at 99.06 60.96 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4880,7 +5381,7 @@
 		(uuid "89312620-6aed-407a-bd51-ec1d9299dd9f")
 	)
 	(label "3.3V"
-		(at 233.68 44.45 0)
+		(at 204.47 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4902,7 +5403,7 @@
 		(uuid "8da0ec47-5f2f-4b9b-8b0e-a16ac66f875c")
 	)
 	(label "Device_{(V)} 2MB Select_{1}"
-		(at 233.68 64.77 0)
+		(at 213.36 74.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4913,7 +5414,7 @@
 		(uuid "8ddac3fc-50dc-4d90-83ed-011ea1143d29")
 	)
 	(label "Device_{(X)} 2MB Select_{0}"
-		(at 233.68 93.98 0)
+		(at 213.36 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4924,7 +5425,7 @@
 		(uuid "916cde70-c7e7-466a-a628-e2e561c77df9")
 	)
 	(label "D5"
-		(at 208.28 62.23 180)
+		(at 179.07 68.58 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4935,7 +5436,7 @@
 		(uuid "936d1b4b-5dc6-4417-a56d-41fc13d4093f")
 	)
 	(label "3.3V"
-		(at 193.04 44.45 0)
+		(at 163.83 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4946,7 +5447,7 @@
 		(uuid "95f2d132-5aed-4d05-920c-66f6562aedc0")
 	)
 	(label "GND"
-		(at 208.28 81.28 180)
+		(at 179.07 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4957,7 +5458,7 @@
 		(uuid "9f1b7fc1-2e43-41f9-a992-ef695b5ce44b")
 	)
 	(label "~{WY_{0}}"
-		(at 153.67 46.99 0)
+		(at 124.46 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4968,7 +5469,7 @@
 		(uuid "9f8254e6-a3a3-4096-be87-6ac19bb172e6")
 	)
 	(label "D0"
-		(at 208.28 49.53 180)
+		(at 179.07 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4979,7 +5480,7 @@
 		(uuid "a0a8e6a8-2025-4af4-9dfa-38c66d4bf321")
 	)
 	(label "H2"
-		(at 153.67 107.95 0)
+		(at 124.46 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4990,7 +5491,7 @@
 		(uuid "a3dc9b55-2237-4119-9497-1c3020c82dbf")
 	)
 	(label "~{WD}"
-		(at 128.27 46.99 180)
+		(at 99.06 53.34 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5001,7 +5502,7 @@
 		(uuid "a42a2083-9d25-4fd1-9843-7c4db8ba9220")
 	)
 	(label "H0"
-		(at 153.67 113.03 0)
+		(at 124.46 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5012,7 +5513,7 @@
 		(uuid "a4664c84-93af-4e1a-9f0a-c200af40c8f5")
 	)
 	(label "GND"
-		(at 208.28 106.68 180)
+		(at 179.07 113.03 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5023,7 +5524,7 @@
 		(uuid "ab3b24dd-4b2f-4a81-b275-a60c7c72378d")
 	)
 	(label "Device_{(Z)} 2MB Select_{0}"
-		(at 233.68 104.14 0)
+		(at 213.36 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5045,7 +5546,7 @@
 		(uuid "b39af118-c84e-4c7c-86e2-a785c4040d1a")
 	)
 	(label "D3"
-		(at 208.28 93.98 180)
+		(at 179.07 100.33 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5056,7 +5557,7 @@
 		(uuid "b6bce0a9-e6bc-4644-bbe1-3815aec6ea53")
 	)
 	(label "~{WY_{1}}"
-		(at 153.67 49.53 0)
+		(at 124.46 55.88 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5067,7 +5568,7 @@
 		(uuid "bf35a360-f812-4c47-bf66-a15610f26b01")
 	)
 	(label "D7"
-		(at 208.28 104.14 180)
+		(at 179.07 110.49 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5078,7 +5579,7 @@
 		(uuid "c15aa8ce-0e82-4e37-a1ca-7e36e1535c0e")
 	)
 	(label "Device_{(Z)} 2MB Select_{1}"
-		(at 233.68 101.6 0)
+		(at 213.36 111.76 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5089,7 +5590,7 @@
 		(uuid "cacde428-f574-478b-afc3-b89a24663306")
 	)
 	(label "Device_{(W)} 2MB Select_{0}"
-		(at 233.68 88.9 0)
+		(at 213.36 91.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5100,7 +5601,7 @@
 		(uuid "cc0ac924-39bc-40a4-9f05-e1a365f689f4")
 	)
 	(label "Device_{(X)} 2MB Select_{1}"
-		(at 233.68 91.44 0)
+		(at 213.36 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5111,7 +5612,7 @@
 		(uuid "cfb9326f-eec0-4b99-be42-8d94dd537728")
 	)
 	(label "D6"
-		(at 208.28 101.6 180)
+		(at 179.07 107.95 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5122,7 +5623,7 @@
 		(uuid "d21a6e15-bb01-4876-9db3-361737115da2")
 	)
 	(label "~{WY_{2}}"
-		(at 153.67 52.07 0)
+		(at 124.46 58.42 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5133,7 +5634,7 @@
 		(uuid "d2b48812-0487-4643-857c-18392d68c37f")
 	)
 	(label "GND"
-		(at 128.27 97.79 180)
+		(at 99.06 104.14 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5144,7 +5645,7 @@
 		(uuid "d3387bff-2f7d-4d82-ac2d-454194b7cee4")
 	)
 	(label "D3"
-		(at 208.28 57.15 180)
+		(at 179.07 63.5 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5155,7 +5656,7 @@
 		(uuid "d424952e-7958-43d0-a7e0-2afe364a4d4a")
 	)
 	(label "WY_{2}"
-		(at 193.04 59.69 0)
+		(at 163.83 66.04 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5166,7 +5667,7 @@
 		(uuid "d92b2f90-8cee-42a6-8ecd-cf4b6feeafb7")
 	)
 	(label "GND"
-		(at 128.27 115.57 180)
+		(at 99.06 121.92 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5177,7 +5678,7 @@
 		(uuid "e26217db-8caf-4f68-a67b-8f72fc85ee05")
 	)
 	(label "GND"
-		(at 128.27 92.71 180)
+		(at 99.06 99.06 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5188,7 +5689,7 @@
 		(uuid "e2968abb-e216-4137-bf49-79a455cd5f44")
 	)
 	(label "3.3V"
-		(at 128.27 49.53 180)
+		(at 99.06 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5210,7 +5711,7 @@
 		(uuid "e62a4b3a-5145-406e-bc9c-c2040b88afef")
 	)
 	(label "D2"
-		(at 208.28 91.44 180)
+		(at 179.07 97.79 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5221,7 +5722,7 @@
 		(uuid "eaa1ffae-4a42-423f-b015-c58cd9577078")
 	)
 	(label "~{Select}"
-		(at 128.27 44.45 180)
+		(at 99.06 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5232,7 +5733,7 @@
 		(uuid "ed4fe687-3215-47a7-be86-095566a7b60a")
 	)
 	(label "3.3V"
-		(at 153.67 90.17 0)
+		(at 124.46 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5243,7 +5744,7 @@
 		(uuid "ef9c9026-47ff-4ba9-882a-03ecc8f0064a")
 	)
 	(label "GND"
-		(at 167.64 49.53 180)
+		(at 138.43 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5254,7 +5755,7 @@
 		(uuid "f063a7cb-9540-441e-b340-e390c01a4a2c")
 	)
 	(label "GND"
-		(at 128.27 100.33 180)
+		(at 99.06 106.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5276,7 +5777,7 @@
 		(uuid "f114ec24-7b79-4ee1-b0af-8755c891d860")
 	)
 	(label "Device_{(Y)} 2MB Select_{1}"
-		(at 233.68 96.52 0)
+		(at 213.36 104.14 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6261,7 +6762,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC138APW-Q100J")
-		(at 128.27 42.545 0)
+		(at 99.06 48.895 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6269,7 +6770,7 @@
 		(dnp no)
 		(uuid "0d2505af-b815-46e4-893a-a879dd79c04a")
 		(property "Reference" "IC3"
-			(at 140.97 39.37 0)
+			(at 111.76 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6277,7 +6778,7 @@
 			)
 		)
 		(property "Value" "74LVC138APW-Q100J"
-			(at 140.97 41.275 0)
+			(at 111.76 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6286,7 +6787,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 157.48 73.66 0)
+			(at 128.27 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6296,7 +6797,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC138A_Q100.pdf"
-			(at 157.48 76.2 0)
+			(at 128.27 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6306,7 +6807,7 @@
 			)
 		)
 		(property "Description" "3-to-8 decoder"
-			(at 140.97 67.945 0)
+			(at 111.76 74.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6314,7 +6815,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 157.48 81.28 0)
+			(at 128.27 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6324,7 +6825,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC138APWQ100J"
-			(at 157.48 83.82 0)
+			(at 128.27 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6334,7 +6835,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC138APW-Q100J?qs=fi7yB2oewZnXKE82xo%252BhJQ%3D%3D"
-			(at 157.48 86.36 0)
+			(at 128.27 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6344,7 +6845,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 157.48 88.9 0)
+			(at 128.27 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6354,7 +6855,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC138APW-Q100J"
-			(at 157.48 91.44 0)
+			(at 128.27 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6364,7 +6865,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC138"
-			(at 157.48 78.74 0)
+			(at 128.27 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6674,7 +7175,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC541APW,118")
-		(at 128.27 90.17 0)
+		(at 99.06 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6682,7 +7183,7 @@
 		(dnp no)
 		(uuid "717be8f9-c4fb-421f-9f4f-d9feabd2c253")
 		(property "Reference" "IC1"
-			(at 139.7 85.09 0)
+			(at 110.49 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6691,7 +7192,7 @@
 			)
 		)
 		(property "Value" "74LVC541APW,118"
-			(at 132.08 86.995 0)
+			(at 102.87 93.345 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6701,7 +7202,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
-			(at 154.305 123.19 0)
+			(at 125.095 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6711,7 +7212,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC541A.pdf"
-			(at 154.305 125.73 0)
+			(at 125.095 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6721,7 +7222,7 @@
 			)
 		)
 		(property "Description" "8-bit line driver"
-			(at 140.97 118.745 0)
+			(at 111.76 125.095 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6729,7 +7230,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 154.305 130.81 0)
+			(at 125.095 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6739,7 +7240,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC541APW-T"
-			(at 154.305 133.35 0)
+			(at 125.095 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6749,7 +7250,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC541APW118?qs=me8TqzrmIYXvoPByM7nnJQ%3D%3D"
-			(at 154.305 135.89 0)
+			(at 125.095 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6759,7 +7260,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 154.305 120.65 0)
+			(at 125.095 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6769,7 +7270,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC541APW,118"
-			(at 154.305 140.97 0)
+			(at 125.095 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6779,7 +7280,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC541"
-			(at 141.605 120.65 0)
+			(at 112.395 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6788,7 +7289,7 @@
 			)
 		)
 		(property "Garbage" "74LVC541A - Octal buffer/line driver with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 128.27 90.17 0)
+			(at 99.06 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7054,7 +7555,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC573APW,118")
-		(at 208.28 81.28 0)
+		(at 179.07 87.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7062,7 +7563,7 @@
 		(dnp no)
 		(uuid "99750ba7-d3bf-43b0-b905-556acf436e20")
 		(property "Reference" "IC4"
-			(at 220.98 76.2 0)
+			(at 191.77 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7070,7 +7571,7 @@
 			)
 		)
 		(property "Value" "74LVC573APW,118"
-			(at 220.98 78.105 0)
+			(at 191.77 84.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7079,7 +7580,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
-			(at 234.315 114.935 0)
+			(at 205.105 121.285 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7089,7 +7590,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC573A.pdf"
-			(at 234.315 117.475 0)
+			(at 205.105 123.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7099,7 +7600,7 @@
 			)
 		)
 		(property "Description" "8-bit D-type latch"
-			(at 220.98 109.855 0)
+			(at 191.77 116.205 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7107,7 +7608,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 234.315 122.555 0)
+			(at 205.105 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7117,7 +7618,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC573APW-T"
-			(at 234.315 125.095 0)
+			(at 205.105 131.445 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7127,7 +7628,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC573APW118/?qs=me8TqzrmIYU4mlL%252B5pgpig%3D%3D"
-			(at 234.315 127.635 0)
+			(at 205.105 133.985 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7137,7 +7638,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 234.315 130.175 0)
+			(at 205.105 136.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7147,7 +7648,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC573APW,118"
-			(at 234.315 132.715 0)
+			(at 205.105 139.065 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7157,7 +7658,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC573"
-			(at 220.98 112.395 0)
+			(at 191.77 118.745 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7166,7 +7667,7 @@
 			)
 		)
 		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 208.28 81.28 0)
+			(at 179.07 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7435,7 +7936,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC573APW,118")
-		(at 208.28 44.45 0)
+		(at 179.07 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7443,7 +7944,7 @@
 		(dnp no)
 		(uuid "c0abca16-6f3e-4e3f-b8aa-5cb866826c4a")
 		(property "Reference" "IC2"
-			(at 220.98 39.37 0)
+			(at 191.77 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7451,7 +7952,7 @@
 			)
 		)
 		(property "Value" "74LVC573APW,118"
-			(at 220.98 41.275 0)
+			(at 191.77 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7460,7 +7961,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
-			(at 234.315 78.105 0)
+			(at 205.105 84.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7470,7 +7971,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC573A.pdf"
-			(at 234.315 80.645 0)
+			(at 205.105 86.995 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7480,7 +7981,7 @@
 			)
 		)
 		(property "Description" "8-bit D-type latch"
-			(at 220.98 73.025 0)
+			(at 191.77 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7488,7 +7989,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 234.315 85.725 0)
+			(at 205.105 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7498,7 +7999,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC573APW-T"
-			(at 234.315 88.265 0)
+			(at 205.105 94.615 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7508,7 +8009,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC573APW118/?qs=me8TqzrmIYU4mlL%252B5pgpig%3D%3D"
-			(at 234.315 90.805 0)
+			(at 205.105 97.155 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7518,7 +8019,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 234.315 93.345 0)
+			(at 205.105 99.695 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7528,7 +8029,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC573APW,118"
-			(at 234.315 95.885 0)
+			(at 205.105 102.235 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7538,7 +8039,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC573"
-			(at 220.98 75.565 0)
+			(at 191.77 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7547,7 +8048,7 @@
 			)
 		)
 		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 208.28 44.45 0)
+			(at 179.07 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7819,7 +8320,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC04APW,118")
-		(at 167.64 46.99 0)
+		(at 138.43 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7827,7 +8328,7 @@
 		(dnp no)
 		(uuid "d817772c-6556-4aee-b17e-6afd842940d4")
 		(property "Reference" "IC7"
-			(at 180.34 39.37 0)
+			(at 151.13 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7835,7 +8336,7 @@
 			)
 		)
 		(property "Value" "74LVC04APW,118"
-			(at 180.34 41.275 0)
+			(at 151.13 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7844,7 +8345,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-			(at 188.595 69.215 0)
+			(at 159.385 75.565 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7854,7 +8355,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC04A.pdf"
-			(at 188.595 71.755 0)
+			(at 159.385 78.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7864,7 +8365,7 @@
 			)
 		)
 		(property "Description" "6-input inverter"
-			(at 180.34 65.405 0)
+			(at 151.13 71.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7872,7 +8373,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 188.595 76.835 0)
+			(at 159.385 83.185 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7882,7 +8383,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 188.595 79.375 0)
+			(at 159.385 85.725 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7892,7 +8393,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC04APW,118"
-			(at 188.595 81.915 0)
+			(at 159.385 88.265 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7902,7 +8403,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC04APW-T"
-			(at 188.595 84.455 0)
+			(at 159.385 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7912,7 +8413,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC04APW118?qs=me8TqzrmIYUA5zXidd9%2F4g%3D%3D"
-			(at 188.595 86.995 0)
+			(at 159.385 93.345 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7922,7 +8423,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC04"
-			(at 180.975 67.31 0)
+			(at 151.765 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)

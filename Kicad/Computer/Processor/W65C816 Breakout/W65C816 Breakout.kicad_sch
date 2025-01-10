@@ -10192,6 +10192,12 @@
 		(uuid "861098fa-15c8-4194-be69-c9cae871e3e8")
 	)
 	(junction
+		(at 496.57 186.69)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "919ebc1a-1b09-4382-aabb-d5a57245ba24")
+	)
+	(junction
 		(at 165.1 215.9)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10202,12 +10208,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c26a92b3-39a3-4f81-bdfb-4ba448b23f77")
-	)
-	(junction
-		(at 483.87 186.69)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f3d7e856-1540-4e02-8784-80bca088b53e")
 	)
 	(no_connect
 		(at 354.33 160.02)
@@ -10515,7 +10515,7 @@
 	)
 	(wire
 		(pts
-			(xy 483.87 199.39) (xy 483.87 186.69)
+			(xy 496.57 199.39) (xy 496.57 186.69)
 		)
 		(stroke
 			(width 0)
@@ -10615,7 +10615,7 @@
 	)
 	(wire
 		(pts
-			(xy 504.19 199.39) (xy 483.87 199.39)
+			(xy 504.19 199.39) (xy 496.57 199.39)
 		)
 		(stroke
 			(width 0)
@@ -11755,6 +11755,16 @@
 	)
 	(wire
 		(pts
+			(xy 496.57 186.69) (xy 504.19 186.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b2a22b1-385b-4772-bda5-bacfbf45ab40")
+	)
+	(wire
+		(pts
 			(xy 55.88 149.86) (xy 57.15 149.86)
 		)
 		(stroke
@@ -11995,7 +12005,7 @@
 	)
 	(wire
 		(pts
-			(xy 483.87 186.69) (xy 478.79 186.69)
+			(xy 478.79 186.69) (xy 496.57 186.69)
 		)
 		(stroke
 			(width 0)
@@ -12212,16 +12222,6 @@
 			(type default)
 		)
 		(uuid "cbc4a51c-0bff-4c25-bdea-53283284a592")
-	)
-	(wire
-		(pts
-			(xy 483.87 186.69) (xy 504.19 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cd6c9fde-b717-40fc-ab68-ef5127242912")
 	)
 	(wire
 		(pts
@@ -12783,16 +12783,6 @@
 		)
 		(uuid "a3cec88e-ed2f-449b-97d8-9e20e7e50894")
 	)
-	(text "These should probably be 6.8K"
-		(exclude_from_sim no)
-		(at 166.37 245.11 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "a693edbf-d5b8-41b2-b79f-58400da746b7")
-	)
 	(text "Bank Zero detect"
 		(exclude_from_sim no)
 		(at 287.02 306.07 0)
@@ -13044,7 +13034,7 @@
 		(uuid "10f1b2d8-0833-4390-aaa1-b16ee42d405f")
 	)
 	(label "FET ~{OE}"
-		(at 483.87 186.69 0)
+		(at 478.79 186.69 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15683,7 +15673,7 @@
 		)
 		(uuid "dd2471bf-92b7-44e4-98c5-b7d9005d0726")
 	)
-	(label "~{Trans Output}"
+	(label "~{Data Output}"
 		(at 433.07 85.09 180)
 		(fields_autoplaced yes)
 		(effects
@@ -17487,7 +17477,7 @@
 			)
 		)
 	)
-	(global_label "~{Trans Output}"
+	(global_label "~{Data Output}"
 		(shape input)
 		(at 69.85 165.1 0)
 		(fields_autoplaced yes)
@@ -22810,7 +22800,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "4.7KΩ 4-array resistor"
+		(property "Description" "6.8KΩ 4-array resistor"
 			(at 153.67 239.395 0)
 			(effects
 				(font

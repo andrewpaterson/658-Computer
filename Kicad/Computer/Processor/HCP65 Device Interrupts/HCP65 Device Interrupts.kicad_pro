@@ -59,9 +59,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "silk_over_copper|98049000|113594000|9a302866-9f05-48e8-8743-3ae59f9ea2af|00000000-0000-0000-0000-000000000000"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -152,7 +150,7 @@
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -163,7 +161,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -174,7 +172,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -506,7 +504,7 @@
         "name": "Power",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.38,
+        "track_width": 0.35,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -546,9 +544,9 @@
       "specctra_dsn": "",
       "step": "Device Interrupts.step",
       "svg": "",
-      "vrml": "HCP65 Device Interrupts.wrl"
+      "vrml": "Device Interrupts.wrl"
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,

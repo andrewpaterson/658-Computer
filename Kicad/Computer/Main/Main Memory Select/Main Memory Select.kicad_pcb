@@ -6480,7 +6480,7 @@
 		)
 	)
 	(gr_text "GND"
-		(at 1.143 22.86 0)
+		(at 1.016 22.86 0)
 		(layer "F.SilkS")
 		(uuid "1fe5c686-b6f3-412f-b646-306db4b77a97")
 		(effects
@@ -6493,7 +6493,7 @@
 		)
 	)
 	(gr_text "5V"
-		(at 1.143 5.08 0)
+		(at 1.016 5.08 0)
 		(layer "F.SilkS")
 		(uuid "240e1173-6f44-4217-8798-f25735324036")
 		(effects
@@ -6519,9 +6519,22 @@
 		)
 	)
 	(gr_text "~{Main}"
-		(at 1.143 20.32 0)
+		(at 1.016 20.32 0)
 		(layer "F.SilkS")
 		(uuid "47184574-13cf-4005-adb3-604997cf63d1")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+				(bold yes)
+			)
+			(justify left)
+		)
+	)
+	(gr_text "S0 Y"
+		(at 1.016 45.72 0)
+		(layer "F.SilkS")
+		(uuid "48a1183c-6806-456d-9514-0739f2734450")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -6543,7 +6556,7 @@
 			)
 		)
 	)
-	(gr_text "~{MEM}_{A2}"
+	(gr_text "~{MEM} Y\n0..2MB"
 		(at 14.224 45.72 0)
 		(layer "F.SilkS")
 		(uuid "6563d000-04e2-41e7-88bd-a70d0d47756e")
@@ -6556,8 +6569,8 @@
 			(justify right)
 		)
 	)
-	(gr_text "~{MEM}_{A1}"
-		(at 14.224 20.32 0)
+	(gr_text "~{MEM} X\n0..2MB"
+		(at 14.2748 20.32 0)
 		(layer "F.SilkS")
 		(uuid "7da8f032-a281-48cb-b372-09e2b646dcb8")
 		(effects
@@ -6569,8 +6582,34 @@
 			(justify right)
 		)
 	)
+	(gr_text "S0 X"
+		(at 1.143 38.1 0)
+		(layer "F.SilkS")
+		(uuid "7ef3253c-3dbc-4b02-bc11-851a64ea1fe9")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+				(bold yes)
+			)
+			(justify left)
+		)
+	)
+	(gr_text "Sel1 Y"
+		(at 1.016 43.18 0)
+		(layer "F.SilkS")
+		(uuid "872523d2-fa6a-4453-a588-b572ab3b0186")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+				(bold yes)
+			)
+			(justify left)
+		)
+	)
 	(gr_text "A21"
-		(at 1.143 30.48 0)
+		(at 1.016 30.48 0)
 		(layer "F.SilkS")
 		(uuid "89f48ba8-075f-45ea-9dc8-deeb74abf995")
 		(effects
@@ -6582,7 +6621,7 @@
 			(justify left)
 		)
 	)
-	(gr_text "~{MEM}_{B2}"
+	(gr_text "~{MEM} Y\n2..4MB"
 		(at 14.224 50.8 0)
 		(layer "F.SilkS")
 		(uuid "9b51ce8f-5f7e-4399-9f94-1f42d93a6b75")
@@ -6596,7 +6635,7 @@
 		)
 	)
 	(gr_text "A23"
-		(at 1.143 25.4 0)
+		(at 1.016 25.4 0)
 		(layer "F.SilkS")
 		(uuid "a8690777-18cb-4933-86fc-4e51ca7bdb53")
 		(effects
@@ -6608,7 +6647,7 @@
 			(justify left)
 		)
 	)
-	(gr_text "~{MEM}_{B1}"
+	(gr_text "~{MEM} X\n2..4MB"
 		(at 14.224 25.4 0)
 		(layer "F.SilkS")
 		(uuid "b3c15ed6-c926-492c-b61b-ecb191c272d1")
@@ -6621,8 +6660,21 @@
 			(justify right)
 		)
 	)
+	(gr_text "Sel1 X"
+		(at 1.016 35.4076 0)
+		(layer "F.SilkS")
+		(uuid "dc4339b8-26a5-4630-8a7c-525983253bea")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+				(bold yes)
+			)
+			(justify left)
+		)
+	)
 	(gr_text "A22"
-		(at 1.143 27.94 0)
+		(at 1.016 27.94 0)
 		(layer "F.SilkS")
 		(uuid "de5aa024-af8d-42e5-8f97-75c2a2c49d20")
 		(effects

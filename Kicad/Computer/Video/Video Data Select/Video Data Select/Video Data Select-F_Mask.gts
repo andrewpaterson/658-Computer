@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*%
-%TF.CreationDate,2025-01-07T19:58:23+02:00*%
+%TF.CreationDate,2025-01-15T15:57:44+02:00*%
 %TF.ProjectId,Video Data Select,56696465-6f20-4446-9174-612053656c65,V0*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-07 19:58:23*
+G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-15 15:57:44*
 %MOMM*%
 %LPD*%
 G01*

@@ -5900,7 +5900,7 @@
 		)
 		(fp_arc
 			(start 86.040048 -8.4)
-			(mid 86.35762 -9.156489)
+			(mid 86.357626 -9.156454)
 			(end 87.117096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -5911,7 +5911,7 @@
 		)
 		(fp_arc
 			(start 90.297 -9.466799)
-			(mid 91.056441 -9.156453)
+			(mid 91.056476 -9.156459)
 			(end 91.374048 -8.4)
 			(stroke
 				(width 0.1)
@@ -5922,7 +5922,7 @@
 		)
 		(fp_arc
 			(start 139.499048 -8.4)
-			(mid 139.81662 -9.156489)
+			(mid 139.816626 -9.156454)
 			(end 140.576096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -8620,7 +8620,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -11410,7 +11410,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -13089,7 +13089,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -13756,7 +13756,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -15224,7 +15224,7 @@
 		)
 		(fp_arc
 			(start 24.763183 0.179239)
-			(mid 25.272985 -1.051589)
+			(mid 25.272978 -1.051587)
 			(end 26.503802 -1.56138)
 			(stroke
 				(width 0.1)
@@ -20805,7 +20805,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -21940,16 +21940,16 @@
 			)
 		)
 	)
-	(footprint "HCP65_Parts:HCP65_Video_Pixel_Doubler"
+	(footprint "HCP65_Parts:HCP65_Video_Pixel_Advance"
 		(layer "F.Cu")
 		(uuid "cf97dd6c-0463-4a33-b06a-36ad45de1369")
 		(at 53.3908 -62.865 -90)
-		(descr "HCP65 Video Pixel Doubler")
-		(tags "HCP65 Video Pixel Doubler")
+		(descr "HCP65 Video Pixel Advance")
+		(tags "HCP65 Video Pixel Advance")
 		(property "Reference" "B1"
 			(at 11.43 -3.556 -90)
 			(layer "F.SilkS")
-			(uuid "e2663059-be47-4853-98b3-271fd1caeba3")
+			(uuid "794bb5a6-1ae7-45e5-9e78-625bb8381f70")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -21961,7 +21961,7 @@
 			(at 11.43 46.736 -90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7b1527a1-552a-4f9d-836c-25e978ed36eb")
+			(uuid "2075e305-b77b-4ff5-b4dc-59424245358c")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -21969,11 +21969,11 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_Video_Pixel_Doubler"
+		(property "Footprint" "HCP65_Parts:HCP65_Video_Pixel_Advance"
 			(at 0 0 -90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "05ac9e54-9961-4aef-9c08-2c524fbaa60e")
+			(uuid "3143390a-97f9-419d-b264-c7df2a7c98aa")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -21985,7 +21985,7 @@
 			(at 0 0 -90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "95c88ba1-93fc-4737-8846-7188b39767ac")
+			(uuid "3a2893e6-e5ec-42ec-85ea-02b0b610453c")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -21993,11 +21993,11 @@
 				)
 			)
 		)
-		(property "Description" "Video Pixel Doubler"
+		(property "Description" "Video Pixel Advance"
 			(at 0 0 -90)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1bd51ff1-197f-4821-ac63-e8c1fa4e2c6c")
+			(uuid "99ea6220-386c-4146-9a04-74e0b9612e53")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -22005,27 +22005,14 @@
 				)
 			)
 		)
-		(property "Silkscreen" "Video Pixel Doubler"
-			(at 11.1252 44.704 -90)
+		(property "Silkscreen" "Video Pixel Advance"
+			(at 11.1252 44.8056 -90)
 			(layer "F.SilkS")
-			(uuid "b9cbad43-8b6b-42e3-8c7d-a7ea553d690a")
+			(uuid "e31e100a-67c6-4652-8b3a-3bfccc58083b")
 			(effects
 				(font
 					(size 1 1)
 					(thickness 0.2)
-				)
-			)
-		)
-		(property "Garbage" "Video Pixel Doubler"
-			(at 0 0 -90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "64577ca9-9a79-4a79-b720-938fc33b65bf")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
 				)
 			)
 		)
@@ -22041,7 +22028,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "3d2145fc-2f56-430c-b452-f3793c26e208")
+			(uuid "b14a761b-ecc1-4206-aebe-125586d4b343")
 		)
 		(fp_line
 			(start 24.765 38.735)
@@ -22051,7 +22038,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "45e50f06-6336-4e47-8c58-d8d1b2842789")
+			(uuid "0530f198-9e68-4f99-aac8-d31244c8bdb8")
 		)
 		(fp_line
 			(start -1.905 -0.635)
@@ -22061,7 +22048,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "2239fb87-8f0d-4b69-85d7-230c9e46f00b")
+			(uuid "d5488385-e616-4a62-8bb8-f8eb304a8693")
 		)
 		(fp_line
 			(start 10.43 -5.616)
@@ -22071,7 +22058,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ea70dced-13cd-4634-a586-00d3894fd2a9")
+			(uuid "1d5be272-9dbf-45f3-aae8-91c9d285b60b")
 		)
 		(fp_line
 			(start 20.574 -5.616)
@@ -22081,7 +22068,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "ea75e746-4699-41d3-80b4-74fd41242429")
+			(uuid "3917ed5a-4da4-435a-88cc-4d90bc5eac69")
 		)
 		(fp_line
 			(start 19.685 -5.715)
@@ -22091,7 +22078,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "76fb6147-f3ca-4883-aa4e-d52596a1ab9a")
+			(uuid "35b39aca-2cc5-49f9-9c71-50fc982c0d74")
 		)
 		(fp_arc
 			(start 3.175 43.815)
@@ -22102,7 +22089,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "682bd9bd-d523-41f8-a499-ec85d893fc14")
+			(uuid "14ad9d76-9aa2-4cbd-a517-935743a3a528")
 		)
 		(fp_arc
 			(start 24.765 38.735)
@@ -22113,7 +22100,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4ff9c509-f4a2-4d83-8166-e9c00a68c3cf")
+			(uuid "c4c0e855-2a15-4db2-af9d-f4a759f513bd")
 		)
 		(fp_arc
 			(start -1.905 -0.635)
@@ -22124,7 +22111,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "bce33beb-4330-413f-83f6-19ca835da4cf")
+			(uuid "28ea0770-7848-4b9d-ac8d-0fe6850a457b")
 		)
 		(fp_arc
 			(start 12.43 -5.616)
@@ -22135,7 +22122,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "d7087bcb-e32b-4f1f-b202-02df7341c521")
+			(uuid "624aa924-a498-4ba3-9a56-a8ede7bb9761")
 		)
 		(fp_arc
 			(start 19.685 -5.715)
@@ -22146,7 +22133,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "58392b3e-ca57-43f1-afb0-4c707cb01f47")
+			(uuid "c3bad501-a844-4d06-9619-0977cdcf7605")
 		)
 		(fp_circle
 			(center 0 -1.322605)
@@ -22157,7 +22144,7 @@
 			)
 			(fill solid)
 			(layer "F.SilkS")
-			(uuid "5e6042de-2c95-44ed-ae93-e7daa3d6db77")
+			(uuid "faef245e-1b7a-451e-80f8-86c6e4706d3d")
 		)
 		(fp_line
 			(start -2.286 44.196)
@@ -22167,7 +22154,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "c1b8b469-9954-4d99-9b3e-cc876c84031a")
+			(uuid "eac7cd81-ffc1-45a3-8188-4065d8318b4c")
 		)
 		(fp_line
 			(start 25.146 44.196)
@@ -22177,7 +22164,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "86898c60-62b1-4255-aaec-d5f6819eddf1")
+			(uuid "23f146c9-df94-4b0d-af47-0b2a7aab8d60")
 		)
 		(fp_line
 			(start -2.286 -6.096)
@@ -22187,7 +22174,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "618a02e9-4a0a-4fe8-bbec-16d8859c7f5a")
+			(uuid "e2d81c95-51fb-4622-80b4-0418bf06dffb")
 		)
 		(fp_line
 			(start -2.286 -6.096)
@@ -22197,7 +22184,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "6d5db9e3-9813-455c-942f-ad9e34838c72")
+			(uuid "9a525a2b-b6f6-41ba-9952-cf595fc6c4c1")
 		)
 		(pad "1" thru_hole circle
 			(at 0 0 270)
@@ -22208,7 +22195,7 @@
 			(net 3 "/5V")
 			(pinfunction "5V")
 			(pintype "passive")
-			(uuid "7dcef0dd-57e5-4ccb-97fb-55ab427eda7d")
+			(uuid "e9d37798-6974-4123-9853-66499d2bb646")
 		)
 		(pad "2" thru_hole circle
 			(at 0 2.54 270)
@@ -22219,7 +22206,7 @@
 			(net 49 "/~{Reset}")
 			(pinfunction "~{Reset}")
 			(pintype "input")
-			(uuid "065fda97-fb40-48d1-b51f-85efa41ce82e")
+			(uuid "83438bb3-c83a-4d6e-9049-39621cede9b7")
 		)
 		(pad "3" thru_hole circle
 			(at 0 5.08 270)
@@ -22230,7 +22217,7 @@
 			(net 50 "/~{Horizontal Blank}")
 			(pinfunction "Enable_Pattern")
 			(pintype "input")
-			(uuid "cb33879d-e39a-42d8-b15d-8cdb5ee6776c")
+			(uuid "5269203d-f2f0-44db-b9e4-d56aa42f3053")
 		)
 		(pad "4" thru_hole circle
 			(at 0 7.62 270)
@@ -22241,7 +22228,7 @@
 			(net 429 "/Pixel CLK_{0}")
 			(pinfunction "CLK")
 			(pintype "input")
-			(uuid "910246bf-3fe5-4770-bb32-37358560fa9d")
+			(uuid "8978154e-db1b-4370-b16a-630e9ded4d2d")
 		)
 		(pad "5" thru_hole circle
 			(at 0 10.16 270)
@@ -22252,7 +22239,7 @@
 			(net 5 "/GND")
 			(pinfunction "GND")
 			(pintype "passive")
-			(uuid "1ddfb94d-1ebc-4105-b170-e70da8881b6f")
+			(uuid "a8cc16d3-6d7b-41ea-8464-531ae9bb94a6")
 		)
 		(pad "6" thru_hole circle
 			(at 0 12.7 270)
@@ -22263,7 +22250,7 @@
 			(net 31 "/Write Horizontal Shift Pattern Low")
 			(pinfunction "Write_Pattern_Low")
 			(pintype "input")
-			(uuid "7476dc5d-2e2e-462f-9ca3-784e01577f7d")
+			(uuid "42376166-70e9-45ab-a169-f814b5327f25")
 		)
 		(pad "7" thru_hole circle
 			(at 0 15.24 270)
@@ -22274,7 +22261,7 @@
 			(net 65 "/Write Horizontal Shift Pattern High")
 			(pinfunction "Write_Pattern_High")
 			(pintype "input")
-			(uuid "888849b6-02cd-4985-ad93-e2bae97bced0")
+			(uuid "a1acbc70-d2cb-4ba1-a70f-e848bc8918e3")
 		)
 		(pad "8" thru_hole circle
 			(at 0 17.78 270)
@@ -22285,7 +22272,7 @@
 			(net 6 "/D7")
 			(pinfunction "D7")
 			(pintype "tri_state")
-			(uuid "db9a8514-1eb7-4ef1-88d4-388b71d4823f")
+			(uuid "d1e8127d-1bf4-4774-a77b-1a25cb586ecf")
 		)
 		(pad "9" thru_hole circle
 			(at 0 20.32 270)
@@ -22296,7 +22283,7 @@
 			(net 7 "/D6")
 			(pinfunction "D6")
 			(pintype "tri_state")
-			(uuid "c049d73b-83b5-4b26-a564-bb102cb8cf8a")
+			(uuid "dc9e7b09-4d6d-4721-984d-9a4b09bd6f6d")
 		)
 		(pad "10" thru_hole circle
 			(at 0 22.86 270)
@@ -22307,7 +22294,7 @@
 			(net 10 "/D5")
 			(pinfunction "D5")
 			(pintype "tri_state")
-			(uuid "90ae55e9-01b8-4c52-8b9a-6cb9e495f53e")
+			(uuid "2a7f9d93-fadc-4670-b567-b5c1b5749dc5")
 		)
 		(pad "11" thru_hole circle
 			(at 0 25.4 270)
@@ -22318,7 +22305,7 @@
 			(net 11 "/D4")
 			(pinfunction "D4")
 			(pintype "tri_state")
-			(uuid "58f858a3-d9d3-49e6-a397-96145938d1a1")
+			(uuid "4f371020-7e62-40b8-8f68-b305218999d6")
 		)
 		(pad "12" thru_hole circle
 			(at 0 27.94 270)
@@ -22329,7 +22316,7 @@
 			(net 5 "/GND")
 			(pinfunction "GND")
 			(pintype "passive")
-			(uuid "25525dad-a1a6-4a70-8902-8a76bc5093ed")
+			(uuid "74c2181a-ddea-46de-a18d-cfc50beeee1c")
 		)
 		(pad "13" thru_hole circle
 			(at 0 30.48 270)
@@ -22340,7 +22327,7 @@
 			(net 12 "/D3")
 			(pinfunction "D3")
 			(pintype "tri_state")
-			(uuid "c2972daf-04bd-4afe-b92a-da0493f1e929")
+			(uuid "fb5d92a5-b0c3-48ae-9a92-e2c5b20ca4e7")
 		)
 		(pad "14" thru_hole circle
 			(at 0 33.02 270)
@@ -22351,7 +22338,7 @@
 			(net 13 "/D2")
 			(pinfunction "D2")
 			(pintype "tri_state")
-			(uuid "330b0094-5772-4052-8de6-41543ef5fdc2")
+			(uuid "c69b9803-1a6e-4690-8a99-c79b5fdb79d0")
 		)
 		(pad "15" thru_hole circle
 			(at 0 35.56 270)
@@ -22362,7 +22349,7 @@
 			(net 14 "/D1")
 			(pinfunction "D1")
 			(pintype "tri_state")
-			(uuid "876d029d-9673-4870-922f-aa8572a48174")
+			(uuid "f29d1e78-d3d6-4980-a7d9-1a7aa85c37d9")
 		)
 		(pad "16" thru_hole circle
 			(at 0 38.1 270)
@@ -22373,7 +22360,7 @@
 			(net 15 "/D0")
 			(pinfunction "D0")
 			(pintype "tri_state")
-			(uuid "56f6ea5f-f5f1-4744-ab21-2698621c1760")
+			(uuid "2ab42230-0a76-4283-9482-eb295fc1032f")
 		)
 		(pad "17" thru_hole circle
 			(at 22.86 38.1 270)
@@ -22384,7 +22371,7 @@
 			(net 3 "/5V")
 			(pinfunction "5V")
 			(pintype "passive")
-			(uuid "6b4468e8-d158-46e9-80e4-bb9dcbab7aa3")
+			(uuid "2e01d22a-e55e-4533-b6e0-38b9b56fb6f3")
 		)
 		(pad "18" thru_hole circle
 			(at 22.86 35.56 270)
@@ -22395,7 +22382,7 @@
 			(net 20 "unconnected-(B1-N.C.-Pad18)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "06dc5b50-46d0-4e14-871c-b239a3b8abb0")
+			(uuid "4c65386e-e305-415f-8d8a-07e8f408bdac")
 		)
 		(pad "19" thru_hole circle
 			(at 22.86 33.02 270)
@@ -22406,7 +22393,7 @@
 			(net 21 "unconnected-(B1-N.C.-Pad19)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "dafac79c-9851-4fae-abfe-40ff66dfd067")
+			(uuid "4d461f9f-0b4f-42e5-bd5b-7c93475a8071")
 		)
 		(pad "20" thru_hole circle
 			(at 22.86 30.48 270)
@@ -22417,7 +22404,7 @@
 			(net 22 "unconnected-(B1-N.C.-Pad20)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "b31504a0-68e6-4de8-bb93-22edf7d4a6c6")
+			(uuid "73c9d806-865c-46a4-834f-83b0ed340418")
 		)
 		(pad "21" thru_hole circle
 			(at 22.86 27.94 270)
@@ -22428,7 +22415,7 @@
 			(net 5 "/GND")
 			(pinfunction "GND")
 			(pintype "passive")
-			(uuid "35f14bc3-916d-4b5b-9bfa-1be9cc3a10af")
+			(uuid "23f56bc2-7fbc-4d01-9707-21e181671553")
 		)
 		(pad "22" thru_hole circle
 			(at 22.86 25.4 270)
@@ -22439,7 +22426,7 @@
 			(net 23 "unconnected-(B1-N.C.-Pad22)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "75e0de2a-204a-4261-9f37-4652c782622e")
+			(uuid "a772b121-c08b-412a-99d2-510aa3d17f4c")
 		)
 		(pad "23" thru_hole circle
 			(at 22.86 22.86 270)
@@ -22450,7 +22437,7 @@
 			(net 24 "unconnected-(B1-N.C.-Pad23)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "b7df5ae3-320f-4154-9b55-d72dde4493be")
+			(uuid "9ef7e6f5-706d-436f-a1f1-496d706ec438")
 		)
 		(pad "24" thru_hole circle
 			(at 22.86 20.32 270)
@@ -22461,7 +22448,7 @@
 			(net 25 "unconnected-(B1-N.C.-Pad24)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "f7cf7136-4805-4702-9495-4cb2a61c069d")
+			(uuid "cd50c280-e9ce-45eb-9448-c96a8d1afe31")
 		)
 		(pad "25" thru_hole circle
 			(at 22.86 17.78 270)
@@ -22472,7 +22459,7 @@
 			(net 26 "unconnected-(B1-N.C.-Pad25)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "acb4a908-1120-486c-81ed-c3e6434b997c")
+			(uuid "d6c1693d-c7c3-4835-9785-ba496c1a2d72")
 		)
 		(pad "26" thru_hole circle
 			(at 22.86 15.24 270)
@@ -22483,7 +22470,7 @@
 			(net 27 "unconnected-(B1-N.C.-Pad26)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "5f505dc7-f3b9-4d1a-9684-11bf94728f29")
+			(uuid "f703fcb0-84bf-4162-b77c-ad250af8c2c9")
 		)
 		(pad "27" thru_hole circle
 			(at 22.86 12.7 270)
@@ -22494,7 +22481,7 @@
 			(net 45 "unconnected-(B1-N.C.-Pad27)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "7c18680d-3a71-4ea2-928f-2fde73970a10")
+			(uuid "e8eee6a4-59f1-488c-a7ac-228443d3c22d")
 		)
 		(pad "28" thru_hole circle
 			(at 22.86 10.16 270)
@@ -22505,7 +22492,7 @@
 			(net 5 "/GND")
 			(pinfunction "GND")
 			(pintype "passive")
-			(uuid "ca6d16a8-a65a-478b-b60e-fc5688a6fa3d")
+			(uuid "0ad4d444-2d40-4187-a08d-b0b3c80e1d51")
 		)
 		(pad "29" thru_hole circle
 			(at 22.86 7.62 270)
@@ -22516,7 +22503,7 @@
 			(net 46 "unconnected-(B1-N.C.-Pad29)")
 			(pinfunction "N.C.")
 			(pintype "no_connect")
-			(uuid "8060fe5d-cac7-43c8-baac-f814ea9892f7")
+			(uuid "f15ca758-e1fe-47bc-b041-cba61c80477c")
 		)
 		(pad "30" thru_hole circle
 			(at 22.86 5.08 270)
@@ -22527,7 +22514,7 @@
 			(net 47 "unconnected-(B1-TC-Pad30)")
 			(pinfunction "TC")
 			(pintype "output+no_connect")
-			(uuid "bbe18c60-a11a-45c1-8ef7-a816eddb7ba2")
+			(uuid "b4aeca1d-ed7f-46ff-8520-c14bfeff666f")
 		)
 		(pad "31" thru_hole circle
 			(at 22.86 2.54 270)
@@ -22538,7 +22525,7 @@
 			(net 188 "/Advance Pixel")
 			(pinfunction "Selected_Pattern")
 			(pintype "output")
-			(uuid "6d61460b-d398-43fc-9cd8-412bf01219cf")
+			(uuid "847a0843-7aea-4215-9373-cafd962fa60d")
 		)
 		(pad "32" thru_hole circle
 			(at 22.86 0 270)
@@ -22549,9 +22536,9 @@
 			(net 48 "unconnected-(B1-CEP-Pad32)")
 			(pinfunction "CEP")
 			(pintype "output+no_connect")
-			(uuid "8e8ca2dd-168b-407d-9b14-9b9200314c54")
+			(uuid "3c827079-7f30-4cc0-846d-28a9f85b009f")
 		)
-		(model "${_658_COMPUTER_}/Computer/Video/Pixel Doubler/Pixel Doubler.wrl"
+		(model "${_658_COMPUTER_}/Computer/Video/Video Pixel Advance/Video Pixel Advance.wrl"
 			(offset
 				(xyz 0 0 3)
 			)
@@ -22762,7 +22749,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -24615,7 +24602,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -25949,7 +25936,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

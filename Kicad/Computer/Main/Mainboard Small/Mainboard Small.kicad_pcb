@@ -1744,6 +1744,110 @@
 				)
 			)
 		)
+		(property "Height" "15.494"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0d846425-28e6-489b-8579-a02d99b475a3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cd7fc941-6416-496d-afdb-19ab2d93f09d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8f40f041-2292-423d-b4bf-ab90d2da77e9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "692e17ee-b769-47cc-9fd1-1d92b87636ab")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "107eb720-c0c1-4a07-aca5-b0af0eb51d30")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f192b571-ce8b-4b03-b576-4259ecc329dc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16fd2f41-96de-40d5-bea8-1fff86a924b6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6b136fb4-be52-421c-b0ac-518f01066bdd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/e98072ec-0c7c-4244-baba-2e941aeb871a")
 		(sheetname "Root")
 		(sheetfile "Mainboard Small.kicad_sch")
@@ -1919,7 +2023,7 @@
 			(roundrect_rratio 0.25)
 			(net 78 "/~{Interrupt}_{Device}1")
 			(pinfunction "1")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3a2ada1c-d265-4e03-9aaa-c3f630fa4294")
 		)
 		(pad "2" thru_hole circle
@@ -2007,7 +2111,7 @@
 			(remove_unused_layers no)
 			(net 100 "/~{Interrupt}_{Device}5")
 			(pinfunction "9")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "cbe0219a-681d-421a-adb7-eceeaa1b5d5b")
 		)
 		(pad "10" thru_hole circle
@@ -2029,7 +2133,7 @@
 			(remove_unused_layers no)
 			(net 98 "/~{Interrupt}_{Device}6")
 			(pinfunction "11")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3e381a6f-9538-46f2-8a99-a1d3331c9969")
 		)
 		(pad "12" thru_hole circle
@@ -2040,7 +2144,7 @@
 			(remove_unused_layers no)
 			(net 99 "/~{Reset}_{Device}7")
 			(pinfunction "12")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "7e25e071-04b8-4283-a2c1-4aecbfe40052")
 		)
 		(pad "13" thru_hole circle
@@ -2051,7 +2155,7 @@
 			(remove_unused_layers no)
 			(net 97 "/~{Interrupt}_{Device}7")
 			(pinfunction "13")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "02cfad0c-77a0-4a8a-879c-53d47b651192")
 		)
 		(pad "14" thru_hole circle
@@ -2062,7 +2166,7 @@
 			(remove_unused_layers no)
 			(net 154 "/~{Reset}_{Device}6")
 			(pinfunction "14")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "a5c9582f-6145-4b78-a878-3731d857754c")
 		)
 		(pad "15" thru_hole circle
@@ -2084,7 +2188,7 @@
 			(remove_unused_layers no)
 			(net 191 "/~{Reset}_{Device}5")
 			(pinfunction "16")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "26ba4717-d51f-4323-947a-f911613f99d7")
 		)
 		(pad "17" thru_hole circle
@@ -2150,7 +2254,7 @@
 			(remove_unused_layers no)
 			(net 80 "/~{Reset}_{Device}2")
 			(pinfunction "22")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "a139a60f-c444-4349-812a-748a553a7c95")
 		)
 		(pad "23" thru_hole circle
@@ -2172,7 +2276,7 @@
 			(remove_unused_layers no)
 			(net 75 "/~{Reset}_{Device}1")
 			(pinfunction "24")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "48550383-1e87-454a-8cea-324ccdd083a5")
 		)
 		(pad "25" thru_hole circle
@@ -2194,7 +2298,7 @@
 			(remove_unused_layers no)
 			(net 194 "/~{Enable}_{Device}5")
 			(pinfunction "26")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "a56a06a3-a3af-4d95-a19a-0c86a00df76b")
 		)
 		(pad "27" thru_hole circle
@@ -2260,7 +2364,7 @@
 			(remove_unused_layers no)
 			(net 86 "/~{Enable}_{Device}2")
 			(pinfunction "32")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3dfa094c-215c-4df6-9885-bfd7a53ea066")
 		)
 		(pad "33" thru_hole circle
@@ -2271,7 +2375,7 @@
 			(remove_unused_layers no)
 			(net 198 "/~{Enable}_{Device}7")
 			(pinfunction "33")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "e95f6150-3fe1-4bc9-a2bb-d94aba60f1c6")
 		)
 		(pad "34" thru_hole circle
@@ -2282,7 +2386,7 @@
 			(remove_unused_layers no)
 			(net 79 "/~{Enable}_{Device}1")
 			(pinfunction "34")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "3e6b148e-5607-4ab5-934f-cb63816091ee")
 		)
 		(pad "35" thru_hole circle
@@ -2293,7 +2397,7 @@
 			(remove_unused_layers no)
 			(net 199 "/~{Enable}_{Device}6")
 			(pinfunction "35")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "91cef015-0d32-4bda-9612-9283a0a8eba7")
 		)
 		(pad "36" thru_hole circle
@@ -2381,6 +2485,110 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1ebc1db8-0cec-4147-aea5-788482502ebd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "768fcb5f-1e25-4352-83ea-abd2dc9e3f5a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2c44b103-2e7d-47c9-9c18-9eb1822c0ac8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "22a3399d-2360-491b-9e94-0f3daffe975c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fcd6c4f8-7180-4e82-a6c2-bc7bfe199620")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7646429f-f7e6-488f-a233-22cd6f7a59eb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0db68d91-560c-42cb-ab07-5b293622c316")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d196a6f5-8d6b-4474-b715-ba3054903914")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -4434,7 +4642,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 6 "/Device_{16} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}X")
+			(pinfunction "Select_0_{_Device}X")
 			(pintype "input")
 			(uuid "478fe669-4f07-4e32-8517-70aa1a8da70f")
 		)
@@ -4445,7 +4653,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 68 "/Device_{16} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}X")
+			(pinfunction "Select_1_{_Device}X")
 			(pintype "input")
 			(uuid "79a032a7-f4ee-4509-9d2a-4558a1d97576")
 		)
@@ -4467,7 +4675,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 69 "/Device_{17} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}Y")
+			(pinfunction "Select_0_{_Device}Y")
 			(pintype "input")
 			(uuid "d9700ac7-0799-44e9-98df-8a031daf5f08")
 		)
@@ -4478,7 +4686,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 70 "/Device_{17} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}Y")
+			(pinfunction "Select_1_{_Device}Y")
 			(pintype "input")
 			(uuid "8c1141be-da58-4de8-b37c-679d504bda6c")
 		)
@@ -5322,7 +5530,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 390 "/Device_{3} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}X")
+			(pinfunction "Select_0_{_Device}X")
 			(pintype "input")
 			(uuid "38b46a18-782a-4b35-9f6a-5ee0c84f02f5")
 		)
@@ -5333,7 +5541,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 391 "/Device_{3} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}X")
+			(pinfunction "Select_1_{_Device}X")
 			(pintype "input")
 			(uuid "dc9be024-dd9c-4765-bfe1-a5f017ef8a13")
 		)
@@ -5355,7 +5563,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 392 "/Device_{4} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}Y")
+			(pinfunction "Select_0_{_Device}Y")
 			(pintype "input")
 			(uuid "b6386a22-c2e8-4d72-b92d-d7e2fe210bc7")
 		)
@@ -5366,7 +5574,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 393 "/Device_{4} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}Y")
+			(pinfunction "Select_1_{_Device}Y")
 			(pintype "input")
 			(uuid "1bb43450-7b3d-4785-a19e-3ba2e045cf10")
 		)
@@ -10302,6 +10510,110 @@
 				)
 			)
 		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f7882385-6e63-4f13-957b-4273f7419ce9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d242673b-5a9e-4f95-bebe-4c0273aa7159")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f2197ddd-24bf-48da-9c01-58e2ea12d317")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f6c5b164-a1b6-46bc-9b1b-b6b82e9f192e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bd7387ef-1f32-40c0-ad82-b1b0e5bb9dc0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "48572871-9bf5-4336-81ba-3964c51d5078")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "85b342cd-0e7f-48cd-a4b8-5f25d0c7da94")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "62a01fa3-d57a-4b92-876c-6428434f32e9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/72c49870-72b5-448e-8e7f-ca5296457d0a")
 		(sheetname "Root")
 		(sheetfile "Mainboard Small.kicad_sch")
@@ -14192,6 +14504,110 @@
 				)
 			)
 		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f138a0fd-5e86-4aa9-acae-b997de615382")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fb25898c-8434-4e75-be1d-5922ac1f72bb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7d34a8f5-8d0c-4561-bd3a-bb501521612d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac7ec74c-6773-43bc-84b4-4fdd430cf791")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "619d8806-a873-4aa1-8902-b1dce2b3b136")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "47dc817d-d4a2-424a-bc85-6ebdc20f4d60")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "424eaecc-f0bf-4f9e-93ed-9a0f91d9cddf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1c8ceeaf-8915-4c60-aff5-e3227afd2575")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/c26ace9d-1d6d-40d4-a384-0c16e6529491")
 		(sheetname "Root")
 		(sheetfile "Mainboard Small.kicad_sch")
@@ -15521,6 +15937,110 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "19a0e13b-16cc-4ac2-96b9-84451b1102a4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "082e6bb9-27b1-45bd-b56b-76c55b7d3870")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e7b8a5b3-e1d9-40e0-ac7f-6f7118510713")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6888e779-0a88-4f8f-8f88-beba2f84318d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "dba35323-a14d-49f7-aca6-c84f5aea5061")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0103d0ea-3e1a-42cd-a781-7205f3555850")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8c29aa6b-49e3-46b4-a536-71f5ccd55920")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "85dc638f-c8e8-4579-95db-748762d942c1")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -16858,6 +17378,110 @@
 				)
 			)
 		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "949ef83f-4428-4d3d-a72d-c3742dc4b486")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c5855773-3b67-4811-9ee6-5ce634333b11")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "603fbc4a-3740-4be6-bc8f-939c47dcdb60")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0ecb174e-9b01-44bc-b1b8-76fe87b050ae")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d84aa84b-032a-4b41-a8a8-2693a082e65a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a6b0c291-6475-419d-a55a-f0c8bcc75108")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "646250c9-2354-486b-8931-c3ac162dc2cd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "21b9aa29-94b8-4b81-b7c9-73f3d197f720")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/928dc4a2-c9f4-4ea3-8c32-ba05f714af11")
 		(sheetname "Root")
 		(sheetfile "Mainboard Small.kicad_sch")
@@ -17615,7 +18239,7 @@
 			(remove_unused_layers no)
 			(net 10 "/~{Select}_{Device}7")
 			(pinfunction "B22")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "c9a24129-def6-422e-9fac-449c7349f77d")
 		)
 		(pad "B23" thru_hole circle
@@ -17626,7 +18250,7 @@
 			(remove_unused_layers no)
 			(net 11 "/~{Select}_{Device}6")
 			(pinfunction "B23")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "19d61242-e73a-4872-94ef-e5bc900e028b")
 		)
 		(pad "B24" thru_hole circle
@@ -17648,7 +18272,7 @@
 			(remove_unused_layers no)
 			(net 12 "/~{Select}_{Device}5")
 			(pinfunction "B25")
-			(pintype "passive")
+			(pintype "passive+no_connect")
 			(uuid "706c9a7e-3a55-4900-8c5b-977475f2b123")
 		)
 		(pad "B26" thru_hole circle
@@ -18362,6 +18986,110 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a75e825-456f-44f0-930d-9c0719f97ce9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5b42d803-d45a-4c50-a7f5-e305e643379d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bc0d7732-ce46-4956-80d5-a2ab7492f5c3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b63202dc-995b-479f-ba8e-b2c66a8bfa05")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "388eb2b1-d300-4645-93fd-73bd7ee7c970")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "63cec149-f2da-42ab-849a-220f4c965d34")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f34c84ca-bbe3-4bb1-8020-9e3852075bc7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3dc4e044-d49b-40b7-ac34-bc321627c35c")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -21792,7 +22520,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 258 "/Device_{18} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}X")
+			(pinfunction "Select_0_{_Device}X")
 			(pintype "input")
 			(uuid "66e55534-1742-44c5-8518-fcf3be43058b")
 		)
@@ -21803,7 +22531,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 303 "/Device_{18} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}X")
+			(pinfunction "Select_1_{_Device}X")
 			(pintype "input")
 			(uuid "97fe5de1-03b9-4b86-be9c-9e9849c26cfc")
 		)
@@ -21825,7 +22553,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 350 "/Device_{19} 2MB Select_{0}")
-			(pinfunction "Select_1_{_Device}Y")
+			(pinfunction "Select_0_{_Device}Y")
 			(pintype "input")
 			(uuid "cc9571e0-5b02-49f7-8794-fbd66b0133c7")
 		)
@@ -21836,7 +22564,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 302 "/Device_{19} 2MB Select_{1}")
-			(pinfunction "Select_0_{_Device}Y")
+			(pinfunction "Select_1_{_Device}Y")
 			(pintype "input")
 			(uuid "907112f2-c00b-41cd-9c4e-3bd0625a5660")
 		)
@@ -22321,6 +23049,110 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "15.4"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "37b2e35e-283f-44c3-944c-33edf0956cda")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "EDAC"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a1f3a88d-c2a7-4a43-875d-12d4fd4cc76c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bd852097-c4e6-49f5-a03d-103fa56aceca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "587-395-098-520-350"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "578aac3c-9f30-448d-bc0c-e0417cf9444e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/EDAC/395-098-520-350?qs=U4pz39agNJAWEyGruTa5gg%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bca5cdf0-d230-4973-8ba0-1af759e3eaa6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8ce031c9-949a-4a43-a9cf-957003f34f57")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "36d9e47a-9f6d-4d8b-b56b-530931c6df9b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors 98P Solder Tail 5.08mm ROW SPACE"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2ca89f1e-835b-4a63-b651-bcc2eae891e1")
+			(effects
+				(font
+					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -23738,7 +24570,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

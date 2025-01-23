@@ -62722,7 +62722,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Selector_12bit"
-			(at 15.24 -69.215 0)
+			(at 15.24 -72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -62740,7 +62740,7 @@
 			)
 		)
 		(property "Description" "Selector 12bit"
-			(at 15.24 -30.48 0)
+			(at 15.24 -34.925 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -62748,7 +62748,7 @@
 			)
 		)
 		(property "Silkscreen" "Selector 12bit"
-			(at 15.24 -33.02 0)
+			(at 15.24 -37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -62759,7 +62759,7 @@
 		(symbol "Selector_12bit_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -67.945) (xy 0 -67.945) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -70.485) (xy 0 -70.485) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -62917,6 +62917,120 @@
 			)
 		)
 		(symbol "Selector_12bit_1_1"
+			(arc
+				(start 4.722 -33.0684)
+				(mid 6.3301 -30.0417)
+				(end 5.715 -26.67)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 4.821 -66.0574)
+				(mid 6.4292 -63.0307)
+				(end 5.814 -59.659)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 5.715 -11.43)
+				(mid 6.3304 -8.0578)
+				(end 4.7187 -5.0323)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 5.715 -11.43)
+				(mid 4.4544 -15.3715)
+				(end 6.35 -19.05)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 5.814 -44.419)
+				(mid 6.4294 -41.0468)
+				(end 4.8177 -38.0213)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 5.814 -44.419)
+				(mid 4.5534 -48.3605)
+				(end 6.449 -52.039)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 6.35 -19.05)
+				(mid 4.4543 -22.7285)
+				(end 5.715 -26.67)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(arc
+				(start 6.449 -52.039)
+				(mid 4.5533 -55.7175)
+				(end 5.814 -59.659)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(text "A"
+				(at 6.985 -19.05 0)
+				(effects
+					(font
+						(size 1 1)
+					)
+					(justify left)
+				)
+			)
+			(text "B"
+				(at 7.084 -52.039 0)
+				(effects
+					(font
+						(size 1 1)
+					)
+					(justify left)
+				)
+			)
 			(pin input inverted
 				(at -5.08 0 0)
 				(length 5.08)
@@ -63026,7 +63140,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -35.56 0)
+				(at -5.08 -38.1 0)
 				(length 5.08)
 				(name "B11"
 					(effects
@@ -63044,7 +63158,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -38.1 0)
+				(at -5.08 -40.64 0)
 				(length 5.08)
 				(name "B10"
 					(effects
@@ -63062,7 +63176,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -40.64 0)
+				(at -5.08 -43.18 0)
 				(length 5.08)
 				(name "B9"
 					(effects
@@ -63080,7 +63194,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -43.18 0)
+				(at -5.08 -45.72 0)
 				(length 5.08)
 				(name "B8"
 					(effects
@@ -63098,7 +63212,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -45.72 0)
+				(at -5.08 -48.26 0)
 				(length 5.08)
 				(name "B7"
 					(effects
@@ -63134,7 +63248,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -66.04 0)
+				(at -5.08 -68.58 0)
 				(length 5.08) hide
 				(name "5V"
 					(effects
@@ -63152,7 +63266,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -48.26 0)
+				(at -5.08 -50.8 0)
 				(length 5.08)
 				(name "B6"
 					(effects
@@ -63170,7 +63284,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -50.8 0)
+				(at -5.08 -53.34 0)
 				(length 5.08)
 				(name "B5"
 					(effects
@@ -63188,7 +63302,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -53.34 0)
+				(at -5.08 -55.88 0)
 				(length 5.08)
 				(name "B4"
 					(effects
@@ -63206,7 +63320,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -55.88 0)
+				(at -5.08 -58.42 0)
 				(length 5.08)
 				(name "B3"
 					(effects
@@ -63224,7 +63338,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -58.42 0)
+				(at -5.08 -60.96 0)
 				(length 5.08)
 				(name "B2"
 					(effects
@@ -63242,7 +63356,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -60.96 0)
+				(at -5.08 -63.5 0)
 				(length 5.08)
 				(name "B1"
 					(effects
@@ -63260,7 +63374,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -63.5 0)
+				(at -5.08 -66.04 0)
 				(length 5.08)
 				(name "B0"
 					(effects
@@ -81251,8 +81365,8 @@
 			)
 		)
 		(symbol "W65C816_Breakout_1_1"
-			(text "~{PHI2}"
-				(at 13.97 -22.86 0)
+			(text "(~{PHI2})"
+				(at 12.065 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -81260,8 +81374,8 @@
 					(justify left)
 				)
 			)
-			(text "~{PHI2}"
-				(at 13.97 -20.32 0)
+			(text "(~{PHI2})"
+				(at 12.065 -20.32 0)
 				(effects
 					(font
 						(size 1.27 1.27)

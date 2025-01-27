@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*%
-%TF.CreationDate,2025-01-26T10:08:31+02:00*%
+%TF.CreationDate,2025-01-27T11:54:07+02:00*%
 %TF.ProjectId,SD Card Board,53442043-6172-4642-9042-6f6172642e6b,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-26 10:08:31*
+G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-27 11:54:07*
 %MOMM*%
 %LPD*%
 G01*

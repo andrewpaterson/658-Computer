@@ -5427,15 +5427,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "Triple 3-Input Positive-NAND Gate"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "SN74LVC10APWR_0_0"
 				(pin input line
 					(at 0 0 0)
@@ -6086,16 +6077,8 @@
 		(uuid "16e006ce-5f7d-450e-b85f-13b71249a842")
 	)
 	(no_connect
-		(at 54.61 129.54)
-		(uuid "397110d6-e7dc-4870-a64e-a1c3ac06b51e")
-	)
-	(no_connect
 		(at 181.61 96.52)
 		(uuid "592738c7-998a-45e1-acd8-e043ebb6d1f7")
-	)
-	(no_connect
-		(at 54.61 93.98)
-		(uuid "653aca20-ab65-49fd-a3c9-7b3a83f57412")
 	)
 	(no_connect
 		(at 247.65 53.34)
@@ -6108,10 +6091,6 @@
 	(no_connect
 		(at 181.61 93.98)
 		(uuid "b8270a23-6fe9-407f-a034-204a63383d88")
-	)
-	(no_connect
-		(at 139.7 137.16)
-		(uuid "bb5f1d28-91f4-4194-b802-ed3a9251aeeb")
 	)
 	(no_connect
 		(at 137.16 105.41)
@@ -6188,6 +6167,16 @@
 			(type default)
 		)
 		(uuid "62de515d-02f5-4ef8-a4c8-605a05952c98")
+	)
+	(wire
+		(pts
+			(xy 55.88 93.98) (xy 54.61 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67028203-11ef-4c4e-9ac2-8f38de17fdae")
 	)
 	(wire
 		(pts
@@ -6331,6 +6320,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 129.54) (xy 54.61 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2afbfdc-0379-45d9-9411-3db951fb4f3b")
+	)
+	(wire
+		(pts
 			(xy 55.88 119.38) (xy 54.61 119.38)
 		)
 		(stroke
@@ -6358,6 +6357,16 @@
 			(type default)
 		)
 		(uuid "fd7d1a4b-65a9-4172-b81c-754f840bbed8")
+	)
+	(text "(Count Enable)"
+		(exclude_from_sim no)
+		(at 81.28 120.015 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "00c7df23-f19d-4864-9ba9-d58a1220dfd6")
 	)
 	(label "DAT_{0..3} Zero"
 		(at 114.3 139.7 180)
@@ -7185,6 +7194,17 @@
 		(uuid "9214b7a1-d079-4c74-b025-47e80030db9e")
 	)
 	(label "~{Read CRC Wide}"
+		(at 114.3 137.16 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "92ed141f-8b1c-4873-b7c2-277889345af6")
+	)
+	(label "~{Read CRC Wide}"
 		(at 222.25 41.91 180)
 		(fields_autoplaced yes)
 		(effects
@@ -7348,17 +7368,6 @@
 			(justify right bottom)
 		)
 		(uuid "bd0122c5-d3f5-4c11-9bcb-0d76976dc67a")
-	)
-	(label "GND"
-		(at 114.3 137.16 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "be21a01b-15dd-4612-989b-bd8164ad5359")
 	)
 	(label "~{RTS}•~{RCRCS}"
 		(at 146.05 53.34 180)
@@ -7524,6 +7533,17 @@
 			(justify right bottom)
 		)
 		(uuid "dc060312-c735-4869-9c66-ab640e3410eb")
+	)
+	(label "Read CRC Wide"
+		(at 139.7 137.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dfaa90cc-2fff-4ec6-a7f4-3430f448fba1")
 	)
 	(label "GND"
 		(at 139.7 179.07 0)
@@ -8185,6 +8205,29 @@
 			)
 		)
 	)
+	(global_label "~{Wait For Read Transmit}"
+		(shape output)
+		(at 55.88 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(italic yes)
+			)
+			(justify left)
+		)
+		(uuid "e5dc7a7d-fa4e-49ce-a44e-9b9b127b8350")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.483 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "~{Main}"
 		(shape output)
 		(at 55.88 99.06 0)
@@ -8198,6 +8241,29 @@
 		(uuid "ecbb609c-ec71-4f95-88c7-ed928e75b6c3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 63.2194 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Read CRC Wide"
+		(shape output)
+		(at 55.88 129.54 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(italic yes)
+			)
+			(justify left)
+		)
+		(uuid "f7675f3e-1104-4810-bd2c-3902f5ddb975")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 73.5608 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9712,15 +9778,6 @@
 		)
 		(property "Silkscreen" "74LVC10"
 			(at 158.115 64.135 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Triple 3-Input Positive-NAND Gate"
-			(at 146.05 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)

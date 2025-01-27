@@ -374,12 +374,12 @@
 	(net 278 "/Write Count Low Address")
 	(net 279 "unconnected-(B12-Y3_{W}-Pad24)")
 	(net 280 "/~{Read CRC Started}")
-	(net 281 "unconnected-(B13-N.C.-Pad32)")
+	(net 281 "unconnected-(B13-Read_CRC_Wide-Pad18)")
 	(net 282 "unconnected-(B13-N.C.-Pad31)")
 	(net 283 "/~{Load Down Count}")
 	(net 284 "/~{Read Transmit Started}")
 	(net 285 "/~{TCD}_{8..11}")
-	(net 286 "unconnected-(B13-N.C.-Pad18)")
+	(net 286 "unconnected-(B13-~{Wait_For_Read_Transmit}-Pad32)")
 	(net 287 "unconnected-(B14-N.C.-Pad9)")
 	(net 288 "unconnected-(B14-N.C.-Pad27)")
 	(net 289 "unconnected-(B14-N.C.-Pad10)")
@@ -3406,7 +3406,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -6820,7 +6820,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252451 -1.848184)
+			(mid 16.252448 -1.848183)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -11982,7 +11982,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)
@@ -12849,9 +12849,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 286 "unconnected-(B13-N.C.-Pad18)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 281 "unconnected-(B13-Read_CRC_Wide-Pad18)")
+			(pinfunction "Read_CRC_Wide")
+			(pintype "output+no_connect")
 			(uuid "4868ee0d-b755-4886-98f9-2efe0a1958e8")
 		)
 		(pad "19" thru_hole circle
@@ -13003,9 +13003,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 281 "unconnected-(B13-N.C.-Pad32)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 286 "unconnected-(B13-~{Wait_For_Read_Transmit}-Pad32)")
+			(pinfunction "~{Wait_For_Read_Transmit}")
+			(pintype "output+no_connect")
 			(uuid "57c22e9d-1635-4dde-a7c3-b378a96f6d39")
 		)
 		(model "${_658_COMPUTER_}/Computer/SD Card/SD Card Read Signals/SD Card Read Signals.wrl"
@@ -16406,7 +16406,7 @@
 		)
 		(fp_arc
 			(start 86.040048 -8.4)
-			(mid 86.35762 -9.156489)
+			(mid 86.357626 -9.156454)
 			(end 87.117096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -16417,7 +16417,7 @@
 		)
 		(fp_arc
 			(start 90.297 -9.466799)
-			(mid 91.056441 -9.156453)
+			(mid 91.056476 -9.156459)
 			(end 91.374048 -8.4)
 			(stroke
 				(width 0.1)
@@ -16428,7 +16428,7 @@
 		)
 		(fp_arc
 			(start 139.499048 -8.4)
-			(mid 139.81662 -9.156489)
+			(mid 139.816626 -9.156454)
 			(end 140.576096 -9.466799)
 			(stroke
 				(width 0.1)
@@ -22121,7 +22121,7 @@
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
-			(mid 16.252448 -1.848183)
+			(mid 16.252451 -1.848184)
 			(end 17.017999 -0.000001)
 			(stroke
 				(width 0.1)

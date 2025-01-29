@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*%
-%TF.CreationDate,2025-01-04T13:45:03+02:00*%
-%TF.ProjectId,SNES Controller Reader,534e4553-2043-46f6-9e74-726f6c6c6572,rev?*%
+%TF.CreationDate,2025-01-29T12:13:09+02:00*%
+%TF.ProjectId,SNES Controller Reader,534e4553-2043-46f6-9e74-726f6c6c6572,V2*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-04 13:45:03*
+G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-29 12:13:09*
 %MOMM*%
 %LPD*%
 G01*

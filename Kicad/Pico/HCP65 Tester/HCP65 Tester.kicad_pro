@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.4,
-          "width": 1.4
+          "drill": 1.0,
+          "height": 1.7,
+          "width": 1.7
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -58,12 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "clearance|23130000|128490000|9c6ca347-e65e-4b72-8f42-27a65dd01656|07e51611-53be-40e8-b932-69fe0c2ea473",
-        "courtyards_overlap|31590000|149716000|2886df3b-f8fc-49c5-9467-a4f6c7129755|f080908a-5906-4cca-9b95-de9223cdcca3",
-        "courtyards_overlap|31590000|58276000|8d39b6de-e38a-4ee9-89b1-2c8094ffdddc|95dfeecc-369a-4c06-976b-049690fc74ec",
-        "courtyards_overlap|38793000|89723000|635ae1c0-125c-4c7a-bd72-d6a67d6967e5|67e16600-d011-4770-9e6a-a4363d8e5ef9"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -103,7 +98,7 @@
         "shorting_items": "error",
         "silk_edge_clearance": "ignore",
         "silk_over_copper": "warning",
-        "silk_overlap": "ignore",
+        "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "ignore",
@@ -152,7 +147,7 @@
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -163,7 +158,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -174,7 +169,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -431,7 +426,7 @@
       "extra_units": "error",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
-      "label_dangling": "error",
+      "label_dangling": "warning",
       "lib_symbol_issues": "warning",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
@@ -458,7 +453,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Pico Wide GPIO Connect.kicad_pro",
+    "filename": "HCP65 Tester.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -531,15 +526,19 @@
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V*"
+        "pattern": "*5V"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*1.6V"
       }
     ]
   },
@@ -548,7 +547,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "Pico Wide GPIO Connect",
+      "plot": "Mainboard Small",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
@@ -645,7 +644,7 @@
       "version": 1
     },
     "net_format_name": "",
-    "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks",
+    "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",

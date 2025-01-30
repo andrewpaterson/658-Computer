@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,8.0.7*%
-%TF.CreationDate,2025-01-03T10:50:03+02:00*%
+%TF.CreationDate,2025-01-30T15:36:26+02:00*%
 %TF.ProjectId,Memory 32KB with Output,4d656d6f-7279-4203-9332-4b4220776974,V0*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-03 10:50:03*
+G04 Created by KiCad (PCBNEW 8.0.7) date 2025-01-30 15:36:26*
 %MOMM*%
 %LPD*%
 G01*
@@ -193,8 +193,8 @@ X6320000Y-47051000D03*
 %TD*%
 D19*
 %TO.C,C1*%
-X7702000Y-15621000D03*
-X9602000Y-15621000D03*
+X7829000Y-15621000D03*
+X9729000Y-15621000D03*
 %TD*%
 D15*
 %TO.C,C3*%

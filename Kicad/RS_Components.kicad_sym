@@ -184,7 +184,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:448376"
-			(at 19.05 2.54 0)
+			(at 19.05 -10.922 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -194,7 +194,7 @@
 			)
 		)
 		(property "Datasheet" "https://docs.rs-online.com/902a/0900766b81582446.pdf"
-			(at 19.05 0 0)
+			(at 19.05 -13.462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -212,7 +212,7 @@
 			)
 		)
 		(property "Height" "11"
-			(at 19.05 -5.08 0)
+			(at 19.05 -18.542 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -222,7 +222,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "RS Components"
-			(at 19.05 -7.62 0)
+			(at 19.05 -21.082 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -232,7 +232,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "448-376"
-			(at 19.05 -10.16 0)
+			(at 19.05 -23.622 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -242,7 +242,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 19.05 -12.7 0)
+			(at 19.05 -26.162 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -252,7 +252,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 19.05 -15.24 0)
+			(at 19.05 -28.702 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -262,7 +262,7 @@
 			)
 		)
 		(property "Arrow Part Number" ""
-			(at 19.05 -17.78 0)
+			(at 19.05 -31.242 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -272,78 +272,13 @@
 			)
 		)
 		(property "Arrow Price/Stock" ""
-			(at 19.05 -20.32 0)
+			(at 19.05 -33.782 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 				(hide yes)
-			)
-		)
-		(property "Garbage" "DC Socket Rated At 1.0A, 12.0 V, PCB Mount, length 14.5mm, Nickel"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(symbol "448-376_0_0"
-			(pin passive line
-				(at 0 -1.27 0)
-				(length 5.08)
-				(name "VCC"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "A1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 22.86 0 180)
-				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "B1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 22.86 -2.54 180)
-				(length 5.08)
-				(name "GND"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "C1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
 			)
 		)
 		(symbol "448-376_0_1"
@@ -357,6 +292,62 @@
 				)
 				(fill
 					(type background)
+				)
+			)
+		)
+		(symbol "448-376_1_0"
+			(pin passive line
+				(at -5.08 -1.27 0)
+				(length 10.16)
+				(name "VCC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "INNER"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 27.94 0 180)
+				(length 10.16)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "SHL1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 27.94 -2.54 180)
+				(length 10.16)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "SHL2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
 				)
 			)
 		)

@@ -59,9 +59,9 @@
         }
       ],
       "drc_exclusions": [
-        "clearance|-6715000|109059000|9c6ca347-e65e-4b72-8f42-27a65dd01656|07e51611-53be-40e8-b932-69fe0c2ea473",
         "courtyards_overlap|1745000|130285000|2886df3b-f8fc-49c5-9467-a4f6c7129755|f080908a-5906-4cca-9b95-de9223cdcca3",
-        "courtyards_overlap|1745000|38845000|8d39b6de-e38a-4ee9-89b1-2c8094ffdddc|95dfeecc-369a-4c06-976b-049690fc74ec"
+        "courtyards_overlap|1745000|38845000|8d39b6de-e38a-4ee9-89b1-2c8094ffdddc|95dfeecc-369a-4c06-976b-049690fc74ec",
+        "silk_over_copper|3215985|71138295|4ef05b3f-3066-47ba-ad44-d5ee911660bb|00000000-0000-0000-0000-000000000000"
       ],
       "meta": {
         "version": 2
@@ -151,7 +151,7 @@
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -162,7 +162,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -173,7 +173,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -522,23 +522,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "Power"
+        "pattern": "*3.3V*"
       },
       {
         "netclass": "Power",
-        "pattern": "*3.3V"
-      },
-      {
-        "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND*"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V*"
+        "pattern": "*12V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V*"
+        "pattern": "*5V*"
       }
     ]
   },

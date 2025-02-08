@@ -1,0 +1,8252 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "8357857d-ab8c-4646-b786-aad4001c0a6b")
+	(paper "A4")
+	(title_block
+		(title "LED Digit Tester")
+		(date "2025-02-08")
+		(rev "V0")
+	)
+	(lib_symbols
+		(symbol "Bourns:CAY16-221J4LF"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "RN"
+				(at 10.16 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "CAY16-221J4LF"
+				(at 10.16 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:CAY16-F4"
+				(at 18.415 -14.605 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/CATCAY.pdf"
+				(at 18.415 -17.145 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "220Ω 4-array resistor"
+				(at 10.16 -10.795 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "0.6"
+				(at 18.415 -22.225 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Bourns"
+				(at 18.415 -24.765 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "CAY16-221J4LF"
+				(at 18.415 -27.305 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "652-CAY16-221J4LF"
+				(at 18.415 -29.845 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-221J4LF?qs=BKfsZh40Pd9sAo64tUrb9Q%3D%3D"
+				(at 18.415 -32.385 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Part Number" "CAY16-221J4LF"
+				(at 18.415 -34.925 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-221j4lf/bourns?region=nac"
+				(at 18.415 -37.465 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "220Ω"
+				(at 10.16 -13.335 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "Bourns CAY16 Series 220 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "CAY16-221J4LF_0_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "R1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "R2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "R3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "R4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -7.62 180)
+					(length 5.08)
+					(name "R4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -5.08 180)
+					(length 5.08)
+					(name "R3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -2.54 180)
+					(length 5.08)
+					(name "R2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 0 180)
+					(length 5.08)
+					(name "R1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "CAY16-221J4LF_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 15.24 1.905) (xy 15.24 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
+		(symbol "Diodes_Inc:74LVC245AT20"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74LVC245AT20"
+				(at 12.7 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
+				(at 19.685 -37.465 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/74LVC245A.pdf"
+				(at 19.685 -40.005 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "8-bit transceiver"
+				(at 12.7 -28.575 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.2"
+				(at 19.685 -42.545 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Diodes Inc."
+				(at 19.685 -45.085 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "74LVC245AT20-13"
+				(at 19.685 -47.625 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "621-74LVC245AT20-13"
+				(at 19.685 -50.165 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/74LVC245AT20-13?qs=IvkZ4pJZlB2XcM151iWWTw%3D%3D"
+				(at 19.685 -52.705 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "74LVC245"
+				(at 12.7 -30.48 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "Bus Transceivers Octal Buffer Trans 3-State Outputs"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "74LVC245AT20_0_0"
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "DIR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -25.4 0)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "B7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -7.62 180)
+					(length 5.08)
+					(name "B6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -10.16 180)
+					(length 5.08)
+					(name "B5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -12.7 180)
+					(length 5.08)
+					(name "B4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -15.24 180)
+					(length 5.08)
+					(name "B3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -17.78 180)
+					(length 5.08)
+					(name "B2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -20.32 180)
+					(length 5.08)
+					(name "B1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -22.86 180)
+					(length 5.08)
+					(name "B0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 0)
+					(length 5.08)
+					(name "~{OE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "A0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LVC245AT20_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -27.305) (xy 5.08 -27.305) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "74LVC245AT20_1_0"
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08) hide
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Diodes_Inc:AP7365-33WG-7"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "AP7365-33WG-7"
+				(at 12.7 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
+				(at 21.59 -14.605 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
+				(at 21.59 -17.145 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "3.3V LDO voltage regulator"
+				(at 12.7 -8.255 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.3"
+				(at 21.59 -19.685 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Diodes Inc."
+				(at 21.59 -22.225 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "AP7365-33WG-7"
+				(at 21.59 -24.765 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "621-AP7365-33WG-7"
+				(at 21.59 -27.305 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
+				(at 21.59 -29.845 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Part Number" "AP7365-33WG-7"
+				(at 21.59 -32.385 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
+				(at 21.59 -34.925 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "AP7365"
+				(at 21.59 -12.065 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "AP7365-33WG-7_0_0"
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "ADJ"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "AP7365-33WG-7_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "6VIn"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "3.3VOut"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "HCP65:C_0805"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.254) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 2.286 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "?μF"
+				(at 2.54 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:C_0805"
+				(at 16.764 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 2.2225 0.3175 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0805_0_1"
+				(polyline
+					(pts
+						(xy 1.9685 -1.4605) (xy 1.9685 1.5875)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.9845 -1.4605) (xy 2.9845 1.5875)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_0805_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Kingbright:KCPSA04-107"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "DS"
+				(at 21.59 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "KCPSA04-107"
+				(at 21.59 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(thickness 0.254)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:KCPSA04107"
+				(at 31.75 -33.02 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://docs.rs-online.com/7525/0900766b813c9017.pdf"
+				(at 31.75 -35.56 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "yellow 14-seg LED display"
+				(at 21.59 -20.955 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "4"
+				(at 31.75 -40.64 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Kingbright"
+				(at 31.75 -43.18 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "KCPSA04-107"
+				(at 31.75 -45.72 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "N/A"
+				(at 31.75 -48.26 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Kingbright/KCPSA04-107?qs=2JU0tDl2GZ1zROqoLKb2zw%3D%3D"
+				(at 31.75 -50.8 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "KCPSA04-107"
+				(at 21.59 -23.495 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "KCPSA04-107_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 36.83 1.905) (xy 36.83 -19.685) (xy 5.08 -19.685) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "KCPSA04-107_1_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "P-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -2.54 180)
+					(length 5.08)
+					(name "A-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -5.08 180)
+					(length 5.08)
+					(name "B-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -7.62 180)
+					(length 5.08)
+					(name "K-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -10.16 180)
+					(length 5.08)
+					(name "J-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -12.7 180)
+					(length 5.08)
+					(name "Cathode"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -15.24 180)
+					(length 5.08)
+					(name "H-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -17.78 180)
+					(length 5.08)
+					(name "F-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "N-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "M-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "L-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "Dot"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "C-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "D-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "E-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 0 180)
+					(length 5.08)
+					(name "G-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Microchip:SST39VF010-70-4I-NHE"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 20.32 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SST39VF010-70-4I-NHE"
+				(at 20.32 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:5408803224008"
+				(at 41.275 -69.215 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 41.275 -66.675 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "32 pin PLCC socket\n(1 Mbit NOR Flash)"
+				(at 20.32 -21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "8.2"
+				(at 41.275 -71.755 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Microchip"
+				(at 41.275 -74.295 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "SST39VF010-70-4I-NHE"
+				(at 41.275 -76.835 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" ""
+				(at 19.05 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" ""
+				(at 19.05 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "SST39VF010-70"
+				(at 20.32 -67.945 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
+				(at 41.402 -79.502 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "SST39VF010-70-4I-NHE_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -53.34) (xy 5.08 -53.34) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "SST39VF010-70-4I-NHE_1_0"
+				(pin passive line
+					(at 0 -50.8 0)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "SST39VF010-70-4I-NHE_1_1"
+				(pin no_connect line
+					(at 40.64 -5.08 180)
+					(length 5.08) hide
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -43.18 0)
+					(length 5.08)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -45.72 0)
+					(length 5.08)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -48.26 0)
+					(length 5.08)
+					(name "A0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 29.21 -58.42 90)
+					(length 5.08)
+					(name "DQ0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 26.67 -58.42 90)
+					(length 5.08)
+					(name "DQ1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 24.13 -58.42 90)
+					(length 5.08)
+					(name "DQ2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 21.59 -58.42 90)
+					(length 5.08)
+					(name "DQ3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 19.05 -58.42 90)
+					(length 5.08)
+					(name "DQ4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 16.51 -58.42 90)
+					(length 5.08)
+					(name "DQ5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "A16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 13.97 -58.42 90)
+					(length 5.08)
+					(name "DQ6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 11.43 -58.42 90)
+					(length 5.08)
+					(name "DQ7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "~{CE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "A10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 0)
+					(length 5.08)
+					(name "~{OE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "A11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -25.4 0)
+					(length 5.08)
+					(name "A9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -27.94 0)
+					(length 5.08)
+					(name "A8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "A13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "A14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "A15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 40.64 -2.54 180)
+					(length 5.08) hide
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "~{WE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 40.64 0 180)
+					(length 5.08)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "A12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -30.48 0)
+					(length 5.08)
+					(name "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -33.02 0)
+					(length 5.08)
+					(name "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -35.56 0)
+					(length 5.08)
+					(name "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -38.1 0)
+					(length 5.08)
+					(name "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -40.64 0)
+					(length 5.08)
+					(name "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "TE_Connectivity:1-406541-1"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at -13.335 5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "1-406541-1"
+				(at -13.335 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:1-406541-1_1"
+				(at 15.875 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://uk.rs-online.com/web/p/products/7820823"
+				(at 15.875 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Cat5 Female RJ45"
+				(at -13.335 -20.955 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description_1" "ModJack,RightAngle,8Position,Cat5 TE Connectivity Female Cat5 RJ45 Connector, Right Angle, Through Hole Mount,"
+				(at 15.875 -22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Height" ""
+				(at 16.51 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "TE Connectivity"
+				(at 15.875 -27.94 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "1-406541-1"
+				(at 15.875 -30.48 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "571-1-406541-1"
+				(at 15.875 -33.02 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/1-406541-1?qs=dOAuEKQrqY4XW9msRoSnqA%3D%3D"
+				(at 15.875 -35.56 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Part Number" "1-406541-1"
+				(at 15.875 -38.1 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1-406541-1/te-connectivity?region=europe"
+				(at 15.875 -40.64 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "1-406541-1_0_0"
+				(pin passive line
+					(at 0 -17.78 180)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 180)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 180)
+					(length 5.08)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 180)
+					(length 5.08)
+					(name "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 180)
+					(length 5.08)
+					(name "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 180)
+					(length 5.08)
+					(name "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 0 180)
+					(length 5.08)
+					(name "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "1-406541-1_0_1"
+				(rectangle
+					(start -21.59 1.905)
+					(end -5.08 -19.685)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -19.05 -5.715) (xy -20.32 -5.715)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -19.05 -4.445) (xy -20.32 -4.445)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -13.335) (xy -19.05 -13.335) (xy -19.05 -13.335)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -12.065) (xy -19.05 -12.065) (xy -19.05 -12.065)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -10.795) (xy -19.05 -10.795) (xy -19.05 -10.795)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -9.525) (xy -19.05 -9.525) (xy -19.05 -9.525)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -8.255) (xy -19.05 -8.255) (xy -19.05 -8.255)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -19.05 -6.985) (xy -20.32 -6.985) (xy -20.32 -6.985)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -20.32 -14.605) (xy -20.32 -3.175) (xy -10.16 -3.175) (xy -10.16 -5.715) (xy -8.89 -5.715)
+						(xy -8.89 -6.985) (xy -7.62 -6.985) (xy -7.62 -10.795) (xy -8.89 -10.795) (xy -8.89 -12.065) (xy -10.16 -12.065)
+						(xy -10.16 -14.605) (xy -20.32 -14.605) (xy -20.32 -14.605)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "1-406541-1_1_0"
+				(pin passive line
+					(at -26.67 0 0)
+					(length 5.08)
+					(name "MH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MH1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -26.67 -17.78 0)
+					(length 5.08)
+					(name "MH2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MH2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Texas_Instruments:SN74ABT245BDBR"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SN74ABT245BDBR"
+				(at 12.7 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOP65P780X200-20N"
+				(at 24.13 -32.385 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/gpn/sn74abt245b"
+				(at 24.13 -34.925 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "8-bit line driver"
+				(at 12.7 -28.575 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "2"
+				(at 24.13 -37.465 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Texas Instruments"
+				(at 24.13 -40.005 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "SN74ABT245BDBR"
+				(at 24.13 -42.545 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "595-SN74ABT245BDBR"
+				(at 24.13 -45.085 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74ABT245BDBR?qs=5nGYs9Do7G0kvriH65mtcg%3D%3D"
+				(at 24.13 -47.625 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "74ABT245"
+				(at 12.7 -31.115 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SN74ABT245BDBR_0_0"
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "DIR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -25.4 0)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "B7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "B6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "B5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "B4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "B3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "B2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "B1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "B0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 0 0)
+					(length 5.08)
+					(name "~{OE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -22.86 180)
+					(length 5.08)
+					(name "A0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08) hide
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -20.32 180)
+					(length 5.08)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -17.78 180)
+					(length 5.08)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -15.24 180)
+					(length 5.08)
+					(name "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -12.7 180)
+					(length 5.08)
+					(name "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -10.16 180)
+					(length 5.08)
+					(name "A5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -7.62 180)
+					(length 5.08)
+					(name "A6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "A7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "SN74ABT245BDBR_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -27.305) (xy 5.08 -27.305) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
+	)
+	(junction
+		(at 237.49 143.51)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "50817077-8aea-44e8-8393-93878bf8e619")
+	)
+	(junction
+		(at 199.39 143.51)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7a2cac73-335e-4303-a4d6-53e288b6ad25")
+	)
+	(no_connect
+		(at 101.6 161.29)
+		(uuid "01c56c33-3c58-4b81-8e6f-cc208c140618")
+	)
+	(no_connect
+		(at 24.13 26.67)
+		(uuid "03405c29-9a1b-42d3-9989-788b8440f906")
+	)
+	(no_connect
+		(at 64.77 176.53)
+		(uuid "0ba57b94-469c-4368-843e-8e28142892bd")
+	)
+	(no_connect
+		(at 24.13 77.47)
+		(uuid "0f8b91d3-1212-46f6-a179-31eb735c80c8")
+	)
+	(no_connect
+		(at 209.55 119.38)
+		(uuid "1667fc08-1ac6-44c8-9975-374d0e398dfc")
+	)
+	(no_connect
+		(at 24.13 44.45)
+		(uuid "41033111-2d5d-4d39-93ca-8ff0df5f4ffd")
+	)
+	(no_connect
+		(at 44.45 176.53)
+		(uuid "63684c6f-eb6a-473c-ae05-2fac6a00479e")
+	)
+	(no_connect
+		(at 64.77 179.07)
+		(uuid "69b658d2-a3d7-4812-ba4a-23ba2de8e28a")
+	)
+	(no_connect
+		(at 50.8 26.67)
+		(uuid "7535d3a2-8313-4adf-b814-26fa5ba4ac51")
+	)
+	(no_connect
+		(at 224.79 148.59)
+		(uuid "a73d64be-e187-4218-9a21-5324f23ba944")
+	)
+	(no_connect
+		(at 207.01 119.38)
+		(uuid "bc19eca4-d934-433a-86d5-d11d0e271a26")
+	)
+	(no_connect
+		(at 44.45 179.07)
+		(uuid "cf7496b2-b85b-468c-b2d8-69efaeceae12")
+	)
+	(no_connect
+		(at 24.13 59.69)
+		(uuid "edecf073-1dfe-495a-9841-1e0d4085fc04")
+	)
+	(wire
+		(pts
+			(xy 237.49 143.51) (xy 248.92 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0887eec0-59d8-48ce-92e3-3c2d479c1cfc")
+	)
+	(wire
+		(pts
+			(xy 96.52 77.47) (xy 128.27 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "099b8b23-e951-4ea4-8f11-b01d76af42f4")
+	)
+	(wire
+		(pts
+			(xy 96.52 69.85) (xy 128.27 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0c2b00df-8fc7-4c83-b40c-810c36e1930e")
+	)
+	(wire
+		(pts
+			(xy 96.52 72.39) (xy 128.27 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f60c890-b1f8-4b9f-b0ce-f077e1ee675e")
+	)
+	(wire
+		(pts
+			(xy 222.25 93.98) (xy 222.25 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "11690702-3669-41af-9616-d3596847882a")
+	)
+	(wire
+		(pts
+			(xy 184.15 143.51) (xy 199.39 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13261a19-80fa-419a-b0f2-d7fc57c873e4")
+	)
+	(wire
+		(pts
+			(xy 212.09 93.98) (xy 212.09 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "193cdb25-a2fc-4422-85d9-633ef89d97b0")
+	)
+	(wire
+		(pts
+			(xy 96.52 54.61) (xy 104.14 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24a91cf1-cb65-415f-8c3f-02cb4ce46504")
+	)
+	(wire
+		(pts
+			(xy 219.71 93.98) (xy 219.71 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e075e3e-1253-4b28-b945-749274a764f1")
+	)
+	(wire
+		(pts
+			(xy 157.48 93.98) (xy 157.48 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f4b91d2-0007-404c-b203-7450951a15f3")
+	)
+	(wire
+		(pts
+			(xy 96.52 67.31) (xy 128.27 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30ec609d-1eb5-4318-b659-88b1d8e13c5d")
+	)
+	(wire
+		(pts
+			(xy 184.15 143.51) (xy 184.15 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "407c0bdf-3c30-4156-bbc2-8466d25daec9")
+	)
+	(wire
+		(pts
+			(xy 139.7 93.98) (xy 139.7 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "446a423f-0007-4e93-9771-b86fbe337c5a")
+	)
+	(wire
+		(pts
+			(xy 154.94 93.98) (xy 154.94 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47530db8-2287-473d-ac13-84d8d87054e3")
+	)
+	(wire
+		(pts
+			(xy 96.52 62.23) (xy 128.27 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54640236-b01e-4bba-83c2-9d7bf6a183bf")
+	)
+	(wire
+		(pts
+			(xy 147.32 93.98) (xy 147.32 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69c3c30b-c89c-4f24-bae9-90f2cbd60a73")
+	)
+	(wire
+		(pts
+			(xy 214.63 93.98) (xy 214.63 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "725deee1-c6b7-4df8-b31a-12a245f546c7")
+	)
+	(wire
+		(pts
+			(xy 224.79 93.98) (xy 224.79 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "784c156c-50ea-4223-9613-37b89bd5880a")
+	)
+	(wire
+		(pts
+			(xy 209.55 93.98) (xy 209.55 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b74d856-45ce-411f-a8dc-a5dad2b8c93b")
+	)
+	(wire
+		(pts
+			(xy 96.52 74.93) (xy 128.27 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d2c85f8-27ac-403a-a96e-f49d86f323e3")
+	)
+	(wire
+		(pts
+			(xy 237.49 148.59) (xy 237.49 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bfaaeff1-af36-4d64-91d4-2d1ea68b3324")
+	)
+	(wire
+		(pts
+			(xy 142.24 93.98) (xy 142.24 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bfd528ee-af0c-4fa5-830a-d15b655e46c1")
+	)
+	(wire
+		(pts
+			(xy 199.39 143.51) (xy 199.39 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca2b5702-b95e-43da-a530-c83226d5c050")
+	)
+	(wire
+		(pts
+			(xy 152.4 93.98) (xy 152.4 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d435fb26-9348-4358-94b3-201d973563b8")
+	)
+	(wire
+		(pts
+			(xy 207.01 93.98) (xy 207.01 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d51a69ce-6fbe-4831-aae2-e416712c531f")
+	)
+	(wire
+		(pts
+			(xy 149.86 93.98) (xy 149.86 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc267498-5bbe-4ee7-95d3-6121b0b49212")
+	)
+	(wire
+		(pts
+			(xy 184.15 148.59) (xy 185.42 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb27cec4-7938-49d6-9b66-cb650cee085c")
+	)
+	(wire
+		(pts
+			(xy 217.17 93.98) (xy 217.17 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb542036-7640-4b30-9215-6136b9c56ecf")
+	)
+	(wire
+		(pts
+			(xy 144.78 93.98) (xy 144.78 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efbf36b0-c7c7-4bc4-b831-086a4b02ef06")
+	)
+	(wire
+		(pts
+			(xy 96.52 59.69) (xy 128.27 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f22c8073-c6b8-46b1-a136-0b777742dde5")
+	)
+	(wire
+		(pts
+			(xy 96.52 64.77) (xy 128.27 64.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f3e5773c-4850-4bd7-ba89-f2a23da49ca4")
+	)
+	(wire
+		(pts
+			(xy 224.79 143.51) (xy 237.49 143.51)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd019b92-a1e5-477c-99f6-1bcf4ef85ae6")
+	)
+	(label "LED L-Seg"
+		(at 44.45 161.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "002bb791-f5cf-442c-a486-14153050edfa")
+	)
+	(label "OP0"
+		(at 50.8 59.69 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "02ea6f10-0fe1-46d4-9e9f-c2d16af974a0")
+	)
+	(label "GND"
+		(at 195.58 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "04e1c827-2b61-428f-81c2-f0dde91733bf")
+	)
+	(label "LED Ω P-Seg"
+		(at 101.6 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "089fc5df-5c50-4586-84d6-6d36c7e526ff")
+	)
+	(label "LED Ω D-Seg"
+		(at 101.6 166.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0c4554f2-0206-4074-8705-c8cb810625ca")
+	)
+	(label "GND"
+		(at 210.82 19.05 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0cc07595-a990-4d70-9fa8-62227f4ce497")
+	)
+	(label "5V"
+		(at 120.65 177.8 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0cdeff9d-da15-4075-a32e-f4c71d7b4894")
+	)
+	(label "GND"
+		(at 134.62 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0d7fc5c0-3d5f-4d3c-acab-bec107660cf3")
+	)
+	(label "A5"
+		(at 195.58 64.77 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0df9f141-9ce1-4b12-b3af-4acb0b7eb63c")
+	)
+	(label "GND"
+		(at 137.16 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0ff88ec8-2ea8-4071-b157-c9197f0e89ed")
+	)
+	(label "LED G-Seg"
+		(at 142.24 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "127c5775-2636-4bb4-9c2d-b87ec2aa108d")
+	)
+	(label "LED M-Seg"
+		(at 217.17 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "128a9749-8866-4bda-a534-06d7a6a2b940")
+	)
+	(label "OP4"
+		(at 71.12 67.31 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "13343e60-bc88-4644-b08e-d51b8d686b4b")
+	)
+	(label "LED Ω M-Seg"
+		(at 101.6 156.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "154e325b-1112-4de1-bda9-f726be9625a3")
+	)
+	(label "LED A-Seg"
+		(at 157.48 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "15955831-2ffc-4b70-8fe2-cec5178f6995")
+	)
+	(label "3.3V"
+		(at 195.58 31.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "159aae34-5fc6-4135-9781-27a45536f2da")
+	)
+	(label "A4"
+		(at 128.27 67.31 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "17156ef1-a732-4cd5-8c5d-5a08bebdf632")
+	)
+	(label "GND"
+		(at 71.12 54.61 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "19175b88-adfc-40fd-9be8-91fb9b799767")
+	)
+	(label "LED Ω K-Seg"
+		(at 143.51 158.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ae6e486-6170-4952-8516-610d956e4b6c")
+	)
+	(label "LED Ω J-Seg"
+		(at 143.51 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1b1e332f-1fe2-4fe7-a383-5029625aae81")
+	)
+	(label "LED Ω A-Seg"
+		(at 64.77 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1b35ac25-c148-4ae5-b8da-2d71aaf3ebde")
+	)
+	(label "12V"
+		(at 50.8 26.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c066b56-d7f3-4935-a7b6-f4bb465dbc8a")
+	)
+	(label "LED L-Seg"
+		(at 219.71 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1cc9fb82-a112-4655-b349-39479fa43228")
+	)
+	(label "GND"
+		(at 199.39 148.59 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ce9aa2b-fb98-4b0a-9f1b-3792ffe1c679")
+	)
+	(label "LED P-Seg"
+		(at 212.09 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1f47b88e-b03c-4546-ba7b-a24d3ff4c88c")
+	)
+	(label "LED Ω G-Seg"
+		(at 143.51 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1fabdb1b-2b68-4b5a-ab6c-a85a0ad27262")
+	)
+	(label "GND"
+		(at 158.75 19.05 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "202073a9-632a-4bc1-9d87-b983b6ad81a1")
+	)
+	(label "LED Ω B-Seg"
+		(at 64.77 140.97 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "249a5f9c-10c3-49ab-9730-7be929834997")
+	)
+	(label "LED Ω H-Seg"
+		(at 143.51 166.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "25d2e147-a7bf-452f-8955-6dcc19c35490")
+	)
+	(label "GND"
+		(at 195.58 34.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "25fbed22-58c6-40d7-8f80-7507ff2b2995")
+	)
+	(label "LED Ω C-Seg"
+		(at 101.6 163.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "26bc2af1-69cd-49d4-b682-08afd47a1f2f")
+	)
+	(label "GND"
+		(at 204.47 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "277ef4ac-4aae-484c-9c0b-7131002908fa")
+	)
+	(label "LED K-Seg"
+		(at 222.25 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "289f84e1-ffd3-42bc-b309-a601b26b0eab")
+	)
+	(label "GND"
+		(at 125.73 177.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2cdaf8d2-c8e4-40c0-92dc-12ac0d6cfb9d")
+	)
+	(label "A3"
+		(at 195.58 69.85 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d11f2bb-ea38-4b89-96df-97c38dbe0f22")
+	)
+	(label "LED G-Seg"
+		(at 44.45 120.65 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d44ddde-8c46-46e9-9afb-ece6a06d97f5")
+	)
+	(label "GND"
+		(at 195.58 49.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2e71f232-614f-4913-8711-c97418f18c95")
+	)
+	(label "GND"
+		(at 143.51 19.05 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2fb91fee-986e-4489-8f52-ae18935e5a61")
+	)
+	(label "GND"
+		(at 128.27 57.15 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "360b982e-4248-45e1-bf05-1d7b5f937c5a")
+	)
+	(label "5V"
+		(at 50.8 31.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "36dac764-adab-4434-960f-0afda0df04ad")
+	)
+	(label "3.3V"
+		(at 138.43 19.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "37b8b6ca-1deb-4998-a9ca-d6784c8ceb2c")
+	)
+	(label "LED Ω J-Seg"
+		(at 64.77 173.99 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "39ba165e-0d04-437d-955e-6c62abad0241")
+	)
+	(label "GND"
+		(at 195.58 29.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3a78e51b-f037-4c85-9900-3426d3614bb5")
+	)
+	(label "LED Ω E-Seg"
+		(at 101.6 168.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3d27a9c4-a29f-4492-a3f3-d75d6be6bb6e")
+	)
+	(label "LED Ω L-Seg"
+		(at 101.6 158.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3da64c4b-5c17-450a-be73-7892333d56c4")
+	)
+	(label "OP6"
+		(at 50.8 74.93 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3dfa37e5-8fa2-49db-a7e9-44ae88a8251a")
+	)
+	(label "3.3V"
+		(at 71.12 57.15 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3e2fd5dd-579f-4ed4-8a34-adb29a8cd779")
+	)
+	(label "GND"
+		(at 242.57 148.59 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3f1991aa-cdbb-42a6-8e56-e0f72d72219e")
+	)
+	(label "LED A-Seg"
+		(at 44.45 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "40b41b8e-6fb8-4e32-833d-83edb54a4303")
+	)
+	(label "3.3V"
+		(at 205.74 19.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4752d542-79d3-47e3-b3e6-64965fae36eb")
+	)
+	(label "GND"
+		(at 50.8 36.83 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "48b8f258-2f70-46f3-8c43-da625ae1b08e")
+	)
+	(label "LED H-Seg"
+		(at 44.45 118.11 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4a1f0be9-8427-44e9-a813-7a6c6f408958")
+	)
+	(label "GND"
+		(at 128.27 49.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4a649235-25d4-405c-9e78-e98c7451faf6")
+	)
+	(label "GND"
+		(at 128.27 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4eda4431-c41e-4842-8a61-442195412209")
+	)
+	(label "5V"
+		(at 201.93 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4ef93bcb-d60a-48cc-bd8f-1bb83a44917d")
+	)
+	(label "OP3"
+		(at 50.8 67.31 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4fd9ac7f-115e-4493-8b6e-1653b092b637")
+	)
+	(label "LED F-Seg"
+		(at 44.45 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "52d87d12-3b5f-458c-aa38-4d4c1881a56f")
+	)
+	(label "LED C-Seg"
+		(at 44.45 138.43 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "570585ff-5461-4cad-b8da-26b0b44b6ede")
+	)
+	(label "GND"
+		(at 50.8 41.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "599dba73-bde5-4c95-8282-e59d472b7565")
+	)
+	(label "GND"
+		(at 128.27 44.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a14edbd-d193-4505-8910-28713371c44d")
+	)
+	(label "LED Ω L-Seg"
+		(at 64.77 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5badcdb0-27d4-4860-ad24-da7d184244f3")
+	)
+	(label "LED Ω N-Seg"
+		(at 101.6 153.67 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5d39b35b-b822-462f-8b35-e676b29ac3ab")
+	)
+	(label "OP7"
+		(at 71.12 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5d9bd8f6-321d-43c2-818d-bf623924f8a7")
+	)
+	(label "LED Ω F-Seg"
+		(at 64.77 123.19 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "65b5f3ba-8ece-4507-adee-8680bbf56a4e")
+	)
+	(label "GND"
+		(at 195.58 54.61 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "66fd8899-6035-4855-bee4-2e43820379dc")
+	)
+	(label "A6"
+		(at 195.58 62.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6990a7d1-640d-46df-8f9f-91ab5cecf0ca")
+	)
+	(label "A3"
+		(at 128.27 69.85 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "69b79240-9e71-4147-b05e-f989e106c3e1")
+	)
+	(label "OP5"
+		(at 71.12 64.77 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6a659510-7308-4c1d-bbfd-770d7b80161a")
+	)
+	(label "A6"
+		(at 128.27 62.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6ae6cd0f-89ed-42c0-a55f-8170fa673b84")
+	)
+	(label "3.3V"
+		(at 96.52 54.61 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6d274031-686e-4911-b283-e95777956521")
+	)
+	(label "LED D-Seg"
+		(at 149.86 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6dcf9bea-0d5b-4a72-ae63-973679ae83a9")
+	)
+	(label "LED C-Seg"
+		(at 152.4 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6f1b98e2-ff6b-4932-a7f0-368bcb896b68")
+	)
+	(label "LED K-Seg"
+		(at 44.45 171.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "70cdd759-cb49-42d8-b006-a03c91f634b2")
+	)
+	(label "LED H-Seg"
+		(at 139.7 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "713e6a09-57dc-4327-b3ee-6bd818566ee6")
+	)
+	(label "3.3V"
+		(at 236.22 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7319f618-b0ee-43ba-8b0c-dc0bb2a1a69f")
+	)
+	(label "LED P-Seg"
+		(at 44.45 153.67 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7376797a-9470-47ec-b96f-77eaf4020f31")
+	)
+	(label "LED N-Seg"
+		(at 44.45 156.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "73fcf6bf-9749-4054-a8b1-ad2ef3e9b0f1")
+	)
+	(label "LED Ω M-Seg"
+		(at 64.77 158.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7b51f118-f90c-43bc-b4f4-fd0b7daaf5bd")
+	)
+	(label "LED E-Seg"
+		(at 44.45 125.73 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7eb3bb13-ea53-414f-8b6a-9deb14314130")
+	)
+	(label "GND"
+		(at 195.58 57.15 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8115df82-3133-429e-8d9f-119365d67d85")
+	)
+	(label "GND"
+		(at 195.58 41.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "83bc9109-37be-45ae-8381-c37ed1a75056")
+	)
+	(label "A2"
+		(at 195.58 72.39 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "83f53a13-65d1-40e0-9988-c24c3880513c")
+	)
+	(label "OP4"
+		(at 50.8 69.85 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "895680ab-dac2-4d98-902b-db482bde7c1e")
+	)
+	(label "OP6"
+		(at 71.12 62.23 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8a525618-4a7a-4d87-b478-b54840174abc")
+	)
+	(label "GND"
+		(at 128.27 29.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8a857d04-3021-4e2e-a709-918a6d5adb50")
+	)
+	(label "LED B-Seg"
+		(at 44.45 140.97 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8afce793-4e01-475b-b52d-b051a2389715")
+	)
+	(label "LED Ω K-Seg"
+		(at 64.77 171.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8b774b28-5fee-4e25-b382-4219be0bc100")
+	)
+	(label "GND"
+		(at 128.27 54.61 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8c52243f-37b4-46c7-8787-3133229a998b")
+	)
+	(label "OP0"
+		(at 71.12 77.47 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8e546fa3-4972-4207-9c97-4a0bf081e520")
+	)
+	(label "A7"
+		(at 195.58 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8f9d1011-d65e-4e7f-ac22-1fdfbd5636ea")
+	)
+	(label "LED M-Seg"
+		(at 44.45 158.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "90c78a5a-8f77-483f-80a5-0701feb2d293")
+	)
+	(label "GND"
+		(at 109.22 54.61 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "926a09ee-76d3-43dc-81b6-deb3cb47e6e6")
+	)
+	(label "GND"
+		(at 195.58 46.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "92a503d9-c5cf-49d1-9528-9c532a1fb9e0")
+	)
+	(label "A1"
+		(at 128.27 74.93 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "94ee8fef-c0f0-4657-aa8c-6d43e10eab44")
+	)
+	(label "GND"
+		(at 50.8 44.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96683cde-d295-42f9-bc0b-cbc3fb0e5061")
+	)
+	(label "GND"
+		(at 160.02 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "968da6f1-b12a-44df-be23-16fda3eb657e")
+	)
+	(label "GND"
+		(at 201.93 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "968f7f86-2eb7-4656-8c8f-de04781a965c")
+	)
+	(label "GND"
+		(at 190.5 148.59 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "96e53ab0-d45a-4f80-b9a8-9fc36df7c4ec")
+	)
+	(label "5V"
+		(at 220.98 19.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "96f69c84-fdb2-4fcc-989a-05273964a079")
+	)
+	(label "LED Ω E-Seg"
+		(at 64.77 125.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "99a48836-2e89-4c46-b2b4-44ac5baea46e")
+	)
+	(label "OP2"
+		(at 71.12 72.39 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9b2b2d96-1ad5-4af4-bcf6-bc12afddd584")
+	)
+	(label "GND"
+		(at 128.27 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9cc883e2-cc42-487a-99ae-b583de65f62f")
+	)
+	(label "A2"
+		(at 128.27 72.39 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9cce7bef-e91e-4c87-b0e7-318f39ad467c")
+	)
+	(label "LED Ω C-Seg"
+		(at 64.77 138.43 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a13bc0dc-2509-410d-a54c-0876a1be45d4")
+	)
+	(label "LED Ω A-Seg"
+		(at 143.51 153.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a25c0b84-79d7-4fa6-82b1-53d78510b830")
+	)
+	(label "LED Ω G-Seg"
+		(at 64.77 120.65 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a36860b8-cec6-4d9e-ae27-fd17e5013aab")
+	)
+	(label "OP3"
+		(at 71.12 69.85 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a3a955d5-906f-4f9b-99f4-a29d0df3cefe")
+	)
+	(label "A0"
+		(at 195.58 77.47 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a60236cf-4e06-4556-ae17-95ab2b45c454")
+	)
+	(label "LED J-Seg"
+		(at 224.79 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a6f40521-8e1a-42c7-b400-bf5a73d43a50")
+	)
+	(label "A7"
+		(at 128.27 59.69 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a8e528ae-5eb6-41c5-9fb2-c6d9c3050c11")
+	)
+	(label "5V"
+		(at 153.67 19.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a979520c-e9c3-461d-99ec-0f3909a182f3")
+	)
+	(label "GND"
+		(at 128.27 34.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a9eef1f9-3c31-4f6d-b3ba-71816ff161f9")
+	)
+	(label "GND"
+		(at 195.58 36.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "aab1281d-d1cc-4b27-b083-4b88b2052ea1")
+	)
+	(label "OP1"
+		(at 50.8 62.23 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "aab601ab-012d-413d-b9ca-abab944ff064")
+	)
+	(label "GND"
+		(at 195.58 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ac89c82e-bea7-4e5e-a0ac-2ff132ff3377")
+	)
+	(label "LED Ω D-Seg"
+		(at 64.77 135.89 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b3262719-7f65-488b-9344-e3cb032b7813")
+	)
+	(label "A4"
+		(at 195.58 67.31 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b72a8900-f9c3-4f08-bddd-182d045db491")
+	)
+	(label "GND"
+		(at 195.58 44.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b738fbed-65cb-424c-92fa-7af8251d636b")
+	)
+	(label "3.3V"
+		(at 248.92 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7d195da-40db-4117-a1fd-b978b31e58c0")
+	)
+	(label "GND"
+		(at 227.33 93.98 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc406023-2b5f-4a1a-a8d7-a7e358c8b9e3")
+	)
+	(label "A1"
+		(at 195.58 74.93 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bde5b37d-f167-4986-a64c-69241fe03d7a")
+	)
+	(label "LED Ω H-Seg"
+		(at 64.77 118.11 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "be026147-72f4-47c4-aca4-55edde722731")
+	)
+	(label "GND"
+		(at 128.27 46.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c17500c8-6fbc-42b6-add4-20fae5a34665")
+	)
+	(label "LED Ω N-Seg"
+		(at 64.77 156.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c1ab61d9-1df8-4df4-9b09-7dea7304c1b0")
+	)
+	(label "5V"
+		(at 50.8 34.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c23a431e-afca-4ecc-8407-87f75f7922dc")
+	)
+	(label "A0"
+		(at 128.27 77.47 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c4cf3a11-a35e-4813-8336-91174adf8bfa")
+	)
+	(label "GND"
+		(at 71.12 80.01 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c5a59075-a48c-49c8-b00c-1685fd77d49b")
+	)
+	(label "LED Ω F-Seg"
+		(at 143.51 168.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c705ad56-27e1-45d1-943b-87e9f8383e28")
+	)
+	(label "GND"
+		(at 128.27 36.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c86394e9-d1cb-4825-9a87-4015bab0f0e0")
+	)
+	(label "3.3V"
+		(at 168.91 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c9fd0877-2c84-4a46-8006-5600e44da680")
+	)
+	(label "GND"
+		(at 128.27 41.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ccd9c66c-2512-4d69-be46-549498802849")
+	)
+	(label "OP5"
+		(at 50.8 72.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d4d45410-8451-472a-b837-37d30fa1e81a")
+	)
+	(label "LED B-Seg"
+		(at 154.94 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d6ba3fa9-faed-496a-8a86-782a8eb62e50")
+	)
+	(label "5V"
+		(at 134.62 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d8a968f3-a048-4c31-ae8e-abe98eb05477")
+	)
+	(label "GND"
+		(at 128.27 52.07 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "da3c810e-7bdf-4966-bdea-e774fdc4bd34")
+	)
+	(label "LED J-Seg"
+		(at 44.45 173.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e38a0b18-2bb5-444c-806b-30e87ae834a0")
+	)
+	(label "LED E-Seg"
+		(at 147.32 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e84b42c0-1931-409f-8d95-52e0519644cb")
+	)
+	(label "LED D-Seg"
+		(at 44.45 135.89 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e9ebf42d-ebad-4795-9848-a4f44781b775")
+	)
+	(label "LED Ω B-Seg"
+		(at 143.51 156.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eaaf37d2-8772-4a51-a3c0-863ed37f6fc6")
+	)
+	(label "3.3V"
+		(at 128.27 31.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ec28dc8c-5e5e-45aa-8dd7-ce7dd913735e")
+	)
+	(label "LED F-Seg"
+		(at 144.78 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ec72c516-3205-4c9c-859e-bf2eb29ac886")
+	)
+	(label "LED Ω P-Seg"
+		(at 64.77 153.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ecc995f3-8503-456c-94ca-7670e55cf641")
+	)
+	(label "GND"
+		(at 50.8 39.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ed92225f-a77c-48fb-9115-b299c30b456a")
+	)
+	(label "GND"
+		(at 226.06 19.05 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f1165e8d-05ab-4004-9c55-3df8c73e8a56")
+	)
+	(label "OP1"
+		(at 71.12 74.93 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f28def3d-ee19-4406-a33b-9646b648fc48")
+	)
+	(label "5V"
+		(at 50.8 29.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f300bbf5-bc81-43e0-a444-148882c8a0b2")
+	)
+	(label "LED N-Seg"
+		(at 214.63 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f357eeff-fa27-44c2-841e-79d2df472229")
+	)
+	(label "GND"
+		(at 143.51 163.83 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f4d9712b-b8cf-4621-aca9-162836b6e5d5")
+	)
+	(label "OP2"
+		(at 50.8 64.77 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fac435c3-f277-4e9f-a47c-1657c489b897")
+	)
+	(label "GND"
+		(at 195.58 52.07 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fbcc9d77-1ea2-4fa2-928e-a64de8ddb79e")
+	)
+	(label "OP7"
+		(at 50.8 77.47 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fc129640-31f8-4729-825d-4931f48746f9")
+	)
+	(label "5V"
+		(at 184.15 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fe4e8b7c-0200-47ee-9fb3-f5af9f33f66f")
+	)
+	(label "A5"
+		(at 128.27 64.77 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ff1789d4-4d67-4a8e-86d1-8630117c78d3")
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 185.42 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0de7584f-b983-416e-9514-78125fb1c6b3")
+		(property "Reference" "C6"
+			(at 187.706 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10µF"
+			(at 185.42 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 202.184 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 187.6425 148.2725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 185.42 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "12114acc-64c3-4b33-a046-99342716bca7")
+		)
+		(pin "2"
+			(uuid "4abf4ef1-c740-4bd2-8242-65a6d2b221d5")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Texas_Instruments:SN74ABT245BDBR")
+		(at 201.93 93.98 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "17ee9eb5-6abd-4768-a04b-c325d90bf82c")
+		(property "Reference" "IC4"
+			(at 196.85 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SN74ABT245BDBR"
+			(at 198.755 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P780X200-20N"
+			(at 234.315 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74abt245b"
+			(at 236.855 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "8-bit line driver"
+			(at 230.505 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "2"
+			(at 239.395 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Texas Instruments"
+			(at 241.935 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "SN74ABT245BDBR"
+			(at 244.475 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "595-SN74ABT245BDBR"
+			(at 247.015 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74ABT245BDBR?qs=5nGYs9Do7G0kvriH65mtcg%3D%3D"
+			(at 249.555 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74ABT245"
+			(at 233.045 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "b3c8f8d8-b1f3-4b41-bf71-4dfef2bac394")
+		)
+		(pin "13"
+			(uuid "36479359-143c-41f6-bfd1-0727c5b8ed15")
+		)
+		(pin "10"
+			(uuid "35f3dbcb-4ef6-4b43-8bf3-3f4bc955a4dc")
+		)
+		(pin "15"
+			(uuid "3b55df2a-ed24-41b8-b72b-349496eadb06")
+		)
+		(pin "16"
+			(uuid "49738ef1-70ed-4047-ba58-b6fe3060987e")
+		)
+		(pin "12"
+			(uuid "db481cd1-fd08-4d86-8642-45116ff6a24b")
+		)
+		(pin "17"
+			(uuid "aa324f85-5647-46fd-90c5-40eddcf26533")
+		)
+		(pin "11"
+			(uuid "ddaa2826-cf06-4af8-a61d-854dd1cccd6b")
+		)
+		(pin "14"
+			(uuid "17108f3e-de05-4ac6-b94e-2c91fc33435c")
+		)
+		(pin "18"
+			(uuid "37253654-8093-4fec-b661-f362ae9b0747")
+		)
+		(pin "19"
+			(uuid "da67b6d7-1f19-4915-b9c4-3bcb0eaa6a3e")
+		)
+		(pin "20"
+			(uuid "93e2a71e-3e3a-4fc4-a934-5e01da03d45e")
+		)
+		(pin "4"
+			(uuid "3ea22c21-b389-4bd7-95c7-6f7771cbcfc5")
+		)
+		(pin "1"
+			(uuid "7ea45695-606d-48f3-9ef9-3861ec01ebaa")
+		)
+		(pin "2"
+			(uuid "151be6a6-17f4-45ed-a36a-09aba212f62c")
+		)
+		(pin "7"
+			(uuid "2606dafa-d8bf-486d-acde-1b0faddbf42b")
+		)
+		(pin "5"
+			(uuid "6fff1635-be0f-48db-a3de-5ee0a5887d64")
+		)
+		(pin "6"
+			(uuid "95eab52e-de1a-4db4-8809-d254fce8845f")
+		)
+		(pin "8"
+			(uuid "d3cb5a8b-d3cf-4a94-9048-4a8aa11adead")
+		)
+		(pin "9"
+			(uuid "a20eb370-59d3-4427-8cbe-fe71ce6046f4")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 220.98 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1d8e3f50-0cda-44ef-a5b9-7a6663a3816c")
+		(property "Reference" "C4"
+			(at 223.266 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 223.52 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 237.744 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 223.2025 18.7325 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 220.98 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78490a33-2493-47b3-9094-6d718d16cd51")
+		)
+		(pin "2"
+			(uuid "e937c197-0c1f-468b-b09a-a2876e0b8bb4")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Kingbright:KCPSA04-107")
+		(at 101.6 151.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1e3398dd-f2d6-4eb1-9378-98ad9a19399d")
+		(property "Reference" "DS1"
+			(at 123.19 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "KCPSA04-107"
+			(at 123.19 147.955 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:KCPSA04107"
+			(at 133.35 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://docs.rs-online.com/7525/0900766b813c9017.pdf"
+			(at 133.35 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "yellow 14-seg LED display"
+			(at 123.19 172.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "4"
+			(at 133.35 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Kingbright"
+			(at 133.35 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "KCPSA04-107"
+			(at 133.35 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "N/A"
+			(at 133.35 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Kingbright/KCPSA04-107?qs=2JU0tDl2GZ1zROqoLKb2zw%3D%3D"
+			(at 133.35 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "KCPSA04-107"
+			(at 123.19 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a1130203-2cf0-4222-a650-1032119c88ca")
+		)
+		(pin "12"
+			(uuid "18c4acfe-63b6-4634-9d83-bf03689ec9b9")
+		)
+		(pin "1"
+			(uuid "0f6434c8-6ca0-4632-b451-f98c95698745")
+		)
+		(pin "16"
+			(uuid "50985f09-536a-4adc-9d7a-eba11700a08b")
+		)
+		(pin "6"
+			(uuid "26ba88fa-b115-4aa5-8e5a-f90c51827ad5")
+		)
+		(pin "5"
+			(uuid "a8ff0cee-59c4-42ec-97e2-88f265d7748c")
+		)
+		(pin "11"
+			(uuid "d1618fed-acb9-49d3-b5f5-e74401ff557d")
+		)
+		(pin "14"
+			(uuid "a47a0cc6-3a19-4e2a-9801-7c267099dd54")
+		)
+		(pin "9"
+			(uuid "165731f5-0758-44d3-b93f-e71e109be9bc")
+		)
+		(pin "10"
+			(uuid "032cb1f5-eac7-4ce3-9e43-ad72db2f4bcc")
+		)
+		(pin "15"
+			(uuid "f966c1bd-0f41-4c15-938a-48ff44ab9f37")
+		)
+		(pin "13"
+			(uuid "56e064ff-65e3-4deb-9921-bb0c10717c9d")
+		)
+		(pin "8"
+			(uuid "423ef045-751e-43a1-871c-da859e6f783c")
+		)
+		(pin "7"
+			(uuid "69b4667e-4067-4d69-a95f-26291acd0bea")
+		)
+		(pin "3"
+			(uuid "9826ff27-84ea-42d9-9ff7-93424c9c9b52")
+		)
+		(pin "4"
+			(uuid "3838fdbf-ee05-4fdc-9f8b-b9e2f04d4ac9")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "DS1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Bourns:CAY16-221J4LF")
+		(at 64.77 179.07 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "23bb4743-8e0c-411c-b808-5413755f06f5")
+		(property "Reference" "RN4"
+			(at 54.61 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CAY16-221J4LF"
+			(at 54.61 182.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAY16-F4"
+			(at 46.355 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/CATCAY.pdf"
+			(at 46.355 161.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "220Ω 4-array resistor"
+			(at 54.61 168.275 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "0.6"
+			(at 46.355 156.845 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Bourns"
+			(at 46.355 154.305 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CAY16-221J4LF"
+			(at 46.355 151.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "652-CAY16-221J4LF"
+			(at 46.355 149.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-221J4LF?qs=BKfsZh40Pd9sAo64tUrb9Q%3D%3D"
+			(at 46.355 146.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "CAY16-221J4LF"
+			(at 46.355 144.145 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-221j4lf/bourns?region=nac"
+			(at 46.355 141.605 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "220Ω"
+			(at 54.61 165.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 220 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 64.77 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0770d787-fd59-4076-a4d1-2abbad4309c0")
+		)
+		(pin "2"
+			(uuid "899c5e86-e3d4-4034-a4a5-04772fa9a057")
+		)
+		(pin "3"
+			(uuid "36488b32-2a2a-434f-a7f7-798be617e4ef")
+		)
+		(pin "4"
+			(uuid "c2f131af-9872-4f36-baf0-3975a617e5e7")
+		)
+		(pin "5"
+			(uuid "9c46e526-848c-4e67-8f82-34989b3deac7")
+		)
+		(pin "6"
+			(uuid "881239df-303c-47e3-93b7-48a988dc34d5")
+		)
+		(pin "7"
+			(uuid "1abd803a-0166-4ea4-8dab-4252dfed9bc2")
+		)
+		(pin "8"
+			(uuid "0e1a1a29-7eac-451c-9f95-5c40fe8ba0ed")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "RN4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Microchip:SST39VF010-70-4I-NHE")
+		(at 128.27 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "250abd55-cc5f-47e9-97c6-764cefc57d32")
+		(property "Reference" "IC6"
+			(at 147.955 23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SST39VF010-70-4I-NHE"
+			(at 147.955 26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:5408803224008"
+			(at 169.545 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 169.545 95.885 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "32 pin PLCC socket\n(1 Mbit NOR Flash)"
+			(at 148.59 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "8.2"
+			(at 169.545 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Microchip"
+			(at 169.545 103.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "SST39VF010-70-4I-NHE"
+			(at 169.545 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 147.32 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 147.32 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "SST39VF010-70"
+			(at 148.59 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
+			(at 169.672 108.712 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "16"
+			(uuid "5f35d71c-1d25-4863-b06a-d2863502296f")
+		)
+		(pin "1"
+			(uuid "8e84e487-cba3-4e0f-b9d5-56f84ab048ba")
+		)
+		(pin "10"
+			(uuid "3d5567ae-92cc-47c4-9a5e-c2edd9573b2e")
+		)
+		(pin "11"
+			(uuid "613d05f2-63ab-467e-aa80-7ad6d9487dbd")
+		)
+		(pin "12"
+			(uuid "07533a8d-15d2-464c-b9bc-0451efa3bfad")
+		)
+		(pin "13"
+			(uuid "e4c3194b-bf6c-4868-b512-192c5d1ce4f1")
+		)
+		(pin "14"
+			(uuid "e7a952e9-16a8-47c2-bee2-81ca523d9f5a")
+		)
+		(pin "15"
+			(uuid "ef05a3b8-2b05-436b-89ff-b13b1f57b3fa")
+		)
+		(pin "17"
+			(uuid "5f7c5f9d-7153-475e-ab93-106af180a810")
+		)
+		(pin "18"
+			(uuid "86f4400e-f2bb-490a-baaf-c2f6629049e5")
+		)
+		(pin "19"
+			(uuid "0335d6d2-d770-4a64-b25c-2d7334cc6a58")
+		)
+		(pin "2"
+			(uuid "42490c2d-85c6-4bd9-a62d-e7c590509445")
+		)
+		(pin "20"
+			(uuid "7b3e3c76-1025-4291-ba1e-1e516811ecf1")
+		)
+		(pin "21"
+			(uuid "0a84b3fe-ab95-4096-ad35-d3ede24c625a")
+		)
+		(pin "22"
+			(uuid "a43b42da-d36a-40ba-9247-534829bc65cf")
+		)
+		(pin "23"
+			(uuid "9b37c5ca-eb12-4cc6-b7b0-d1a8d9068fe1")
+		)
+		(pin "24"
+			(uuid "3ef8de29-a864-4c89-b984-0d14c3acf69b")
+		)
+		(pin "25"
+			(uuid "f4b84ea8-98ba-465a-895e-8df0f140612f")
+		)
+		(pin "26"
+			(uuid "e93c2718-661f-4de3-bcf2-54743112c3a4")
+		)
+		(pin "27"
+			(uuid "4e857664-0fea-4a34-81f9-ee8c88de9ee0")
+		)
+		(pin "28"
+			(uuid "78743553-c22f-4dba-8287-4621f9934e49")
+		)
+		(pin "29"
+			(uuid "120b97bc-1281-4ad8-bce1-ea6782c1326b")
+		)
+		(pin "3"
+			(uuid "e817ed95-dc0b-4b17-a7de-9e84afd168a9")
+		)
+		(pin "30"
+			(uuid "5755d647-c366-4968-ad57-0b036331e015")
+		)
+		(pin "31"
+			(uuid "9aecacc2-3b6e-4777-b9a1-b4cdc1950a93")
+		)
+		(pin "32"
+			(uuid "df5f4263-b8af-44ff-b4f5-69d8609eb4bb")
+		)
+		(pin "4"
+			(uuid "db09f818-08f7-4452-872d-92725b3ac177")
+		)
+		(pin "5"
+			(uuid "1d4b15a0-9ca0-4630-9474-94f03e5e663a")
+		)
+		(pin "6"
+			(uuid "164e78aa-f8d8-4623-ab9d-8af48217985a")
+		)
+		(pin "7"
+			(uuid "740125e9-ac27-464f-92b5-730ac1038ddd")
+		)
+		(pin "8"
+			(uuid "b2949474-c9a8-4f18-a4dc-4d3843d0335e")
+		)
+		(pin "9"
+			(uuid "b04c9de7-b824-474b-a8a2-9d86889abd34")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Bourns:CAY16-221J4LF")
+		(at 64.77 143.51 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "29ce617e-f11f-48f0-8f87-97318345e24f")
+		(property "Reference" "RN2"
+			(at 54.61 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CAY16-221J4LF"
+			(at 54.61 146.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAY16-F4"
+			(at 46.355 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/CATCAY.pdf"
+			(at 46.355 126.365 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "220Ω 4-array resistor"
+			(at 54.61 132.715 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "0.6"
+			(at 46.355 121.285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Bourns"
+			(at 46.355 118.745 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CAY16-221J4LF"
+			(at 46.355 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "652-CAY16-221J4LF"
+			(at 46.355 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-221J4LF?qs=BKfsZh40Pd9sAo64tUrb9Q%3D%3D"
+			(at 46.355 111.125 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "CAY16-221J4LF"
+			(at 46.355 108.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-221j4lf/bourns?region=nac"
+			(at 46.355 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "220Ω"
+			(at 54.61 130.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 220 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 64.77 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "efafefc5-d8dc-47cd-aad8-f1e1a3162b31")
+		)
+		(pin "2"
+			(uuid "3f4279fb-1ebd-4a4c-b18a-3ef6d67ae462")
+		)
+		(pin "3"
+			(uuid "c9d08506-de0a-40ee-a8e4-076093bf42b1")
+		)
+		(pin "4"
+			(uuid "c2fd025c-01c4-4c2e-be5f-a06051e0b394")
+		)
+		(pin "5"
+			(uuid "74c827d1-b341-497d-9ca3-d55624d3692e")
+		)
+		(pin "6"
+			(uuid "abcd27e2-bce9-49c3-8fdb-7adb5c3b92b5")
+		)
+		(pin "7"
+			(uuid "b4ade5a5-5cea-4398-b72d-009230302828")
+		)
+		(pin "8"
+			(uuid "11bcedd5-db25-42ba-9ab4-8e8577c333ca")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "RN2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 237.49 148.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4d303325-ec1d-44ea-8985-24738a306108")
+		(property "Reference" "C7"
+			(at 239.776 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10µF"
+			(at 237.49 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 254.254 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 239.7125 148.2725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 237.49 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "93c3c00d-05d7-44ae-8140-fd3cf034b5a2")
+		)
+		(pin "2"
+			(uuid "aaa8ee1c-a6a6-4fd5-9d24-a1811c330220")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diodes_Inc:AP7365-33WG-7")
+		(at 199.39 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50c7284a-c305-4bb9-9b66-88f672a4d397")
+		(property "Reference" "IC5"
+			(at 212.09 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AP7365-33WG-7"
+			(at 212.09 140.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
+			(at 220.98 158.115 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
+			(at 220.98 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "3.3V LDO voltage regulator"
+			(at 212.09 151.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.3"
+			(at 220.98 163.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Diodes Inc."
+			(at 220.98 165.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "AP7365-33WG-7"
+			(at 220.98 168.275 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "621-AP7365-33WG-7"
+			(at 220.98 170.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
+			(at 220.98 173.355 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "AP7365-33WG-7"
+			(at 220.98 175.895 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
+			(at 220.98 178.435 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "AP7365"
+			(at 220.98 155.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0007b7e5-f793-4d64-a596-56f4e293c766")
+		)
+		(pin "2"
+			(uuid "c757c92c-dd8b-4e3d-b5b6-a657f3b95ad7")
+		)
+		(pin "3"
+			(uuid "09b6d3cb-ae22-4227-90f5-3fd6b663aeb7")
+		)
+		(pin "4"
+			(uuid "5ee390bf-0f84-4cb8-8815-a6df659182b0")
+		)
+		(pin "5"
+			(uuid "aeb4746f-eb4b-43c1-a080-6c28a149d862")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 120.65 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "54f81046-77e1-4b48-a901-8464d90b1f54")
+		(property "Reference" "C5"
+			(at 122.936 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 123.19 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 137.414 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 122.8725 177.4825 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 120.65 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f8d549dc-b196-4938-8067-2612c5582995")
+		)
+		(pin "2"
+			(uuid "e0cb2b84-85d5-4616-89d1-4b190b3bc6b8")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:1-406541-1")
+		(at 50.8 44.45 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "78c00fc5-4500-4c55-98c8-d1a8eca85b24")
+		(property "Reference" "J1"
+			(at 37.465 50.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1-406541-1"
+			(at 37.465 47.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:1-406541-1_1"
+			(at 66.675 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://uk.rs-online.com/web/p/products/7820823"
+			(at 66.675 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Cat5 Female RJ45"
+			(at 37.465 23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "ModJack,RightAngle,8Position,Cat5 TE Connectivity Female Cat5 RJ45 Connector, Right Angle, Through Hole Mount,"
+			(at 66.675 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" ""
+			(at 67.31 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 66.675 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "1-406541-1"
+			(at 66.675 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-1-406541-1"
+			(at 66.675 11.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/1-406541-1?qs=dOAuEKQrqY4XW9msRoSnqA%3D%3D"
+			(at 66.675 8.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "1-406541-1"
+			(at 66.675 6.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1-406541-1/te-connectivity?region=europe"
+			(at 66.675 3.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "a69f2e4c-f48e-4b2d-a9d6-d5b57bc413fd")
+		)
+		(pin "8"
+			(uuid "74782326-cbc8-49b8-91c0-f7168a4e531f")
+		)
+		(pin "4"
+			(uuid "d078c604-19e1-4268-b4e6-072b08c6a0cf")
+		)
+		(pin "3"
+			(uuid "23499a2b-66c9-446d-a527-73decf3957af")
+		)
+		(pin "2"
+			(uuid "dfab92ba-195f-45b7-86dc-0b06ac592082")
+		)
+		(pin "5"
+			(uuid "772eaf06-bbc5-4f7f-b706-f9bb54f89f86")
+		)
+		(pin "1"
+			(uuid "5d9b513b-c4c3-490f-9273-51a02b5291be")
+		)
+		(pin "6"
+			(uuid "fa8e94b8-4a4d-44f0-a955-b0bb1f8ea47a")
+		)
+		(pin "MH1"
+			(uuid "31e7d1e5-46ec-4ce1-81ce-a18c2533d7b2")
+		)
+		(pin "MH2"
+			(uuid "e31fa9ed-d860-4e3e-a9b9-5efc8393bdc9")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:1-406541-1")
+		(at 50.8 77.47 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "80f5958b-f346-436c-bec8-440866575fea")
+		(property "Reference" "J2"
+			(at 37.465 83.185 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "1-406541-1"
+			(at 37.465 80.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:1-406541-1_1"
+			(at 66.675 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://uk.rs-online.com/web/p/products/7820823"
+			(at 66.675 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Cat5 Female RJ45"
+			(at 37.465 56.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "ModJack,RightAngle,8Position,Cat5 TE Connectivity Female Cat5 RJ45 Connector, Right Angle, Through Hole Mount,"
+			(at 66.675 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" ""
+			(at 67.31 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 66.675 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "1-406541-1"
+			(at 66.675 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-1-406541-1"
+			(at 66.675 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/1-406541-1?qs=dOAuEKQrqY4XW9msRoSnqA%3D%3D"
+			(at 66.675 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "1-406541-1"
+			(at 66.675 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/1-406541-1/te-connectivity?region=europe"
+			(at 66.675 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "7"
+			(uuid "57e7e815-7434-4ec4-9994-4fefc5d362b2")
+		)
+		(pin "8"
+			(uuid "28c6c942-a92d-4391-a780-b9861dd227fd")
+		)
+		(pin "4"
+			(uuid "ed58d63f-d2ef-4893-9705-9bd6ba2c2fa1")
+		)
+		(pin "3"
+			(uuid "950389f6-2ae0-4883-a79d-b0f59d563e84")
+		)
+		(pin "2"
+			(uuid "481bb628-abf6-4980-ba0c-3f45ad760424")
+		)
+		(pin "5"
+			(uuid "058e85ce-59e9-4822-807b-9a3b9d7928d3")
+		)
+		(pin "1"
+			(uuid "8f6fb57d-5fba-45ab-9e7b-be432a1a1cc9")
+		)
+		(pin "6"
+			(uuid "efe3a1ff-9eae-4c99-b230-967c4171d81b")
+		)
+		(pin "MH1"
+			(uuid "7f7aa183-1090-475b-9312-4483b07ff23c")
+		)
+		(pin "MH2"
+			(uuid "656a8b74-8613-4ed7-9c77-e2381bd95f93")
+		)
+		(instances
+			(project "HCP65 Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 104.14 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "826aefb9-c645-47fe-a00a-ca2a0d5e1ff7")
+		(property "Reference" "C8"
+			(at 106.6228 48.8399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 106.6228 51.2642 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 120.904 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.3625 54.2925 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 104.14 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7c16efd4-e18b-4ab9-a6cd-a85f6f2e5bdd")
+		)
+		(pin "2"
+			(uuid "e219be0d-7956-4f70-925d-6ebf9606b50a")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Bourns:CAY16-221J4LF")
+		(at 64.77 125.73 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d544793b-aaf6-462f-af89-1eef12e94c3c")
+		(property "Reference" "RN1"
+			(at 54.61 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CAY16-221J4LF"
+			(at 54.61 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAY16-F4"
+			(at 46.355 111.125 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/CATCAY.pdf"
+			(at 46.355 108.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "220Ω 4-array resistor"
+			(at 54.61 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "0.6"
+			(at 46.355 103.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Bourns"
+			(at 46.355 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CAY16-221J4LF"
+			(at 46.355 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "652-CAY16-221J4LF"
+			(at 46.355 95.885 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-221J4LF?qs=BKfsZh40Pd9sAo64tUrb9Q%3D%3D"
+			(at 46.355 93.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "CAY16-221J4LF"
+			(at 46.355 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-221j4lf/bourns?region=nac"
+			(at 46.355 88.265 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "220Ω"
+			(at 54.61 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 220 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 64.77 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a954362b-06a2-4819-a53a-9495ce9c3665")
+		)
+		(pin "2"
+			(uuid "022233cb-a285-4fa9-b86e-53a0448166e6")
+		)
+		(pin "3"
+			(uuid "8ef6b54d-3fe4-451e-900c-f88e9c546f30")
+		)
+		(pin "4"
+			(uuid "cfd3043e-d38b-47a7-ae1b-4774f3697757")
+		)
+		(pin "5"
+			(uuid "bb491bed-6341-4fd4-b8c1-b80a53c5d72e")
+		)
+		(pin "6"
+			(uuid "852d18e0-9f99-4abd-850f-0f80691524cf")
+		)
+		(pin "7"
+			(uuid "685b7499-64c8-4264-900f-80c956056c6c")
+		)
+		(pin "8"
+			(uuid "6526bb72-1191-411d-bf79-e018b89cc96a")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "RN1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Bourns:CAY16-221J4LF")
+		(at 64.77 161.29 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dee16f5a-52ff-4d13-baab-5049d09ac30b")
+		(property "Reference" "RN3"
+			(at 54.61 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "CAY16-221J4LF"
+			(at 54.61 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CAY16-F4"
+			(at 46.355 146.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/CATCAY.pdf"
+			(at 46.355 144.145 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "220Ω 4-array resistor"
+			(at 54.61 150.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "0.6"
+			(at 46.355 139.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Bourns"
+			(at 46.355 136.525 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "CAY16-221J4LF"
+			(at 46.355 133.985 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "652-CAY16-221J4LF"
+			(at 46.355 131.445 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-221J4LF?qs=BKfsZh40Pd9sAo64tUrb9Q%3D%3D"
+			(at 46.355 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "CAY16-221J4LF"
+			(at 46.355 126.365 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-221j4lf/bourns?region=nac"
+			(at 46.355 123.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "220Ω"
+			(at 54.61 147.955 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bourns CAY16 Series 220 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
+			(at 64.77 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "871fa0ab-6001-473a-a224-399f04dca396")
+		)
+		(pin "2"
+			(uuid "228f59d5-a125-41aa-83f1-2540649643b4")
+		)
+		(pin "3"
+			(uuid "03cd134a-ba8c-48f4-ab22-dbc9556e6410")
+		)
+		(pin "4"
+			(uuid "a7e6c23b-5790-467a-8f77-c7308662ab8c")
+		)
+		(pin "5"
+			(uuid "fc55d6d1-f556-41e8-9d37-b38219fcdba8")
+		)
+		(pin "6"
+			(uuid "9a93888e-430b-47de-a279-9a6a98654d58")
+		)
+		(pin "7"
+			(uuid "f2063164-bd0e-4f5c-b6a3-00e4e29fd3f5")
+		)
+		(pin "8"
+			(uuid "83338aa5-2cc4-4c04-bad3-bc0229105995")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "RN3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Microchip:SST39VF010-70-4I-NHE")
+		(at 195.58 29.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "df5fd2cb-ed94-40e8-a086-9228aba16a6a")
+		(property "Reference" "IC1"
+			(at 215.265 23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SST39VF010-70-4I-NHE"
+			(at 215.265 26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:5408803224008"
+			(at 236.855 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.855 95.885 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "32 pin PLCC socket\n(1 Mbit NOR Flash)"
+			(at 215.9 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "8.2"
+			(at 236.855 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Microchip"
+			(at 236.855 103.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "SST39VF010-70-4I-NHE"
+			(at 236.855 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" ""
+			(at 214.63 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" ""
+			(at 214.63 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "SST39VF010-70"
+			(at 215.9 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Preci-Dip 1.27mm Pitch Female PLCC Socket, 32 Way, Through Hole, Tin Plated Contacts 1A"
+			(at 236.982 108.712 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "16"
+			(uuid "25cef815-3b16-49a5-a5ec-4e12a2b60834")
+		)
+		(pin "1"
+			(uuid "c1c3bdbb-0157-4e9b-a47c-3e4d6f008e1d")
+		)
+		(pin "10"
+			(uuid "137aaaa5-3496-498c-9f25-1dec572c6c1f")
+		)
+		(pin "11"
+			(uuid "bc82d179-aac6-44b3-8c3b-73df5684cf8f")
+		)
+		(pin "12"
+			(uuid "5bd91334-9813-4b0f-95ac-cf6976d42fba")
+		)
+		(pin "13"
+			(uuid "e774df61-7c19-40ae-9a88-35771bc91d02")
+		)
+		(pin "14"
+			(uuid "9a7bfc67-c414-422b-a1ee-0256afe84176")
+		)
+		(pin "15"
+			(uuid "2900e00f-19be-482e-b2da-f5bdef156f8f")
+		)
+		(pin "17"
+			(uuid "1375c52f-9b2b-465a-90cd-55c095fda916")
+		)
+		(pin "18"
+			(uuid "21689ac5-3381-41a1-920f-842d84ec233a")
+		)
+		(pin "19"
+			(uuid "b4b12c68-f062-42f0-a207-7cd2d3902e9d")
+		)
+		(pin "2"
+			(uuid "ea3dd2c7-8440-4cd9-8b8b-04f53379c584")
+		)
+		(pin "20"
+			(uuid "4a307138-3eea-4539-88aa-2efd0672066f")
+		)
+		(pin "21"
+			(uuid "355cd50a-f8bf-4b67-a9b7-d3a9a87aac76")
+		)
+		(pin "22"
+			(uuid "ee120a6b-9331-46ea-ab2b-a861c22edbc7")
+		)
+		(pin "23"
+			(uuid "51e6f8c9-b26d-448a-a633-19a889e366b1")
+		)
+		(pin "24"
+			(uuid "26ebbe12-09b3-47ab-b6e9-4c32d9951c36")
+		)
+		(pin "25"
+			(uuid "73c77f1a-5b8a-4206-bdeb-51c2c92cdafd")
+		)
+		(pin "26"
+			(uuid "3d1fc697-7c20-4bd7-a513-870d67c24261")
+		)
+		(pin "27"
+			(uuid "23c9f61b-8a38-4b51-b06f-fb81dc8d47d8")
+		)
+		(pin "28"
+			(uuid "c91b10bc-1038-47f6-b53f-603362baf560")
+		)
+		(pin "29"
+			(uuid "7f95ee5c-e2d7-4422-b005-9acd5bf85238")
+		)
+		(pin "3"
+			(uuid "a2ae1845-a7fa-4f4f-8ede-42cc56e9c960")
+		)
+		(pin "30"
+			(uuid "33b30574-d7e9-4d82-95ef-d9c2a7f482ed")
+		)
+		(pin "31"
+			(uuid "7dab9c44-8010-4a2f-ace8-25ba52b1dd32")
+		)
+		(pin "32"
+			(uuid "beb24bd9-bd88-451d-9c32-fb9dc0defa23")
+		)
+		(pin "4"
+			(uuid "1632924b-ad24-415a-85f6-7c09ce92b7fd")
+		)
+		(pin "5"
+			(uuid "41402d20-39f4-4d9c-bb72-af045de3664c")
+		)
+		(pin "6"
+			(uuid "c4490bf3-5b5b-4756-b3e5-ebefdf275538")
+		)
+		(pin "7"
+			(uuid "e5becbc0-4199-494d-988c-721a1b827b2b")
+		)
+		(pin "8"
+			(uuid "d4c2f3c8-a994-4f1f-b3a2-099d5ce70069")
+		)
+		(pin "9"
+			(uuid "d1b968c8-eca8-4f1e-8490-e0b231b44ac6")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 205.74 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e7777237-b430-487b-9919-693b793736d0")
+		(property "Reference" "C3"
+			(at 208.026 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 208.28 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 222.504 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 207.9625 18.7325 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 205.74 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "29f5f1c8-1fb1-40d5-aad7-6929220d6863")
+		)
+		(pin "2"
+			(uuid "5ea36d8f-ba9f-4343-ab44-7400b50e07e4")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diodes_Inc:74LVC245AT20")
+		(at 71.12 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e868e7e2-19ee-4264-a47c-2dbd9b0f633e")
+		(property "Reference" "IC7"
+			(at 83.82 45.8529 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC245AT20"
+			(at 83.82 48.4443 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
+			(at 90.805 92.075 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/74LVC245A.pdf"
+			(at 90.805 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "8-bit transceiver"
+			(at 83.82 51.0356 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.2"
+			(at 90.805 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Diodes Inc."
+			(at 90.805 99.695 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC245AT20-13"
+			(at 90.805 102.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "621-74LVC245AT20-13"
+			(at 90.805 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/74LVC245AT20-13?qs=IvkZ4pJZlB2XcM151iWWTw%3D%3D"
+			(at 90.805 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74LVC245"
+			(at 83.82 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Bus Transceivers Octal Buffer Trans 3-State Outputs"
+			(at 71.12 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "12"
+			(uuid "f4967d23-17b8-44db-a6f1-6c17d79d1918")
+		)
+		(pin "18"
+			(uuid "6700c07f-0701-410e-9488-d64d7e552dba")
+		)
+		(pin "6"
+			(uuid "6c9b9dda-6f48-4577-9cbb-6a56a6b1eb4d")
+		)
+		(pin "9"
+			(uuid "4f38e0e4-ea49-4072-b453-d366ffa95ff4")
+		)
+		(pin "1"
+			(uuid "8dcbbb98-c72a-4d10-904b-acbf84e13317")
+		)
+		(pin "5"
+			(uuid "709611d0-90c5-4538-8a2e-b377b03ffa9b")
+		)
+		(pin "4"
+			(uuid "db5f9ed3-d280-4bf8-8e9d-a3e52d217db9")
+		)
+		(pin "13"
+			(uuid "51f67de5-d596-4ed5-9f37-2e49572666fc")
+		)
+		(pin "3"
+			(uuid "d7d42001-1838-46c5-92d8-5340c66b9228")
+		)
+		(pin "2"
+			(uuid "fe00db29-a1f8-4211-83df-4529cb195715")
+		)
+		(pin "10"
+			(uuid "cef4fa54-9257-4cfb-9cca-1bb0398e65c4")
+		)
+		(pin "15"
+			(uuid "83f1ed21-57e6-4bb6-96d3-08b16c0ff6d2")
+		)
+		(pin "16"
+			(uuid "5fbfcee1-4938-483d-bbd9-65c1ba165b8d")
+		)
+		(pin "20"
+			(uuid "2adf94b2-480a-4f59-bccc-27b2196049cc")
+		)
+		(pin "8"
+			(uuid "52ca5ce4-9169-4957-a85f-3f7f474b6c03")
+		)
+		(pin "19"
+			(uuid "f3edb29e-20a8-4391-9796-26b4489b8940")
+		)
+		(pin "7"
+			(uuid "a1ca9aba-c076-4924-b9dd-84e41c06dbd8")
+		)
+		(pin "11"
+			(uuid "e2ca5db0-57a1-43cf-92a7-7ca9065e7cb6")
+		)
+		(pin "14"
+			(uuid "39a59673-133f-4599-90e6-9063c8afddf7")
+		)
+		(pin "17"
+			(uuid "ef352fd0-037f-4e0a-97c5-976d279a7c83")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 138.43 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec1025fd-bfaf-4d36-b560-2cdbd933be8b")
+		(property "Reference" "C1"
+			(at 140.716 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 140.97 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 155.194 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.6525 18.7325 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 138.43 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c322e1d6-c38b-49a1-9f1d-675430e0478a")
+		)
+		(pin "2"
+			(uuid "045832ad-12de-4998-bce0-c695495a28cd")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 153.67 19.05 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec7a51ac-1b5c-4ebc-bb7b-a3066f775a53")
+		(property "Reference" "C2"
+			(at 155.956 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 156.21 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 170.434 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 155.8925 18.7325 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 153.67 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0ae800cf-a773-4afd-89d1-b9dc1bbb60c4")
+		)
+		(pin "2"
+			(uuid "0484a3a2-b011-49c4-95d6-d84132a53a80")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Texas_Instruments:SN74ABT245BDBR")
+		(at 134.62 93.98 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f7e75e1c-904b-42ce-a17b-0f2f48cb7e62")
+		(property "Reference" "IC2"
+			(at 129.54 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SN74ABT245BDBR"
+			(at 131.445 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOP65P780X200-20N"
+			(at 167.005 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74abt245b"
+			(at 169.545 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "8-bit line driver"
+			(at 163.195 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "2"
+			(at 172.085 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Texas Instruments"
+			(at 174.625 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "SN74ABT245BDBR"
+			(at 177.165 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "595-SN74ABT245BDBR"
+			(at 179.705 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74ABT245BDBR?qs=5nGYs9Do7G0kvriH65mtcg%3D%3D"
+			(at 182.245 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "74ABT245"
+			(at 165.735 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "44f73dd2-5029-4482-aca8-34971bc856db")
+		)
+		(pin "13"
+			(uuid "094c2707-7d92-4795-9300-1f36e0bb05ef")
+		)
+		(pin "10"
+			(uuid "20f8f28b-10ec-4056-a0d9-14dfaa2005bd")
+		)
+		(pin "15"
+			(uuid "bedfa2cd-d905-41fb-947d-adde1c8e936b")
+		)
+		(pin "16"
+			(uuid "9c880f02-2019-4858-a88b-92cf559abf8b")
+		)
+		(pin "12"
+			(uuid "ad8fb404-441c-4267-a556-0084d04bfe0c")
+		)
+		(pin "17"
+			(uuid "ffce54be-de43-4f85-bbc3-2aaaaef2e03b")
+		)
+		(pin "11"
+			(uuid "9b108120-3d01-47a7-b7ff-532e0ae88c2f")
+		)
+		(pin "14"
+			(uuid "2daac196-1e43-4346-9e0e-036d493b2c53")
+		)
+		(pin "18"
+			(uuid "2f89b0a7-edce-4276-ba92-cbf4f9681de1")
+		)
+		(pin "19"
+			(uuid "15058043-1403-482e-b1c8-fd06cf0656b3")
+		)
+		(pin "20"
+			(uuid "482c9d44-1ad6-439e-8a93-3503eca2954c")
+		)
+		(pin "4"
+			(uuid "090b6976-3c67-4822-8c93-dc61a5d20342")
+		)
+		(pin "1"
+			(uuid "939aa687-7839-4915-bc71-40201d31a8e3")
+		)
+		(pin "2"
+			(uuid "aa5658f7-8ff2-454a-8e17-3749743a5ca4")
+		)
+		(pin "7"
+			(uuid "93ec82c9-ef1c-462c-bb26-5e525fdae2f2")
+		)
+		(pin "5"
+			(uuid "3e7adba5-607c-47af-9de1-7b2c532eba11")
+		)
+		(pin "6"
+			(uuid "90b88c01-b66f-412a-8acb-fd7446e80195")
+		)
+		(pin "8"
+			(uuid "b272e5b1-d242-4899-b62b-a5cfb9d3e594")
+		)
+		(pin "9"
+			(uuid "d197041c-b641-408a-ad65-acf7bc9f065b")
+		)
+		(instances
+			(project "LED Digit Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

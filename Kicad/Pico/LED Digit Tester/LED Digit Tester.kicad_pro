@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 1.0,
+          "height": 1.7,
+          "width": 1.7
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -48,7 +48,6 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "45_degree_only": false,
           "min_clearance": 0.25
         }
       },
@@ -64,12 +63,12 @@
         "version": 2
       },
       "rule_severities": {
-        "annular_width": "error",
+        "annular_width": "ignore",
         "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
-        "courtyards_overlap": "ignore",
+        "courtyards_overlap": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
@@ -77,7 +76,7 @@
         "extra_footprint": "warning",
         "footprint": "error",
         "footprint_symbol_mismatch": "warning",
-        "footprint_type_mismatch": "error",
+        "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
         "hole_near_hole": "error",
         "holes_co_located": "warning",
@@ -92,17 +91,17 @@
         "microvia_drill_out_of_range": "error",
         "missing_courtyard": "ignore",
         "missing_footprint": "warning",
-        "net_conflict": "error",
+        "net_conflict": "warning",
         "npth_inside_courtyard": "ignore",
-        "padstack": "error",
+        "padstack": "warning",
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
-        "silk_edge_clearance": "warning",
-        "silk_over_copper": "ignore",
-        "silk_overlap": "ignore",
+        "silk_edge_clearance": "ignore",
+        "silk_over_copper": "warning",
+        "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
-        "starved_thermal": "error",
+        "starved_thermal": "ignore",
         "text_height": "warning",
         "text_thickness": "warning",
         "through_hole_pad_without_hole": "error",
@@ -116,12 +115,10 @@
         "zones_intersect": "error"
       },
       "rules": {
-        "allow_blind_buried_vias": false,
-        "allow_microvias": false,
         "max_error": 0.005,
         "min_clearance": 0.0,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
+        "min_copper_edge_clearance": 0.25,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
@@ -129,11 +126,11 @@
         "min_resolved_spokes": 2,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.635,
-        "min_text_thickness": 0.1,
+        "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.2,
-        "min_via_annular_width": 0.05,
-        "min_via_diameter": 0.4,
+        "min_track_width": 0.0,
+        "min_via_annular_width": 0.1,
+        "min_via_diameter": 0.5,
         "solder_mask_clearance": 0.0,
         "solder_mask_min_width": 0.0,
         "solder_mask_to_copper_clearance": 0.0,
@@ -185,7 +182,6 @@
       "track_widths": [
         0.0,
         0.2,
-        0.3,
         0.38,
         1.0
       ],
@@ -225,8 +221,7 @@
           "drill": 1.0
         }
       ],
-      "zones_allow_external_fillets": false,
-      "zones_use_no_outline": true
+      "zones_allow_external_fillets": false
     },
     "ipc2581": {
       "dist": "",
@@ -431,7 +426,7 @@
       "extra_units": "error",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
-      "label_dangling": "error",
+      "label_dangling": "warning",
       "lib_symbol_issues": "warning",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
@@ -458,7 +453,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "W65C816 Opcode Display.kicad_pro",
+    "filename": "LED Digit Tester.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -540,6 +535,10 @@
       {
         "netclass": "Power",
         "pattern": "*Cathode*"
+      },
+      {
+        "netclass": "Power",
+        "pattern": ""
       }
     ]
   },
@@ -548,12 +547,12 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "W65C816 Opcode Display",
+      "plot": "LED Digit Tester",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "W65C816 Opcode Display.step",
+      "step": "",
       "svg": "",
-      "vrml": "W65C816 Opcode Display.wrl"
+      "vrml": ""
     },
     "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks"
   },
@@ -645,18 +644,8 @@
       "version": 1
     },
     "net_format_name": "",
-    "ngspice": {
-      "fix_include_paths": true,
-      "fix_passive_vals": false,
-      "meta": {
-        "version": 0
-      },
-      "model_mode": 0,
-      "workbook_filename": ""
-    },
     "page_layout_descr_file": "",
     "plot_directory": "",
-    "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -668,28 +657,8 @@
   },
   "sheets": [
     [
-      "36ae9fab-3bd5-422b-bccc-b7d474dd236c",
+      "8357857d-ab8c-4646-b786-aad4001c0a6b",
       "Root"
-    ],
-    [
-      "32470b6e-eaeb-4929-8f97-2be2f190d5f9",
-      "Middle Opcode"
-    ],
-    [
-      "60ac891e-c3d8-4194-b686-232b30793d73",
-      "Low Count Display"
-    ],
-    [
-      "60d88903-f13e-4222-ade2-dd2918b75800",
-      "Left Opcode"
-    ],
-    [
-      "1fd267ab-ca31-4f74-9199-1cccdcf81957",
-      "High Count Display"
-    ],
-    [
-      "d0ba56d5-4dbb-4adb-8eb4-4e0f874c5d40",
-      "Right Opcode"
     ]
   ],
   "text_variables": {}

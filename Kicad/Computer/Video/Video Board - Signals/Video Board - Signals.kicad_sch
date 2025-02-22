@@ -10,1986 +10,6 @@
 		(rev "V0")
 	)
 	(lib_symbols
-		(symbol "Comparator_10bit_1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "B"
-				(at 15.875 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Comparator 10bit"
-				(at 15.24 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "HCP65_Parts:HCP65_Comparator_10bit"
-				(at 15.24 -49.53 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Comparator 10bit"
-				(at 15.24 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Silkscreen" "Comparator 10bit"
-				(at 15.24 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Comparator 10bit"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Comparator_10bit_1_0_1"
-				(polyline
-					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -35.56) (xy 0 -35.56) (xy 0 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_1_1_0"
-				(pin no_connect line
-					(at 35.56 -30.48 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_1_1_1"
-				(pin passive line
-					(at -5.08 -30.48 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -17.78 0)
-					(length 5.08)
-					(name "C4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -15.24 0)
-					(length 5.08)
-					(name "C5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -2.54 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -12.7 0)
-					(length 5.08)
-					(name "C6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -10.16 0)
-					(length 5.08)
-					(name "C7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "C8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -5.08 0)
-					(length 5.08)
-					(name "C9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -33.02 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -22.86 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -25.4 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -20.32 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 24.13 -40.64 90)
-					(length 5.08)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 21.59 -40.64 90)
-					(length 5.08)
-					(name "D1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 19.05 -40.64 90)
-					(length 5.08)
-					(name "D2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 16.51 -40.64 90)
-					(length 5.08)
-					(name "D3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 13.97 -40.64 90)
-					(length 5.08)
-					(name "D4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 11.43 -40.64 90)
-					(length 5.08)
-					(name "D5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 8.89 -40.64 90)
-					(length 5.08)
-					(name "D6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -7.62 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 6.35 -40.64 90)
-					(length 5.08)
-					(name "D7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 0 0)
-					(length 5.08)
-					(name "Write_A_High"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -27.94 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -15.24 180)
-					(length 5.08)
-					(name "~{C=A}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "Write_A_Low"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 0 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -27.94 0)
-					(length 5.08)
-					(name "C0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -25.4 0)
-					(length 5.08)
-					(name "C1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -22.86 0)
-					(length 5.08)
-					(name "C2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -20.32 0)
-					(length 5.08)
-					(name "C3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "Comparator_10bit_2"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "B"
-				(at 15.875 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Comparator 10bit"
-				(at 15.24 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "HCP65_Parts:HCP65_Comparator_10bit"
-				(at 15.24 -49.53 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Comparator 10bit"
-				(at 15.24 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Silkscreen" "Comparator 10bit"
-				(at 15.24 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Comparator 10bit"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Comparator_10bit_2_0_1"
-				(polyline
-					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -35.56) (xy 0 -35.56) (xy 0 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_2_1_0"
-				(pin no_connect line
-					(at 35.56 -30.48 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_2_1_1"
-				(pin passive line
-					(at -5.08 -30.48 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -17.78 0)
-					(length 5.08)
-					(name "C4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -15.24 0)
-					(length 5.08)
-					(name "C5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -2.54 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -12.7 0)
-					(length 5.08)
-					(name "C6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -10.16 0)
-					(length 5.08)
-					(name "C7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "C8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -5.08 0)
-					(length 5.08)
-					(name "C9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -33.02 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -22.86 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -25.4 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -20.32 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 24.13 -40.64 90)
-					(length 5.08)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 21.59 -40.64 90)
-					(length 5.08)
-					(name "D1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 19.05 -40.64 90)
-					(length 5.08)
-					(name "D2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 16.51 -40.64 90)
-					(length 5.08)
-					(name "D3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 13.97 -40.64 90)
-					(length 5.08)
-					(name "D4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 11.43 -40.64 90)
-					(length 5.08)
-					(name "D5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 8.89 -40.64 90)
-					(length 5.08)
-					(name "D6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -7.62 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 6.35 -40.64 90)
-					(length 5.08)
-					(name "D7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 0 0)
-					(length 5.08)
-					(name "Write_A_High"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -27.94 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -15.24 180)
-					(length 5.08)
-					(name "~{C=A}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "Write_A_Low"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 0 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -27.94 0)
-					(length 5.08)
-					(name "C0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -25.4 0)
-					(length 5.08)
-					(name "C1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -22.86 0)
-					(length 5.08)
-					(name "C2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -20.32 0)
-					(length 5.08)
-					(name "C3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "Comparator_10bit_3"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "B"
-				(at 15.875 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Comparator 10bit"
-				(at 15.24 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "HCP65_Parts:HCP65_Comparator_10bit"
-				(at 15.24 -49.53 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Comparator 10bit"
-				(at 15.24 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Silkscreen" "Comparator 10bit"
-				(at 15.24 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Comparator 10bit"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Comparator_10bit_3_0_1"
-				(polyline
-					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -35.56) (xy 0 -35.56) (xy 0 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_3_1_0"
-				(pin no_connect line
-					(at 35.56 -30.48 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "Comparator_10bit_3_1_1"
-				(pin passive line
-					(at -5.08 -30.48 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -17.78 0)
-					(length 5.08)
-					(name "C4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -15.24 0)
-					(length 5.08)
-					(name "C5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -2.54 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -12.7 0)
-					(length 5.08)
-					(name "C6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -10.16 0)
-					(length 5.08)
-					(name "C7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "C8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -5.08 0)
-					(length 5.08)
-					(name "C9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -33.02 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -22.86 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -25.4 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -20.32 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 24.13 -40.64 90)
-					(length 5.08)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 21.59 -40.64 90)
-					(length 5.08)
-					(name "D1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 19.05 -40.64 90)
-					(length 5.08)
-					(name "D2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 16.51 -40.64 90)
-					(length 5.08)
-					(name "D3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 13.97 -40.64 90)
-					(length 5.08)
-					(name "D4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 11.43 -40.64 90)
-					(length 5.08)
-					(name "D5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 8.89 -40.64 90)
-					(length 5.08)
-					(name "D6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -7.62 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 6.35 -40.64 90)
-					(length 5.08)
-					(name "D7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 0 0)
-					(length 5.08)
-					(name "Write_A_High"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -27.94 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -15.24 180)
-					(length 5.08)
-					(name "~{C=A}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "Write_A_Low"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 0 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -27.94 0)
-					(length 5.08)
-					(name "C0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -25.4 0)
-					(length 5.08)
-					(name "C1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -22.86 0)
-					(length 5.08)
-					(name "C2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -5.08 -20.32 0)
-					(length 5.08)
-					(name "C3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Connector:Conn_01x08_Pin"
 			(pin_names
 				(offset 1.016) hide)
@@ -6410,7 +4430,7 @@
 			(symbol "Clock_Hold_Standard_1_1"
 				(pin passive line
 					(at -5.08 -25.4 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -6482,7 +4502,7 @@
 				)
 				(pin passive line
 					(at -5.08 -27.94 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -6536,7 +4556,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -6644,7 +4664,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -6734,7 +4754,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -6824,7 +4844,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -6944,7 +4964,7 @@
 			(symbol "Comparator_10bit_1_1"
 				(pin passive line
 					(at -5.08 -30.48 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -6998,7 +5018,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -7088,7 +5108,7 @@
 				)
 				(pin passive line
 					(at -5.08 -33.02 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -7178,7 +5198,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -7304,7 +5324,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -7412,7 +5432,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -7656,7 +5676,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -7982,7 +6002,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -8162,7 +6182,7 @@
 				)
 				(pin passive line
 					(at -5.08 -71.12 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -8198,7 +6218,7 @@
 				)
 				(pin passive line
 					(at -5.08 -73.66 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -8378,7 +6398,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -8576,7 +6596,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -8676,7 +6696,7 @@
 			(symbol "Device_Buffer_1_0"
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -8750,7 +6770,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -9002,7 +7022,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -9128,7 +7148,7 @@
 				)
 				(pin passive line
 					(at -5.08 -88.9 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -9236,7 +7256,7 @@
 				)
 				(pin passive line
 					(at -5.08 -91.44 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -9578,7 +7598,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -9957,7 +7977,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -9977,7 +7997,7 @@
 			(symbol "Device_Decode_Stage_A_1_1"
 				(pin passive line
 					(at -5.08 -40.64 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -10031,7 +8051,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -10121,7 +8141,7 @@
 				)
 				(pin passive line
 					(at -5.08 -43.18 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -10157,7 +8177,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -10391,7 +8411,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -10675,7 +8695,7 @@
 				)
 				(pin passive line
 					(at -5.08 -48.26 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -10729,7 +8749,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -10819,7 +8839,7 @@
 				)
 				(pin passive line
 					(at -5.08 -50.8 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -10909,7 +8929,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11035,7 +9055,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11161,7 +9181,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11369,7 +9389,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11569,7 +9589,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11749,7 +9769,7 @@
 				)
 				(pin passive line
 					(at -5.08 -40.64 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -11821,7 +9841,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -11875,7 +9895,7 @@
 				)
 				(pin passive line
 					(at -5.08 -38.1 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -12001,7 +10021,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -12137,7 +10157,7 @@
 			(symbol "Flags_Interrupt_1_1"
 				(pin passive line
 					(at -5.08 -38.1 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -12191,7 +10211,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -12281,7 +10301,7 @@
 				)
 				(pin passive line
 					(at -5.08 -40.64 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -12371,7 +10391,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -12497,7 +10517,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -12623,7 +10643,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -13192,7 +11212,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -13392,7 +11412,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -13572,7 +11592,7 @@
 				)
 				(pin passive line
 					(at -5.08 -53.34 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -13644,7 +11664,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -13698,7 +11718,7 @@
 				)
 				(pin passive line
 					(at -5.08 -50.8 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -13824,7 +11844,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -13980,7 +12000,7 @@
 			(symbol "Video_Blank_and_Sync_1_1"
 				(pin passive line
 					(at -5.08 -38.1 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -14034,7 +12054,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -14124,7 +12144,7 @@
 				)
 				(pin passive line
 					(at -5.08 -40.64 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -14214,7 +12234,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -14340,7 +12360,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -14448,7 +12468,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -14656,7 +12676,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -14856,7 +12876,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15036,7 +13056,7 @@
 				)
 				(pin passive line
 					(at -5.08 -40.64 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -15108,7 +13128,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15162,7 +13182,7 @@
 				)
 				(pin passive line
 					(at -5.08 -38.1 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -15288,7 +13308,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15460,7 +13480,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15660,7 +13680,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15840,7 +13860,7 @@
 				)
 				(pin passive line
 					(at -5.08 -45.72 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -15912,7 +13932,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -15966,7 +13986,7 @@
 				)
 				(pin passive line
 					(at -5.08 -43.18 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -16092,7 +14112,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17052,7 +15072,7 @@
 			(symbol "Video_Pixel_Advance_1_1"
 				(pin passive line
 					(at -5.08 -33.02 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -17106,7 +15126,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17196,7 +15216,7 @@
 				)
 				(pin passive line
 					(at -5.08 -35.56 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -17286,7 +15306,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17412,7 +15432,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17520,7 +15540,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17728,7 +15748,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -17910,7 +15930,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18090,7 +16110,7 @@
 				)
 				(pin passive line
 					(at -5.08 -63.5 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -18162,7 +16182,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18216,7 +16236,7 @@
 				)
 				(pin passive line
 					(at -5.08 -66.04 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -18360,7 +16380,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18516,7 +16536,7 @@
 			(symbol "Video_Signals_Output_1_1"
 				(pin passive line
 					(at -5.08 -48.26 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -18570,7 +16590,7 @@
 				)
 				(pin passive line
 					(at 35.56 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18660,7 +16680,7 @@
 				)
 				(pin passive line
 					(at -5.08 -50.8 0)
-					(length 5.08) hide
+					(length 5.08)
 					(name "5V"
 						(effects
 							(font
@@ -18750,7 +16770,7 @@
 				)
 				(pin passive line
 					(at 35.56 -5.08 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18876,7 +16896,7 @@
 				)
 				(pin passive line
 					(at 35.56 -7.62 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -18984,7 +17004,7 @@
 				)
 				(pin passive line
 					(at 35.56 0 180)
-					(length 5.08) hide
+					(length 5.08)
 					(name "GND"
 						(effects
 							(font
@@ -20472,666 +18492,6 @@
 						)
 					)
 					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "Video_Blank_and_Sync_1"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "B"
-				(at 15.875 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Video Blank and Sync"
-				(at 15.24 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "HCP65_Parts:HCP65_Video_Blank_and_Sync"
-				(at 16.51 -44.45 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Video Blank and Sync"
-				(at 15.24 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Silkscreen" "Video Blank and Sync"
-				(at 15.24 -22.86 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Video Blank and Sync"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Video_Blank_and_Sync_1_0_1"
-				(polyline
-					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -42.545) (xy 0 -42.545) (xy 0 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "Video_Blank_and_Sync_1_1_0"
-				(pin no_connect line
-					(at 35.56 -40.64 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "Video_Blank_and_Sync_1_1_1"
-				(pin passive line
-					(at -5.08 -38.1 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -27.94 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -5.08 -5.08 0)
-					(length 5.08)
-					(name "~{Back_Porch_Start}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -2.54 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -5.08 -7.62 0)
-					(length 5.08)
-					(name "~{Back_Porch_End}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -30.48 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -33.02 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -35.56 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -40.64 0)
-					(length 5.08) hide
-					(name "5V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -35.56 180)
-					(length 5.08)
-					(name "~{Back_Porch_End}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -22.86 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -17.78 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -12.7 180)
-					(length 5.08)
-					(name "~{Sync}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -10.16 180)
-					(length 5.08)
-					(name "Sync"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -30.48 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -27.94 180)
-					(length 5.08)
-					(name "Last+1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -25.4 180)
-					(length 5.08)
-					(name "First"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -15.24 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -20.32 180)
-					(length 5.08)
-					(name "~{Blank}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -7.62 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -17.78 180)
-					(length 5.08)
-					(name "Blank"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -20.32 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -38.1 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -33.02 180)
-					(length 5.08)
-					(name "~{Front_Porch_Start}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -5.08 0 0)
-					(length 5.08)
-					(name "~{Front_Porch_Start}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 0 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "~{Sync_Start}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -22.86 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted_clock
-					(at -5.08 -12.7 0)
-					(length 5.08)
-					(name "~{CLK}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -25.4 0)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -39748,7 +37108,7 @@
 				)
 			)
 		)
-		(property "Value" "Video Pixel Doubler"
+		(property "Value" "Video Pixel Advance"
 			(at 387.35 61.595 0)
 			(effects
 				(font
@@ -40334,15 +37694,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Device Decode Stage B"
-			(at 473.71 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "e8f24059-c8dc-4f20-b81c-0b7f827bf0bd")
 		)
@@ -40693,15 +38044,6 @@
 		)
 		(property "Silkscreen" "Video Counter 12bit"
 			(at 90.17 353.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Counter 12bit"
-			(at 74.93 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42007,15 +39349,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Signals Output"
-			(at 492.76 444.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "32"
 			(uuid "e292d265-ac29-422e-a370-2ad2b92d39b0")
 		)
@@ -42252,15 +39585,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Flags Interrupt"
-			(at 372.11 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "0e7fcfbb-3bcc-4681-8af0-3ebf84f454b1")
 		)
@@ -42420,15 +39744,6 @@
 		)
 		(property "Silkscreen" "Video Blank and Sync"
 			(at 299.72 438.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Blank and Sync"
-			(at 284.48 415.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42617,7 +39932,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Comparator_10bit_1")
 		(lib_id "HCP65:Comparator_10bit")
 		(at 388.62 469.9 0)
 		(unit 1)
@@ -42671,15 +39985,6 @@
 		)
 		(property "Silkscreen" "Comparator 10bit"
 			(at 403.86 487.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Comparator 10bit"
-			(at 388.62 469.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42846,15 +40151,6 @@
 		)
 		(property "Silkscreen" "Dual Comparator 8bit"
 			(at 188.595 353.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Dual Comparator 8bit"
-			(at 173.99 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43117,15 +40413,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Video Counter 12bit"
-			(at 289.56 330.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "32"
 			(uuid "99c0d0c5-2a2f-407d-be7c-da32897904f8")
 		)
@@ -43316,15 +40603,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Dual Comparator 8bit"
-			(at 173.99 402.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "32"
 			(uuid "5015a43d-266f-49b1-ae04-1f4cae487dbe")
 		)
@@ -43508,15 +40786,6 @@
 		)
 		(property "Silkscreen" "Device Decode Stage B"
 			(at 488.95 195.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Decode Stage B"
-			(at 473.71 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43880,15 +41149,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "Comparator 10bit"
-			(at 388.62 528.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "32"
 			(uuid "a3ad7f3c-70e7-4f33-98af-6cdf196203ab")
 		)
@@ -43995,7 +41255,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Video_Blank_and_Sync_1")
 		(lib_id "HCP65:Video_Blank_and_Sync")
 		(at 492.76 353.06 0)
 		(unit 1)
@@ -44049,15 +41308,6 @@
 		)
 		(property "Silkscreen" "Video Blank and Sync"
 			(at 508 375.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Blank and Sync"
-			(at 492.76 353.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44352,7 +41602,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Comparator_10bit_2")
 		(lib_id "HCP65:Comparator_10bit")
 		(at 388.62 340.36 0)
 		(unit 1)
@@ -44406,15 +41655,6 @@
 		)
 		(property "Silkscreen" "Comparator 10bit"
 			(at 403.86 358.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Comparator 10bit"
-			(at 388.62 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44651,15 +41891,6 @@
 		)
 		(property "Silkscreen" "Device Buffer"
 			(at 299.72 228.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Buffer"
-			(at 284.48 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44922,15 +42153,6 @@
 		)
 		(property "Silkscreen" "Device Decode Stage B"
 			(at 488.95 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Device Decode Stage B"
-			(at 473.71 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45398,7 +42620,6 @@
 		)
 	)
 	(symbol
-		(lib_name "Comparator_10bit_3")
 		(lib_id "HCP65:Comparator_10bit")
 		(at 388.62 410.21 0)
 		(unit 1)
@@ -45452,15 +42673,6 @@
 		)
 		(property "Silkscreen" "Comparator 10bit"
 			(at 403.86 427.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Comparator 10bit"
-			(at 388.62 410.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -45712,15 +42924,6 @@
 		)
 		(property "Silkscreen" "Clock Hold Standard"
 			(at 299.085 299.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Clock Hold Standard"
-			(at 284.48 284.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46319,15 +43522,6 @@
 		)
 		(property "Silkscreen" "Video Clock"
 			(at 293.37 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Video Clock"
-			(at 278.13 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)

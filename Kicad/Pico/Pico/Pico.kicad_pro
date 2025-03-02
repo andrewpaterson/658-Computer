@@ -58,10 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "silk_edge_clearance|103378000|78232000|b3b23c89-e7c5-42bb-ad3c-2dcfc1db3998|6d816434-5309-4c20-8404-7cdb8db9da1a",
-        "silk_edge_clearance|94488000|78232000|b3b23c89-e7c5-42bb-ad3c-2dcfc1db3998|83544060-a6d3-4468-97b3-b2b81a088a04"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -150,7 +147,7 @@
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -161,7 +158,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -172,7 +169,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 0,
+          "td_curve_segcount": 5,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -218,6 +215,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.6,
+          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false
@@ -517,14 +518,14 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Pico Power",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "Pico Power.step",
       "svg": "",
-      "vrml": ""
+      "vrml": "Pico.wrl"
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,

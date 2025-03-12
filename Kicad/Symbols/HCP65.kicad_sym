@@ -38956,10 +38956,10 @@
 					)
 				)
 			)
-			(pin output inverted
-				(at 35.56 -58.42 180)
-				(length 5.08)
-				(name "~{Device_Group_32K}"
+			(pin no_connect line
+				(at 35.56 -10.16 180)
+				(length 5.08) hide
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -38974,10 +38974,10 @@
 					)
 				)
 			)
-			(pin output inverted
-				(at 35.56 -81.28 180)
+			(pin input line
+				(at -5.08 -5.08 0)
 				(length 5.08)
-				(name "~{Device_Group_128K}"
+				(name "Kernal_Mode"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -38992,10 +38992,10 @@
 					)
 				)
 			)
-			(pin output inverted
-				(at 35.56 -53.34 180)
+			(pin input line
+				(at -5.08 -7.62 0)
 				(length 5.08)
-				(name "~{Other}"
+				(name "Address_Valid"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -39028,10 +39028,10 @@
 					)
 				)
 			)
-			(pin input line
-				(at -5.08 -5.08 0)
+			(pin output inverted
+				(at 35.56 -53.34 180)
 				(length 5.08)
-				(name "Kernal_Mode"
+				(name "~{Other}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -81638,7 +81638,7 @@
 			(pin output line
 				(at 35.56 -99.06 180)
 				(length 5.08)
-				(name "Address_Valid"
+				(name "VPA+VDA"
 					(effects
 						(font
 							(size 1.27 1.27)

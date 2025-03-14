@@ -3018,6 +3018,163 @@
 				)
 			)
 		)
+		(symbol "HCP65:LED"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0.254) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "LED"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Colour"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 6.35 -7.62 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "LED diode light-emitting-diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts
+						(xy -0.762 -1.016) (xy -0.762 1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.016) (xy -0.762 0) (xy 0.762 1.016) (xy 0.762 -1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0.762) (xy -0.508 1.27) (xy -0.254 1.27) (xy -0.508 1.27) (xy -0.508 1.016)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 1.27) (xy 0 1.778) (xy 0.254 1.778) (xy 0 1.778) (xy 0 1.524)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LED_1_1"
+				(pin passive line
+					(at -2.54 0 0)
+					(length 1.778)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 1.778)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "RS_Components:448-376"
 			(pin_names
 				(offset 0.762)
@@ -3782,6 +3939,12 @@
 		(color 0 0 0 0)
 		(uuid "d4946787-7623-480c-a9b8-c72b22f53f75")
 	)
+	(junction
+		(at 146.05 142.24)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f402dbbc-70cf-4a37-ab6a-b2ad5d477224")
+	)
 	(no_connect
 		(at 199.39 107.95)
 		(uuid "10da2a45-9e96-4995-bb52-50c9d8510358")
@@ -4208,6 +4371,16 @@
 	)
 	(wire
 		(pts
+			(xy 154.94 154.94) (xy 156.21 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36d3a7dd-efb8-4945-b3d0-6ef1eedec711")
+	)
+	(wire
+		(pts
 			(xy 95.25 57.15) (xy 95.25 91.44)
 		)
 		(stroke
@@ -4278,6 +4451,16 @@
 	)
 	(wire
 		(pts
+			(xy 146.05 154.94) (xy 147.32 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d6aeed7-eab8-4f1e-af40-87400ff77793")
+	)
+	(wire
+		(pts
 			(xy 59.69 54.61) (xy 67.31 54.61)
 		)
 		(stroke
@@ -4285,6 +4468,16 @@
 			(type default)
 		)
 		(uuid "718609a5-9251-4d9c-bdfb-e83be0d454c0")
+	)
+	(wire
+		(pts
+			(xy 146.05 142.24) (xy 146.05 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "743da915-7979-494c-939f-96a787e41f47")
 	)
 	(wire
 		(pts
@@ -5664,6 +5857,17 @@
 		)
 		(uuid "cf019f5b-d231-4034-b002-303232c7b597")
 	)
+	(label "GND"
+		(at 161.29 154.94 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf54c429-684f-4817-9da9-a5351f843017")
+	)
 	(label "TDI"
 		(at 80.01 62.23 0)
 		(fields_autoplaced yes)
@@ -6226,6 +6430,73 @@
 			(project "EPM570 Programmer"
 				(path "/da8c5c90-e607-4538-b77b-9c657af61acc"
 					(reference "IC1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:LED")
+		(at 158.75 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "20515052-140f-44ff-91ce-01fd62571b7f")
+		(property "Reference" "LED1"
+			(at 158.75 151.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Red"
+			(at 158.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
+			(at 158.75 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 162.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 158.75 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "62b5b72f-1f68-43ee-bbe6-d4b0d723aa74")
+		)
+		(pin "2"
+			(uuid "15127978-ee4a-4e28-9df0-6fa68009ac9a")
+		)
+		(instances
+			(project "EPM570 Programmer"
+				(path "/da8c5c90-e607-4538-b77b-9c657af61acc"
+					(reference "LED1")
 					(unit 1)
 				)
 			)
@@ -6963,6 +7234,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 151.13 154.94 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b6c5e33a-02cc-4a99-bcca-a298d2c74279")
+		(property "Reference" "R5"
+			(at 151.13 152.908 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10KΩ"
+			(at 151.13 157.48 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:R_DIN_P7.62mm"
+			(at 151.13 156.718 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 151.13 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 151.13 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c988b01a-1973-4e1c-b6ba-ff9a0ff6f3fd")
+		)
+		(pin "1"
+			(uuid "7f50c403-284e-47f9-9dfd-1e15b83efc32")
+		)
+		(instances
+			(project "EPM570 Programmer"
+				(path "/da8c5c90-e607-4538-b77b-9c657af61acc"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
 		(at 236.22 137.16 90)
 		(unit 1)
@@ -7050,15 +7389,15 @@
 				)
 			)
 		)
-		(property "Value" "10K"
-			(at 104.14 44.45 90)
+		(property "Value" "10KΩ"
+			(at 104.14 46.99 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "SamacSys_Parts:R_DIN_P7.62mm"
 			(at 104.14 46.228 90)
 			(effects
 				(font
@@ -7118,15 +7457,15 @@
 				)
 			)
 		)
-		(property "Value" "1.0K"
-			(at 104.14 62.23 90)
+		(property "Value" "1.0KΩ"
+			(at 104.14 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "SamacSys_Parts:R_DIN_P7.62mm"
 			(at 104.14 64.008 90)
 			(effects
 				(font
@@ -7252,15 +7591,15 @@
 				)
 			)
 		)
-		(property "Value" "100"
-			(at 55.88 44.45 90)
+		(property "Value" "100Ω"
+			(at 55.88 46.99 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal"
+		(property "Footprint" "SamacSys_Parts:R_DIN_P12.70mm"
 			(at 55.88 46.228 90)
 			(effects
 				(font

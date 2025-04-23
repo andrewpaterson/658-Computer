@@ -193,6 +193,190 @@
 			)
 		)
 	)
+	(symbol "L7812ACD2T-TR"
+		(pin_names
+			(offset 0.762)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "IC"
+			(at 12.7 5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "L7812ACD2T-TR"
+			(at 12.7 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:TO254P1542X460-3N"
+			(at 34.29 2.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.st.com/web/en/resource/technical/document/datasheet/CD00000444.pdf"
+			(at 34.29 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Voltage Regulator 12V 1A D2PAK STMicroelectronics L7812ACD2T-TR, Single Linear Voltage Regulator, 1.5A 12 V, +/-2%, 3-Pin D2PAK"
+			(at 34.29 -22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "4.6"
+			(at 34.29 -5.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "STMicroelectronics"
+			(at 34.29 -7.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "L7812ACD2T-TR"
+			(at 34.29 -10.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "L7812ACD2T-TR"
+			(at 34.29 -12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(symbol "L7812ACD2T-TR_0_1"
+			(polyline
+				(pts
+					(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -4.445) (xy 5.08 -4.445) (xy 5.08 1.905)
+				)
+				(stroke
+					(width 0.1524)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "L7812ACD2T-TR_1_0"
+			(pin passive line
+				(at 0 0 0)
+				(length 5.08)
+				(name "35VIn"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 25.4 -2.54 180)
+				(length 5.08) hide
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 25.4 0 180)
+				(length 5.08)
+				(name "12VOut"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 0 -2.54 0)
+				(length 5.08)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
 	(symbol "LD1117S33C"
 		(pin_names
 			(offset 0.762)
@@ -288,7 +472,7 @@
 		)
 		(symbol "LD1117S33C_0_0"
 			(pin passive line
-				(at 7.62 -12.7 90)
+				(at -5.08 -2.54 0)
 				(length 5.08)
 				(name "GND"
 					(effects
@@ -309,7 +493,7 @@
 		(symbol "LD1117S33C_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.905)
+					(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 0 -4.445) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -357,10 +541,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 10.16 -12.7 90)
-				(length 5.08) hide
-				(name "N.C"
+			(pin passive line
+				(at 20.32 -2.54 180)
+				(length 5.08)
+				(name "3.3VOut"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -462,11 +646,12 @@
 			)
 		)
 		(property "Silkscreen" "LD1117S50"
-			(at 7.62 -24.13 0)
+			(at 27.94 -13.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -482,7 +667,7 @@
 		)
 		(symbol "LD1117S50C_0_0"
 			(pin passive line
-				(at 7.62 -12.7 90)
+				(at -5.08 -2.54 0)
 				(length 5.08)
 				(name "GND"
 					(effects
@@ -503,7 +688,7 @@
 		(symbol "LD1117S50C_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.905)
+					(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 0 -4.445) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -551,10 +736,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 10.16 -12.7 90)
-				(length 5.08) hide
-				(name "N.C"
+			(pin passive line
+				(at 20.32 -2.54 180)
+				(length 5.08)
+				(name "5.0VOut"
 					(effects
 						(font
 							(size 1.27 1.27)

@@ -6,310 +6,10 @@
 	(paper "A3")
 	(title_block
 		(title "GPIO 16bit")
-		(date "2024-01-28")
+		(date "2025-04-24")
+		(rev "V1")
 	)
 	(lib_symbols
-		(symbol "Bourns:CAY16-151J4LF"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "RN"
-				(at 10.16 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "CAY16-151J4LF"
-				(at 10.16 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:CAY16-J4"
-				(at 17.78 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-7/sf-000140092.pdf"
-				(at 17.78 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "150Ω 4-array resistor"
-				(at 10.16 -10.795 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "0.6"
-				(at 17.78 -22.86 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Bourns"
-				(at 17.78 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "CAY16-151J4LF"
-				(at 17.78 -27.94 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "652-CAY16-151J4LF"
-				(at 17.78 -30.48 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-151J4LF?qs=Qv7qbSW4mEF5GWsPNNp3QA%3D%3D"
-				(at 17.78 -33.02 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Part Number" "CAY16-151J4LF"
-				(at 17.78 -35.56 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-151j4lf/bourns"
-				(at 17.78 -38.1 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "150Ω"
-				(at 10.16 -13.335 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "CAY16-151J4LF_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "R1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "R2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "R3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "R4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -7.62 180)
-					(length 5.08)
-					(name "R4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -5.08 180)
-					(length 5.08)
-					(name "R3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -2.54 180)
-					(length 5.08)
-					(name "R2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 0 180)
-					(length 5.08)
-					(name "R1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "CAY16-151J4LF_0_1"
-				(polyline
-					(pts
-						(xy 5.08 1.905) (xy 15.24 1.905) (xy 15.24 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-		)
 		(symbol "Connector_Generic:Conn_01x20"
 			(pin_names
 				(offset 1.016) hide)
@@ -3896,278 +3596,6 @@
 				)
 			)
 		)
-		(symbol "Yageo:CA0612KRX7R9BB100"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "CN"
-				(at 10.16 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Value" "CA0612KRX7R9BB100"
-				(at 10.16 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:CA0612KRX7R9BB100"
-				(at 27.305 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/CA0612KRX7R9BB102.pdf"
-				(at 8.89 -20.32 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "10pF 4-array capacitor"
-				(at 10.16 -10.795 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" ""
-				(at 16.51 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "KEMET"
-				(at 8.89 -27.94 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "CA0612KRX7R9BB102"
-				(at 8.89 -30.48 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "603-CA612KRX7R9BB102"
-				(at 8.89 -33.02 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/YAGEO/CA0612KRX7R9BB102?qs=50q%252BZR8McTG8nSzW%2FPfXjQ%3D%3D"
-				(at 8.89 -35.56 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "10pF"
-				(at 10.16 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "CA0612KRX7R9BB100_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -7.62 180)
-					(length 5.08)
-					(name "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -5.08 180)
-					(length 5.08)
-					(name "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -2.54 180)
-					(length 5.08)
-					(name "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 0 180)
-					(length 5.08)
-					(name "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "CA0612KRX7R9BB100_1_1"
-				(polyline
-					(pts
-						(xy 5.08 1.905) (xy 15.24 1.905) (xy 15.24 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-		)
 	)
 	(junction
 		(at 212.09 245.11)
@@ -4191,13 +3619,23 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 157.48) (xy 252.73 157.48)
+			(xy 262.89 48.26) (xy 320.04 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "09cada79-bf42-448f-aa9b-c8488599657c")
+		(uuid "074a5eec-a5d4-43d8-a0f0-929365f523cd")
+	)
+	(wire
+		(pts
+			(xy 250.19 114.3) (xy 320.04 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09ea07b1-25f2-4b50-b1d8-1a07275a071a")
 	)
 	(wire
 		(pts
@@ -4211,23 +3649,13 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 121.92) (xy 289.56 121.92)
+			(xy 266.7 55.88) (xy 320.04 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0e0475e3-4c3e-4cbd-815b-d6ec40132800")
-	)
-	(wire
-		(pts
-			(xy 360.68 115.57) (xy 367.03 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e198561-d803-4b6e-943a-6651cf82b1aa")
+		(uuid "0be9073d-48c6-4c3f-9715-4137ac33bddb")
 	)
 	(wire
 		(pts
@@ -4238,26 +3666,6 @@
 			(type default)
 		)
 		(uuid "0e82e658-1639-43fe-9d28-9581f153c6dd")
-	)
-	(wire
-		(pts
-			(xy 254 162.56) (xy 250.19 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0f787c02-e68c-49c9-a7d0-08dec7f7c707")
-	)
-	(wire
-		(pts
-			(xy 255.27 121.92) (xy 255.27 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0fddeffc-7589-4fb0-97f7-28abf3d04d49")
 	)
 	(wire
 		(pts
@@ -4281,16 +3689,6 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 43.18) (xy 292.1 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "141a4547-d001-4356-8aab-4eb9b79651fa")
-	)
-	(wire
-		(pts
 			(xy 113.03 114.3) (xy 128.27 114.3)
 		)
 		(stroke
@@ -4301,36 +3699,6 @@
 	)
 	(wire
 		(pts
-			(xy 252.73 81.28) (xy 252.73 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "16254d5e-dbf4-43e3-85cc-886e89637c8e")
-	)
-	(wire
-		(pts
-			(xy 278.13 116.84) (xy 289.56 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "17ea8912-5748-443f-8306-baaf96c546f5")
-	)
-	(wire
-		(pts
-			(xy 250.19 119.38) (xy 252.73 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1bd56865-1523-44bf-bf15-ba3d700295b5")
-	)
-	(wire
-		(pts
 			(xy 205.74 73.66) (xy 224.79 73.66)
 		)
 		(stroke
@@ -4338,6 +3706,16 @@
 			(type default)
 		)
 		(uuid "1ea3f3ab-702d-4f9f-8821-9f801beae87a")
+	)
+	(wire
+		(pts
+			(xy 250.19 162.56) (xy 265.43 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ea7796e-5d5e-49ca-810c-bbc0e62b7638")
 	)
 	(wire
 		(pts
@@ -4361,33 +3739,43 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 167.64) (xy 250.19 167.64)
+			(xy 250.19 86.36) (xy 265.43 86.36)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2a081c0b-cb45-4520-86a7-a8afe9bfdadf")
+		(uuid "2416ba5e-8105-46e7-93b6-e1c8e3427f7b")
 	)
 	(wire
 		(pts
-			(xy 278.13 45.72) (xy 292.1 45.72)
+			(xy 261.62 121.92) (xy 320.04 121.92)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2acb5e18-edec-4062-b0e0-816fb65921fb")
+		(uuid "25842337-9cbd-4ebd-9498-75b95a9fcb3e")
 	)
 	(wire
 		(pts
-			(xy 252.73 78.74) (xy 257.81 78.74)
+			(xy 262.89 124.46) (xy 320.04 124.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2ade3188-2512-4e50-90bf-c5dc40e1e4c9")
+		(uuid "275b71ef-c02e-4c58-85dc-8de2cee6142b")
+	)
+	(wire
+		(pts
+			(xy 260.35 119.38) (xy 320.04 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29b34a1c-23c8-437e-a38a-08feb82f4a5f")
 	)
 	(wire
 		(pts
@@ -4398,16 +3786,6 @@
 			(type default)
 		)
 		(uuid "2d52c86e-e3b9-4875-b54e-260b822021b0")
-	)
-	(wire
-		(pts
-			(xy 278.13 119.38) (xy 289.56 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34270893-c719-4ff7-bf1d-0f1048b8665c")
 	)
 	(wire
 		(pts
@@ -4431,6 +3809,16 @@
 	)
 	(wire
 		(pts
+			(xy 266.7 132.08) (xy 320.04 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "353f6955-2832-4da5-9946-575efdd6a88b")
+	)
+	(wire
+		(pts
 			(xy 113.03 40.64) (xy 128.27 40.64)
 		)
 		(stroke
@@ -4438,16 +3826,6 @@
 			(type default)
 		)
 		(uuid "35cab80c-d0c3-40f7-94f6-32b8e04d7c2f")
-	)
-	(wire
-		(pts
-			(xy 255.27 83.82) (xy 255.27 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "35eca768-3145-45fb-a2c9-20e56dfd40fa")
 	)
 	(wire
 		(pts
@@ -4461,13 +3839,23 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 157.48) (xy 254 157.48)
+			(xy 265.43 53.34) (xy 320.04 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "36ef1bf9-7ac9-40af-a3fa-ca6b366d4eb7")
+		(uuid "36345e89-1752-4d0a-a365-8a1a9c41c306")
+	)
+	(wire
+		(pts
+			(xy 250.19 152.4) (xy 262.89 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3643a046-6e96-4394-9c6a-0a6fdcfa49e0")
 	)
 	(wire
 		(pts
@@ -4511,26 +3899,6 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 157.48) (xy 289.56 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3bdc8320-5f76-477c-9798-0821d521ab03")
-	)
-	(wire
-		(pts
-			(xy 252.73 119.38) (xy 252.73 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3ddbab03-e5a4-4d7c-bdd6-9940cc56e8e4")
-	)
-	(wire
-		(pts
 			(xy 113.03 38.1) (xy 128.27 38.1)
 		)
 		(stroke
@@ -4541,23 +3909,13 @@
 	)
 	(wire
 		(pts
-			(xy 254 157.48) (xy 254 162.56)
+			(xy 265.43 86.36) (xy 265.43 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3fff24e2-27fd-47bb-80d5-c9692e151452")
-	)
-	(wire
-		(pts
-			(xy 278.13 83.82) (xy 289.56 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "41423ab4-54b7-41b4-bccf-e75b93192dcf")
+		(uuid "40fcf1c1-7214-4b6a-90b2-f538214c73b8")
 	)
 	(wire
 		(pts
@@ -4571,16 +3929,6 @@
 	)
 	(wire
 		(pts
-			(xy 254 119.38) (xy 254 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "45715d20-c722-4c8f-9aa3-302b441693f7")
-	)
-	(wire
-		(pts
 			(xy 241.3 250.19) (xy 241.3 245.11)
 		)
 		(stroke
@@ -4588,16 +3936,6 @@
 			(type default)
 		)
 		(uuid "46a9ea41-65b7-4870-a9db-5e696764ddd1")
-	)
-	(wire
-		(pts
-			(xy 252.73 154.94) (xy 257.81 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "47811bba-68bf-42fb-993e-0db42145f771")
 	)
 	(wire
 		(pts
@@ -4611,6 +3949,46 @@
 	)
 	(wire
 		(pts
+			(xy 264.16 50.8) (xy 320.04 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b847255-5cba-4ef0-805c-9e51b84f90d0")
+	)
+	(wire
+		(pts
+			(xy 250.19 157.48) (xy 264.16 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d426f54-419c-4bc0-9849-07c8269a388a")
+	)
+	(wire
+		(pts
+			(xy 262.89 152.4) (xy 262.89 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4eda83df-2c04-4d43-a659-5a13b32f279f")
+	)
+	(wire
+		(pts
+			(xy 313.69 104.14) (xy 313.69 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4f057f6f-7b34-44db-9296-e3eb519f93ac")
+	)
+	(wire
+		(pts
 			(xy 113.03 50.8) (xy 128.27 50.8)
 		)
 		(stroke
@@ -4621,43 +3999,33 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 43.18) (xy 252.73 43.18)
+			(xy 261.62 121.92) (xy 261.62 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "50ad3b7a-acfc-4dd8-a933-9ef4208cb029")
+		(uuid "517925f9-a54c-4a69-b41e-bfba6ff9c600")
 	)
 	(wire
 		(pts
-			(xy 278.13 114.3) (xy 289.56 114.3)
+			(xy 250.19 48.26) (xy 260.35 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "50ae41f0-9ea4-4d6e-8320-2482d160e3d3")
+		(uuid "5ca68a05-16ec-447b-8765-18324a55d0e0")
 	)
 	(wire
 		(pts
-			(xy 257.81 81.28) (xy 254 81.28)
+			(xy 262.89 76.2) (xy 262.89 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5627c22f-c908-461f-8992-198e8ad4c2d4")
-	)
-	(wire
-		(pts
-			(xy 254 81.28) (xy 254 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5f076fb1-701c-4d7d-aa44-ba741a1f8e42")
+		(uuid "6231c284-61b2-441d-85ac-3e28a63604af")
 	)
 	(wire
 		(pts
@@ -4671,6 +4039,16 @@
 	)
 	(wire
 		(pts
+			(xy 259.08 116.84) (xy 320.04 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "659c80ba-5f20-42a4-991c-19be5fb6d6df")
+	)
+	(wire
+		(pts
 			(xy 205.74 111.76) (xy 224.79 111.76)
 		)
 		(stroke
@@ -4681,13 +4059,13 @@
 	)
 	(wire
 		(pts
-			(xy 252.73 116.84) (xy 257.81 116.84)
+			(xy 265.43 162.56) (xy 265.43 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "67ffcead-4966-416f-844f-2696870f6dfa")
+		(uuid "67577242-f14e-4f66-9e89-9201157d4150")
 	)
 	(wire
 		(pts
@@ -4701,43 +4079,23 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 152.4) (xy 257.81 152.4)
+			(xy 264.16 127) (xy 320.04 127)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6ab58c97-331a-4cfe-b775-b2b7f3e74583")
+		(uuid "6abf7e2c-9ef8-44df-a303-0fdd0dfc5150")
 	)
 	(wire
 		(pts
-			(xy 254 86.36) (xy 250.19 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6d559a30-55d8-460a-aae6-fdbfc5042341")
-	)
-	(wire
-		(pts
-			(xy 252.73 40.64) (xy 257.81 40.64)
+			(xy 259.08 40.64) (xy 320.04 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "70b1f5f9-e583-4439-bb14-93f728cec4e2")
-	)
-	(wire
-		(pts
-			(xy 255.27 53.34) (xy 250.19 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "737e53a4-23cb-452a-91b0-113387481776")
 	)
 	(wire
 		(pts
@@ -4748,26 +4106,6 @@
 			(type default)
 		)
 		(uuid "75270753-9323-4eee-a7df-8f288a1272a0")
-	)
-	(wire
-		(pts
-			(xy 278.13 78.74) (xy 289.56 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7535393c-f1c9-4593-beed-3b8eb6db7298")
-	)
-	(wire
-		(pts
-			(xy 278.13 154.94) (xy 289.56 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "762171e2-e6e9-4904-96c7-70e11c54fa65")
 	)
 	(wire
 		(pts
@@ -4821,43 +4159,13 @@
 	)
 	(wire
 		(pts
-			(xy 254 48.26) (xy 250.19 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c1bd288-8b31-490f-86c7-e314477ca932")
-	)
-	(wire
-		(pts
-			(xy 255.27 45.72) (xy 255.27 53.34)
+			(xy 261.62 45.72) (xy 261.62 53.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "8c2fc360-7eeb-4a72-a8d9-324d420a2963")
-	)
-	(wire
-		(pts
-			(xy 254 124.46) (xy 250.19 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8c67591e-21f4-440f-847f-d1bf97a61cea")
-	)
-	(wire
-		(pts
-			(xy 255.27 91.44) (xy 250.19 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9247e752-6a37-4f59-9218-3d617add4af4")
 	)
 	(wire
 		(pts
@@ -4881,6 +4189,26 @@
 	)
 	(wire
 		(pts
+			(xy 250.19 129.54) (xy 261.62 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a5f3e0f-f037-4f4a-b000-3c574a705b8e")
+	)
+	(wire
+		(pts
+			(xy 250.19 167.64) (xy 266.7 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c744891-88cc-4fba-80ea-5a02abcb2cac")
+	)
+	(wire
+		(pts
 			(xy 113.03 45.72) (xy 128.27 45.72)
 		)
 		(stroke
@@ -4891,27 +4219,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 119.38) (xy 254 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9e881d03-e46e-4789-9101-6910d1ff9c0f")
-	)
-	(wire
-		(pts
-			(xy 252.73 157.48) (xy 252.73 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a2a8c485-5d6d-434a-a652-5ff1390282fe")
-	)
-	(wire
-		(pts
-			(xy 254 43.18) (xy 254 48.26)
+			(xy 260.35 43.18) (xy 260.35 48.26)
 		)
 		(stroke
 			(width 0)
@@ -4938,16 +4246,6 @@
 			(type default)
 		)
 		(uuid "a95b7af0-4cf7-45ce-adc8-be62dd7cc039")
-	)
-	(wire
-		(pts
-			(xy 278.13 76.2) (xy 289.56 76.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a99f0110-ed53-4de0-8076-64034080e396")
 	)
 	(wire
 		(pts
@@ -4991,17 +4289,27 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 121.92) (xy 255.27 121.92)
+			(xy 266.7 167.64) (xy 266.7 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b09caa09-cf6b-4159-9a25-c9d3033bacc4")
+		(uuid "aedf30cb-5636-4218-8405-b82cb05730c5")
 	)
 	(wire
 		(pts
-			(xy 360.68 39.37) (xy 367.03 39.37)
+			(xy 250.19 53.34) (xy 261.62 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b18343b8-9622-4210-afc4-321ce3bcbf88")
+	)
+	(wire
+		(pts
+			(xy 313.69 27.94) (xy 314.96 27.94)
 		)
 		(stroke
 			(width 0)
@@ -5021,7 +4329,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 43.18) (xy 254 43.18)
+			(xy 260.35 43.18) (xy 320.04 43.18)
 		)
 		(stroke
 			(width 0)
@@ -5061,26 +4369,6 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 40.64) (xy 292.1 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba7a3c3c-8258-4431-becc-011ad546661e")
-	)
-	(wire
-		(pts
-			(xy 278.13 152.4) (xy 289.56 152.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb75c4ea-ba5e-4cd1-b872-82b705185f10")
-	)
-	(wire
-		(pts
 			(xy 205.74 154.94) (xy 224.79 154.94)
 		)
 		(stroke
@@ -5098,16 +4386,6 @@
 			(type default)
 		)
 		(uuid "bbe8960c-2781-40d2-ae46-5f48f11f914f")
-	)
-	(wire
-		(pts
-			(xy 250.19 114.3) (xy 257.81 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfb56c7f-472c-4063-86e3-f38885732754")
 	)
 	(wire
 		(pts
@@ -5141,16 +4419,6 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 83.82) (xy 255.27 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c7e54825-8788-49de-9560-036f11bfdd44")
-	)
-	(wire
-		(pts
 			(xy 113.03 121.92) (xy 128.27 121.92)
 		)
 		(stroke
@@ -5171,6 +4439,36 @@
 	)
 	(wire
 		(pts
+			(xy 266.7 91.44) (xy 266.7 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc432067-1e70-424a-88d8-b026852aae3c")
+	)
+	(wire
+		(pts
+			(xy 250.19 119.38) (xy 259.08 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0034299-6039-4116-903e-3fbb3a8310d9")
+	)
+	(wire
+		(pts
+			(xy 250.19 124.46) (xy 260.35 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d31d7c57-26b9-4b7b-a7f6-2d37b5502b3b")
+	)
+	(wire
+		(pts
 			(xy 88.9 246.38) (xy 87.63 246.38)
 		)
 		(stroke
@@ -5181,17 +4479,37 @@
 	)
 	(wire
 		(pts
-			(xy 278.13 81.28) (xy 289.56 81.28)
+			(xy 265.43 129.54) (xy 320.04 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d5aa7486-81c5-446d-988b-4dd5ef0fc335")
+		(uuid "d3c5449d-2716-47d9-be93-671bc2857f0e")
 	)
 	(wire
 		(pts
-			(xy 252.73 43.18) (xy 252.73 40.64)
+			(xy 260.35 119.38) (xy 260.35 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3d71caa-d779-41d0-9a5d-6a1e33ec96f8")
+	)
+	(wire
+		(pts
+			(xy 259.08 119.38) (xy 259.08 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4e97b82-82d6-4393-8ba5-615b91afb9a3")
+	)
+	(wire
+		(pts
+			(xy 259.08 43.18) (xy 259.08 40.64)
 		)
 		(stroke
 			(width 0)
@@ -5201,13 +4519,23 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 76.2) (xy 257.81 76.2)
+			(xy 250.19 76.2) (xy 262.89 76.2)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "d7d726e8-8a0c-47ec-af85-9fa09e2c10ae")
+	)
+	(wire
+		(pts
+			(xy 314.96 33.02) (xy 320.04 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d86cf0f6-b9d2-42d3-b7be-0044e0dc0122")
 	)
 	(wire
 		(pts
@@ -5221,16 +4549,6 @@
 	)
 	(wire
 		(pts
-			(xy 255.27 160.02) (xy 255.27 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dd5d727a-0742-4fde-966e-57421648d305")
-	)
-	(wire
-		(pts
 			(xy 113.03 167.64) (xy 128.27 167.64)
 		)
 		(stroke
@@ -5241,7 +4559,17 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 38.1) (xy 257.81 38.1)
+			(xy 313.69 109.22) (xy 320.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e265b59d-65b4-48fc-b377-f7b4927261ad")
+	)
+	(wire
+		(pts
+			(xy 250.19 38.1) (xy 320.04 38.1)
 		)
 		(stroke
 			(width 0)
@@ -5271,7 +4599,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 45.72) (xy 255.27 45.72)
+			(xy 261.62 45.72) (xy 320.04 45.72)
 		)
 		(stroke
 			(width 0)
@@ -5281,7 +4609,7 @@
 	)
 	(wire
 		(pts
-			(xy 250.19 81.28) (xy 252.73 81.28)
+			(xy 250.19 81.28) (xy 264.16 81.28)
 		)
 		(stroke
 			(width 0)
@@ -5321,43 +4649,33 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 160.02) (xy 255.27 160.02)
+			(xy 264.16 157.48) (xy 264.16 127)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f04f280e-b6dd-416e-99c1-d53a259ac45c")
+		(uuid "f1a19b07-cb7b-4707-bca8-c31e7e5c5d06")
 	)
 	(wire
 		(pts
-			(xy 278.13 38.1) (xy 292.1 38.1)
+			(xy 314.96 27.94) (xy 314.96 33.02)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f46fd863-6da2-4478-a8fc-79d3635f055d")
+		(uuid "f2fadff8-5ced-40fd-a426-081000ba0497")
 	)
 	(wire
 		(pts
-			(xy 278.13 160.02) (xy 289.56 160.02)
+			(xy 250.19 43.18) (xy 259.08 43.18)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f7a28dcc-c30e-4a8c-ad33-1c65e1c3c15f")
-	)
-	(wire
-		(pts
-			(xy 255.27 129.54) (xy 250.19 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f9c3e5bb-2cd3-4857-9107-ea3a09c184eb")
+		(uuid "f4a6c6ae-2b12-44e9-b4aa-46223d864cb3")
 	)
 	(wire
 		(pts
@@ -5379,6 +4697,26 @@
 		)
 		(uuid "fada94ab-028a-423e-8c69-3c786355a724")
 	)
+	(wire
+		(pts
+			(xy 264.16 81.28) (xy 264.16 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe626e43-dd55-4b3f-8ee8-06e6ce556ea0")
+	)
+	(wire
+		(pts
+			(xy 250.19 91.44) (xy 266.7 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff65a2fb-a5fb-4c1e-ad41-3b3f8392a5ce")
+	)
 	(label "GND"
 		(at 147.32 256.54 0)
 		(fields_autoplaced yes)
@@ -5391,7 +4729,7 @@
 		(uuid "00d507b9-cb22-4e66-8d7f-dce7ccae8093")
 	)
 	(label "GPIO0"
-		(at 278.13 38.1 0)
+		(at 250.19 38.1 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5413,7 +4751,7 @@
 		(uuid "01f00a3b-1d68-4aa7-8e01-6281924682a1")
 	)
 	(label "D7"
-		(at 392.43 138.43 0)
+		(at 345.44 132.08 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5446,7 +4784,7 @@
 		(uuid "090da42a-60b2-4943-a790-10ef46aac5e1")
 	)
 	(label "D1"
-		(at 392.43 123.19 0)
+		(at 345.44 116.84 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5501,7 +4839,7 @@
 		(uuid "0c5c6808-5b99-495d-9934-c0b73535dfef")
 	)
 	(label "D2"
-		(at 392.43 49.53 0)
+		(at 345.44 43.18 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5544,30 +4882,8 @@
 		)
 		(uuid "0f0baba1-af87-4acb-a910-5766be86d12f")
 	)
-	(label "GND"
-		(at 312.42 40.64 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "10e3fe67-2534-4e2c-8b5d-1f48131856bf")
-	)
-	(label "GND"
-		(at 309.88 114.3 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "132910a5-15ca-494b-9dad-f4499e7cda34")
-	)
 	(label "D6"
-		(at 392.43 59.69 0)
+		(at 345.44 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5589,7 +4905,7 @@
 		(uuid "1425bc88-66f8-4161-86ad-8e3b0de43774")
 	)
 	(label "D1"
-		(at 392.43 46.99 0)
+		(at 345.44 40.64 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5631,17 +4947,6 @@
 			(justify left bottom)
 		)
 		(uuid "1a82897d-69e0-455d-a775-8525a8bc8693")
-	)
-	(label "GND"
-		(at 309.88 76.2 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1b6a6a99-476b-4384-b1e6-fddb456df810")
 	)
 	(label "OE14"
 		(at 153.67 167.64 0)
@@ -5687,19 +4992,8 @@
 		)
 		(uuid "1cb8e710-3217-4097-ba57-6638f0cfa94c")
 	)
-	(label "GND"
-		(at 312.42 43.18 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "1dce5bb9-c235-4b51-bf8e-6e2dcc465db0")
-	)
 	(label "D6"
-		(at 392.43 135.89 0)
+		(at 345.44 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5730,17 +5024,6 @@
 			(justify right bottom)
 		)
 		(uuid "21d2b80c-dbe9-4e9d-84ae-9638cfe5a3a7")
-	)
-	(label "GND"
-		(at 309.88 121.92 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "22399347-d5b3-425e-886f-a39b9eeafe31")
 	)
 	(label "GND"
 		(at 133.35 212.09 0)
@@ -5787,7 +5070,7 @@
 		(uuid "263cd166-8efc-448a-b657-056dea9933e9")
 	)
 	(label "GPIO9"
-		(at 278.13 116.84 0)
+		(at 250.19 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5829,28 +5112,6 @@
 			(justify right bottom)
 		)
 		(uuid "2b36846a-d67a-486b-9ebb-3c5ae1b4f525")
-	)
-	(label "GND"
-		(at 309.88 154.94 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2c57980c-6fd7-4073-b825-4bfe0802163d")
-	)
-	(label "5V"
-		(at 250.19 149.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2c7dde4b-3f85-4ece-bab8-e021343f251e")
 	)
 	(label "GND"
 		(at 161.29 256.54 0)
@@ -5897,7 +5158,7 @@
 		(uuid "2f5896db-e896-4752-acee-7a21c0abb6ac")
 	)
 	(label "GPIO9"
-		(at 367.03 123.19 180)
+		(at 320.04 116.84 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5908,7 +5169,7 @@
 		(uuid "303ee7ec-78f1-4a37-8c33-d3505fafdcc3")
 	)
 	(label "GPIO11"
-		(at 367.03 128.27 180)
+		(at 320.04 121.92 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5919,7 +5180,7 @@
 		(uuid "30a1375a-b098-4f96-96cb-de2fc16eaa69")
 	)
 	(label "GPIO3"
-		(at 367.03 52.07 180)
+		(at 320.04 45.72 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5963,7 +5224,7 @@
 		(uuid "353bcb58-7117-41e7-828e-a2f196922524")
 	)
 	(label "GPIO14"
-		(at 367.03 135.89 180)
+		(at 320.04 129.54 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5974,7 +5235,7 @@
 		(uuid "37e2aa3e-ff04-48c2-b061-e190377d3bf5")
 	)
 	(label "GPIO4"
-		(at 278.13 76.2 0)
+		(at 250.19 76.2 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6007,7 +5268,7 @@
 		(uuid "4250ec4e-80f7-4cd6-a632-59cafbd48a3d")
 	)
 	(label "D2"
-		(at 392.43 125.73 0)
+		(at 345.44 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6040,7 +5301,7 @@
 		(uuid "449c9494-f551-4dbd-b1c0-afe0481b8dd4")
 	)
 	(label "GPIO2"
-		(at 278.13 43.18 0)
+		(at 250.19 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6084,7 +5345,7 @@
 		(uuid "49b72e40-fb5c-4d8b-9d7f-045658eea05c")
 	)
 	(label "3.3V"
-		(at 360.68 113.03 0)
+		(at 313.69 101.6 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6205,7 +5466,7 @@
 		(uuid "51fd8070-91ae-465f-adf9-3a602e96f6b2")
 	)
 	(label "3.3V"
-		(at 392.43 115.57 0)
+		(at 345.44 109.22 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6227,7 +5488,7 @@
 		(uuid "53f2a1d7-7940-4df2-a947-6c34be4127c8")
 	)
 	(label "GPIO3"
-		(at 278.13 45.72 0)
+		(at 250.19 53.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6236,28 +5497,6 @@
 			(justify left bottom)
 		)
 		(uuid "54572b24-2cbc-45cc-bda4-5bc8bfe7a2f9")
-	)
-	(label "GND"
-		(at 309.88 119.38 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "55e2a935-8e78-4106-beaf-ae302a03c605")
-	)
-	(label "GND"
-		(at 309.88 83.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "56ee9f7e-e190-471a-a994-967155eb3807")
 	)
 	(label "D5"
 		(at 87.63 50.8 180)
@@ -6304,7 +5543,7 @@
 		(uuid "57f9fac4-d461-456c-b2b4-aeb490dbb7a5")
 	)
 	(label "GPIO15"
-		(at 278.13 160.02 0)
+		(at 250.19 167.64 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6359,7 +5598,7 @@
 		(uuid "5a8a780a-b018-4585-bef0-6131106305a5")
 	)
 	(label "GPIO10"
-		(at 367.03 125.73 180)
+		(at 320.04 119.38 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6381,7 +5620,7 @@
 		(uuid "5c04f8ae-2bcf-4540-baed-49a0649f0909")
 	)
 	(label "GPIO11"
-		(at 278.13 121.92 0)
+		(at 250.19 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6403,7 +5642,7 @@
 		(uuid "5c378ed2-3ee8-45c5-80dc-fe197f378bda")
 	)
 	(label "GPIO8"
-		(at 367.03 120.65 180)
+		(at 320.04 114.3 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6414,7 +5653,7 @@
 		(uuid "5cda1f43-7176-428d-960f-066170428d87")
 	)
 	(label "GPIO7"
-		(at 367.03 62.23 180)
+		(at 320.04 55.88 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6436,7 +5675,7 @@
 		(uuid "5d2f17f6-dee4-40ea-ad09-6fadea89d42c")
 	)
 	(label "D7"
-		(at 392.43 62.23 0)
+		(at 345.44 55.88 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6447,7 +5686,7 @@
 		(uuid "5d65ca90-ac05-4074-b328-3bc801e9a226")
 	)
 	(label "GPIO12"
-		(at 278.13 152.4 0)
+		(at 250.19 152.4 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6458,7 +5697,7 @@
 		(uuid "5d71c7a7-4f85-4ba4-84c8-465dc00a4162")
 	)
 	(label "GPIO4"
-		(at 367.03 54.61 180)
+		(at 320.04 48.26 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6469,7 +5708,7 @@
 		(uuid "5e30f05a-f8ff-4494-b064-1ea62826d899")
 	)
 	(label "GND"
-		(at 335.28 41.91 180)
+		(at 288.29 30.48 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6480,7 +5719,7 @@
 		(uuid "61855c8e-5847-4462-a593-ed3edac3bea4")
 	)
 	(label "D0"
-		(at 392.43 44.45 0)
+		(at 345.44 38.1 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6502,7 +5741,7 @@
 		(uuid "63125102-9a9c-4d7e-a669-2d76de25d272")
 	)
 	(label "3.3V"
-		(at 360.68 36.83 0)
+		(at 313.69 25.4 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6511,17 +5750,6 @@
 			(justify left bottom)
 		)
 		(uuid "63defd99-8b06-4c7e-a5b5-301ad8803753")
-	)
-	(label "GND"
-		(at 309.88 157.48 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6424d4fe-460d-4364-afc6-ba163d9d46da")
 	)
 	(label "OE11"
 		(at 153.67 160.02 0)
@@ -6533,17 +5761,6 @@
 			(justify left bottom)
 		)
 		(uuid "64ee5611-3dda-4873-9c4b-7a9535e2e258")
-	)
-	(label "GND"
-		(at 309.88 116.84 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6504a46d-0187-424b-b476-9ee945c23033")
 	)
 	(label "GD13"
 		(at 224.79 157.48 180)
@@ -6557,7 +5774,7 @@
 		(uuid "65348346-bb89-4d6f-b1ea-5be3da7b94ef")
 	)
 	(label "GPIO7"
-		(at 278.13 83.82 0)
+		(at 250.19 91.44 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6601,7 +5818,7 @@
 		(uuid "66b3a638-c924-4f7d-b131-1b6b1fadad95")
 	)
 	(label "GPIO14"
-		(at 278.13 157.48 0)
+		(at 250.19 162.56 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6645,7 +5862,7 @@
 		(uuid "6ae853dc-9bc4-4d50-9f7d-84d397812e0c")
 	)
 	(label "GPIO1"
-		(at 367.03 46.99 180)
+		(at 320.04 40.64 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6700,7 +5917,7 @@
 		(uuid "6feecd54-92cf-40aa-b95d-376d2c6a3625")
 	)
 	(label "D5"
-		(at 392.43 57.15 0)
+		(at 345.44 50.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6764,17 +5981,6 @@
 			(justify left bottom)
 		)
 		(uuid "76ec4daf-ebfd-4f15-863c-0a54642bd86b")
-	)
-	(label "GND"
-		(at 309.88 160.02 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "77905c41-6a53-4b35-a617-c2748717d4d1")
 	)
 	(label "D2"
 		(at 87.63 81.28 180)
@@ -6843,7 +6049,7 @@
 		(uuid "7d3272df-c589-4e6a-849c-2870084d7633")
 	)
 	(label "GPIO5"
-		(at 367.03 57.15 180)
+		(at 320.04 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6865,7 +6071,7 @@
 		(uuid "7e463194-13bd-4678-a4e9-5d81f9e1c7c3")
 	)
 	(label "GPIO10"
-		(at 278.13 119.38 0)
+		(at 250.19 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6975,7 +6181,7 @@
 		(uuid "857bb1bf-81b3-459f-b192-a9bc1a511878")
 	)
 	(label "Read GD _{8..15}"
-		(at 335.28 115.57 180)
+		(at 288.29 104.14 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7151,7 +6357,7 @@
 		(uuid "939f64e0-478f-413b-8a33-158ae1a0c7a3")
 	)
 	(label "GPIO1"
-		(at 278.13 40.64 0)
+		(at 250.19 43.18 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7184,7 +6390,7 @@
 		(uuid "95144144-f7a5-4c49-b99b-54344e446c0d")
 	)
 	(label "D5"
-		(at 392.43 133.35 0)
+		(at 345.44 127 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7238,8 +6444,8 @@
 		)
 		(uuid "99ae8ded-c555-453d-8a05-c3617b9e1cff")
 	)
-	(label "GND"
-		(at 312.42 45.72 0)
+	(label "5V"
+		(at 250.19 149.86 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7247,18 +6453,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "9b5c6e39-48c7-4c72-bbe3-d01da87bc32f")
-	)
-	(label "GND"
-		(at 312.42 38.1 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9babf4cf-7d1c-4250-8824-34a57ed4a4db")
+		(uuid "9bc45624-df03-434a-bf17-c7728061888e")
 	)
 	(label "GND"
 		(at 224.79 170.18 180)
@@ -7294,7 +6489,7 @@
 		(uuid "a0e42bff-2631-45e0-be3c-06c548f9005c")
 	)
 	(label "D4"
-		(at 392.43 54.61 0)
+		(at 345.44 48.26 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7305,7 +6500,7 @@
 		(uuid "a2047bce-1445-4609-83ae-8668820a8ad9")
 	)
 	(label "GND"
-		(at 335.28 118.11 180)
+		(at 288.29 106.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7316,7 +6511,7 @@
 		(uuid "a2929b59-152d-4489-b707-f7b5a6afee96")
 	)
 	(label "GND"
-		(at 367.03 140.97 180)
+		(at 320.04 134.62 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7338,7 +6533,7 @@
 		(uuid "a419fbd0-351f-4ebb-a85a-0668fd037d0c")
 	)
 	(label "GPIO13"
-		(at 367.03 133.35 180)
+		(at 320.04 127 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7470,7 +6665,7 @@
 		(uuid "ac46a39c-6b66-4a67-b0d9-febd70fc6e88")
 	)
 	(label "GPIO5"
-		(at 278.13 78.74 0)
+		(at 250.19 81.28 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7481,7 +6676,7 @@
 		(uuid "acb4db7c-6855-43df-b039-32d0ba82e3ca")
 	)
 	(label "3.3V"
-		(at 392.43 39.37 0)
+		(at 345.44 33.02 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7536,7 +6731,7 @@
 		(uuid "b26832c5-d454-401c-b0ce-6627ba5c473a")
 	)
 	(label "GPIO0"
-		(at 367.03 44.45 180)
+		(at 320.04 38.1 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7591,7 +6786,7 @@
 		(uuid "b7fc3afb-6aa1-4348-9ff5-9b49a074fc19")
 	)
 	(label "D0"
-		(at 392.43 120.65 0)
+		(at 345.44 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7613,7 +6808,7 @@
 		(uuid "b96b9f2b-250a-47d9-ae7a-28700e68f857")
 	)
 	(label "D3"
-		(at 392.43 128.27 0)
+		(at 345.44 121.92 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7767,7 +6962,7 @@
 		(uuid "c0c0ad17-2656-4ca4-9738-bb94955fd465")
 	)
 	(label "GPIO15"
-		(at 367.03 138.43 180)
+		(at 320.04 132.08 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7854,17 +7049,6 @@
 		)
 		(uuid "c8fc15a6-ebdd-4125-bb14-d5459f5778cd")
 	)
-	(label "GND"
-		(at 309.88 81.28 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "caa2ec01-c670-43e6-8554-f65992b83ddf")
-	)
 	(label "OE7"
 		(at 180.34 90.17 180)
 		(fields_autoplaced yes)
@@ -7877,7 +7061,7 @@
 		(uuid "cb331bdd-12c7-4ea0-be62-bb5e465f57be")
 	)
 	(label "GPIO6"
-		(at 367.03 59.69 180)
+		(at 320.04 53.34 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7932,7 +7116,7 @@
 		(uuid "d077ae8f-de48-4f90-a4d5-94f00f9627c3")
 	)
 	(label "D4"
-		(at 392.43 130.81 0)
+		(at 345.44 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7954,7 +7138,7 @@
 		(uuid "d2247d4e-3d15-4ad0-85d8-6da1135d6a6a")
 	)
 	(label "GPIO2"
-		(at 367.03 49.53 180)
+		(at 320.04 43.18 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7963,17 +7147,6 @@
 			(justify right bottom)
 		)
 		(uuid "d486f85c-68eb-4d3f-87d1-bfa87a75a379")
-	)
-	(label "GND"
-		(at 309.88 152.4 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "d4fc8cf3-3e06-4c15-8869-66cecf446a49")
 	)
 	(label "Enable"
 		(at 180.34 34.29 180)
@@ -8031,7 +7204,7 @@
 		(uuid "d6991ad5-0e16-4e52-8bd4-21e6afce634a")
 	)
 	(label "Read GD _{0..7}"
-		(at 335.28 39.37 180)
+		(at 288.29 27.94 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8053,7 +7226,7 @@
 		(uuid "d6b6625e-a6e5-4b42-ac88-91ea5c4be6b8")
 	)
 	(label "Read"
-		(at 367.03 118.11 180)
+		(at 320.04 111.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8086,7 +7259,7 @@
 		(uuid "db174a42-77ec-45c7-9608-07ec11d2a789")
 	)
 	(label "Read"
-		(at 367.03 41.91 180)
+		(at 320.04 35.56 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8185,7 +7358,7 @@
 		(uuid "e6944ecf-32d8-46c0-8eee-a626f1de3758")
 	)
 	(label "GPIO12"
-		(at 367.03 130.81 180)
+		(at 320.04 124.46 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8251,7 +7424,7 @@
 		(uuid "ec86b7e2-4dff-4589-8f1e-babfcec17004")
 	)
 	(label "GPIO8"
-		(at 278.13 114.3 0)
+		(at 250.19 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8262,7 +7435,7 @@
 		(uuid "ed28dd47-6bc4-4b6a-9758-91a0a224bdab")
 	)
 	(label "GND"
-		(at 367.03 64.77 180)
+		(at 320.04 58.42 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8283,17 +7456,6 @@
 		)
 		(uuid "eda22511-c591-4759-b56a-ba1108b3f89e")
 	)
-	(label "GND"
-		(at 309.88 78.74 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ee23cce2-3d77-4987-8b3c-2d91c21c4c5c")
-	)
 	(label "GD8"
 		(at 224.79 114.3 180)
 		(fields_autoplaced yes)
@@ -8306,7 +7468,7 @@
 		(uuid "ee3e99be-62b2-47f4-afe5-95c692c8ef38")
 	)
 	(label "GPIO6"
-		(at 278.13 81.28 0)
+		(at 250.19 86.36 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8317,7 +7479,7 @@
 		(uuid "eec05240-e558-4e41-b45c-d27be4fb138e")
 	)
 	(label "GPIO13"
-		(at 278.13 154.94 0)
+		(at 250.19 157.48 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8383,7 +7545,7 @@
 		(uuid "f8bac62a-f4dd-4076-8eac-4c5daf8cf100")
 	)
 	(label "D3"
-		(at 392.43 52.07 0)
+		(at 345.44 45.72 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -10068,152 +9230,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Yageo:CA0612KRX7R9BB100")
-		(at 292.1 38.1 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "17d76e8f-1188-49b7-a40e-a10f553f97ec")
-		(property "Reference" "CN4"
-			(at 302.26 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Value" "CA0612KRX7R9BB100"
-			(at 302.26 34.925 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CA0612KRX7R9BB100"
-			(at 319.405 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/CA0612KRX7R9BB102.pdf"
-			(at 300.99 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "10pF 4-array capacitor"
-			(at 302.26 48.895 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" ""
-			(at 308.61 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "KEMET"
-			(at 300.99 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CA0612KRX7R9BB102"
-			(at 300.99 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "603-CA612KRX7R9BB102"
-			(at 300.99 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/YAGEO/CA0612KRX7R9BB102?qs=50q%252BZR8McTG8nSzW%2FPfXjQ%3D%3D"
-			(at 300.99 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "10pF"
-			(at 302.26 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "72a32616-e5a9-4fa3-b080-36d65fb74bef")
-		)
-		(pin "2"
-			(uuid "d0d04d1e-121b-4111-8bae-c77174f91be5")
-		)
-		(pin "3"
-			(uuid "e40218f7-29ab-462d-b962-f61439bcf63e")
-		)
-		(pin "4"
-			(uuid "010ba51c-45f6-438d-a4b9-c78f2e2e5f8f")
-		)
-		(pin "5"
-			(uuid "25597b26-e023-42f5-af85-71a45c0ccfca")
-		)
-		(pin "6"
-			(uuid "e7be77a9-71fa-4446-a17e-f3af8840863e")
-		)
-		(pin "7"
-			(uuid "c7e2fd5b-78c8-401f-a8c7-50b913a41156")
-		)
-		(pin "8"
-			(uuid "eebf88f5-ea06-4572-9a66-c474ca6c0ba4")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "CN4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:Pin_Header_01x32")
 		(at 68.58 200.66 0)
 		(unit 1)
@@ -10276,7 +9292,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC573APW,118")
-		(at 367.03 39.37 0)
+		(at 320.04 33.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10284,7 +9300,7 @@
 		(dnp no)
 		(uuid "2ac10a67-dcee-4d38-87a2-0ac2d3650fba")
 		(property "Reference" "IC2"
-			(at 379.73 34.29 0)
+			(at 332.74 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10292,7 +9308,7 @@
 			)
 		)
 		(property "Value" "74LVC573APW,118"
-			(at 379.73 36.195 0)
+			(at 332.74 29.845 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10301,7 +9317,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
-			(at 393.065 73.025 0)
+			(at 346.075 66.675 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10311,7 +9327,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC573A.pdf"
-			(at 393.065 75.565 0)
+			(at 346.075 69.215 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10321,7 +9337,7 @@
 			)
 		)
 		(property "Description" "8-bit D-type latch"
-			(at 379.73 67.945 0)
+			(at 332.74 61.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10329,7 +9345,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 393.065 80.645 0)
+			(at 346.075 74.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10339,7 +9355,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC573APW-T"
-			(at 393.065 83.185 0)
+			(at 346.075 76.835 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10349,7 +9365,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC573APW118/?qs=me8TqzrmIYU4mlL%252B5pgpig%3D%3D"
-			(at 393.065 85.725 0)
+			(at 346.075 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10359,7 +9375,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 393.065 88.265 0)
+			(at 346.075 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10369,7 +9385,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC573APW,118"
-			(at 393.065 90.805 0)
+			(at 346.075 84.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10379,7 +9395,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC573"
-			(at 379.73 70.485 0)
+			(at 332.74 64.135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10388,7 +9404,7 @@
 			)
 		)
 		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 367.03 39.37 0)
+			(at 320.04 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10467,7 +9483,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC2G04GW-Q100H_Multi")
-		(at 335.28 39.37 0)
+		(at 288.29 27.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10475,7 +9491,7 @@
 		(dnp no)
 		(uuid "30ca1700-7b26-486f-b027-11cabe7ff21d")
 		(property "Reference" "IC17"
-			(at 346.71 31.75 0)
+			(at 299.72 20.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10484,7 +9500,7 @@
 			)
 		)
 		(property "Value" "74LVC2G04GW-Q100H"
-			(at 347.98 33.655 0)
+			(at 300.99 22.225 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10493,7 +9509,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
-			(at 356.87 51.435 0)
+			(at 309.88 40.005 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10503,7 +9519,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G04_Q100.pdf"
-			(at 356.87 53.975 0)
+			(at 309.88 42.545 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10513,7 +9529,7 @@
 			)
 		)
 		(property "Description" "2-input inverter"
-			(at 347.98 45.085 0)
+			(at 300.99 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10521,7 +9537,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 356.87 59.055 0)
+			(at 309.88 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10531,7 +9547,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 356.87 61.595 0)
+			(at 309.88 50.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10541,7 +9557,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC2G04GW-Q100H"
-			(at 356.87 64.135 0)
+			(at 309.88 52.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10551,7 +9567,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC2G04GWQ100H"
-			(at 356.87 66.675 0)
+			(at 309.88 55.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10561,7 +9577,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G04GW-Q100H?qs=Yna0arPQ0CQTXbBDVSrZqQ%3D%3D"
-			(at 356.87 69.215 0)
+			(at 309.88 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10571,7 +9587,7 @@
 			)
 		)
 		(property "Silkscreen" "'2G04"
-			(at 347.98 46.99 0)
+			(at 300.99 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10580,7 +9596,7 @@
 			)
 		)
 		(property "Garbage" "74LVC2G04-Q100 - Dual inverter@en-us"
-			(at 335.28 39.37 0)
+			(at 288.29 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11337,181 +10353,6 @@
 			(project "GPIO 16bit"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "IC3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Bourns:CAY16-151J4LF")
-		(at 257.81 121.92 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4656363a-694f-40c7-95fa-e566f98c8dbf")
-		(property "Reference" "RN3"
-			(at 267.97 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "CAY16-151J4LF"
-			(at 267.97 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CAY16-J4"
-			(at 275.59 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-7/sf-000140092.pdf"
-			(at 275.59 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "150Ω 4-array resistor"
-			(at 267.97 111.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "0.6"
-			(at 275.59 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Bourns"
-			(at 275.59 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CAY16-151J4LF"
-			(at 275.59 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "652-CAY16-151J4LF"
-			(at 275.59 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-151J4LF?qs=Qv7qbSW4mEF5GWsPNNp3QA%3D%3D"
-			(at 275.59 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "CAY16-151J4LF"
-			(at 275.59 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-151j4lf/bourns"
-			(at 275.59 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "150Ω"
-			(at 267.97 108.585 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 257.81 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "652f5edb-2ad4-4725-aa0f-b5219db8df1e")
-		)
-		(pin "2"
-			(uuid "bd731584-a050-410f-8b74-0d98c87d4487")
-		)
-		(pin "3"
-			(uuid "e1fa5cf9-9a76-4ac0-865e-714213274029")
-		)
-		(pin "4"
-			(uuid "4d0b47d7-0274-4b37-97f7-1fabfa3333c3")
-		)
-		(pin "5"
-			(uuid "ad89d887-3d50-47de-9080-4243d2204def")
-		)
-		(pin "6"
-			(uuid "e32f2b09-80dd-4236-b658-1707d7897464")
-		)
-		(pin "7"
-			(uuid "d52cb8bd-98df-4387-a24e-bf421e9ac5d3")
-		)
-		(pin "8"
-			(uuid "2028dc13-0d2d-4b63-ad4a-df2df149c93d")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "RN3")
 					(unit 1)
 				)
 			)
@@ -13597,7 +12438,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC573APW,118")
-		(at 367.03 115.57 0)
+		(at 320.04 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13605,7 +12446,7 @@
 		(dnp no)
 		(uuid "89803e96-ea98-4478-98fa-06aa6daecee1")
 		(property "Reference" "IC13"
-			(at 379.73 110.49 0)
+			(at 332.74 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13613,7 +12454,7 @@
 			)
 		)
 		(property "Value" "74LVC573APW,118"
-			(at 379.73 112.395 0)
+			(at 332.74 106.045 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13622,7 +12463,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X110-20N"
-			(at 393.065 149.225 0)
+			(at 346.075 142.875 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13632,7 +12473,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC573A.pdf"
-			(at 393.065 151.765 0)
+			(at 346.075 145.415 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13642,7 +12483,7 @@
 			)
 		)
 		(property "Description" "8-bit D-type latch"
-			(at 379.73 144.145 0)
+			(at 332.74 137.795 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13650,7 +12491,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 393.065 156.845 0)
+			(at 346.075 150.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13660,7 +12501,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC573APW-T"
-			(at 393.065 159.385 0)
+			(at 346.075 153.035 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13670,7 +12511,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC573APW118/?qs=me8TqzrmIYU4mlL%252B5pgpig%3D%3D"
-			(at 393.065 161.925 0)
+			(at 346.075 155.575 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13680,7 +12521,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 393.065 164.465 0)
+			(at 346.075 158.115 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13690,7 +12531,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC573APW,118"
-			(at 393.065 167.005 0)
+			(at 346.075 160.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13700,7 +12541,7 @@
 			)
 		)
 		(property "Silkscreen" "74LVC573"
-			(at 379.73 146.685 0)
+			(at 332.74 140.335 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13709,7 +12550,7 @@
 			)
 		)
 		(property "Garbage" "74LVC573A - Octal D-type transparent latch with 5 V tolerant inputs/outputs; 3-state@en-us"
-			(at 367.03 115.57 0)
+			(at 320.04 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13952,7 +12793,7 @@
 	)
 	(symbol
 		(lib_id "Nexperia:74LVC2G04GW-Q100H_Multi")
-		(at 335.28 115.57 0)
+		(at 288.29 104.14 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13960,7 +12801,7 @@
 		(dnp no)
 		(uuid "8b06f924-c30b-44a9-b92d-037c27ecd629")
 		(property "Reference" "IC17"
-			(at 346.71 107.95 0)
+			(at 299.72 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13969,7 +12810,7 @@
 			)
 		)
 		(property "Value" "74LVC2G04GW-Q100H"
-			(at 347.98 109.855 0)
+			(at 300.99 98.425 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13978,7 +12819,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
-			(at 356.87 127.635 0)
+			(at 309.88 116.205 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13988,7 +12829,7 @@
 			)
 		)
 		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC2G04_Q100.pdf"
-			(at 356.87 130.175 0)
+			(at 309.88 118.745 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13998,7 +12839,7 @@
 			)
 		)
 		(property "Description" "2-input inverter"
-			(at 347.98 121.285 0)
+			(at 300.99 109.855 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14006,7 +12847,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 356.87 135.255 0)
+			(at 309.88 123.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14016,7 +12857,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Nexperia"
-			(at 356.87 137.795 0)
+			(at 309.88 126.365 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14026,7 +12867,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "74LVC2G04GW-Q100H"
-			(at 356.87 140.335 0)
+			(at 309.88 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14036,7 +12877,7 @@
 			)
 		)
 		(property "Mouser Part Number" "771-74LVC2G04GWQ100H"
-			(at 356.87 142.875 0)
+			(at 309.88 131.445 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14046,7 +12887,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC2G04GW-Q100H?qs=Yna0arPQ0CQTXbBDVSrZqQ%3D%3D"
-			(at 356.87 145.415 0)
+			(at 309.88 133.985 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14056,7 +12897,7 @@
 			)
 		)
 		(property "Silkscreen" "'2G04"
-			(at 347.98 123.19 0)
+			(at 300.99 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14065,7 +12906,7 @@
 			)
 		)
 		(property "Garbage" "74LVC2G04-Q100 - Dual inverter@en-us"
-			(at 335.28 115.57 0)
+			(at 288.29 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14281,152 +13122,6 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Yageo:CA0612KRX7R9BB100")
-		(at 289.56 152.4 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "99d02fa2-476b-4837-b50e-bf640a8d4353")
-		(property "Reference" "CN1"
-			(at 299.72 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Value" "CA0612KRX7R9BB100"
-			(at 299.72 149.225 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CA0612KRX7R9BB100"
-			(at 316.865 177.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/CA0612KRX7R9BB102.pdf"
-			(at 298.45 172.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "10pF 4-array capacitor"
-			(at 299.72 163.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" ""
-			(at 306.07 157.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "KEMET"
-			(at 298.45 180.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CA0612KRX7R9BB102"
-			(at 298.45 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "603-CA612KRX7R9BB102"
-			(at 298.45 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/YAGEO/CA0612KRX7R9BB102?qs=50q%252BZR8McTG8nSzW%2FPfXjQ%3D%3D"
-			(at 298.45 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "10pF"
-			(at 299.72 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3fd5c6d1-02bd-4040-9675-6342b7ab5157")
-		)
-		(pin "2"
-			(uuid "632fe6c4-64f8-4478-a83c-98afe3bfb626")
-		)
-		(pin "3"
-			(uuid "0464183a-26a4-4993-a40f-539285904854")
-		)
-		(pin "4"
-			(uuid "a4fa3800-ab48-4779-a115-5c9303e3ec0f")
-		)
-		(pin "5"
-			(uuid "e706fe0a-2b35-4617-9383-bc5b22d99552")
-		)
-		(pin "6"
-			(uuid "a75dc3a5-95c2-4920-a9bc-b4d27b869634")
-		)
-		(pin "7"
-			(uuid "3814ff22-093e-42fc-bd92-caf36681a3ef")
-		)
-		(pin "8"
-			(uuid "6f181972-6846-46af-aa70-78ae82bd7e07")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "CN1")
 					(unit 1)
 				)
 			)
@@ -15193,152 +13888,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Yageo:CA0612KRX7R9BB100")
-		(at 289.56 114.3 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c1118f10-7eb4-4419-872a-4fd0eb98330c")
-		(property "Reference" "CN2"
-			(at 299.72 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Value" "CA0612KRX7R9BB100"
-			(at 299.72 111.125 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CA0612KRX7R9BB100"
-			(at 316.865 139.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/CA0612KRX7R9BB102.pdf"
-			(at 298.45 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "10pF 4-array capacitor"
-			(at 299.72 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" ""
-			(at 306.07 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "KEMET"
-			(at 298.45 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CA0612KRX7R9BB102"
-			(at 298.45 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "603-CA612KRX7R9BB102"
-			(at 298.45 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/YAGEO/CA0612KRX7R9BB102?qs=50q%252BZR8McTG8nSzW%2FPfXjQ%3D%3D"
-			(at 298.45 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "10pF"
-			(at 299.72 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9ae6a2fb-2823-49b6-96c1-6683287902f6")
-		)
-		(pin "2"
-			(uuid "463b7ba5-4f91-44d9-bafc-4d4d6e2e294a")
-		)
-		(pin "3"
-			(uuid "5450cea9-eec2-46b1-bcf3-42578c9f4853")
-		)
-		(pin "4"
-			(uuid "5d24eca0-a23d-4353-bc26-cdeed6fcfafd")
-		)
-		(pin "5"
-			(uuid "ade00ddf-50f4-49e7-a616-8544df0da74d")
-		)
-		(pin "6"
-			(uuid "0115de5c-6a48-4acb-a6ca-b63249f432ce")
-		)
-		(pin "7"
-			(uuid "08dccb87-e839-465e-9b99-6d1bb1f3cfde")
-		)
-		(pin "8"
-			(uuid "66a79773-72ea-4971-96b5-08393860353d")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "CN2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:C_0805")
 		(at 128.27 220.98 0)
 		(unit 1)
@@ -15426,181 +13975,6 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Bourns:CAY16-151J4LF")
-		(at 257.81 45.72 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d3ecf9c6-ba98-417e-b179-1347f546278e")
-		(property "Reference" "RN2"
-			(at 267.97 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "CAY16-151J4LF"
-			(at 267.97 48.895 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CAY16-J4"
-			(at 275.59 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-7/sf-000140092.pdf"
-			(at 275.59 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "150Ω 4-array resistor"
-			(at 267.97 34.925 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "0.6"
-			(at 275.59 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Bourns"
-			(at 275.59 20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CAY16-151J4LF"
-			(at 275.59 17.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "652-CAY16-151J4LF"
-			(at 275.59 15.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-151J4LF?qs=Qv7qbSW4mEF5GWsPNNp3QA%3D%3D"
-			(at 275.59 12.7 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "CAY16-151J4LF"
-			(at 275.59 10.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-151j4lf/bourns"
-			(at 275.59 7.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "150Ω"
-			(at 267.97 32.385 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 257.81 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6d66d43b-23dd-4d90-b878-bb54ce45dbd7")
-		)
-		(pin "2"
-			(uuid "0f970bb8-3f7d-49c8-af7e-eb5a31ad68cb")
-		)
-		(pin "3"
-			(uuid "2658cbc8-66ce-4ae9-b617-a043d809d247")
-		)
-		(pin "4"
-			(uuid "9ea357ac-02a7-46ed-9c7c-1b7d3b30d8a7")
-		)
-		(pin "5"
-			(uuid "7152bb94-2a13-4ce9-8b5f-744d0a1e6813")
-		)
-		(pin "6"
-			(uuid "2b2795ce-0861-45e4-8f73-220be1208c7b")
-		)
-		(pin "7"
-			(uuid "d441593c-619b-4fc0-bf94-235b7a888771")
-		)
-		(pin "8"
-			(uuid "ec99ea24-15b7-45e0-804f-94a09dbc39be")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "RN2")
 					(unit 1)
 				)
 			)
@@ -15957,327 +14331,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Yageo:CA0612KRX7R9BB100")
-		(at 289.56 76.2 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f211b145-b1fc-4742-9ea4-546a9235b0a3")
-		(property "Reference" "CN3"
-			(at 299.72 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Value" "CA0612KRX7R9BB100"
-			(at 299.72 73.025 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CA0612KRX7R9BB100"
-			(at 316.865 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/CA0612KRX7R9BB102.pdf"
-			(at 298.45 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "10pF 4-array capacitor"
-			(at 299.72 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" ""
-			(at 306.07 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "KEMET"
-			(at 298.45 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CA0612KRX7R9BB102"
-			(at 298.45 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "603-CA612KRX7R9BB102"
-			(at 298.45 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/YAGEO/CA0612KRX7R9BB102?qs=50q%252BZR8McTG8nSzW%2FPfXjQ%3D%3D"
-			(at 298.45 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "10pF"
-			(at 299.72 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "74fb45c5-b0a4-432f-bce1-703927077bec")
-		)
-		(pin "2"
-			(uuid "f60cf2d1-7e14-4b10-8bac-d77e0e056d00")
-		)
-		(pin "3"
-			(uuid "eca807e1-a275-41e5-82e4-398b57189fe9")
-		)
-		(pin "4"
-			(uuid "d0a740a4-da1b-4b5d-87d5-326a8eb27443")
-		)
-		(pin "5"
-			(uuid "2ecdf466-586f-4747-89a5-e9b066c92e5b")
-		)
-		(pin "6"
-			(uuid "08addd94-9441-4ad8-9369-df273a55b617")
-		)
-		(pin "7"
-			(uuid "77289a28-9418-4081-bea3-dd5438431dc5")
-		)
-		(pin "8"
-			(uuid "5d11b421-7e54-4f48-be29-b3a79ce7147a")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "CN3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Bourns:CAY16-151J4LF")
-		(at 257.81 160.02 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "f4091a23-aa26-428e-8383-6f4bf24c296c")
-		(property "Reference" "RN4"
-			(at 267.97 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "CAY16-151J4LF"
-			(at 267.97 163.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CAY16-J4"
-			(at 275.59 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-7/sf-000140092.pdf"
-			(at 275.59 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "150Ω 4-array resistor"
-			(at 267.97 149.225 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "0.6"
-			(at 275.59 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Bourns"
-			(at 275.59 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CAY16-151J4LF"
-			(at 275.59 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "652-CAY16-151J4LF"
-			(at 275.59 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-151J4LF?qs=Qv7qbSW4mEF5GWsPNNp3QA%3D%3D"
-			(at 275.59 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "CAY16-151J4LF"
-			(at 275.59 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-151j4lf/bourns"
-			(at 275.59 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "150Ω"
-			(at 267.97 146.685 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 257.81 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e04e72cc-b11a-4b45-8f93-d3024ffcd065")
-		)
-		(pin "2"
-			(uuid "a90c9545-5564-40ab-9b43-02e6c6555a95")
-		)
-		(pin "3"
-			(uuid "8255460d-b3ef-4113-aa8f-efe9aa01e626")
-		)
-		(pin "4"
-			(uuid "091d85f8-ff29-4fc0-bf70-3e2162ad5c30")
-		)
-		(pin "5"
-			(uuid "0f8c274b-1a00-4b6d-b9e7-b5b05cb9535f")
-		)
-		(pin "6"
-			(uuid "288581fd-98c1-4223-a13b-bd6c7d827555")
-		)
-		(pin "7"
-			(uuid "ffbfc67e-2e1a-495a-819b-92edfcc54b19")
-		)
-		(pin "8"
-			(uuid "7f4e35ef-d0ac-4731-abe5-9c09079b5637")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "RN4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Texas_Instruments:SN74AHC125DBR")
 		(at 224.79 73.66 0)
 		(unit 1)
@@ -16436,181 +14489,6 @@
 			(project "GPIO 16bit"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "IC9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Bourns:CAY16-151J4LF")
-		(at 257.81 83.82 0)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "fd52d518-51c1-4252-acf6-820ce83bb0bf")
-		(property "Reference" "RN1"
-			(at 267.97 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "CAY16-151J4LF"
-			(at 267.97 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:CAY16-J4"
-			(at 275.59 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/SFDatasheet-7/sf-000140092.pdf"
-			(at 275.59 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "150Ω 4-array resistor"
-			(at 267.97 73.025 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "0.6"
-			(at 275.59 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Bourns"
-			(at 275.59 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "CAY16-151J4LF"
-			(at 275.59 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "652-CAY16-151J4LF"
-			(at 275.59 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/CAY16-151J4LF?qs=Qv7qbSW4mEF5GWsPNNp3QA%3D%3D"
-			(at 275.59 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "CAY16-151J4LF"
-			(at 275.59 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/cay16-151j4lf/bourns"
-			(at 275.59 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "150Ω"
-			(at 267.97 70.485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Bourns CAY16 Series 150 +/-5% Isolated SMT Resistor Array, 4 Resistors, 0.25W total 1206 (3216M) package Convex"
-			(at 257.81 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "23a9c1e0-0d0a-4735-bd71-06fc28c622e9")
-		)
-		(pin "2"
-			(uuid "0776ab10-f665-4904-b899-b94a6808acb5")
-		)
-		(pin "3"
-			(uuid "a37e9ae7-680f-41d8-a2c6-935007c17bd0")
-		)
-		(pin "4"
-			(uuid "19f2f0f2-a517-4d08-a45e-bb73c30ed7ca")
-		)
-		(pin "5"
-			(uuid "f08f3ca9-8c06-434c-b26d-a0b833c7a14d")
-		)
-		(pin "6"
-			(uuid "4cbca5db-8022-4796-91b3-50ba5c312155")
-		)
-		(pin "7"
-			(uuid "cb725632-6e5c-4f6d-b952-4837d447040e")
-		)
-		(pin "8"
-			(uuid "0368503b-d980-4046-8f25-002bfed2df51")
-		)
-		(instances
-			(project "GPIO 16bit"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "RN1")
 					(unit 1)
 				)
 			)

@@ -6572,7 +6572,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "D"
-			(at 12.7 7.62 0)
+			(at 12.7 10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6580,7 +6580,7 @@
 			)
 		)
 		(property "Value" "NUP5120X6T1G"
-			(at 12.7 5.715 0)
+			(at 12.7 8.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6590,7 +6590,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOTFL50P160X60-6N"
-			(at 24.765 -17.145 0)
+			(at 24.765 -14.605 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6600,7 +6600,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NUP5120-D.PDF"
-			(at 24.765 -19.685 0)
+			(at 24.765 -17.145 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6610,7 +6610,7 @@
 			)
 		)
 		(property "Description" "TVS diode 5-array 6.2V"
-			(at 12.7 -10.795 0)
+			(at 12.7 -8.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6618,7 +6618,7 @@
 			)
 		)
 		(property "Height" "0.6"
-			(at 24.765 -24.13 0)
+			(at 24.765 -21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6628,7 +6628,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "onsemi"
-			(at 24.765 -26.67 0)
+			(at 24.765 -24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6638,7 +6638,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "NUP5120X6T1G"
-			(at 24.765 -29.21 0)
+			(at 24.765 -26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6648,7 +6648,7 @@
 			)
 		)
 		(property "Silkscreen" "NUP5120"
-			(at 24.765 -22.225 0)
+			(at 24.765 -19.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6668,7 +6668,7 @@
 		)
 		(symbol "NUP5120X6T1G_0_0"
 			(pin passive line
-				(at 0 -2.54 0)
+				(at 0 0 0)
 				(length 5.08)
 				(name "A"
 					(effects
@@ -6689,19 +6689,7 @@
 		(symbol "NUP5120X6T1G_0_1"
 			(polyline
 				(pts
-					(xy 8.382 -2.54) (xy 9.652 -2.54)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 9.652 -7.62) (xy 11.811 -7.62)
+					(xy 8.382 0) (xy 9.652 0)
 				)
 				(stroke
 					(width 0.254)
@@ -6749,18 +6737,6 @@
 			)
 			(polyline
 				(pts
-					(xy 9.652 2.54) (xy 9.652 -7.62)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
 					(xy 9.652 2.54) (xy 11.811 2.54)
 				)
 				(stroke
@@ -6773,7 +6749,19 @@
 			)
 			(polyline
 				(pts
-					(xy 13.589 -7.62) (xy 15.748 -7.62)
+					(xy 9.652 5.08) (xy 9.652 -5.08)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 9.652 5.08) (xy 11.811 5.08)
 				)
 				(stroke
 					(width 0.254)
@@ -6833,31 +6821,7 @@
 			)
 			(polyline
 				(pts
-					(xy 13.716 -8.128) (xy 13.97 -8.382)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 13.716 -7.112) (xy 13.462 -6.858)
-				)
-				(stroke
-					(width 0.254)
-					(type default)
-				)
-				(fill
-					(type none)
-				)
-			)
-			(polyline
-				(pts
-					(xy 13.716 -7.112) (xy 13.716 -8.128)
+					(xy 13.589 5.08) (xy 15.748 5.08)
 				)
 				(stroke
 					(width 0.254)
@@ -7013,7 +6977,31 @@
 			)
 			(polyline
 				(pts
-					(xy 11.811 -6.731) (xy 11.811 -8.382) (xy 13.589 -7.62) (xy 11.811 -6.731)
+					(xy 13.716 4.572) (xy 13.97 4.318)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 13.716 5.588) (xy 13.462 5.842)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 13.716 5.588) (xy 13.716 4.572)
 				)
 				(stroke
 					(width 0.254)
@@ -7073,7 +7061,19 @@
 			)
 			(polyline
 				(pts
-					(xy 5.08 4.445) (xy 20.32 4.445) (xy 20.32 -9.525) (xy 5.08 -9.525) (xy 5.08 4.445)
+					(xy 11.811 5.969) (xy 11.811 4.318) (xy 13.589 5.08) (xy 11.811 5.969)
+				)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 5.08 6.985) (xy 20.32 6.985) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 6.985)
 				)
 				(stroke
 					(width 0.1524)
@@ -7086,7 +7086,7 @@
 		)
 		(symbol "NUP5120X6T1G_1_0"
 			(pin passive line
-				(at 25.4 2.54 180)
+				(at 25.4 5.08 180)
 				(length 5.08)
 				(name "K1"
 					(effects
@@ -7104,7 +7104,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 0 180)
+				(at 25.4 2.54 180)
 				(length 5.08)
 				(name "K2"
 					(effects
@@ -7122,7 +7122,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -2.54 180)
+				(at 25.4 0 180)
 				(length 5.08)
 				(name "K3"
 					(effects
@@ -7140,7 +7140,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -5.08 180)
+				(at 25.4 -2.54 180)
 				(length 5.08)
 				(name "K4"
 					(effects
@@ -7158,7 +7158,7 @@
 				)
 			)
 			(pin passive line
-				(at 25.4 -7.62 180)
+				(at 25.4 -5.08 180)
 				(length 5.08)
 				(name "K5"
 					(effects

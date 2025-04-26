@@ -6,7 +6,7 @@
 	(descr "CP, Radial series, Radial, pin pitch=3.80mm, , diameter=8mm, Electrolytic Capacitor")
 	(tags "CP Radial series Radial pin pitch 3.80mm  diameter 8mm Electrolytic Capacitor")
 	(property "Reference" "REF**"
-		(at 1.905 -4.953 0)
+		(at 1.905 -4.699 0)
 		(layer "F.SilkS")
 		(uuid "11af47ff-1827-44a0-909c-bbb86cfee3af")
 		(effects
@@ -16,10 +16,9 @@
 			)
 		)
 	)
-	(property "Value" "CP_Radial_D8.0mm_P3.80mm"
-		(at 1.9 5.25 0)
-		(layer "F.Fab")
-		(hide yes)
+	(property "Value" "${Value}"
+		(at 1.9 4.826 0)
+		(layer "F.SilkS")
 		(uuid "f314d224-9d6c-4668-897a-afa0f4532f38")
 		(effects
 			(font
@@ -28,7 +27,7 @@
 			)
 		)
 	)
-	(property "Footprint" "CP_Radial_D8.0mm_P3.80mm"
+	(property "Footprint" ""
 		(at 2.032 6.477 0)
 		(unlocked yes)
 		(layer "F.Fab")

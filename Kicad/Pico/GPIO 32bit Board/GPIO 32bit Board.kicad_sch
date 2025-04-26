@@ -2055,6 +2055,198 @@
 				)
 			)
 		)
+		(symbol "Keystone:7761-3"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 10.16 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "7761-3"
+				(at 10.16 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(thickness 0.254)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:77613"
+				(at 16.51 -16.51 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=3925"
+				(at 16.51 -19.05 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Screw Terminal, M3, Right Angle"
+				(at 10.16 -5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description_1" "4 Pin Screw Terminal, Power Tap M3 Through Hole, Right Angle"
+				(at 16.51 -21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Height" "8.17"
+				(at 16.51 -24.13 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Keystone Electronics"
+				(at 16.51 -26.67 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "7761-3"
+				(at 16.51 -29.21 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "7761-3"
+				(at 16.51 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "7761-3_0_0"
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -2.54 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 0 180)
+					(length 5.08)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "7761-3_1_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 5.08 -4.445) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
 		(symbol "ST_Microelectronics:LD1117S50C"
 			(pin_names
 				(offset 0.762)
@@ -5781,6 +5973,17 @@
 		(uuid "05a5f3a8-8477-4451-a779-a35c34a8b3a4")
 	)
 	(label "GND"
+		(at 33.02 180.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "05eff4d7-bedd-427e-a1db-cd290dd9e7b9")
+	)
+	(label "GND"
 		(at 153.67 24.13 180)
 		(fields_autoplaced yes)
 		(effects
@@ -6375,6 +6578,17 @@
 		(uuid "5bbc3ea9-eaa5-4d96-9ef0-03b0bce94f68")
 	)
 	(label "GND"
+		(at 53.34 177.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60aef07c-d46f-4967-a0e5-fec05bce59c9")
+	)
+	(label "GND"
 		(at 130.81 29.21 0)
 		(fields_autoplaced yes)
 		(effects
@@ -6736,6 +6950,17 @@
 			(justify right bottom)
 		)
 		(uuid "865cd455-218a-44fb-802f-fb065b33d381")
+	)
+	(label "GND"
+		(at 53.34 180.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "867ccdba-7b41-4918-97ff-3cd597fdff3f")
 	)
 	(label "GND"
 		(at 273.05 46.99 0)
@@ -7474,6 +7699,17 @@
 		)
 		(uuid "f24b0ae1-322c-4847-8bfb-ae55309016fe")
 	)
+	(label "GND"
+		(at 33.02 177.8 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f2666f49-f4fd-4948-a0e3-37b0eb7a5e94")
+	)
 	(label "GPIO_{Ω}4"
 		(at 245.11 57.15 180)
 		(fields_autoplaced yes)
@@ -8129,6 +8365,132 @@
 			(project "GPIO 32bit Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Keystone:7761-3")
+		(at 33.02 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9729c85e-6862-445e-bfc9-02e592c86357")
+		(property "Reference" "J3"
+			(at 43.18 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "7761-3"
+			(at 43.18 174.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:77613"
+			(at 49.53 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=3925"
+			(at 49.53 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Screw Terminal, M3, Right Angle"
+			(at 43.18 183.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description_1" "4 Pin Screw Terminal, Power Tap M3 Through Hole, Right Angle"
+			(at 49.53 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "8.17"
+			(at 49.53 201.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Keystone Electronics"
+			(at 49.53 204.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "7761-3"
+			(at 49.53 207.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "7761-3"
+			(at 49.53 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a4a54f80-74ab-456e-a28c-d960f760a71a")
+		)
+		(pin "2"
+			(uuid "7360804a-95df-4a5a-80e5-658630aa9f4e")
+		)
+		(pin "3"
+			(uuid "30bb8d9a-67bb-47fd-8a94-29aea5ab7b09")
+		)
+		(pin "4"
+			(uuid "1c9f17fb-0e91-462a-bc4e-9b1c8ac0b251")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J3")
 					(unit 1)
 				)
 			)

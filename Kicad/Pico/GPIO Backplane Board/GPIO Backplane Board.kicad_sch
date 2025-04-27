@@ -1,0 +1,5898 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "8357857d-ab8c-4646-b786-aad4001c0a6b")
+	(paper "A3")
+	(title_block
+		(title "GPIO Controller Board")
+		(date "2025-04-24")
+		(rev "V1")
+	)
+	(lib_symbols
+		(symbol "HCP65:GPIO_32bit_Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "HCP65_Parts:HCP65_GPIO_32bit_Board"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
+		(symbol "HCP65:GPIO_Controller_Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "HCP65_Parts:HCP65_GPIO_Controller_Board"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+		)
+		(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim yes)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+		)
+		(symbol "Mechanical:MountingHole_Pad"
+			(pin_numbers hide)
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim yes)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_Pad"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole with connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*Pad*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_Pad_0_1"
+				(circle
+					(center 0 1.27)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_1_1"
+				(pin input line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "TE_Connectivity:2-5530843-7"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 11.43 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "2-5530843-7"
+				(at 11.43 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:255308437"
+				(at 19.05 -51.435 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+				(at 19.05 -53.975 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+				(at 19.05 -56.515 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Height" "15.494"
+				(at 19.05 -59.055 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "TE Connectivity"
+				(at 19.05 -61.595 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "2-5530843-7"
+				(at 19.05 -64.135 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "571-2-5530843-7"
+				(at 19.05 -66.675 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+				(at 19.05 -69.215 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Part Number" "2-5530843-7"
+				(at 19.05 -71.755 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+				(at 19.05 -74.295 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "2-5530843-7_0_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -10.16 180)
+					(length 5.08)
+					(name "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -12.7 180)
+					(length 5.08)
+					(name "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -15.24 180)
+					(length 5.08)
+					(name "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -17.78 180)
+					(length 5.08)
+					(name "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -20.32 180)
+					(length 5.08)
+					(name "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 0 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -22.86 180)
+					(length 5.08)
+					(name "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -25.4 0)
+					(length 5.08)
+					(name "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -25.4 180)
+					(length 5.08)
+					(name "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -27.94 0)
+					(length 5.08)
+					(name "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -27.94 180)
+					(length 5.08)
+					(name "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -30.48 0)
+					(length 5.08)
+					(name "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -30.48 180)
+					(length 5.08)
+					(name "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -33.02 0)
+					(length 5.08)
+					(name "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -33.02 180)
+					(length 5.08)
+					(name "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -35.56 0)
+					(length 5.08)
+					(name "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -35.56 180)
+					(length 5.08)
+					(name "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -38.1 0)
+					(length 5.08)
+					(name "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -38.1 180)
+					(length 5.08)
+					(name "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -40.64 0)
+					(length 5.08)
+					(name "33"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "33"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -40.64 180)
+					(length 5.08)
+					(name "34"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "34"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -43.18 0)
+					(length 5.08)
+					(name "35"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "35"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -43.18 180)
+					(length 5.08)
+					(name "36"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "36"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -2.54 180)
+					(length 5.08)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -5.08 180)
+					(length 5.08)
+					(name "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -7.62 180)
+					(length 5.08)
+					(name "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "2-5530843-7_1_1"
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 17.78 2.54) (xy 17.78 -45.72) (xy 5.08 -45.72) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type solid)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(text "Edge connector 36pin"
+					(at 11.43 -46.99 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 135.89 96.52)
+		(uuid "0b29731b-388f-40db-8704-6f1d0a8b6420")
+	)
+	(no_connect
+		(at 69.85 96.52)
+		(uuid "0f2de008-ffb7-4239-a71b-c3e21c345b43")
+	)
+	(no_connect
+		(at 181.61 91.44)
+		(uuid "12a325e4-b69b-4e06-920c-ddc04a315da2")
+	)
+	(no_connect
+		(at 69.85 146.05)
+		(uuid "132d94e0-728e-40bb-8bc9-a98dedc70620")
+	)
+	(no_connect
+		(at 113.03 93.98)
+		(uuid "14f5b6c3-e9d8-4117-b906-ef42905db77e")
+	)
+	(no_connect
+		(at 204.47 91.44)
+		(uuid "1ba226ca-935f-40f6-9dcd-5a2152cad21d")
+	)
+	(no_connect
+		(at 181.61 93.98)
+		(uuid "23e5502f-53bd-401f-9943-5d223299a955")
+	)
+	(no_connect
+		(at 270.51 93.98)
+		(uuid "30fa11cf-06f6-44fe-9703-76934a0354c9")
+	)
+	(no_connect
+		(at 46.99 93.98)
+		(uuid "31f96513-e2ce-464a-a7e1-0bccc656df01")
+	)
+	(no_connect
+		(at 270.51 91.44)
+		(uuid "41e7c2cb-24f5-46f9-9f8c-ba7fd53fc748")
+	)
+	(no_connect
+		(at 113.03 96.52)
+		(uuid "47bfa479-a71a-40d2-aec1-8e2a868ad404")
+	)
+	(no_connect
+		(at 247.65 93.98)
+		(uuid "56f2d747-76b5-4a25-a65d-3e62cb411ee0")
+	)
+	(no_connect
+		(at 46.99 96.52)
+		(uuid "6df7ffd9-e02e-4acd-9e84-eb75c44a71b2")
+	)
+	(no_connect
+		(at 69.85 66.04)
+		(uuid "805f888f-e3fc-43d8-9fdc-a98d41a9635f")
+	)
+	(no_connect
+		(at 247.65 91.44)
+		(uuid "86160b7e-3473-47dd-aad4-821c95c88cfc")
+	)
+	(no_connect
+		(at 135.89 93.98)
+		(uuid "8c8e4af5-3f03-44b7-b8e6-d162cb99bd6b")
+	)
+	(no_connect
+		(at 135.89 66.04)
+		(uuid "95f76458-7330-4cc2-a7f7-53e21198912e")
+	)
+	(no_connect
+		(at 270.51 63.5)
+		(uuid "c19f31bf-b93d-437b-bf70-83b6f96cd499")
+	)
+	(no_connect
+		(at 69.85 93.98)
+		(uuid "da8c5d96-d67a-4ed1-ae9d-024277dca136")
+	)
+	(no_connect
+		(at 204.47 63.5)
+		(uuid "daf460d0-117e-4493-aaf5-503c489b9a7b")
+	)
+	(no_connect
+		(at 204.47 93.98)
+		(uuid "ed58505c-f8bb-4b8c-89e6-a4fcc9433e46")
+	)
+	(label "D7"
+		(at 69.85 168.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0051daf7-9ec3-4a31-9d7a-654142dbe278")
+	)
+	(label "12V"
+		(at 181.61 50.8 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "00e41e82-e0c4-4bd8-8013-7546e5a29621")
+	)
+	(label "12V"
+		(at 247.65 50.8 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "01576140-c6a5-4890-917e-d35d794b813a")
+	)
+	(label "D3"
+		(at 135.89 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "02b23d8b-420e-42bf-aad8-d6d0ef65d84d")
+	)
+	(label "Write OE B0 _{40..47}"
+		(at 135.89 140.97 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0302a943-990c-41b3-b199-acc9e0f4b90f")
+	)
+	(label "Read GD B1 _{8..15}"
+		(at 113.03 140.97 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "03c534de-1e11-425a-8481-aea6acf950ed")
+	)
+	(label "Write GPIO _{ALL}"
+		(at 270.51 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0609f43d-7a44-4359-877a-77eb6fa4762f")
+	)
+	(label "D7"
+		(at 135.89 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0662db21-1313-4ec4-8609-67925a01756d")
+	)
+	(label "Write OE B1 _{24..31}"
+		(at 135.89 163.83 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "06aee78f-699a-49db-b3b5-5aa80c9854a0")
+	)
+	(label "D6"
+		(at 270.51 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "072afa25-9993-4067-8b64-53c6ccc8e50b")
+	)
+	(label "Read GD B0 _{16..23}"
+		(at 46.99 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "079ba62d-d9a6-473a-97dd-56585bf42da7")
+	)
+	(label "GND"
+		(at 69.85 171.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "080a0fcd-d7bb-494a-8e1f-85ff317055b6")
+	)
+	(label "Read GD B1 _{0..7}"
+		(at 181.61 55.88 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0844b15f-d974-4c5e-99b8-8cfe9374ac89")
+	)
+	(label "Read GPIO _{ALL}"
+		(at 69.85 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08be98dd-8a4a-4c10-be61-2756ccedf1c0")
+	)
+	(label "Write GD B0 _{0..7}"
+		(at 46.99 63.5 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "09fa2e5a-0039-4524-9395-b9c45927ca4b")
+	)
+	(label "D1"
+		(at 270.51 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0b454265-c500-43cb-9969-7e09e442dd3f")
+	)
+	(label "Write Enable"
+		(at 204.47 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0d06beec-fe60-4941-9073-ab7f6182b8fb")
+	)
+	(label "12V"
+		(at 135.89 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0e2b2d27-85d1-4d5d-bcf0-22cf696a3c47")
+	)
+	(label "Write GD B1 _{56..63}"
+		(at 135.89 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0eb462b2-c936-4a85-ad05-993bdafa993a")
+	)
+	(label "D1"
+		(at 135.89 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0f7efd98-6596-4638-8e51-914f214f358b")
+	)
+	(label "Write GD B0 _{32..39}"
+		(at 46.99 173.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1009922b-0c58-4fdd-9d3d-7cc3ec3b558d")
+	)
+	(label "Write Enable"
+		(at 69.85 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10256d0c-9273-402e-b9c4-41bebe92d531")
+	)
+	(label "GND"
+		(at 113.03 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "104966f6-d415-48cc-8ee8-905c7df2264b")
+	)
+	(label "GND"
+		(at 69.85 73.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "10769337-8868-4eaa-bead-81c053128fdc")
+	)
+	(label "D1"
+		(at 69.85 151.13 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "11ee57ef-1c23-4c54-8f90-d5b2a37914aa")
+	)
+	(label "D4"
+		(at 69.85 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1229e21d-e436-4444-89ab-4f4cf5f9958f")
+	)
+	(label "GND"
+		(at 135.89 135.89 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "122cefed-0236-45c8-b92d-21bf10b5058d")
+	)
+	(label "Read GD B0 _{24..31}"
+		(at 46.99 78.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "12d06c81-22ab-440b-aa3f-afc64ef75db0")
+	)
+	(label "Write GD B1 _{40..47}"
+		(at 247.65 63.5 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "12e26497-df8a-4118-bbcd-61c0ccd59128")
+	)
+	(label "Write OE B0 _{24..31}"
+		(at 135.89 133.35 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "12f858e1-827d-4ce9-876c-90e65ecc6d9c")
+	)
+	(label "12V"
+		(at 270.51 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16395daf-b9fc-4874-ae9c-9572d1245ae4")
+	)
+	(label "Read GD B1 _{32..39}"
+		(at 247.65 55.88 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1da05871-abad-4082-88f2-f05768a19e10")
+	)
+	(label "Read GPIO _{ALL}"
+		(at 69.85 140.97 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1dc179ee-f79f-4845-9b9e-4e122248885d")
+	)
+	(label "D0"
+		(at 270.51 66.04 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f578ed2-5eaa-4ad1-a017-21cf759e5fc9")
+	)
+	(label "Write GD B0 _{32..39}"
+		(at 113.03 63.5 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1ff47c9d-2c3b-4f1a-81e1-67557d1eb65a")
+	)
+	(label "Read GD B0 _{48..55}"
+		(at 46.99 156.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2298c286-96fb-4430-8368-755e9f1bae22")
+	)
+	(label "Write Enable"
+		(at 69.85 138.43 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "25e12ca9-1a33-4b47-ad35-e55633ec48c0")
+	)
+	(label "Write GD B1 _{40..47}"
+		(at 113.03 176.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "260e0347-6673-492d-9cee-01957db03035")
+	)
+	(label "D7"
+		(at 69.85 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2617793c-e9dd-4d3d-9423-33b060ef86a9")
+	)
+	(label "D2"
+		(at 270.51 73.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "26e53156-e58b-4121-acdf-6560916f2a86")
+	)
+	(label "Read GD B0 _{24..31}"
+		(at 46.99 146.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "26e6b84d-43b9-4271-93a9-ab18004e8888")
+	)
+	(label "D5"
+		(at 69.85 163.83 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2b5da396-6bdd-4140-8b96-951b77d7fe70")
+	)
+	(label "Write OE B0 _{48..55}"
+		(at 135.89 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2dbf8851-ec5e-4bca-97cd-708995fe62a0")
+	)
+	(label "Read GD B0 _{40..47}"
+		(at 46.99 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2f052504-4e2c-4ea0-ba83-33d41a1dfaee")
+	)
+	(label "D0"
+		(at 69.85 148.59 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "331ac2f3-9623-4563-89cd-bfe95ff9d08c")
+	)
+	(label "D4"
+		(at 135.89 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3391c5f8-6c3a-46b6-8710-2b2ba18b95d6")
+	)
+	(label "Write OE B1 _{48..55}"
+		(at 247.65 83.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "34f82498-6e9f-4c80-8b39-d55dde6a0543")
+	)
+	(label "D5"
+		(at 270.51 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "35344e7d-dbd2-437b-a925-640d7b24ac4c")
+	)
+	(label "Write Enable"
+		(at 135.89 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "35a7e08a-a08f-4211-95cd-89dea4057a63")
+	)
+	(label "Write OE B1 _{8..15}"
+		(at 181.61 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3bbb9dab-c3f1-4a16-9b5e-7a050dea2d09")
+	)
+	(label "D0"
+		(at 135.89 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3d82e308-c7fd-40ea-bae5-05e38431ee6d")
+	)
+	(label "Write OE B1 _{32..39}"
+		(at 135.89 166.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3fd7ec57-1940-45a3-a463-1284e2b7d224")
+	)
+	(label "Write OE B0 _{24..31}"
+		(at 46.99 88.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "40171fa3-ab60-4ad8-9fee-c2a37859c7e9")
+	)
+	(label "Write OE B0 _{8..15}"
+		(at 46.99 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "42213e5f-654e-4d59-80f1-ebcdba2facf7")
+	)
+	(label "GND"
+		(at 113.03 55.88 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "438f17b3-b952-4c37-a63d-985bdb6a01c8")
+	)
+	(label "GND"
+		(at 69.85 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "44acab41-a86f-4120-9352-b48dea45cae0")
+	)
+	(label "Read GD B1 _{24..31}"
+		(at 113.03 146.05 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "457439fc-85af-410c-8090-dcfec81e93ee")
+	)
+	(label "Write GD B1 _{48..55}"
+		(at 135.89 148.59 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4603bc67-c55d-4e93-9b5a-065e6f7199be")
+	)
+	(label "GND"
+		(at 113.03 171.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "46cd8f41-83a4-4074-8944-19c545a0a968")
+	)
+	(label "D2"
+		(at 69.85 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "46e5df07-a0f3-4a21-9aa8-4899aae7a0ec")
+	)
+	(label "Write OE B0 _{40..47}"
+		(at 113.03 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "484edf86-6646-4fa5-86f5-31eb6483d43e")
+	)
+	(label "Write GPIO _{ALL}"
+		(at 135.89 63.5 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4b8fd04d-b5d0-4af5-ab1e-5323c449194c")
+	)
+	(label "GND"
+		(at 181.61 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4bbfb7c6-d0b1-4e69-bfea-ed968cf8696c")
+	)
+	(label "Write OE B1 _{0..7}"
+		(at 181.61 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4d341550-77df-4518-9459-60cdd3855e89")
+	)
+	(label "D3"
+		(at 204.47 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4da696c6-35f8-4e1d-8ae9-1c859b51e1e5")
+	)
+	(label "Write GD B0 _{40..47}"
+		(at 46.99 176.53 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4f069782-917b-4bf7-b2d7-d837a1465ca2")
+	)
+	(label "D4"
+		(at 204.47 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "50bef282-6327-422b-8351-801183f40c6b")
+	)
+	(label "D5"
+		(at 204.47 81.28 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "526d4e0c-12ea-4f67-adc7-bbb1cbf8c200")
+	)
+	(label "Write OE B0 _{16..23}"
+		(at 46.99 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "54147f66-ff4d-4445-ad82-2ac8a29a1f31")
+	)
+	(label "Write GD B0 _{0..7}"
+		(at 46.99 161.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "554ba472-27ba-43fd-9e9a-3471fc45a558")
+	)
+	(label "D7"
+		(at 204.47 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "56f7cafa-cc94-4fef-acc1-aa681df4aa92")
+	)
+	(label "Read GD B0 _{32..39}"
+		(at 113.03 58.42 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "599809d2-1ee7-45e9-a048-ebd2c8715a86")
+	)
+	(label "D6"
+		(at 135.89 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5a9d7d73-c36e-4ef7-be1a-487f5c819f2f")
+	)
+	(label "GND"
+		(at 259.08 29.21 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5b0b20c5-5064-43fd-ac47-8fb217e5dfb8")
+	)
+	(label "Write GD B1 _{16..23}"
+		(at 181.61 78.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5c4b8d11-3d02-4060-92b0-af914e45c881")
+	)
+	(label "Write GD B1 _{48..55}"
+		(at 247.65 78.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5c81d8c1-4595-4127-9314-3ef85cd92835")
+	)
+	(label "Write GD B1 _{32..39}"
+		(at 113.03 173.99 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5e6b88f6-8966-4126-94df-bb36bdf4050b")
+	)
+	(label "Read GD B0 _{56..63}"
+		(at 46.99 158.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5ee37880-0a03-403b-8c07-676e3c3d72e8")
+	)
+	(label "Write GD B0 _{16..23}"
+		(at 46.99 166.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "60e718e9-afd7-41db-a12f-1fb19260ffda")
+	)
+	(label "12V"
+		(at 46.99 53.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "611aeede-867d-4b63-8fcb-bdb5398d7cf4")
+	)
+	(label "Write GD B0 _{56..63}"
+		(at 69.85 176.53 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "62cdad55-98ac-4fd9-a19f-363b69f70b1f")
+	)
+	(label "Write GD B0 _{48..55}"
+		(at 69.85 173.99 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6428f652-6923-438a-bd40-d31c96645ecc")
+	)
+	(label "Write GD B0 _{56..63}"
+		(at 113.03 83.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "645b33c3-dc84-4cda-92f0-f9469ae9a3cf")
+	)
+	(label "Write OE B1 _{16..23}"
+		(at 181.61 83.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "655fe199-afae-43a7-abb8-d553fdc0f96d")
+	)
+	(label "Read GD B0 _{32..39}"
+		(at 46.99 148.59 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "67107a85-4ef0-4339-a8e9-97f9e256e68c")
+	)
+	(label "Read GD B1 _{48..55}"
+		(at 113.03 156.21 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "68b9760c-adb5-4f93-82c5-b52a9c5ffbe4")
+	)
+	(label "Read GD B1 _{24..31}"
+		(at 181.61 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "68e4651d-34d6-4948-976a-e49e556ac1a7")
+	)
+	(label "Read GD B1 _{16..23}"
+		(at 181.61 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6e424bef-6638-4f45-b746-79b7308a612b")
+	)
+	(label "GND"
+		(at 46.99 153.67 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6e992816-4528-492e-8ec4-dd9969755b99")
+	)
+	(label "Write GD B0 _{8..15}"
+		(at 46.99 163.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6eaf75f3-e172-4549-ab01-e8d71b3468d0")
+	)
+	(label "Write GD B1 _{56..63}"
+		(at 247.65 81.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6ef95df4-b5f8-4d64-9660-6c3659ef3675")
+	)
+	(label "Write GD B1 _{8..15}"
+		(at 181.61 63.5 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6f1ca00d-daa7-4d92-ba86-228447b05c73")
+	)
+	(label "GND"
+		(at 204.47 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "720c666b-d6b3-4173-95ff-66ce33133731")
+	)
+	(label "Write OE B1 _{32..39}"
+		(at 247.65 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7358baae-8196-44a8-9583-4eb6ca3f0a90")
+	)
+	(label "Write OE B1 _{56..63}"
+		(at 135.89 176.53 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7638f47c-e4fe-4b58-bb04-0bd191f31a12")
+	)
+	(label "GND"
+		(at 247.65 88.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "76b2c771-13ed-4fdb-988b-ac51d534caa6")
+	)
+	(label "Read GPIO _{ALL}"
+		(at 204.47 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "789deb26-1a43-4eb8-8889-502a6842c80f")
+	)
+	(label "Read GD B1 _{0..7}"
+		(at 113.03 138.43 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "797521f7-a0a2-4f8c-bb7e-5e9a26f350a8")
+	)
+	(label "D3"
+		(at 69.85 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7a4ed660-aa43-4d6b-9e57-0095683ddb77")
+	)
+	(label "Write GD B0 _{16..23}"
+		(at 46.99 81.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7c838a30-b3d8-44e9-a17a-cc9e1be05c31")
+	)
+	(label "D2"
+		(at 204.47 73.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7e078325-e500-4d37-a8e4-3eb4d535f7a6")
+	)
+	(label "GND"
+		(at 270.51 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7f8313f9-05c4-4ccb-9104-660aca0677c7")
+	)
+	(label "GND"
+		(at 58.42 30.48 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8035c38c-9f2c-410b-9098-8931080feca7")
+	)
+	(label "Read GD B0 _{16..23}"
+		(at 46.99 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "807225df-0586-4647-8792-efcc537de0f8")
+	)
+	(label "D6"
+		(at 204.47 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8229a462-b04b-4671-97b6-53b38b71fec0")
+	)
+	(label "D7"
+		(at 270.51 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "846a04e9-2a15-4372-a389-d03300186d35")
+	)
+	(label "12V"
+		(at 69.85 133.35 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8d682dce-7487-46c6-bceb-5ca7d2534c3d")
+	)
+	(label "Write OE B1 _{48..55}"
+		(at 135.89 173.99 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8f7342d2-ff2a-42bd-b3cd-9dab9fe582e0")
+	)
+	(label "GND"
+		(at 204.47 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "90ab3c75-7390-4f6c-907e-3ce29e71792a")
+	)
+	(label "GND"
+		(at 69.85 153.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92f64105-23bf-4274-a013-fc404b022e4c")
+	)
+	(label "D6"
+		(at 69.85 86.36 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "93fb4477-8c29-40ee-91ee-f1652fc62629")
+	)
+	(label "D4"
+		(at 270.51 78.74 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "967a030a-3cbf-424f-b60e-22142ceb6205")
+	)
+	(label "D3"
+		(at 69.85 158.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9698a28d-eaa1-4d8c-a158-e92ef8370180")
+	)
+	(label "12V"
+		(at 46.99 133.35 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "98a9412b-e314-4df8-bee7-224b2517f442")
+	)
+	(label "GND"
+		(at 113.03 91.44 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "98dc1a09-8eaf-4f27-acbe-268330a8239e")
+	)
+	(label "Read GD B0 _{0..7}"
+		(at 46.99 138.43 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "99444ea8-b7f2-4c6d-80da-5a9947586fff")
+	)
+	(label "Write OE B0 _{32..39}"
+		(at 135.89 138.43 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9c21f8e9-c96e-4c38-b33f-df9cfccc5330")
+	)
+	(label "Read GD B0 _{8..15}"
+		(at 46.99 60.96 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9d108e3f-c73f-4492-8359-3e5fa28562ba")
+	)
+	(label "D2"
+		(at 135.89 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9d7eab33-1ade-48ff-9462-ab28f2a5cfc7")
+	)
+	(label "GND"
+		(at 135.89 73.66 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9f4318fa-6451-4d33-8489-5ebac44ad5ec")
+	)
+	(label "GND"
+		(at 69.85 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9fee8109-e638-4f27-875f-e64d2b33197c")
+	)
+	(label "Read GPIO _{ALL}"
+		(at 270.51 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a1e22f10-aa08-4b46-9733-1e36274645dc")
+	)
+	(label "Write GD B1 _{24..31}"
+		(at 113.03 168.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a2162c36-99b3-4fa0-af08-c074d80c3ac8")
+	)
+	(label "Write OE B0 _{0..7}"
+		(at 46.99 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a2dfc17d-9260-4bcf-b183-bfaa5d13e04b")
+	)
+	(label "D0"
+		(at 204.47 66.04 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a54564d7-f838-4e24-b58c-487e4d4105a6")
+	)
+	(label "Write OE B1 _{56..63}"
+		(at 247.65 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a5e3c9e0-e391-4c5e-9d68-7a60f22d7b04")
+	)
+	(label "Write Enable"
+		(at 270.51 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a61c55e0-041f-4685-b808-e5a08c197195")
+	)
+	(label "GND"
+		(at 135.89 91.44 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a75a0c17-7b4f-4bc4-ba69-5f8777d18ef3")
+	)
+	(label "GND"
+		(at 46.99 91.44 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a84494b2-d438-475a-8fa9-72403fc65ea8")
+	)
+	(label "GND"
+		(at 270.51 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a958419f-5369-44fc-a4b8-2a438c78688a")
+	)
+	(label "Read GD B1 _{8..15}"
+		(at 181.61 58.42 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ab65fce1-c44e-4c38-87cf-2d70719cea39")
+	)
+	(label "Write OE B0 _{48..55}"
+		(at 113.03 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ac6bd7fb-b168-4a64-989f-820d6ab60e2b")
+	)
+	(label "GND"
+		(at 69.85 135.89 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac80bb96-62b3-4b24-909e-87cbdcb6dd68")
+	)
+	(label "D4"
+		(at 69.85 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ad4d10e2-c5ad-4a80-bb99-1e71f7a52f40")
+	)
+	(label "GND"
+		(at 247.65 53.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ae8bd122-8cc9-4cbb-8188-978991cc69de")
+	)
+	(label "GND"
+		(at 181.61 88.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b1225a09-ed91-4b6a-b4d3-406643e264e4")
+	)
+	(label "GND"
+		(at 125.73 119.38 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b17062af-b55c-4b28-b1b5-f630babb7a72")
+	)
+	(label "Write GD B1 _{32..39}"
+		(at 247.65 60.96 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b27b1626-f847-4d84-aace-24abdfaa1039")
+	)
+	(label "Write OE B1 _{24..31}"
+		(at 181.61 86.36 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b4510e1c-bf34-449c-ac25-53f6e833db26")
+	)
+	(label "GND"
+		(at 46.99 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b596da66-e337-43c8-b3cd-cf40a4f85fbf")
+	)
+	(label "Write OE B0 _{56..63}"
+		(at 135.89 146.05 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b8a52462-ce92-4e16-8b49-bba27ff27dfb")
+	)
+	(label "GND"
+		(at 247.65 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b8dc4675-1cc4-487a-9b31-f59d08247a59")
+	)
+	(label "Write OE B0 _{56..63}"
+		(at 113.03 88.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b9c76db8-b0f7-4a92-bbb4-c59387f029ec")
+	)
+	(label "Read GD B1 _{56..63}"
+		(at 113.03 158.75 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b9fc4a1d-c47b-4e5f-8b2a-86d6aa0c2cec")
+	)
+	(label "Write GPIO _{ALL}"
+		(at 69.85 63.5 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "baa2b1fe-f8c6-4f1e-a557-374df786cdb6")
+	)
+	(label "Write OE B0 _{16..23}"
+		(at 113.03 133.35 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb81441b-2ac4-422c-a668-6a5b051f03e1")
+	)
+	(label "D1"
+		(at 204.47 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bba276b6-ec9b-473c-a684-0b9821aea98d")
+	)
+	(label "Read GD B0 _{0..7}"
+		(at 46.99 58.42 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bd0e6699-5a4c-4302-ac05-e93fe6115df5")
+	)
+	(label "Write GPIO _{ALL}"
+		(at 204.47 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bd7b42d2-af7b-4029-88cc-25b377753c91")
+	)
+	(label "12V"
+		(at 69.85 53.34 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "be2dc236-6038-4ed1-84c9-823aec7ac063")
+	)
+	(label "Write OE B1 _{40..47}"
+		(at 247.65 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bf734990-f8d5-483f-b46c-2cd1a3e58915")
+	)
+	(label "Write GD B0 _{24..31}"
+		(at 46.99 83.82 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bfa7bd01-ef11-4404-ab02-05a347a8cc64")
+	)
+	(label "GND"
+		(at 46.99 135.89 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c0f41087-04c5-4d4b-b5a5-612ea3d53f08")
+	)
+	(label "D0"
+		(at 69.85 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c1657ee8-1b97-485f-adac-a058dd75d15e")
+	)
+	(label "Write OE B1 _{40..47}"
+		(at 135.89 168.91 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c3487b35-a37a-4b13-94a8-5c28dcc98f9c")
+	)
+	(label "Read GPIO _{ALL}"
+		(at 135.89 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c740b3a6-51ec-4693-a0ed-77a0c8988693")
+	)
+	(label "D5"
+		(at 69.85 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c861dea7-f597-401a-83e5-d4e2af829838")
+	)
+	(label "Read GD B0 _{48..55}"
+		(at 113.03 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c880a8eb-034a-4c0e-9ab9-c1a0a6f65d8f")
+	)
+	(label "Read GD B0 _{8..15}"
+		(at 46.99 140.97 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cb2c8e51-1bac-4b7e-9181-3956068c03e6")
+	)
+	(label "D2"
+		(at 69.85 156.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cda83118-fd78-4a2f-b8f2-584f30791de3")
+	)
+	(label "Read GD B1 _{48..55}"
+		(at 247.65 73.66 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cdd159e4-31f6-4cc7-8580-3ab7d98f0e40")
+	)
+	(label "Write GPIO _{ALL}"
+		(at 69.85 143.51 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cde4be76-cba5-4c17-891f-dfae55e74cbf")
+	)
+	(label "GND"
+		(at 181.61 53.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d0f68251-3fc8-4f4e-9f25-c190581b9cb2")
+	)
+	(label "Read GD B1 _{40..47}"
+		(at 113.03 151.13 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d13523eb-d522-4779-a90f-a20c78a07853")
+	)
+	(label "GND"
+		(at 204.47 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d146b408-488a-4e14-afaf-2cbb334770a2")
+	)
+	(label "12V"
+		(at 113.03 53.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d311eafe-b1af-4113-b32d-0968665554d7")
+	)
+	(label "Write OE B0 _{0..7}"
+		(at 113.03 153.67 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d5147c7b-1731-4739-988b-7ebc077219e6")
+	)
+	(label "Write GD B1 _{16..23}"
+		(at 113.03 166.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d6125c4d-752e-4816-9aff-9f8d7aceb837")
+	)
+	(label "Write OE B1 _{16..23}"
+		(at 135.89 161.29 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d7f3dd51-b1c6-4713-9fd6-7f15938b5c45")
+	)
+	(label "Write GD B0 _{48..55}"
+		(at 113.03 81.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d86a02a5-f4c4-49ce-a8e7-a2bdce60f111")
+	)
+	(label "Read GD B1 _{40..47}"
+		(at 247.65 58.42 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d870b3cd-5840-47aa-bd36-808850562568")
+	)
+	(label "Write OE B0 _{8..15}"
+		(at 135.89 153.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da24a7c7-aa7e-4f10-bb07-3aa965d2910a")
+	)
+	(label "Write OE B0 _{32..39}"
+		(at 113.03 68.58 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dcceb7ba-7b68-4ccd-b8bc-8bffb5df517f")
+	)
+	(label "GND"
+		(at 135.89 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "de93b410-7330-4a19-8133-c54416992d49")
+	)
+	(label "Write GD B1 _{24..31}"
+		(at 181.61 81.28 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e0b4ae57-68db-4abb-9c56-61380c8882c3")
+	)
+	(label "Write OE B1 _{8..15}"
+		(at 135.89 158.75 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e166a2b2-ee16-4f44-a261-abaf827c46c3")
+	)
+	(label "Read GD B1 _{16..23}"
+		(at 113.03 143.51 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e1ae7c3b-8bd8-41e9-b495-9200212f224e")
+	)
+	(label "GND"
+		(at 125.73 30.48 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e862c1ca-a249-48f9-864f-41fa649efc4f")
+	)
+	(label "GND"
+		(at 193.04 29.21 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e8fcdc76-edd8-4911-ad87-6d2f31f36256")
+	)
+	(label "12V"
+		(at 204.47 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e95f46a3-bdf8-4316-9d90-f65eeed8c9b2")
+	)
+	(label "Write GD B0 _{24..31}"
+		(at 46.99 168.91 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e9d91386-e648-4b41-9a67-c235051c7090")
+	)
+	(label "D6"
+		(at 69.85 166.37 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ea9c5a54-69cd-474a-8fb3-4ee5ba14ef50")
+	)
+	(label "GND"
+		(at 135.89 171.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ec2762bb-d04f-4636-8786-5f42146a8f61")
+	)
+	(label "D1"
+		(at 69.85 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ec40a820-b791-4aff-9e76-206e685bbe4b")
+	)
+	(label "Write GD B0 _{8..15}"
+		(at 46.99 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ec9eb38e-4c9d-4199-80d2-53efbbe50d78")
+	)
+	(label "Read GD B0 _{40..47}"
+		(at 113.03 60.96 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "eef19c4b-1d95-40c0-b184-c1f552e15aa4")
+	)
+	(label "Write GD B0 _{40..47}"
+		(at 113.03 66.04 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ef2f02b0-51c6-4f47-96f4-eb4eb74aec96")
+	)
+	(label "GND"
+		(at 46.99 171.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f2350c2c-c9b9-4541-ac03-9ed47b3f57d6")
+	)
+	(label "Write OE B1 _{0..7}"
+		(at 135.89 156.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f3d56426-ab20-4445-8eb4-d6e54f105df9")
+	)
+	(label "GND"
+		(at 46.99 55.88 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f4404df6-0f95-4e1d-ac95-765f9397b3f2")
+	)
+	(label "Read GD B1 _{32..39}"
+		(at 113.03 148.59 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f4e68f33-d3e4-4fc6-80e5-1c73165892b2")
+	)
+	(label "D3"
+		(at 270.51 76.2 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f6e45379-1b60-4153-b6ff-a65093393ad4")
+	)
+	(label "Write GD B1 _{0..7}"
+		(at 181.61 60.96 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f8ee6438-22f7-4d86-a7bb-ce3d115ffaa5")
+	)
+	(label "Read GD B1 _{56..63}"
+		(at 247.65 76.2 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f97e8d9c-e82b-4f57-b1db-ca9d4a236f7b")
+	)
+	(label "Write GD B1 _{8..15}"
+		(at 113.03 163.83 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f9d15dc4-d448-4aa9-bd8c-57937185f1e8")
+	)
+	(label "GND"
+		(at 113.03 135.89 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fa25192f-dd6e-4ca9-82f6-4b5019016549")
+	)
+	(label "GND"
+		(at 270.51 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "faabc766-145c-4ada-9e5f-4e64600c9b1d")
+	)
+	(label "Write GD B1 _{0..7}"
+		(at 113.03 161.29 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fc224794-31ae-4d7b-b64f-4348cbbdb0cb")
+	)
+	(label "D5"
+		(at 135.89 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fc4cf7ab-dff1-4f77-8554-9ff6212873c2")
+	)
+	(label "Read GD B0 _{56..63}"
+		(at 113.03 78.74 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fc61de84-0898-4e99-a7fc-b85739002c80")
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 220.98 133.35 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "02409448-5e03-45f6-ab6e-ec0f2f35ff20")
+		(property "Reference" "H9"
+			(at 220.98 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 220.98 130.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 220.98 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 220.98 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 135.89 133.35 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1224e03e-bfc6-4ae9-b0bb-bdd7c7b192bb")
+		(property "Reference" "J4"
+			(at 124.46 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 124.46 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 116.84 184.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 116.84 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 116.84 189.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 116.84 192.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 116.84 194.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 116.84 197.485 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 116.84 200.025 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 116.84 202.565 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 116.84 205.105 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 116.84 207.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 135.89 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "41205fc4-868d-4a43-9067-6a27fe82b709")
+		)
+		(pin "10"
+			(uuid "3c47f301-3091-48ed-976e-1ac15a0ddfac")
+		)
+		(pin "11"
+			(uuid "7cc77c64-9bbc-40a4-a606-18a5d287d838")
+		)
+		(pin "12"
+			(uuid "9447c130-9f84-412f-940e-e818c18b9e26")
+		)
+		(pin "13"
+			(uuid "58b9502d-9fc9-48af-929b-cc0eb576ec56")
+		)
+		(pin "14"
+			(uuid "ded9f7b2-51b4-43bd-832a-61344c92b8be")
+		)
+		(pin "15"
+			(uuid "2d7ef324-05e9-49be-9697-ed04bf1c596f")
+		)
+		(pin "16"
+			(uuid "93a21dc4-e26b-42ad-8967-136c53251059")
+		)
+		(pin "17"
+			(uuid "c3d6ab6d-c26c-480b-b368-aae11b89b479")
+		)
+		(pin "18"
+			(uuid "cbc72317-57be-4a20-b2f6-1d80a61a58e9")
+		)
+		(pin "19"
+			(uuid "ce17818d-fd1e-4e9e-af06-4b79cdd51f9f")
+		)
+		(pin "2"
+			(uuid "6f553172-c96e-4cad-ad8a-96d1a8dffa0e")
+		)
+		(pin "20"
+			(uuid "12f231df-c75f-4b1b-9d18-20044b4a6ad9")
+		)
+		(pin "21"
+			(uuid "a6eb0a9e-119a-4826-96e0-b55a3b090a9d")
+		)
+		(pin "22"
+			(uuid "5f655b2f-9f0c-4e31-a78a-6790e334180a")
+		)
+		(pin "23"
+			(uuid "0dae702f-e5b1-435a-a176-14a80d8348df")
+		)
+		(pin "24"
+			(uuid "6bf627e6-f353-4f68-a854-609451f56d59")
+		)
+		(pin "25"
+			(uuid "9bf40291-ae58-4bb3-a177-a570f9583963")
+		)
+		(pin "26"
+			(uuid "a9ece048-01e1-4e49-a08c-c9b9197e4bfd")
+		)
+		(pin "27"
+			(uuid "544c6976-ef1f-46d8-a73c-6f0f1bf9c2bf")
+		)
+		(pin "28"
+			(uuid "fb28ffef-89df-4987-8730-466bdec4de7a")
+		)
+		(pin "29"
+			(uuid "5084c8dd-e250-4173-a704-abfe83cd156a")
+		)
+		(pin "3"
+			(uuid "f0da2123-f7a0-41ec-9be1-2b0083d84eb2")
+		)
+		(pin "30"
+			(uuid "6c5ac170-18bf-49ef-942c-351838b9da7a")
+		)
+		(pin "31"
+			(uuid "2216e7f0-a224-4cfc-943c-167246ee3925")
+		)
+		(pin "32"
+			(uuid "2f4b00b3-e2e1-493e-9f38-cafdc86c7a2f")
+		)
+		(pin "33"
+			(uuid "fad2c6bb-b9a3-4600-a95e-7578683f7c05")
+		)
+		(pin "34"
+			(uuid "92f960da-8059-4324-86d5-0268517c38f8")
+		)
+		(pin "35"
+			(uuid "8a0e4855-c6de-4e12-a264-2e35ad28fabc")
+		)
+		(pin "36"
+			(uuid "dc087f1e-bd3e-4ed7-9df8-0b2fca9842dc")
+		)
+		(pin "4"
+			(uuid "7cd00cb1-62c3-4f97-9d22-92d47671b2f4")
+		)
+		(pin "5"
+			(uuid "3d5bef3a-816f-4c70-8b00-d7e6ebb7e668")
+		)
+		(pin "6"
+			(uuid "c5fda212-1552-4241-ad2c-8284b9731dee")
+		)
+		(pin "7"
+			(uuid "bbac6c53-cb28-44d3-8aac-a54f5e872d5e")
+		)
+		(pin "8"
+			(uuid "a10d1262-ff11-4228-93ce-949a62aee48e")
+		)
+		(pin "9"
+			(uuid "d61311c9-ae38-4047-bc3d-fb9dd565e2ab")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 220.98 115.57 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "1472dc28-0dd2-4d1d-ae2f-938895212805")
+		(property "Reference" "H8"
+			(at 220.98 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 220.98 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 220.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 220.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 220.98 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 135.89 53.34 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "32dd1b50-0c82-4cd0-9d7c-db1fbc922125")
+		(property "Reference" "J3"
+			(at 124.46 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 124.46 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 116.84 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 116.84 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 116.84 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 116.84 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 116.84 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 116.84 117.475 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 116.84 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 116.84 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 116.84 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 116.84 127.635 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 135.89 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "322a69fd-f8f9-4a1c-b6d1-f7cb04be562e")
+		)
+		(pin "10"
+			(uuid "bcfe0a34-38dd-4dff-ba99-eb09eaed236a")
+		)
+		(pin "11"
+			(uuid "6bc24aef-a5c6-4b42-8571-454e725e26e5")
+		)
+		(pin "12"
+			(uuid "1edfc524-20f8-4d86-91f2-de24192d7fec")
+		)
+		(pin "13"
+			(uuid "2f7fa58b-e9e4-48a1-8fe6-afc36e7ed287")
+		)
+		(pin "14"
+			(uuid "657d7651-e427-46f7-a1a7-b67c910dcca0")
+		)
+		(pin "15"
+			(uuid "69504845-aaa4-4c70-bf93-d4cb0ac7b920")
+		)
+		(pin "16"
+			(uuid "0ec21485-5c5b-435f-8e45-5236327748d9")
+		)
+		(pin "17"
+			(uuid "ad34d1f7-6774-4252-b09e-d73dab6552ad")
+		)
+		(pin "18"
+			(uuid "3ae88409-facb-474a-8165-eda2a046989d")
+		)
+		(pin "19"
+			(uuid "f621ba3a-5c8d-4eb1-b793-ccb8120790db")
+		)
+		(pin "2"
+			(uuid "13d6826f-bcd5-47a2-a761-f3f83ae4698e")
+		)
+		(pin "20"
+			(uuid "c759c450-029e-450a-80ff-50a5c0cfc5fb")
+		)
+		(pin "21"
+			(uuid "ef6cc888-4e77-48a0-9b76-a39e32f4acae")
+		)
+		(pin "22"
+			(uuid "2162ab2f-7e2f-4657-94b0-75f042fd3592")
+		)
+		(pin "23"
+			(uuid "16477868-453c-439d-a85b-b43bd5343e2e")
+		)
+		(pin "24"
+			(uuid "097767c9-81a5-4268-ab28-a86fe48fe681")
+		)
+		(pin "25"
+			(uuid "4a0e0abe-752a-4589-ad78-4f279b690093")
+		)
+		(pin "26"
+			(uuid "09aed7b0-0858-4262-afad-646a85c72b9d")
+		)
+		(pin "27"
+			(uuid "179445ae-a8ab-4a89-8f69-812f50220fed")
+		)
+		(pin "28"
+			(uuid "0c50623d-6ffe-4273-b720-1509ac349731")
+		)
+		(pin "29"
+			(uuid "8f8b2ee3-aa3c-41e1-af73-bd24e4cb243a")
+		)
+		(pin "3"
+			(uuid "4019e939-297c-41f7-9414-3f64b212857a")
+		)
+		(pin "30"
+			(uuid "24b9f56f-06dd-48eb-b336-de2932b762ac")
+		)
+		(pin "31"
+			(uuid "86cded90-b107-4827-b6af-cc5e2bfe53d8")
+		)
+		(pin "32"
+			(uuid "70de824e-5649-486f-8d64-8d6296bc8f61")
+		)
+		(pin "33"
+			(uuid "8c9f3d6f-4e68-464b-9367-8da8b0965313")
+		)
+		(pin "34"
+			(uuid "3e35f1bf-566b-486a-9c16-08a7a72bb103")
+		)
+		(pin "35"
+			(uuid "560fc301-13a6-4d5e-9f41-b97734b003a8")
+		)
+		(pin "36"
+			(uuid "b833c344-c27f-4966-a377-fe0e53fc03d0")
+		)
+		(pin "4"
+			(uuid "2d6e7f28-cc06-49c0-b487-4abd534eabb0")
+		)
+		(pin "5"
+			(uuid "ff81bd7c-ae37-4e1c-8313-66b0d4d89d92")
+		)
+		(pin "6"
+			(uuid "fe4a0471-2f0f-4856-bc6f-aeea944c56eb")
+		)
+		(pin "7"
+			(uuid "dc8ffcde-d089-4ce6-ac5a-9a4ae9694c79")
+		)
+		(pin "8"
+			(uuid "cfb3c90f-a35d-4421-aa77-aa48a5dd64d5")
+		)
+		(pin "9"
+			(uuid "f168ef98-81c4-4f31-890a-6d92f7e4fa5c")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 193.04 133.35 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "343effb1-3847-4711-abfd-0b3617537826")
+		(property "Reference" "H7"
+			(at 193.04 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 193.04 130.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 193.04 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 193.04 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 193.04 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 69.85 53.34 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "36160543-d59b-4e51-b764-240be28278f0")
+		(property "Reference" "J1"
+			(at 58.42 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 58.42 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 50.8 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 50.8 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 50.8 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 50.8 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 50.8 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 50.8 117.475 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 50.8 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 50.8 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 50.8 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 50.8 127.635 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 69.85 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b447e17-f86e-41c5-a0e1-250346d41f72")
+		)
+		(pin "10"
+			(uuid "fa4562b6-d663-4d89-b4c2-4a5c7803a22f")
+		)
+		(pin "11"
+			(uuid "f921109f-8847-44e1-975f-926b2e414329")
+		)
+		(pin "12"
+			(uuid "000aab1d-06de-4453-8eb5-e28e7d48fefe")
+		)
+		(pin "13"
+			(uuid "b144b726-011c-46c5-807a-849b6d6c6a3f")
+		)
+		(pin "14"
+			(uuid "6ced4130-c179-4798-9aff-f9e865eea54a")
+		)
+		(pin "15"
+			(uuid "06fa9a9b-3f5a-4566-bff3-1f79da304416")
+		)
+		(pin "16"
+			(uuid "981f626a-febb-4108-b748-11ebb073c171")
+		)
+		(pin "17"
+			(uuid "01fb1942-1421-42eb-aeac-75f53656eeaa")
+		)
+		(pin "18"
+			(uuid "a1af4953-7c23-4df4-896c-3d62731698c0")
+		)
+		(pin "19"
+			(uuid "99c4ec30-5aa8-451c-bca3-4e1091ea063f")
+		)
+		(pin "2"
+			(uuid "cf4ce221-0cf6-4f8c-b869-1859af609e49")
+		)
+		(pin "20"
+			(uuid "782f21f9-d496-4e0b-9757-7227bbb1fb03")
+		)
+		(pin "21"
+			(uuid "66edba80-79a5-4aa0-847a-0e0730a98263")
+		)
+		(pin "22"
+			(uuid "9b01aac7-f2e7-4b32-ab8b-373dd90454cd")
+		)
+		(pin "23"
+			(uuid "6145970f-693f-4ece-9018-25e0a2bf9b91")
+		)
+		(pin "24"
+			(uuid "b1fd1439-063e-46fc-99a2-335059bc1f12")
+		)
+		(pin "25"
+			(uuid "1830970e-3770-48d8-933c-726353b1b9d9")
+		)
+		(pin "26"
+			(uuid "6dfa403d-1286-4c07-b88e-dd7dae52fcd7")
+		)
+		(pin "27"
+			(uuid "56b6146d-ccb8-4779-957d-1ea5cad2acf3")
+		)
+		(pin "28"
+			(uuid "d7f85ed7-2a13-4129-a1bc-6bfb00b15e00")
+		)
+		(pin "29"
+			(uuid "ba5659bd-057e-48cd-992d-d2fb4007007d")
+		)
+		(pin "3"
+			(uuid "0788aa00-7fd1-423d-b153-11fa866bd5c4")
+		)
+		(pin "30"
+			(uuid "72a207f0-40d9-4bb1-9dd1-55d3c864f0f0")
+		)
+		(pin "31"
+			(uuid "1b8fecfe-9762-4c8f-9371-b1c20ab1914c")
+		)
+		(pin "32"
+			(uuid "1cf8c2b2-691b-4423-9570-7522d1642b31")
+		)
+		(pin "33"
+			(uuid "da080184-797e-429b-85fb-2e3e4f557735")
+		)
+		(pin "34"
+			(uuid "f755b1c0-4909-47f7-9bd0-c40ca6361bfe")
+		)
+		(pin "35"
+			(uuid "080dfd5a-97c4-4efc-a7f2-5d5b06c7d134")
+		)
+		(pin "36"
+			(uuid "3e05ce4e-7303-4314-bec7-e187bfb59789")
+		)
+		(pin "4"
+			(uuid "ea808111-f949-4b72-8d89-fefb4c4426ad")
+		)
+		(pin "5"
+			(uuid "3a9dde74-f242-4d01-b8a8-ca9659fcf3f9")
+		)
+		(pin "6"
+			(uuid "4da2934b-0c28-4477-af77-19105828ea53")
+		)
+		(pin "7"
+			(uuid "b1401606-f32e-4381-bc63-f0952c9419e0")
+		)
+		(pin "8"
+			(uuid "20f72501-58cf-4375-b453-f06f77e4c79f")
+		)
+		(pin "9"
+			(uuid "ca3c8b82-faa2-480e-b8cd-95f2f17bcca9")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 207.01 133.35 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "6b8f47ae-222b-463b-8c34-81a098ec15ac")
+		(property "Reference" "H11"
+			(at 207.01 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 207.01 130.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 207.01 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 207.01 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 69.85 133.35 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "71cc8c67-79f2-4a46-9c3a-79448a289dad")
+		(property "Reference" "J2"
+			(at 58.42 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 58.42 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 50.8 184.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 50.8 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 50.8 189.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 50.8 192.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 50.8 194.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 50.8 197.485 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 50.8 200.025 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 50.8 202.565 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 50.8 205.105 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 50.8 207.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 69.85 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b86836b1-082c-4886-bd5d-e48b4a7e2a24")
+		)
+		(pin "10"
+			(uuid "a500533a-57c2-4e34-9445-5c3455c8dbbf")
+		)
+		(pin "11"
+			(uuid "8ee252f8-2f5f-4e49-9c0e-0bd0d1c4e192")
+		)
+		(pin "12"
+			(uuid "7f7883bc-f484-41c1-8975-1d61077bb333")
+		)
+		(pin "13"
+			(uuid "91ea44f9-9f0a-4a28-8278-fd925cb00c6e")
+		)
+		(pin "14"
+			(uuid "020d540c-393a-4246-85ca-0595057d577f")
+		)
+		(pin "15"
+			(uuid "a629f5d9-0500-4d8f-b911-609db5bc81d8")
+		)
+		(pin "16"
+			(uuid "f5748baf-d23e-470c-a388-57ee63669b58")
+		)
+		(pin "17"
+			(uuid "11ae9611-1e2f-4b16-848b-ba88fcc1b531")
+		)
+		(pin "18"
+			(uuid "939b31d7-f42f-460a-aaff-67bdee2f350f")
+		)
+		(pin "19"
+			(uuid "3f305f47-c476-4bfe-9a25-cd96be35186f")
+		)
+		(pin "2"
+			(uuid "9a0d0913-ac32-4f89-ad9d-c3b8a45c4e17")
+		)
+		(pin "20"
+			(uuid "2edbdf5a-859b-442b-9f3e-bf047a539f93")
+		)
+		(pin "21"
+			(uuid "2ce87df2-4dd0-4f21-a986-eb0d830673d1")
+		)
+		(pin "22"
+			(uuid "4e0e8e85-595a-4e81-a759-ac76047c692f")
+		)
+		(pin "23"
+			(uuid "dd899d8f-4ad8-4232-81e0-8d742d124813")
+		)
+		(pin "24"
+			(uuid "483f94b0-1db8-46a7-ace3-22f62dd33368")
+		)
+		(pin "25"
+			(uuid "65128057-5fba-4680-99d2-3de4b58958b7")
+		)
+		(pin "26"
+			(uuid "81dfcd82-3d64-4e46-a877-956a6b0be028")
+		)
+		(pin "27"
+			(uuid "60f9ef07-d3b7-4df6-be12-7c8953da4295")
+		)
+		(pin "28"
+			(uuid "739e8da3-5ca2-4e43-a193-277acadc09a1")
+		)
+		(pin "29"
+			(uuid "0e755f85-0d77-409d-b128-bb0446ca026b")
+		)
+		(pin "3"
+			(uuid "2de868ea-03fc-4efa-bd8a-90d783bd8b2f")
+		)
+		(pin "30"
+			(uuid "11766694-54e8-44f8-8afe-e60ebd818149")
+		)
+		(pin "31"
+			(uuid "29eb6a6b-8d20-4fe5-8dba-25d12420ccd5")
+		)
+		(pin "32"
+			(uuid "f02c897e-e03a-44e2-aac7-57319ee20c87")
+		)
+		(pin "33"
+			(uuid "0484f390-c446-45fe-a3a4-c6966d491366")
+		)
+		(pin "34"
+			(uuid "88d0f16d-9fc6-48ff-9ddc-229a94de1861")
+		)
+		(pin "35"
+			(uuid "3ce2d6b8-147b-49ed-934e-ee7bdf660349")
+		)
+		(pin "36"
+			(uuid "a5f3b745-afa5-47b9-802d-8ddc39ecc261")
+		)
+		(pin "4"
+			(uuid "24d69e15-3306-422c-89ef-01179d9f2316")
+		)
+		(pin "5"
+			(uuid "0c50273d-98b1-47de-b04b-a6f1789a9b0d")
+		)
+		(pin "6"
+			(uuid "1f1f6c0f-6d93-4085-8ed4-6cc83fa0aaf2")
+		)
+		(pin "7"
+			(uuid "523d9ea7-99aa-4888-919d-be88f768490a")
+		)
+		(pin "8"
+			(uuid "c97d48d1-739f-44bf-971a-0aeaa343cbb3")
+		)
+		(pin "9"
+			(uuid "7129e8fa-95d0-4575-a223-8d64c6a676e8")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 125.73 27.94 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "819a8597-2c1e-433d-80ee-d0757a0df4e4")
+		(property "Reference" "H2"
+			(at 125.73 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 125.73 23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 125.73 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 125.73 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 125.73 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c4f2970b-1ca6-41c6-a305-32a759b56c66")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:GPIO_Controller_Board")
+		(at 58.42 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8415c4f7-f70e-4e79-9beb-6b7b7ddcdb5c")
+		(property "Reference" "B5"
+			(at 58.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 58.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_GPIO_Controller_Board"
+			(at 58.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 58.42 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:GPIO_32bit_Board")
+		(at 259.08 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a8815a8-4c2e-444d-90d0-4d7f684cd6ec")
+		(property "Reference" "B4"
+			(at 259.08 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 259.08 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_GPIO_32bit_Board"
+			(at 259.08 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 259.08 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 259.08 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 58.42 27.94 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "8e62fc4b-c172-4bd3-9086-2321b3a95cb6")
+		(property "Reference" "H1"
+			(at 58.42 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 58.42 23.495 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 58.42 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 58.42 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 58.42 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "730e5015-51f5-4790-9589-3df74e468922")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 125.73 116.84 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "8f2794e5-f3f7-4496-beff-7abdddb9c5c8")
+		(property "Reference" "H5"
+			(at 125.73 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 125.73 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 125.73 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 125.73 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 125.73 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0f1b14bd-6e4b-4835-8a3a-3feceb346b72")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 193.04 115.57 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "9040d8d4-1a9e-488f-9b42-f7f5e3c3ec6d")
+		(property "Reference" "H6"
+			(at 193.04 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 193.04 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 193.04 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 193.04 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 193.04 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:GPIO_32bit_Board")
+		(at 193.04 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "928f5e0f-c1a0-46cc-9a34-f75703e5a108")
+		(property "Reference" "B3"
+			(at 193.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 193.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_GPIO_32bit_Board"
+			(at 193.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 193.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 270.51 50.8 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b31d07a6-deb9-45ad-b660-e443e464e0be")
+		(property "Reference" "J6"
+			(at 259.08 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 259.08 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 251.46 102.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 251.46 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 251.46 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 251.46 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 251.46 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 251.46 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 251.46 117.475 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 251.46 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 251.46 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 251.46 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 270.51 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9cad7f99-d8eb-41bd-91e1-65e003c035cd")
+		)
+		(pin "10"
+			(uuid "3183026c-dd15-4908-8321-9c03543f39b0")
+		)
+		(pin "11"
+			(uuid "aedf7cd3-90ea-48b2-8742-5b4019eb1830")
+		)
+		(pin "12"
+			(uuid "2fe45ff1-6a53-4795-84ab-677188017ba7")
+		)
+		(pin "13"
+			(uuid "92c182ad-55c8-4acc-a90c-86261f5d7e11")
+		)
+		(pin "14"
+			(uuid "749123ca-b237-4dac-b331-b95c2745f2f2")
+		)
+		(pin "15"
+			(uuid "750c02a5-9489-4395-a86b-3ed64a10e79a")
+		)
+		(pin "16"
+			(uuid "f572f996-ef25-45bc-b735-44174594b6f4")
+		)
+		(pin "17"
+			(uuid "076d60b0-7251-4961-98db-82de12b350d9")
+		)
+		(pin "18"
+			(uuid "3fb74a12-d72f-4fdd-8211-449871f930f8")
+		)
+		(pin "19"
+			(uuid "dc8a2c1c-dbc9-434c-beda-cc85051ff860")
+		)
+		(pin "2"
+			(uuid "7be2f6ac-7d1c-4459-bd61-47ed1f68d43b")
+		)
+		(pin "20"
+			(uuid "b77b2825-2a1a-4018-92b1-0638a354b602")
+		)
+		(pin "21"
+			(uuid "9480839a-c882-4884-8ed2-002dac1107c4")
+		)
+		(pin "22"
+			(uuid "5276484c-3629-4b8f-a7d1-23c49309a941")
+		)
+		(pin "23"
+			(uuid "443fdc98-7ea8-4e12-aca1-c4c14f601f4a")
+		)
+		(pin "24"
+			(uuid "7c7c9b90-6f63-4dfd-9b0d-0ef366cc259d")
+		)
+		(pin "25"
+			(uuid "67300989-aa51-4700-8696-0e3783cea2e9")
+		)
+		(pin "26"
+			(uuid "b56a691e-e311-4e75-a571-bee5fbee6492")
+		)
+		(pin "27"
+			(uuid "90f5bb43-c266-474f-adc8-b5a998c43424")
+		)
+		(pin "28"
+			(uuid "e59e94c4-fa46-4cee-b3db-4ea07f5022cb")
+		)
+		(pin "29"
+			(uuid "adfbcb1f-055c-4b18-89af-65ffacb933ba")
+		)
+		(pin "3"
+			(uuid "c28e5c16-5eee-41d3-8bfa-b55337a59b54")
+		)
+		(pin "30"
+			(uuid "1a798ee8-c654-4a84-8760-24ec57e30f1d")
+		)
+		(pin "31"
+			(uuid "084b5f54-900e-4724-9d89-c23d4018fa37")
+		)
+		(pin "32"
+			(uuid "cdc18d2d-9b8d-4b84-9ec3-0c59bf8f866d")
+		)
+		(pin "33"
+			(uuid "fb4962d5-6e2f-4ba7-934b-60df965bf821")
+		)
+		(pin "34"
+			(uuid "2595b963-e62f-4a26-a5cb-d2e869ed8061")
+		)
+		(pin "35"
+			(uuid "48536458-8020-4294-89be-c08b3ed3e943")
+		)
+		(pin "36"
+			(uuid "252c437d-a7be-4c74-9ed2-9296b2451736")
+		)
+		(pin "4"
+			(uuid "8f6c3345-3f6a-49a5-ba25-31277548535a")
+		)
+		(pin "5"
+			(uuid "73532005-c310-4977-b04a-fbec36058c0e")
+		)
+		(pin "6"
+			(uuid "21efe523-7301-4ed8-a11c-5b3e41f87957")
+		)
+		(pin "7"
+			(uuid "38726d6b-46af-4706-a753-6a258579800e")
+		)
+		(pin "8"
+			(uuid "9f844a7e-46e5-4018-9572-0b5ad985426f")
+		)
+		(pin "9"
+			(uuid "5a346876-f220-492a-90b2-dfa8ef7528dd")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:GPIO_32bit_Board")
+		(at 125.73 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b509f8a7-6f9d-4f61-b639-ccb7272433a8")
+		(property "Reference" "B2"
+			(at 125.73 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 125.73 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_GPIO_32bit_Board"
+			(at 125.73 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 125.73 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 125.73 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 193.04 26.67 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e19ab6f5-6e0b-497d-a9fe-8a1f01af9575")
+		(property "Reference" "H3"
+			(at 193.04 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 193.04 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 193.04 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 193.04 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 193.04 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "846a389d-3109-4e32-ae0d-009ba41893b2")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "TE_Connectivity:2-5530843-7")
+		(at 204.47 50.8 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e53cb6e9-8c22-47c4-85ac-387c60f83067")
+		(property "Reference" "J5"
+			(at 193.04 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2-5530843-7"
+			(at 193.04 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:255308437"
+			(at 185.42 102.235 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA8/2558532.pdf"
+			(at 185.42 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 185.42 107.315 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Height" "15.494"
+			(at 185.42 109.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 185.42 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "2-5530843-7"
+			(at 185.42 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "571-2-5530843-7"
+			(at 185.42 117.475 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity/2-5530843-7?qs=D%2FjeFm%2FW2iQ%2FxNvh55mqEQ%3D%3D"
+			(at 185.42 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" "2-5530843-7"
+			(at 185.42 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
+			(at 185.42 125.095 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
+			(at 204.47 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f56efb83-eb2e-4453-a919-75a3980c89f5")
+		)
+		(pin "10"
+			(uuid "ea9a4524-884c-4d35-a640-2bf6f8268260")
+		)
+		(pin "11"
+			(uuid "683e481f-c10b-4155-9749-033200d469df")
+		)
+		(pin "12"
+			(uuid "9a71e4c7-4ea1-4bdb-bca2-7d78718ffdba")
+		)
+		(pin "13"
+			(uuid "db15e08a-a1ce-4b6c-81fa-bb0d46ffa4e6")
+		)
+		(pin "14"
+			(uuid "e50c3a2f-0011-4734-9099-adb27aff3bdc")
+		)
+		(pin "15"
+			(uuid "49c0a18d-65b1-437c-9c56-b71184dd6157")
+		)
+		(pin "16"
+			(uuid "070803a5-18c3-45cb-9a1a-d7de41aecd77")
+		)
+		(pin "17"
+			(uuid "459004fe-0374-4f73-aa90-8c8220def9b8")
+		)
+		(pin "18"
+			(uuid "ecd9fd5a-3bc3-422f-8fda-f7be42aaf085")
+		)
+		(pin "19"
+			(uuid "440ee975-805c-4600-94fe-238d4f9e86a3")
+		)
+		(pin "2"
+			(uuid "cfc03050-b9a9-4c1a-b488-a90b215e7e16")
+		)
+		(pin "20"
+			(uuid "c79d30c9-c7b1-4914-8509-f7bfae543022")
+		)
+		(pin "21"
+			(uuid "eb330bac-5278-45e8-b817-b51ca687b6f8")
+		)
+		(pin "22"
+			(uuid "d4882c29-cd76-4553-b957-23ba158fb786")
+		)
+		(pin "23"
+			(uuid "f4fbad39-f26a-4320-9c78-2efc3d56f57b")
+		)
+		(pin "24"
+			(uuid "f2c73744-03ad-418a-a8d6-b98b6bcff2a2")
+		)
+		(pin "25"
+			(uuid "5d2a8fd2-d902-4d39-b01f-1e36b7bd255d")
+		)
+		(pin "26"
+			(uuid "c5ebc47d-7dc4-4dbf-b337-7c9404fdc633")
+		)
+		(pin "27"
+			(uuid "920eda2d-b83d-4096-b033-e10580caa586")
+		)
+		(pin "28"
+			(uuid "6542abf6-7cb9-4961-b70e-f3e912adbdb4")
+		)
+		(pin "29"
+			(uuid "ba91efb4-5ab0-4a53-87ed-41d33be2b425")
+		)
+		(pin "3"
+			(uuid "78ecdd94-0605-4dc9-abe3-aa443562118b")
+		)
+		(pin "30"
+			(uuid "33d2d356-5718-40a2-84e1-74386d438c7f")
+		)
+		(pin "31"
+			(uuid "f88c4680-6ae6-4324-ac67-d5db02f087f3")
+		)
+		(pin "32"
+			(uuid "7cb9157a-c619-49ac-aeb5-73034feec68d")
+		)
+		(pin "33"
+			(uuid "968b9c34-ae40-469c-83c8-0267fce1f710")
+		)
+		(pin "34"
+			(uuid "4aa73f35-539e-4f17-b97f-6a33a4a67a42")
+		)
+		(pin "35"
+			(uuid "0f79c1b1-48ce-46aa-bb3c-d700962b160c")
+		)
+		(pin "36"
+			(uuid "8c8b9899-eb1e-42cb-957d-0a7723786e9f")
+		)
+		(pin "4"
+			(uuid "f3e4862a-038a-4bc7-a4f4-daeaadab2170")
+		)
+		(pin "5"
+			(uuid "0b1c78cb-aaf2-4306-b50d-67b3bb183927")
+		)
+		(pin "6"
+			(uuid "4848d3e7-c007-439f-a768-f6fdb8a5489e")
+		)
+		(pin "7"
+			(uuid "28a49da6-03ac-4ea2-aff4-5e2147723439")
+		)
+		(pin "8"
+			(uuid "ab89f35e-9a1e-476e-875d-b96e6c8878c8")
+		)
+		(pin "9"
+			(uuid "adfbc257-d8b0-4cbd-8399-4103048d50ff")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 259.08 26.67 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e5c80a08-7730-4809-82bb-0b5591a502f7")
+		(property "Reference" "H4"
+			(at 259.08 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 259.08 22.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 259.08 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 259.08 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9a744edf-4680-4acb-a526-a1e6852dd318")
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 207.01 115.57 0)
+		(unit 1)
+		(exclude_from_sim yes)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "ee8ea846-8ee4-4ee8-b5cb-481642d69d62")
+		(property "Reference" "H10"
+			(at 207.01 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole"
+			(at 207.01 112.395 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole without connection"
+			(at 207.01 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "GPIO Backplane Board"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:GPIO_32bit_Board")
+		(at 58.42 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f2b47660-d58b-4811-b129-6d03b55e5623")
+		(property "Reference" "B1"
+			(at 58.42 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 58.42 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_GPIO_32bit_Board"
+			(at 58.42 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 58.42 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 58.42 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

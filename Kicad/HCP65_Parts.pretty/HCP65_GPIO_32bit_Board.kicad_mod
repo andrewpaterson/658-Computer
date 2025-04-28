@@ -68,6 +68,48 @@
 		)
 	)
 	(attr smd)
+	(fp_circle
+		(center 0 0)
+		(end 0.254 0)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(fill solid)
+		(layer "F.SilkS")
+		(uuid "9ac6107f-1a0f-497d-a581-48cb1e42085f")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 1.27 0)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "09118003-ebd3-4e21-ae95-e063336b9419")
+	)
+	(fp_line
+		(start -1.27 0)
+		(end 1.27 0)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "bf758547-fda1-494c-8b43-7af2b98f57eb")
+	)
+	(fp_line
+		(start 0 1.27)
+		(end 0 -1.27)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "c6f5a457-8e36-4fa9-8187-066742ecd263")
+	)
 	(model "${_658_COMPUTER_}/Pico/GPIO 32bit Board/GPIO 32bit Board.wrl"
 		(offset
 			(xyz 0 0 20.828)

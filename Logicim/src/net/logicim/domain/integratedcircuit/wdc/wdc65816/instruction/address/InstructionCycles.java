@@ -154,11 +154,6 @@ public class InstructionCycles
     return new IncrementProgramCounter();
   }
 
-  protected static DecrementProgramCounter PC_dec()
-  {
-    return new DecrementProgramCounter();
-  }
-
   protected static DecrementStackPointer SP_dec()
   {
     return new DecrementStackPointer();

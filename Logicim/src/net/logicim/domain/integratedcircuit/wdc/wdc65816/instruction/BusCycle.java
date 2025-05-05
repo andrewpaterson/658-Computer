@@ -155,14 +155,14 @@ public class BusCycle
     return dataOperation.isFetchOpCode();
   }
 
-  public void setCycle(int cycle)
-  {
-    this.cycle = cycle;
-  }
-
   public int getCycle()
   {
     return cycle;
+  }
+
+  public void setCycle(int cycle)
+  {
+    this.cycle = cycle;
   }
 
   public List<Operation> getOperations()

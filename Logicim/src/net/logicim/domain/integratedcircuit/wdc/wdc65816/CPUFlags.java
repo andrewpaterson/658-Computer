@@ -1,6 +1,6 @@
 package net.logicim.domain.integratedcircuit.wdc.wdc65816;
 
-public abstract class CpuFlags
+public abstract class CPUFlags
 {
   public static final int STATUS_CARRY = 0x01;
   public static final int STATUS_ZERO = 0x02;

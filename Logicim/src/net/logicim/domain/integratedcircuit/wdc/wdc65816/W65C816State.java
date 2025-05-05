@@ -11,7 +11,7 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;
 
 import static net.common.util.IntUtil.*;
-import static net.logicim.domain.integratedcircuit.wdc.wdc65816.CpuFlags.*;
+import static net.logicim.domain.integratedcircuit.wdc.wdc65816.CPUFlags.*;
 
 public class W65C816State
     extends State

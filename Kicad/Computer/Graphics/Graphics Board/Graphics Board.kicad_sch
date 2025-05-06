@@ -17917,11 +17917,12 @@
 				)
 			)
 			(property "Silkscreen" "LD1117S50"
-				(at 7.62 -24.13 0)
+				(at 27.94 -13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -17937,7 +17938,7 @@
 			)
 			(symbol "LD1117S50C_0_0"
 				(pin passive line
-					(at 7.62 -12.7 90)
+					(at -5.08 -2.54 0)
 					(length 5.08)
 					(name "GND"
 						(effects
@@ -17958,7 +17959,7 @@
 			(symbol "LD1117S50C_0_1"
 				(polyline
 					(pts
-						(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.905)
+						(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 0 -4.445) (xy 0 1.905)
 					)
 					(stroke
 						(width 0.1524)
@@ -18006,10 +18007,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 10.16 -12.7 90)
-					(length 5.08) hide
-					(name "N.C"
+				(pin passive line
+					(at 20.32 -2.54 180)
+					(length 5.08)
+					(name "5.0VOut"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -18028,22 +18029,28 @@
 		)
 	)
 	(junction
+		(at 31.75 339.09)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4ae2c541-96fc-4fc4-8d5b-b6c26ef5599b")
+	)
+	(junction
 		(at 76.2 331.47)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "4bd2ae17-0481-49c8-a974-08bb281a9ccb")
 	)
 	(junction
+		(at 402.59 219.71)
+		(diameter 0)
+		(color 90 53 255 1)
+		(uuid "68c225bd-7623-4012-98c1-fad65cd50d41")
+	)
+	(junction
 		(at 228.6 99.06)
 		(diameter 0)
 		(color 24 199 56 1)
 		(uuid "6fce1226-d395-4c7e-a047-6fd3dad7fc35")
-	)
-	(junction
-		(at 402.59 200.66)
-		(diameter 0)
-		(color 90 53 255 1)
-		(uuid "737196ec-097f-4cf8-acf0-e6b917c3957a")
 	)
 	(junction
 		(at 31.75 331.47)
@@ -18128,6 +18135,10 @@
 	(no_connect
 		(at 393.7 157.48)
 		(uuid "2e4ca546-a6df-445b-9e6d-7fcb382cce69")
+	)
+	(no_connect
+		(at 60.96 334.01)
+		(uuid "30f7fb2a-1d15-452e-b7d4-1e5851382804")
 	)
 	(no_connect
 		(at 288.29 321.31)
@@ -22402,7 +22413,7 @@
 	)
 	(bus
 		(pts
-			(xy 433.07 200.66) (xy 402.59 200.66)
+			(xy 433.07 219.71) (xy 402.59 219.71)
 		)
 		(stroke
 			(width 0)
@@ -25588,6 +25599,16 @@
 		)
 		(uuid "617591f9-8309-44fd-96a6-15f49f2fad6e")
 	)
+	(wire
+		(pts
+			(xy 35.56 334.01) (xy 35.56 339.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "61840b4f-4a32-481a-b46c-02b9a1f74fb0")
+	)
 	(bus
 		(pts
 			(xy 509.27 66.04) (xy 509.27 68.58)
@@ -25710,7 +25731,7 @@
 	)
 	(bus
 		(pts
-			(xy 402.59 200.66) (xy 402.59 219.71)
+			(xy 402.59 198.12) (xy 402.59 219.71)
 		)
 		(stroke
 			(width 0)
@@ -26228,7 +26249,7 @@
 		(stroke
 			(width 0)
 			(type default)
-			(color 231 106 255 1)
+			(color 87 190 169 1)
 		)
 		(uuid "7335e50b-aae6-4ff6-8d93-ed3a18b8ed4c")
 	)
@@ -26870,7 +26891,7 @@
 	)
 	(bus
 		(pts
-			(xy 433.07 198.12) (xy 433.07 200.66)
+			(xy 433.07 198.12) (xy 433.07 219.71)
 		)
 		(stroke
 			(width 0)
@@ -27086,17 +27107,6 @@
 			(color 255 25 87 1)
 		)
 		(uuid "8892be73-f561-4a1e-bf2e-11d8a4e4a227")
-	)
-	(bus
-		(pts
-			(xy 402.59 198.12) (xy 402.59 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-			(color 90 53 255 1)
-		)
-		(uuid "88a65c23-f698-4f44-a95c-5794c49ff68a")
 	)
 	(wire
 		(pts
@@ -31057,6 +31067,16 @@
 	)
 	(wire
 		(pts
+			(xy 35.56 339.09) (xy 31.75 339.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f473fe5a-dc58-413a-87cb-8c2643908083")
+	)
+	(wire
+		(pts
 			(xy 330.2 280.67) (xy 351.79 280.67)
 		)
 		(stroke
@@ -34041,7 +34061,7 @@
 		(uuid "46d30122-a8af-4e4a-b611-de99c17ec63d")
 	)
 	(label "C[0..15]"
-		(at 402.59 200.66 0)
+		(at 402.59 219.71 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -38153,17 +38173,6 @@
 			(justify left bottom)
 		)
 		(uuid "c1f9c302-a371-46e4-852f-344efafca60a")
-	)
-	(label "GND"
-		(at 48.26 344.17 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c21798a5-b3e0-49e5-af6d-4bc9e06ef8ed")
 	)
 	(label "C2"
 		(at 247.65 379.73 180)
@@ -45357,7 +45366,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 32.385 337.82 0)
+			(at 26.67 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46351,11 +46360,12 @@
 			)
 		)
 		(property "Silkscreen" "LD1117S50"
-			(at 48.26 355.6 0)
+			(at 68.58 345.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)

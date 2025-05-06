@@ -10488,11 +10488,12 @@
 				)
 			)
 			(property "Silkscreen" "LD1117S50"
-				(at 7.62 -24.13 0)
+				(at 27.94 -13.97 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 					(hide yes)
 				)
 			)
@@ -10508,7 +10509,7 @@
 			)
 			(symbol "LD1117S50C_0_0"
 				(pin passive line
-					(at 7.62 -12.7 90)
+					(at -5.08 -2.54 0)
 					(length 5.08)
 					(name "GND"
 						(effects
@@ -10529,7 +10530,7 @@
 			(symbol "LD1117S50C_0_1"
 				(polyline
 					(pts
-						(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -7.62) (xy 0 -7.62) (xy 0 1.905)
+						(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 0 -4.445) (xy 0 1.905)
 					)
 					(stroke
 						(width 0.1524)
@@ -10577,10 +10578,10 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 10.16 -12.7 90)
-					(length 5.08) hide
-					(name "N.C"
+				(pin passive line
+					(at 20.32 -2.54 180)
+					(length 5.08)
+					(name "5.0VOut"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10597,6 +10598,12 @@
 				)
 			)
 		)
+	)
+	(junction
+		(at 92.71 243.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2111e070-9108-44a4-a511-b100662c37ed")
 	)
 	(junction
 		(at 137.16 236.22)
@@ -10825,6 +10832,10 @@
 		(uuid "ab048f18-2833-4da2-8e03-ff8d132a1b99")
 	)
 	(no_connect
+		(at 121.92 238.76)
+		(uuid "af44ec11-2341-44c2-b038-f5ce6562786a")
+	)
+	(no_connect
 		(at 50.8 128.27)
 		(uuid "b02920ed-9650-4004-a482-9e1af821b068")
 	)
@@ -11022,6 +11033,16 @@
 	)
 	(wire
 		(pts
+			(xy 96.52 243.84) (xy 92.71 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e8f29ca-172e-4d21-a785-f7eeca23205b")
+	)
+	(wire
+		(pts
 			(xy 213.36 171.45) (xy 247.65 171.45)
 		)
 		(stroke
@@ -11169,6 +11190,16 @@
 			(type default)
 		)
 		(uuid "d1797586-e95b-4adb-8126-f313e41caae9")
+	)
+	(wire
+		(pts
+			(xy 96.52 238.76) (xy 96.52 243.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc0a5bcb-e701-47bb-8d2e-882bf708e333")
 	)
 	(wire
 		(pts
@@ -13834,17 +13865,6 @@
 		)
 		(uuid "b38c4678-041e-4c8a-b3c7-a4c9ca39ef17")
 	)
-	(label "GND"
-		(at 109.22 248.92 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b3ce0e64-c54a-4f82-9bd1-5c93835ab35d")
-	)
 	(label "~{Code Waiting}_{ 1}"
 		(at 367.03 125.73 0)
 		(fields_autoplaced yes)
@@ -16459,11 +16479,12 @@
 			)
 		)
 		(property "Silkscreen" "LD1117S50"
-			(at 109.22 260.35 0)
+			(at 129.54 250.19 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -16915,7 +16936,7 @@
 			)
 		)
 		(property "Value" "100μF"
-			(at 121.92 245.11 90)
+			(at 132.08 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18318,7 +18339,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 88.9 243.84 90)
+			(at 92.71 242.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)

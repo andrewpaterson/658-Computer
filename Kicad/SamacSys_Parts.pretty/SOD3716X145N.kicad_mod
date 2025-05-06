@@ -6,7 +6,7 @@
 	(descr "SOD123(H=1.45)")
 	(tags "Diode")
 	(property "Reference" "D**"
-		(at 0 -1.27 0)
+		(at 0 0 0)
 		(layer "F.SilkS")
 		(uuid "f6335497-01c9-4297-94f2-69356575259f")
 		(effects
@@ -17,9 +17,8 @@
 		)
 	)
 	(property "Value" "SOD3716X145N"
-		(at 0 2.667 0)
+		(at 0.254 1.524 0)
 		(layer "F.SilkS")
-		(hide yes)
 		(uuid "8592f8e0-0d21-4ebf-8308-b3d08e826872")
 		(effects
 			(font
@@ -174,18 +173,6 @@
 		)
 		(layer "F.Fab")
 		(uuid "abaaf581-9100-4819-a081-6c9db787a21b")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 0 3.683 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "5c6c761c-8255-465b-b8c3-3078f3cd3d7d")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
 	)
 	(pad "1" smd rect
 		(at -1.7 0 90)

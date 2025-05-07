@@ -7,8 +7,8 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.InstructionFactory;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.InstructionCycles;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.DataOperation;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.DataOperation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.Operation;
 
 import static net.common.util.IntUtil.*;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.CPUFlags.*;

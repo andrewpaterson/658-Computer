@@ -7,7 +7,7 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.WidthFromRegister;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.AddressingMode;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.interrupt.InterruptVector;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.*;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -169,9 +169,9 @@ public class InstructionCycles
     return new WriteProgramBank();
   }
 
-  protected static ReadNewProgramCounterHigh Read_NewPCH()
+  protected static ReadProgramCounterHigh Read_NewPCH()
   {
-    return new ReadNewProgramCounterHigh(true);
+    return new ReadProgramCounterHigh(true);
   }
 
   protected static InternalOperation IO()
@@ -204,14 +204,14 @@ public class InstructionCycles
     return new ReadAbsoluteAddressHigh(notMemoryLock, true);
   }
 
-  protected static ReadNewProgramBank Read_NewPBR()
+  protected static ReadProgramBank Read_NewPBR()
   {
-    return new ReadNewProgramBank(true);
+    return new ReadProgramBank(true);
   }
 
-  protected static ReadNewProgramCounterLow Read_NewPCL()
+  protected static ReadProgramCounterLow Read_NewPCL()
   {
-    return new ReadNewProgramCounterLow(true);
+    return new ReadProgramCounterLow(true);
   }
 
   protected static ReadAbsoluteAddressLow Read_AAL()

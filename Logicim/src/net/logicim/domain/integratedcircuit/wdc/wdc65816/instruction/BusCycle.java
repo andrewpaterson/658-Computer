@@ -5,8 +5,8 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.Address;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.AddressOffset;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.address.ConstantOffset;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.DataOperation;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.Operation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.DataOperation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.Operation;
 
 import java.util.Arrays;
 import java.util.List;

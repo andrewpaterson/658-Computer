@@ -8,7 +8,7 @@ import net.logicim.domain.common.state.State;
 import net.logicim.domain.common.wire.TraceValue;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.Instruction;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.DataOperation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.DataOperation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import static net.common.util.StringUtil.*;

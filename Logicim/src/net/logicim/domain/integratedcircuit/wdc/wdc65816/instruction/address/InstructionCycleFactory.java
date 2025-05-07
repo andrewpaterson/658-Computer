@@ -6,11 +6,11 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.WidthFromRegister;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.AddressingMode;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.BusCycle;
 import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.interrupt.InterruptVector;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.InternalOperation;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.ReadOpCode;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.RestoreAbortValues;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.WaitOperation;
-import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operations.notes.*;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.InternalOperation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.ReadOpCode;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.RestoreAbortValues;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.WaitOperation;
+import net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.operation.notes.*;
 
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.WidthFromRegister.M;
 import static net.logicim.domain.integratedcircuit.wdc.wdc65816.instruction.AddressingMode.*;

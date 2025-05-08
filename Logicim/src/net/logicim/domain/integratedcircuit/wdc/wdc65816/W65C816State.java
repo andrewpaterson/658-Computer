@@ -750,7 +750,7 @@ public class W65C816State
       accumulator = toShort(--accumulator);
       xIndex = trimIndex(++xIndex);
       yIndex = trimIndex(++yIndex);
-      programCounter.offset(-3, true);
+      programCounter.offset(-3);
     }
   }
 
@@ -761,7 +761,7 @@ public class W65C816State
       accumulator = toShort(--accumulator);
       xIndex = trimIndex(--xIndex);
       yIndex = trimIndex(--yIndex);
-      programCounter.offset(-3, true);
+      programCounter.offset(-3);
     }
   }
 
@@ -918,12 +918,12 @@ public class W65C816State
 
   public void incrementProgramAddress()
   {
-    this.programCounter.offset(1, true);
+    this.programCounter.offset(1);
   }
 
   public void decrementProgramCounter()
   {
-    this.programCounter.offset(-1, true);
+    this.programCounter.offset(-1);
   }
 
   public void incrementStackPointer()
@@ -1369,7 +1369,7 @@ public class W65C816State
     }
   }
 
-  protected void bitIInternal()
+  protected void BIT_I()
   {
     if (isMemory16Bit())
     {

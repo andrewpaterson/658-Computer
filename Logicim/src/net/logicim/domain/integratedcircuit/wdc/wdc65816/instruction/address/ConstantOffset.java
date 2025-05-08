@@ -6,7 +6,7 @@ import net.logicim.domain.integratedcircuit.wdc.wdc65816.W65C816;
 public class ConstantOffset
     extends AddressOffset
 {
-  private final int offset;
+  private int offset;
 
   public ConstantOffset(int offset)
   {

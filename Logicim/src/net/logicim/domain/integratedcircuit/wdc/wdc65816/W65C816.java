@@ -285,7 +285,7 @@ public class W65C816
 
   public void BIT_I()
   {
-    state.bitIInternal();
+    state.BIT_I();
   }
 
   public void ROL()

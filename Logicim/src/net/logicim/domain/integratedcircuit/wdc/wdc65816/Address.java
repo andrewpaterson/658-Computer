@@ -58,27 +58,11 @@ public class Address
     return pageOfFirst != pageOfSecond;
   }
 
-  public Address offset(int offset, boolean wrapOffset)
+  public Address offset(int offset)
   {
     if (offset != 0)
     {
-      if (wrapOffset)
-      {
-        this.offset = toShort(this.offset + offset);
-      }
-      else
-      {
-        int newOffset = this.offset + offset;
-        if (newOffset >= BANK_SIZE_BYTES)
-        {
-          this.bank = toByte(bank + 1);
-          this.offset = toShort((newOffset - BANK_SIZE_BYTES));  //This subtraction is probably unnecessary.
-        }
-        else
-        {
-          this.offset = toShort(this.offset + offset);
-        }
-      }
+      this.offset = toShort(this.offset + offset);
     }
     return this;
   }

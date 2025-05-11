@@ -43,75 +43,57 @@ public class W65C816
   {
   }
 
-  @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
-  {
-    long simulationTime = simulation.getTime();
-
-    LogicPort res = getPins().getResB();
-    if (port == res)
-    {
-      boolean reset = !res.readValue(simulationTime).isLow();
-      if (reset)
-      {
-        state.resetPulled();
-      }
-    }
-
-    LogicPort clock = getPins().getPhi2();
-    LogicPort nmi = getPins().getNmiB();
-    LogicPort irq = getPins().getIrqB();
-    LogicPort abort = getPins().getAbortB();
-    LogicPort be = getPins().getBe();
-
-    if (clock == port)
-    {
-      TraceValue clockValue = clock.readValue(simulationTime);
-      if (clockValue.isHigh() || clockValue.isLow())
-      {
-        boolean currentClock = clockValue.isHigh();
-        boolean fallingEdge = !currentClock;
-
-        if (!state.isBusEnable())
-        {
-          disableBuses();
-        }
-
-        if (!state.isStopped())
-        {
-          if (fallingEdge)
-          {
-            executeLowHalf(simulation.getTimeline());
-          }
-
-          if (currentClock)
-          {
-            executeHighHalf(simulation.getTimeline());
-          }
-        }
-      }
-    }
-    else if (port == nmi)
-    {
-      state.nmi = !nmi.readValue(simulationTime).isLow();
-    }
-    else if (port == irq)
-    {
-      state.irq = !irq.readValue(simulationTime).isLow();
-    }
-    else if (port == abort)
-    {
-      state.abort = !abort.readValue(simulationTime).isLow();
-    }
-    else if (port == be)
-    {
-      state.busEnable = be.readValue(simulationTime).isLow();
-    }
-  }
-
   private void disableBuses()
   {
     //@todo - implement me please.
+  }
+
+  @Override
+  public void inputTransition(Timeline timeline, LogicPort port)
+  {
+    W65C816Pins pins = getPins();
+    boolean reset = pins.readRES(timeline).isLow();
+    if (reset)
+    {
+      state.resetPulled();
+    }
+
+    TraceValue clockValue = pins.readPhi2(timeline);
+    boolean nmi = pins.readNMI(timeline).isLow();
+    boolean irq = pins.readIRQ(timeline).isLow();
+    boolean abort = pins.readAbort(timeline).isLow();
+
+    state.busEnable = pins.readBE(timeline).isHigh();
+    if (!state.isBusEnable())
+    {
+      disableBuses();
+    }
+
+    if (clockValue.isHigh() || clockValue.isLow())
+    {
+      boolean fallingEdge = clockValue.isHigh() && state.previousClockLow;
+      boolean risingEdge = clockValue.isLow() && state.previousClockHigh;
+
+      state.previousClockLow = clockValue.isLow();
+      state.previousClockHigh = clockValue.isHigh();
+
+      if (!state.isStopped())
+      {
+        if (fallingEdge)
+        {
+          executeLowHalf(timeline);
+        }
+
+        if (risingEdge)
+        {
+          executeHighHalf(timeline);
+        }
+      }
+    }
+
+    state.nmi = !nmi;
+    state.irq = !irq;
+    state.abort = !abort;
   }
 
   public final void executeLowHalf(Timeline timeline)
@@ -121,13 +103,13 @@ public class W65C816
     boolean read = dataOperation.isRead();
     Address address = busCycle.getAddress(this);
 
-    pins.getRwb().writeBool(timeline, read);
-    pins.getMx().writeBool(timeline, state.isIndex8Bit());
-    pins.getVda().writeBool(timeline, dataOperation.isValidDataAddress());
-    pins.getVpa().writeBool(timeline, dataOperation.isValidProgramAddress());
-    pins.getMlB().writeBool(timeline, dataOperation.isNotMemoryLock());
-    pins.getVpB().writeBool(timeline, dataOperation.isNotVectorPull());
-    pins.getE().writeBool(timeline, state.isEmulation());
+    pins.writeRWB(timeline, read);
+    pins.writeMX(timeline, state.isIndex8Bit());
+    pins.writeVDA(timeline, dataOperation.isValidDataAddress());
+    pins.writeVPA(timeline, dataOperation.isValidProgramAddress());
+    pins.writeMLB(timeline, dataOperation.isNotMemoryLock());
+    pins.writeVPB(timeline, dataOperation.isNotVectorPull());
+    pins.writeE(timeline, state.isEmulation());
     //pins.getRdy().writeBool(timeline, dataOperation.isReady());
     pins.writeAddress(timeline, address.getOffset());
     pins.writeData(timeline, address.getBank());
@@ -136,24 +118,14 @@ public class W65C816
   public final void executeHighHalf(Timeline timeline)
   {
     DataOperation dataOperation = state.getDataOperation();
-//    BusCycle busCycle = state.getBusCycle();
     boolean read = dataOperation.isRead();
-//    Address address = busCycle.getAddress(this);
 
     if (read)
     {
       state.data = pins.readData(timeline);
     }
 
-//    pins.getRwb().writeBool(timeline, read);
-//    pins.getMlB().writeBool(timeline, dataOperation.isNotMemoryLock());
-    pins.getMx().writeBool(timeline, state.isMemory8Bit());
-//    pins.getE().writeBool(timeline, isEmulation());
-//    //pins.getRdy().writeBool(timeline, dataOperation.isReady());
-//    pins.getVda().writeBool(timeline, dataOperation.isValidDataAddress());
-//    pins.getVpa().writeBool(timeline, dataOperation.isValidProgramAddress());
-//    pins.getVpB().writeBool(timeline, dataOperation.isNotVectorPull());
-//    pins.writeAddress(timeline, address.getOffset());
+    pins.writeMX(timeline, state.isMemory8Bit());
 
     state.executeOperation(this);
 

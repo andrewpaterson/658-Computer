@@ -31,7 +31,7 @@ public class Constant
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
     throw new SimulatorException("Input transition not allowed on Constant.");
   }

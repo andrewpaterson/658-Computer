@@ -68,6 +68,8 @@ public class W65C816State
   protected boolean nextInstruction;
   protected int data;
   protected boolean nmi;
+  protected boolean previousClockHigh;
+  protected boolean previousClockLow;
 
   public W65C816State()
   {
@@ -109,6 +111,8 @@ public class W65C816State
     newProgramCounter = new Address();
     address = new Address();
     nmi = false;
+    previousClockHigh = false;
+    previousClockLow = false;
 
     createAbortValues();
   }
@@ -160,6 +164,8 @@ public class W65C816State
     this.nextInstruction = state.nextInstruction;
     this.data = state.data;
     this.nmi = state.nmi;
+    this.previousClockHigh = state.previousClockHigh;
+    this.previousClockLow = state.previousClockLow;
   }
 
   public void createAbortValues()
@@ -919,11 +925,6 @@ public class W65C816State
   public void incrementProgramAddress()
   {
     this.programCounter.offset(1);
-  }
-
-  public void decrementProgramCounter()
-  {
-    this.programCounter.offset(-1);
   }
 
   public void incrementStackPointer()

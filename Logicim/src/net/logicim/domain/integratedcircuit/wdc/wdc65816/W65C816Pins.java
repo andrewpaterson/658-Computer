@@ -4,6 +4,7 @@ import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.propagation.VoltageConfigurationSource;
+import net.logicim.domain.common.wire.TraceValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,84 +126,69 @@ public class W65C816Pins
                         voltageConfiguration);
   }
 
-  public List<LogicPort> getAddress()
+  public void writeVPB(Timeline timeline, boolean b)
   {
-    return address;
+    vpB.writeBool(timeline, b);
   }
 
-  public List<LogicPort> getData()
+  public TraceValue readAbort(Timeline timeline)
   {
-    return data;
+    return abortB.readValue(timeline.getTime());
   }
 
-  public LogicPort getVpB()
+  public TraceValue readIRQ(Timeline timeline)
   {
-    return vpB;
+    return irqB.readValue(timeline.getTime());
   }
 
-  public LogicPort getRdy()
+  public TraceValue readNMI(Timeline timeline)
   {
-    return rdy;
+    return nmiB.readValue(timeline.getTime());
   }
 
-  public LogicPort getAbortB()
+  public void writeMLB(Timeline timeline, boolean b)
   {
-    return abortB;
+    mlB.writeBool(timeline, b);
   }
 
-  public LogicPort getIrqB()
+  public void writeVPA(Timeline timeline, boolean b)
   {
-    return irqB;
+    vpa.writeBool(timeline, b);
   }
 
-  public LogicPort getNmiB()
+  public void writeVDA(Timeline timeline, boolean b)
   {
-    return nmiB;
+    vda.writeBool(timeline, b);
   }
 
-  public LogicPort getMlB()
+  public TraceValue readRES(Timeline timeline)
   {
-    return mlB;
+    return resB.readValue(timeline.getTime());
   }
 
-  public LogicPort getVpa()
+  public void writeMX(Timeline timeline, boolean b)
   {
-    return vpa;
+    mx.writeBool(timeline, b);
   }
 
-  public LogicPort getVda()
+  public TraceValue readPhi2(Timeline timeline)
   {
-    return vda;
+    return phi2.readValue(timeline.getTime());
   }
 
-  public LogicPort getResB()
+  public TraceValue readBE(Timeline timeline)
   {
-    return resB;
+    return be.readValue(timeline.getTime());
   }
 
-  public LogicPort getMx()
+  public void writeE(Timeline timeline, boolean b)
   {
-    return mx;
+    e.writeBool(timeline, b);
   }
 
-  public LogicPort getPhi2()
+  public void writeRWB(Timeline timeline, boolean b)
   {
-    return phi2;
-  }
-
-  public LogicPort getBe()
-  {
-    return be;
-  }
-
-  public LogicPort getE()
-  {
-    return e;
-  }
-
-  public LogicPort getRwb()
-  {
-    return rwb;
+    rwb.writeBool(timeline, b);
   }
 
   public void writeAddress(Timeline timeline, int address)

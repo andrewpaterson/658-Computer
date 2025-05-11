@@ -2,6 +2,7 @@ package net.logicim.domain.integratedcircuit.standard.logic.buffer;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
@@ -29,9 +30,9 @@ public class Buffer
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
-    if (isPowered(simulation.getTime()))
+    if (isPowered(timeline.getTime()))
     {
       List<LogicPort> inputs = pins.getInputs();
       List<LogicPort> outputs = pins.getOutputs();
@@ -40,14 +41,14 @@ public class Buffer
       {
         LogicPort input = inputs.get(i);
         LogicPort output = outputs.get(i);
-        TraceValue inValue = input.readValue(simulation.getTime());
+        TraceValue inValue = input.readValue(timeline.getTime());
         if (inValue.isHigh())
         {
-          output.writeBool(simulation.getTimeline(), transformOutput(true));
+          output.writeBool(timeline, transformOutput(true));
         }
         else if (inValue.isLow())
         {
-          output.writeBool(simulation.getTimeline(), transformOutput(false));
+          output.writeBool(timeline, transformOutput(false));
         }
       }
     }

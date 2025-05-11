@@ -184,7 +184,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
 
   public abstract void simulationStarted(Simulation simulation);
 
-  public abstract void inputTransition(Simulation simulation, LogicPort port);
+  public abstract void inputTransition(Timeline timeline, LogicPort port);
 
   public abstract String getType();
 }

@@ -3,6 +3,7 @@ package net.logicim.domain.integratedcircuit.standard.clock;
 import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.event.IntegratedCircuitEvent;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
@@ -43,7 +44,7 @@ public class ClockOscillator
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
   }
 

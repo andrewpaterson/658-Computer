@@ -2,6 +2,7 @@ package net.logicim.domain.integratedcircuit.standard.logic.xor;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
@@ -29,7 +30,7 @@ public class XorGate
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
     List<LogicPort> inputs = pins.getInputs();
 
@@ -37,7 +38,7 @@ public class XorGate
     int lows = 0;
     for (LogicPort input : inputs)
     {
-      TraceValue inValue = input.readValue(simulation.getTime());
+      TraceValue inValue = input.readValue(timeline.getTime());
       if (inValue.isHigh())
       {
         highs++;
@@ -50,7 +51,7 @@ public class XorGate
     if ((highs > 0 || lows > 0))
     {
       boolean value = highs % 2 == 1;
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(value));
+      pins.getOutput().writeBool(timeline, transformOutput(value));
     }
 
   }

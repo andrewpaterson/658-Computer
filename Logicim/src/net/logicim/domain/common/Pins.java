@@ -55,7 +55,7 @@ public abstract class Pins
 
   public void inputTransition(Simulation simulation, LogicPort port)
   {
-    getIntegratedCircuit().inputTransition(simulation, port);
+    getIntegratedCircuit().inputTransition(simulation.getTimeline(), port);
   }
 
   public PowerInPort getVoltageCommon()

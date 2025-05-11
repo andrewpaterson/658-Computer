@@ -209,7 +209,7 @@ public class InstructionCycles
     return new ReadProgramBank(true);
   }
 
-  protected static ReadProgramCounterLow Read_NewPCL()
+  protected static ReadProgramCounterLow  Read_NewPCL()
   {
     return new ReadProgramCounterLow(true);
   }

@@ -24,7 +24,6 @@ public class NoteFourY
     return cpu.getState().noteFourY(nextWillRead);
   }
 
-
   @Override
   public String toString()
   {

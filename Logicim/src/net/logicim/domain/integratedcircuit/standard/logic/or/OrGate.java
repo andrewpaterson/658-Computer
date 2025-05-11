@@ -2,6 +2,7 @@ package net.logicim.domain.integratedcircuit.standard.logic.or;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.common.wire.TraceValue;
@@ -29,14 +30,14 @@ public class OrGate
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
     List<LogicPort> inputs = pins.getInputs();
     int highs = 0;
     int lows = 0;
     for (LogicPort input : inputs)
     {
-      TraceValue inValue = input.readValue(simulation.getTime());
+      TraceValue inValue = input.readValue(timeline.getTime());
       if (inValue.isHigh())
       {
         highs++;
@@ -48,11 +49,11 @@ public class OrGate
     }
     if (highs > 0)
     {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(true));
+      pins.getOutput().writeBool(timeline, transformOutput(true));
     }
     else if (lows > 0)
     {
-      pins.getOutput().writeBool(simulation.getTimeline(), transformOutput(false));
+      pins.getOutput().writeBool(timeline, transformOutput(false));
     }
   }
 

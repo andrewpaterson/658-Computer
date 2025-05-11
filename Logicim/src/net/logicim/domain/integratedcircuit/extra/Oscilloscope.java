@@ -2,6 +2,7 @@ package net.logicim.domain.integratedcircuit.extra;
 
 import net.logicim.domain.Simulation;
 import net.logicim.domain.common.IntegratedCircuit;
+import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.event.TickEvent;
 import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.state.State;
@@ -70,7 +71,7 @@ public class Oscilloscope
   }
 
   @Override
-  public void inputTransition(Simulation simulation, LogicPort port)
+  public void inputTransition(Timeline timeline, LogicPort port)
   {
   }
 

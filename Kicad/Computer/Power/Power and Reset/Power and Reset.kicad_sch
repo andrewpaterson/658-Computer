@@ -3251,6 +3251,12 @@
 		(uuid "361bf262-876c-4bc0-84d6-bbc69710658e")
 	)
 	(junction
+		(at 276.86 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7789bb14-250b-41f2-9a43-20df5970efba")
+	)
+	(junction
 		(at 270.51 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3620,6 +3626,16 @@
 	)
 	(wire
 		(pts
+			(xy 276.86 57.15) (xy 276.86 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "76229eee-0d8f-4ad7-ae7a-9a1ba7aee868")
+	)
+	(wire
+		(pts
 			(xy 132.08 54.61) (xy 144.78 54.61)
 		)
 		(stroke
@@ -3670,7 +3686,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 130.81) (xy 123.19 129.54)
+			(xy 276.86 72.39) (xy 276.86 71.12)
 		)
 		(stroke
 			(width 0)
@@ -3780,7 +3796,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 118.11) (xy 123.19 121.92)
+			(xy 276.86 62.23) (xy 276.86 63.5)
 		)
 		(stroke
 			(width 0)
@@ -3860,6 +3876,16 @@
 	)
 	(wire
 		(pts
+			(xy 276.86 54.61) (xy 287.02 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f238efc8-08ff-4bfe-8e21-033a55ef0f57")
+	)
+	(wire
+		(pts
 			(xy 118.11 93.98) (xy 135.89 93.98)
 		)
 		(stroke
@@ -3900,7 +3926,7 @@
 	)
 	(wire
 		(pts
-			(xy 270.51 54.61) (xy 275.59 54.61)
+			(xy 270.51 54.61) (xy 276.86 54.61)
 		)
 		(stroke
 			(width 0)
@@ -4151,7 +4177,7 @@
 		(uuid "03b755c5-88a0-47b8-a7a3-c9d09fb45b11")
 	)
 	(label "5V"
-		(at 275.59 54.61 0)
+		(at 287.02 54.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4524,19 +4550,8 @@
 		)
 		(uuid "da7d0520-d59c-4149-9617-1425c26ee801")
 	)
-	(label "5V"
-		(at 123.19 113.03 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "dad46136-3d11-49eb-855c-e19deefa3357")
-	)
 	(label "GND"
-		(at 123.19 130.81 270)
+		(at 276.86 72.39 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4603,7 +4618,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_Small_Filled")
-		(at 123.19 115.57 270)
+		(at 276.86 59.69 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4612,7 +4627,7 @@
 		(dnp no)
 		(uuid "0174ee03-bb54-4941-831f-d597edf3f46c")
 		(property "Reference" "LED1"
-			(at 126.365 116.84 0)
+			(at 280.035 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4621,7 +4636,7 @@
 			)
 		)
 		(property "Value" "LED_Small_Filled"
-			(at 120.65 120.015 0)
+			(at 274.32 64.135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4631,7 +4646,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
-			(at 123.19 115.57 90)
+			(at 276.86 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4640,7 +4655,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 123.19 115.57 90)
+			(at 276.86 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4649,7 +4664,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol, filled shape"
-			(at 123.19 115.57 0)
+			(at 276.86 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6271,7 +6286,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_Axial_D1.6mm_P5.08mm")
-		(at 123.19 129.54 90)
+		(at 276.86 71.12 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6279,7 +6294,7 @@
 		(dnp no)
 		(uuid "89b65887-f2ea-4e23-a326-727cbf49d053")
 		(property "Reference" "R4"
-			(at 121.158 125.73 0)
+			(at 274.828 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6287,7 +6302,7 @@
 			)
 		)
 		(property "Value" "10KΩ"
-			(at 125.476 125.73 0)
+			(at 279.146 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6295,7 +6310,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
-			(at 129.667 121.031 0)
+			(at 283.337 62.611 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6304,7 +6319,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 123.19 125.73 90)
+			(at 276.86 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6313,7 +6328,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 131.572 125.476 0)
+			(at 285.242 67.056 0)
 			(effects
 				(font
 					(size 1.27 1.27)

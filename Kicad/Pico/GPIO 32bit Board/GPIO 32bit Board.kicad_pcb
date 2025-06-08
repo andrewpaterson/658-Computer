@@ -1,7 +1,7 @@
 (kicad_pcb
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(general
 		(thickness 1.6)
 		(legacy_teardrops no)
@@ -13,15 +13,15 @@
 	)
 	(layers
 		(0 "F.Cu" signal)
-		(31 "B.Cu" signal)
-		(36 "B.SilkS" user "B.Silkscreen")
-		(37 "F.SilkS" user "F.Silkscreen")
-		(38 "B.Mask" user)
-		(39 "F.Mask" user)
-		(44 "Edge.Cuts" user)
-		(45 "Margin" user)
-		(46 "B.CrtYd" user "B.Courtyard")
-		(47 "F.CrtYd" user "F.Courtyard")
+		(2 "B.Cu" signal)
+		(5 "F.SilkS" user "F.Silkscreen")
+		(7 "B.SilkS" user "B.Silkscreen")
+		(1 "F.Mask" user)
+		(3 "B.Mask" user)
+		(25 "Edge.Cuts" user)
+		(27 "Margin" user)
+		(31 "F.CrtYd" user "F.Courtyard")
+		(29 "B.CrtYd" user "B.Courtyard")
 	)
 	(setup
 		(stackup
@@ -59,9 +59,10 @@
 		)
 		(pad_to_mask_clearance 0)
 		(allow_soldermask_bridges_in_footprints no)
+		(tenting front back)
 		(pcbplotparams
-			(layerselection 0x00010f0_ffffffff)
-			(plot_on_all_layers_selection 0x0000000_00000000)
+			(layerselection 0x00000000_00000000_55555555_575555ff)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
 			(usegerberextensions yes)
 			(usegerberattributes yes)
@@ -71,7 +72,6 @@
 			(dashed_line_gap_ratio 3.000000)
 			(svgprecision 4)
 			(plotframeref no)
-			(viasonmask no)
 			(mode 1)
 			(useauxorigin yes)
 			(hpglpennumber 1)
@@ -79,16 +79,19 @@
 			(hpglpendiameter 15.000000)
 			(pdf_front_fp_property_popups yes)
 			(pdf_back_fp_property_popups yes)
+			(pdf_metadata yes)
+			(pdf_single_document no)
 			(dxfpolygonmode yes)
 			(dxfimperialunits yes)
 			(dxfusepcbnewfont yes)
 			(psnegative no)
 			(psa4output no)
-			(plotreference yes)
-			(plotvalue yes)
-			(plotfptext yes)
-			(plotinvisibletext no)
+			(plot_black_and_white yes)
 			(sketchpadsonfab no)
+			(plotpadnumbers no)
+			(hidednponfab no)
+			(sketchdnponfab yes)
+			(crossoutdnponfab yes)
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
@@ -225,18 +228,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:77613"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b780d3a9-3106-4291-a801-847e3e69046f")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.keyelco.com/product-pdf.cfm?p=3925"
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -325,7 +316,7 @@
 			)
 		)
 		(path "/9729c85e-6862-445e-bfc9-02e592c86357")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -554,6 +545,7 @@
 			(pintype "passive")
 			(uuid "d7361527-2da2-4d92-8db8-68e67f7be024")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/7761-3.stp"
 			(offset
 				(xyz 0 0 0)
@@ -590,18 +582,6 @@
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:36pin Edge Connector"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "77d44d13-6da8-451d-b7f0-3eceba530bc5")
-			(effects
-				(font
-					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -735,7 +715,7 @@
 			)
 		)
 		(path "/e8cf2f2b-f065-4785-adaf-664c45603b5c")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr exclude_from_pos_files)
 		(fp_line
@@ -1430,7 +1410,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "ef3c2751-3225-43a3-ba13-37d55bfc6394")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1445,6 +1425,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1458,7 +1442,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "eb48d00b-5630-44ac-9e84-fe96663dbd0c")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1473,6 +1457,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1486,7 +1474,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "2b8af8e1-9e21-473d-a5bd-aef2e327014a")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1501,6 +1489,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1514,7 +1506,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "1915d05b-a873-431d-be0c-7c59689d8d26")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1529,6 +1521,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1542,7 +1538,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "9e5df6e9-6f3d-4267-a9e4-ac0bcf437e5b")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1557,6 +1553,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1570,7 +1570,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "664aede6-39cd-42bb-b311-a68f7ef59e78")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1585,6 +1585,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1598,7 +1602,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "14fded67-7453-4d58-b5f2-54112398041a")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1613,6 +1617,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1626,7 +1634,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "ac96bcfe-7049-416c-a24e-081fd2d35e54")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1641,6 +1649,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1654,7 +1666,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "1b37e4ef-fd8b-4698-98db-e13316aa0078")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1669,6 +1681,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1682,7 +1698,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "fd9ff344-ff63-4794-982f-02a55a423b09")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1697,6 +1713,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1710,7 +1730,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "a23a60bc-bd45-479b-a30e-ed9e42ff6366")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1725,6 +1745,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1738,7 +1762,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "b3c2f4e6-f494-451b-90fb-9913e66666c6")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1753,6 +1777,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1766,7 +1794,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "f51f3a9f-905a-429a-bd29-ee9bb4557a9d")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1781,6 +1809,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1794,7 +1826,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "4f7f279d-a39e-4588-9c5e-875fd773b129")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1809,6 +1841,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1822,7 +1858,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "945d32fa-2b22-4fa0-adb6-812bc47b0ea2")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1837,6 +1873,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1850,7 +1890,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "bd59f1f7-bc16-47d9-a0fc-e1609bee3cc2")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1865,6 +1905,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1878,7 +1922,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "f6465921-2645-4c20-913e-dfee2a6b7cc7")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1893,6 +1937,10 @@
 				(copperpour allowed)
 				(footprints not_allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1906,7 +1954,7 @@
 		(zone
 			(net 0)
 			(net_name "")
-			(layers "F&B.Cu")
+			(layers "F.Cu" "B.Cu")
 			(uuid "e3bea9e5-cb9b-4c06-926f-ad312874d3fb")
 			(hatch edge 0.5)
 			(connect_pads
@@ -1921,6 +1969,10 @@
 				(copperpour allowed)
 				(footprints allowed)
 			)
+			(placement
+				(enabled no)
+				(sheetname "")
+			)
 			(fill
 				(thermal_gap 0.5)
 				(thermal_bridge_width 0.5)
@@ -1932,6 +1984,7 @@
 				)
 			)
 		)
+		(embedded_fonts no)
 	)
 	(footprint "SamacSys_Parts:LD1117S33C"
 		(layer "F.Cu")
@@ -1940,7 +1993,7 @@
 		(descr "SOT-223_2022")
 		(tags "Integrated Circuit")
 		(property "Reference" "IC1"
-			(at 0 0.381 -90)
+			(at 0 0.381 270)
 			(layer "F.SilkS")
 			(uuid "0fccfcb7-6ebe-4165-bcb6-e59001be9fb0")
 			(effects
@@ -1951,7 +2004,7 @@
 			)
 		)
 		(property "Value" "LD1117S50C"
-			(at 0 8.001 -90)
+			(at 0 8.001 270)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "c7fb7911-3e2f-4d7a-beee-a99946381a23")
@@ -1962,20 +2015,8 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:LD1117S33C"
-			(at 0 0 -90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3d77f6e3-9bec-4452-9072-82da4e672ff4")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/ld1117.pdf"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "68323dae-dd09-44b4-a6cd-103dc0284233")
@@ -1987,7 +2028,7 @@
 			)
 		)
 		(property "Description" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(layer "F.Fab")
 			(uuid "387e324c-b97e-4b60-a491-08dfee881468")
 			(effects
@@ -1998,7 +2039,7 @@
 			)
 		)
 		(property "Silkscreen" "LD1117S50"
-			(at 0 4.826 -90)
+			(at 0 4.826 270)
 			(layer "F.SilkS")
 			(uuid "829be836-b9a1-46d5-a44b-5c4611b8b518")
 			(effects
@@ -2009,7 +2050,7 @@
 			)
 		)
 		(property "Height" "1.8"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -2022,7 +2063,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "STMicroelectronics"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -2035,7 +2076,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "LD1117S50C"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -2048,7 +2089,7 @@
 			)
 		)
 		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -2061,7 +2102,7 @@
 			)
 		)
 		(path "/d0514b99-78bf-4c7e-a3bf-d390e9ca00bc")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -2206,22 +2247,10 @@
 			(layer "F.Fab")
 			(uuid "62499c8f-1a05-48e5-bc26-6aeddd798917")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 6.096 -90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "da9a4cc8-9281-4c2e-b14c-547c6ab49a25")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd rect
 			(at -2.3 3.2 270)
 			(size 1.2 1.5)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 2 "/GND")
 			(pinfunction "GND")
 			(pintype "passive")
@@ -2230,7 +2259,7 @@
 		(pad "2" smd rect
 			(at 0 3.2 270)
 			(size 1.2 1.5)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 1 "/5V")
 			(pinfunction "5.0VOut")
 			(pintype "passive")
@@ -2239,7 +2268,7 @@
 		(pad "3" smd rect
 			(at 2.3 3.2 270)
 			(size 1.2 1.5)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 60 "/12V")
 			(pinfunction "15VIn")
 			(pintype "passive")
@@ -2248,12 +2277,13 @@
 		(pad "4" smd rect
 			(at 0 -3.175)
 			(size 3.81 5.842)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 1 "/5V")
 			(pinfunction "5.0VOut")
 			(pintype "passive")
 			(uuid "56a79009-7a9c-4d4a-8264-74da9f6011c1")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/LD1117S33.stp"
 			(offset
 				(xyz 0 0 0)
@@ -2294,19 +2324,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3eb8b99e-5afe-4f58-a22c-c20745c554d5")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -2335,7 +2352,7 @@
 		)
 		(property ki_fp_filters "R_*")
 		(path "/f4910a4f-36a5-476f-85e5-222dc05bd6fc")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -2478,6 +2495,7 @@
 			(pintype "passive")
 			(uuid "2de99a35-9ba5-49d7-aef6-3361ca708044")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_THT.3dshapes/R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -2512,19 +2530,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "bc42db40-d8ec-438e-88bd-f49c2afbe6f0")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_GPIO_16bit"
-			(at 22.86 57.785 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d8b7352c-a465-4ff2-a47c-d4557edc87cf")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -2570,7 +2575,7 @@
 			)
 		)
 		(path "/9d95c1a1-f4cb-401a-8924-21c3c0d81199")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -2705,7 +2710,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill solid)
+			(fill yes)
 			(layer "F.SilkS")
 			(uuid "414d689a-b62f-4927-81eb-8ebe9f6aeb1b")
 		)
@@ -3189,6 +3194,7 @@
 			(pintype "tri_state")
 			(uuid "99d4e438-2c2b-4331-9058-70c3d23b1f41")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/Computer/Component Boards/GPIO 16bit/GPIO 16bit.wrl"
 			(offset
 				(xyz 0 0 3)
@@ -3229,19 +3235,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
-			(at 1.016 4.445 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "862d1603-f3c4-44c5-821d-59b425cc9b55")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -3270,7 +3263,7 @@
 		)
 		(property ki_fp_filters "CP_*")
 		(path "/acda8410-37f2-4d10-80b3-cc6bd79bae25")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -4240,7 +4233,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "efb8c2f3-a1bc-4089-b345-a0bf478d5790")
 		)
@@ -4251,7 +4244,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "f994a66a-e77b-48e2-a5bb-b3bb889fbf52")
 		)
@@ -4262,7 +4255,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "2d9fd24e-f1d0-4534-9e9a-06e277b69afd")
 		)
@@ -4286,6 +4279,7 @@
 			(pintype "passive")
 			(uuid "20fe2836-a500-4cfd-9c36-e99c5ef72135")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D4.0mm_P2.00mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4326,19 +4320,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
-			(at 1.016 4.445 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2e0c2d07-3858-4415-b5b7-e364a7a5b70f")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -4367,7 +4348,7 @@
 		)
 		(property ki_fp_filters "CP_*")
 		(path "/a4c3d8e6-dad2-466e-b336-cd49a2ff5ced")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -5337,7 +5318,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "90825791-1490-451f-a077-bfc2e93b1204")
 		)
@@ -5348,7 +5329,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "8fa97d94-e8af-45ce-8245-e4cc91962e61")
 		)
@@ -5359,7 +5340,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "cae2c359-414d-46c9-8c95-67d681265dc1")
 		)
@@ -5383,6 +5364,7 @@
 			(pintype "passive")
 			(uuid "2dbbbb3a-3784-4083-a515-2fa5e1645965")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D4.0mm_P2.00mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -5422,19 +5404,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
-			(at 1.27 4.952999 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d648683e-67cc-48cc-b7ff-ec25db117407")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -5463,7 +5432,7 @@
 		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/fcb203ec-613b-44a7-9306-540783e6cf98")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -5505,7 +5474,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "d311f5b7-dd5c-4523-9b9c-c4fbeb14a869")
 		)
@@ -5516,7 +5485,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "d1829fd5-b8ca-4040-a47a-2c797a455511")
 		)
@@ -5548,7 +5517,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "796d9dec-82c0-4a87-af55-d6cec2223588")
 		)
@@ -5574,6 +5543,7 @@
 			(pintype "passive")
 			(uuid "04c68329-a591-4e12-bf89-cd8b58fae8cb")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/LED_THT.3dshapes/LED_D5.0mm.wrl"
 			(offset
 				(xyz 0 0 -2.8)
@@ -5608,19 +5578,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d340ce48-ff21-414a-ac40-744246113f7c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "HCP65_Parts:HCP65_GPIO_16bit"
-			(at 22.86 57.785 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c62e3c1e-317e-4c8c-9a4a-1248f979a538")
 			(effects
 				(font
 					(size 0.635 0.635)
@@ -5666,7 +5623,7 @@
 			)
 		)
 		(path "/7a4bcc0c-b660-45cc-a836-45de7b04279c")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -5801,7 +5758,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill solid)
+			(fill yes)
 			(layer "F.SilkS")
 			(uuid "fce351f8-43e2-419e-8a07-5912982f5892")
 		)
@@ -6285,6 +6242,7 @@
 			(pintype "tri_state")
 			(uuid "295f68e5-086b-4342-af32-ca5a916868cf")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/Computer/Component Boards/GPIO 16bit/GPIO 16bit.wrl"
 			(offset
 				(xyz 0 0 3)
@@ -6326,20 +6284,6 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_Signal_Protection"
-			(at 11.43 58.039 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "aeef0b0b-4ee4-40ac-bf6b-c80628c7656a")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-					(bold yes)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -6378,7 +6322,7 @@
 			)
 		)
 		(path "/766e1e34-0f58-49e6-9d4d-f9b398009208")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -6513,7 +6457,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill solid)
+			(fill yes)
 			(layer "F.SilkS")
 			(uuid "6e97adb1-010d-4e24-902f-26bf939a5ac4")
 		)
@@ -6997,6 +6941,7 @@
 			(pintype "passive")
 			(uuid "6ff1c161-e574-4188-aa89-80f64d8f2b9c")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/Pico/Signal Protection/Signal Protection.wrl"
 			(offset
 				(xyz 0 0 3)
@@ -7038,20 +6983,6 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_Signal_Protection"
-			(at 11.43 58.039 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3c680fd4-3dc8-4129-b5fe-e57cf1e79fce")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-					(bold yes)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(unlocked yes)
@@ -7090,7 +7021,7 @@
 			)
 		)
 		(path "/87686cf2-9358-49eb-b676-3142a1459cab")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -7225,7 +7156,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill solid)
+			(fill yes)
 			(layer "F.SilkS")
 			(uuid "6c2c933a-95aa-4730-b5fd-b24b6f0bc07f")
 		)
@@ -7709,6 +7640,7 @@
 			(pintype "passive")
 			(uuid "a5b5f665-5d54-4572-ab63-feca497625f2")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/Pico/Signal Protection/Signal Protection.wrl"
 			(offset
 				(xyz 0 0 3)
@@ -7751,18 +7683,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:63391672"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bf748c56-020e-4b19-abf4-ec13efccb5c5")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=6339167&DocType=Customer+Drawing&DocLang=English"
 			(at 0 0 90)
 			(layer "F.Fab")
@@ -7787,8 +7707,112 @@
 				)
 			)
 		)
+		(property "Description_1" "Body Features: Shield Plating Material Tin over Nickel | Modular Jack Latch Orientation Standard - Latch Down | Shield Material Copper Alloy | Connector Profile Standard | PCB Ground Tab Location 4.57 MM | PCB Ground Tab Location .18 INCH | Configuration Features: Connector Contact Density Standard | Number of Panel Ground Tabs 15 | Number of Loaded Positions 8 | Status Light Type Not Illuminated | Multiple Port Configuration Ganged | Number of PCB Ground Tabs 5 | PCB Mount Orientation Right Angle | Number "
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d49cc14d-797f-4b96-abbc-506df3c81d3c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Height" "16.1"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9c523f7a-b391-46f4-95d7-e1b8569cf6f6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "TE Connectivity"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7b909335-d8d6-4d46-9411-fd3002e9d87e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "6339167-2"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "23cd705b-f1c8-4179-b5b7-2505abe3e723")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Part Number" "571-6339167-2"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "efac864c-e306-4d1f-a490-0b395cac0f90")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/TE-Connectivity-Alcoswitch/6339167-2?qs=Il0cmQ4mt8LMMudP2tjy4A%3D%3D"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a952be6-10b6-454f-b2d5-c4f93c0fd333")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Part Number" "6339167-2"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3e2e1858-7a7b-4520-a976-ce9b396cbb78")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/6339167-2/te-connectivity?region=nac"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "17c70d6a-63a6-4ef4-a399-0dd82c468716")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/b10c091d-f3fa-4531-b2dc-b810ef9c37c0")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "GPIO 32bit Board.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -8573,6 +8597,7 @@
 			(pintype "passive")
 			(uuid "c5a179de-670f-449d-b236-9e6ff6f853b0")
 		)
+		(embedded_fonts no)
 		(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/6339167-2.stp"
 			(offset
 				(xyz -16.50999998 -17.14999936 7.079999817)
@@ -15155,4 +15180,5 @@
 		(net 98)
 		(uuid "fb5db04e-42e1-4468-a1bf-5dba97c986e6")
 	)
+	(embedded_fonts no)
 )

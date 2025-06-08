@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "8357857d-ab8c-4646-b786-aad4001c0a6b")
 	(paper "A3")
 	(title_block
@@ -57,6 +57,7 @@
 					(hide yes)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "HCP65:GPIO_Controller_Board"
 			(exclude_from_sim no)
@@ -105,12 +106,13 @@
 					(hide yes)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Mechanical:MountingHole"
 			(pin_names
 				(offset 1.016)
 			)
-			(exclude_from_sim yes)
+			(exclude_from_sim no)
 			(in_bom no)
 			(on_board yes)
 			(property "Reference" "H"
@@ -187,12 +189,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Mechanical:MountingHole_Pad"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
-			(exclude_from_sim yes)
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
 			(in_bom no)
 			(on_board yes)
 			(property "Reference" "H"
@@ -289,6 +296,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "TE_Connectivity:2-5530843-7"
 			(pin_names
@@ -394,35 +402,6 @@
 					(hide yes)
 				)
 			)
-			(property "Arrow Part Number" "2-5530843-7"
-				(at 19.05 -71.755 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-				(at 19.05 -74.295 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "2-5530843-7_0_0"
 				(pin passive line
 					(at 0 0 0)
@@ -435,384 +414,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -10.16 180)
-					(length 5.08)
-					(name "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -12.7 0)
-					(length 5.08)
-					(name "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -12.7 180)
-					(length 5.08)
-					(name "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -15.24 0)
-					(length 5.08)
-					(name "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -15.24 180)
-					(length 5.08)
-					(name "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -17.78 0)
-					(length 5.08)
-					(name "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -17.78 180)
-					(length 5.08)
-					(name "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -20.32 0)
-					(length 5.08)
-					(name "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "17"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -20.32 180)
-					(length 5.08)
-					(name "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -22.86 0)
-					(length 5.08)
-					(name "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 0 180)
-					(length 5.08)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -22.86 180)
-					(length 5.08)
-					(name "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -25.4 0)
-					(length 5.08)
-					(name "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -25.4 180)
-					(length 5.08)
-					(name "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -27.94 0)
-					(length 5.08)
-					(name "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -27.94 180)
-					(length 5.08)
-					(name "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -30.48 0)
-					(length 5.08)
-					(name "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -30.48 180)
-					(length 5.08)
-					(name "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -33.02 0)
-					(length 5.08)
-					(name "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -33.02 180)
-					(length 5.08)
-					(name "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "28"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -35.56 0)
-					(length 5.08)
-					(name "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -839,150 +440,6 @@
 					)
 				)
 				(pin passive line
-					(at 22.86 -35.56 180)
-					(length 5.08)
-					(name "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -38.1 0)
-					(length 5.08)
-					(name "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -38.1 180)
-					(length 5.08)
-					(name "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -40.64 0)
-					(length 5.08)
-					(name "33"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "33"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -40.64 180)
-					(length 5.08)
-					(name "34"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "34"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -43.18 0)
-					(length 5.08)
-					(name "35"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "35"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -43.18 180)
-					(length 5.08)
-					(name "36"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "36"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -2.54 180)
-					(length 5.08)
-					(name "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 -5.08 0)
 					(length 5.08)
 					(name "5"
@@ -993,24 +450,6 @@
 						)
 					)
 					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 22.86 -5.08 180)
-					(length 5.08)
-					(name "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1037,6 +476,312 @@
 					)
 				)
 				(pin passive line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -17.78 0)
+					(length 5.08)
+					(name "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -25.4 0)
+					(length 5.08)
+					(name "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -27.94 0)
+					(length 5.08)
+					(name "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -30.48 0)
+					(length 5.08)
+					(name "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -33.02 0)
+					(length 5.08)
+					(name "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -35.56 0)
+					(length 5.08)
+					(name "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -38.1 0)
+					(length 5.08)
+					(name "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -40.64 0)
+					(length 5.08)
+					(name "33"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "33"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -43.18 0)
+					(length 5.08)
+					(name "35"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "35"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 0 180)
+					(length 5.08)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -2.54 180)
+					(length 5.08)
+					(name "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -5.08 180)
+					(length 5.08)
+					(name "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
 					(at 22.86 -7.62 180)
 					(length 5.08)
 					(name "8"
@@ -1055,16 +800,250 @@
 					)
 				)
 				(pin passive line
-					(at 0 -10.16 0)
+					(at 22.86 -10.16 180)
 					(length 5.08)
-					(name "9"
+					(name "10"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -12.7 180)
+					(length 5.08)
+					(name "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -15.24 180)
+					(length 5.08)
+					(name "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -17.78 180)
+					(length 5.08)
+					(name "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -20.32 180)
+					(length 5.08)
+					(name "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -22.86 180)
+					(length 5.08)
+					(name "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -25.4 180)
+					(length 5.08)
+					(name "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -27.94 180)
+					(length 5.08)
+					(name "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -30.48 180)
+					(length 5.08)
+					(name "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -33.02 180)
+					(length 5.08)
+					(name "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -35.56 180)
+					(length 5.08)
+					(name "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -38.1 180)
+					(length 5.08)
+					(name "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -40.64 180)
+					(length 5.08)
+					(name "34"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "34"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 22.86 -43.18 180)
+					(length 5.08)
+					(name "36"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "36"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1095,6 +1074,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(no_connect
@@ -1183,7 +1163,6 @@
 	)
 	(label "D7"
 		(at 69.85 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1194,7 +1173,6 @@
 	)
 	(label "12V"
 		(at 181.61 50.8 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1205,7 +1183,6 @@
 	)
 	(label "12V"
 		(at 247.65 50.8 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1216,7 +1193,6 @@
 	)
 	(label "D3"
 		(at 135.89 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1227,7 +1203,6 @@
 	)
 	(label "Write OE B0 _{40..47}"
 		(at 135.89 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1238,7 +1213,6 @@
 	)
 	(label "Read GD B1 _{8..15}"
 		(at 113.03 140.97 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1249,7 +1223,6 @@
 	)
 	(label "Write GPIO _{ALL}"
 		(at 270.51 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1260,7 +1233,6 @@
 	)
 	(label "D7"
 		(at 135.89 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1271,7 +1243,6 @@
 	)
 	(label "Write OE B1 _{24..31}"
 		(at 135.89 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1282,7 +1253,6 @@
 	)
 	(label "D6"
 		(at 270.51 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1293,7 +1263,6 @@
 	)
 	(label "Read GD B0 _{16..23}"
 		(at 46.99 143.51 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1304,7 +1273,6 @@
 	)
 	(label "GND"
 		(at 69.85 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1315,7 +1283,6 @@
 	)
 	(label "Read GD B1 _{0..7}"
 		(at 181.61 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1326,7 +1293,6 @@
 	)
 	(label "Read GPIO _{ALL}"
 		(at 69.85 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1337,7 +1303,6 @@
 	)
 	(label "Write GD B0 _{0..7}"
 		(at 46.99 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1348,7 +1313,6 @@
 	)
 	(label "D1"
 		(at 270.51 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1359,7 +1323,6 @@
 	)
 	(label "Write Enable"
 		(at 204.47 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1370,7 +1333,6 @@
 	)
 	(label "12V"
 		(at 135.89 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1381,7 +1343,6 @@
 	)
 	(label "Write GD B1 _{56..63}"
 		(at 135.89 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1392,7 +1353,6 @@
 	)
 	(label "D1"
 		(at 135.89 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1403,7 +1363,6 @@
 	)
 	(label "Write GD B0 _{32..39}"
 		(at 46.99 173.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1414,7 +1373,6 @@
 	)
 	(label "Write Enable"
 		(at 69.85 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1425,7 +1383,6 @@
 	)
 	(label "GND"
 		(at 113.03 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1436,7 +1393,6 @@
 	)
 	(label "GND"
 		(at 69.85 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1447,7 +1403,6 @@
 	)
 	(label "D1"
 		(at 69.85 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1458,7 +1413,6 @@
 	)
 	(label "D4"
 		(at 69.85 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1469,7 +1423,6 @@
 	)
 	(label "GND"
 		(at 135.89 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1480,7 +1433,6 @@
 	)
 	(label "Read GD B0 _{24..31}"
 		(at 46.99 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1491,7 +1443,6 @@
 	)
 	(label "Write GD B1 _{40..47}"
 		(at 247.65 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1502,7 +1453,6 @@
 	)
 	(label "Write OE B0 _{24..31}"
 		(at 135.89 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1513,7 +1463,6 @@
 	)
 	(label "12V"
 		(at 270.51 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1524,7 +1473,6 @@
 	)
 	(label "Read GD B1 _{32..39}"
 		(at 247.65 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1535,7 +1483,6 @@
 	)
 	(label "Read GPIO _{ALL}"
 		(at 69.85 140.97 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1546,7 +1493,6 @@
 	)
 	(label "D0"
 		(at 270.51 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1557,7 +1503,6 @@
 	)
 	(label "Write GD B0 _{32..39}"
 		(at 113.03 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1568,7 +1513,6 @@
 	)
 	(label "Read GD B0 _{48..55}"
 		(at 46.99 156.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1579,7 +1523,6 @@
 	)
 	(label "Write Enable"
 		(at 69.85 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1590,7 +1533,6 @@
 	)
 	(label "Write GD B1 _{40..47}"
 		(at 113.03 176.53 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1601,7 +1543,6 @@
 	)
 	(label "D7"
 		(at 69.85 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1612,7 +1553,6 @@
 	)
 	(label "D2"
 		(at 270.51 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1623,7 +1563,6 @@
 	)
 	(label "Read GD B0 _{24..31}"
 		(at 46.99 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1634,7 +1573,6 @@
 	)
 	(label "D5"
 		(at 69.85 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1645,7 +1583,6 @@
 	)
 	(label "Write OE B0 _{48..55}"
 		(at 135.89 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1656,7 +1593,6 @@
 	)
 	(label "Read GD B0 _{40..47}"
 		(at 46.99 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1667,7 +1603,6 @@
 	)
 	(label "D0"
 		(at 69.85 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1678,7 +1613,6 @@
 	)
 	(label "D4"
 		(at 135.89 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1689,7 +1623,6 @@
 	)
 	(label "Write OE B1 _{48..55}"
 		(at 247.65 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1700,7 +1633,6 @@
 	)
 	(label "D5"
 		(at 270.51 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1711,7 +1643,6 @@
 	)
 	(label "Write Enable"
 		(at 135.89 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1722,7 +1653,6 @@
 	)
 	(label "Write OE B1 _{8..15}"
 		(at 181.61 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1733,7 +1663,6 @@
 	)
 	(label "D0"
 		(at 135.89 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1744,7 +1673,6 @@
 	)
 	(label "Write OE B1 _{32..39}"
 		(at 135.89 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1755,7 +1683,6 @@
 	)
 	(label "Write OE B0 _{24..31}"
 		(at 46.99 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1766,7 +1693,6 @@
 	)
 	(label "Write OE B0 _{8..15}"
 		(at 46.99 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1777,7 +1703,6 @@
 	)
 	(label "GND"
 		(at 113.03 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1788,7 +1713,6 @@
 	)
 	(label "GND"
 		(at 69.85 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1799,7 +1723,6 @@
 	)
 	(label "Read GD B1 _{24..31}"
 		(at 113.03 146.05 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1810,7 +1733,6 @@
 	)
 	(label "Write GD B1 _{48..55}"
 		(at 135.89 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1821,7 +1743,6 @@
 	)
 	(label "GND"
 		(at 113.03 171.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1832,7 +1753,6 @@
 	)
 	(label "D2"
 		(at 69.85 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1843,7 +1763,6 @@
 	)
 	(label "Write OE B0 _{40..47}"
 		(at 113.03 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1854,7 +1773,6 @@
 	)
 	(label "Write GPIO _{ALL}"
 		(at 135.89 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1865,7 +1783,6 @@
 	)
 	(label "GND"
 		(at 181.61 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1876,7 +1793,6 @@
 	)
 	(label "Write OE B1 _{0..7}"
 		(at 181.61 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1887,7 +1803,6 @@
 	)
 	(label "D3"
 		(at 204.47 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1898,7 +1813,6 @@
 	)
 	(label "Write GD B0 _{40..47}"
 		(at 46.99 176.53 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1909,7 +1823,6 @@
 	)
 	(label "D4"
 		(at 204.47 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1920,7 +1833,6 @@
 	)
 	(label "D5"
 		(at 204.47 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1931,7 +1843,6 @@
 	)
 	(label "Write OE B0 _{16..23}"
 		(at 46.99 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1942,7 +1853,6 @@
 	)
 	(label "Write GD B0 _{0..7}"
 		(at 46.99 161.29 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1953,7 +1863,6 @@
 	)
 	(label "D7"
 		(at 204.47 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1964,7 +1873,6 @@
 	)
 	(label "Read GD B0 _{32..39}"
 		(at 113.03 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1975,7 +1883,6 @@
 	)
 	(label "D6"
 		(at 135.89 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1986,7 +1893,6 @@
 	)
 	(label "GND"
 		(at 259.08 29.21 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1997,7 +1903,6 @@
 	)
 	(label "Write GD B1 _{16..23}"
 		(at 181.61 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2008,7 +1913,6 @@
 	)
 	(label "Write GD B1 _{48..55}"
 		(at 247.65 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2019,7 +1923,6 @@
 	)
 	(label "Write GD B1 _{32..39}"
 		(at 113.03 173.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2030,7 +1933,6 @@
 	)
 	(label "Read GD B0 _{56..63}"
 		(at 46.99 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2041,7 +1943,6 @@
 	)
 	(label "Write GD B0 _{16..23}"
 		(at 46.99 166.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2052,7 +1953,6 @@
 	)
 	(label "12V"
 		(at 46.99 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2063,7 +1963,6 @@
 	)
 	(label "Write GD B0 _{56..63}"
 		(at 69.85 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2074,7 +1973,6 @@
 	)
 	(label "Write GD B0 _{48..55}"
 		(at 69.85 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2085,7 +1983,6 @@
 	)
 	(label "Write GD B0 _{56..63}"
 		(at 113.03 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2096,7 +1993,6 @@
 	)
 	(label "Write OE B1 _{16..23}"
 		(at 181.61 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2107,7 +2003,6 @@
 	)
 	(label "Read GD B0 _{32..39}"
 		(at 46.99 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2118,7 +2013,6 @@
 	)
 	(label "Read GD B1 _{48..55}"
 		(at 113.03 156.21 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2129,7 +2023,6 @@
 	)
 	(label "Read GD B1 _{24..31}"
 		(at 181.61 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2140,7 +2033,6 @@
 	)
 	(label "Read GD B1 _{16..23}"
 		(at 181.61 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2151,7 +2043,6 @@
 	)
 	(label "GND"
 		(at 46.99 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2162,7 +2053,6 @@
 	)
 	(label "Write GD B0 _{8..15}"
 		(at 46.99 163.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2173,7 +2063,6 @@
 	)
 	(label "Write GD B1 _{56..63}"
 		(at 247.65 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2184,7 +2073,6 @@
 	)
 	(label "Write GD B1 _{8..15}"
 		(at 181.61 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2195,7 +2083,6 @@
 	)
 	(label "GND"
 		(at 204.47 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2206,7 +2093,6 @@
 	)
 	(label "Write OE B1 _{32..39}"
 		(at 247.65 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2217,7 +2103,6 @@
 	)
 	(label "Write OE B1 _{56..63}"
 		(at 135.89 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2228,7 +2113,6 @@
 	)
 	(label "GND"
 		(at 247.65 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2239,7 +2123,6 @@
 	)
 	(label "Read GPIO _{ALL}"
 		(at 204.47 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2250,7 +2133,6 @@
 	)
 	(label "Read GD B1 _{0..7}"
 		(at 113.03 138.43 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2261,7 +2143,6 @@
 	)
 	(label "D3"
 		(at 69.85 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2272,7 +2153,6 @@
 	)
 	(label "Write GD B0 _{16..23}"
 		(at 46.99 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2283,7 +2163,6 @@
 	)
 	(label "D2"
 		(at 204.47 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2294,7 +2173,6 @@
 	)
 	(label "GND"
 		(at 270.51 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2305,7 +2183,6 @@
 	)
 	(label "GND"
 		(at 58.42 30.48 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2316,7 +2193,6 @@
 	)
 	(label "Read GD B0 _{16..23}"
 		(at 46.99 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2327,7 +2203,6 @@
 	)
 	(label "D6"
 		(at 204.47 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2338,7 +2213,6 @@
 	)
 	(label "D7"
 		(at 270.51 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2349,7 +2223,6 @@
 	)
 	(label "12V"
 		(at 69.85 133.35 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2360,7 +2233,6 @@
 	)
 	(label "Write OE B1 _{48..55}"
 		(at 135.89 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2371,7 +2243,6 @@
 	)
 	(label "GND"
 		(at 204.47 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2382,7 +2253,6 @@
 	)
 	(label "GND"
 		(at 69.85 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2393,7 +2263,6 @@
 	)
 	(label "D6"
 		(at 69.85 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2404,7 +2273,6 @@
 	)
 	(label "D4"
 		(at 270.51 78.74 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2415,7 +2283,6 @@
 	)
 	(label "D3"
 		(at 69.85 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2426,7 +2293,6 @@
 	)
 	(label "12V"
 		(at 46.99 133.35 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2437,7 +2303,6 @@
 	)
 	(label "GND"
 		(at 113.03 91.44 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2448,7 +2313,6 @@
 	)
 	(label "Read GD B0 _{0..7}"
 		(at 46.99 138.43 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2459,7 +2323,6 @@
 	)
 	(label "Write OE B0 _{32..39}"
 		(at 135.89 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2470,7 +2333,6 @@
 	)
 	(label "Read GD B0 _{8..15}"
 		(at 46.99 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2481,7 +2343,6 @@
 	)
 	(label "D2"
 		(at 135.89 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2492,7 +2353,6 @@
 	)
 	(label "GND"
 		(at 135.89 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2503,7 +2363,6 @@
 	)
 	(label "GND"
 		(at 69.85 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2514,7 +2373,6 @@
 	)
 	(label "Read GPIO _{ALL}"
 		(at 270.51 58.42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2525,7 +2383,6 @@
 	)
 	(label "Write GD B1 _{24..31}"
 		(at 113.03 168.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2536,7 +2393,6 @@
 	)
 	(label "Write OE B0 _{0..7}"
 		(at 46.99 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2547,7 +2403,6 @@
 	)
 	(label "D0"
 		(at 204.47 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2558,7 +2413,6 @@
 	)
 	(label "Write OE B1 _{56..63}"
 		(at 247.65 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2569,7 +2423,6 @@
 	)
 	(label "Write Enable"
 		(at 270.51 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2580,7 +2433,6 @@
 	)
 	(label "GND"
 		(at 135.89 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2591,7 +2443,6 @@
 	)
 	(label "GND"
 		(at 46.99 91.44 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2602,7 +2453,6 @@
 	)
 	(label "GND"
 		(at 270.51 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2613,7 +2463,6 @@
 	)
 	(label "Read GD B1 _{8..15}"
 		(at 181.61 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2624,7 +2473,6 @@
 	)
 	(label "Write OE B0 _{48..55}"
 		(at 113.03 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2635,7 +2483,6 @@
 	)
 	(label "GND"
 		(at 69.85 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2646,7 +2493,6 @@
 	)
 	(label "D4"
 		(at 69.85 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2657,7 +2503,6 @@
 	)
 	(label "GND"
 		(at 247.65 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2668,7 +2513,6 @@
 	)
 	(label "GND"
 		(at 181.61 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2679,7 +2523,6 @@
 	)
 	(label "GND"
 		(at 125.73 119.38 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2690,7 +2533,6 @@
 	)
 	(label "Write GD B1 _{32..39}"
 		(at 247.65 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2701,7 +2543,6 @@
 	)
 	(label "Write OE B1 _{24..31}"
 		(at 181.61 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2712,7 +2553,6 @@
 	)
 	(label "GND"
 		(at 46.99 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2723,7 +2563,6 @@
 	)
 	(label "Write OE B0 _{56..63}"
 		(at 135.89 146.05 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2734,7 +2573,6 @@
 	)
 	(label "GND"
 		(at 247.65 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2745,7 +2583,6 @@
 	)
 	(label "Write OE B0 _{56..63}"
 		(at 113.03 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2756,7 +2593,6 @@
 	)
 	(label "Read GD B1 _{56..63}"
 		(at 113.03 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2767,7 +2603,6 @@
 	)
 	(label "Write GPIO _{ALL}"
 		(at 69.85 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2778,7 +2613,6 @@
 	)
 	(label "Write OE B0 _{16..23}"
 		(at 113.03 133.35 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2789,7 +2623,6 @@
 	)
 	(label "D1"
 		(at 204.47 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2800,7 +2633,6 @@
 	)
 	(label "Read GD B0 _{0..7}"
 		(at 46.99 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2811,7 +2643,6 @@
 	)
 	(label "Write GPIO _{ALL}"
 		(at 204.47 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2822,7 +2653,6 @@
 	)
 	(label "12V"
 		(at 69.85 53.34 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2833,7 +2663,6 @@
 	)
 	(label "Write OE B1 _{40..47}"
 		(at 247.65 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2844,7 +2673,6 @@
 	)
 	(label "Write GD B0 _{24..31}"
 		(at 46.99 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2855,7 +2683,6 @@
 	)
 	(label "GND"
 		(at 46.99 135.89 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2866,7 +2693,6 @@
 	)
 	(label "D0"
 		(at 69.85 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2877,7 +2703,6 @@
 	)
 	(label "Write OE B1 _{40..47}"
 		(at 135.89 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2888,7 +2713,6 @@
 	)
 	(label "Read GPIO _{ALL}"
 		(at 135.89 60.96 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2899,7 +2723,6 @@
 	)
 	(label "D5"
 		(at 69.85 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2910,7 +2733,6 @@
 	)
 	(label "Read GD B0 _{48..55}"
 		(at 113.03 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2921,7 +2743,6 @@
 	)
 	(label "Read GD B0 _{8..15}"
 		(at 46.99 140.97 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2932,7 +2753,6 @@
 	)
 	(label "D2"
 		(at 69.85 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2943,7 +2763,6 @@
 	)
 	(label "Read GD B1 _{48..55}"
 		(at 247.65 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2954,7 +2773,6 @@
 	)
 	(label "Write GPIO _{ALL}"
 		(at 69.85 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2965,7 +2783,6 @@
 	)
 	(label "GND"
 		(at 181.61 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2976,7 +2793,6 @@
 	)
 	(label "Read GD B1 _{40..47}"
 		(at 113.03 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2987,7 +2803,6 @@
 	)
 	(label "GND"
 		(at 204.47 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2998,7 +2813,6 @@
 	)
 	(label "12V"
 		(at 113.03 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3009,7 +2823,6 @@
 	)
 	(label "Write OE B0 _{0..7}"
 		(at 113.03 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3020,7 +2833,6 @@
 	)
 	(label "Write GD B1 _{16..23}"
 		(at 113.03 166.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3031,7 +2843,6 @@
 	)
 	(label "Write OE B1 _{16..23}"
 		(at 135.89 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3042,7 +2853,6 @@
 	)
 	(label "Write GD B0 _{48..55}"
 		(at 113.03 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3053,7 +2863,6 @@
 	)
 	(label "Read GD B1 _{40..47}"
 		(at 247.65 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3064,7 +2873,6 @@
 	)
 	(label "Write OE B0 _{8..15}"
 		(at 135.89 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3075,7 +2883,6 @@
 	)
 	(label "Write OE B0 _{32..39}"
 		(at 113.03 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3086,7 +2893,6 @@
 	)
 	(label "GND"
 		(at 135.89 55.88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3097,7 +2903,6 @@
 	)
 	(label "Write GD B1 _{24..31}"
 		(at 181.61 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3108,7 +2913,6 @@
 	)
 	(label "Write OE B1 _{8..15}"
 		(at 135.89 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3119,7 +2923,6 @@
 	)
 	(label "Read GD B1 _{16..23}"
 		(at 113.03 143.51 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3130,7 +2933,6 @@
 	)
 	(label "GND"
 		(at 125.73 30.48 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3141,7 +2943,6 @@
 	)
 	(label "GND"
 		(at 193.04 29.21 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3152,7 +2953,6 @@
 	)
 	(label "12V"
 		(at 204.47 50.8 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3163,7 +2963,6 @@
 	)
 	(label "Write GD B0 _{24..31}"
 		(at 46.99 168.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3174,7 +2973,6 @@
 	)
 	(label "D6"
 		(at 69.85 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3185,7 +2983,6 @@
 	)
 	(label "GND"
 		(at 135.89 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3196,7 +2993,6 @@
 	)
 	(label "D1"
 		(at 69.85 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3207,7 +3003,6 @@
 	)
 	(label "Write GD B0 _{8..15}"
 		(at 46.99 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3218,7 +3013,6 @@
 	)
 	(label "Read GD B0 _{40..47}"
 		(at 113.03 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3229,7 +3023,6 @@
 	)
 	(label "Write GD B0 _{40..47}"
 		(at 113.03 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3240,7 +3033,6 @@
 	)
 	(label "GND"
 		(at 46.99 171.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3251,7 +3043,6 @@
 	)
 	(label "Write OE B1 _{0..7}"
 		(at 135.89 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3262,7 +3053,6 @@
 	)
 	(label "GND"
 		(at 46.99 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3273,7 +3063,6 @@
 	)
 	(label "Read GD B1 _{32..39}"
 		(at 113.03 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3284,7 +3073,6 @@
 	)
 	(label "D3"
 		(at 270.51 76.2 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3295,7 +3083,6 @@
 	)
 	(label "Write GD B1 _{0..7}"
 		(at 181.61 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3306,7 +3093,6 @@
 	)
 	(label "Read GD B1 _{56..63}"
 		(at 247.65 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3317,7 +3103,6 @@
 	)
 	(label "Write GD B1 _{8..15}"
 		(at 113.03 163.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3328,7 +3113,6 @@
 	)
 	(label "GND"
 		(at 113.03 135.89 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3339,7 +3123,6 @@
 	)
 	(label "GND"
 		(at 270.51 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3350,7 +3133,6 @@
 	)
 	(label "Write GD B1 _{0..7}"
 		(at 113.03 161.29 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3361,7 +3143,6 @@
 	)
 	(label "D5"
 		(at 135.89 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3372,7 +3153,6 @@
 	)
 	(label "Read GD B0 _{56..63}"
 		(at 113.03 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3385,7 +3165,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 220.98 133.35 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -3610,35 +3390,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 116.84 205.105 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 116.84 207.645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 135.89 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "41205fc4-868d-4a43-9067-6a27fe82b709")
 		)
@@ -3760,7 +3511,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 220.98 115.57 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -3924,35 +3675,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 116.84 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 116.84 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 135.89 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "322a69fd-f8f9-4a1c-b6d1-f7cb04be562e")
 		)
@@ -4074,7 +3796,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 193.04 133.35 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -4235,35 +3957,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 50.8 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 50.8 127.635 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 69.85 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -4510,7 +4203,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 207.01 133.35 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -4674,35 +4367,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 50.8 205.105 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 50.8 207.645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 69.85 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "b86836b1-082c-4886-bd5d-e48b4a7e2a24")
 		)
@@ -4824,7 +4488,7 @@
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 125.73 27.94 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -4888,7 +4552,7 @@
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 58.42 27.94 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -4952,7 +4616,7 @@
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 125.73 116.84 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -5016,7 +4680,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 193.04 115.57 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -5241,35 +4905,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 251.46 122.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 251.46 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 270.51 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "9cad7f99-d8eb-41bd-91e1-65e003c035cd")
 		)
@@ -5452,7 +5087,7 @@
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 193.04 26.67 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -5619,35 +5254,6 @@
 				(hide yes)
 			)
 		)
-		(property "Arrow Part Number" "2-5530843-7"
-			(at 185.42 122.555 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/2-5530843-7/te-connectivity"
-			(at 185.42 125.095 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "Standard Card Edge Connectors CONN SEC II 36 POS 100C/L"
-			(at 204.47 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f56efb83-eb2e-4453-a919-75a3980c89f5")
 		)
@@ -5769,7 +5375,7 @@
 		(lib_id "Mechanical:MountingHole_Pad")
 		(at 259.08 26.67 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -5833,7 +5439,7 @@
 		(lib_id "Mechanical:MountingHole")
 		(at 207.01 115.57 0)
 		(unit 1)
-		(exclude_from_sim yes)
+		(exclude_from_sim no)
 		(in_bom no)
 		(on_board yes)
 		(dnp no)
@@ -5895,4 +5501,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

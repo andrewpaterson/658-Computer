@@ -1,7 +1,7 @@
 (footprint "SOP65P400X130-8N"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "DCT (R-PDSO-G8)")
 	(tags "Integrated Circuit")
@@ -30,20 +30,6 @@
 			)
 		)
 	)
-	(property "Footprint" "SOP65P400X130-8N"
-		(at 0 5.969 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "21c37ab3-baf7-45c7-8da5-73059200aae8")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
@@ -53,6 +39,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -65,6 +52,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -236,52 +224,53 @@
 	(pad "1" smd rect
 		(at -1.95 -0.975 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5690ca09-0682-4e1e-95c5-ef71ab1e1bc5")
 	)
 	(pad "2" smd rect
 		(at -1.95 -0.325 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "364b41d2-8e14-4b75-9ea2-ecbeb5b33cca")
 	)
 	(pad "3" smd rect
 		(at -1.95 0.325 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2e0b4ae7-339e-49b3-aa19-41b27b2ff08a")
 	)
 	(pad "4" smd rect
 		(at -1.95 0.975 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "3d13f328-e9dc-42e0-a699-6b7bb1355543")
 	)
 	(pad "5" smd rect
 		(at 1.95 0.975 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f52285bf-0d5a-40a1-9bd9-f62d8d94515e")
 	)
 	(pad "6" smd rect
 		(at 1.95 0.325 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "842e94fe-9814-45f7-bcd7-64c790abad86")
 	)
 	(pad "7" smd rect
 		(at 1.95 -0.325 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2671fc8e-5df8-4392-99d8-c49c47179cc4")
 	)
 	(pad "8" smd rect
 		(at 1.95 -0.975 90)
 		(size 0.45 1.1)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "759870da-262f-4ca4-918b-28ddac9a206b")
 	)
-	(model "${_658_COMPUTER_}/SamacSys_Parts.3dshapes/SN74LVC2G79DCTR.stp"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/SN74LVC2G79DCTR.stp"
 		(offset
 			(xyz 0 0 0)
 		)

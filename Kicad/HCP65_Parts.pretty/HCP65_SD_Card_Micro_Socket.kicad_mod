@@ -1,7 +1,7 @@
 (footprint "HCP65_SD_Card_Micro_Socket"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 SD Card Micro Socket")
 	(tags "HCP65 SD Card Micro Socket")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 11.557 38.1 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "69e914fe-7d36-440b-a8ca-894ec53f1ab1")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -202,7 +188,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "b53d3e18-b727-463e-b14c-cfa73bd784e0")
 	)
@@ -438,7 +424,8 @@
 		(remove_unused_layers no)
 		(uuid "4e9790f0-b806-4063-8935-aa4001f30757")
 	)
-	(model "${_658_COMPUTER_}/Computer/SD Card/SD Card Micro Socket/SD Card Micro Socket.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Computer/SD Card/SD Card Micro Socket/SD Card Micro Socket.wrl"
 		(offset
 			(xyz 0 0 3)
 		)

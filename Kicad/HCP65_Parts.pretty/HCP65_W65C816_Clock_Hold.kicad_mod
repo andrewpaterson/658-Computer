@@ -1,7 +1,7 @@
 (footprint "HCP65_W65C816_Clock_Hold"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 W65C816 Clock Hold")
 	(tags "HCP65 W65C816 Clock Hold")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_W65C816_Clock_Hold"
-		(at 11.43 48.0568 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "465a7483-8f17-495c-bbb7-eeb5cd3f15f4")
 		(effects
 			(font
 				(size 1 1)
@@ -211,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "055ff2b6-f533-4a42-ac9b-6a4928372b01")
 	)
@@ -511,7 +498,8 @@
 		(remove_unused_layers no)
 		(uuid "29768778-9b99-4c48-b6fc-f20ef546a8bb")
 	)
-	(model "${_658_COMPUTER_}/Computer/Processor/W65C816 Clock Hold/W65C816 Clock Hold.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/W65C816 Clock Hold/W65C816 Clock Hold.wrl"
 		(offset
 			(xyz 0 0 3)
 		)

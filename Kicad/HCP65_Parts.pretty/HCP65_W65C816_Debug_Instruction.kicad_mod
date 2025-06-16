@@ -1,7 +1,7 @@
 (footprint "HCP65_W65C816_Debug_Instruction"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 10.6172 -7.4168 0)
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "bcace9f0-b7cc-4649-a174-5cd852e4eb0b")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_W65C816_Debug_Instruction"
-		(at 9.0424 6.5532 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "5b530afc-95ab-41a8-9ecb-cbc1ba94b081")
 		(effects
 			(font
 				(size 1 1)
@@ -328,7 +315,8 @@
 		(remove_unused_layers no)
 		(uuid "2397a0f5-582a-4d42-bd50-4360178d5def")
 	)
-	(model "${_658_COMPUTER_}/Computer/Processor/W65C816 Opcode Display/W65C816 Opcode Display.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/W65C816 Opcode Display/W65C816 Opcode Display.wrl"
 		(offset
 			(xyz 0 0 3.5)
 		)

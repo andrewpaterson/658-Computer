@@ -1,7 +1,7 @@
 (footprint "HCP65_Memory_4MB"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Memory 4MB")
 	(tags "HCP65 Memory 4MB")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 11.43 58.039 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b40adbe7-91a9-43b2-a75f-55a57c00ab87")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -91,6 +77,16 @@
 		(uuid "9b3b2736-8add-4def-91a9-7b24d4d91965")
 	)
 	(fp_line
+		(start 10.414 -5.715)
+		(end 3.175 -5.715)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "dc50ea29-7f51-4023-a47c-281fe15706a0")
+	)
+	(fp_line
 		(start 10.43 -5.616)
 		(end 2.286 -5.616)
 		(stroke
@@ -102,13 +98,13 @@
 	)
 	(fp_line
 		(start 19.685 -5.715)
-		(end 3.175 -5.715)
+		(end 12.425087 -5.715004)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "dc50ea29-7f51-4023-a47c-281fe15706a0")
+		(uuid "d5b77c8f-b9a2-4eb1-9d7b-438d27e39ac2")
 	)
 	(fp_line
 		(start 19.685 53.975)
@@ -202,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "ff95bfdd-b9ef-4290-a125-ebdb2e7f0041")
 	)
@@ -566,7 +562,8 @@
 		(remove_unused_layers no)
 		(uuid "806a6753-a03f-488e-b865-37a83c6d1730")
 	)
-	(model "${_658_COMPUTER_}/Computer/Memory/Memory 4MB/Memory 4MB.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Computer/Memory/Memory 4MB/Memory 4MB.wrl"
 		(offset
 			(xyz 0 0 3)
 		)

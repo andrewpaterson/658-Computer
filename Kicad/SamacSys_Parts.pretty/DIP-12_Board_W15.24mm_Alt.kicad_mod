@@ -1,7 +1,7 @@
 (footprint "DIP-12_Board_W15.24mm_Alt"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "12-lead though-hole mounted DIP package, row spacing 15.24 mm")
 	(tags "THT DIP DIL PDIP 2.54mm 15.24mm")
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "a7865108-24c5-4772-8414-9b3cb2f29d08")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -232,16 +220,6 @@
 		(uuid "39b46fb5-598d-4b65-b53c-b07667f15b28")
 	)
 	(fp_line
-		(start 16.256 14.224)
-		(end 16.3 -1.55)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(layer "F.CrtYd")
-		(uuid "633dadd4-0ab7-4ded-aacc-9cce3040a150")
-	)
-	(fp_line
 		(start 16.3 -1.55)
 		(end 14.224 -1.55)
 		(stroke
@@ -251,17 +229,15 @@
 		(layer "F.CrtYd")
 		(uuid "2a1e331f-99e5-43ea-9803-269cbc822b52")
 	)
-	(fp_text user "${REFERENCE}"
-		(at 7.62 13.208 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "098456d8-b82e-4558-a951-bb94c27895c3")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
+	(fp_line
+		(start 16.3 14.224)
+		(end 16.3 -1.55)
+		(stroke
+			(width 0.05)
+			(type solid)
 		)
+		(layer "F.CrtYd")
+		(uuid "633dadd4-0ab7-4ded-aacc-9cce3040a150")
 	)
 	(pad "1" thru_hole oval
 		(at 0 0 180)
@@ -360,4 +336,5 @@
 		(remove_unused_layers no)
 		(uuid "06f7bbc1-24ad-471b-af51-2d614881f5ec")
 	)
+	(embedded_fonts no)
 )

@@ -1,0 +1,224 @@
+  Mon Jun  2 2025 14:44                                                Page 1
+
+
+                     ***************************************
+                     **      WDC 65C816 Macro Assembler   **
+                     **                                   **
+                     **     Version 3.49.1- Feb  6 2006    **
+                     ***************************************
+
+     1                        STARTUP SECTION
+     2                        
+     3                        
+     4                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+     5                        	
+     6                        	ORG $0200
+     7                        RESET:
+     8 00:0200: 18           	CLC	     		;clear carry
+     9 00:0201: FB           	XCE	     		;clear emulation
+    10 00:0202: C2 30        	REP		#$30    ;16 bit registers
+    11                        	LONGI 	ON
+    12                        	LONGA	ON
+    13 00:0204: A9 FF 01     	LDA		#$01FF  ;get the stack address
+    14 00:0207: 1B           	TCS	     		;and set the stack to it
+    15                        
+    16 00:0208: E2 20        	SEP		#$20	;8 bit memory
+    17                        	LONGA 	OFF
+    18 00:020A: A9 00        	LDA 	#$00	;get bank of data
+    19 00:020C: 48           	PHA
+    20 00:020D: AB           	PLB	     		;set data bank register
+    21 00:020E: C2 20        	REP		#$20    ;back to 16 bit mode
+    22                        	LONGA	ON
+    23                        
+    24 00:0210: 5C 5E 02 00  	JML  	START	;long jump in case not bank 0
+    25                        
+    26                        IRQ:
+    27 00:0214: 8B           	PHB				;save DB
+    28 00:0215: 0B           	PHD				;save DP
+    29 00:0216: C2 30        	REP		#$30	;16 bit registers
+    30                        	LONGI 	ON
+    31                        	LONGA	ON
+    32 00:0218: 48           	PHA				;save A
+    33 00:0219: DA           	PHX				;save X
+    34 00:021A: 5A           	PHY 			;save Y
+    35                        	
+    36 00:021B: 80 39        	BRA 	EXIT_INTERRUPT 
+    37                        
+    38                        NMI:
+    39 00:021D: 8B           	PHB				;save DB
+    40 00:021E: 0B           	PHD				;save DP
+    41 00:021F: C2 30        	REP		#$30	;16 bit registers
+    42                        	LONGI 	ON
+    43                        	LONGA	ON
+    44 00:0221: 48           	PHA				;save A
+    45 00:0222: DA           	PHX				;save X
+    46 00:0223: 5A           	PHY 			;save Y
+    47                        
+    48 00:0224: 80 30        	BRA 	EXIT_INTERRUPT 
+    49                        
+    50                        ABORT:
+    51 00:0226: 8B           	PHB				;save DB
+    52 00:0227: 0B           	PHD				;save DP
+  Mon Jun  2 2025 14:44                                                Page 2
+
+
+    53 00:0228: C2 30        	REP		#$30	;16 bit registers
+    54                        	LONGI 	ON
+    55                        	LONGA	ON
+    56 00:022A: 48           	PHA				;save A
+    57 00:022B: DA           	PHX				;save X
+    58 00:022C: 5A           	PHY 			;save Y
+    59                        
+    60 00:022D: 80 27        	BRA 	EXIT_INTERRUPT 
+    61                        
+    62                        COP:
+    63 00:022F: 8B           	PHB				;save DB
+    64 00:0230: 0B           	PHD				;save DP
+    65 00:0231: C2 30        	REP		#$30	;16 bit registers
+    66                        	LONGI 	ON
+    67                        	LONGA	ON
+    68 00:0233: 48           	PHA				;save A
+    69 00:0234: DA           	PHX				;save X
+    70 00:0235: 5A           	PHY 			;save Y
+    71                        
+    72 00:0236: E2 20        	SEP		#$20	;8 bit memory
+    73                        	LONGA 	OFF
+    74 00:0238: A9 00        	LDA 	#$00	;get bank of data
+    75 00:023A: 48           	PHA
+    76 00:023B: AB           	PLB	     		;set data bank register
+    77                        
+    78 00:023C: AE 0C 6F     	LDX		$6F0C	;instruction counter byt
+                    e 0 and 1
+    79 00:023F: AC 0E 6F     	LDY		$6F0E	;instruction counter byt
+                    e 2 and 3
+    80                        
+    81 00:0242: 80 12        	BRA 	EXIT_INTERRUPT 
+    82                        
+    83                        BRK:
+    84 00:0244: 8B           	PHB				;save DB
+    85 00:0245: 0B           	PHD				;save DP
+    86 00:0246: C2 30        	REP		#$30	;16 bit registers
+    87                        	LONGI 	ON
+    88                        	LONGA	ON
+    89 00:0248: 48           	PHA				;save A
+    90 00:0249: DA           	PHX				;save X
+    91 00:024A: 5A           	PHY 			;save Y
+    92                        
+    93 00:024B: 80 09        	BRA 	EXIT_INTERRUPT 
+    94                        
+    95                        EMU:
+    96 00:024D: 8B           	PHB				;save DB
+    97 00:024E: 0B           	PHD				;save DP
+    98 00:024F: C2 30        	REP		#$30	;16 bit registers
+    99                        	LONGI 	ON
+   100                        	LONGA	ON
+   101 00:0251: 48           	PHA				;save A
+   102 00:0252: DA           	PHX				;save X
+   103 00:0253: 5A           	PHY 			;save Y
+   104                        
+   105 00:0254: 80 00        	BRA 	EXIT_INTERRUPT 
+   106                        
+   107                        EXIT_INTERRUPT:
+   108 00:0256: C2 30        	REP	#$30		;16 bit registers
+  Mon Jun  2 2025 14:44                                                Page 3
+
+
+   109                        	LONGI 	ON
+   110                        	LONGA	ON
+   111 00:0258: 7A           	PLY             ;restore Y
+   112 00:0259: FA               PLX             ;restore X
+   113 00:025A: 68               PLA             ;restore A
+   114 00:025B: 2B               PLD             ;restore DP
+   115 00:025C: AB               PLB             ;restore DB
+   116 00:025D: 40           	RTI
+   117                        	
+   118                        START:
+   119 00:025E: AD FC FF     	LDA		$FFFC
+   120 00:0261: C9 00 02     	CMP		#$0200
+   121                        	
+   122 00:0264: F0 02        	BEQ		ABSOLUTE_READ_OKAY
+   123 00:0266: 00 00        	BRK
+   124                        ABSOLUTE_READ_OKAY
+   125                        
+   126 00:0268: E2 20        	SEP		#$20	;8 bit memory
+   127                        	LONGA	OFF
+   128                        	
+   129 00:026A: A9 A4        	LDA		#$A4
+   130 00:026C: 8D 12 70     	STA		$7012	;echo device (device 1, 
+                    address 2)
+   131 00:026F: A9 CC        	LDA		#$CC
+   132 00:0271: AD 12 70     	LDA		$7012	;echo device (device 1, 
+                    address 2)
+   133 00:0274: 1A           	INC 	A
+   134 00:0275: 8D 12 70     	STA		$7012	;echo device (device 1, 
+                    address 2)
+   135 00:0278: A9 CC        	LDA		#$CC
+   136 00:027A: AD 12 70     	LDA		$7012	;echo device (device 1, 
+                    address 2)
+   137 00:027D: C9 A5        	CMP		#$A5
+   138 00:027F: F0 02        	BEQ		READ_DEVICE_OKAY
+   139 00:0281: 00 00        	BRK
+   140                        READ_DEVICE_OKAY
+   141                        
+   142 00:0283: A2 EF CD     	LDX		#$CDEF
+   143 00:0286: 9B           	TXY
+   144                        
+   145 00:0287: AE 0C 6F     	LDX		$6F0C	;instruction counter byt
+                    e 0 and 1
+   146 00:028A: AC 0E 6F     	LDY		$6F0E	;instruction counter byt
+                    e 2 and 3
+   147                        
+   148 00:028D: A9 FF        	LDA		#$FF	;user program 0 (0xFF - 
+                    user program ID)
+   149 00:028F: 8D 00 6F     	STA		$6F00
+   150                        	
+   151 00:0292: A9 42        	LDA		#$42
+   152 00:0294: 8F 00 FF 01  	STA		$01FF00	;remap user progream 0xF
+                    F, bank 0x00 to real bank 0x42
+   153 00:0298: A9 43        	LDA		#$43
+   154 00:029A: 8F 01 FF 01  	STA		$01FF01	;remap user progream 0xF
+                    F, bank 0x01 to real bank 0x43
+   155                        	
+   156 00:029E: A9 00        	LDA		#$00
+   157 00:02A0: 48           	PHA				;push progream c
+  Mon Jun  2 2025 14:44                                                Page 4
+
+
+                    ounter bank
+   158 00:02A1: A9 04        	LDA		#$04
+   159 00:02A3: 48           	PHA				;push progream c
+                    ounter high-byte
+   160 00:02A4: A9 1C        	LDA		#$1C
+   161 00:02A6: 48           	PHA				;push progream c
+                    ounter low-byte
+   162 00:02A7: 08           	PHP				;push processor 
+                    status
+   163                        	
+   164 00:02A8: 40           	RTI
+   165                        	
+   166                        ; This section defines the interrupt and reset vec
+                    tors.    
+   167                        
+   168                        	ORG	$FFE4
+   169                        
+   170 00:FFE4: 2F 02        N_COP   DW    COP
+   171 00:FFE6: 44 02        N_BRK   DW    BRK
+   172 00:FFE8: 26 02        N_ABORT DW    ABORT
+   173 00:FFEA: 1D 02        N_NMI   DW    NMI
+   174 00:FFEC: 00 00        N_RSRVD DW    0
+   175 00:FFEE: 14 02        N_IRQ   DW    IRQ
+   176                        
+   177                        	ORG	$FFF4
+   178 00:FFF4: 4D 02        E_COP   DW    EMU
+   179 00:FFF6: 00 00        E_RSRVD DW    0
+   180 00:FFF8: 4D 02        E_ABORT DW    EMU
+   181 00:FFFA: 4D 02        E_NMI   DW    EMU
+   182 00:FFFC: 00 02        E_RESET DW    RESET
+   183 00:FFFE: 4D 02        E_IRQ   DW    EMU
+   184                        
+   185 01:0000:              	ENDS
+   186                        	END
+
+
+      Lines assembled: 186
+      Errors: 0

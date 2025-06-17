@@ -1,0 +1,198 @@
+  Mon Jun  2 2025 14:44                                                Page 1
+
+
+                     ***************************************
+                     **      WDC 65C816 Macro Assembler   **
+                     **                                   **
+                     **     Version 3.49.1- Feb  6 2006    **
+                     ***************************************
+
+     1                        STARTUP SECTION
+     2                        
+     3                        
+     4                        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+     5                        	
+     6                        	ORG $0200
+     7                        
+     8                        ; Demonstrate that the V flag works as described
+     9                        ;
+    10                        ; Returns with ERROR = 0 if the test passes, ERROR
+                     = 1 if the test fails
+    11                        ;
+    12                        ; Five (additional) memory locations are used: ERR
+                    OR, S1, S2, U1, and U2
+    13                        ; which can be located anywhere convenient in RAM
+    14                        ;
+    15                        RESET:
+    16                        	LONGI OFF
+    17                        	LONGA OFF
+    18                        	
+    19 00:0200: D8           	CLD      ; Clear decimal mode (just in case) for
+                     test
+    20 00:0201: A9 01            LDA #1
+    21 00:0203: 8D 88 02         STA ERROR ; Store 1 in ERROR until test passes
+    22 00:0206: A9 80            LDA #$80
+    23 00:0208: 8D 89 02         STA S1    ; Initalize S1 and S2 to -128 ($80)
+    24 00:020B: 8D 8A 02         STA S2
+    25 00:020E: A9 00            LDA #0
+    26 00:0210: 8D 8B 02         STA U1    ; Initialize U1 and U2 to 0
+    27 00:0213: 8D 8C 02         STA U2
+    28 00:0216: A0 01            LDY #1    ; Initialize Y (used to set and clear
+                     the carry flag) to 1
+    29                        LOOP: 
+    30 00:0218: 20 3F 02     	JSR ADD   ; Test ADC
+    31 00:021B: E0 01            CPX #1
+    32 00:021D: F0 1F            BEQ DONE  ; End if V and unsigned result do not
+                     agree (X = 1)
+    33 00:021F: 20 5E 02         JSR SUB   ; Test SBC
+    34 00:0222: E0 01            CPX #1
+    35 00:0224: F0 18            BEQ DONE  ; End if V and unsigned result do not
+                     agree (X = 1)
+    36 00:0226: EE 89 02         INC S1
+    37 00:0229: EE 8B 02         INC U1
+    38 00:022C: D0 EA            BNE LOOP  ; Loop until all 256 possibilities of
+                     S1 and U1 are tested
+    39 00:022E: EE 8A 02         INC S2
+    40 00:0231: EE 8C 02         INC U2
+    41 00:0234: D0 E2            BNE LOOP  ; Loop until all 256 possibilities of
+                     S2 and U2 are tested
+    42 00:0236: 88               DEY
+    43 00:0237: 10 DF            BPL LOOP  ; Loop until both possiblities of the
+                     carry flag are tested
+  Mon Jun  2 2025 14:44                                                Page 2
+
+
+    44 00:0239: A9 00            LDA #0
+    45 00:023B: 8D 88 02         STA ERROR ; All tests pass, so store 0 in ERROR
+    46                        DONE:
+    47 00:023E: DB           	STP
+    48                        ;
+    49                        ; Test ADC
+    50                        ;
+    51                        ; X is initialized to 0
+    52                        ; X is incremented when V = 1
+    53                        ; X is incremented when the unsigned result predic
+                    ts an overflow
+    54                        ; Therefore, if the V flag and the unsigned result
+                     agree, X will be
+    55                        ; incremented zero or two times (returning X = 0 o
+                    r X = 2), and if they do
+    56                        ; not agree X will be incremented once (returning 
+                    X = 1)
+    57                        ;
+    58                        ADD:
+    59 00:023F: C0 01        	CPY #1   ; Set carry when Y = 1, clear carry whe
+                    n Y = 0
+    60 00:0241: AD 89 02         LDA S1   ; Test twos complement addition
+    61 00:0244: 6D 8A 02         ADC S2
+    62 00:0247: A2 00            LDX #0   ; Initialize X to 0
+    63 00:0249: 50 01            BVC ADD1
+    64 00:024B: E8               INX     ; Increment X if V = 1
+    65                        ADD1:
+    66 00:024C: C0 01        	CPY #1   ; Set carry when Y = 1, clear carry whe
+                    n Y = 0
+    67 00:024E: AD 8B 02         LDA U1   ; Test unsigned addition
+    68 00:0251: 6D 8C 02         ADC U2
+    69 00:0254: B0 04            BCS ADD3 ; Carry is set if U1 + U2 >= 256
+    70 00:0256: 30 01            BMI ADD2 ; U1 + U2 < 256, A >= 128 if U1 + U2 >
+                    = 128
+    71 00:0258: E8               INX     ; Increment X if U1 + U2 < 128
+    72                        ADD2:
+    73 00:0259: 60           	RTS
+    74                        ADD3:
+    75 00:025A: 10 01        	BPL ADD4 ; U1 + U2 >= 256, A <= 127 if U1 + U2 <
+                    = 383 ($17F)
+    76 00:025C: E8               INX     ; Increment X if U1 + U2 > 383
+    77                        ADD4:
+    78 00:025D: 60           	RTS
+    79                        ;
+    80                        ; Test SBC
+    81                        ;
+    82                        ; X is initialized to 0
+    83                        ; X is incremented when V = 1
+    84                        ; X is incremented when the unsigned result predic
+                    ts an overflow
+    85                        ; Therefore, if the V flag and the unsigned result
+                     agree, X will be
+    86                        ; incremented zero or two times (returning X = 0 o
+                    r X = 2), and if they do
+    87                        ; not agree X will be incremented once (returning 
+                    X = 1)
+    88                        ;
+    89                        SUB:
+  Mon Jun  2 2025 14:44                                                Page 3
+
+
+    90 00:025E: C0 01        	CPY #1   ; Set carry when Y = 1, clear carry whe
+                    n Y = 0
+    91 00:0260: AD 89 02         LDA S1   ; Test twos complement subtraction
+    92 00:0263: ED 8A 02         SBC S2
+    93 00:0266: A2 00            LDX #0   ; Initialize X to 0
+    94 00:0268: 50 01            BVC SUB1
+    95 00:026A: E8               INX     ; Increment X if V = 1
+    96                        SUB1:
+    97 00:026B: C0 01        	CPY #1   ; Set carry when Y = 1, clear carry whe
+                    n Y = 0
+    98 00:026D: AD 8B 02         LDA U1   ; Test unsigned subtraction
+    99 00:0270: ED 8C 02         SBC U2
+   100 00:0273: 48               PHA     ; Save the low byte of result on the st
+                    ack
+   101 00:0274: A9 FF            LDA #$FF
+   102 00:0276: E9 00            SBC #$00 ; result = (65280 + U1) - U2, 65280 = 
+                    $FF00
+   103 00:0278: C9 FE            CMP #$FE
+   104 00:027A: D0 05            BNE SUB4 ; Branch if result >= 65280 ($FF00) or
+                     result < 65024 ($FE00)
+   105 00:027C: 68               PLA     ; Get the low byte of result
+   106 00:027D: 30 01            BMI SUB3 ; result < 65280 ($FF00), A >= 128 if 
+                    result >= 65152 ($FE80)
+   107                        SUB2:
+   108 00:027F: E8           	INX     ; Increment X if result < 65152 ($FE80)
+   109                        SUB3:
+   110 00:0280: 60           	RTS
+   111                        SUB4:
+   112 00:0281: 68           	PLA     ; Get the low byte of result (does not a
+                    ffect the carry flag)
+   113 00:0282: 90 FB            BCC SUB2 ; The carry flag is clear if result < 
+                    65024 ($FE00)
+   114 00:0284: 10 01            BPL SUB5 ; result >= 65280 ($FF00), A <= 127 if
+                     result <= 65407 ($FF7F)
+   115 00:0286: E8               INX     ; Increment X if result > 65407 ($FF7F)
+   116                        SUB5:
+   117 00:0287: 60           	RTS
+   118                        
+   119 00:0288: 00           ERROR 	DB
+   120 00:0289: 00           S1		DB
+   121 00:028A: 00           S2		DB
+   122 00:028B: 00           U1		DB
+   123 00:028C: 00           U2		DB
+   124                        
+   125                        ; This section defines the interrupt and reset vec
+                    tors.    
+   126                        
+   127                        	ORG	$FFE4
+   128                        
+   129 00:FFE4: 00 00        N_COP   DW    #$0000
+   130 00:FFE6: 00 00        N_BRK   DW    #$0000
+   131 00:FFE8: 00 00        N_ABORT DW    #$0000
+   132 00:FFEA: 00 00        N_NMI   DW    #$0000
+   133 00:FFEC: 00 00        N_RSRVD DW    #$0000
+   134 00:FFEE: 00 00        N_IRQ   DW    #$0000
+   135                        
+   136                        	ORG	$FFF4
+   137 00:FFF4: 00 00        E_COP   DW    #$0000
+  Mon Jun  2 2025 14:44                                                Page 4
+
+
+   138 00:FFF6: 00 00        E_RSRVD DW    #$0000
+   139 00:FFF8: 00 00        E_ABORT DW    #$0000
+   140 00:FFFA: 00 00        E_NMI   DW    #$0000
+   141 00:FFFC: 00 02        E_RESET DW    RESET
+   142 00:FFFE: 00 00        E_IRQ   DW    #$0000
+   143                        
+   144 01:0000:              	ENDS
+   145                        	END
+
+
+      Lines assembled: 145
+      Errors: 0

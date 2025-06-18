@@ -16584,6 +16584,12 @@
 		(color 0 0 0 0)
 		(uuid "ada06c83-a8b1-43ac-af89-5b820bae8b8a")
 	)
+	(junction
+		(at 59.69 365.76)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cf9aec26-49c2-4ef0-828a-9f59846c292c")
+	)
 	(no_connect
 		(at 19.05 118.11)
 		(uuid "04517e83-f564-45ae-a1b8-e07b2704f665")
@@ -16657,10 +16663,6 @@
 		(uuid "7fef99b3-9c14-4de1-a9e9-de5898b1fb5b")
 	)
 	(no_connect
-		(at 203.2 220.98)
-		(uuid "80d7421b-5f29-448b-bdec-32ab4e98bdb3")
-	)
-	(no_connect
 		(at 191.77 59.69)
 		(uuid "82ccf498-9d52-4eca-bc02-431ee7a27af3")
 	)
@@ -16719,10 +16721,6 @@
 	(no_connect
 		(at 64.77 54.61)
 		(uuid "b841f018-3df8-4a46-9567-e7b7a628dc3f")
-	)
-	(no_connect
-		(at 59.69 368.3)
-		(uuid "c8709076-9418-407c-9f09-c739c555d700")
 	)
 	(no_connect
 		(at 53.34 46.99)
@@ -27792,6 +27790,16 @@
 	)
 	(wire
 		(pts
+			(xy 59.69 365.76) (xy 59.69 368.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0ade77d-07ab-400f-9f57-e6fe8a340040")
+	)
+	(wire
+		(pts
 			(xy 528.32 49.53) (xy 514.35 49.53)
 		)
 		(stroke
@@ -31283,6 +31291,16 @@
 			(justify right bottom)
 		)
 		(uuid "5c4516c9-d895-453f-a37a-2b0621e13618")
+	)
+	(label "A18_{M}"
+		(at 436.88 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5c69a108-d3b1-4f12-a00d-5e05ef46e422")
 	)
 	(label "CA0_{7}"
 		(at 528.32 153.67 180)

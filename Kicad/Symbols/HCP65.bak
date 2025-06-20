@@ -18020,7 +18020,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Coprocessor_Transceiver"
-			(at 15.24 -59.69 0)
+			(at 15.24 -52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18038,7 +18038,7 @@
 			)
 		)
 		(property "Description" "Coprocessor Transceiver"
-			(at 14.605 -12.7 0)
+			(at 13.97 -10.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18046,7 +18046,7 @@
 			)
 		)
 		(property "Silkscreen" "Coprocessor Transceiver"
-			(at 14.605 -15.24 0)
+			(at 13.97 -12.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18066,7 +18066,7 @@
 		(symbol "Coprocessor Transceiver_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -57.785) (xy 0 -57.785) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -38.1) (xy 0 -38.1) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -18078,10 +18078,10 @@
 			)
 		)
 		(symbol "Coprocessor Transceiver_1_0"
-			(pin no_connect line
-				(at -27.94 -50.8 180)
+			(pin tri_state line
+				(at -5.08 -25.4 0)
 				(length 5.08)
-				(name "QD0_{2}"
+				(name "Q0D_{2}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -18098,386 +18098,8 @@
 			)
 		)
 		(symbol "Coprocessor Transceiver_1_1"
-			(pin no_connect line
-				(at -27.94 12.7 180)
-				(length 5.08)
-				(name "QD0_{0}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 10.16 180)
-				(length 5.08)
-				(name "QD0_{1}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 7.62 180)
-				(length 5.08)
-				(name "D0_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 5.08 180)
-				(length 5.08)
-				(name "D1_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 2.54 180)
-				(length 5.08)
-				(name "D2_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 0 180)
-				(length 5.08)
-				(name "D3_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -2.54 180)
-				(length 5.08)
-				(name "D4_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -5.08 180)
-				(length 5.08)
-				(name "D5_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -7.62 180)
-				(length 5.08)
-				(name "D6_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -10.16 180)
-				(length 5.08)
-				(name "D7_{M}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "13"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -12.7 180)
-				(length 5.08)
-				(name "QD1_{5}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "14"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -15.24 180)
-				(length 5.08)
-				(name "QD1_{6}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "15"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -17.78 180)
-				(length 5.08)
-				(name "QD1_{7}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -20.32 180)
-				(length 5.08)
-				(name "Q1D_{4}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "18"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -22.86 180)
-				(length 5.08)
-				(name "Q1D_{3}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "19"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -25.4 180)
-				(length 5.08)
-				(name "Q1D_{2}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "20"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -27.94 180)
-				(length 5.08)
-				(name "M~{Memory2•3}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "22"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -30.48 180)
-				(length 5.08)
-				(name "Q1D_{1}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "23"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -33.02 180)
-				(length 5.08)
-				(name "Q1D_{0}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "24"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -35.56 180)
-				(length 5.08)
-				(name "QD0_{7}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "25"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -38.1 180)
-				(length 5.08)
-				(name "QD0_{6}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "26"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -27.94 -40.64 180)
+			(pin input inverted
+				(at -5.08 0 0)
 				(length 5.08)
 				(name "M~{Memory0•1}"
 					(effects
@@ -18494,10 +18116,64 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -27.94 -43.18 180)
+			(pin input inverted
+				(at -5.08 -2.54 0)
 				(length 5.08)
-				(name "QD0_{5}"
+				(name "M~{Memory2•3}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "22"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at -5.08 -12.7 0)
+				(length 5.08)
+				(name "Q0D_{7}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "Q0D_{6}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at -5.08 -17.78 0)
+				(length 5.08)
+				(name "Q0D_{5}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -18512,10 +18188,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -27.94 -45.72 180)
+			(pin tri_state line
+				(at -5.08 -20.32 0)
 				(length 5.08)
-				(name "QD0_{4}"
+				(name "Q0D_{4}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -18530,10 +18206,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -27.94 -48.26 180)
+			(pin tri_state line
+				(at -5.08 -22.86 0)
 				(length 5.08)
-				(name "QD0_{3}"
+				(name "Q0D_{3}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -18548,8 +18224,44 @@
 					)
 				)
 			)
+			(pin tri_state line
+				(at -5.08 -27.94 0)
+				(length 5.08)
+				(name "Q0D_{1}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at -5.08 -30.48 0)
+				(length 5.08)
+				(name "Q0D_{0}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin passive line
-				(at -5.08 -53.34 0)
+				(at -5.08 -33.02 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -18567,7 +18279,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -55.88 0)
+				(at -5.08 -35.56 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -18577,6 +18289,150 @@
 					)
 				)
 				(number "17"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 6.35 -43.18 90)
+				(length 5.08)
+				(name "D7_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "13"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 8.89 -43.18 90)
+				(length 5.08)
+				(name "D6_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 11.43 -43.18 90)
+				(length 5.08)
+				(name "D5_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 13.97 -43.18 90)
+				(length 5.08)
+				(name "D4_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 16.51 -43.18 90)
+				(length 5.08)
+				(name "D3_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 19.05 -43.18 90)
+				(length 5.08)
+				(name "D2_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 21.59 -43.18 90)
+				(length 5.08)
+				(name "D1_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 24.13 -43.18 90)
+				(length 5.08)
+				(name "D0_{M}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -18649,6 +18505,150 @@
 					)
 				)
 				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -12.7 180)
+				(length 5.08)
+				(name "Q1D_{7}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -15.24 180)
+				(length 5.08)
+				(name "Q1D_{6}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "15"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -17.78 180)
+				(length 5.08)
+				(name "Q1D_{5}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "14"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -20.32 180)
+				(length 5.08)
+				(name "Q1D_{4}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -22.86 180)
+				(length 5.08)
+				(name "Q1D_{3}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "19"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -25.4 180)
+				(length 5.08)
+				(name "Q1D_{2}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -27.94 180)
+				(length 5.08)
+				(name "Q1D_{1}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin tri_state line
+				(at 35.56 -30.48 180)
+				(length 5.08)
+				(name "Q1D_{0}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
 					(effects
 						(font
 							(size 1.27 1.27)

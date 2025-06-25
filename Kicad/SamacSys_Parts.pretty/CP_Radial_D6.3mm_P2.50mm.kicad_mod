@@ -1,7 +1,7 @@
 (footprint "CP_Radial_D6.3mm_P2.50mm"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "C, Radial series, Radial, pin pitch=2.50mm, diameter=6.3mm, height=7mm, Non-Polar Electrolytic Capacitor")
 	(tags "C Radial series Radial pin pitch 2.50mm diameter 6.3mm height 7mm Non-Polar Electrolytic Capacitor")
@@ -20,19 +20,6 @@
 		(at 1.25 3.937 0)
 		(layer "F.SilkS")
 		(uuid "d4296405-27e3-454f-91bc-a9942d892a4f")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "c3d071c2-1734-440b-afb1-6cb5e0ad5bc1")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -67,6 +54,26 @@
 		)
 	)
 	(attr through_hole)
+	(fp_line
+		(start -1 -1.524)
+		(end 0 -1.524)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5946c891-5191-4d26-847b-36753d4cccff")
+	)
+	(fp_line
+		(start -0.5 -2.024)
+		(end -0.5 -1.024)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9f8d159f-58e7-4436-b8df-4dd5ec6f0581")
+	)
 	(fp_circle
 		(center 1.25 0)
 		(end 4.52 0)
@@ -74,9 +81,35 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "110ea52e-2f73-454c-9183-e253556718bd")
+	)
+	(fp_poly
+		(pts
+			(xy 1.25 -0.889) (xy 1.25 0.889) (xy 1.524 0.889) (xy 1.524 -0.889)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "60ec1ac6-821c-409a-a646-d253d65c75a5")
+	)
+	(fp_poly
+		(pts
+			(xy 1.25 -3.27) (xy 1.25 -0.889) (xy 3.429 -0.889) (xy 3.429 0.889) (xy 1.25 0.889) (xy 1.25 3.27)
+			(xy 2.032 3.175) (xy 3.175 2.667) (xy 3.81 2.032) (xy 4.318 1.143) (xy 4.52 0) (xy 4.318 -1.143)
+			(xy 3.81 -2.032) (xy 3.175 -2.667) (xy 2.032 -3.175)
+		)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "50b1450f-4c2d-42db-8287-20f6b9e3b9cf")
 	)
 	(fp_circle
 		(center 1.25 0)
@@ -85,7 +118,7 @@
 			(width 0.05)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.CrtYd")
 		(uuid "8be88d18-9906-4013-b178-52374a7bcca0")
 	)
@@ -96,7 +129,7 @@
 			(width 0.1)
 			(type solid)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.Fab")
 		(uuid "4818be00-9154-48ae-b528-bddae6ec683c")
 	)
@@ -116,6 +149,7 @@
 		(remove_unused_layers no)
 		(uuid "a813d1e3-cacc-42b8-a756-59e4508ec00e")
 	)
+	(embedded_fonts no)
 	(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/C_Radial_D6.3mm_H7.0mm_P2.50mm.wrl"
 		(offset
 			(xyz 0 0 0)

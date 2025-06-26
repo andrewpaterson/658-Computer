@@ -1,7 +1,7 @@
 (footprint "5408803224008"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "540-88-032-24-008-2")
 	(tags "Integrated Circuit")
@@ -28,18 +28,6 @@
 			)
 		)
 	)
-	(property "Footprint" "5408803224008"
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b1c8bace-7922-47d6-86ee-6a4aadfbe808")
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-	)
 	(property "Datasheet" ""
 		(at 0 0 0)
 		(unlocked yes)
@@ -49,6 +37,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -61,6 +50,7 @@
 		(effects
 			(font
 				(size 1.27 1.27)
+				(thickness 0.15)
 			)
 		)
 	)
@@ -112,7 +102,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "878a8227-dee0-40db-9868-5ac2a55049a4")
 	)
@@ -200,18 +190,6 @@
 		(at 1.27 6.223 0)
 		(layer "F.SilkS")
 		(uuid "78fbc58f-0761-482e-ae25-eaa662cc0e80")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(fp_text user "${REFERENCE}"
-		(at 1.27 7.493 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "8e2e2dad-41b1-4dbd-80ac-859f4c3cc1fc")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -475,6 +453,7 @@
 		(remove_unused_layers no)
 		(uuid "4f1e0f21-e1c5-43b8-a4fe-33023f88887f")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/PLCC32-Pin-SMD_Socket_IC.step"
 		(offset
 			(xyz 1.25 5 0)

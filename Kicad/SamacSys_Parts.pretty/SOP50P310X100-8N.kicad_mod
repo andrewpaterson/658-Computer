@@ -1,7 +1,7 @@
 (footprint "SOP50P310X100-8N"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOT765-1")
 	(tags "Integrated Circuit")
@@ -24,18 +24,6 @@
 		(effects
 			(font
 				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "2dbdd014-5704-43c6-b3e9-b9349c3f64e1")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -230,51 +218,52 @@
 	(pad "1" smd rect
 		(at -1.575 -0.75 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "67d7c002-07cc-4435-b2b1-184c29bc5c7d")
 	)
 	(pad "2" smd rect
 		(at -1.575 -0.25 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "f7812491-8b4b-4cb6-a354-756ebe4bc852")
 	)
 	(pad "3" smd rect
 		(at -1.575 0.25 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "124be0e1-6e03-40a0-bf83-b153903d7d87")
 	)
 	(pad "4" smd rect
 		(at -1.575 0.75 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "5ec75f16-93f4-40c3-af48-943833a7c9f3")
 	)
 	(pad "5" smd rect
 		(at 1.575 0.75 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "07e8c0ae-8f04-4837-8b6b-1c776be68282")
 	)
 	(pad "6" smd rect
 		(at 1.575 0.25 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "be6dce44-f869-4de0-a6ee-34b5e8eea20b")
 	)
 	(pad "7" smd rect
 		(at 1.575 -0.25 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "7f7af67b-939f-4b0b-8ae7-9eaac76a0660")
 	)
 	(pad "8" smd rect
 		(at 1.575 -0.75 90)
 		(size 0.3 0.85)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fb69129d-a5a9-4452-89a4-f5033351c199")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/74LVC2G32DP,125.stp"
 		(offset
 			(xyz 0 0 0)

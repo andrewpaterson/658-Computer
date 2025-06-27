@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "a87b879d-2820-4f3b-a1dc-e6cf77413bf9")
-	(paper "A4")
+	(paper "A5")
 	(title_block
 		(title "2316 to 2716 ROM Adapter")
 		(date "2025-06-21")
@@ -502,40 +502,40 @@
 		)
 	)
 	(no_connect
-		(at 90.17 38.1)
+		(at 85.09 50.8)
 		(uuid "26a77658-0b85-497e-80bd-5e077c381692")
 	)
 	(no_connect
-		(at 102.87 45.72)
+		(at 97.79 58.42)
 		(uuid "29e95b18-e20c-4fe9-8262-788273b8b863")
 	)
 	(no_connect
-		(at 102.87 43.18)
+		(at 97.79 55.88)
 		(uuid "42fd08ed-a3a9-4d3e-93fb-47984bd11de3")
 	)
 	(no_connect
-		(at 102.87 40.64)
+		(at 97.79 53.34)
 		(uuid "52bc811c-54f0-468a-97bb-d3153bbf1617")
 	)
 	(no_connect
-		(at 102.87 35.56)
+		(at 97.79 48.26)
 		(uuid "76660e59-1db1-48b7-a432-0142e3e9f9c3")
 	)
 	(no_connect
-		(at 102.87 33.02)
+		(at 97.79 45.72)
 		(uuid "88aef337-ee1f-4a2c-860d-04c42791f16c")
 	)
 	(no_connect
-		(at 102.87 38.1)
+		(at 97.79 50.8)
 		(uuid "9c891a94-c112-4039-b89f-ff7d90293ef9")
 	)
 	(no_connect
-		(at 102.87 30.48)
+		(at 97.79 43.18)
 		(uuid "b954c30d-e79c-4c9d-a73b-ce28acfe43f5")
 	)
 	(wire
 		(pts
-			(xy 82.55 35.56) (xy 82.55 45.72)
+			(xy 77.47 48.26) (xy 77.47 58.42)
 		)
 		(stroke
 			(width 0)
@@ -545,7 +545,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 30.48) (xy 85.09 30.48)
+			(xy 85.09 43.18) (xy 80.01 43.18)
 		)
 		(stroke
 			(width 0)
@@ -555,7 +555,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 43.18) (xy 90.17 43.18)
+			(xy 78.74 55.88) (xy 85.09 55.88)
 		)
 		(stroke
 			(width 0)
@@ -565,7 +565,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 33.02) (xy 83.82 33.02)
+			(xy 85.09 45.72) (xy 78.74 45.72)
 		)
 		(stroke
 			(width 0)
@@ -575,7 +575,7 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 45.72) (xy 90.17 45.72)
+			(xy 77.47 58.42) (xy 85.09 58.42)
 		)
 		(stroke
 			(width 0)
@@ -585,7 +585,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 40.64) (xy 90.17 40.64)
+			(xy 80.01 53.34) (xy 85.09 53.34)
 		)
 		(stroke
 			(width 0)
@@ -595,7 +595,7 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 35.56) (xy 82.55 35.56)
+			(xy 85.09 48.26) (xy 77.47 48.26)
 		)
 		(stroke
 			(width 0)
@@ -605,7 +605,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 30.48) (xy 85.09 40.64)
+			(xy 80.01 43.18) (xy 80.01 53.34)
 		)
 		(stroke
 			(width 0)
@@ -615,7 +615,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 33.02) (xy 83.82 43.18)
+			(xy 78.74 45.72) (xy 78.74 55.88)
 		)
 		(stroke
 			(width 0)
@@ -625,7 +625,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x07_Counter_Clockwise")
-		(at 95.25 38.1 0)
+		(at 90.17 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -633,7 +633,7 @@
 		(dnp no)
 		(uuid "1b98e6a4-a981-4b72-b692-a6ab7b80e2a8")
 		(property "Reference" "J5"
-			(at 96.52 27.94 0)
+			(at 91.44 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -641,7 +641,7 @@
 			)
 		)
 		(property "Value" "Conn_02x07_Counter_Clockwise"
-			(at 96.52 48.26 0)
+			(at 91.44 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -649,7 +649,7 @@
 			)
 		)
 		(property "Footprint" "Package_DIP:DIP-14_W7.62mm"
-			(at 95.25 38.1 0)
+			(at 90.17 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -658,7 +658,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 95.25 38.1 0)
+			(at 90.17 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -667,7 +667,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x07, counter clockwise pin numbering scheme (similar to DIP package numbering), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 95.25 38.1 0)
+			(at 90.17 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)

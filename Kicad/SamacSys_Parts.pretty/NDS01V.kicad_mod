@@ -1,7 +1,7 @@
 (footprint "NDS01V"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "NDS-01V-2")
 	(tags "Switch")
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "ee6e9606-563b-4ec5-a606-5201b2b65f9b")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -184,18 +172,6 @@
 		(layer "F.Fab")
 		(uuid "1a3f70aa-becd-4204-b18e-7a01299d078e")
 	)
-	(fp_text user "${REFERENCE}"
-		(at 0 3.175 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "1b2e1fa9-5f2c-4a57-b106-383ba43f792a")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
 	(pad "1" thru_hole rect
 		(at 0 0)
 		(size 1.509 1.509)
@@ -212,6 +188,7 @@
 		(remove_unused_layers no)
 		(uuid "7da17d25-9f35-4061-a2df-a559db52b722")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/DIP Red 1-way.stp"
 		(offset
 			(xyz 0 0 0)

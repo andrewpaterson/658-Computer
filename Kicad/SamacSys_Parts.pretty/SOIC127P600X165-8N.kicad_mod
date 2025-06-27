@@ -1,7 +1,7 @@
 (footprint "SOIC127P600X165-8N"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "SOP-J8")
 	(tags "Integrated Circuit")
@@ -21,18 +21,6 @@
 		(layer "F.SilkS")
 		(hide yes)
 		(uuid "765a90a3-e28b-4029-8ce0-9b1ca3fd31ad")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "d779d65a-60f5-47e9-addf-a3bb9efd5f92")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -219,51 +207,52 @@
 	(pad "1" smd rect
 		(at -2.775 -1.905 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "9ea2fa9a-412e-4598-a95f-b355d7224096")
 	)
 	(pad "2" smd rect
 		(at -2.775 -0.635 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "b4b5392f-e9fa-4f25-a38a-06ca992f2c46")
 	)
 	(pad "3" smd rect
 		(at -2.775 0.635 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "2616b35c-0d82-4402-b162-6f9525bc28b8")
 	)
 	(pad "4" smd rect
 		(at -2.775 1.905 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "a04e78d5-9c4e-4324-a723-3bd68f8e55e3")
 	)
 	(pad "5" smd rect
 		(at 2.775 1.905 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "9072a1dd-dd6c-42c2-9b8a-99fadc0b0bb1")
 	)
 	(pad "6" smd rect
 		(at 2.775 0.635 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "62a305eb-1c46-4848-87b9-637f5da5b3c4")
 	)
 	(pad "7" smd rect
 		(at 2.775 -0.635 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "fd6df4ec-3d21-4382-8403-889bf1f2d906")
 	)
 	(pad "8" smd rect
 		(at 2.775 -1.905 90)
 		(size 0.7 1.5)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "92f56899-4d90-41b9-8626-42746ff8d181")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/BV1LB150FJ-CE2.stp"
 		(offset
 			(xyz 3 2.5 0.95)

@@ -1,7 +1,7 @@
 (footprint "DIP-20_W15.24mm_Socket"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "20-lead though-hole mounted DIP package, row spacing 15.24 mm, Socket")
 	(tags "THT DIP DIL PDIP 2.54mm 15.24mm Socket")
@@ -23,19 +23,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "12627d9d-17db-40d4-a10b-2ef69ee22ee7")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -469,6 +456,7 @@
 		(remove_unused_layers no)
 		(uuid "d98991a2-fcf0-461a-b02a-622ff7975c4f")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/SO20 or TSSOP20 to DIL Adapter.step"
 		(offset
 			(xyz -1.27 -24.13 4)

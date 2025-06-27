@@ -1,7 +1,7 @@
 (footprint "DIP-32_TSSOP_14mm_Adapter"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 7.874 0.254 0)
@@ -23,18 +23,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "ac361c5e-b01c-4c46-8a59-7f3bc7450964")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -72,7 +60,6 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(net 2)
 		(uuid "6cdfc6c2-b3b5-4159-b4d6-3b9869843ee0")
 	)
 	(fp_line
@@ -83,7 +70,6 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(net 2)
 		(uuid "02b4371d-cb2e-4ad9-9118-d640a105c041")
 	)
 	(fp_line
@@ -94,7 +80,6 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(net 2)
 		(uuid "ca43093c-acb7-4bba-ad9f-13ba536d17c6")
 	)
 	(fp_line
@@ -105,7 +90,6 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(net 2)
 		(uuid "cfbaa015-126c-4552-a1e6-cf95b03b6723")
 	)
 	(fp_arc
@@ -117,7 +101,6 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(net 2)
 		(uuid "b8ac234c-4f83-463c-a0db-ba5a28f72a80")
 	)
 	(fp_line
@@ -128,7 +111,6 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(net 2)
 		(uuid "a80474eb-29b8-4f9c-9cfd-abad8668008d")
 	)
 	(fp_line
@@ -139,7 +121,6 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(net 2)
 		(uuid "0fd6aef2-7c0d-4f65-a056-30ed75e5d442")
 	)
 	(fp_line
@@ -230,7 +211,6 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(net 2)
 		(uuid "9ced835d-d47b-4bc8-b5c3-438acc621400")
 	)
 	(fp_line
@@ -241,20 +221,7 @@
 			(type solid)
 		)
 		(layer "F.CrtYd")
-		(net 2)
 		(uuid "00568060-8c1d-440c-95f8-8cda1d2569dc")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 7.62 18.796 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "098456d8-b82e-4558-a951-bb94c27895c3")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
 	)
 	(pad "1" thru_hole rect
 		(at 0 0)
@@ -512,7 +479,8 @@
 		(remove_unused_layers no)
 		(uuid "2858ace5-36a7-4f37-b6c7-af6f59e93fe1")
 	)
-	(model "${_658_COMPUTER_}/Tester/TSSOP32-14mm Adapter/TSSOP32-14mm Adapter.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Tester/TSSOP32-14mm Adapter/TSSOP32-14mm Adapter.wrl"
 		(offset
 			(xyz 0 0 3)
 		)

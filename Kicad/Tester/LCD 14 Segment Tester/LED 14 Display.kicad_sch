@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "a082d7ae-15ad-4d07-ae5b-fc2307087b77")
 	(paper "A4")
 	(title_block
@@ -224,34 +224,16 @@
 					)
 				)
 				(pin passive line
-					(at 20.32 -7.62 180)
+					(at 20.32 0 180)
 					(length 5.08)
-					(name "R4"
+					(name "R1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -5.08 180)
-					(length 5.08)
-					(name "R3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -278,16 +260,34 @@
 					)
 				)
 				(pin passive line
-					(at 20.32 0 180)
+					(at 20.32 -5.08 180)
 					(length 5.08)
-					(name "R1"
+					(name "R3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 20.32 -7.62 180)
+					(length 5.08)
+					(name "R4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -310,11 +310,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "HCP65:C_0805"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0.254) hide)
+				(offset 0.254)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -443,6 +448,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Kingbright:KCPSA04-107"
 			(pin_names
@@ -582,132 +588,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -2.54 180)
-					(length 5.08)
-					(name "A-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -5.08 180)
-					(length 5.08)
-					(name "B-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -7.62 180)
-					(length 5.08)
-					(name "K-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -10.16 180)
-					(length 5.08)
-					(name "J-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -12.7 180)
-					(length 5.08)
-					(name "Cathode"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -15.24 180)
-					(length 5.08)
-					(name "H-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 41.91 -17.78 180)
-					(length 5.08)
-					(name "F-Seg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -859,7 +739,134 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 41.91 -2.54 180)
+					(length 5.08)
+					(name "A-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -5.08 180)
+					(length 5.08)
+					(name "B-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -7.62 180)
+					(length 5.08)
+					(name "K-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -10.16 180)
+					(length 5.08)
+					(name "J-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -12.7 180)
+					(length 5.08)
+					(name "Cathode"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -15.24 180)
+					(length 5.08)
+					(name "H-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 41.91 -17.78 180)
+					(length 5.08)
+					(name "F-Seg"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Microchip:SST39VF010-70-4I-WHE"
 			(pin_names
@@ -975,24 +982,6 @@
 			)
 			(symbol "SST39VF010-70-4I-WHE_0_0"
 				(pin input line
-					(at 0 -20.32 0)
-					(length 5.08)
-					(name "A11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
 					(at 0 -7.62 0)
 					(length 5.08)
 					(name "A16"
@@ -1029,6 +1018,42 @@
 					)
 				)
 				(pin input line
+					(at 0 -12.7 0)
+					(length 5.08)
+					(name "A14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -15.24 0)
+					(length 5.08)
+					(name "A13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at 0 -17.78 0)
 					(length 5.08)
 					(name "A12"
@@ -1039,6 +1064,78 @@
 						)
 					)
 					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -20.32 0)
+					(length 5.08)
+					(name "A11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -22.86 0)
+					(length 5.08)
+					(name "A10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -25.4 0)
+					(length 5.08)
+					(name "A9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -27.94 0)
+					(length 5.08)
+					(name "A8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1173,24 +1270,6 @@
 					)
 				)
 				(pin input line
-					(at 0 -25.4 0)
-					(length 5.08)
-					(name "A9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
 					(at 0 -48.26 0)
 					(length 5.08)
 					(name "A0"
@@ -1209,106 +1288,16 @@
 					)
 				)
 				(pin tri_state line
-					(at 29.21 -58.42 90)
+					(at 11.43 -58.42 90)
 					(length 5.08)
-					(name "DQ0"
+					(name "DQ7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 26.67 -58.42 90)
-					(length 5.08)
-					(name "DQ1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 24.13 -58.42 90)
-					(length 5.08)
-					(name "DQ2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 21.59 -58.42 90)
-					(length 5.08)
-					(name "DQ3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 19.05 -58.42 90)
-					(length 5.08)
-					(name "DQ4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 16.51 -58.42 90)
-					(length 5.08)
-					(name "DQ5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
+					(number "29"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1335,16 +1324,16 @@
 					)
 				)
 				(pin tri_state line
-					(at 11.43 -58.42 90)
+					(at 16.51 -58.42 90)
 					(length 5.08)
-					(name "DQ7"
+					(name "DQ5"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "29"
+					(number "27"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1352,17 +1341,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -27.94 0)
+				(pin tri_state line
+					(at 19.05 -58.42 90)
 					(length 5.08)
-					(name "A8"
+					(name "DQ4"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
+					(number "26"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1370,17 +1359,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -22.86 0)
+				(pin tri_state line
+					(at 21.59 -58.42 90)
 					(length 5.08)
-					(name "A10"
+					(name "DQ3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "31"
+					(number "25"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1388,17 +1377,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -15.24 0)
+				(pin tri_state line
+					(at 24.13 -58.42 90)
 					(length 5.08)
-					(name "A13"
+					(name "DQ2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
+					(number "23"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1406,17 +1395,35 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 -12.7 0)
+				(pin tri_state line
+					(at 26.67 -58.42 90)
 					(length 5.08)
-					(name "A14"
+					(name "DQ1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 29.21 -58.42 90)
+					(length 5.08)
+					(name "DQ0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1440,17 +1447,35 @@
 				)
 			)
 			(symbol "SST39VF010-70-4I-WHE_1_0"
-				(pin passive line
-					(at 0 -50.8 0)
-					(length 5.08) hide
-					(name "GND"
+				(pin input inverted
+					(at 0 0 0)
+					(length 5.08)
+					(name "~{OE}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "24"
+					(number "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "~{WE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1476,53 +1501,18 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at 0 0 0)
+				(pin passive line
+					(at 0 -50.8 0)
 					(length 5.08)
-					(name "~{OE}"
+					(hide yes)
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 40.64 -5.08 180)
-					(length 5.08) hide
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input inverted
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "~{WE}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
+					(number "24"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1550,7 +1540,8 @@
 				)
 				(pin no_connect line
 					(at 40.64 -2.54 180)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "N.C."
 						(effects
 							(font
@@ -1566,7 +1557,27 @@
 						)
 					)
 				)
+				(pin no_connect line
+					(at 40.64 -5.08 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Texas_Instruments:SN74ABT245BDBR"
 			(pin_names
@@ -1680,6 +1691,24 @@
 				)
 			)
 			(symbol "SN74ABT245BDBR_0_0"
+				(pin input inverted
+					(at 0 0 0)
+					(length 5.08)
+					(name "~{OE}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin input line
 					(at 0 -2.54 0)
 					(length 5.08)
@@ -1691,24 +1720,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -25.4 0)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1860,35 +1871,18 @@
 						)
 					)
 				)
-				(pin input inverted
-					(at 0 0 0)
+				(pin passive line
+					(at 0 -25.4 0)
 					(length 5.08)
-					(name "~{OE}"
+					(hide yes)
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 25.4 -22.86 180)
-					(length 5.08)
-					(name "A0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1898,7 +1892,8 @@
 				)
 				(pin passive line
 					(at 25.4 0 180)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "5V"
 						(effects
 							(font
@@ -1915,88 +1910,16 @@
 					)
 				)
 				(pin tri_state line
-					(at 25.4 -20.32 180)
+					(at 25.4 -5.08 180)
 					(length 5.08)
-					(name "A1"
+					(name "A7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 25.4 -17.78 180)
-					(length 5.08)
-					(name "A2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 25.4 -15.24 180)
-					(length 5.08)
-					(name "A3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 25.4 -12.7 180)
-					(length 5.08)
-					(name "A4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 25.4 -10.16 180)
-					(length 5.08)
-					(name "A5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2023,16 +1946,106 @@
 					)
 				)
 				(pin tri_state line
-					(at 25.4 -5.08 180)
+					(at 25.4 -10.16 180)
 					(length 5.08)
-					(name "A7"
+					(name "A5"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -12.7 180)
+					(length 5.08)
+					(name "A4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -15.24 180)
+					(length 5.08)
+					(name "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -17.78 180)
+					(length 5.08)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -20.32 180)
+					(length 5.08)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 25.4 -22.86 180)
+					(length 5.08)
+					(name "A0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2055,6 +2068,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(no_connect
@@ -2377,7 +2391,6 @@
 	)
 	(label "LED J-Seg"
 		(at 109.22 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2388,7 +2401,6 @@
 	)
 	(label "GND"
 		(at 80.01 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2399,7 +2411,6 @@
 	)
 	(label "GND"
 		(at 95.25 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2410,7 +2421,6 @@
 	)
 	(label "5V"
 		(at 31.75 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2421,7 +2431,6 @@
 	)
 	(label "LED Ω A-Seg"
 		(at 170.18 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2432,7 +2441,6 @@
 	)
 	(label "OP3"
 		(at 54.61 179.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2443,7 +2451,6 @@
 	)
 	(label "GND"
 		(at 80.01 40.64 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2454,7 +2461,6 @@
 	)
 	(label "LED M-Seg"
 		(at 101.6 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2465,7 +2471,6 @@
 	)
 	(label "5V"
 		(at 50.8 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2476,7 +2481,6 @@
 	)
 	(label "LED Ω N-Seg"
 		(at 215.9 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2487,7 +2491,6 @@
 	)
 	(label "GND"
 		(at 25.4 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2498,7 +2501,6 @@
 	)
 	(label "GND"
 		(at 57.15 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2509,7 +2511,6 @@
 	)
 	(label "Cathode"
 		(at 240.03 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2520,7 +2521,6 @@
 	)
 	(label "GND"
 		(at 25.4 50.8 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2531,7 +2531,6 @@
 	)
 	(label "3.3V"
 		(at 66.04 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2542,7 +2541,6 @@
 	)
 	(label "GND"
 		(at 25.4 48.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2553,7 +2551,6 @@
 	)
 	(label "GND"
 		(at 80.01 50.8 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2564,7 +2561,6 @@
 	)
 	(label "LED Ω M-Seg"
 		(at 215.9 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2575,7 +2571,6 @@
 	)
 	(label "LED K-Seg"
 		(at 106.68 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2586,7 +2581,6 @@
 	)
 	(label "LED N-Seg"
 		(at 99.06 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2597,7 +2591,6 @@
 	)
 	(label "OP3"
 		(at 80.01 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2608,7 +2601,6 @@
 	)
 	(label "LED A-Seg"
 		(at 54.61 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2619,7 +2611,6 @@
 	)
 	(label "OP6"
 		(at 54.61 186.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2630,7 +2621,6 @@
 	)
 	(label "LED Ω L-Seg"
 		(at 215.9 91.44 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2641,7 +2631,6 @@
 	)
 	(label "LED K-Seg"
 		(at 149.86 105.41 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2652,7 +2641,6 @@
 	)
 	(label "LED E-Seg"
 		(at 149.86 59.69 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2663,7 +2651,6 @@
 	)
 	(label "~{Digit Enable}"
 		(at 80.01 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2674,7 +2661,6 @@
 	)
 	(label "LED N-Seg"
 		(at 149.86 90.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2685,7 +2671,6 @@
 	)
 	(label "OP2"
 		(at 25.4 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2696,7 +2681,6 @@
 	)
 	(label "GND"
 		(at 25.4 40.64 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2707,7 +2691,6 @@
 	)
 	(label "LED Ω A-Seg"
 		(at 257.81 86.36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2718,7 +2701,6 @@
 	)
 	(label "LED E-Seg"
 		(at 44.45 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2729,7 +2711,6 @@
 	)
 	(label "GND"
 		(at 25.4 91.44 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2740,7 +2721,6 @@
 	)
 	(label "OP3"
 		(at 25.4 81.28 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2751,7 +2731,6 @@
 	)
 	(label "LED F-Seg"
 		(at 41.91 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2762,7 +2741,6 @@
 	)
 	(label "~{Digit Enable}"
 		(at 25.4 68.58 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2773,7 +2751,6 @@
 	)
 	(label "OP5"
 		(at 54.61 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2784,7 +2761,6 @@
 	)
 	(label "LED Ω L-Seg"
 		(at 170.18 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2795,7 +2771,6 @@
 	)
 	(label "GND"
 		(at 110.49 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2806,7 +2781,6 @@
 	)
 	(label "GND"
 		(at 25.4 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2817,7 +2791,6 @@
 	)
 	(label "LED Ω F-Seg"
 		(at 170.18 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2828,7 +2801,6 @@
 	)
 	(label "OP2"
 		(at 54.61 176.53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2839,7 +2811,6 @@
 	)
 	(label "Cathode"
 		(at 54.61 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2850,7 +2821,6 @@
 	)
 	(label "LED D-Seg"
 		(at 149.86 69.85 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2861,7 +2831,6 @@
 	)
 	(label "OP1"
 		(at 25.4 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2872,7 +2841,6 @@
 	)
 	(label "LED Ω H-Seg"
 		(at 170.18 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2883,7 +2851,6 @@
 	)
 	(label "LED Ω D-Seg"
 		(at 170.18 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2894,7 +2861,6 @@
 	)
 	(label "OP5"
 		(at 80.01 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2905,7 +2871,6 @@
 	)
 	(label "OP7"
 		(at 25.4 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2916,7 +2881,6 @@
 	)
 	(label "GND"
 		(at 40.64 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2927,7 +2891,6 @@
 	)
 	(label "LED P-Seg"
 		(at 149.86 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2938,7 +2901,6 @@
 	)
 	(label "GND"
 		(at 111.76 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2949,7 +2911,6 @@
 	)
 	(label "GND"
 		(at 25.4 45.72 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2960,7 +2921,6 @@
 	)
 	(label "OP4"
 		(at 54.61 181.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2971,7 +2931,6 @@
 	)
 	(label "3.3V"
 		(at 54.61 158.75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2982,7 +2941,6 @@
 	)
 	(label "LED B-Seg"
 		(at 149.86 74.93 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2993,7 +2951,6 @@
 	)
 	(label "GND"
 		(at 55.88 30.48 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3004,7 +2961,6 @@
 	)
 	(label "Cathode"
 		(at 257.81 96.52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3015,7 +2971,6 @@
 	)
 	(label "LED Ω G-Seg"
 		(at 257.81 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3026,7 +2981,6 @@
 	)
 	(label "GND"
 		(at 80.01 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3037,7 +2991,6 @@
 	)
 	(label "GND"
 		(at 25.4 53.34 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3048,7 +3001,6 @@
 	)
 	(label "LED Ω G-Seg"
 		(at 170.18 54.61 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3059,7 +3011,6 @@
 	)
 	(label "LED Ω B-Seg"
 		(at 257.81 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3070,7 +3021,6 @@
 	)
 	(label "GND"
 		(at 80.01 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3081,7 +3031,6 @@
 	)
 	(label "LED Ω D-Seg"
 		(at 215.9 99.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3092,7 +3041,6 @@
 	)
 	(label "GND"
 		(at 80.01 91.44 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3103,7 +3051,6 @@
 	)
 	(label "OP7"
 		(at 54.61 189.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3114,7 +3061,6 @@
 	)
 	(label "LED Ω P-Seg"
 		(at 170.18 87.63 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3125,7 +3071,6 @@
 	)
 	(label "GND"
 		(at 54.61 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3136,7 +3081,6 @@
 	)
 	(label "GND"
 		(at 80.01 63.5 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3147,7 +3091,6 @@
 	)
 	(label "LED H-Seg"
 		(at 149.86 52.07 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3158,7 +3101,6 @@
 	)
 	(label "OP4"
 		(at 80.01 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3169,7 +3111,6 @@
 	)
 	(label "GND"
 		(at 25.4 58.42 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3180,7 +3121,6 @@
 	)
 	(label "LED Ω J-Seg"
 		(at 257.81 93.98 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3191,7 +3131,6 @@
 	)
 	(label "LED L-Seg"
 		(at 104.14 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3202,7 +3141,6 @@
 	)
 	(label "LED C-Seg"
 		(at 49.53 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3213,7 +3151,6 @@
 	)
 	(label "LED Ω K-Seg"
 		(at 257.81 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3224,7 +3161,6 @@
 	)
 	(label "GND"
 		(at 80.01 66.04 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3235,7 +3171,6 @@
 	)
 	(label "5V"
 		(at 54.61 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3246,7 +3181,6 @@
 	)
 	(label "LED A-Seg"
 		(at 149.86 77.47 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3257,7 +3191,6 @@
 	)
 	(label "LED Ω F-Seg"
 		(at 257.81 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3268,7 +3201,6 @@
 	)
 	(label "LED D-Seg"
 		(at 46.99 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3279,7 +3211,6 @@
 	)
 	(label "LED Ω C-Seg"
 		(at 215.9 96.52 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3290,7 +3221,6 @@
 	)
 	(label "OP7"
 		(at 80.01 71.12 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3301,7 +3231,6 @@
 	)
 	(label "OP2"
 		(at 80.01 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3312,7 +3241,6 @@
 	)
 	(label "OP6"
 		(at 80.01 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3323,7 +3251,6 @@
 	)
 	(label "OP1"
 		(at 80.01 86.36 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3334,7 +3261,6 @@
 	)
 	(label "LED H-Seg"
 		(at 36.83 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3345,7 +3271,6 @@
 	)
 	(label "LED M-Seg"
 		(at 149.86 92.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3356,7 +3281,6 @@
 	)
 	(label "LED C-Seg"
 		(at 149.86 72.39 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3367,7 +3291,6 @@
 	)
 	(label "OP5"
 		(at 25.4 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3378,7 +3301,6 @@
 	)
 	(label "3.3V"
 		(at 35.56 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3389,7 +3311,6 @@
 	)
 	(label "~{Digit Enable}"
 		(at 54.61 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3400,7 +3321,6 @@
 	)
 	(label "LED Ω M-Seg"
 		(at 170.18 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3411,7 +3331,6 @@
 	)
 	(label "GND"
 		(at 25.4 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3422,7 +3341,6 @@
 	)
 	(label "5V"
 		(at 105.41 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3433,7 +3351,6 @@
 	)
 	(label "OP4"
 		(at 25.4 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3444,7 +3361,6 @@
 	)
 	(label "LED Ω K-Seg"
 		(at 170.18 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3455,7 +3371,6 @@
 	)
 	(label "GND"
 		(at 86.36 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3466,7 +3381,6 @@
 	)
 	(label "LED Ω C-Seg"
 		(at 170.18 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3477,7 +3391,6 @@
 	)
 	(label "OP1"
 		(at 54.61 173.99 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3488,7 +3401,6 @@
 	)
 	(label "OP0"
 		(at 54.61 171.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3499,7 +3411,6 @@
 	)
 	(label "5V"
 		(at 86.36 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3510,7 +3421,6 @@
 	)
 	(label "LED Ω E-Seg"
 		(at 215.9 101.6 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3521,7 +3431,6 @@
 	)
 	(label "3.3V"
 		(at 25.4 43.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3532,7 +3441,6 @@
 	)
 	(label "GND"
 		(at 31.75 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3543,7 +3451,6 @@
 	)
 	(label "GND"
 		(at 80.01 60.96 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3554,7 +3461,6 @@
 	)
 	(label "LED F-Seg"
 		(at 149.86 57.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3565,7 +3471,6 @@
 	)
 	(label "5V"
 		(at 234.95 110.49 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3576,7 +3481,6 @@
 	)
 	(label "LED Ω E-Seg"
 		(at 170.18 59.69 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3587,7 +3491,6 @@
 	)
 	(label "GND"
 		(at 80.01 45.72 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3598,7 +3501,6 @@
 	)
 	(label "GND"
 		(at 88.9 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3609,7 +3511,6 @@
 	)
 	(label "3.3V"
 		(at 120.65 40.64 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3620,7 +3521,6 @@
 	)
 	(label "GND"
 		(at 80.01 48.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3631,7 +3531,6 @@
 	)
 	(label "LED Ω H-Seg"
 		(at 257.81 99.06 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3642,7 +3541,6 @@
 	)
 	(label "LED Ω P-Seg"
 		(at 215.9 83.82 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3653,7 +3551,6 @@
 	)
 	(label "LED L-Seg"
 		(at 149.86 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3664,7 +3561,6 @@
 	)
 	(label "LED B-Seg"
 		(at 52.07 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3675,7 +3571,6 @@
 	)
 	(label "LED G-Seg"
 		(at 149.86 54.61 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3686,7 +3581,6 @@
 	)
 	(label "3.3V"
 		(at 90.17 30.48 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3697,7 +3591,6 @@
 	)
 	(label "OP0"
 		(at 25.4 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3708,7 +3601,6 @@
 	)
 	(label "3.3V"
 		(at 80.01 43.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3719,7 +3611,6 @@
 	)
 	(label "LED Ω B-Seg"
 		(at 170.18 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3730,7 +3621,6 @@
 	)
 	(label "OP6"
 		(at 25.4 73.66 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3741,7 +3631,6 @@
 	)
 	(label "LED P-Seg"
 		(at 96.52 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3752,7 +3641,6 @@
 	)
 	(label "OP0"
 		(at 80.01 88.9 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3763,7 +3651,6 @@
 	)
 	(label "GND"
 		(at 25.4 55.88 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3774,7 +3661,6 @@
 	)
 	(label "GND"
 		(at 34.29 105.41 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3785,7 +3671,6 @@
 	)
 	(label "LED G-Seg"
 		(at 39.37 130.81 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3796,7 +3681,6 @@
 	)
 	(label "LED Ω N-Seg"
 		(at 170.18 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3807,7 +3691,6 @@
 	)
 	(label "LED Ω J-Seg"
 		(at 170.18 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3818,7 +3701,6 @@
 	)
 	(label "LED J-Seg"
 		(at 149.86 107.95 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3830,7 +3712,6 @@
 	(hierarchical_label "GND"
 		(shape input)
 		(at 43.18 163.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3842,7 +3723,6 @@
 	(hierarchical_label "OP2"
 		(shape input)
 		(at 43.18 176.53 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3854,7 +3734,6 @@
 	(hierarchical_label "OP0"
 		(shape input)
 		(at 43.18 171.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3866,7 +3745,6 @@
 	(hierarchical_label "OP7"
 		(shape input)
 		(at 43.18 189.23 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3878,7 +3756,6 @@
 	(hierarchical_label "OP5"
 		(shape input)
 		(at 43.18 184.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3890,7 +3767,6 @@
 	(hierarchical_label "~{Digit Enable}"
 		(shape input)
 		(at 43.18 166.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3902,7 +3778,6 @@
 	(hierarchical_label "5V"
 		(shape input)
 		(at 43.18 161.29 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3914,7 +3789,6 @@
 	(hierarchical_label "OP1"
 		(shape input)
 		(at 43.18 173.99 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3926,7 +3800,6 @@
 	(hierarchical_label "OP6"
 		(shape input)
 		(at 43.18 186.69 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3938,7 +3811,6 @@
 	(hierarchical_label "OP3"
 		(shape input)
 		(at 43.18 179.07 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3950,7 +3822,6 @@
 	(hierarchical_label "Cathode"
 		(shape input)
 		(at 43.18 168.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3962,7 +3833,6 @@
 	(hierarchical_label "3.3V"
 		(shape input)
 		(at 43.18 158.75 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3974,7 +3844,6 @@
 	(hierarchical_label "OP4"
 		(shape input)
 		(at 43.18 181.61 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

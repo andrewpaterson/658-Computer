@@ -1,7 +1,7 @@
 (footprint "237-8270"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -0.5 0)
@@ -20,19 +20,6 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "be24d152-5ca6-4093-b41f-59805fb826da")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "e3337b55-08e7-4a69-9d4d-6bda65ead57a")
 		(effects
 			(font
 				(size 1 1)
@@ -114,7 +101,7 @@
 			(width 0.2)
 			(type default)
 		)
-		(fill none)
+		(fill no)
 		(layer "F.SilkS")
 		(uuid "3acfd1c2-b073-43db-bc14-3f49696e0e2f")
 	)
@@ -175,6 +162,7 @@
 		(remove_unused_layers no)
 		(uuid "ac7a492e-d253-4ff5-8ec7-21e9be310343")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/2378270.wrl"
 		(offset
 			(xyz 0 0 1.6)

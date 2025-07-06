@@ -1,7 +1,7 @@
 (footprint "63391672"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "6339167-2-1")
 	(tags "Connector")
@@ -26,18 +26,6 @@
 				(size 0.635 0.635)
 				(thickness 0.15)
 				(bold yes)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "77b68c0d-e1b3-4a92-a7dd-a7004a29adc1")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
 			)
 		)
 	)
@@ -514,20 +502,20 @@
 		(uuid "9ace985c-4495-4519-a404-6977888ae115")
 	)
 	(pad "B2" thru_hole circle
-		(at -11.43 0)
-		(size 1.65 1.65)
-		(drill 1.1)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(uuid "d144cc48-e208-401b-b06c-85a26baac96a")
-	)
-	(pad "B3" thru_hole circle
 		(at -12.7 -2.54)
 		(size 1.65 1.65)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "643e2423-ea8b-4a79-a9e1-4869c82284fd")
+	)
+	(pad "B3" thru_hole circle
+		(at -11.43 0)
+		(size 1.65 1.65)
+		(drill 1.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d144cc48-e208-401b-b06c-85a26baac96a")
 	)
 	(pad "B4" thru_hole circle
 		(at -10.16 -2.54)
@@ -642,20 +630,20 @@
 		(uuid "8b5a3e36-f8e3-41d7-8265-938e6afc6970")
 	)
 	(pad "D2" thru_hole circle
-		(at -39.37 0)
-		(size 1.65 1.65)
-		(drill 1.1)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(uuid "080f0964-f91a-49c7-bcef-991ea1325727")
-	)
-	(pad "D3" thru_hole circle
 		(at -40.64 -2.54)
 		(size 1.65 1.65)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "2cc4c75e-94d2-42d8-8b85-fd2effef570f")
+	)
+	(pad "D3" thru_hole circle
+		(at -39.37 0)
+		(size 1.65 1.65)
+		(drill 1.1)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "080f0964-f91a-49c7-bcef-991ea1325727")
 	)
 	(pad "D4" thru_hole circle
 		(at -38.1 -2.54)
@@ -737,6 +725,7 @@
 		(remove_unused_layers no)
 		(uuid "7629b7cd-bd29-49e9-95e6-48f9eff1e2a8")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/6339167-2.stp"
 		(offset
 			(xyz -16.50999998 -17.14999936 7.079999817)

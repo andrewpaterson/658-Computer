@@ -1,7 +1,7 @@
 (footprint "DIOM5226X230N"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "B350A-13-F-1")
 	(tags "Diode")
@@ -21,18 +21,6 @@
 		(layer "F.SilkS")
 		(hide yes)
 		(uuid "7b725357-c2ac-4605-8e13-b8efb5f28a94")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9622a03a-a311-4640-abbc-2b9e6bc7a9f8")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -87,18 +75,8 @@
 		(uuid "c7afb6a5-bfb0-4380-9bc9-81548e56e5d8")
 	)
 	(fp_line
-		(start -1.016 -0.9652)
-		(end -3.2512 -0.9652)
-		(stroke
-			(width 0.2)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "019058c8-1e68-4d45-9b89-9a696021e2b1")
-	)
-	(fp_line
 		(start 2.598 -1.397)
-		(end -2.598 -1.397)
+		(end -3.302 -1.397)
 		(stroke
 			(width 0.2)
 			(type solid)
@@ -199,15 +177,16 @@
 	(pad "1" smd rect
 		(at -2.15 0 90)
 		(size 1.55 2.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "ec367149-4f8d-4aae-9503-6e9453d2afcb")
 	)
 	(pad "2" smd rect
 		(at 2.15 0 90)
 		(size 1.55 2.35)
-		(layers "F.Cu" "F.Paste" "F.Mask")
+		(layers "F.Cu" "F.Mask" "F.Paste")
 		(uuid "e1939030-8ff5-4349-af78-9ac365548196")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/SamacSys_Parts.3dshapes/B350A-13-F.stp"
 		(offset
 			(xyz 0 0 0)

@@ -1,7 +1,7 @@
 (footprint "HCP65_GPIO_16bit"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 GPIO 16bit")
 	(tags "HCP65 GPIO 16bit")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_GPIO_16bit"
-		(at 22.86 57.785 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9a92829c-6410-4ab5-a2f1-9494e7f5c166")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -211,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "ff95bfdd-b9ef-4290-a125-ebdb2e7f0041")
 	)
@@ -575,6 +562,7 @@
 		(remove_unused_layers no)
 		(uuid "806a6753-a03f-488e-b865-37a83c6d1730")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Component Boards/GPIO 16bit/GPIO 16bit.wrl"
 		(offset
 			(xyz 0 0 3)

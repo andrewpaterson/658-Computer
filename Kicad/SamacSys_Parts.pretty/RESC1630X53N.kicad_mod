@@ -1,0 +1,171 @@
+(footprint "RESC1630X53N"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "RNWA0612BTE100R")
+	(tags "Resistor")
+	(property "Reference" "R**"
+		(at 0 -1.651 0)
+		(layer "F.SilkS")
+		(uuid "697260b9-876f-4346-b65d-b973fa41ee0c")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "RESC1630X53N"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "cc1db109-c5b4-4516-830c-51cfc1c23508")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "40817ec2-bd05-408c-bd7d-b6d9ee0dd782")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6583d9ac-d09f-435a-91bd-d7f800bacefa")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Silkscreen" "${Value}"
+		(at 0 1.778 0)
+		(layer "F.SilkS")
+		(uuid "6bc1ea03-14b9-469a-9548-bbc2fea3f7f9")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -1.85 -1.45)
+		(end 1.85 -1.45)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "0528ba25-c8f8-44cb-893d-40668bc447e2")
+	)
+	(fp_line
+		(start -1.85 1.45)
+		(end -1.85 -1.45)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "07d443bb-3e98-4b70-be40-001335b6bbc0")
+	)
+	(fp_line
+		(start 1.85 -1.45)
+		(end 1.85 1.45)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "0253a668-719e-4188-980c-2edbec0a4162")
+	)
+	(fp_line
+		(start 1.85 1.45)
+		(end -1.85 1.45)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ba139a3a-221c-462a-a890-e9a5bccea58d")
+	)
+	(fp_line
+		(start -1.5 -0.775)
+		(end 1.5 -0.775)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "766ce3d9-3b78-4bb1-90ca-f06fe11c84f5")
+	)
+	(fp_line
+		(start -1.5 0.775)
+		(end -1.5 -0.775)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2f3edfe8-de00-43c8-973c-feb4671268d1")
+	)
+	(fp_line
+		(start 1.5 -0.775)
+		(end 1.5 0.775)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f7a2d2eb-ac17-4d6d-83cb-fefa25481122")
+	)
+	(fp_line
+		(start 1.5 0.775)
+		(end -1.5 0.775)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "dff00cf1-fe6f-4d0c-9bbd-5ecdb17e8c0b")
+	)
+	(pad "1" smd rect
+		(at 0 -0.75 270)
+		(size 0.9 3.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "dfc26c35-963c-4d3e-ac0d-7c5c884ad8fe")
+	)
+	(pad "2" smd rect
+		(at 0 0.75 270)
+		(size 0.9 3.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "85d1bf0e-7800-4f00-9655-2348bdccc789")
+	)
+	(embedded_fonts no)
+	(model "C:/Work/Kicad/ToDo/RNWA0612BTE100R/3D/RNWA0612BTE100R.stp"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -90)
+		)
+	)
+)

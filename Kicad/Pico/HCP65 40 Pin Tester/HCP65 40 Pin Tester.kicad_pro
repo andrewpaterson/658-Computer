@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 1.0,
-          "height": 1.6,
-          "width": 1.6
+          "height": 1.7,
+          "width": 1.7
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -63,22 +63,25 @@
         "version": 2
       },
       "rule_severities": {
-        "annular_width": "error",
+        "annular_width": "ignore",
         "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
         "courtyards_overlap": "error",
+        "creepage": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
         "drill_out_of_range": "error",
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
+        "footprint_filters_mismatch": "ignore",
         "footprint_symbol_mismatch": "warning",
         "footprint_type_mismatch": "ignore",
         "hole_clearance": "error",
         "hole_near_hole": "error",
+        "hole_to_hole": "error",
         "holes_co_located": "warning",
         "invalid_outline": "error",
         "isolated_copper": "ignore",
@@ -89,24 +92,29 @@
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
+        "mirrored_text_on_front_layer": "warning",
         "missing_courtyard": "ignore",
         "missing_footprint": "warning",
         "net_conflict": "warning",
+        "nonmirrored_text_on_back_layer": "warning",
         "npth_inside_courtyard": "ignore",
         "padstack": "warning",
         "pth_inside_courtyard": "ignore",
         "shorting_items": "error",
-        "silk_edge_clearance": "warning",
+        "silk_edge_clearance": "ignore",
         "silk_over_copper": "warning",
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
         "starved_thermal": "ignore",
         "text_height": "warning",
+        "text_on_edge_cuts": "error",
         "text_thickness": "warning",
         "through_hole_pad_without_hole": "error",
         "too_many_vias": "error",
+        "track_angle": "error",
         "track_dangling": "warning",
+        "track_segment_length": "error",
         "track_width": "error",
         "tracks_crossing": "error",
         "unconnected_items": "error",
@@ -119,6 +127,7 @@
         "min_clearance": 0.0,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.25,
+        "min_groove_width": 0.0,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
@@ -138,16 +147,17 @@
       },
       "teardrop_options": [
         {
-          "td_onpadsmd": true,
+          "td_onpthpad": true,
           "td_onroundshapesonly": false,
+          "td_onsmdpad": true,
           "td_ontrackend": false,
-          "td_onviapad": true
+          "td_onvia": true
         }
       ],
       "teardrop_parameters": [
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 1,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -158,7 +168,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 1,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -169,7 +179,7 @@
         },
         {
           "td_allow_use_two_tracks": true,
-          "td_curve_segcount": 5,
+          "td_curve_segcount": 1,
           "td_height_ratio": 1.0,
           "td_length_ratio": 0.5,
           "td_maxheight": 2.0,
@@ -182,8 +192,8 @@
       "track_widths": [
         0.0,
         0.2,
-        0.35,
-        0.38
+        0.38,
+        1.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -215,6 +225,10 @@
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.6,
+          "drill": 1.0
         }
       ],
       "zones_allow_external_fillets": false
@@ -426,7 +440,7 @@
       "four_way_junction": "ignore",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
-      "label_dangling": "error",
+      "label_dangling": "warning",
       "label_multiple_wires": "warning",
       "lib_symbol_issues": "warning",
       "lib_symbol_mismatch": "warning",
@@ -440,9 +454,9 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "error",
+      "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
-      "same_local_global_label": "ignore",
+      "same_local_global_label": "warning",
       "similar_label_and_power": "warning",
       "similar_labels": "warning",
       "similar_power": "warning",
@@ -460,7 +474,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Counter 16bit with IO.kicad_pro",
+    "filename": "HCP65 40 Pin Tester.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -484,12 +498,9 @@
         "wire_width": 6
       },
       {
-        "bus_width": 12,
         "clearance": 0.5,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
-        "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "12V",
@@ -498,16 +509,12 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.0,
         "via_diameter": 1.3,
-        "via_drill": 1.0,
-        "wire_width": 6
+        "via_drill": 1.0
       },
       {
-        "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
-        "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "Power",
@@ -516,8 +523,7 @@
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.38,
         "via_diameter": 0.8,
-        "via_drill": 0.4,
-        "wire_width": 6
+        "via_drill": 0.4
       }
     ],
     "meta": {
@@ -528,19 +534,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "*3.3V"
+        "pattern": "*3.3V*"
       },
       {
         "netclass": "Power",
-        "pattern": "*5V"
-      },
-      {
-        "netclass": "Power",
-        "pattern": "*GND"
+        "pattern": "*GND*"
       },
       {
         "netclass": "12V",
         "pattern": "*12V*"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "*5V*"
       }
     ]
   },
@@ -549,12 +555,12 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "Counter 16bit with IO",
+      "plot": "HCP65 Component Tester",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "Counter 16bit with IO.step",
+      "step": "",
       "svg": "",
-      "vrml": "Counter 16bit with IO.wrl"
+      "vrml": ""
     },
     "page_layout_descr_file": "${_658_COMPUTER_}/SchematicTemplate.kicad_wks"
   },
@@ -661,7 +667,7 @@
   },
   "sheets": [
     [
-      "337b5f72-8be1-4121-9dc6-479b565482b2",
+      "8357857d-ab8c-4646-b786-aad4001c0a6b",
       "Root"
     ]
   ],

@@ -5,9 +5,9 @@
 	(uuid "8357857d-ab8c-4646-b786-aad4001c0a6b")
 	(paper "A3")
 	(title_block
-		(title "HCP65 Component Tester")
-		(date "2025-02-08")
-		(rev "V0")
+		(title "HCP65 40pin Component Tester")
+		(date "2025-08-17")
+		(rev "V1")
 	)
 	(lib_symbols
 		(symbol "Bourns:CAY16-222F4LF"
@@ -1203,6 +1203,144 @@
 						)
 					)
 					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "HCP65:C_0805"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 2.286 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "?μF"
+				(at 2.54 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:C_0805"
+				(at 16.764 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 2.2225 0.3175 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0805_0_1"
+				(polyline
+					(pts
+						(xy 1.9685 -1.4605) (xy 1.9685 1.5875)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.9845 -1.4605) (xy 2.9845 1.5875)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_0805_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7277,6 +7415,16 @@
 		)
 		(uuid "02df3e26-25c8-4bff-9da1-5af6cb0d497e")
 	)
+	(label "5V_{3}"
+		(at 127 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "039bc5c2-806a-4c26-a693-acfae9f6eb40")
+	)
 	(label "S17"
 		(at 339.09 161.29 0)
 		(effects
@@ -7446,6 +7594,16 @@
 			(justify left bottom)
 		)
 		(uuid "16e00be6-cd41-4337-82d0-2483aa0417e3")
+	)
+	(label "5V_{3}"
+		(at 113.03 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "16fef144-92dc-43fa-b59a-b6148d2de378")
 	)
 	(label "IO1"
 		(at 153.67 38.1 180)
@@ -7868,6 +8026,16 @@
 		(uuid "4922737e-2d37-44d8-b4c5-562b7ee56607")
 	)
 	(label "GND_{3}"
+		(at 146.05 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4a5c31a6-d0ed-4ff5-bf27-6fc8893e6587")
+	)
+	(label "GND_{3}"
 		(at 273.05 86.36 0)
 		(effects
 			(font
@@ -7886,6 +8054,16 @@
 			(justify right bottom)
 		)
 		(uuid "4d936376-6676-434f-8699-59256f7541a1")
+	)
+	(label "5V_{3}"
+		(at 140.97 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4ef3ac39-a4f7-4bc4-afa4-b180f02aff2e")
 	)
 	(label "GND_{4}"
 		(at 60.96 198.12 0)
@@ -8117,6 +8295,16 @@
 		)
 		(uuid "63d09bbc-247f-479e-bac4-6b4cf92ac71e")
 	)
+	(label "5V_{3}"
+		(at 154.94 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "651ae11b-2626-4762-84d7-2f1421582040")
+	)
 	(label "GND_{1}"
 		(at 107.95 73.66 180)
 		(effects
@@ -8306,6 +8494,16 @@
 			(justify left bottom)
 		)
 		(uuid "77ec8c80-fefb-4644-8d02-b755c8d94207")
+	)
+	(label "GND_{3}"
+		(at 132.08 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "78138691-a88b-49f1-abee-7fb1511a3b69")
 	)
 	(label "S13"
 		(at 248.92 129.54 0)
@@ -8708,6 +8906,16 @@
 		(uuid "9f2a8a97-a096-49b7-93ea-15ece0279caa")
 	)
 	(label "GND_{3}"
+		(at 104.14 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9f671839-7e33-491c-8b74-f816e51b97d2")
+	)
+	(label "GND_{3}"
 		(at 354.33 124.46 0)
 		(effects
 			(font
@@ -8786,6 +8994,16 @@
 			(justify left bottom)
 		)
 		(uuid "a9cb0bb0-8b7e-4256-856e-7c1af33cc851")
+	)
+	(label "GND_{3}"
+		(at 160.02 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a9d4f6cd-49cc-4e69-a64c-05a11c86ce31")
 	)
 	(label "IO22"
 		(at 283.21 148.59 180)
@@ -9036,6 +9254,16 @@
 			(justify left bottom)
 		)
 		(uuid "ca7fc5bd-254f-4991-93b0-b76d6a11e904")
+	)
+	(label "5V_{3}"
+		(at 99.06 262.89 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cb00d4ca-bfa4-471e-b72e-d0b6e99c8535")
 	)
 	(label "IO0"
 		(at 153.67 35.56 180)
@@ -9296,6 +9524,16 @@
 			(justify left bottom)
 		)
 		(uuid "e1297b2f-b422-4ccc-83ac-5f4906e40120")
+	)
+	(label "GND_{3}"
+		(at 118.11 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e26b2d86-4b21-4ca0-a730-3b4126117de5")
 	)
 	(label "GND_{3}"
 		(at 100.33 143.51 180)
@@ -14470,6 +14708,73 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 154.94 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "586e4148-3e6c-4e96-b739-312ca80473d4")
+		(property "Reference" "C5"
+			(at 157.226 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 157.48 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 171.704 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.1625 262.5725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fe98eefa-ebd8-42c0-ac86-5c00020c01f0")
+		)
+		(pin "2"
+			(uuid "e6426e25-237c-4cc5-96e4-e4d473cd45bc")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 167.64 195.58 180)
 		(unit 1)
@@ -16110,6 +16415,73 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 127 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "81f35bd8-ba1c-4736-bd61-1e906f166888")
+		(property "Reference" "C3"
+			(at 129.286 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 129.54 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 143.764 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 129.2225 262.5725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 127 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "30f08b9e-cbf3-457a-9be1-ae08742dd522")
+		)
+		(pin "2"
+			(uuid "4793fc60-9f4d-4fbb-9a5e-b39ddf958104")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Texas_Instruments:SN74ABT245BDBR")
 		(at 193.04 212.09 0)
 		(unit 1)
@@ -17190,6 +17562,73 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 99.06 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "94dd8928-d972-4017-bcda-a29b928d5a01")
+		(property "Reference" "C1"
+			(at 101.346 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 101.6 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 115.824 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 101.2825 262.5725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 99.06 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "27be1baf-294b-4cd9-a894-c31bef2f9735")
+		)
+		(pin "2"
+			(uuid "de9cbb24-ee2d-4f7e-9509-0543790f3393")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C1")
 					(unit 1)
 				)
 			)
@@ -19561,6 +20000,73 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 140.97 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d9b4e80a-862a-4ed8-8032-879237c330a6")
+		(property "Reference" "C4"
+			(at 143.256 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 143.51 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 157.734 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.1925 262.5725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 140.97 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5144f9b8-12c5-446e-ac9c-45b3dbec0600")
+		)
+		(pin "2"
+			(uuid "544cd231-841a-47e9-8b8b-9f73123d5516")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 260.35 139.7 180)
 		(unit 1)
@@ -20123,6 +20629,73 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "RN10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 113.03 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f2bc3baa-8a43-48e0-b98e-197566b5c2f4")
+		(property "Reference" "C2"
+			(at 115.316 260.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 115.57 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 129.794 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 115.2525 262.5725 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 113.03 262.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b7a329b6-d83b-47fa-8de1-80d0238e6f3f")
+		)
+		(pin "2"
+			(uuid "e9aef047-1a94-4361-b41d-03ae5c019aa9")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C2")
 					(unit 1)
 				)
 			)

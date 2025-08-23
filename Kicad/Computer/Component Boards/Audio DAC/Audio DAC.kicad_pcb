@@ -1,7 +1,7 @@
 (kicad_pcb
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(general
 		(thickness 0.7)
 		(legacy_teardrops no)
@@ -14,17 +14,17 @@
 	)
 	(layers
 		(0 "F.Cu" signal)
-		(31 "B.Cu" signal)
-		(34 "B.Paste" user)
-		(35 "F.Paste" user)
-		(36 "B.SilkS" user "B.Silkscreen")
-		(37 "F.SilkS" user "F.Silkscreen")
-		(38 "B.Mask" user)
-		(39 "F.Mask" user)
-		(44 "Edge.Cuts" user)
-		(45 "Margin" user)
-		(46 "B.CrtYd" user "B.Courtyard")
-		(47 "F.CrtYd" user "F.Courtyard")
+		(2 "B.Cu" signal)
+		(13 "F.Paste" user)
+		(15 "B.Paste" user)
+		(5 "F.SilkS" user "F.Silkscreen")
+		(7 "B.SilkS" user "B.Silkscreen")
+		(1 "F.Mask" user)
+		(3 "B.Mask" user)
+		(25 "Edge.Cuts" user)
+		(27 "Margin" user)
+		(31 "F.CrtYd" user "F.Courtyard")
+		(29 "B.CrtYd" user "B.Courtyard")
 	)
 	(setup
 		(stackup
@@ -68,9 +68,10 @@
 		)
 		(pad_to_mask_clearance 0)
 		(allow_soldermask_bridges_in_footprints no)
+		(tenting front back)
 		(pcbplotparams
-			(layerselection 0x00010fc_ffffffff)
-			(plot_on_all_layers_selection 0x0000000_00000000)
+			(layerselection 0x00000000_00000000_55555555_5755f5ff)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
 			(disableapertmacros no)
 			(usegerberextensions yes)
 			(usegerberattributes yes)
@@ -80,7 +81,6 @@
 			(dashed_line_gap_ratio 3.000000)
 			(svgprecision 4)
 			(plotframeref no)
-			(viasonmask no)
 			(mode 1)
 			(useauxorigin yes)
 			(hpglpennumber 1)
@@ -88,16 +88,19 @@
 			(hpglpendiameter 15.000000)
 			(pdf_front_fp_property_popups yes)
 			(pdf_back_fp_property_popups yes)
+			(pdf_metadata yes)
+			(pdf_single_document no)
 			(dxfpolygonmode yes)
 			(dxfimperialunits yes)
 			(dxfusepcbnewfont yes)
 			(psnegative no)
 			(psa4output no)
-			(plotreference yes)
-			(plotvalue yes)
-			(plotfptext yes)
-			(plotinvisibletext no)
+			(plot_black_and_white yes)
 			(sketchpadsonfab no)
+			(plotpadnumbers no)
+			(hidednponfab no)
+			(sketchdnponfab yes)
+			(crossoutdnponfab yes)
 			(subtractmaskfromsilk no)
 			(outputformat 1)
 			(mirror no)
@@ -185,18 +188,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0c43ccd8-b95b-49a1-a7cf-d2dd17a6920b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -222,7 +213,7 @@
 			)
 		)
 		(path "/d78f71fe-3ab0-491c-8f26-9c9dea28b103")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -325,22 +316,10 @@
 			(layer "F.Fab")
 			(uuid "3edb5600-106c-48b9-97b0-e3e2217db4b4")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1bc9fb44-97bf-4e79-9002-5bdfcdf3b563")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 7 "Net-(C5-Pad2)")
 			(pintype "passive")
@@ -349,12 +328,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 9 "Net-(C7-Pad2)")
 			(pintype "passive")
 			(uuid "cb690aea-a8ea-4227-a829-9f547af12fe6")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -395,18 +375,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5b900200-423d-4201-a21c-7385a120f589")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -431,21 +399,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cc03bed2-8cc5-40a0-93c1-11453c0bfdc2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/75e40405-d4e1-461e-bd4d-a98658f34cb0")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -548,22 +504,10 @@
 			(layer "F.Fab")
 			(uuid "d33074e2-c424-458d-ab22-252be2a2fdee")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e9770fef-f6be-438e-ad16-6095212fcd93")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -572,12 +516,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 15 "Net-(C15-Pad2)")
 			(pintype "passive")
 			(uuid "150089e3-cd7d-4819-abd6-f4e0feeae400")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -619,18 +564,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3487cb5b-3438-49aa-9ca3-b54bdf470b8e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -655,21 +588,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2cf85c13-0c26-4ac5-ba55-0554db898f74")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/5d28e972-0885-4620-988d-bd9ccc404531")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -772,22 +693,10 @@
 			(layer "F.Fab")
 			(uuid "dce5d808-a06e-45b8-b505-458b0ec71363")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "84da189a-e131-46bc-aa4d-a73899ed0a8b")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -796,12 +705,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 8 "Net-(IC6-REF)")
 			(pintype "passive")
 			(uuid "1112eeb7-3595-4261-af24-8782e8bc6d55")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -843,18 +753,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:SOIC127P600X175-8N"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "40863d73-be10-4f3a-b078-435771848cdc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://ww1.microchip.com/downloads/en/devicedoc/21465c.pdf"
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -875,30 +773,6 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Arrow Part Number" "TC7660EOA"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3822868f-384d-45f2-92cf-a18fa6d41543")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/tc7660eoa/microchip-technology?region=nac"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e9304492-4e2d-43d9-b5ac-d323433266ca")
-			(effects
-				(font
-					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -975,20 +849,8 @@
 				)
 			)
 		)
-		(property "Garbage" "Microchip TC7660EOA, Charge Pump Inverting 20mA 10 kHz, -1.5  -10 V, 8-Pin, SOIC"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "62074e69-fb31-4d4d-b4bb-0b4fe067e720")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(path "/3fac1b9c-6670-4738-b984-acb86379424d")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -1142,22 +1004,10 @@
 				)
 			)
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "33b43b54-73b1-41b3-9ef0-fd8cdfa341f8")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd rect
 			(at -2.725 -1.905 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 17 "unconnected-(IC1-NC-Pad1)")
 			(pinfunction "NC")
 			(pintype "no_connect")
@@ -1166,7 +1016,7 @@
 		(pad "2" smd rect
 			(at -2.725 -0.635 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 3 "Net-(IC1-CAP+)")
 			(pinfunction "CAP+")
 			(pintype "passive")
@@ -1175,7 +1025,7 @@
 		(pad "3" smd rect
 			(at -2.725 0.635 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 1 "GND")
 			(pinfunction "GND")
 			(pintype "passive")
@@ -1184,7 +1034,7 @@
 		(pad "4" smd rect
 			(at -2.725 1.905 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 4 "Net-(IC1-CAP-)")
 			(pinfunction "CAP-")
 			(pintype "passive")
@@ -1193,7 +1043,7 @@
 		(pad "5" smd rect
 			(at 2.725 1.905 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 5 "/-5V")
 			(pinfunction "VOUT")
 			(pintype "passive")
@@ -1202,7 +1052,7 @@
 		(pad "6" smd rect
 			(at 2.725 0.635 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 1 "GND")
 			(pinfunction "LV")
 			(pintype "passive")
@@ -1211,7 +1061,7 @@
 		(pad "7" smd rect
 			(at 2.725 -0.635 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 18 "unconnected-(IC1-OSC-Pad7)")
 			(pinfunction "OSC")
 			(pintype "passive+no_connect")
@@ -1220,12 +1070,13 @@
 		(pad "8" smd rect
 			(at 2.725 -1.905 90)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 2 "5V")
 			(pinfunction "V+")
 			(pintype "passive")
 			(uuid "30ce798e-338f-402e-a724-8294e3200679")
 		)
+		(embedded_fonts no)
 		(model ":HCP65_3DMODEL:NJM78L05EA-TE1.stp"
 			(offset
 				(xyz 0 0 0)
@@ -1266,18 +1117,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "7a6d62cd-1d76-4f8d-a5c5-f7913757d775")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -1303,7 +1142,7 @@
 			)
 		)
 		(path "/cd0b84eb-1912-4ac5-b152-428373a3364d")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -1406,22 +1245,10 @@
 			(layer "F.Fab")
 			(uuid "38800ea4-1e36-46b5-9011-f13d151bf4fb")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cb003dc5-bff4-44b9-8fe8-99949dba2359")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 20 "Net-(IC7-IN_1-)")
 			(pintype "passive")
@@ -1430,12 +1257,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 35 "/Line Out Left")
 			(pintype "passive")
 			(uuid "63ffd4b9-02b1-4b5f-9d15-e2c09ddcceed")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -1476,19 +1304,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
-			(at 1.016 4.445 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2c2ec9ef-a20d-4094-acd7-c05758e6660c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 90)
 			(unlocked yes)
@@ -1517,7 +1332,7 @@
 		)
 		(property ki_fp_filters "CP_*")
 		(path "/fe61a95b-8341-4392-a315-ecddde6b785b")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -2487,7 +2302,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "77c8b7d3-90a7-44f3-95c5-07ce5142f768")
 		)
@@ -2498,7 +2313,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "f5fe98f4-a860-43f6-a9b7-84439850b3b2")
 		)
@@ -2509,7 +2324,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "22c7b148-3b10-40a2-8b14-44d196b6e5c2")
 		)
@@ -2533,6 +2348,7 @@
 			(pintype "passive")
 			(uuid "f5c5f869-0207-4144-a17d-90953992c048")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D4.0mm_P2.00mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -2573,18 +2389,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0576af86-57fb-4820-a614-a06f86c3690b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -2610,7 +2414,7 @@
 			)
 		)
 		(path "/f945fc95-393b-4175-93d7-2c14d5d172e5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -2713,22 +2517,10 @@
 			(layer "F.Fab")
 			(uuid "c29e260e-9a97-4136-9699-d9bd32dd18c1")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c9535aa7-74ee-47a9-a47c-018bb8f4e567")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 14 "Net-(C14-Pad2)")
 			(pintype "passive")
@@ -2737,12 +2529,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 15 "Net-(C15-Pad2)")
 			(pintype "passive")
 			(uuid "63cda87d-9849-469e-a78b-a63e26140e94")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -2783,18 +2576,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3b8c98c5-9d02-44b5-86b2-622b674db42c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -2820,7 +2601,7 @@
 			)
 		)
 		(path "/b8618c87-2f7f-4b74-8b8b-104b471e7e60")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -2923,22 +2704,10 @@
 			(layer "F.Fab")
 			(uuid "31e49812-15f2-48dd-9f37-eb71b9e4c42d")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0acf38d4-9977-4310-b860-6133e190e936")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 15 "Net-(C15-Pad2)")
 			(pintype "passive")
@@ -2947,12 +2716,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 16 "Net-(IC7-IN_2+)")
 			(pintype "passive")
 			(uuid "b5151204-7839-4f24-8ff2-86abbb4a922d")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -2993,18 +2763,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "779ea9b7-cc4a-4df7-b49b-afce6ec10ce9")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -3029,21 +2787,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b36948f6-1b25-4a60-9b98-e3943c9e50b2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/80db7c65-fc4e-4f4b-a8b6-c019e0637ff5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -3146,22 +2892,10 @@
 			(layer "F.Fab")
 			(uuid "a27dc770-8825-4f0c-9426-c3e4012bfa76")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2be09638-827f-4aec-8dcc-2b28e13cd97b")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -3170,12 +2904,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 9 "Net-(C7-Pad2)")
 			(pintype "passive")
 			(uuid "2d7c368c-e13d-4932-a544-bb4a7d0e03e7")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -3195,7 +2930,7 @@
 		(descr "SJ1-3525NG-GR-1")
 		(tags "Connector")
 		(property "Reference" "J2"
-			(at 2.032 -6.858 -90)
+			(at 2.032 -6.858 270)
 			(layer "F.SilkS")
 			(uuid "62eb48af-1261-4e22-b86a-3ade59d475af")
 			(effects
@@ -3206,7 +2941,7 @@
 			)
 		)
 		(property "Value" "SJ1-3525NG-GR"
-			(at 1.778 6.858 -90)
+			(at 1.778 6.858 270)
 			(layer "F.SilkS")
 			(uuid "86bf5b83-4a0d-49ec-84a2-4c83b6863e9b")
 			(effects
@@ -3216,20 +2951,8 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:SJ13525NGGR"
-			(at 0 0 -90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6c785867-160c-46ae-a432-e831432bc327")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" "https://www.cuidevices.com/product/resource/digikeypdf/sj1-352xng.pdf"
-			(at 0 0 -90)
+			(at 0 0 270)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "011eb955-2e88-4c73-bbe1-4d867c2e0934")
@@ -3349,7 +3072,7 @@
 			)
 		)
 		(path "/f13972a2-fdfa-492f-a04a-32446dc76eab")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -3735,7 +3458,7 @@
 			(uuid "252e657a-f789-4948-aade-50dc0ab7849d")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 3.302 0 -90)
+			(at 3.302 0 270)
 			(layer "F.Fab")
 			(uuid "0b92218c-6d9e-4cd3-b84d-383b795c0095")
 			(effects
@@ -3800,6 +3523,7 @@
 			(pintype "passive+no_connect")
 			(uuid "c275028b-b896-492f-aa4e-d8eb03003339")
 		)
+		(embedded_fonts no)
 		(model ":HCP65_3DMODEL:SJ1-3525NG-GR.stp"
 			(offset
 				(xyz -6.5 -0.11 2.88)
@@ -3837,18 +3561,6 @@
 			(effects
 				(font
 					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOP65P640X110-16N"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "36c6bfc3-54ff-4bef-90cf-9e25555cedd0")
-			(effects
-				(font
-					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -3950,7 +3662,7 @@
 			)
 		)
 		(path "/017512b0-e302-4c89-864d-8f82cc8a45b5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -4104,22 +3816,10 @@
 				)
 			)
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c66b5c01-a964-4f64-8aa4-6f3e0298f296")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd rect
 			(at -2.925 -2.275 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 2 "5V")
 			(pinfunction "VDD")
 			(pintype "passive")
@@ -4128,7 +3828,7 @@
 		(pad "2" smd rect
 			(at -2.925 -1.625 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 8 "Net-(IC6-REF)")
 			(pinfunction "REF")
 			(pintype "input")
@@ -4137,7 +3837,7 @@
 		(pad "3" smd rect
 			(at -2.925 -0.975 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 50 "~{Enable}")
 			(pinfunction "SHDN")
 			(pintype "input")
@@ -4146,7 +3846,7 @@
 		(pad "4" smd rect
 			(at -2.925 -0.325 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 42 "~{WR}")
 			(pinfunction "~{WR}")
 			(pintype "input")
@@ -4155,7 +3855,7 @@
 		(pad "5" smd rect
 			(at -2.925 0.325 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 48 "D7")
 			(pinfunction "D7")
 			(pintype "input")
@@ -4164,7 +3864,7 @@
 		(pad "6" smd rect
 			(at -2.925 0.975 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 41 "D6")
 			(pinfunction "D6")
 			(pintype "input")
@@ -4173,7 +3873,7 @@
 		(pad "7" smd rect
 			(at -2.925 1.625 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 45 "D5")
 			(pinfunction "D5")
 			(pintype "input")
@@ -4182,7 +3882,7 @@
 		(pad "8" smd rect
 			(at -2.925 2.275 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 46 "D4")
 			(pinfunction "D4")
 			(pintype "input")
@@ -4191,7 +3891,7 @@
 		(pad "9" smd rect
 			(at 2.925 2.275 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 49 "D3")
 			(pinfunction "D3")
 			(pintype "input")
@@ -4200,7 +3900,7 @@
 		(pad "10" smd rect
 			(at 2.925 1.625 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 43 "D2")
 			(pinfunction "D2")
 			(pintype "input")
@@ -4209,7 +3909,7 @@
 		(pad "11" smd rect
 			(at 2.925 0.975 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 19 "D1")
 			(pinfunction "D1")
 			(pintype "input")
@@ -4218,7 +3918,7 @@
 		(pad "12" smd rect
 			(at 2.925 0.325 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 44 "D0")
 			(pinfunction "D0")
 			(pintype "input")
@@ -4227,7 +3927,7 @@
 		(pad "13" smd rect
 			(at 2.925 -0.325 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 47 "A0")
 			(pinfunction "A0")
 			(pintype "input")
@@ -4236,7 +3936,7 @@
 		(pad "14" smd rect
 			(at 2.925 -0.975 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 1 "GND")
 			(pinfunction "GND")
 			(pintype "passive")
@@ -4245,7 +3945,7 @@
 		(pad "15" smd rect
 			(at 2.925 -1.625 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 12 "Net-(IC6-OUTB)")
 			(pinfunction "OUTB")
 			(pintype "output")
@@ -4254,12 +3954,13 @@
 		(pad "16" smd rect
 			(at 2.925 -2.275 90)
 			(size 0.45 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 6 "Net-(IC6-OUTA)")
 			(pinfunction "OUTA")
 			(pintype "output")
 			(uuid "84f8098f-608b-4478-93f6-a0897bd5a8da")
 		)
+		(embedded_fonts no)
 		(model ":HCP65_3DMODEL:MC74VHC139DR2G.stp"
 			(offset
 				(xyz 0 0 0)
@@ -4300,18 +4001,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cbfa97b1-44e4-48b1-b289-177968b4165e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -4337,7 +4026,7 @@
 			)
 		)
 		(path "/be5a99fd-6e28-4b46-b2ff-cb63bde6d8c0")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -4440,22 +4129,10 @@
 			(layer "F.Fab")
 			(uuid "84c6787a-03a0-40d0-8176-f4a2e02befea")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d6242d05-961a-4fc6-ade3-85263aeb563c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 9 "Net-(C7-Pad2)")
 			(pintype "passive")
@@ -4464,12 +4141,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 10 "Net-(C10-Pad2)")
 			(pintype "passive")
 			(uuid "9fd2f886-b2bd-4516-980e-d8862a58ea7d")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4510,18 +4188,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b4a03e60-105a-4872-9b3c-41f94f2f1410")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -4546,21 +4212,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5c8a34d8-2d33-495f-ade7-77ac4647c6bb")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/44fa4a58-bc4f-4f0f-8ab5-dd4bbfbb17d5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -4663,22 +4317,10 @@
 			(layer "F.Fab")
 			(uuid "65f7cb8e-f1ef-4666-bdf4-005050431cd9")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ca288aeb-659e-472e-86dc-ae8effce05b3")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -4687,12 +4329,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 16 "Net-(IC7-IN_2+)")
 			(pintype "passive")
 			(uuid "1fe3749a-c00f-4403-ab3a-1bb2824714c9")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4733,18 +4376,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c4afa6ce-d18d-46e5-b14c-8d42ebfd4516")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -4770,7 +4401,7 @@
 			)
 		)
 		(path "/6fde708f-30ff-4183-9010-d761220a6015")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -4873,22 +4504,10 @@
 			(layer "F.Fab")
 			(uuid "56f00d8f-d69f-434e-b8e0-87a6cde4b4c4")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "be2de8e8-9cec-40c5-8091-3eccd95a3a4b")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 21 "Net-(IC7-IN_2-)")
 			(pintype "passive")
@@ -4897,12 +4516,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 34 "/Line Out Right")
 			(pintype "passive")
 			(uuid "36e597a1-e266-48cd-985f-3e7b1f21c975")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -4945,18 +4565,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:DIP-32_Board_W22.86mm"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "af942195-c629-42ab-8f03-c82305f4da9f")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -4983,7 +4591,7 @@
 		)
 		(property ki_fp_filters "Connector*:*_2x??_*")
 		(path "/30c398ae-075c-4039-9c51-cb831f31da87")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -5170,18 +4778,6 @@
 			)
 			(layer "F.CrtYd")
 			(uuid "00400d1e-891c-4ff7-b5d7-b8866013d28f")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 11.43 19.05 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "91d6e917-7883-45b2-973d-182ce0799739")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
 		)
 		(pad "1" thru_hole roundrect
 			(at 0 0)
@@ -5537,6 +5133,7 @@
 			(pintype "passive+no_connect")
 			(uuid "cd1dd7f2-c958-4da7-8811-b1fb773488e6")
 		)
+		(embedded_fonts no)
 	)
 	(footprint "SamacSys_Parts:R_0805"
 		(layer "F.Cu")
@@ -5567,18 +5164,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "511c41c5-5567-490e-b44e-a0d27951d191")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -5604,7 +5189,7 @@
 			)
 		)
 		(path "/0bdfad5a-8734-4061-9f79-1b1431779126")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -5707,22 +5292,10 @@
 			(layer "F.Fab")
 			(uuid "c649c146-a10c-452f-8bd4-90b481e434d8")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "dceb7180-5245-4a41-be99-712e71888f2a")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 1 "GND")
 			(pintype "passive")
@@ -5731,12 +5304,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 8 "Net-(IC6-REF)")
 			(pintype "passive")
 			(uuid "474569b1-b412-4e69-8857-00fd14d609c8")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -5777,18 +5351,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "62ca1610-e2a4-461d-a63d-5a943dc97a8e")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -5813,21 +5375,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "302ec4e3-f6ac-4de1-8403-dab0ca8c6bc6")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/1d596fb9-f955-4a40-9669-41401f7d105c")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -5930,22 +5480,10 @@
 			(layer "F.Fab")
 			(uuid "b0fcd88a-f212-4c5b-8ed1-ab88c0d586e6")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "562e9245-5393-48b9-98e8-7806ebc3030a")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -5954,12 +5492,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 11 "Net-(IC7-IN_1+)")
 			(pintype "passive")
 			(uuid "3c9b4289-0e58-44a3-b518-0f80915d21dd")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6000,18 +5539,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ed14bade-ca07-418a-aa6f-fc2d7afd3c9d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -6036,21 +5563,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 262.89 171.958 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "035427a7-c5d8-4e3b-978e-9c639d6a3e56")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/94b3c772-3e0d-4d35-a706-4e386ad1a33f")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -6153,22 +5668,10 @@
 			(layer "F.Fab")
 			(uuid "db624f96-eca5-4cbf-9159-bc9be540695b")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "90494d9e-27a6-4e6f-90b3-99b8d9c5ad19")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 270)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 3 "Net-(IC1-CAP+)")
 			(pintype "passive")
@@ -6177,12 +5680,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 270)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 4 "Net-(IC1-CAP-)")
 			(pintype "passive")
 			(uuid "aff196cd-749d-49aa-ac24-c9c98f18374c")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6223,18 +5727,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e5433efe-46bf-43fe-816a-4c238ecf9fa3")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -6259,21 +5751,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 268.478 171.958 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b0127867-aad9-49bc-ac76-73c56f96d609")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/fa3c97c2-3cf0-4aed-af7e-a04ceba4262d")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -6376,22 +5856,10 @@
 			(layer "F.Fab")
 			(uuid "a1a62311-2857-43af-8a8b-7c82cacfd2a0")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c4972d83-03aa-4380-a982-9eb2c059e4e0")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 270)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -6400,12 +5868,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 270)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 5 "/-5V")
 			(pintype "passive")
 			(uuid "17cfca4c-e440-4e89-8309-cbb33bd93baf")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6446,18 +5915,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5af3259e-251a-4918-9b15-7350e4c12e5d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -6483,7 +5940,7 @@
 			)
 		)
 		(path "/63752447-aaab-4db4-a692-f8ed6e898a48")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -6586,22 +6043,10 @@
 			(layer "F.Fab")
 			(uuid "714582c3-10b5-44cc-9c72-7454a35781ba")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "94d7728c-77af-4e98-88d8-e8105091376c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 10 "Net-(C10-Pad2)")
 			(pintype "passive")
@@ -6610,12 +6055,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 11 "Net-(IC7-IN_1+)")
 			(pintype "passive")
 			(uuid "f460dedb-68a5-4136-9a76-d2dde70c7e21")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6657,18 +6103,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "0207ffc7-c884-44ea-8ace-4de22a2c0d75")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -6694,7 +6128,7 @@
 			)
 		)
 		(path "/a0fc0a6b-019f-4498-a8c5-786b6dc428ef")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -6797,22 +6231,10 @@
 			(layer "F.Fab")
 			(uuid "3c48f810-2f3e-4ca8-9d73-8c58e85fd3b8")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "551effd0-d48c-44ba-ade7-6c1df13a633e")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 2 "5V")
 			(pintype "passive")
@@ -6821,12 +6243,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 8 "Net-(IC6-REF)")
 			(pintype "passive")
 			(uuid "733bb43a-0bee-42f7-aa24-87962bfd6e7b")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -6867,18 +6290,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "f0274d58-a388-4a2e-9829-1af2571473d2")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -6903,21 +6314,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4f8e76a4-c3d7-4add-a9e8-cc2229332f2a")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/9c778251-752f-4734-a675-72045f6e746e")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -7020,22 +6419,10 @@
 			(layer "F.Fab")
 			(uuid "c5498037-be30-4b6b-a737-f811a2e0eeeb")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "52bd1512-5087-4ca1-92f4-5d89eee77211")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -7044,12 +6431,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 10 "Net-(C10-Pad2)")
 			(pintype "passive")
 			(uuid "2297c1f6-272d-468a-a57a-7fe5f63b3f4e")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -7090,18 +6478,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "34605544-6881-4b3a-8667-e9fd6a682440")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -7126,21 +6502,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cf5ae727-d90b-4e3f-a3a5-d905e558bdbf")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/51de6b66-63ea-4eee-b2ce-916eeadc809b")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -7243,22 +6607,10 @@
 			(layer "F.Fab")
 			(uuid "86825063-b994-4984-ade2-bc39a8fe8a74")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c1316912-8377-454a-877b-36615ca52771")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
@@ -7267,12 +6619,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 14 "Net-(C14-Pad2)")
 			(pintype "passive")
 			(uuid "8f82189e-42fd-4287-bf25-e76d1c12f225")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -7313,19 +6666,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
-			(at 1.016 4.445 90)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a013644a-9394-418f-a800-a1c296e487f0")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 90)
 			(unlocked yes)
@@ -7354,7 +6694,7 @@
 		)
 		(property ki_fp_filters "CP_*")
 		(path "/5aa8bb99-2296-45c8-b501-ed50e01eaec4")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -8324,7 +7664,7 @@
 				(width 0.12)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.SilkS")
 			(uuid "4d0f80da-73dd-4327-a614-de2f6b7d2349")
 		)
@@ -8335,7 +7675,7 @@
 				(width 0.05)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.CrtYd")
 			(uuid "fbf17148-728b-48e5-b5ae-79497d8df65a")
 		)
@@ -8346,7 +7686,7 @@
 				(width 0.1)
 				(type solid)
 			)
-			(fill none)
+			(fill no)
 			(layer "F.Fab")
 			(uuid "489c6189-46fa-405a-b87e-ba465e38c8b9")
 		)
@@ -8370,6 +7710,7 @@
 			(pintype "passive")
 			(uuid "52bd93d7-f1a9-4d08-94e0-89c222dd0c9f")
 		)
+		(embedded_fonts no)
 		(model "${KICAD8_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_D4.0mm_P2.00mm.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -8410,18 +7751,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c6f49475-96d9-4567-923c-bf3cd5ef8bb1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -8447,7 +7776,7 @@
 			)
 		)
 		(path "/0cb8a9b8-b3b6-4017-a709-8da7d185e138")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -8550,22 +7879,10 @@
 			(layer "F.Fab")
 			(uuid "c6059858-079e-42e1-b422-e85c9115fdd3")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6d7ffa45-a412-4b6b-b79e-2c58c1a278ed")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 1 "GND")
 			(pintype "passive")
@@ -8574,12 +7891,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 7 "Net-(C5-Pad2)")
 			(pintype "passive")
 			(uuid "28140b0c-4793-4b28-8ad2-130760dadd13")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -8620,18 +7938,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "281f202e-5ce6-43dd-a037-7413dad9f950")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -8657,7 +7963,7 @@
 			)
 		)
 		(path "/f18b82b2-0134-4cac-80ff-ba632f7e268a")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -8760,22 +8066,10 @@
 			(layer "F.Fab")
 			(uuid "b73e4c35-0f9c-4f00-911e-af7da77f2f57")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9412e6a5-a477-425f-87d3-dbacd6b29a73")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 13 "Net-(C12-Pad2)")
 			(pintype "passive")
@@ -8784,12 +8078,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 90)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 14 "Net-(C14-Pad2)")
 			(pintype "passive")
 			(uuid "5c3568cc-dd3d-4ad9-8396-bab7ec097bbf")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -8830,18 +8125,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9b54de0d-de9e-48a7-9eeb-37f93eb7ca58")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 90)
 			(layer "F.Fab")
@@ -8866,21 +8149,9 @@
 				)
 			)
 		)
-		(property "Garbage" "Unpolarized capacitor, small symbol"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "753383cb-dfb8-41b4-96bc-b20d68202b5c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/fd6ee500-7d5e-42b1-990b-b7e161f336f5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -8983,22 +8254,10 @@
 			(layer "F.Fab")
 			(uuid "ca914b5d-e40b-4e74-8030-b36638547473")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.047999 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8d5e7dcc-62f6-43a6-846a-9e126a89221f")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 2 "5V")
 			(pintype "passive")
@@ -9007,12 +8266,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 1 "GND")
 			(pintype "passive")
 			(uuid "94d9a87a-be1d-4f6e-b37a-da6e9d554b99")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9053,18 +8313,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "dae3764a-ee0c-4097-8412-92ed4ae5bed1")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -9091,7 +8339,7 @@
 		)
 		(property ki_fp_filters "C_*")
 		(path "/7a561533-0b31-4d79-b526-b6b8cc0675a5")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -9194,22 +8442,10 @@
 			(layer "F.Fab")
 			(uuid "8c1eceec-a7fd-4a55-8b15-fc90453ba73a")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 3.048 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9a97a3da-7ea4-4d9f-b8e2-640bac25ed4c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at 0 0.934 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 2 "5V")
 			(pintype "passive")
@@ -9218,12 +8454,13 @@
 		(pad "2" smd roundrect
 			(at 0 -0.966 90)
 			(size 1 1.45)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
 			(net 5 "/-5V")
 			(pintype "passive")
 			(uuid "67f40f2d-842b-4da8-abe4-d8b168272d0b")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9264,18 +8501,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bf704cb9-04c8-432d-809e-794c9e46ec85")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -9301,7 +8526,7 @@
 			)
 		)
 		(path "/3d2c54ed-aa13-4dad-a831-9bda1599ad9e")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -9404,22 +8629,10 @@
 			(layer "F.Fab")
 			(uuid "092cdc61-e0e3-41c3-aeb0-75bd2ee6e5f5")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 2.921 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b136a71f-a0e7-4cf9-a170-ab3125063923")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.01 0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 1 "GND")
 			(pintype "passive")
@@ -9428,12 +8641,13 @@
 		(pad "2" smd roundrect
 			(at -0.01 -0.9125 270)
 			(size 1.025 1.4)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.243902439)
 			(net 13 "Net-(C12-Pad2)")
 			(pintype "passive")
 			(uuid "37c3345c-1311-4b29-ae48-8efbd4f094a3")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0805_2012Metric.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -9475,18 +8689,6 @@
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:SOIC127P600X175-8N"
-			(at 0 0 180)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "924db1dd-abbd-41d2-901a-171b06d0d928")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 180)
 			(layer "F.Fab")
@@ -9507,30 +8709,6 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Arrow Part Number" "AS358AMTR-G1"
-			(at 250.698 128.27 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d7be3342-fea8-4df6-8dfa-6dd351a09085")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/as358amtr-g1/diodes-incorporated"
-			(at 250.698 128.27 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "12cb6329-d3bd-4765-8df5-1eb970c55f48")
-			(effects
-				(font
-					(size 1 1)
 					(thickness 0.15)
 				)
 			)
@@ -9571,30 +8749,6 @@
 				)
 			)
 		)
-		(property "Mouser Part Number" "621-AS358AMTR-G1"
-			(at 250.698 128.27 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bb36042a-3f2f-413b-b66a-c07507ce0da8")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AS358AMTR-G1?qs=FKu9oBikfSnwK81wQRvcDw%3D%3D"
-			(at 250.698 128.27 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "84c8d989-453e-428e-9763-e62f9c2d7210")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property "Silkscreen" "AS358"
 			(at 250.698 128.27 0)
 			(layer "F.Fab")
@@ -9607,20 +8761,8 @@
 				)
 			)
 		)
-		(property "Garbage" "DiodesZetex AS358AMTR-G1, Dual Low Power Op Amp, 3  36 V, 8-Pin SOIC"
-			(at 250.698 128.27 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "4d064021-4c5e-4104-927e-6756ccbaf75c")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(path "/ef2d40f6-c20e-4f96-990a-fa7a6c21c1d6")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr smd)
 		(fp_line
@@ -9774,22 +8916,10 @@
 				)
 			)
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "f532abc5-f389-4c9b-a2dd-ef04552f1b5c")
-			(effects
-				(font
-					(size 0.635 0.635)
-					(thickness 0.15)
-				)
-			)
-		)
 		(pad "1" smd rect
 			(at -2.725 -1.905 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 20 "Net-(IC7-IN_1-)")
 			(pinfunction "OUT_1")
 			(pintype "output")
@@ -9798,7 +8928,7 @@
 		(pad "2" smd rect
 			(at -2.725 -0.635 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 20 "Net-(IC7-IN_1-)")
 			(pinfunction "IN_1-")
 			(pintype "input")
@@ -9807,7 +8937,7 @@
 		(pad "3" smd rect
 			(at -2.725 0.635 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 11 "Net-(IC7-IN_1+)")
 			(pinfunction "IN_1+")
 			(pintype "input")
@@ -9816,7 +8946,7 @@
 		(pad "4" smd rect
 			(at -2.725 1.905 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 5 "/-5V")
 			(pinfunction "GND")
 			(pintype "passive")
@@ -9825,7 +8955,7 @@
 		(pad "5" smd rect
 			(at 2.725 1.905 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 16 "Net-(IC7-IN_2+)")
 			(pinfunction "IN_2+")
 			(pintype "input")
@@ -9834,7 +8964,7 @@
 		(pad "6" smd rect
 			(at 2.725 0.635 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 21 "Net-(IC7-IN_2-)")
 			(pinfunction "IN_2-")
 			(pintype "input")
@@ -9843,7 +8973,7 @@
 		(pad "7" smd rect
 			(at 2.725 -0.635 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 21 "Net-(IC7-IN_2-)")
 			(pinfunction "OUT_2")
 			(pintype "output")
@@ -9852,12 +8982,13 @@
 		(pad "8" smd rect
 			(at 2.725 -1.905 270)
 			(size 0.65 1.55)
-			(layers "F.Cu" "F.Paste" "F.Mask")
+			(layers "F.Cu" "F.Mask" "F.Paste")
 			(net 2 "5V")
 			(pinfunction "VCC")
 			(pintype "passive")
 			(uuid "5e632f15-8ea8-4ac5-b140-477a1a25dbc7")
 		)
+		(embedded_fonts no)
 		(model ":HCP65_3DMODEL:NJM78L05EA-TE1.stp"
 			(offset
 				(xyz 0 0 0)
@@ -9901,19 +9032,6 @@
 				(justify mirror)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
-			(at 0 0 0)
-			(layer "B.Fab")
-			(hide yes)
-			(uuid "fa1042ab-8a72-4bd6-8c0e-055bf60a93e6")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "B.Fab")
@@ -9942,7 +9060,7 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/8930090d-eadf-4181-a95e-2c5bd9f307ea")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -9985,6 +9103,7 @@
 			(layer "B.CrtYd")
 			(uuid "4e70b1da-ce53-44c0-aa86-56609a226385")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x16_P2.54mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -10028,19 +9147,6 @@
 				(justify mirror)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:PinHeader_1x16_P2.54mm_Vertical"
-			(at 0 0 0)
-			(layer "B.Fab")
-			(hide yes)
-			(uuid "17d8ba84-d71d-4721-821a-21e487ec04aa")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-				(justify mirror)
-			)
-		)
 		(property "Datasheet" ""
 			(at 0 0 0)
 			(layer "B.Fab")
@@ -10069,7 +9175,7 @@
 		)
 		(property ki_fp_filters "Connector*:*_1x??_*")
 		(path "/50737c3b-1584-481c-aaf7-c7e6fefadd7e")
-		(sheetname "Root")
+		(sheetname "/")
 		(sheetfile "Audio DAC.kicad_sch")
 		(attr through_hole)
 		(fp_line
@@ -10112,6 +9218,7 @@
 			(layer "B.CrtYd")
 			(uuid "3586b258-27d3-4291-a3d7-fe59574004c4")
 		)
+		(embedded_fonts no)
 		(model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x16_P2.54mm_Vertical.wrl"
 			(offset
 				(xyz 0 0 0)
@@ -13958,4 +13065,5 @@
 		(net 50)
 		(uuid "a59fb9da-9035-4675-a557-cd3df0a25c2e")
 	)
+	(embedded_fonts no)
 )

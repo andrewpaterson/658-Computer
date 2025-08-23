@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "5ce90b85-49a2-4937-86c7-662b0d6f8431")
 	(paper "A4")
 	(title_block
@@ -12,7 +12,9 @@
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_02x06_Counter_Clockwise"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -79,41 +81,19 @@
 			)
 			(symbol "Conn_02x06_Counter_Clockwise_1_1"
 				(rectangle
-					(start -1.27 -7.493)
-					(end 0 -7.747)
+					(start -1.27 6.35)
+					(end 3.81 -8.89)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
+					(start -1.27 5.207)
+					(end 0 4.953)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -134,8 +114,8 @@
 					)
 				)
 				(rectangle
-					(start -1.27 5.207)
-					(end 0 4.953)
+					(start -1.27 0.127)
+					(end 0 -0.127)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -145,19 +125,8 @@
 					)
 				)
 				(rectangle
-					(start -1.27 6.35)
-					(end 3.81 -8.89)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start 3.81 -7.493)
-					(end 2.54 -7.747)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -167,8 +136,8 @@
 					)
 				)
 				(rectangle
-					(start 3.81 -4.953)
-					(end 2.54 -5.207)
+					(start -1.27 -4.953)
+					(end 0 -5.207)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -178,8 +147,8 @@
 					)
 				)
 				(rectangle
-					(start 3.81 -2.413)
-					(end 2.54 -2.667)
+					(start -1.27 -7.493)
+					(end 0 -7.747)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -189,8 +158,8 @@
 					)
 				)
 				(rectangle
-					(start 3.81 0.127)
-					(end 2.54 -0.127)
+					(start 3.81 5.207)
+					(end 2.54 4.953)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -211,8 +180,41 @@
 					)
 				)
 				(rectangle
-					(start 3.81 5.207)
-					(end 2.54 4.953)
+					(start 3.81 0.127)
+					(end 2.54 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -2.413)
+					(end 2.54 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -4.953)
+					(end 2.54 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -7.493)
+					(end 2.54 -7.747)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -232,60 +234,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "Pin_10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 2.54 180)
-					(length 3.81)
-					(name "Pin_11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 5.08 180)
-					(length 3.81)
-					(name "Pin_12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -384,16 +332,70 @@
 					)
 				)
 				(pin passive line
-					(at 7.62 -7.62 180)
+					(at 7.62 5.08 180)
 					(length 3.81)
-					(name "Pin_7"
+					(name "Pin_12"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 3.81)
+					(name "Pin_11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "Pin_10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 3.81)
+					(name "Pin_9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -420,16 +422,16 @@
 					)
 				)
 				(pin passive line
-					(at 7.62 -2.54 180)
+					(at 7.62 -7.62 180)
 					(length 3.81)
-					(name "Pin_9"
+					(name "Pin_7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -438,6 +440,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Diodes_Inc:AP7365-33WG-7"
 			(pin_names
@@ -572,24 +575,6 @@
 				)
 			)
 			(symbol "AP7365-33WG-7_0_0"
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at 0 -2.54 0)
 					(length 5.08)
@@ -601,6 +586,24 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -679,11 +682,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "HCP65:C_0805"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0.254) hide)
+				(offset 0.254)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -812,10 +820,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "HCP65:Pin_Header_01x32"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -871,6 +882,7 @@
 					(hide yes)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Nexperia:74LVC08APW,112_Multi"
 			(pin_names
@@ -985,26 +997,9 @@
 			)
 			(symbol "74LVC08APW,112_Multi_0_0"
 				(pin passive line
-					(at 25.4 1.27 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 -5.08 0)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -1020,11 +1015,42 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 25.4 1.27 180)
+					(length 5.08)
+					(hide yes)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(symbol "74LVC08APW,112_Multi_0_1"
 				(polyline
 					(pts
-						(xy 8.89 -2.54) (xy 10.1599 -2.54)
+						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 8.89 0) (xy 10.1599 0)
 					)
 					(stroke
 						(width 0)
@@ -1036,7 +1062,7 @@
 				)
 				(polyline
 					(pts
-						(xy 8.89 0) (xy 10.1599 0)
+						(xy 8.89 -2.54) (xy 10.1599 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -1060,18 +1086,6 @@
 				)
 				(polyline
 					(pts
-						(xy 12.065 -3.175) (xy 10.248 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
 						(xy 12.065 0.635) (xy 10.248 0.635)
 					)
 					(stroke
@@ -1084,22 +1098,10 @@
 				)
 				(polyline
 					(pts
-						(xy 14.605 -1.27) (xy 17.145 -1.27)
+						(xy 12.065 -3.175) (xy 10.248 -3.175)
 					)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1107,8 +1109,20 @@
 					)
 				)
 				(arc
-					(start 12.065 -3.175)
-					(mid 13.6634 -2.6604)
+					(start 14.605 -1.27)
+					(mid 13.6635 -2.6605)
+					(end 12.065 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 12.065 0.635)
+					(mid 13.6649 0.1222)
 					(end 14.605 -1.27)
 					(stroke
 						(width 0.254)
@@ -1118,12 +1132,12 @@
 						(type none)
 					)
 				)
-				(arc
-					(start 14.605 -1.27)
-					(mid 13.6646 0.122)
-					(end 12.065 0.635)
+				(polyline
+					(pts
+						(xy 14.605 -1.27) (xy 17.145 -1.27)
+					)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -1245,6 +1259,24 @@
 			)
 			(symbol "74LVC08APW,112_Multi_3_0"
 				(pin input line
+					(at 0 0 0)
+					(length 5.08)
+					(name "3A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at 0 -2.54 0)
 					(length 5.08)
 					(name "3B"
@@ -1280,44 +1312,8 @@
 						)
 					)
 				)
-				(pin input line
-					(at 0 0 0)
-					(length 5.08)
-					(name "3A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "74LVC08APW,112_Multi_4_0"
-				(pin output line
-					(at 25.4 -1.27 180)
-					(length 5.08)
-					(name "4Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
 					(at 0 0 0)
 					(length 5.08)
@@ -1354,7 +1350,26 @@
 						)
 					)
 				)
+				(pin output line
+					(at 25.4 -1.27 180)
+					(length 5.08)
+					(name "4Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Nexperia:74LVC1G02GV,125"
 			(pin_names
@@ -1481,24 +1496,6 @@
 			)
 			(symbol "74LVC1G02GV,125_0_0"
 				(pin input line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
 					(at 0 0 0)
 					(length 5.08)
 					(name "A"
@@ -1516,9 +1513,28 @@
 						)
 					)
 				)
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin passive line
 					(at 0 -5.08 0)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -1527,6 +1543,25 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 1.27 180)
+					(length 5.08)
+					(hide yes)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1552,36 +1587,18 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 1.27 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "74LVC1G02GV,125_0_1"
 				(polyline
 					(pts
-						(xy 8.89 -2.54) (xy 10.795 -2.54)
+						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
 					)
 					(stroke
-						(width 0)
+						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(polyline
@@ -1598,14 +1615,26 @@
 				)
 				(polyline
 					(pts
-						(xy 12.065 -3.175) (xy 10.16 -3.175)
+						(xy 8.89 -2.54) (xy 10.795 -2.54)
 					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 10.16 0.635)
+					(mid 11.2105 -1.27)
+					(end 10.16 -3.175)
 					(stroke
 						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(polyline
@@ -1622,22 +1651,10 @@
 				)
 				(polyline
 					(pts
-						(xy 15.963 -1.27) (xy 17.145 -1.27)
+						(xy 12.065 -3.175) (xy 10.16 -3.175)
 					)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1645,33 +1662,21 @@
 					)
 				)
 				(arc
-					(start 10.16 -3.175)
-					(mid 11.2106 -1.27)
-					(end 10.16 0.635)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 -3.175)
-					(mid 13.6634 -2.6604)
-					(end 14.605 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
 					(start 14.605 -1.27)
-					(mid 13.6641 0.1213)
-					(end 12.065 0.635)
+					(mid 13.6635 -2.6605)
+					(end 12.065 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 12.065 0.635)
+					(mid 13.664 0.1212)
+					(end 14.605 -1.27)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -1691,7 +1696,20 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 15.963 -1.27) (xy 17.145 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Nexperia:74LVC1G32GV,125"
 			(pin_names
@@ -1852,7 +1870,8 @@
 				)
 				(pin passive line
 					(at 0 -5.08 0)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -1861,6 +1880,25 @@
 						)
 					)
 					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 1.27 180)
+					(length 5.08)
+					(hide yes)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1886,32 +1924,26 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 25.4 1.27 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "74LVC1G32GV,125_0_1"
 				(polyline
 					(pts
-						(xy 8.802 -2.54) (xy 10.0719 -2.54)
+						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
 					)
 					(stroke
-						(width 0)
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(arc
+					(start 9.437 0.635)
+					(mid 10.4969 -1.27)
+					(end 9.437 -3.175)
+					(stroke
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1932,14 +1964,14 @@
 				)
 				(polyline
 					(pts
-						(xy 11.977 -3.175) (xy 9.437 -3.175)
+						(xy 8.802 -2.54) (xy 10.0719 -2.54)
 					)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(polyline
@@ -1956,6 +1988,42 @@
 				)
 				(polyline
 					(pts
+						(xy 11.977 -3.175) (xy 9.437 -3.175)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(arc
+					(start 14.517 -1.27)
+					(mid 13.5755 -2.6605)
+					(end 11.977 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 11.977 0.635)
+					(mid 13.576 0.1212)
+					(end 14.517 -1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
 						(xy 14.605 -1.27) (xy 16.51 -1.27)
 					)
 					(stroke
@@ -1966,55 +2034,8 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 9.437 -3.175)
-					(mid 10.4969 -1.27)
-					(end 9.437 0.635)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 11.977 -3.175)
-					(mid 13.5751 -2.6601)
-					(end 14.517 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.517 -1.27)
-					(mid 13.5761 0.1213)
-					(end 11.977 0.635)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Nexperia:74LVC74APW,118_Multi"
 			(pin_names
@@ -2139,26 +2160,9 @@
 			)
 			(symbol "74LVC74APW,118_Multi_0_0"
 				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08) hide
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 -10.16 0)
-					(length 5.08) hide
+					(length 5.08)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -2167,6 +2171,25 @@
 						)
 					)
 					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(hide yes)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2190,42 +2213,6 @@
 				)
 			)
 			(symbol "74LVC74APW,118_Multi_1_0"
-				(pin input inverted
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "~{1RD}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "1D"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input clock
 					(at 0 0 0)
 					(length 5.08)
@@ -2255,6 +2242,42 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "1D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "~{1RD}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2300,24 +2323,6 @@
 				)
 			)
 			(symbol "74LVC74APW,118_Multi_2_0"
-				(pin input inverted
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "~{2SD}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input clock
 					(at 0 0 0)
 					(length 5.08)
@@ -2329,6 +2334,24 @@
 						)
 					)
 					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "~{2SD}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2372,24 +2395,6 @@
 						)
 					)
 				)
-				(pin output inverted
-					(at 25.4 -5.08 180)
-					(length 5.08)
-					(name "~{2Q}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin output line
 					(at 25.4 -2.54 180)
 					(length 5.08)
@@ -2408,7 +2413,26 @@
 						)
 					)
 				)
+				(pin output inverted
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(name "~{2Q}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -3083,7 +3107,6 @@
 	)
 	(label "GND"
 		(at 179.07 151.13 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3094,7 +3117,6 @@
 	)
 	(label "3.3V"
 		(at 168.91 36.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3105,7 +3127,6 @@
 	)
 	(label "3.3V"
 		(at 143.51 148.59 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3116,7 +3137,6 @@
 	)
 	(label "GND"
 		(at 143.51 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3127,7 +3147,6 @@
 	)
 	(label "3.3V"
 		(at 273.05 69.85 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3138,7 +3157,6 @@
 	)
 	(label "Clock1_{Q}"
 		(at 194.31 36.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3149,7 +3167,6 @@
 	)
 	(label "3.3V"
 		(at 115.57 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3160,7 +3177,6 @@
 	)
 	(label "GND"
 		(at 168.91 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3171,7 +3187,6 @@
 	)
 	(label "~{Reset}"
 		(at 129.54 97.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3182,7 +3197,6 @@
 	)
 	(label "GND"
 		(at 91.44 43.18 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3193,7 +3207,6 @@
 	)
 	(label "3.3V"
 		(at 123.19 184.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3204,7 +3217,6 @@
 	)
 	(label "GND"
 		(at 113.03 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3215,7 +3227,6 @@
 	)
 	(label "3.3V"
 		(at 123.19 175.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3226,7 +3237,6 @@
 	)
 	(label "3.3V"
 		(at 92.71 175.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3237,7 +3247,6 @@
 	)
 	(label "GND"
 		(at 90.17 99.06 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3248,7 +3257,6 @@
 	)
 	(label "GND"
 		(at 210.82 39.37 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3259,7 +3267,6 @@
 	)
 	(label "Clock"
 		(at 273.05 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3270,7 +3277,6 @@
 	)
 	(label "3.3V"
 		(at 204.47 147.32 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3281,7 +3287,6 @@
 	)
 	(label "GND"
 		(at 100.33 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3292,7 +3297,6 @@
 	)
 	(label "~{Select Fast}"
 		(at 60.96 38.1 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3303,7 +3307,6 @@
 	)
 	(label "3.3V"
 		(at 107.95 175.26 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3314,7 +3317,6 @@
 	)
 	(label "GND"
 		(at 130.81 44.45 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3325,7 +3327,6 @@
 	)
 	(label "GND"
 		(at 128.27 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3336,7 +3337,6 @@
 	)
 	(label "3.3V"
 		(at 116.84 36.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3347,7 +3347,6 @@
 	)
 	(label "GND"
 		(at 179.07 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3358,7 +3357,6 @@
 	)
 	(label "3.3V"
 		(at 193.04 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3369,7 +3367,6 @@
 	)
 	(label "3.3V"
 		(at 154.94 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3380,7 +3377,6 @@
 	)
 	(label "Slow Clock"
 		(at 60.96 78.74 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3391,7 +3387,6 @@
 	)
 	(label "3.3V"
 		(at 130.81 36.83 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3402,7 +3397,6 @@
 	)
 	(label "GND"
 		(at 113.03 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3413,7 +3407,6 @@
 	)
 	(label "Fast Clock"
 		(at 60.96 22.86 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3424,7 +3417,6 @@
 	)
 	(label "3.3V"
 		(at 107.95 184.15 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3435,7 +3427,6 @@
 	)
 	(label "GND"
 		(at 97.79 175.26 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3446,7 +3437,6 @@
 	)
 	(label "GND"
 		(at 247.65 76.2 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3457,7 +3447,6 @@
 	)
 	(label "~{Clock1}_{Q}"
 		(at 194.31 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3468,7 +3457,6 @@
 	)
 	(label "GND"
 		(at 209.55 95.25 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3479,7 +3467,6 @@
 	)
 	(label "GND"
 		(at 129.54 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3490,7 +3477,6 @@
 	)
 	(label "Clock2_{Q}"
 		(at 193.04 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3501,7 +3487,6 @@
 	)
 	(label "3.3V"
 		(at 167.64 92.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3512,7 +3497,6 @@
 	)
 	(label "~{Reset}"
 		(at 130.81 41.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3523,7 +3507,6 @@
 	)
 	(label "~{Reset}"
 		(at 167.64 97.79 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3534,7 +3517,6 @@
 	)
 	(label "GND"
 		(at 167.64 100.33 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3545,7 +3527,6 @@
 	)
 	(label "GND"
 		(at 179.07 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3556,7 +3537,6 @@
 	)
 	(label "3.3V"
 		(at 194.31 34.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3567,7 +3547,6 @@
 	)
 	(label "GND"
 		(at 128.27 184.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3578,7 +3557,6 @@
 	)
 	(label "5V"
 		(at 93.98 148.59 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3589,7 +3567,6 @@
 	)
 	(label "3.3V"
 		(at 236.22 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3600,7 +3577,6 @@
 	)
 	(label "3.3V"
 		(at 156.21 34.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3611,7 +3587,6 @@
 	)
 	(label "3.3V"
 		(at 129.54 92.71 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3622,7 +3597,6 @@
 	)
 	(label "~{Reset}"
 		(at 168.91 41.91 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3633,7 +3607,6 @@
 	)
 	(label "GND"
 		(at 109.22 153.67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3644,7 +3617,6 @@
 	)
 	(label "3.3V"
 		(at 234.95 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4265,7 +4237,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "16e9132d-1f5d-4764-8e2b-1cd43a7a2c22")
-		(property "Reference" "C27"
+		(property "Reference" "C44"
 			(at 140.716 151.13 0)
 			(effects
 				(font
@@ -4753,7 +4725,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2e00584a-5177-477b-9ae3-1942c2341906")
-		(property "Reference" "C27"
+		(property "Reference" "C43"
 			(at 97.536 151.13 0)
 			(effects
 				(font
@@ -6368,4 +6340,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

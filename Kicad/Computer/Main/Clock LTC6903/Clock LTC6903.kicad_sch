@@ -1,9 +1,9 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "337b5f72-8be1-4121-9dc6-479b565482b2")
-	(paper "A4")
+	(paper "A5")
 	(title_block
 		(title "Clock LTC6903")
 		(date "2023-12-06")
@@ -133,24 +133,6 @@
 			)
 			(symbol "LTC6903CMS8#PBF_0_0"
 				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 0 0)
 					(length 5.08)
 					(name "SDI"
@@ -205,16 +187,16 @@
 					)
 				)
 				(pin passive line
-					(at 27.94 -7.62 180)
+					(at 0 -7.62 0)
 					(length 5.08)
-					(name "~{CLK}"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -223,16 +205,16 @@
 					)
 				)
 				(pin passive line
-					(at 27.94 -5.08 180)
+					(at 27.94 0 180)
 					(length 5.08)
-					(name "CLK"
+					(name "V+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -259,16 +241,34 @@
 					)
 				)
 				(pin passive line
-					(at 27.94 0 180)
+					(at 27.94 -5.08 180)
 					(length 5.08)
-					(name "V+"
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 27.94 -7.62 180)
+					(length 5.08)
+					(name "~{CLK}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -291,10 +291,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Conn_01x03_Pin_1"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -368,9 +371,42 @@
 				)
 			)
 			(symbol "Conn_01x03_Pin_1_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -394,7 +430,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -402,39 +438,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(pin passive line
@@ -492,10 +495,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Conn_01x03_Pin_2"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -569,9 +575,42 @@
 				)
 			)
 			(symbol "Conn_01x03_Pin_2_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -595,7 +634,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -603,39 +642,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(pin passive line
@@ -693,10 +699,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector:Conn_01x03_Pin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -770,9 +779,42 @@
 				)
 			)
 			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -796,7 +838,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -804,39 +846,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(pin passive line
@@ -894,11 +903,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "HCP65:C_0805"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0.254) hide)
+				(offset 0.254)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1027,23 +1041,24 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(no_connect
-		(at 54.61 93.98)
+		(at 54.61 41.91)
 		(uuid "0b5a681f-d86e-4498-b31f-a34eb6fe52a0")
 	)
 	(no_connect
-		(at 85.09 93.98)
+		(at 85.09 41.91)
 		(uuid "66914bd3-fe4e-45c9-a9b4-cb957aaf4a99")
 	)
 	(no_connect
-		(at 142.24 120.65)
+		(at 142.24 68.58)
 		(uuid "e1fd387f-a282-497c-bd97-195a409fd5aa")
 	)
 	(wire
 		(pts
-			(xy 104.14 115.57) (xy 114.3 115.57)
+			(xy 104.14 63.5) (xy 114.3 63.5)
 		)
 		(stroke
 			(width 0)
@@ -1053,7 +1068,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 113.03) (xy 114.3 113.03)
+			(xy 104.14 60.96) (xy 114.3 60.96)
 		)
 		(stroke
 			(width 0)
@@ -1063,7 +1078,7 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 118.11) (xy 114.3 118.11)
+			(xy 104.14 66.04) (xy 114.3 66.04)
 		)
 		(stroke
 			(width 0)
@@ -1072,8 +1087,7 @@
 		(uuid "c643d1c9-d1e8-4292-bba3-d0015beadedf")
 	)
 	(label "GND"
-		(at 114.3 120.65 180)
-		(fields_autoplaced yes)
+		(at 114.3 68.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1083,8 +1097,7 @@
 		(uuid "15396d70-7a18-4f96-8eda-b728be175d05")
 	)
 	(label "~{Reset}"
-		(at 54.61 91.44 180)
-		(fields_autoplaced yes)
+		(at 54.61 39.37 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1094,8 +1107,7 @@
 		(uuid "448442ef-e303-49e9-b39c-0d734eabfe2f")
 	)
 	(label "3.3V"
-		(at 85.09 91.44 0)
-		(fields_autoplaced yes)
+		(at 85.09 39.37 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1105,8 +1117,7 @@
 		(uuid "46394f42-b244-4c80-b1bd-ee05855651e0")
 	)
 	(label "GND"
-		(at 72.39 113.03 0)
-		(fields_autoplaced yes)
+		(at 72.39 60.96 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1116,8 +1127,7 @@
 		(uuid "4eb9b52b-5f0a-42f6-973c-25f94caafb7a")
 	)
 	(label "SDI"
-		(at 114.3 113.03 180)
-		(fields_autoplaced yes)
+		(at 114.3 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1127,8 +1137,7 @@
 		(uuid "66053900-59ff-4b85-b900-bd9d034a6ecc")
 	)
 	(label "CLK"
-		(at 142.24 118.11 0)
-		(fields_autoplaced yes)
+		(at 142.24 66.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1138,8 +1147,7 @@
 		(uuid "6a051e1d-c5e9-426f-92ba-9b016eaa6648")
 	)
 	(label "3.3V"
-		(at 67.31 113.03 180)
-		(fields_autoplaced yes)
+		(at 67.31 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1149,8 +1157,7 @@
 		(uuid "6f5f9edc-8c4f-4021-819f-ba5290525120")
 	)
 	(label "GND"
-		(at 54.61 96.52 180)
-		(fields_autoplaced yes)
+		(at 54.61 44.45 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1160,8 +1167,7 @@
 		(uuid "78e9065f-7ea1-4bd6-afa2-edaed0b33623")
 	)
 	(label "CLK"
-		(at 85.09 96.52 0)
-		(fields_autoplaced yes)
+		(at 85.09 44.45 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1171,8 +1177,7 @@
 		(uuid "c0792a0e-7bfd-4b8d-bd74-89fc92f7e2e9")
 	)
 	(label "3.3V"
-		(at 142.24 115.57 0)
-		(fields_autoplaced yes)
+		(at 142.24 63.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1182,8 +1187,7 @@
 		(uuid "d36fa7ce-1cc2-4eb5-9fe1-5b7bbac0fbfb")
 	)
 	(label "SCK"
-		(at 114.3 115.57 180)
-		(fields_autoplaced yes)
+		(at 114.3 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1193,8 +1197,7 @@
 		(uuid "e84c4914-92b1-47fd-bd80-a9f5dc3c205d")
 	)
 	(label "~{SEN}"
-		(at 114.3 118.11 180)
-		(fields_autoplaced yes)
+		(at 114.3 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1204,8 +1207,7 @@
 		(uuid "f2ba3278-5b19-4700-97ef-f59f454c9aa8")
 	)
 	(label "3.3V"
-		(at 142.24 113.03 0)
-		(fields_autoplaced yes)
+		(at 142.24 60.96 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1217,7 +1219,7 @@
 	(symbol
 		(lib_name "Conn_01x03_Pin_1")
 		(lib_id "Connector:Conn_01x03_Pin")
-		(at 80.01 93.98 0)
+		(at 80.01 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1225,7 +1227,7 @@
 		(dnp no)
 		(uuid "090d9d5d-1a7c-49ee-81d6-6f2936916bd4")
 		(property "Reference" "J2"
-			(at 80.01 88.9 0)
+			(at 80.01 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1233,7 +1235,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03_Pin"
-			(at 80.01 99.06 0)
+			(at 80.01 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1241,7 +1243,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 80.01 93.98 0)
+			(at 80.01 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1250,7 +1252,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 80.01 93.98 0)
+			(at 80.01 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1259,7 +1261,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 80.01 93.98 0)
+			(at 80.01 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1288,7 +1290,7 @@
 	(symbol
 		(lib_name "Conn_01x03_Pin_2")
 		(lib_id "Connector:Conn_01x03_Pin")
-		(at 59.69 93.98 0)
+		(at 59.69 41.91 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -1297,7 +1299,7 @@
 		(dnp no)
 		(uuid "438ef4db-20ac-42e2-8e52-b92b5d5c9068")
 		(property "Reference" "J1"
-			(at 59.69 88.9 0)
+			(at 59.69 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1305,7 +1307,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03_Pin"
-			(at 59.69 99.06 0)
+			(at 59.69 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1313,7 +1315,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 59.69 93.98 0)
+			(at 59.69 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1322,7 +1324,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 59.69 93.98 0)
+			(at 59.69 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1331,7 +1333,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 59.69 93.98 0)
+			(at 59.69 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1359,7 +1361,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x03_Pin")
-		(at 99.06 115.57 0)
+		(at 99.06 63.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1367,7 +1369,7 @@
 		(dnp no)
 		(uuid "5f31ecaa-bc1b-4185-9574-01c07dbe6fb4")
 		(property "Reference" "J3"
-			(at 99.06 110.49 0)
+			(at 99.06 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1375,7 +1377,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03_Pin"
-			(at 99.06 120.65 0)
+			(at 99.06 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1383,7 +1385,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 99.06 115.57 0)
+			(at 99.06 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1392,7 +1394,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 99.06 115.57 0)
+			(at 99.06 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1401,7 +1403,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 99.06 115.57 0)
+			(at 99.06 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1429,7 +1431,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 67.31 113.03 0)
+		(at 67.31 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1437,7 +1439,7 @@
 		(dnp no)
 		(uuid "696d6131-effb-4a2a-a6a8-5939ca20a6e3")
 		(property "Reference" "C2"
-			(at 69.596 110.49 0)
+			(at 69.596 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1445,7 +1447,7 @@
 			)
 		)
 		(property "Value" "1μF"
-			(at 69.85 115.57 0)
+			(at 69.85 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1453,7 +1455,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 84.074 120.65 0)
+			(at 84.074 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1462,7 +1464,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 69.5325 112.7125 90)
+			(at 69.5325 60.6425 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1471,7 +1473,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 67.31 113.03 0)
+			(at 67.31 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1522,7 +1524,7 @@
 	)
 	(symbol
 		(lib_id "Analog_Devices:LTC6903CMS8#PBF")
-		(at 114.3 113.03 0)
+		(at 114.3 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1530,7 +1532,7 @@
 		(dnp no)
 		(uuid "9bbaa77b-9981-49af-9fe8-81904fca9317")
 		(property "Reference" "IC1"
-			(at 128.27 107.95 0)
+			(at 128.27 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1538,7 +1540,7 @@
 			)
 		)
 		(property "Value" "LTC6903CMS8#PBF"
-			(at 128.27 109.855 0)
+			(at 128.27 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1547,7 +1549,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P490X110-8N"
-			(at 140.335 133.985 0)
+			(at 140.335 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1557,7 +1559,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/69034fe.pdf"
-			(at 140.335 136.525 0)
+			(at 140.335 84.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1567,7 +1569,7 @@
 			)
 		)
 		(property "Description" "SPI clock 1KHz - 68MHz"
-			(at 128.27 123.825 0)
+			(at 128.27 71.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1575,7 +1577,7 @@
 			)
 		)
 		(property "Height" "1.1"
-			(at 140.335 141.605 0)
+			(at 140.335 89.535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1585,7 +1587,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Analog Devices"
-			(at 140.335 144.145 0)
+			(at 140.335 92.075 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1595,7 +1597,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "LTC6903CMS8#PBF"
-			(at 140.335 146.685 0)
+			(at 140.335 94.615 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1605,7 +1607,7 @@
 			)
 		)
 		(property "Mouser Part Number" ""
-			(at 138.43 125.73 0)
+			(at 138.43 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1615,7 +1617,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" ""
-			(at 138.43 128.27 0)
+			(at 138.43 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1625,7 +1627,7 @@
 			)
 		)
 		(property "Silkscreen" "LTC6903"
-			(at 140.335 131.445 0)
+			(at 140.335 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1635,7 +1637,7 @@
 			)
 		)
 		(property "Garbage" "Clock Generators & Support Products 1KHz - 68MHz SPI Programmable Oscillator"
-			(at 114.3 113.03 0)
+			(at 114.3 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1687,4 +1689,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )

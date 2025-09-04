@@ -59,7 +59,12 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "silk_edge_clearance|7280277|-1794671|f0928dfc-031c-4276-a297-3e1fdfc3b8b2|3d72a087-1c5a-4a54-89ea-d57b1a1a2232",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -463,6 +468,7 @@
       "single_global_label": "ignore",
       "unannotated": "error",
       "unconnected_wire_endpoint": "ignore",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"

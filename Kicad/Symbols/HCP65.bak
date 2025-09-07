@@ -43091,7 +43091,7 @@
 			(pin output inverted
 				(at 35.56 -63.5 180)
 				(length 5.08)
-				(name "~{Device__{CS}2}"
+				(name "~{Device2}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43109,7 +43109,7 @@
 			(pin output inverted
 				(at 35.56 -66.04 180)
 				(length 5.08)
-				(name "~{Device__{CS}3}"
+				(name "~{Device3}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43127,7 +43127,7 @@
 			(pin output inverted
 				(at 35.56 -68.58 180)
 				(length 5.08)
-				(name "~{Device__{CS}4}"
+				(name "~{Device4}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43145,7 +43145,7 @@
 			(pin output inverted
 				(at 35.56 -71.12 180)
 				(length 5.08)
-				(name "~{Device__{CS}5}"
+				(name "~{Device5}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43163,7 +43163,7 @@
 			(pin output inverted
 				(at 35.56 -73.66 180)
 				(length 5.08)
-				(name "~{Device__{CS}6}"
+				(name "~{Device6}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43181,7 +43181,7 @@
 			(pin output inverted
 				(at 35.56 -76.2 180)
 				(length 5.08)
-				(name "~{Device__{CS}7}"
+				(name "~{Device7}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43199,7 +43199,7 @@
 			(pin output inverted
 				(at 35.56 -86.36 180)
 				(length 5.08)
-				(name "~{Device__{CS}17}"
+				(name "~{Device17}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43217,7 +43217,7 @@
 			(pin output inverted
 				(at 35.56 -104.14 180)
 				(length 5.08)
-				(name "~{Special__{CS}2}"
+				(name "~{Register2}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43235,7 +43235,7 @@
 			(pin output inverted
 				(at 35.56 -106.68 180)
 				(length 5.08)
-				(name "~{Special__{CS}3}"
+				(name "~{Register3}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43253,7 +43253,7 @@
 			(pin output inverted
 				(at 35.56 -109.22 180)
 				(length 5.08)
-				(name "~{Special__{CS}4}"
+				(name "~{Register4}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43271,7 +43271,7 @@
 			(pin output inverted
 				(at 35.56 -111.76 180)
 				(length 5.08)
-				(name "~{Special__{CS}5}"
+				(name "~{Register5}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43289,7 +43289,7 @@
 			(pin output inverted
 				(at 35.56 -114.3 180)
 				(length 5.08)
-				(name "~{Special__{CS}6}"
+				(name "~{Register6}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43307,7 +43307,7 @@
 			(pin output inverted
 				(at 35.56 -116.84 180)
 				(length 5.08)
-				(name "~{Special__{CS}7}"
+				(name "~{Register7}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43325,7 +43325,7 @@
 			(pin output inverted
 				(at 35.56 -137.16 180)
 				(length 5.08)
-				(name "~{Special__{CS}15}"
+				(name "~{Register15}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -43342,7 +43342,7 @@
 			)
 		)
 		(symbol "MPU_Address_Decode_1_1"
-			(text "~{OTHER} (~{Kernal_Mode})\n200000..FFFFFF\n~{OTHER} (Kernal_Mode)\n000000..FFFFFF"
+			(text "~{Main} (~{Kernal_Mode})\n200000..FFFFFF\n~{Main} (Kernal_Mode)\n000000..FFFFFF"
 				(at 1.27 -52.07 0)
 				(effects
 					(font
@@ -44026,9 +44026,45 @@
 				)
 			)
 			(pin output inverted
+				(at 35.56 -30.48 180)
+				(length 5.08)
+				(name "~{Devices}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 35.56 -33.02 180)
+				(length 5.08)
+				(name "~{Registers}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
 				(at 35.56 -43.18 180)
 				(length 5.08)
-				(name "~{RAM_{CS}}"
+				(name "~{RAM}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44046,7 +44082,7 @@
 			(pin output inverted
 				(at 35.56 -45.72 180)
 				(length 5.08)
-				(name "~{ROM_{CS}}"
+				(name "~{ROM}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44061,28 +44097,10 @@
 					)
 				)
 			)
-			(pin output line
+			(pin output inverted
 				(at 35.56 -48.26 180)
 				(length 5.08)
-				(name "~{Device}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "29"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output inverted
-				(at 35.56 -53.34 180)
-				(length 5.08)
-				(name "~{Other}"
+				(name "~{Main}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44100,7 +44118,7 @@
 			(pin output inverted
 				(at 35.56 -60.96 180)
 				(length 5.08)
-				(name "~{Device__{CS}1}"
+				(name "~{Device1}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44118,7 +44136,7 @@
 			(pin output inverted
 				(at 35.56 -83.82 180)
 				(length 5.08)
-				(name "~{Device__{CS}16}"
+				(name "~{Device16}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44136,7 +44154,7 @@
 			(pin output inverted
 				(at 35.56 -88.9 180)
 				(length 5.08)
-				(name "~{Device__{CS}18}"
+				(name "~{Device18}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44154,7 +44172,7 @@
 			(pin output inverted
 				(at 35.56 -91.44 180)
 				(length 5.08)
-				(name "~{Device__{CS}19}"
+				(name "~{Device19}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44170,27 +44188,9 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -96.52 180)
-				(length 5.08)
-				(name "~{Special}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "28"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output inverted
 				(at 35.56 -99.06 180)
 				(length 5.08)
-				(name "~{Special__{CS}0}"
+				(name "~{Register0}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44208,7 +44208,7 @@
 			(pin output inverted
 				(at 35.56 -101.6 180)
 				(length 5.08)
-				(name "~{Special__{CS}1}"
+				(name "~{Register1}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44226,7 +44226,7 @@
 			(pin output inverted
 				(at 35.56 -119.38 180)
 				(length 5.08)
-				(name "~{Special__{CS}8}"
+				(name "~{Register8}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44244,7 +44244,7 @@
 			(pin output inverted
 				(at 35.56 -121.92 180)
 				(length 5.08)
-				(name "~{Special__{CS}9}"
+				(name "~{Register9}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44262,7 +44262,7 @@
 			(pin output inverted
 				(at 35.56 -124.46 180)
 				(length 5.08)
-				(name "~{Special__{CS}10}"
+				(name "~{Register10}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44280,7 +44280,7 @@
 			(pin output inverted
 				(at 35.56 -127 180)
 				(length 5.08)
-				(name "~{Special__{CS}11}"
+				(name "~{Register11}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44298,7 +44298,7 @@
 			(pin output inverted
 				(at 35.56 -129.54 180)
 				(length 5.08)
-				(name "~{Special__{CS}12}"
+				(name "~{Register12}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44316,7 +44316,7 @@
 			(pin output inverted
 				(at 35.56 -132.08 180)
 				(length 5.08)
-				(name "~{Special__{CS}13}"
+				(name "~{Register13}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44334,7 +44334,7 @@
 			(pin output inverted
 				(at 35.56 -134.62 180)
 				(length 5.08)
-				(name "~{Special__{CS}14}"
+				(name "~{Register14}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44667,7 +44667,7 @@
 			(pin input inverted
 				(at -5.08 -5.08 0)
 				(length 5.08)
-				(name "~{Special}"
+				(name "~{Register}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -44675,24 +44675,6 @@
 					)
 				)
 				(number "53"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input inverted
-				(at -5.08 -10.16 0)
-				(length 5.08)
-				(name "~{Address_Valid}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -45287,6 +45269,25 @@
 					)
 				)
 				(number "52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -25.4 180)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
 					(effects
 						(font
 							(size 1.27 1.27)

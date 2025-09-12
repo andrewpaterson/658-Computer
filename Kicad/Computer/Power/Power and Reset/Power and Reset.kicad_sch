@@ -1520,171 +1520,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Littlefuse:LS0504EVT233"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 12.7 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LS0504EVT233"
-				(at 12.7 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(thickness 0.254)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOT95P280X145-3N"
-				(at 28.702 -14.732 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.mouser.in/datasheet/2/240/Littelfuse-3045601.pdf"
-				(at 28.702 -17.272 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "OCP and OVP eFuse, 5V"
-				(at 12.7 -5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.45"
-				(at 28.702 -22.352 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "LITTELFUSE"
-				(at 28.702 -24.892 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "LS0504EVT233"
-				(at 28.702 -27.432 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "LS0504"
-				(at 28.575 -30.48 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(symbol "LS0504EVT233_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "LS0504EVT233_1_1"
-				(polyline
-					(pts
-						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -4.445) (xy 5.08 -4.445) (xy 5.08 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type solid)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Maxim:DS1813R-10+T&R"
 			(pin_names
 				(offset 0.762)
@@ -3511,13 +3346,13 @@
 		(uuid "361bf262-876c-4bc0-84d6-bbc69710658e")
 	)
 	(junction
-		(at 266.7 40.64)
+		(at 229.87 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7789bb14-250b-41f2-9a43-20df5970efba")
 	)
 	(junction
-		(at 260.35 40.64)
+		(at 223.52 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a7116da3-004f-4d49-9bf9-519062d11973")
@@ -3866,7 +3701,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.82 40.64) (xy 227.33 40.64)
+			(xy 210.82 40.64) (xy 223.52 40.64)
 		)
 		(stroke
 			(width 0)
@@ -3886,7 +3721,7 @@
 	)
 	(wire
 		(pts
-			(xy 266.7 43.18) (xy 266.7 40.64)
+			(xy 229.87 43.18) (xy 229.87 40.64)
 		)
 		(stroke
 			(width 0)
@@ -3946,7 +3781,7 @@
 	)
 	(wire
 		(pts
-			(xy 266.7 58.42) (xy 266.7 57.15)
+			(xy 229.87 58.42) (xy 229.87 57.15)
 		)
 		(stroke
 			(width 0)
@@ -4056,7 +3891,7 @@
 	)
 	(wire
 		(pts
-			(xy 266.7 48.26) (xy 266.7 49.53)
+			(xy 229.87 48.26) (xy 229.87 49.53)
 		)
 		(stroke
 			(width 0)
@@ -4136,7 +3971,7 @@
 	)
 	(wire
 		(pts
-			(xy 266.7 40.64) (xy 276.86 40.64)
+			(xy 229.87 40.64) (xy 240.03 40.64)
 		)
 		(stroke
 			(width 0)
@@ -4176,17 +4011,7 @@
 	)
 	(wire
 		(pts
-			(xy 252.73 40.64) (xy 260.35 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f99006bd-64d4-4e80-b191-29634a7ed6b1")
-	)
-	(wire
-		(pts
-			(xy 260.35 40.64) (xy 266.7 40.64)
+			(xy 223.52 40.64) (xy 229.87 40.64)
 		)
 		(stroke
 			(width 0)
@@ -4204,18 +4029,8 @@
 		)
 		(uuid "009e7b47-c7b3-4841-99f3-947dc7a9bb7c")
 	)
-	(label "GND"
-		(at 227.33 43.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "03b755c5-88a0-47b8-a7a3-c9d09fb45b11")
-	)
 	(label "5V"
-		(at 276.86 40.64 0)
+		(at 240.03 40.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4245,7 +4060,7 @@
 		(uuid "085f6f4b-3e05-4abd-a21a-70e708f7dbee")
 	)
 	(label "GND"
-		(at 260.35 48.26 270)
+		(at 223.52 48.26 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4303,16 +4118,6 @@
 			(justify left bottom)
 		)
 		(uuid "560842a2-fc2a-40a9-a655-16530020d214")
-	)
-	(label "5V Unprotected"
-		(at 210.82 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "56f545c2-805c-4caf-88aa-4706b1faeadc")
 	)
 	(label "3.3V"
 		(at 76.2 129.54 0)
@@ -4555,7 +4360,7 @@
 		(uuid "da7d0520-d59c-4149-9617-1425c26ee801")
 	)
 	(label "GND"
-		(at 266.7 58.42 270)
+		(at 229.87 58.42 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4616,7 +4421,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_Small_Filled")
-		(at 266.7 45.72 270)
+		(at 229.87 45.72 270)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4625,7 +4430,7 @@
 		(dnp no)
 		(uuid "0174ee03-bb54-4941-831f-d597edf3f46c")
 		(property "Reference" "LED1"
-			(at 269.875 46.99 0)
+			(at 233.045 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4634,7 +4439,7 @@
 			)
 		)
 		(property "Value" "LED_Small_Filled"
-			(at 264.16 50.165 0)
+			(at 227.33 50.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4644,7 +4449,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
-			(at 266.7 45.72 90)
+			(at 229.87 45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4653,7 +4458,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 266.7 45.72 90)
+			(at 229.87 45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4662,7 +4467,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol, filled shape"
-			(at 266.7 45.72 0)
+			(at 229.87 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4671,7 +4476,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 266.7 45.72 0)
+			(at 229.87 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5091,7 +4896,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_Radial_D6.3mm_P2.50mm")
-		(at 260.35 44.45 0)
+		(at 223.52 44.45 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5100,7 +4905,7 @@
 		(dnp no)
 		(uuid "326b55c3-247d-4b1e-88bc-ca1e39bf4e77")
 		(property "Reference" "C5"
-			(at 259.715 41.91 0)
+			(at 222.885 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5109,7 +4914,7 @@
 			)
 		)
 		(property "Value" "100μF"
-			(at 260.35 46.99 0)
+			(at 223.52 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5118,7 +4923,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:CP_Radial_D6.3mm_P2.50mm"
-			(at 260.35 55.88 0)
+			(at 223.52 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5127,7 +4932,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 255.27 49.53 0)
+			(at 218.44 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5136,7 +4941,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 259.715 46.99 0)
+			(at 222.885 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5476,119 +5281,6 @@
 			(project "Pico Power"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Littlefuse:LS0504EVT233")
-		(at 227.33 40.64 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4109d93f-f3f2-4ff0-a445-b6c1fa2d07c5")
-		(property "Reference" "IC6"
-			(at 240.03 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LS0504EVT233"
-			(at 240.03 37.465 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.254)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOT95P280X145-3N"
-			(at 256.032 55.372 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.mouser.in/datasheet/2/240/Littelfuse-3045601.pdf"
-			(at 256.032 57.912 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "OCP and OVP eFuse, 5V"
-			(at 240.03 46.355 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.45"
-			(at 256.032 62.992 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "LITTELFUSE"
-			(at 256.032 65.532 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "LS0504EVT233"
-			(at 256.032 68.072 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "LS0504"
-			(at 255.905 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a8a5d450-98e4-47cc-a9f3-fbf76440bada")
-		)
-		(pin "2"
-			(uuid "c3c9578c-cc23-4fd1-acbb-fa7f45668cef")
-		)
-		(pin "3"
-			(uuid "878f0002-116a-42cb-8bf8-0f82825f3725")
-		)
-		(instances
-			(project ""
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "IC6")
 					(unit 1)
 				)
 			)
@@ -6293,7 +5985,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_Axial_D1.6mm_P5.08mm")
-		(at 266.7 57.15 90)
+		(at 229.87 57.15 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6301,7 +5993,7 @@
 		(dnp no)
 		(uuid "89b65887-f2ea-4e23-a326-727cbf49d053")
 		(property "Reference" "R4"
-			(at 264.668 53.34 0)
+			(at 227.838 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6309,7 +6001,7 @@
 			)
 		)
 		(property "Value" "10KΩ"
-			(at 268.986 53.34 0)
+			(at 232.156 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6317,7 +6009,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal"
-			(at 273.177 48.641 0)
+			(at 236.347 48.641 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6326,7 +6018,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 266.7 53.34 90)
+			(at 229.87 53.34 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6335,7 +6027,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 275.082 53.086 0)
+			(at 238.252 53.086 0)
 			(effects
 				(font
 					(size 1.27 1.27)

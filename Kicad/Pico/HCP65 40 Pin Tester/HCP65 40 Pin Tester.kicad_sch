@@ -1457,6 +1457,113 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Mechanical:MountingHole_Pad"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_Pad"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole with connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*Pad*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_Pad_0_1"
+				(circle
+					(center 0 1.27)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_1_1"
+				(pin input line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Nexperia:BAS40-06W,115"
 			(pin_names
 				(offset 0.762)
@@ -4414,6 +4521,16 @@
 	(no_connect
 		(at 60.96 149.86)
 		(uuid "ef644e1e-a36a-49f7-8f10-eab630df460a")
+	)
+	(wire
+		(pts
+			(xy 320.04 55.88) (xy 317.5 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00583a47-463c-41af-a74a-9bcc964ff37f")
 	)
 	(wire
 		(pts
@@ -7485,6 +7602,16 @@
 		)
 		(uuid "07da6143-8e41-42cc-8ab5-a116a6591c8c")
 	)
+	(label "12V"
+		(at 38.1 227.33 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "082d4108-1915-4b50-8975-93e53c4cc73e")
+	)
 	(label "S19"
 		(at 339.09 156.21 0)
 		(effects
@@ -7494,6 +7621,16 @@
 			(justify left bottom)
 		)
 		(uuid "08b117dd-c9d8-43c9-b91c-5aa4c951dd4e")
+	)
+	(label "GNDa"
+		(at 38.1 257.81 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0b75cac8-9bfa-4e3b-a542-85ab1ba12d7c")
 	)
 	(label "GNDb"
 		(at 171.45 132.08 0)
@@ -7785,6 +7922,16 @@
 		)
 		(uuid "247a407b-1cba-49bf-bdba-bd99b51118d7")
 	)
+	(label "GNDc"
+		(at 38.1 273.05 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "25a3234b-ba55-4343-bb3a-193e71c4e00f")
+	)
 	(label "IO10"
 		(at 153.67 60.96 180)
 		(effects
@@ -7794,6 +7941,16 @@
 			(justify right bottom)
 		)
 		(uuid "27e55f5a-a77c-4c7b-8f00-9bdc28316a07")
+	)
+	(label "5Vb"
+		(at 38.1 242.57 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "28496fc9-43df-45ba-81a8-1383345fd064")
 	)
 	(label "GNDb"
 		(at 171.45 148.59 0)
@@ -7974,6 +8131,16 @@
 			(justify right bottom)
 		)
 		(uuid "41fd255c-3bb0-485e-a29f-da4a2097e62c")
+	)
+	(label "5Va"
+		(at 57.15 227.33 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "453ac40d-606e-4be5-bfdb-df9d48d9d220")
 	)
 	(label "IO30"
 		(at 100.33 219.71 180)
@@ -8405,6 +8572,16 @@
 		)
 		(uuid "6d420e80-d872-4225-bff5-867452a4c0ef")
 	)
+	(label "5Va"
+		(at 312.42 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6f590f7d-ebab-4678-8872-ce08cc032073")
+	)
 	(label "GNDb"
 		(at 264.16 116.84 0)
 		(effects
@@ -8625,6 +8802,16 @@
 		)
 		(uuid "82bb76f1-d232-42e6-bd6d-142f6346f0a0")
 	)
+	(label "GNDb"
+		(at 327.66 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "82dfcf71-8d0b-410c-8dc2-bdd491d3b288")
+	)
 	(label "IO7"
 		(at 100.33 146.05 180)
 		(effects
@@ -8694,6 +8881,16 @@
 			(justify left bottom)
 		)
 		(uuid "8844d02d-8b13-4925-858b-1620228494d9")
+	)
+	(label "5Vc"
+		(at 57.15 242.57 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "89aa2727-d50f-4ffa-b6ce-2194abf6db90")
 	)
 	(label "IO9"
 		(at 193.04 161.29 180)
@@ -9356,6 +9553,16 @@
 		(uuid "d06924a5-f05d-4e98-93e1-2d69c2127b15")
 	)
 	(label "GNDb"
+		(at 57.15 257.81 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d0a26d11-a089-4fa7-8248-1a740e50d0f8")
+	)
+	(label "GNDb"
 		(at 171.45 195.58 0)
 		(effects
 			(font
@@ -9374,6 +9581,16 @@
 			(justify left bottom)
 		)
 		(uuid "d3c0464d-83f5-452e-81c9-d1d0e595509e")
+	)
+	(label "GNDd"
+		(at 57.15 273.05 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d5bbcdb0-41ea-4ff8-8e49-8190eb6a55b2")
 	)
 	(label "IO34"
 		(at 193.04 229.87 180)
@@ -10211,6 +10428,146 @@
 		)
 	)
 	(symbol
+		(lib_id "Wurth_Elektronik:150224SS73100")
+		(at 323.85 55.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0646b338-d64c-4bee-9688-9b48b4de7e94")
+		(property "Reference" "LED49"
+			(at 323.85 57.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224SS73100"
+			(at 311.785 42.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224SS73100A"
+			(at 320.04 47.625 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.farnell.com/datasheets/2301711.pdf"
+			(at 320.04 45.085 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "red LED"
+			(at 323.85 52.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.31"
+			(at 320.04 40.005 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 320.04 37.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "red"
+			(at 318.135 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "150224SS73100"
+			(at 320.04 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-150224SS73100"
+			(at 320.04 32.385 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224SS73100?qs=5aG0NVq1C4xYrTr%2FIVl59g%3D%3D"
+			(at 320.04 29.845 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Red LED"
+			(at 323.85 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3e559cce-a663-472c-8adf-baf50029340e")
+		)
+		(pin "2"
+			(uuid "65d1425b-734f-4a4f-859e-02e52c4459e3")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "LED49")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 260.35 195.58 180)
 		(unit 1)
@@ -10367,7 +10724,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 258.445 49.53 0)
 			(effects
 				(font
@@ -10698,6 +11055,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 57.15 240.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "14487b39-84ff-4e62-acb3-5558d7f7436e")
+		(property "Reference" "H4"
+			(at 57.15 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 57.15 235.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 57.15 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 57.15 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ae89f186-afc5-4f6a-a1c9-70394b1edf9f")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 167.64 139.7 180)
 		(unit 1)
@@ -10832,6 +11253,70 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 57.15 270.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "1d150f53-6455-4eec-8e7c-177d21605df3")
+		(property "Reference" "H8"
+			(at 57.15 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 57.15 266.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 57.15 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 57.15 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a0421f82-63d4-49d7-9dbd-f8ec77e8d37f")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H8")
 					(unit 1)
 				)
 			)
@@ -11009,7 +11494,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 258.445 33.02 0)
 			(effects
 				(font
@@ -11794,7 +12279,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 258.445 66.04 0)
 			(effects
 				(font
@@ -12002,7 +12487,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 112.395 44.45 0)
 			(effects
 				(font
@@ -13092,7 +13577,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 112.395 60.96 0)
 			(effects
 				(font
@@ -14133,6 +14618,134 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 38.1 270.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "510fd5bc-b2eb-476d-95e5-c03b04dfa700")
+		(property "Reference" "H6"
+			(at 38.1 264.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 38.1 266.065 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 38.1 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 38.1 270.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "44debb4a-08b3-4b7e-9ba9-92f4e963453f")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 57.15 255.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "529ed7a9-0f7c-4eb8-aaf9-48f905182b57")
+		(property "Reference" "H7"
+			(at 57.15 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 57.15 250.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 57.15 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 57.15 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f5c5b51d-f90c-49ea-878b-32860938a114")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 260.35 148.59 180)
 		(unit 1)
@@ -14909,6 +15522,70 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 38.1 255.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d9077be-dad5-4020-9ef2-16b1539ffa7e")
+		(property "Reference" "H5"
+			(at 38.1 248.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 38.1 250.825 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 38.1 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 38.1 255.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1fa9a0b4-bc3e-4cda-b12c-48f38bb1b008")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -17097,7 +17774,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 112.395 93.98 0)
 			(effects
 				(font
@@ -17635,6 +18312,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 38.1 240.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "99f8be5e-ee1a-4b4a-8229-2a1c5ec45fd0")
+		(property "Reference" "H3"
+			(at 38.1 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 38.1 235.585 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 38.1 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 38.1 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4ce6eaf6-be20-45a3-a8b7-84ff70f7b666")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:R_0805")
 		(at 260.35 85.09 270)
 		(mirror x)
@@ -17652,7 +18393,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 258.445 82.55 0)
 			(effects
 				(font
@@ -18155,7 +18896,7 @@
 				)
 			)
 		)
-		(property "Value" "2.2KΩ"
+		(property "Value" "10KΩ"
 			(at 112.395 77.47 0)
 			(effects
 				(font
@@ -20207,6 +20948,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 38.1 224.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e19ab6f5-6e0b-497d-a9fe-8a1f01af9575")
+		(property "Reference" "H1"
+			(at 38.1 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 38.1 220.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 38.1 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 38.1 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 38.1 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "846a389d-3109-4e32-ae0d-009ba41893b2")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Nexperia:BAS40-06W,115")
 		(at 128.27 104.14 180)
 		(unit 1)
@@ -20474,6 +21279,70 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 57.15 224.79 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e71fa45e-1f2c-434c-acb2-793594fd09c7")
+		(property "Reference" "H2"
+			(at 57.15 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 57.15 220.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 57.15 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 57.15 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 57.15 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9350e48e-6ba8-45e0-9597-8fc00775b5e8")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -20976,6 +21845,73 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:R_0805")
+		(at 312.42 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f459fe01-f1ae-4c57-884e-40a20aa0e6a7")
+		(property "Reference" "R12"
+			(at 314.96 54.102 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10KΩ"
+			(at 314.96 57.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:R_0805"
+			(at 329.946 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 312.42 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 312.42 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d9b89872-bbc1-4198-9a8f-9e35eb1a6e4b")
+		)
+		(pin "2"
+			(uuid "8243c10f-84dd-47ea-83e8-d67e1e0c4348")
+		)
+		(instances
+			(project "HCP65 40 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "R12")
 					(unit 1)
 				)
 			)

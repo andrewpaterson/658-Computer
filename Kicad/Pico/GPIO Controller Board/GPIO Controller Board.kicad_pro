@@ -72,15 +72,7 @@
           ""
         ],
         [
-          "footprint_symbol_mismatch|24069000|17780000|ac694804-53e6-4ca3-a1c3-9cb63393b64a|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "footprint_symbol_mismatch|84938100|17780000|8019b007-660f-4dd2-8e24-d6317585bac7|00000000-0000-0000-0000-000000000000",
-          ""
-        ],
-        [
-          "silk_over_copper|51278097|-6932563|93dbc6c1-7555-4e36-a44c-b5d5cf8e1137|00000000-0000-0000-0000-000000000000",
+          "silk_over_copper|51278097|-6932563|85240e85-24d6-47c5-89a6-b048a457eb3e|00000000-0000-0000-0000-000000000000",
           ""
         ]
       ],
@@ -274,16 +266,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      [
-        "lib_symbol_mismatch|2476500|1790700|f227878c-3540-4c10-a427-626dc846638e|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ],
-      [
-        "lib_symbol_mismatch|3136900|1790700|10e0f024-2f7a-4d8c-97f4-6a8a9dff8ef9|00000000-0000-0000-0000-000000000000|||",
-        ""
-      ]
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -498,6 +481,7 @@
       "single_global_label": "ignore",
       "unannotated": "error",
       "unconnected_wire_endpoint": "warning",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"

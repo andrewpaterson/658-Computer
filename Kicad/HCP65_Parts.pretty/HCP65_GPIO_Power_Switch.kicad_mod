@@ -1,7 +1,7 @@
 (footprint "HCP65_GPIO_Power_Switch"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Power and Reset")
 	(tags "HCP65 Power Reset")
@@ -22,19 +22,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 23.114 55.753 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "96277028-0403-4151-b91e-e307f0aa6117")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -171,7 +158,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "ff95bfdd-b9ef-4290-a125-ebdb2e7f0041")
 	)
@@ -535,7 +522,8 @@
 		(remove_unused_layers no)
 		(uuid "806a6753-a03f-488e-b865-37a83c6d1730")
 	)
-	(model "${_658_COMPUTER_}/Pico/GPIO Power Switch/GPIO Power Switch.wrl"
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Pico/GPIO Power Switch/GPIO Power Switch.wrl"
 		(offset
 			(xyz 0 0 3)
 		)

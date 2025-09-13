@@ -1855,6 +1855,168 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "HCP65:C_Radial_D4.0mm_P2.00mm"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "?μF"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+				(at 0 -11.43 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Polarised Capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_Radial_D4.0mm_P2.00mm_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 2.286) (xy -0.762 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.794) (xy -1.27 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "C_Radial_D4.0mm_P2.00mm_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers
 				(hide yes)
@@ -1951,6 +2113,113 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Mechanical:MountingHole_Pad"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "H"
+				(at 0 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole_Pad"
+				(at 0 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Mounting Hole with connection"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*Pad*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "MountingHole_Pad_0_1"
+				(circle
+					(center 0 1.27)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "MountingHole_Pad_1_1"
+				(pin input line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5381,10 +5650,6 @@
 		(uuid "e4e943f7-6620-4419-96a5-1c24d7b52fd8")
 	)
 	(no_connect
-		(at 44.45 238.76)
-		(uuid "040c1679-92bc-438c-9ffa-881fed4c3f28")
-	)
-	(no_connect
 		(at 17.78 54.61)
 		(uuid "313adaf5-7c3d-4a0c-8eb8-89a481653a2e")
 	)
@@ -5415,10 +5680,6 @@
 	(no_connect
 		(at 17.78 170.18)
 		(uuid "a24defb0-ef8b-4573-b952-81983c27f5a7")
-	)
-	(no_connect
-		(at 44.45 228.6)
-		(uuid "a640e1e7-3442-4148-9ea8-361000703a42")
 	)
 	(no_connect
 		(at 17.78 209.55)
@@ -6878,6 +7139,16 @@
 	)
 	(wire
 		(pts
+			(xy 330.2 63.5) (xy 322.58 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51944531-7265-40a9-bbae-e9bae5c56bbf")
+	)
+	(wire
+		(pts
 			(xy 114.3 45.72) (xy 114.3 48.26)
 		)
 		(stroke
@@ -8235,6 +8506,16 @@
 			(type default)
 		)
 		(uuid "ab140387-372b-4748-b3ea-4e391022dce8")
+	)
+	(wire
+		(pts
+			(xy 322.58 54.61) (xy 320.04 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "abe04af9-6b1e-43fb-8399-593a5e8db68c")
 	)
 	(wire
 		(pts
@@ -9596,7 +9877,7 @@
 		)
 		(uuid "ff98193d-646a-453c-8d20-18d244ab79d7")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 157.48 0)
 		(effects
 			(font
@@ -9606,7 +9887,7 @@
 		)
 		(uuid "0049077a-8e4b-47d2-94c4-4870f461986c")
 	)
-	(label "GND_{1}"
+	(label "GNDd"
 		(at 262.89 45.72 0)
 		(effects
 			(font
@@ -9616,7 +9897,7 @@
 		)
 		(uuid "00aa5429-39c2-404a-8179-1cf7446f1866")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 196.85 0)
 		(effects
 			(font
@@ -9666,7 +9947,7 @@
 		)
 		(uuid "0394c9a1-c554-40cc-84dd-b25bcbc5ea4a")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 134.62 264.16 180)
 		(effects
 			(font
@@ -9676,7 +9957,7 @@
 		)
 		(uuid "039bc5c2-806a-4c26-a693-acfae9f6eb40")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 220.98 0)
 		(effects
 			(font
@@ -9696,7 +9977,7 @@
 		)
 		(uuid "03ba0c39-780c-43fd-90ea-22195ab58d13")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 175.26 142.24 0)
 		(effects
 			(font
@@ -9716,7 +9997,7 @@
 		)
 		(uuid "04328969-0481-47b1-a9f0-f7ce7a5f8a09")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 262.89 213.36 0)
 		(effects
 			(font
@@ -9726,7 +10007,7 @@
 		)
 		(uuid "05655fb5-bed7-4db9-a97d-8fdefd22b119")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 142.24 180)
 		(effects
 			(font
@@ -9736,7 +10017,7 @@
 		)
 		(uuid "05aa9988-35e5-42b0-8ed8-c68fd86a0c4b")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 204.47 0)
 		(effects
 			(font
@@ -9756,7 +10037,7 @@
 		)
 		(uuid "0758436c-758c-4c68-b558-b45347d35838")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 140.97 0)
 		(effects
 			(font
@@ -9806,7 +10087,7 @@
 		)
 		(uuid "0b0dfd51-7f3c-4c9c-85cb-adbd65a358f7")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 167.64 180)
 		(effects
 			(font
@@ -9816,7 +10097,7 @@
 		)
 		(uuid "0c20170f-64d7-4edd-b338-6e53dd4134ee")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 133.35 0)
 		(effects
 			(font
@@ -9826,7 +10107,7 @@
 		)
 		(uuid "0c4d76e1-32a4-4b67-9333-80fb4f65dbcc")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 157.48 0)
 		(effects
 			(font
@@ -9846,7 +10127,7 @@
 		)
 		(uuid "0cdfd28d-9a9b-47e7-8907-5c90ad353aea")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 165.1 0)
 		(effects
 			(font
@@ -9886,7 +10167,7 @@
 		)
 		(uuid "0eba098c-781f-4523-a08e-52c56a2ed189")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 165.1 0)
 		(effects
 			(font
@@ -9946,6 +10227,16 @@
 		)
 		(uuid "159de0cd-0e8f-4985-b788-023d4547d2d9")
 	)
+	(label "GNDb"
+		(at 330.2 63.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "16105cd3-7d54-4bf5-b5b8-2493b57f9b18")
+	)
 	(label "IO4"
 		(at 45.72 46.99 0)
 		(effects
@@ -9956,7 +10247,7 @@
 		)
 		(uuid "16424f96-859e-4313-8799-a58b6aa43f65")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 120.65 264.16 180)
 		(effects
 			(font
@@ -10006,7 +10297,7 @@
 		)
 		(uuid "177d7733-328c-44d2-90eb-587657b934f7")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 243.84 0)
 		(effects
 			(font
@@ -10016,7 +10307,7 @@
 		)
 		(uuid "17a126f5-2ea4-45ea-a40d-131036f0d6a7")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 196.85 0)
 		(effects
 			(font
@@ -10046,7 +10337,7 @@
 		)
 		(uuid "1a209e73-79f5-4390-b193-91aeef2d13cb")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 220.98 0)
 		(effects
 			(font
@@ -10066,7 +10357,7 @@
 		)
 		(uuid "1aad985d-9dc9-42ef-8c4d-0e3859d6f8f8")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 157.48 0)
 		(effects
 			(font
@@ -10086,7 +10377,7 @@
 		)
 		(uuid "1b607766-b725-435b-8a60-73f79739e1b0")
 	)
-	(label "5V_{1}"
+	(label "5Vc"
 		(at 107.95 27.94 180)
 		(effects
 			(font
@@ -10116,7 +10407,7 @@
 		)
 		(uuid "1b9139d9-a31e-441b-bc9d-f60cab570e25")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 125.73 0)
 		(effects
 			(font
@@ -10126,7 +10417,7 @@
 		)
 		(uuid "1bac6cbd-9802-4d85-8cf0-2fbb3b861b48")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 237.49 213.36 180)
 		(effects
 			(font
@@ -10136,7 +10427,7 @@
 		)
 		(uuid "1bc5e6fe-8b3b-4acc-b655-ba9a1e5d8a64")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 149.86 0)
 		(effects
 			(font
@@ -10146,7 +10437,7 @@
 		)
 		(uuid "1d22ee96-7c63-4cc3-b21e-074925db5053")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 118.11 0)
 		(effects
 			(font
@@ -10206,7 +10497,7 @@
 		)
 		(uuid "229d4b25-5d56-46f3-8689-2863ec37bb91")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 273.05 86.36 0)
 		(effects
 			(font
@@ -10226,7 +10517,7 @@
 		)
 		(uuid "235a8d4f-a136-4794-85a3-163067c42b15")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 237.49 144.78 180)
 		(effects
 			(font
@@ -10236,7 +10527,7 @@
 		)
 		(uuid "235f0434-eb95-420a-b961-2a316e3126a2")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 133.35 0)
 		(effects
 			(font
@@ -10326,7 +10617,7 @@
 		)
 		(uuid "27e55f5a-a77c-4c7b-8f00-9bdc28316a07")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 44.45 241.3 0)
 		(effects
 			(font
@@ -10336,7 +10627,7 @@
 		)
 		(uuid "288e9f75-9804-4410-afbb-90207fda0d6a")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 149.86 0)
 		(effects
 			(font
@@ -10346,7 +10637,7 @@
 		)
 		(uuid "2932a29a-552f-4e52-897b-248a5f0cf7bf")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 167.64 180)
 		(effects
 			(font
@@ -10356,7 +10647,7 @@
 		)
 		(uuid "2a296aef-b9d5-4bb0-bca8-09da0fc864e1")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 172.72 0)
 		(effects
 			(font
@@ -10366,7 +10657,7 @@
 		)
 		(uuid "2b8e600c-50f3-44f2-b2bd-ea8a54d05388")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 97.79 53.34 180)
 		(effects
 			(font
@@ -10396,7 +10687,7 @@
 		)
 		(uuid "2e7a01ce-e0bb-490d-b2fa-9acc2e5d27ea")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 237.49 167.64 180)
 		(effects
 			(font
@@ -10416,7 +10707,7 @@
 		)
 		(uuid "31eda272-61b6-46aa-b207-3679ea008144")
 	)
-	(label "GND_{1}"
+	(label "GNDd"
 		(at 44.45 246.38 0)
 		(effects
 			(font
@@ -10446,7 +10737,7 @@
 		)
 		(uuid "353cdf86-b581-43ac-afb6-8460ec1e89b6")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 262.89 142.24 0)
 		(effects
 			(font
@@ -10456,7 +10747,7 @@
 		)
 		(uuid "36c04608-f3a4-4d1d-884d-a5d0a245c698")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 189.23 0)
 		(effects
 			(font
@@ -10486,7 +10777,7 @@
 		)
 		(uuid "37f37b9c-ed9e-4c9d-a877-48a0119613a0")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 157.48 0)
 		(effects
 			(font
@@ -10496,7 +10787,7 @@
 		)
 		(uuid "38b6c3f3-dfcc-42e4-b507-37cfdea7ad2a")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 140.97 0)
 		(effects
 			(font
@@ -10526,7 +10817,7 @@
 		)
 		(uuid "3e6877e1-70d6-4075-bd8c-5d060f0d3cdf")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 213.36 180)
 		(effects
 			(font
@@ -10536,7 +10827,7 @@
 		)
 		(uuid "3ed4a920-7a04-4023-84a8-8e5948e9ebe0")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 144.78 180)
 		(effects
 			(font
@@ -10546,7 +10837,7 @@
 		)
 		(uuid "3ef86bac-6624-49b3-ad44-3710c58af3ff")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 172.72 0)
 		(effects
 			(font
@@ -10606,7 +10897,7 @@
 		)
 		(uuid "459e2110-377c-40a0-8698-cd7c56df2eae")
 	)
-	(label "5V_{1}"
+	(label "5Vc"
 		(at 262.89 96.52 0)
 		(effects
 			(font
@@ -10646,6 +10937,16 @@
 		)
 		(uuid "47d16ce7-c661-425c-9707-b9dbfeb73a6e")
 	)
+	(label "12V"
+		(at 367.03 35.56 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "485850f3-493f-4cc9-802c-6f613bf6966e")
+	)
 	(label "IO23"
 		(at 45.72 95.25 0)
 		(effects
@@ -10656,7 +10957,7 @@
 		)
 		(uuid "48e0177b-b84a-4497-9863-aa96a1f25033")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 238.76 180)
 		(effects
 			(font
@@ -10666,7 +10967,7 @@
 		)
 		(uuid "4922737e-2d37-44d8-b4c5-562b7ee56607")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 153.67 264.16 0)
 		(effects
 			(font
@@ -10676,7 +10977,7 @@
 		)
 		(uuid "4a5c31a6-d0ed-4ff5-bf27-6fc8893e6587")
 	)
-	(label "GND_{4}"
+	(label "GNDa"
 		(at 44.45 238.76 0)
 		(effects
 			(font
@@ -10706,7 +11007,7 @@
 		)
 		(uuid "4c42dbb0-5b4f-4e14-9f92-5f468516b9eb")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 273.05 104.14 0)
 		(effects
 			(font
@@ -10726,7 +11027,7 @@
 		)
 		(uuid "4d936376-6676-434f-8699-59256f7541a1")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 148.59 264.16 180)
 		(effects
 			(font
@@ -10736,7 +11037,7 @@
 		)
 		(uuid "4ef3ac39-a4f7-4bc4-afa4-b180f02aff2e")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 149.86 0)
 		(effects
 			(font
@@ -10746,7 +11047,7 @@
 		)
 		(uuid "4f50763e-18f0-4652-b39b-8b6b90ef7269")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 172.72 0)
 		(effects
 			(font
@@ -10796,7 +11097,7 @@
 		)
 		(uuid "517917d1-9b3a-40da-95f2-03ba63cd2dde")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 172.72 0)
 		(effects
 			(font
@@ -10806,7 +11107,7 @@
 		)
 		(uuid "52cf9195-01d2-4b41-8158-21f8af949de4")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 213.36 180)
 		(effects
 			(font
@@ -10846,7 +11147,7 @@
 		)
 		(uuid "544b4bea-d4bd-4784-9291-dc605269371e")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 212.09 0)
 		(effects
 			(font
@@ -10856,7 +11157,7 @@
 		)
 		(uuid "54e93642-6061-4f5c-87a4-4647f0daa39a")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 196.85 0)
 		(effects
 			(font
@@ -10946,7 +11247,7 @@
 		)
 		(uuid "59775e04-891a-4868-adc0-64e4988bb291")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 236.22 0)
 		(effects
 			(font
@@ -10956,7 +11257,17 @@
 		)
 		(uuid "59b80571-3d5c-43af-8fa7-c0082eea64c1")
 	)
-	(label "GND_{3}"
+	(label "5Va"
+		(at 314.96 63.5 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5a4a1dc3-562f-470e-af3d-01a021d82071")
+	)
+	(label "GNDb"
 		(at 237.49 215.9 180)
 		(effects
 			(font
@@ -10975,6 +11286,16 @@
 			(justify left bottom)
 		)
 		(uuid "5b643cc6-0702-47c1-a8bd-4e189277d4a3")
+	)
+	(label "5Vc"
+		(at 386.08 50.8 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5b921755-988f-4948-96e1-3bc507f68181")
 	)
 	(label "IO45"
 		(at 217.17 55.88 0)
@@ -11036,7 +11357,7 @@
 		)
 		(uuid "5eb74dfc-355a-4b22-b007-b63620015a47")
 	)
-	(label "5V_{2}"
+	(label "5Vb"
 		(at 107.95 101.6 180)
 		(effects
 			(font
@@ -11086,7 +11407,7 @@
 		)
 		(uuid "63d09bbc-247f-479e-bac4-6b4cf92ac71e")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 162.56 264.16 180)
 		(effects
 			(font
@@ -11106,7 +11427,17 @@
 		)
 		(uuid "65b2ce1d-d772-4728-940a-e8badc6d6add")
 	)
-	(label "GND_{1}"
+	(label "GNDb"
+		(at 386.08 66.04 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "65bb74fb-d438-4b0c-8880-f09418e83933")
+	)
+	(label "GNDd"
 		(at 107.95 78.74 180)
 		(effects
 			(font
@@ -11146,7 +11477,7 @@
 		)
 		(uuid "68d27316-b7d0-4289-af75-0442a1cf9482")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 189.23 0)
 		(effects
 			(font
@@ -11155,6 +11486,16 @@
 			(justify left bottom)
 		)
 		(uuid "6932a54b-b848-492d-a375-4d1afc5ba0e2")
+	)
+	(label "5Va"
+		(at 314.96 54.61 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "695d5d46-dc2b-42b9-b9d3-1d4f0189ec57")
 	)
 	(label "IO21"
 		(at 45.72 90.17 0)
@@ -11166,7 +11507,7 @@
 		)
 		(uuid "6ac94171-b6ac-466d-bf19-827457375459")
 	)
-	(label "GND_{1}"
+	(label "GNDd"
 		(at 262.89 78.74 0)
 		(effects
 			(font
@@ -11176,7 +11517,7 @@
 		)
 		(uuid "6c51b0d0-4017-4ad1-80d3-6426273bb1a6")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 215.9 180)
 		(effects
 			(font
@@ -11196,7 +11537,7 @@
 		)
 		(uuid "6cfcf057-49ed-4f8d-bd6a-82c881d46641")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 140.97 0)
 		(effects
 			(font
@@ -11216,7 +11557,7 @@
 		)
 		(uuid "6d420e80-d872-4225-bff5-867452a4c0ef")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 118.11 0)
 		(effects
 			(font
@@ -11226,7 +11567,7 @@
 		)
 		(uuid "6fa3411e-7da8-4942-9d20-36461e40e008")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 351.79 213.36 0)
 		(effects
 			(font
@@ -11236,7 +11577,7 @@
 		)
 		(uuid "703fc9d5-8db9-4973-8cb2-eb6938fbb7ac")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 236.22 0)
 		(effects
 			(font
@@ -11266,7 +11607,7 @@
 		)
 		(uuid "70ad537c-f3c7-42e7-acbb-2102ddba3ca4")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 237.49 142.24 180)
 		(effects
 			(font
@@ -11306,7 +11647,7 @@
 		)
 		(uuid "7437928c-4c70-48e3-aa41-5abb244326ee")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 97.79 35.56 180)
 		(effects
 			(font
@@ -11346,7 +11687,7 @@
 		)
 		(uuid "77ec8c80-fefb-4644-8d02-b755c8d94207")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 139.7 264.16 0)
 		(effects
 			(font
@@ -11406,7 +11747,7 @@
 		)
 		(uuid "7a6fd6e3-8a80-446f-99d1-028db68bf59d")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 195.58 264.16 0)
 		(effects
 			(font
@@ -11426,7 +11767,7 @@
 		)
 		(uuid "7ae71923-e875-48e8-9823-692e4f268228")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 204.47 264.16 180)
 		(effects
 			(font
@@ -11456,7 +11797,7 @@
 		)
 		(uuid "7c2e364d-f5e5-4f53-a41a-9e808914770e")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 238.76 180)
 		(effects
 			(font
@@ -11466,7 +11807,7 @@
 		)
 		(uuid "7ca4046a-aaf3-427a-baed-349ccd119dd7")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 97.79 109.22 180)
 		(effects
 			(font
@@ -11476,7 +11817,7 @@
 		)
 		(uuid "7d29ad3f-a6c6-4119-8e5b-b0c98968d4cd")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 142.24 180)
 		(effects
 			(font
@@ -11496,7 +11837,7 @@
 		)
 		(uuid "7dead377-7c5c-491f-b987-d372aeee5ca9")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 213.36 180)
 		(effects
 			(font
@@ -11506,7 +11847,7 @@
 		)
 		(uuid "7eeee87a-9e2d-423e-a0a6-d6565c56bacb")
 	)
-	(label "GND_{2}"
+	(label "GNDc"
 		(at 44.45 243.84 0)
 		(effects
 			(font
@@ -11526,7 +11867,7 @@
 		)
 		(uuid "80f28839-6185-4ae1-a815-8127970a0914")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 118.11 0)
 		(effects
 			(font
@@ -11566,7 +11907,7 @@
 		)
 		(uuid "8388d49c-e439-4e94-950c-e0d4df75c1a3")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 167.64 180)
 		(effects
 			(font
@@ -11596,7 +11937,7 @@
 		)
 		(uuid "84c3b23f-9382-43d8-8425-aef28b557648")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 273.05 53.34 0)
 		(effects
 			(font
@@ -11606,7 +11947,7 @@
 		)
 		(uuid "85bfd9a9-26af-482f-95b5-3375a65e2f3a")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 220.98 0)
 		(effects
 			(font
@@ -11626,7 +11967,7 @@
 		)
 		(uuid "87a94e30-76f2-487f-919b-b9adb6c94e3d")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 237.49 238.76 180)
 		(effects
 			(font
@@ -11636,7 +11977,7 @@
 		)
 		(uuid "8841a2d3-d237-4a49-8e80-7f3c8a33d3e4")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 125.73 0)
 		(effects
 			(font
@@ -11696,7 +12037,7 @@
 		)
 		(uuid "8c35ae27-d251-4219-a656-3293b4bcfaad")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 243.84 0)
 		(effects
 			(font
@@ -11776,7 +12117,7 @@
 		)
 		(uuid "9129fdd3-7ed7-4545-93f5-a40162eafd2b")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 204.47 0)
 		(effects
 			(font
@@ -11796,7 +12137,7 @@
 		)
 		(uuid "933b8f8c-9986-45bd-af47-55ff33698ec3")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 228.6 0)
 		(effects
 			(font
@@ -11826,7 +12167,7 @@
 		)
 		(uuid "9468f2d3-6e37-4dbf-a0f9-c0df1ed8c727")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 165.1 0)
 		(effects
 			(font
@@ -11936,7 +12277,7 @@
 		)
 		(uuid "9b018010-f08e-49b2-90a3-134df4f64342")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 140.97 0)
 		(effects
 			(font
@@ -11986,7 +12327,7 @@
 		)
 		(uuid "9ef61d27-ddaf-4c4e-87fa-00fa213a4339")
 	)
-	(label "GND_{1}"
+	(label "GNDd"
 		(at 107.95 45.72 180)
 		(effects
 			(font
@@ -11996,7 +12337,7 @@
 		)
 		(uuid "9f2a8a97-a096-49b7-93ea-15ece0279caa")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 111.76 264.16 0)
 		(effects
 			(font
@@ -12006,7 +12347,7 @@
 		)
 		(uuid "9f671839-7e33-491c-8b74-f816e51b97d2")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 125.73 0)
 		(effects
 			(font
@@ -12096,7 +12437,7 @@
 		)
 		(uuid "a7b7c89e-7c33-4b59-9b44-5d533301aafe")
 	)
-	(label "5V_{1}"
+	(label "5Vc"
 		(at 44.45 236.22 0)
 		(effects
 			(font
@@ -12136,7 +12477,7 @@
 		)
 		(uuid "a9cb0bb0-8b7e-4256-856e-7c1af33cc851")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 167.64 264.16 0)
 		(effects
 			(font
@@ -12186,7 +12527,7 @@
 		)
 		(uuid "ac6e6c5e-b02d-4526-b8da-d51fe11d6212")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 220.98 0)
 		(effects
 			(font
@@ -12196,7 +12537,7 @@
 		)
 		(uuid "ad254971-6de4-4ee1-8158-dd41a2407f4d")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 189.23 0)
 		(effects
 			(font
@@ -12246,6 +12587,26 @@
 		)
 		(uuid "b299e61f-6004-428d-a6cb-3db7a84ed4fa")
 	)
+	(label "GNDa"
+		(at 367.03 66.04 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b30c0e1f-fb94-46c8-859b-0a7947729f00")
+	)
+	(label "5Va"
+		(at 386.08 35.56 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b3819302-3105-4431-94bd-aa42c5dbf385")
+	)
 	(label "IO3"
 		(at 45.72 44.45 0)
 		(effects
@@ -12266,7 +12627,7 @@
 		)
 		(uuid "b3b6363d-8b82-448d-ab49-0a254d18256b")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 204.47 0)
 		(effects
 			(font
@@ -12296,7 +12657,7 @@
 		)
 		(uuid "b5705187-e208-43dc-93ff-5a236e716d4c")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 273.05 30.48 0)
 		(effects
 			(font
@@ -12326,7 +12687,7 @@
 		)
 		(uuid "b767fdef-cc07-4f58-a13b-8bf9b573479c")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 243.84 0)
 		(effects
 			(font
@@ -12366,7 +12727,17 @@
 		)
 		(uuid "bb11aec4-dfc6-4abd-94af-f0e02a2a3503")
 	)
-	(label "5V_{3}"
+	(label "GNDc"
+		(at 367.03 81.28 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bb447104-13ad-4f75-a81c-90793e3f922f")
+	)
+	(label "5Va"
 		(at 175.26 213.36 0)
 		(effects
 			(font
@@ -12396,7 +12767,7 @@
 		)
 		(uuid "bb9fc68c-0629-4ff9-abbc-270a021ea851")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 125.73 0)
 		(effects
 			(font
@@ -12426,7 +12797,7 @@
 		)
 		(uuid "bcbe45ff-1242-4160-98ef-5beb3c300e3d")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 190.5 264.16 180)
 		(effects
 			(font
@@ -12436,7 +12807,7 @@
 		)
 		(uuid "bdbbf27d-377a-410a-941f-41e0c7a0097a")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 149.86 0)
 		(effects
 			(font
@@ -12456,7 +12827,7 @@
 		)
 		(uuid "bed0820d-52c6-4d49-a0d3-3f5f58f55838")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 176.53 264.16 180)
 		(effects
 			(font
@@ -12496,7 +12867,7 @@
 		)
 		(uuid "c3707446-3f4c-4aae-b7e9-a054e4e4aae8")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 133.35 0)
 		(effects
 			(font
@@ -12516,7 +12887,17 @@
 		)
 		(uuid "c6aa3937-c673-47bf-a93b-d273ece47bde")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
+		(at 330.2 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c746843a-d74b-499f-8275-fbcbb2f47afe")
+	)
+	(label "GNDb"
 		(at 209.55 264.16 0)
 		(effects
 			(font
@@ -12536,7 +12917,7 @@
 		)
 		(uuid "c7defb97-b26f-4e0f-96ad-4119aae3dcf6")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 181.61 264.16 0)
 		(effects
 			(font
@@ -12566,7 +12947,7 @@
 		)
 		(uuid "ca6853c7-bb65-46d2-85b3-82f57482341f")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 212.09 0)
 		(effects
 			(font
@@ -12586,7 +12967,7 @@
 		)
 		(uuid "caaff230-9077-4627-af7c-f2d78ef9f075")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 106.68 264.16 180)
 		(effects
 			(font
@@ -12626,7 +13007,7 @@
 		)
 		(uuid "cc35ec86-0d3f-4410-b376-6963a47eb651")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 228.6 0)
 		(effects
 			(font
@@ -12635,6 +13016,16 @@
 			(justify left bottom)
 		)
 		(uuid "ccdf81f7-73c0-457c-b681-e5b5f24d4213")
+	)
+	(label "GNDd"
+		(at 386.08 81.28 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "cceaeecf-fabc-45ac-aa8b-b5c59e76d229")
 	)
 	(label "IO62"
 		(at 326.39 233.68 180)
@@ -12706,7 +13097,7 @@
 		)
 		(uuid "cffc94f8-42f7-400b-a3dd-27467d1e75e4")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 118.11 0)
 		(effects
 			(font
@@ -12716,7 +13107,7 @@
 		)
 		(uuid "d06924a5-f05d-4e98-93e1-2d69c2127b15")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 196.85 0)
 		(effects
 			(font
@@ -12736,7 +13127,7 @@
 		)
 		(uuid "d2023037-1c81-499e-821d-af49182d23f0")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 351.79 142.24 0)
 		(effects
 			(font
@@ -12756,7 +13147,7 @@
 		)
 		(uuid "d3c0464d-83f5-452e-81c9-d1d0e595509e")
 	)
-	(label "5V_{2}"
+	(label "5Vb"
 		(at 44.45 233.68 0)
 		(effects
 			(font
@@ -12766,7 +13157,7 @@
 		)
 		(uuid "d5c8f404-2608-457a-8bc8-0f85d802afca")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 228.6 0)
 		(effects
 			(font
@@ -12796,7 +13187,7 @@
 		)
 		(uuid "d6c02a22-08a9-4ab1-a1a2-423946ca6c47")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 212.09 0)
 		(effects
 			(font
@@ -12816,7 +13207,7 @@
 		)
 		(uuid "d876c3c9-d76b-4753-b750-175bf4eb2776")
 	)
-	(label "GND_{2}"
+	(label "GNDc"
 		(at 262.89 22.86 0)
 		(effects
 			(font
@@ -12866,7 +13257,7 @@
 		)
 		(uuid "da81fa1b-de0f-4a23-b2fb-6f25f5a16e42")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 44.45 231.14 0)
 		(effects
 			(font
@@ -12916,7 +13307,7 @@
 		)
 		(uuid "ddb71eda-4f92-402f-9607-835d072e7957")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 238.76 180)
 		(effects
 			(font
@@ -12956,7 +13347,7 @@
 		)
 		(uuid "e0c0ee57-d122-4188-b119-a92e8498b5a9")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 204.47 0)
 		(effects
 			(font
@@ -12966,7 +13357,7 @@
 		)
 		(uuid "e1297b2f-b422-4ccc-83ac-5f4906e40120")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 397.51 243.84 0)
 		(effects
 			(font
@@ -12976,7 +13367,7 @@
 		)
 		(uuid "e1c3d222-6b34-4017-a982-7ecec6625e4d")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 125.73 264.16 0)
 		(effects
 			(font
@@ -12986,7 +13377,7 @@
 		)
 		(uuid "e26b2d86-4b21-4ca0-a730-3b4126117de5")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 63.5 144.78 180)
 		(effects
 			(font
@@ -13036,7 +13427,7 @@
 		)
 		(uuid "e52df1ad-7ae3-405d-8aa8-f2ff236278e3")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 144.78 180)
 		(effects
 			(font
@@ -13046,7 +13437,7 @@
 		)
 		(uuid "e54b5428-d6b4-41a6-83f5-07d7eb603100")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 215.9 180)
 		(effects
 			(font
@@ -13086,6 +13477,16 @@
 		)
 		(uuid "e7ca8ff7-b74a-4ed8-8b00-c27563e863fd")
 	)
+	(label "5Vb"
+		(at 367.03 50.8 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e8661687-1a50-4351-a02d-7989fd0001a3")
+	)
 	(label "S23"
 		(at 293.37 125.73 0)
 		(effects
@@ -13106,7 +13507,7 @@
 		)
 		(uuid "ea20532b-d54d-47dd-85db-be792d79b525")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 88.9 213.36 0)
 		(effects
 			(font
@@ -13126,7 +13527,7 @@
 		)
 		(uuid "ec817dc4-e4af-4f43-b190-56a1d069aea9")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 228.6 0)
 		(effects
 			(font
@@ -13156,7 +13557,7 @@
 		)
 		(uuid "eda7d6a1-3377-4ca4-b4cf-63e03ab7f753")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 189.23 0)
 		(effects
 			(font
@@ -13196,7 +13597,7 @@
 		)
 		(uuid "eeaf0fa5-82a3-40b7-b943-28493e3df7e9")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 212.09 0)
 		(effects
 			(font
@@ -13226,7 +13627,7 @@
 		)
 		(uuid "f0e790e5-8b15-47c4-ad35-6f8c6846a6bf")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 97.79 86.36 180)
 		(effects
 			(font
@@ -13236,7 +13637,7 @@
 		)
 		(uuid "f141605e-e6a3-4422-9aa0-c2aaacb7cd67")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 149.86 215.9 180)
 		(effects
 			(font
@@ -13276,7 +13677,7 @@
 		)
 		(uuid "f2c99f9a-67a7-442c-96d6-17949750de13")
 	)
-	(label "5V_{3}"
+	(label "5Va"
 		(at 88.9 142.24 0)
 		(effects
 			(font
@@ -13286,7 +13687,7 @@
 		)
 		(uuid "f33b321e-9518-448b-83e0-0833b46ba7db")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 220.98 236.22 0)
 		(effects
 			(font
@@ -13306,7 +13707,7 @@
 		)
 		(uuid "f3ec3958-4121-453b-9a68-5b24d80c1069")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 133.35 0)
 		(effects
 			(font
@@ -13346,7 +13747,7 @@
 		)
 		(uuid "f5fce56f-92a7-487c-b2f6-6581ad9073e2")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 326.39 142.24 180)
 		(effects
 			(font
@@ -13426,7 +13827,7 @@
 		)
 		(uuid "fc5cf4f1-311f-4307-809c-9fdffcd58986")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 308.61 165.1 0)
 		(effects
 			(font
@@ -13506,7 +13907,7 @@
 		)
 		(uuid "ff6308d5-4a69-4e29-a32a-5ebdf1076dd9")
 	)
-	(label "GND_{3}"
+	(label "GNDb"
 		(at 134.62 236.22 0)
 		(effects
 			(font
@@ -14299,6 +14700,141 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
+		(at 318.77 63.5 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "126a1ebf-4824-4dbb-bb30-4df93c91ca71")
+		(property "Reference" "C10"
+			(at 320.04 59.69 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10μF"
+			(at 321.31 67.31 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
+			(at 330.2 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 323.85 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "10μF"
+			(at 321.31 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5ca8aa00-be52-483a-8be3-db8ce1bcc8a0")
+		)
+		(pin "2"
+			(uuid "dd45bbe2-1b38-47eb-8aa3-81c23225579f")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 386.08 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "14487b39-84ff-4e62-acb3-5558d7f7436e")
+		(property "Reference" "H4"
+			(at 386.08 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 386.08 43.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 386.08 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 386.08 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 386.08 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ae89f186-afc5-4f6a-a1c9-70394b1edf9f")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 130.81 140.97 180)
 		(unit 1)
@@ -14728,6 +15264,70 @@
 			(project "HCP65 56 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "RN13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 386.08 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "1d150f53-6455-4eec-8e7c-177d21605df3")
+		(property "Reference" "H8"
+			(at 386.08 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 386.08 74.295 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 386.08 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 386.08 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 386.08 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a0421f82-63d4-49d7-9dbd-f8ec77e8d37f")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H8")
 					(unit 1)
 				)
 			)
@@ -18935,6 +19535,134 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 367.03 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "510fd5bc-b2eb-476d-95e5-c03b04dfa700")
+		(property "Reference" "H6"
+			(at 367.03 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 367.03 74.295 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 367.03 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 367.03 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 367.03 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "44debb4a-08b3-4b7e-9ba9-92f4e963453f")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 386.08 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "529ed7a9-0f7c-4eb8-aaf9-48f905182b57")
+		(property "Reference" "H7"
+			(at 386.08 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 386.08 59.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 386.08 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 386.08 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 386.08 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f5c5b51d-f90c-49ea-878b-32860938a114")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Wurth_Elektronik:150224VS73100A")
 		(at 217.17 149.86 180)
 		(unit 1)
@@ -19851,6 +20579,70 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 367.03 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d9077be-dad5-4020-9ef2-16b1539ffa7e")
+		(property "Reference" "H5"
+			(at 367.03 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 367.03 59.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 367.03 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 367.03 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 367.03 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1fa9a0b4-bc3e-4cda-b12c-48f38bb1b008")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H5")
 					(unit 1)
 				)
 			)
@@ -24362,6 +25154,146 @@
 		)
 	)
 	(symbol
+		(lib_id "Wurth_Elektronik:150224SS73100")
+		(at 326.39 54.61 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "93654fa8-8431-486b-920f-fd3ad0a2708f")
+		(property "Reference" "LED73"
+			(at 326.39 56.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Value" "150224SS73100"
+			(at 314.325 41.275 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:150224SS73100A"
+			(at 322.58 46.355 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.farnell.com/datasheets/2301711.pdf"
+			(at 322.58 43.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Description" "red LED"
+			(at 326.39 51.435 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+			)
+		)
+		(property "Height" "1.31"
+			(at 322.58 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Wurth Elektronik"
+			(at 322.58 36.195 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "red"
+			(at 320.675 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "150224SS73100"
+			(at 322.58 33.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "710-150224SS73100"
+			(at 322.58 31.115 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Wurth-Elektronik/150224SS73100?qs=5aG0NVq1C4xYrTr%2FIVl59g%3D%3D"
+			(at 322.58 28.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Red LED"
+			(at 326.39 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6b3d14dd-f720-45c1-ba4b-5a63de98a712")
+		)
+		(pin "2"
+			(uuid "d6250380-6ded-4b64-ba56-2a6714f60a95")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "LED73")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:C_0805")
 		(at 106.68 264.16 0)
 		(unit 1)
@@ -24563,6 +25495,70 @@
 			(project "HCP65 64 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED66")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 367.03 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "99f8be5e-ee1a-4b4a-8229-2a1c5ec45fd0")
+		(property "Reference" "H3"
+			(at 367.03 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 367.03 43.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 367.03 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 367.03 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 367.03 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4ce6eaf6-be20-45a3-a8b7-84ff70f7b666")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H3")
 					(unit 1)
 				)
 			)
@@ -28639,6 +29635,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 367.03 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e19ab6f5-6e0b-497d-a9fe-8a1f01af9575")
+		(property "Reference" "H1"
+			(at 367.03 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 367.03 28.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 367.03 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 367.03 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 367.03 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "846a389d-3109-4e32-ae0d-009ba41893b2")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Nexperia:BAS40-06W,115")
 		(at 128.27 115.57 180)
 		(unit 1)
@@ -28906,6 +29966,70 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole_Pad")
+		(at 386.08 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e71fa45e-1f2c-434c-acb2-793594fd09c7")
+		(property "Reference" "H2"
+			(at 386.08 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 386.08 28.575 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3_Pad"
+			(at 386.08 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 386.08 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Mounting Hole with connection"
+			(at 386.08 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9350e48e-6ba8-45e0-9597-8fc00775b5e8")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H2")
 					(unit 1)
 				)
 			)
@@ -29688,6 +30812,73 @@
 			(project "HCP65 40 Pin Tester"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "LED9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:R_0805")
+		(at 314.96 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f459fe01-f1ae-4c57-884e-40a20aa0e6a7")
+		(property "Reference" "R12"
+			(at 317.5 52.832 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10KΩ"
+			(at 317.5 56.515 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:R_0805"
+			(at 332.486 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 314.96 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 314.96 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d9b89872-bbc1-4198-9a8f-9e35eb1a6e4b")
+		)
+		(pin "2"
+			(uuid "8243c10f-84dd-47ea-83e8-d67e1e0c4348")
+		)
+		(instances
+			(project "HCP65 64 Pin Tester"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "R12")
 					(unit 1)
 				)
 			)

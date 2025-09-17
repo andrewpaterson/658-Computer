@@ -8064,6 +8064,684 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "HCP65:Main_Memory_Small_Abort"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 15.24 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Main Memory Small Abort"
+				(at 15.24 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Small_Abort"
+				(at 15.24 -43.815 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Main Memory Small Abort"
+				(at 14.605 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Silkscreen" "Main Memory Small Abort"
+				(at 14.605 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "HCP65 Main Memory Small Abort"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Main_Memory_Small_Abort_0_1"
+				(polyline
+					(pts
+						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -42.545) (xy 0 -42.545) (xy 0 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "Main_Memory_Small_Abort_1_0"
+				(pin no_connect line
+					(at 35.56 -40.64 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "32"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "Main_Memory_Small_Abort_1_1"
+				(pin input inverted
+					(at -5.08 0 0)
+					(length 5.08)
+					(name "~{Main}0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -2.54 0)
+					(length 5.08)
+					(name "~{Main}1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -5.08 0)
+					(length 5.08)
+					(name "~{Main}2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "~{Main}3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -10.16 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -15.24 0)
+					(length 5.08)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -17.78 0)
+					(length 5.08)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -20.32 0)
+					(length 5.08)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -22.86 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -25.4 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -27.94 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -30.48 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "19"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -33.02 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -35.56 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -38.1 0)
+					(length 5.08)
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -40.64 0)
+					(length 5.08)
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 0 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -2.54 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -5.08 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "21"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -7.62 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "28"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 35.56 -10.16 180)
+					(length 5.08)
+					(name "~{Set_Contention}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -15.24 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 35.56 -17.78 180)
+					(length 5.08)
+					(name "A•B•C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -20.32 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -22.86 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "24"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -25.4 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "25"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -27.94 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "26"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -30.48 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "27"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -33.02 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "29"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -35.56 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "30"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -38.1 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "31"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "HCP65:MountingHole_Pad"
 			(pin_numbers
 				(hide yes)
@@ -10847,7 +11525,7 @@
 	)
 	(rectangle
 		(start 325.12 241.3)
-		(end 632.46 309.88)
+		(end 817.88 309.88)
 		(stroke
 			(width 0)
 			(type dash)
@@ -11127,7 +11805,7 @@
 		(uuid "5cc37a00-30e5-4fc0-89f4-3f2b3c105a0b")
 	)
 	(junction
-		(at 614.68 279.4)
+		(at 788.67 279.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "740587fd-6a59-4f7f-a40a-71a172f5d07d")
@@ -11497,6 +12175,10 @@
 	(no_connect
 		(at 238.76 417.83)
 		(uuid "4043bb7b-1447-4971-bcdf-471671f0e538")
+	)
+	(no_connect
+		(at 469.9 270.51)
+		(uuid "40e96560-5938-43ef-b49a-17dba6f455f7")
 	)
 	(no_connect
 		(at 180.34 46.99)
@@ -12268,13 +12950,23 @@
 	)
 	(wire
 		(pts
-			(xy 429.26 349.25) (xy 449.58 349.25)
+			(xy 490.22 273.05) (xy 514.35 273.05)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "00b60b08-a39e-40ed-a554-77253bab1025")
+		(uuid "0115339c-93d6-42c3-82bc-a0139c1d9cbd")
+	)
+	(wire
+		(pts
+			(xy 490.22 298.45) (xy 490.22 273.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0360d537-a723-4cd4-a26f-acee84fa2103")
 	)
 	(wire
 		(pts
@@ -12308,16 +13000,6 @@
 	)
 	(wire
 		(pts
-			(xy 412.75 262.89) (xy 412.75 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e8c27cf-a11f-45dd-a7b2-352b4569ae5c")
-	)
-	(wire
-		(pts
 			(xy 448.31 64.77) (xy 452.12 64.77)
 		)
 		(stroke
@@ -12345,6 +13027,16 @@
 			(type default)
 		)
 		(uuid "10772387-b09f-44a9-8bb7-fb7325a52de4")
+	)
+	(wire
+		(pts
+			(xy 412.75 262.89) (xy 412.75 298.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "119177ee-6ae0-4eea-a9ff-dd851f0dc77f")
 	)
 	(wire
 		(pts
@@ -12488,16 +13180,6 @@
 	)
 	(wire
 		(pts
-			(xy 330.2 349.25) (xy 350.52 349.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "31319bb4-0a91-428b-8ad7-29f827195cae")
-	)
-	(wire
-		(pts
 			(xy 448.31 62.23) (xy 452.12 62.23)
 		)
 		(stroke
@@ -12548,17 +13230,7 @@
 	)
 	(wire
 		(pts
-			(xy 327.66 341.63) (xy 330.2 341.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3aaec6ce-c1e3-462c-91a6-bfac66531819")
-	)
-	(wire
-		(pts
-			(xy 412.75 245.11) (xy 339.09 245.11)
+			(xy 586.74 245.11) (xy 339.09 245.11)
 		)
 		(stroke
 			(width 0)
@@ -12615,16 +13287,6 @@
 			(type default)
 		)
 		(uuid "48027fdb-44e9-46cc-9eae-034089abd1a0")
-	)
-	(wire
-		(pts
-			(xy 330.2 341.63) (xy 330.2 349.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "48450c94-8d96-407e-b5c4-18fd25a25b29")
 	)
 	(wire
 		(pts
@@ -12808,6 +13470,16 @@
 	)
 	(wire
 		(pts
+			(xy 392.43 262.89) (xy 412.75 262.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77195d77-d816-4f6c-bf2e-71ac5ebd238a")
+	)
+	(wire
+		(pts
 			(xy 426.72 354.33) (xy 449.58 354.33)
 		)
 		(stroke
@@ -12818,16 +13490,6 @@
 	)
 	(wire
 		(pts
-			(xy 421.64 341.63) (xy 417.83 341.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "77fde4bc-a90d-49e2-a90c-7698b00df484")
-	)
-	(wire
-		(pts
 			(xy 640.08 515.62) (xy 656.59 515.62)
 		)
 		(stroke
@@ -12835,16 +13497,6 @@
 			(type default)
 		)
 		(uuid "781449a0-f8cb-425e-b934-bc551d394269")
-	)
-	(wire
-		(pts
-			(xy 429.26 341.63) (xy 429.26 349.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78667a0f-c939-492e-a210-39ede62f32c3")
 	)
 	(wire
 		(pts
@@ -12868,7 +13520,7 @@
 	)
 	(wire
 		(pts
-			(xy 613.41 273.05) (xy 614.68 273.05)
+			(xy 787.4 273.05) (xy 788.67 273.05)
 		)
 		(stroke
 			(width 0)
@@ -12885,6 +13537,16 @@
 			(type default)
 		)
 		(uuid "7f764910-4220-4836-9a5b-03c35a36c5e5")
+	)
+	(wire
+		(pts
+			(xy 490.22 267.97) (xy 490.22 262.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80e76a29-d16e-461a-a1f0-e7b3e35b0f29")
 	)
 	(wire
 		(pts
@@ -12928,7 +13590,7 @@
 	)
 	(wire
 		(pts
-			(xy 613.41 279.4) (xy 614.68 279.4)
+			(xy 787.4 279.4) (xy 788.67 279.4)
 		)
 		(stroke
 			(width 0)
@@ -13038,7 +13700,7 @@
 	)
 	(wire
 		(pts
-			(xy 434.34 252.73) (xy 412.75 252.73)
+			(xy 608.33 252.73) (xy 586.74 252.73)
 		)
 		(stroke
 			(width 0)
@@ -13088,16 +13750,6 @@
 	)
 	(wire
 		(pts
-			(xy 426.72 341.63) (xy 429.26 341.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a89edc74-4a9d-45a3-9937-897b6f833d07")
-	)
-	(wire
-		(pts
 			(xy 774.7 492.76) (xy 778.51 492.76)
 		)
 		(stroke
@@ -13105,6 +13757,16 @@
 			(type default)
 		)
 		(uuid "a9ae08df-9473-4223-8a96-c4e424f13761")
+	)
+	(wire
+		(pts
+			(xy 514.35 267.97) (xy 490.22 267.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa7f7bd5-0c5b-4c6c-a402-ce31a3563aec")
 	)
 	(wire
 		(pts
@@ -13208,6 +13870,16 @@
 	)
 	(wire
 		(pts
+			(xy 412.75 298.45) (xy 490.22 298.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bac5a7af-d560-4efb-b9ef-3024c6c046a8")
+	)
+	(wire
+		(pts
 			(xy 703.58 129.54) (xy 707.39 129.54)
 		)
 		(stroke
@@ -13215,16 +13887,6 @@
 			(type default)
 		)
 		(uuid "bb19d707-9a29-43b1-9b4d-528e4d94ce1d")
-	)
-	(wire
-		(pts
-			(xy 322.58 341.63) (xy 318.77 341.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bbfc59d8-4bbf-4079-87f5-f608766bcbd8")
 	)
 	(wire
 		(pts
@@ -13288,23 +13950,13 @@
 	)
 	(wire
 		(pts
-			(xy 632.46 252.73) (xy 636.27 252.73)
+			(xy 817.88 252.73) (xy 821.69 252.73)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "c74f4511-563a-47ee-90d4-c18fcd765c72")
-	)
-	(wire
-		(pts
-			(xy 412.75 255.27) (xy 434.34 255.27)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c7c67de4-1f2e-41c1-bdc0-f4aabfbdc8ba")
 	)
 	(wire
 		(pts
@@ -13398,16 +14050,6 @@
 	)
 	(wire
 		(pts
-			(xy 392.43 262.89) (xy 412.75 262.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d0f683ce-b0bd-4392-91ee-f5f71436f445")
-	)
-	(wire
-		(pts
 			(xy 344.17 62.23) (xy 344.17 54.61)
 		)
 		(stroke
@@ -13428,7 +14070,7 @@
 	)
 	(wire
 		(pts
-			(xy 614.68 279.4) (xy 614.68 281.94)
+			(xy 788.67 279.4) (xy 788.67 281.94)
 		)
 		(stroke
 			(width 0)
@@ -13438,7 +14080,7 @@
 	)
 	(wire
 		(pts
-			(xy 632.46 250.19) (xy 636.27 250.19)
+			(xy 817.88 250.19) (xy 821.69 250.19)
 		)
 		(stroke
 			(width 0)
@@ -13448,7 +14090,7 @@
 	)
 	(wire
 		(pts
-			(xy 412.75 252.73) (xy 412.75 245.11)
+			(xy 586.74 252.73) (xy 586.74 245.11)
 		)
 		(stroke
 			(width 0)
@@ -13508,7 +14150,7 @@
 	)
 	(wire
 		(pts
-			(xy 614.68 273.05) (xy 614.68 279.4)
+			(xy 788.67 273.05) (xy 788.67 279.4)
 		)
 		(stroke
 			(width 0)
@@ -13625,6 +14267,16 @@
 			(type default)
 		)
 		(uuid "f18ae0ac-984f-4f3a-8824-43bfdf0a8d8c")
+	)
+	(wire
+		(pts
+			(xy 490.22 262.89) (xy 469.9 262.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2b7233f-ffcb-4afa-a8c5-e88e8059b415")
 	)
 	(wire
 		(pts
@@ -14107,7 +14759,7 @@
 		(uuid "068640e3-e8b9-407a-b10f-b67552feb4e5")
 	)
 	(label "M~{WD}"
-		(at 608.33 264.16 180)
+		(at 782.32 264.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14127,7 +14779,7 @@
 		(uuid "06a11bef-7e7e-447c-9cd2-06df124f2789")
 	)
 	(label "AM1"
-		(at 528.32 271.78 180)
+		(at 702.31 271.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14147,7 +14799,7 @@
 		(uuid "0705df50-8452-46c0-84ae-26c1e91abb77")
 	)
 	(label "MPU0 ~{Main}19"
-		(at 434.34 275.59 180)
+		(at 608.33 275.59 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14207,7 +14859,7 @@
 		(uuid "0794e473-a94c-4055-b19d-997055eaf8cc")
 	)
 	(label "DM0"
-		(at 500.38 274.32 180)
+		(at 674.37 274.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14215,16 +14867,6 @@
 			(justify right bottom)
 		)
 		(uuid "07a6d02e-5ac9-42bb-8971-1c9c4a6de5bd")
-	)
-	(label "5V"
-		(at 318.77 341.63 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "07fbc295-dfe0-4a78-bfca-a52691afb873")
 	)
 	(label "AM12"
 		(at 203.2 461.01 0)
@@ -14247,7 +14889,7 @@
 		(uuid "083dda98-2ff9-435b-83a7-6733fda3aef2")
 	)
 	(label "~{Main}"
-		(at 636.27 250.19 0)
+		(at 821.69 250.19 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14326,8 +14968,18 @@
 		)
 		(uuid "0987958f-fe1e-40cc-81e6-9616a84b514b")
 	)
+	(label "GND"
+		(at 554.99 255.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "099864a0-9e00-479d-9394-c41f4652a877")
+	)
 	(label "AM2"
-		(at 528.32 269.24 180)
+		(at 702.31 269.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14337,7 +14989,7 @@
 		(uuid "099894e1-fa3d-4437-b321-95ac1ceb6be7")
 	)
 	(label "3.3V"
-		(at 434.34 293.37 180)
+		(at 608.33 293.37 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14446,7 +15098,7 @@
 		)
 		(uuid "0b8c4273-9df1-4d36-8b94-e6d54e160ad7")
 	)
-	(label "~{Reset}"
+	(label "MPU1 ~{Reset}"
 		(at 373.38 341.63 0)
 		(effects
 			(font
@@ -14656,6 +15308,16 @@
 		)
 		(uuid "0dfeb785-04d4-483c-8c8a-2a418bece7b7")
 	)
+	(label "~{Contention}"
+		(at 449.58 349.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0e178235-0c31-4b05-82cc-268d644db946")
+	)
 	(label "MPU0 D~{WD}"
 		(at 119.38 218.44 180)
 		(effects
@@ -14715,6 +15377,16 @@
 			(justify left bottom)
 		)
 		(uuid "0e577b0d-011a-4f6c-b6b6-a9ddf41534a3")
+	)
+	(label "GND"
+		(at 554.99 252.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0e8c312c-ffc3-49b8-ac20-22dbf347407a")
 	)
 	(label "MPU0 DD3"
 		(at 83.82 246.38 0)
@@ -14857,7 +15529,7 @@
 		(uuid "116cca78-6964-4ccf-a492-50ba89119b0b")
 	)
 	(label "MPU0 ~{Main}17"
-		(at 434.34 270.51 180)
+		(at 608.33 270.51 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14956,7 +15628,7 @@
 		)
 		(uuid "1276963d-3e33-4f84-9204-ca8aed61d086")
 	)
-	(label "~{Reset}"
+	(label "MPU2 ~{Reset}"
 		(at 472.44 341.63 0)
 		(effects
 			(font
@@ -15077,7 +15749,7 @@
 		(uuid "1508c6f9-7788-4ee5-9d4c-a5f8cadc8a7d")
 	)
 	(label "1.6V"
-		(at 528.32 254 180)
+		(at 702.31 254 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15266,8 +15938,18 @@
 		)
 		(uuid "19daaa5c-75a2-457c-a8aa-76d33b91b021")
 	)
+	(label "GND"
+		(at 554.99 257.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "19de8906-c77e-42d0-87f9-f3f5d6c895f9")
+	)
 	(label "AM6"
-		(at 528.32 259.08 180)
+		(at 702.31 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15347,7 +16029,7 @@
 		(uuid "1ab89188-1b97-4e8e-89f1-1bfa79346ef6")
 	)
 	(label "1.6V"
-		(at 500.38 254 180)
+		(at 674.37 254 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15397,7 +16079,7 @@
 		(uuid "1b7dccbe-ac4f-45de-95d8-9187035bd2fe")
 	)
 	(label "GND"
-		(at 614.68 289.56 270)
+		(at 788.67 289.56 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15496,6 +16178,16 @@
 		)
 		(uuid "1cb662b1-026e-40e9-877c-2920bec5764d")
 	)
+	(label "MPU1 ~{Main}17"
+		(at 514.35 257.81 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1cca2203-177b-4608-9e1c-74a5c790043d")
+	)
 	(label "DM0"
 		(at 364.49 133.35 180)
 		(effects
@@ -15586,16 +16278,6 @@
 		)
 		(uuid "1e2fb5e3-6c64-4dca-936e-a83babddf106")
 	)
-	(label "~{Reset}"
-		(at 764.54 368.3 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1e63cd2f-cadb-4c94-a503-fd33dc223993")
-	)
 	(label "AM12"
 		(at 261.62 146.05 0)
 		(effects
@@ -15607,7 +16289,7 @@
 		(uuid "1e6f8a39-4271-4c74-bec2-81ddc69d1f8f")
 	)
 	(label "GND"
-		(at 608.33 273.05 180)
+		(at 782.32 273.05 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15796,8 +16478,8 @@
 		)
 		(uuid "22a762e9-902c-4aff-8157-700154a0e9e2")
 	)
-	(label "MPU0 ~{NMI}1"
-		(at 474.98 265.43 0)
+	(label "~{Contention}"
+		(at 648.97 265.43 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -15856,16 +16538,6 @@
 		)
 		(uuid "23756dbd-6c23-46e9-8353-eb904849eeeb")
 	)
-	(label "MPU0 ~{NMI}1"
-		(at 364.49 44.45 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "23832700-0cd3-44e1-bc2f-e7a1d7110a1d")
-	)
 	(label "AM2"
 		(at 60.96 153.67 180)
 		(effects
@@ -15897,7 +16569,7 @@
 		(uuid "24fefe99-2ec9-4c1e-aa5c-e49b24084ebf")
 	)
 	(label "MPU2 ~{Main}16"
-		(at 434.34 285.75 180)
+		(at 608.33 285.75 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16035,6 +16707,16 @@
 			(justify left bottom)
 		)
 		(uuid "2692cf29-ef50-415f-9d72-e51dd0df9b4f")
+	)
+	(label "GND"
+		(at 429.26 273.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "26a1a836-4f22-4d7a-bb84-bb722a3c137a")
 	)
 	(label "AM19"
 		(at 261.62 128.27 0)
@@ -16235,6 +16917,16 @@
 			(justify left bottom)
 		)
 		(uuid "2a65076a-af35-4a45-8879-9ebbb71f8afc")
+	)
+	(label "MPU2 ~{Main}16"
+		(at 429.26 255.27 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a82ac3e-d6a1-4c72-ba68-bb9d8af3818c")
 	)
 	(label "AM21"
 		(at 142.24 123.19 0)
@@ -16877,7 +17569,7 @@
 		(uuid "3512e272-80ff-4f61-b12c-cdcc08119aa0")
 	)
 	(label "3.3V"
-		(at 608.33 279.4 180)
+		(at 782.32 279.4 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -16927,7 +17619,7 @@
 		(uuid "36ac2052-4cde-41eb-bff0-7135f2b9467a")
 	)
 	(label "AM23"
-		(at 582.93 256.54 180)
+		(at 756.92 256.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17577,7 +18269,7 @@
 		(uuid "3fe438c1-ddc9-46f2-a113-c1f7bcd5a6e0")
 	)
 	(label "AM19"
-		(at 582.93 266.7 180)
+		(at 756.92 266.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17657,7 +18349,7 @@
 		(uuid "411bb1fc-f393-45ce-9a38-a908a25c405c")
 	)
 	(label "MPU0 ~{Main}5"
-		(at 434.34 265.43 180)
+		(at 608.33 265.43 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17727,7 +18419,7 @@
 		(uuid "427349cc-6e6c-4be2-a682-2f38f73ac6ed")
 	)
 	(label "DM2"
-		(at 500.38 269.24 180)
+		(at 674.37 269.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17887,7 +18579,7 @@
 		(uuid "448b8ef4-3504-4362-a8cd-15b4bc9f0c2a")
 	)
 	(label "GND"
-		(at 474.98 260.35 0)
+		(at 648.97 260.35 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18267,7 +18959,7 @@
 		(uuid "4a3b4da3-5510-481c-a54a-11fa2dcabbd1")
 	)
 	(label "AM9"
-		(at 554.99 271.78 180)
+		(at 728.98 271.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18657,7 +19349,7 @@
 		(uuid "4f2857cc-732a-4c21-a6cd-f6fad9dddc50")
 	)
 	(label "MPU2 ~{Main}17"
-		(at 434.34 288.29 180)
+		(at 608.33 288.29 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18736,7 +19428,7 @@
 		)
 		(uuid "51023632-d755-4e33-a8fa-c90b91ee9eb6")
 	)
-	(label "~{Memory Fail}"
+	(label "MPU0 ~{Memory Fail}"
 		(at 392.43 262.89 0)
 		(effects
 			(font
@@ -18847,7 +19539,7 @@
 		(uuid "529dab79-98b2-4897-9c62-c6f72d48c226")
 	)
 	(label "GND"
-		(at 474.98 257.81 0)
+		(at 648.97 257.81 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18887,7 +19579,7 @@
 		(uuid "53957941-e183-422d-bbd5-2726a7dd5385")
 	)
 	(label "AM17"
-		(at 582.93 271.78 180)
+		(at 756.92 271.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19317,7 +20009,7 @@
 		(uuid "592f61f9-59cd-4e9a-977e-84ca4bbf0455")
 	)
 	(label "AM3"
-		(at 528.32 266.7 180)
+		(at 702.31 266.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19527,7 +20219,7 @@
 		(uuid "5c8099f7-3a01-4196-a4a7-5171dbc3f3bf")
 	)
 	(label "DM1"
-		(at 500.38 271.78 180)
+		(at 674.37 271.78 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19575,6 +20267,16 @@
 			(justify left bottom)
 		)
 		(uuid "5d220e62-bc46-4a13-8fa8-67a289f2915a")
+	)
+	(label "MPU2 ~{Main}"
+		(at 429.26 252.73 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5d65293a-7792-400a-a72a-b02d78a55ff3")
 	)
 	(label "AM2"
 		(at 238.76 468.63 180)
@@ -19735,6 +20437,16 @@
 			(justify left bottom)
 		)
 		(uuid "5f7acdbb-e977-496a-b749-1866b557a3f6")
+	)
+	(label "GND"
+		(at 469.9 252.73 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5f807e3b-dc94-4ecc-b225-e954ea8b5e43")
 	)
 	(label "AM19"
 		(at 83.82 274.32 0)
@@ -20047,7 +20759,7 @@
 		(uuid "6497d09f-ec2b-41c6-a59a-692920854cfa")
 	)
 	(label "AM4"
-		(at 528.32 264.16 180)
+		(at 702.31 264.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20086,16 +20798,6 @@
 		)
 		(uuid "64e406d6-d249-412b-951d-fd4e88efdc21")
 	)
-	(label "MPU2 ~{NMI}1"
-		(at 449.58 349.25 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "64f585da-29f8-4768-bdbc-43d7d52dba5f")
-	)
 	(label "~{Reset} MPU2 DEV16"
 		(at 180.34 402.59 180)
 		(effects
@@ -20125,6 +20827,16 @@
 			(justify left bottom)
 		)
 		(uuid "6544de99-292c-4d5f-a46e-e03512264ebe")
+	)
+	(label "5V"
+		(at 514.35 293.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6592bb61-ee8a-4bce-b7ed-7fff8fbb4927")
 	)
 	(label "~{Reset} MPU0 DEV18"
 		(at 119.38 233.68 180)
@@ -20337,7 +21049,7 @@
 		(uuid "68456622-132a-4270-8416-a9685320b8fc")
 	)
 	(label "3.3V"
-		(at 474.98 303.53 0)
+		(at 648.97 303.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20446,6 +21158,16 @@
 		)
 		(uuid "69eba14d-c317-428c-baca-548d43d3081e")
 	)
+	(label "3.3V"
+		(at 429.26 260.35 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6a0125dc-74ca-4318-8789-554e6edfaa5d")
+	)
 	(label "GND"
 		(at 180.34 284.48 180)
 		(effects
@@ -20487,7 +21209,7 @@
 		(uuid "6b7748d4-ece2-42e7-88ab-c431bccaf4ef")
 	)
 	(label "AM16"
-		(at 582.93 274.32 180)
+		(at 756.92 274.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20505,6 +21227,16 @@
 			(justify right bottom)
 		)
 		(uuid "6bd1be64-4506-4f00-a12f-357b1b0fb9b1")
+	)
+	(label "MPU1 ~{Reset}"
+		(at 796.29 382.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6beb810f-a1f4-482f-8076-9ce7c864ac0a")
 	)
 	(label "M~{RD}"
 		(at 350.52 443.23 180)
@@ -20887,7 +21619,7 @@
 		(uuid "708003c4-fd13-4334-a722-3bcb2bdef301")
 	)
 	(label "DM3"
-		(at 500.38 266.7 180)
+		(at 674.37 266.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -20926,7 +21658,7 @@
 		)
 		(uuid "714eb39b-0562-487c-a49b-2a28e1d9aa7f")
 	)
-	(label "~{Reset}"
+	(label "MPU2 ~{Reset}"
 		(at 203.2 354.33 0)
 		(effects
 			(font
@@ -20997,7 +21729,7 @@
 		(uuid "72b2dff3-c776-45b7-8adc-6199369c53c5")
 	)
 	(label "AM13"
-		(at 554.99 261.62 180)
+		(at 728.98 261.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21176,6 +21908,16 @@
 		)
 		(uuid "754f8352-c552-45ad-970b-8a9005d332cf")
 	)
+	(label "~{Contention}"
+		(at 350.52 349.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7560092e-0887-4d5c-b762-9b2c2ae33327")
+	)
 	(label "~{Memory Lo} MPU0 DEV17"
 		(at 60.96 256.54 180)
 		(effects
@@ -21257,7 +21999,7 @@
 		(uuid "769eb744-e7f3-463d-b353-c66cc2401a9f")
 	)
 	(label "AM22"
-		(at 582.93 259.08 180)
+		(at 756.92 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21305,6 +22047,16 @@
 			(justify right bottom)
 		)
 		(uuid "7754e051-82a4-4a57-92c0-11ec0efa055c")
+	)
+	(label "5V"
+		(at 429.26 290.83 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "776a7c25-aaaa-4aa7-957e-576cff6eeb83")
 	)
 	(label "GND"
 		(at 609.6 39.37 0)
@@ -21507,7 +22259,7 @@
 		(uuid "7ab0c706-1082-4ca2-8104-7070d69b4cc2")
 	)
 	(label "GND"
-		(at 474.98 255.27 0)
+		(at 648.97 255.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21535,6 +22287,16 @@
 			(justify left bottom)
 		)
 		(uuid "7b91ee4f-4ced-42a1-9a25-653f5b62301c")
+	)
+	(label "MPU1 ~{Main}16"
+		(at 514.35 255.27 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7b98734e-6d84-484d-b612-8cd4320423fe")
 	)
 	(label "MPU0 AD16"
 		(at 83.82 233.68 0)
@@ -21605,6 +22367,16 @@
 			(justify left bottom)
 		)
 		(uuid "7d0de6c5-f205-41a5-b292-095aefe0564a")
+	)
+	(label "MPU1 ~{Main}"
+		(at 514.35 252.73 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7d48f858-1113-4a32-b552-a5035deebac0")
 	)
 	(label "MPU0 AD1"
 		(at 387.35 46.99 0)
@@ -21737,7 +22509,7 @@
 		(uuid "7e9ee72b-8764-4013-9c97-414c3b2e3ea9")
 	)
 	(label "AM18"
-		(at 582.93 269.24 180)
+		(at 756.92 269.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -21957,7 +22729,7 @@
 		(uuid "834543b4-3440-4cbb-93e5-43d9a245c926")
 	)
 	(label "DM6"
-		(at 500.38 259.08 180)
+		(at 674.37 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22007,7 +22779,7 @@
 		(uuid "8402bd31-23ee-4b65-9238-28f1f49a97a2")
 	)
 	(label "3.3V"
-		(at 434.34 290.83 180)
+		(at 608.33 290.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22045,16 +22817,6 @@
 			(justify right bottom)
 		)
 		(uuid "8481637a-0e37-4625-8ea3-31d52b3581c2")
-	)
-	(label "5V"
-		(at 417.83 341.63 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "84b0b338-afb8-4a06-8c70-f1250822dcd4")
 	)
 	(label "MPU0 DCLK"
 		(at 238.76 74.93 180)
@@ -22187,7 +22949,7 @@
 		(uuid "864564d8-dd12-4cdd-8260-9b3b11a3653f")
 	)
 	(label "AM20"
-		(at 582.93 264.16 180)
+		(at 756.92 264.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22666,6 +23428,16 @@
 		)
 		(uuid "8e315bba-0b66-40b3-bf42-d258010e5dd6")
 	)
+	(label "GND"
+		(at 429.26 270.51 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8e3321f1-8c15-4615-9043-54f071038ec7")
+	)
 	(label "MPU0 AD1"
 		(at 448.31 41.91 180)
 		(effects
@@ -22716,6 +23488,16 @@
 		)
 		(uuid "8ec20988-0488-444b-a096-af3e2b9d87f2")
 	)
+	(label "GND"
+		(at 429.26 267.97 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8ef04439-5a56-4b01-a3c7-8297fbe37a50")
+	)
 	(label "MPU2 DD0"
 		(at 261.62 422.91 0)
 		(effects
@@ -22727,7 +23509,7 @@
 		(uuid "8efe7fbf-15fe-4b7a-8c8c-dced4dbe129d")
 	)
 	(label "AM5"
-		(at 528.32 261.62 180)
+		(at 702.31 261.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22816,8 +23598,18 @@
 		)
 		(uuid "90fee593-9b1b-4051-b546-f333539db3f4")
 	)
+	(label "MPU2 ~{Memory Fail}"
+		(at 469.9 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "91264199-c26a-4ddf-9c55-f16e7d9c7ea6")
+	)
 	(label "MPU0 ~{NMI}1"
-		(at 636.27 252.73 0)
+		(at 821.69 252.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23636,6 +24428,16 @@
 		)
 		(uuid "a0d2985f-7180-41e1-a184-d29d83e44b88")
 	)
+	(label "~{Contention}"
+		(at 364.49 44.45 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a110c59e-1ac6-4466-b65f-06fb18a8c50c")
+	)
 	(label "DM5"
 		(at 119.38 123.19 180)
 		(effects
@@ -23647,7 +24449,7 @@
 		(uuid "a13036b9-0e2d-41ff-9682-bf928ceccdd4")
 	)
 	(label "MPU0 ~{Main}"
-		(at 434.34 257.81 180)
+		(at 608.33 257.81 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23657,7 +24459,7 @@
 		(uuid "a16ecf09-4511-4cf4-8cb6-346e5f1fcd5b")
 	)
 	(label "AM11"
-		(at 554.99 266.7 180)
+		(at 728.98 266.7 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23677,7 +24479,7 @@
 		(uuid "a1beb69b-36a7-4031-bdc3-4dcd6ff4c3ea")
 	)
 	(label "AM12"
-		(at 554.99 264.16 180)
+		(at 728.98 264.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -23785,6 +24587,16 @@
 			(justify left bottom)
 		)
 		(uuid "a4291472-5051-4463-8056-b585d0e65459")
+	)
+	(label "GND"
+		(at 469.9 257.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a460bfbb-50a3-4fee-995d-6160c87a15b3")
 	)
 	(label "5V"
 		(at 332.74 43.18 180)
@@ -24087,7 +24899,7 @@
 		(uuid "a9d0e1ae-ca9c-4e3a-9986-9805e96313f0")
 	)
 	(label "MPU0 ~{Main}4"
-		(at 434.34 262.89 180)
+		(at 608.33 262.89 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24107,7 +24919,7 @@
 		(uuid "aa00ed18-9e01-45c9-99c3-e5b32dcf3f90")
 	)
 	(label "AM10"
-		(at 554.99 269.24 180)
+		(at 728.98 269.24 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24115,6 +24927,16 @@
 			(justify right bottom)
 		)
 		(uuid "aa04434d-2975-4e3f-aa6d-d858554393ca")
+	)
+	(label "MPU2 ~{Memory Fail}"
+		(at 514.35 267.97 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "aa0cb58c-1cda-4508-903a-37133e12e10d")
 	)
 	(label "M~{RD}"
 		(at 180.34 140.97 180)
@@ -24187,7 +25009,7 @@
 		(uuid "aaacda00-737c-42d7-a141-e7a76d0a2c81")
 	)
 	(label "DM7"
-		(at 500.38 256.54 180)
+		(at 674.37 256.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24227,7 +25049,7 @@
 		(uuid "aaddd522-df1f-45ea-a3ac-52f61a58b303")
 	)
 	(label "MPU0 ~{Main}18"
-		(at 434.34 273.05 180)
+		(at 608.33 273.05 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24237,7 +25059,7 @@
 		(uuid "aafa9094-cd25-47b5-8c49-1f90f330dd2b")
 	)
 	(label "1.6V"
-		(at 614.68 273.05 0)
+		(at 788.67 273.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24257,7 +25079,7 @@
 		(uuid "ab5d8324-6b55-420e-bb50-765185f42b56")
 	)
 	(label "3.3V"
-		(at 434.34 295.91 180)
+		(at 608.33 295.91 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24267,7 +25089,7 @@
 		(uuid "ab652265-b630-408d-8844-13d0eadd5d91")
 	)
 	(label "3.3V"
-		(at 613.41 264.16 0)
+		(at 787.4 264.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24427,7 +25249,7 @@
 		(uuid "ae2650e3-114a-4256-8e63-f41c68b36034")
 	)
 	(label "M~{RD}"
-		(at 608.33 255.27 180)
+		(at 782.32 255.27 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24436,8 +25258,18 @@
 		)
 		(uuid "ae8b7bdf-23fb-47d6-8aec-8929dbfa116e")
 	)
+	(label "5V"
+		(at 514.35 290.83 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "af054b97-2d93-4892-acd4-1b6a7f4d8df9")
+	)
 	(label "MPU1 ~{Main}17"
-		(at 434.34 283.21 180)
+		(at 608.33 283.21 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24556,6 +25388,16 @@
 		)
 		(uuid "b0c02f50-ed0b-4393-9c95-d7a170829230")
 	)
+	(label "5V"
+		(at 429.26 293.37 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b0d465ce-a8c2-4e62-8b6c-ccb9c9221081")
+	)
 	(label "DM2"
 		(at 60.96 130.81 180)
 		(effects
@@ -24567,7 +25409,7 @@
 		(uuid "b0d55371-f8fa-4797-8c74-9c5a9265c2dd")
 	)
 	(label "MPU0 ~{Main}16"
-		(at 434.34 267.97 180)
+		(at 608.33 267.97 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24727,7 +25569,7 @@
 		(uuid "b3b9fd86-b7a2-4dcc-ac23-ab3f89abb1db")
 	)
 	(label "DM5"
-		(at 500.38 261.62 180)
+		(at 674.37 261.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24826,6 +25668,16 @@
 		)
 		(uuid "b58722bb-7b4d-43bb-b5b2-aa232d528a18")
 	)
+	(label "MPU2 ~{Reset}"
+		(at 792.48 392.43 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b59ed99e-a7a3-42b3-80dc-e862e123df7b")
+	)
 	(label "~{Memory Lo} MPU0 DEV19"
 		(at 180.34 256.54 180)
 		(effects
@@ -24877,7 +25729,7 @@
 		(uuid "b733ec20-7c0c-45ce-a5d8-4ee0788cc6f3")
 	)
 	(label "AM7"
-		(at 528.32 256.54 180)
+		(at 702.31 256.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24937,7 +25789,7 @@
 		(uuid "b867ceb4-db62-4773-b4a3-78c689b30e8a")
 	)
 	(label "AM14"
-		(at 554.99 259.08 180)
+		(at 728.98 259.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25136,6 +25988,16 @@
 		)
 		(uuid "bada18b9-f910-438b-b8ac-4d877afa7c9e")
 	)
+	(label "~{Memory Contention}"
+		(at 554.99 262.89 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bb336be8-7d0b-4b32-892e-bc21745d87fd")
+	)
 	(label "AM23"
 		(at 142.24 118.11 0)
 		(effects
@@ -25285,6 +26147,16 @@
 			(justify left bottom)
 		)
 		(uuid "bf04c613-2a5d-45a5-a717-95e36ed8952c")
+	)
+	(label "MPU2 ~{Main}17"
+		(at 429.26 257.81 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bf0bc0c4-bea5-4fef-bc96-b4c75d144e77")
 	)
 	(label "AM23"
 		(at 566.42 153.67 180)
@@ -25547,7 +26419,7 @@
 		(uuid "c3445dd3-34ab-409e-a8d9-c6c836bd6441")
 	)
 	(label "AM15"
-		(at 554.99 256.54 180)
+		(at 728.98 256.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25677,7 +26549,7 @@
 		(uuid "c4cf2439-d1ca-49ea-861f-0d72c916459a")
 	)
 	(label "DM4"
-		(at 500.38 264.16 180)
+		(at 674.37 264.16 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25755,6 +26627,16 @@
 			(justify right bottom)
 		)
 		(uuid "c683f25d-a64f-4138-88b3-bf093a474524")
+	)
+	(label "GND"
+		(at 554.99 260.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c68b7ae7-36bd-4be1-a73f-b5f9ca2d9d7a")
 	)
 	(label "~{Memory Hi} MPU0 DEV18"
 		(at 119.38 259.08 180)
@@ -25905,6 +26787,16 @@
 			(justify left bottom)
 		)
 		(uuid "c8ed737a-e2e8-4eb5-a183-1d64d26f4ce0")
+	)
+	(label "MPU1 ~{Memory Fail}"
+		(at 514.35 270.51 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c8f998c6-7c0a-4acb-8fc3-69e106081a5d")
 	)
 	(label "MPU0 AD4"
 		(at 203.2 203.2 0)
@@ -26177,7 +27069,7 @@
 		(uuid "cc4260ef-1c38-4102-81a8-6675327fe87f")
 	)
 	(label "1.6V"
-		(at 582.93 254 180)
+		(at 756.92 254 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26307,7 +27199,7 @@
 		(uuid "cdf6eb6e-0b67-444e-9ef4-2a193d76486d")
 	)
 	(label "~{Main}"
-		(at 474.98 262.89 0)
+		(at 648.97 262.89 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26376,6 +27268,16 @@
 		)
 		(uuid "cf894ebf-3dec-448d-92ba-af278ab9d08b")
 	)
+	(label "GND"
+		(at 469.9 255.27 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfd0469e-48a6-4480-866d-4734f21f656f")
+	)
 	(label "MPU1 AD2"
 		(at 142.24 367.03 0)
 		(effects
@@ -26397,7 +27299,7 @@
 		(uuid "cff178be-f9aa-41d5-b514-661ae1398510")
 	)
 	(label "MPU1 ~{Main}16"
-		(at 434.34 280.67 180)
+		(at 608.33 280.67 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26427,7 +27329,7 @@
 		(uuid "d0c2d0eb-0d5b-450b-ba87-5a4a60e13fbd")
 	)
 	(label "5V"
-		(at 434.34 300.99 180)
+		(at 608.33 300.99 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26446,7 +27348,7 @@
 		)
 		(uuid "d16961b4-614b-4736-bd30-dad0a2775244")
 	)
-	(label "~{Reset}"
+	(label "MPU1 ~{Reset}"
 		(at 142.24 354.33 0)
 		(effects
 			(font
@@ -26465,6 +27367,16 @@
 			(justify left bottom)
 		)
 		(uuid "d1e8ccfd-da57-400f-bd4c-a85258c97176")
+	)
+	(label "GND"
+		(at 469.9 260.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d209934d-3c52-4182-ab4d-91d7d169cf08")
 	)
 	(label "MPU0 AD14"
 		(at 387.35 80.01 0)
@@ -26545,6 +27457,16 @@
 			(justify left bottom)
 		)
 		(uuid "d3457982-fe9b-4bef-9149-86187dc77d1c")
+	)
+	(label "3.3V"
+		(at 514.35 260.35 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d3b1a607-3781-4006-950e-813ca54a87eb")
 	)
 	(label "MPU1 ~{Main Access}"
 		(at 119.38 379.73 180)
@@ -26976,6 +27898,16 @@
 		)
 		(uuid "da0b95cc-e3b0-4868-8e8b-00c267461cd0")
 	)
+	(label "MPU0 ~{Memory Fail}"
+		(at 514.35 273.05 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "da461abd-c942-4a8c-a668-b96a1ab3db32")
+	)
 	(label "MPU2 CLK"
 		(at 580.39 367.03 0)
 		(effects
@@ -27167,7 +28099,7 @@
 		(uuid "ddf3320a-bea4-4a0a-8c58-b53024e53a6d")
 	)
 	(label "1.6V"
-		(at 554.99 254 180)
+		(at 728.98 254 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27175,16 +28107,6 @@
 			(justify right bottom)
 		)
 		(uuid "ddfd2dd7-c7af-414e-984d-fbd3522b38b4")
-	)
-	(label "MPU1 ~{NMI}1"
-		(at 350.52 349.25 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "de223d02-639a-4884-8779-f39bda4a34fb")
 	)
 	(label "MPU0 AD7"
 		(at 203.2 64.77 0)
@@ -27257,7 +28179,7 @@
 		(uuid "deb48aa6-ab1c-41fe-a424-db66c2ecaf63")
 	)
 	(label "5V"
-		(at 434.34 303.53 180)
+		(at 608.33 303.53 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27567,7 +28489,7 @@
 		(uuid "e3c08dc5-5076-4b75-b4e1-2d173d469da7")
 	)
 	(label "~{Reset}"
-		(at 434.34 252.73 180)
+		(at 608.33 252.73 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28017,7 +28939,7 @@
 		(uuid "ebffb516-c8a7-42ec-baff-5e45944fe548")
 	)
 	(label "3.3V"
-		(at 613.41 255.27 0)
+		(at 787.4 255.27 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28137,7 +29059,7 @@
 		(uuid "edc64b14-5d32-4476-8c61-48c681b1eceb")
 	)
 	(label "AM8"
-		(at 554.99 274.32 180)
+		(at 728.98 274.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28336,7 +29258,7 @@
 		)
 		(uuid "f1489fb0-15e0-43d3-b27c-f7176b6b28a6")
 	)
-	(label "~{Reset}"
+	(label "MPU2 ~{Reset}"
 		(at 261.62 354.33 0)
 		(effects
 			(font
@@ -28357,7 +29279,7 @@
 		(uuid "f156e464-8426-4551-9373-71db7d549d31")
 	)
 	(label "AM21"
-		(at 582.93 261.62 180)
+		(at 756.92 261.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28557,7 +29479,7 @@
 		(uuid "f4576340-1754-40d7-8d4b-7c67aea8cdde")
 	)
 	(label "3.3V"
-		(at 434.34 298.45 180)
+		(at 608.33 298.45 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28636,7 +29558,7 @@
 		)
 		(uuid "f553d4fe-27df-4691-b2fc-b19c57811a90")
 	)
-	(label "~{Reset}"
+	(label "MPU1 ~{Reset}"
 		(at 83.82 354.33 0)
 		(effects
 			(font
@@ -28657,7 +29579,7 @@
 		(uuid "f63a7775-1a93-4a2b-8457-b831a53d1e14")
 	)
 	(label "GND"
-		(at 474.98 252.73 0)
+		(at 648.97 252.73 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28906,6 +29828,16 @@
 		)
 		(uuid "fa3e0658-9d72-44c2-b98d-01b13733eab9")
 	)
+	(label "~{Memory Fail}"
+		(at 554.99 270.51 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa4506f4-eaae-4b8f-bce2-bd8a8034e7d8")
+	)
 	(label "AM21"
 		(at 373.38 425.45 0)
 		(effects
@@ -28957,7 +29889,7 @@
 		(uuid "faedd03a-f2f6-4b74-a1d4-780109b107e5")
 	)
 	(label "AM0"
-		(at 528.32 274.32 180)
+		(at 702.31 274.32 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28977,7 +29909,7 @@
 		(uuid "fb2d7418-6976-4890-b32a-620d706c1dcd")
 	)
 	(label "~{Memory Fail}"
-		(at 434.34 255.27 180)
+		(at 608.33 255.27 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28987,7 +29919,7 @@
 		(uuid "fb347246-76a9-4111-8d18-f93efe8f6153")
 	)
 	(label "MPU0 ~{Main}3"
-		(at 434.34 260.35 180)
+		(at 608.33 260.35 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29258,7 +30190,7 @@
 	)
 	(symbol
 		(lib_id "Bourns:4609X-101-103LF")
-		(at 554.99 254 0)
+		(at 728.98 254 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -29266,7 +30198,7 @@
 		(dnp no)
 		(uuid "0347db16-3ce6-4ad0-ab80-4d4e4c5a3437")
 		(property "Reference" "RN3"
-			(at 563.245 248.92 0)
+			(at 737.235 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29274,7 +30206,7 @@
 			)
 		)
 		(property "Value" "4609X-101-103LF"
-			(at 563.245 250.825 0)
+			(at 737.235 250.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29282,7 +30214,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:4609X"
-			(at 570.23 283.21 0)
+			(at 744.22 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29292,7 +30224,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/datasheet/2/54/4600x-776645.pdf"
-			(at 570.23 285.75 0)
+			(at 744.22 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29302,7 +30234,7 @@
 			)
 		)
 		(property "Description" "10KΩ 8-bus resistor"
-			(at 563.245 277.495 0)
+			(at 737.235 277.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29310,7 +30242,7 @@
 			)
 		)
 		(property "Height" "5.08"
-			(at 570.23 288.29 0)
+			(at 744.22 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29320,7 +30252,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 570.23 290.83 0)
+			(at 744.22 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29330,7 +30262,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-102LF?qs=nFt9sTYf7TAKYPPrg1sLvw%3D%3D"
-			(at 570.23 298.45 0)
+			(at 744.22 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33203,6 +34135,172 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:Main_Memory_Small_Abort")
+		(at 434.34 252.73 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4b051ecf-8f20-4c43-9033-c1fa868bce95")
+		(property "Reference" "B11"
+			(at 449.58 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Main Memory Small Abort"
+			(at 449.58 249.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Small_Abort"
+			(at 449.58 296.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 434.34 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Main Memory Small Abort"
+			(at 448.945 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "Main Memory Small Abort"
+			(at 448.945 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e6d9c6b8-74d6-44e8-b5d3-5dff630dbe7b")
+		)
+		(pin "32"
+			(uuid "14aca459-a2db-446d-aa44-f83b3e823d7d")
+		)
+		(pin "6"
+			(uuid "ea2d6110-405a-49ce-920d-c94182413743")
+		)
+		(pin "12"
+			(uuid "55b46b43-cf0d-4891-bdf5-d439ec473da2")
+		)
+		(pin "14"
+			(uuid "068bb46a-d78e-4c28-8721-5e8add742db2")
+		)
+		(pin "29"
+			(uuid "0ea7a4e3-725d-4a95-9e7b-d0e46e186312")
+		)
+		(pin "30"
+			(uuid "724af430-f739-4b60-8fac-3208cb0f8983")
+		)
+		(pin "15"
+			(uuid "edf9044f-1f0e-43f9-b716-69593182a22f")
+		)
+		(pin "31"
+			(uuid "3fc66772-29b3-48fd-9c87-40f9a333a182")
+		)
+		(pin "10"
+			(uuid "818b2ed3-7eb7-43dc-bd12-142c0fe3f09e")
+		)
+		(pin "16"
+			(uuid "6c42ec43-d509-4730-9cb5-34daa2a955e9")
+		)
+		(pin "8"
+			(uuid "41451262-4ee5-47e4-815d-8ae2c88be417")
+		)
+		(pin "13"
+			(uuid "5be8d57c-7094-4e83-b8e0-f826426db111")
+		)
+		(pin "18"
+			(uuid "bf9baf32-fdb5-40e3-9548-1381440ae848")
+		)
+		(pin "19"
+			(uuid "df3d2edb-264f-4058-bdb2-530ef1508bf2")
+		)
+		(pin "9"
+			(uuid "92b297be-32ac-41bb-95e8-766abec07684")
+		)
+		(pin "23"
+			(uuid "9f9a2641-47f9-4dcf-aeea-79d06a60a30d")
+		)
+		(pin "4"
+			(uuid "8193fa30-f2eb-4ea4-ab1a-a44c9b5ad58c")
+		)
+		(pin "24"
+			(uuid "a263e3ee-185d-469e-95ae-81857aa31f9c")
+		)
+		(pin "21"
+			(uuid "38fd3608-88aa-4edc-ba7f-fde02eab9ae0")
+		)
+		(pin "3"
+			(uuid "64445af1-53ac-4c0e-aeb2-d250fcd1fb2b")
+		)
+		(pin "20"
+			(uuid "c8fe43ce-7e13-4464-a89d-d4bfb1f94a8e")
+		)
+		(pin "17"
+			(uuid "30d4d50d-44b5-4944-809c-361db32be027")
+		)
+		(pin "26"
+			(uuid "3763fc41-ae7b-40cd-b156-4bcf3af26f24")
+		)
+		(pin "27"
+			(uuid "eb6541b1-6485-49cf-81a0-7040aa706758")
+		)
+		(pin "11"
+			(uuid "a214f2ac-d068-471a-b14c-c42bee31e21a")
+		)
+		(pin "5"
+			(uuid "16588b0a-db8d-4e50-a2b5-cf9858548b33")
+		)
+		(pin "2"
+			(uuid "ef76ea78-4379-476c-bddd-faa67b47b391")
+		)
+		(pin "7"
+			(uuid "b7ea6074-30c0-42eb-aafa-93133750f148")
+		)
+		(pin "22"
+			(uuid "0789de38-4ded-4bad-b70f-827c0f402c45")
+		)
+		(pin "28"
+			(uuid "fab83059-7ce5-4101-b5a9-3be456ebee83")
+		)
+		(pin "25"
+			(uuid "19a6a1c9-9f28-4dd0-9d71-e626772a2bcc")
+		)
+		(instances
+			(project "Mainboard Full"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:MountingHole_Pad")
 		(at 561.34 511.81 0)
 		(unit 1)
@@ -33268,32 +34366,33 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 613.41 255.27 180)
+		(lib_id "HCP65:Main_Memory_Small_Abort")
+		(at 519.43 252.73 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5e194cd9-e4f4-4669-9e58-83c515dd34ac")
-		(property "Reference" "R10"
-			(at 610.87 257.048 0)
+		(uuid "50909407-3be5-4fbd-a2ce-306e4e57b6d5")
+		(property "Reference" "B5"
+			(at 534.67 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "10KΩ"
-			(at 610.87 253.365 0)
+		(property "Value" "Main Memory Small Abort"
+			(at 534.67 249.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(bold yes)
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 595.884 247.65 0)
+		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Small_Abort"
+			(at 534.67 296.545 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33302,7 +34401,172 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 613.41 255.27 0)
+			(at 519.43 252.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Main Memory Small Abort"
+			(at 534.035 265.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "Main Memory Small Abort"
+			(at 534.035 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dfd754e4-f4c4-4dad-8f09-b7d59da1e3fe")
+		)
+		(pin "32"
+			(uuid "4cda652f-13b5-4f1e-b9a3-749f14fe3686")
+		)
+		(pin "6"
+			(uuid "ad6e9ebe-add7-4f22-9fb8-80162d310de2")
+		)
+		(pin "12"
+			(uuid "fb649f7f-26b6-416d-8395-bf7bed98def2")
+		)
+		(pin "14"
+			(uuid "0a761b9a-157c-491a-ad80-9fbe36e418bb")
+		)
+		(pin "29"
+			(uuid "faebf537-6ec9-4023-93fe-cce32c0f99b3")
+		)
+		(pin "30"
+			(uuid "4d738195-ac7b-421f-8b1e-5ff14e447b1f")
+		)
+		(pin "15"
+			(uuid "ee082422-d0b0-4066-9a39-10dcfe42a124")
+		)
+		(pin "31"
+			(uuid "37edeae9-d27f-49e5-9b7c-95ea11403f5b")
+		)
+		(pin "10"
+			(uuid "cca77186-3665-49cd-9aaf-fcce4bbe9532")
+		)
+		(pin "16"
+			(uuid "b5b70c13-9e91-4125-bde9-c223646ca573")
+		)
+		(pin "8"
+			(uuid "c1f091b2-b067-41b9-a2b1-3d4649b7fc4f")
+		)
+		(pin "13"
+			(uuid "ba0660fb-83e5-4e76-9b8e-caa531f02603")
+		)
+		(pin "18"
+			(uuid "98c52cea-d33d-4fd4-9e24-f1e4651561a5")
+		)
+		(pin "19"
+			(uuid "f9ff2f19-6ada-48d8-a917-db39cf5c3dee")
+		)
+		(pin "9"
+			(uuid "ef1ddd43-9ee6-477d-b542-da9c32e32ce8")
+		)
+		(pin "23"
+			(uuid "245f50c0-303d-404b-a317-9e8bed962deb")
+		)
+		(pin "4"
+			(uuid "7be95bef-9043-4944-9b6e-978ebfe9c61e")
+		)
+		(pin "24"
+			(uuid "b8563c4f-5662-4a87-967d-d0f3790bade8")
+		)
+		(pin "21"
+			(uuid "21bf65b7-c1a2-45e5-8643-1c4ee5ca2d44")
+		)
+		(pin "3"
+			(uuid "f44c825a-9a72-47ed-9f08-dd2729fd3bc9")
+		)
+		(pin "20"
+			(uuid "028eee79-e7a6-4301-8cfe-a7361457341c")
+		)
+		(pin "17"
+			(uuid "38795e5d-a317-4043-857d-779cfc85db25")
+		)
+		(pin "26"
+			(uuid "be0ac899-914e-4cc5-af62-cd6c24788593")
+		)
+		(pin "27"
+			(uuid "17c5b78d-d330-4206-be77-07aeb7fe8cbd")
+		)
+		(pin "11"
+			(uuid "e019383f-9cc7-43c9-89d4-c0cf6bd2ad82")
+		)
+		(pin "5"
+			(uuid "763bc19a-4d9b-4bb8-af69-6289b139bfaf")
+		)
+		(pin "2"
+			(uuid "ee54e180-e401-4f5b-aa5a-e13e28dcbdfb")
+		)
+		(pin "7"
+			(uuid "e6c74331-2e2e-4adb-84d7-6743dcee38fb")
+		)
+		(pin "22"
+			(uuid "1e2783ab-8280-4313-985c-bb1e3e199d64")
+		)
+		(pin "28"
+			(uuid "420ac592-7a57-4cd7-8683-a38434b6e451")
+		)
+		(pin "25"
+			(uuid "10c41306-eb34-4c30-bba3-cb9c05cc281b")
+		)
+		(instances
+			(project ""
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "B5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:R_0805")
+		(at 787.4 255.27 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e194cd9-e4f4-4669-9e58-83c515dd34ac")
+		(property "Reference" "R10"
+			(at 784.86 257.048 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10KΩ"
+			(at 784.86 253.365 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:R_0805"
+			(at 769.874 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 787.4 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33311,7 +34575,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 613.41 255.27 0)
+			(at 787.4 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33467,7 +34731,7 @@
 	)
 	(symbol
 		(lib_id "Bourns:4609X-101-103LF")
-		(at 528.32 254 0)
+		(at 702.31 254 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -33475,7 +34739,7 @@
 		(dnp no)
 		(uuid "608ca146-f698-4154-a496-b3a0e40e255a")
 		(property "Reference" "RN2"
-			(at 536.575 248.92 0)
+			(at 710.565 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33483,7 +34747,7 @@
 			)
 		)
 		(property "Value" "4609X-101-103LF"
-			(at 536.575 250.825 0)
+			(at 710.565 250.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33491,7 +34755,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:4609X"
-			(at 543.56 283.21 0)
+			(at 717.55 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33501,7 +34765,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/datasheet/2/54/4600x-776645.pdf"
-			(at 543.56 285.75 0)
+			(at 717.55 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33511,7 +34775,7 @@
 			)
 		)
 		(property "Description" "10KΩ 8-bus resistor"
-			(at 536.575 277.495 0)
+			(at 710.565 277.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33519,7 +34783,7 @@
 			)
 		)
 		(property "Height" "5.08"
-			(at 543.56 288.29 0)
+			(at 717.55 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33529,7 +34793,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 543.56 290.83 0)
+			(at 717.55 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33539,7 +34803,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-102LF?qs=nFt9sTYf7TAKYPPrg1sLvw%3D%3D"
-			(at 543.56 298.45 0)
+			(at 717.55 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34081,7 +35345,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 613.41 279.4 180)
+		(at 787.4 279.4 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34089,7 +35353,7 @@
 		(dnp no)
 		(uuid "70c340b0-ec81-4704-9645-e04a6ce8db98")
 		(property "Reference" "R11"
-			(at 610.87 281.178 0)
+			(at 784.86 281.178 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34097,7 +35361,7 @@
 			)
 		)
 		(property "Value" "1KΩ"
-			(at 610.87 277.495 0)
+			(at 784.86 277.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34105,7 +35369,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 595.884 271.78 0)
+			(at 769.874 271.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34114,7 +35378,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 613.41 279.4 0)
+			(at 787.4 279.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34123,7 +35387,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 613.41 279.4 0)
+			(at 787.4 279.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34586,7 +35850,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:Main_Memory_Full_Enable")
-		(at 439.42 252.73 0)
+		(at 613.41 252.73 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -34594,7 +35858,7 @@
 		(dnp no)
 		(uuid "7a2308cf-159b-4b55-8403-5f61f1425b10")
 		(property "Reference" "B10"
-			(at 454.66 247.65 0)
+			(at 628.65 247.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34602,7 +35866,7 @@
 			)
 		)
 		(property "Value" "Main Memory Full Enable"
-			(at 454.66 249.555 0)
+			(at 628.65 249.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34611,7 +35875,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Full_Enable"
-			(at 454.66 307.34 0)
+			(at 628.65 307.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34620,7 +35884,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 439.42 252.73 0)
+			(at 613.41 252.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34629,7 +35893,7 @@
 			)
 		)
 		(property "Description" "Main Memory Full Enable"
-			(at 453.39 278.13 0)
+			(at 627.38 278.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34637,7 +35901,7 @@
 			)
 		)
 		(property "Silkscreen" "Main Memory Full Enable"
-			(at 454.66 303.53 0)
+			(at 628.65 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36618,7 +37882,7 @@
 	)
 	(symbol
 		(lib_id "Bourns:4609X-101-103LF")
-		(at 500.38 254 0)
+		(at 674.37 254 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36626,7 +37890,7 @@
 		(dnp no)
 		(uuid "b31d4604-2ecf-495d-8fd5-0ac06a2323e6")
 		(property "Reference" "RN1"
-			(at 508.635 248.92 0)
+			(at 682.625 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36634,7 +37898,7 @@
 			)
 		)
 		(property "Value" "4609X-101-103LF"
-			(at 508.635 250.825 0)
+			(at 682.625 250.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36642,7 +37906,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:4609X"
-			(at 515.62 283.21 0)
+			(at 689.61 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36652,7 +37916,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/datasheet/2/54/4600x-776645.pdf"
-			(at 515.62 285.75 0)
+			(at 689.61 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36662,7 +37926,7 @@
 			)
 		)
 		(property "Description" "10KΩ 8-bus resistor"
-			(at 508.635 277.495 0)
+			(at 682.625 277.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36670,7 +37934,7 @@
 			)
 		)
 		(property "Height" "5.08"
-			(at 515.62 288.29 0)
+			(at 689.61 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36680,7 +37944,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 515.62 290.83 0)
+			(at 689.61 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36690,7 +37954,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-102LF?qs=nFt9sTYf7TAKYPPrg1sLvw%3D%3D"
-			(at 515.62 298.45 0)
+			(at 689.61 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36737,7 +38001,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 613.41 264.16 180)
+		(at 787.4 264.16 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36745,7 +38009,7 @@
 		(dnp no)
 		(uuid "b478c591-d713-4c60-afdd-27e577935222")
 		(property "Reference" "R8"
-			(at 610.87 265.938 0)
+			(at 784.86 265.938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36753,7 +38017,7 @@
 			)
 		)
 		(property "Value" "10KΩ"
-			(at 610.87 262.255 0)
+			(at 784.86 262.255 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36761,7 +38025,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 595.884 256.54 0)
+			(at 769.874 256.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36770,7 +38034,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 613.41 264.16 0)
+			(at 787.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36779,7 +38043,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 613.41 264.16 0)
+			(at 787.4 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38026,73 +39290,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 421.64 341.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c59b931f-e258-4ed9-9add-ee48bbda408a")
-		(property "Reference" "R16"
-			(at 424.18 339.852 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "3.3KΩ"
-			(at 424.18 343.535 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 439.166 349.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 421.64 341.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 421.64 341.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f4f05b1c-c2de-4629-a031-1b84774ec199")
-		)
-		(pin "2"
-			(uuid "f347f531-861f-48d3-8438-71fc9562e651")
-		)
-		(instances
-			(project "Mainboard Full"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "ST_Microelectronics:1N5819RL")
 		(at 685.8 515.62 0)
 		(mirror y)
@@ -38207,73 +39404,6 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "D1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 322.58 341.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c941f44f-9718-496e-a9d4-5119ae105c63")
-		(property "Reference" "R7"
-			(at 325.12 339.852 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "3.3KΩ"
-			(at 325.12 343.535 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 340.106 349.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 322.58 341.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 322.58 341.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "92a072a9-aec3-4e21-b517-c552505f4971")
-		)
-		(pin "2"
-			(uuid "427dba89-c80c-4c0a-9585-9172b1b34258")
-		)
-		(instances
-			(project "Mainboard Full"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -39537,7 +40667,7 @@
 	)
 	(symbol
 		(lib_id "Bourns:4609X-101-103LF")
-		(at 582.93 254 0)
+		(at 756.92 254 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -39545,7 +40675,7 @@
 		(dnp no)
 		(uuid "d8ba4808-3a4c-4d7e-ad22-e883f4f101a8")
 		(property "Reference" "RN4"
-			(at 591.185 248.92 0)
+			(at 765.175 248.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39553,7 +40683,7 @@
 			)
 		)
 		(property "Value" "4609X-101-103LF"
-			(at 591.185 250.825 0)
+			(at 765.175 250.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39561,7 +40691,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:4609X"
-			(at 598.17 283.21 0)
+			(at 772.16 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39571,7 +40701,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.mouser.com/datasheet/2/54/4600x-776645.pdf"
-			(at 598.17 285.75 0)
+			(at 772.16 285.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39581,7 +40711,7 @@
 			)
 		)
 		(property "Description" "10KΩ 8-bus resistor"
-			(at 591.185 277.495 0)
+			(at 765.175 277.495 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39589,7 +40719,7 @@
 			)
 		)
 		(property "Height" "5.08"
-			(at 598.17 288.29 0)
+			(at 772.16 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39599,7 +40729,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Bourns"
-			(at 598.17 290.83 0)
+			(at 772.16 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39609,7 +40739,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Bourns/4609X-101-102LF?qs=nFt9sTYf7TAKYPPrg1sLvw%3D%3D"
-			(at 598.17 298.45 0)
+			(at 772.16 298.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41211,7 +42341,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 613.41 273.05 180)
+		(at 787.4 273.05 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41219,7 +42349,7 @@
 		(dnp no)
 		(uuid "f55fcfb3-bdf0-4c5d-a261-54f7b7af8aee")
 		(property "Reference" "R9"
-			(at 610.87 274.828 0)
+			(at 784.86 274.828 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41227,7 +42357,7 @@
 			)
 		)
 		(property "Value" "1KΩ"
-			(at 610.87 271.145 0)
+			(at 784.86 271.145 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41235,7 +42365,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 595.884 265.43 0)
+			(at 769.874 265.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41244,7 +42374,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 613.41 273.05 0)
+			(at 787.4 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41253,7 +42383,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 613.41 273.05 0)
+			(at 787.4 273.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41489,7 +42619,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_Radial_D4.0mm_P2.00mm")
-		(at 614.68 285.75 0)
+		(at 788.67 285.75 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -41498,7 +42628,7 @@
 		(dnp no)
 		(uuid "ff841f1f-db28-4fff-b8be-6027aec50ced")
 		(property "Reference" "C1"
-			(at 614.045 283.21 0)
+			(at 788.035 283.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41507,7 +42637,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 610.87 288.29 90)
+			(at 784.86 288.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41516,7 +42646,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:CP_Radial_D4.0mm_P2.00mm"
-			(at 614.68 297.18 0)
+			(at 788.67 297.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41525,7 +42655,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 609.6 290.83 0)
+			(at 783.59 290.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41534,7 +42664,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 614.045 288.29 0)
+			(at 788.035 288.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)

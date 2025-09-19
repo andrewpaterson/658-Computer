@@ -1,7 +1,7 @@
 (footprint "HCP65_Main_Memory_Select"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Main Memory Select")
 	(tags "HCP65 Main Memory Select")
@@ -22,18 +22,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "14fad1b7-562b-494a-8b99-71df2e253fda")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -89,13 +77,13 @@
 	)
 	(fp_line
 		(start 0.835732 -2.613732)
-		(end 14.404268 -2.613732)
+		(end 6.624035 -2.613732)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "287ef69e-2beb-4f0e-872b-f0b2b92ff9e6")
+		(uuid "597d3e1b-8851-4817-8c8f-5a8094a32db1")
 	)
 	(fp_line
 		(start 6.62 -2.524)
@@ -106,6 +94,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "3a53ef77-9806-4c24-adcf-7c8319821595")
+	)
+	(fp_line
+		(start 8.615965 -2.613732)
+		(end 14.404268 -2.613732)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "287ef69e-2beb-4f0e-872b-f0b2b92ff9e6")
 	)
 	(fp_line
 		(start 14.404269 71.193733)
@@ -199,7 +197,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "a1347bcb-2156-48ca-b550-81ab431c0f7c")
 	)
@@ -691,6 +689,7 @@
 		(remove_unused_layers no)
 		(uuid "7d922439-4e0e-46ac-94cf-c364dab598dc")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Main/Main Memory Select/Main Memory Select.wrl"
 		(offset
 			(xyz 0 0 3)

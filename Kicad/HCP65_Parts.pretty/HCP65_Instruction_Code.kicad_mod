@@ -1,7 +1,7 @@
 (footprint "HCP65_Instruction_Code"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Instruction Code")
 	(tags "HCP65 Instruction Code")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_Instruction_Code"
-		(at 11.43 88.773 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "181d092b-7750-4d4a-96ff-5c89a1bd4d42")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -101,7 +87,7 @@
 		(uuid "c1df1bbf-2ce1-426a-9053-312c1aa0b887")
 	)
 	(fp_line
-		(start 19.685 -5.715)
+		(start 10.434913 -5.715)
 		(end 3.175 -5.715)
 		(stroke
 			(width 0.1)
@@ -109,6 +95,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "dc50ea29-7f51-4023-a47c-281fe15706a0")
+	)
+	(fp_line
+		(start 19.685 -5.715)
+		(end 12.43 -5.715)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "01a535ce-5bfd-49ce-860a-f732116a5f83")
 	)
 	(fp_line
 		(start 19.685 84.455)
@@ -202,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "d1edabd8-c3cd-41f7-8f2a-874e74bb857d")
 	)
@@ -758,6 +754,7 @@
 		(remove_unused_layers no)
 		(uuid "9edb62d2-01a8-4002-9810-b457b338c1a6")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/HCP65 Instruction Code/Instruction Code.wrl"
 		(offset
 			(xyz 0 0 3)

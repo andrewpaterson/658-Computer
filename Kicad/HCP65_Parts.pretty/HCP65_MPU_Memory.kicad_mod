@@ -1,7 +1,7 @@
 (footprint "HCP65_MPU_Memory"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 MPU Memory")
 	(tags "HCP65 MPU Memory")
@@ -26,20 +26,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_MPU_Memory"
-		(at 11.43 78.994 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f756acd7-855d-4130-bba9-3dcaeed2408d")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -104,7 +90,7 @@
 		(uuid "ae7399f2-5be3-4903-a423-50949b8117dd")
 	)
 	(fp_line
-		(start 19.685 -5.715)
+		(start 10.434913 -5.715004)
 		(end 3.175 -5.715)
 		(stroke
 			(width 0.1)
@@ -112,6 +98,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "6787f62c-0e12-4dee-b81c-9fa89c1aedf4")
+	)
+	(fp_line
+		(start 19.685 -5.715)
+		(end 12.43 -5.715)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "de923cd1-abb0-429f-bc16-05bac45bd61e")
 	)
 	(fp_line
 		(start 19.685 74.295)
@@ -205,7 +201,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "1ca97059-cbbe-43b8-9442-cd3f00212e92")
 	)
@@ -697,6 +693,7 @@
 		(remove_unused_layers no)
 		(uuid "12806dff-a3c5-4984-a07a-c1406fbfde37")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/HCP65 MPU Memory/MPU Memory.wrl"
 		(offset
 			(xyz 0 0 3)

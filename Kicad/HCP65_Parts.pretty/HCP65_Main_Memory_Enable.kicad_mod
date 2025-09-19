@@ -1,7 +1,7 @@
 (footprint "HCP65_Main_Memory_Enable"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Main Memory Enable")
 	(tags "HCP65 Main Memory Enable")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 7.366 45.212 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "ba8fbc07-03c6-46b0-b0bc-9f1d4c1669e8")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -92,7 +78,7 @@
 	)
 	(fp_line
 		(start 0.835732 -2.613732)
-		(end 14.404267 -2.613733)
+		(end 6.62 -2.613733)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -109,6 +95,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "92789d7e-39c2-4a74-8308-01ab33a9d006")
+	)
+	(fp_line
+		(start 8.62 -2.613733)
+		(end 14.404267 -2.613733)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b72815e1-ff7f-4307-b96a-0f9d3ce13206")
 	)
 	(fp_line
 		(start 14.404268 40.713732)
@@ -202,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "6de5baff-0976-4778-af0d-d023324510fd")
 	)
@@ -502,6 +498,7 @@
 		(remove_unused_layers no)
 		(uuid "6ab00ebc-a09b-4e41-902f-9f4c1bed8cdd")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Main/Main Memory Enable/Main Memory Enable.wrl"
 		(offset
 			(xyz 0 0 3)

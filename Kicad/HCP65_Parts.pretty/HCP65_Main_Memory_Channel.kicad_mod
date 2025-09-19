@@ -1,7 +1,7 @@
 (footprint "HCP65_Main_Memory_Channel"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Main Memory Channel")
 	(tags "HCP65 Main Memory Channel")
@@ -21,18 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "0f8f91a5-cee6-4db5-9e11-7763515c8537")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -88,13 +76,13 @@
 	)
 	(fp_line
 		(start 0.832188 -2.613732)
-		(end 14.407812 -2.613732)
+		(end 6.62 -2.613745)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "095fc412-3536-4a92-8b85-60dde716735a")
+		(uuid "874ebc93-daa7-438e-b300-2840f09a663c")
 	)
 	(fp_line
 		(start 6.62 -2.524)
@@ -105,6 +93,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "92789d7e-39c2-4a74-8308-01ab33a9d006")
+	)
+	(fp_line
+		(start 8.615965 -2.613742)
+		(end 14.407812 -2.613732)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "095fc412-3536-4a92-8b85-60dde716735a")
 	)
 	(fp_line
 		(start 14.404269 50.873733)
@@ -198,7 +196,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "9c59c039-6213-45c6-a19a-07fb63d77526")
 	)
@@ -562,6 +560,7 @@
 		(remove_unused_layers no)
 		(uuid "806a6753-a03f-488e-b865-37a83c6d1730")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Main/Main Memory Channel/Main Memory Channel.wrl"
 		(offset
 			(xyz 0 0 3)

@@ -1,7 +1,7 @@
 (footprint "HCP65_Graphics_Transparency"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Graphics Transparency")
 	(tags "HCP65 Graphics Transparency")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_Graphics_Transparency"
-		(at 11.43 48.514 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9331e6b9-ede1-4c6e-816f-b14838f10a7b")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -91,6 +77,16 @@
 		(uuid "9b3b2736-8add-4def-91a9-7b24d4d91965")
 	)
 	(fp_line
+		(start 10.43 -5.715)
+		(end 3.175 -5.715)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "0a445ce4-08d8-483a-b0b6-3b7109a5e83b")
+	)
+	(fp_line
 		(start 10.43 -5.616)
 		(end 2.286 -5.616)
 		(stroke
@@ -102,7 +98,7 @@
 	)
 	(fp_line
 		(start 19.685 -5.715)
-		(end 3.175 -5.715)
+		(end 12.43 -5.715)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -202,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "a37aad23-898d-488e-837f-15537e778fe9")
 	)
@@ -502,6 +498,7 @@
 		(remove_unused_layers no)
 		(uuid "4e9790f0-b806-4063-8935-aa4001f30757")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Graphics/Graphics Transparency/Graphics Transparency.wrl"
 		(offset
 			(xyz 0 0 3)

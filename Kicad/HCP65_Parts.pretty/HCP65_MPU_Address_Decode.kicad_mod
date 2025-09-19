@@ -1,7 +1,7 @@
 (footprint "HCP65_MPU_Address_Decode"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 MPU Address Decode")
 	(tags "HCP65 MPU Address Decode")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_MPU_Address_Decode"
-		(at 7.366 75.184 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "fa4065a4-daf3-4204-8552-cd0e4cbe5802")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -91,13 +78,13 @@
 	)
 	(fp_line
 		(start 0.835732 -2.613732)
-		(end 14.404268 -2.613732)
+		(end 6.62 -2.613732)
 		(stroke
 			(width 0.1)
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "095fc412-3536-4a92-8b85-60dde716735a")
+		(uuid "95a5132c-9a66-4196-a5af-42e8922b140a")
 	)
 	(fp_line
 		(start 6.62 -2.524)
@@ -108,6 +95,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "92789d7e-39c2-4a74-8308-01ab33a9d006")
+	)
+	(fp_line
+		(start 8.615965 -2.613732)
+		(end 14.404268 -2.613732)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "095fc412-3536-4a92-8b85-60dde716735a")
 	)
 	(fp_line
 		(start 14.404269 71.193733)
@@ -201,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "1fe71aec-fc7f-45bd-b828-02f434b59cb8")
 	)
@@ -693,6 +690,7 @@
 		(remove_unused_layers no)
 		(uuid "12806dff-a3c5-4984-a07a-c1406fbfde37")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/HCP65 MPU Address Decode/MPU Address Decode.wrl"
 		(offset
 			(xyz 0 0 3)

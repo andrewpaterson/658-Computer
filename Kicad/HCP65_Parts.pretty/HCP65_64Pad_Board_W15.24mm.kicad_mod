@@ -1,7 +1,7 @@
 (footprint "HCP65_64Pad_Board_W15.24mm"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 646Pad Board W15.24mm")
 	(tags "HCP65 64Pad Board W15.24mm")
@@ -25,20 +25,6 @@
 			(font
 				(size 0.635 0.635)
 				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_64Pad_Board_W15.24mm"
-		(at 7.62 85.471 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "9c93901c-445d-4a50-b14a-9bd80a588896")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-				(bold yes)
 			)
 		)
 	)
@@ -69,7 +55,7 @@
 		)
 	)
 	(property "Silkscreen" "${Silkscreen}"
-		(at 6.985 82.296 0)
+		(at 7.62 82.296 0)
 		(layer "F.SilkS")
 		(uuid "7da4c879-fffa-4498-8a75-789756a18a71")
 		(effects
@@ -212,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "0bbedaca-a296-43e0-a02e-f18339e93729")
 	)
@@ -768,4 +754,5 @@
 		(remove_unused_layers no)
 		(uuid "a6200dc1-13bb-45b4-8be3-75d756a73291")
 	)
+	(embedded_fonts no)
 )

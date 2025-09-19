@@ -1,7 +1,7 @@
 (footprint "HCP65_MPU_NMI"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 MPU NMI")
 	(tags "HCP65 MPU NMI")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_MPU_NMI"
-		(at 0 0 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "f3ebd9f4-df52-4a69-b10b-3464f6ad6cb5")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -89,6 +76,16 @@
 		(uuid "9b3b2736-8add-4def-91a9-7b24d4d91965")
 	)
 	(fp_line
+		(start 10.43 -5.715)
+		(end 3.175 -5.715)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d17de51e-2100-4166-984c-c1b724372263")
+	)
+	(fp_line
 		(start 10.43 -5.616)
 		(end 2.286 -5.616)
 		(stroke
@@ -100,7 +97,7 @@
 	)
 	(fp_line
 		(start 19.685 -5.715)
-		(end 3.175 -5.715)
+		(end 12.425087 -5.715004)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -200,7 +197,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "e05835d7-16c8-45b6-b13d-bce3cf941431")
 	)
@@ -500,6 +497,7 @@
 		(remove_unused_layers no)
 		(uuid "4e9790f0-b806-4063-8935-aa4001f30757")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Processor/HCP65 MPU NMI/MPU NMI.wrl"
 		(offset
 			(xyz 0 0 3)

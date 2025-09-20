@@ -60,7 +60,7 @@
       ],
       "drc_exclusions": [
         [
-          "courtyards_overlap|21843786|3285000|46e3ba84-acf2-40c5-88a1-a29b944b13c5|879f953d-a6f1-4a62-9537-83d35f5162ed",
+          "courtyards_overlap|21986798|3285000|46e3ba84-acf2-40c5-88a1-a29b944b13c5|879f953d-a6f1-4a62-9537-83d35f5162ed",
           ""
         ],
         [
@@ -506,7 +506,6 @@
         "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -529,15 +528,15 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V*"
       },
       {
         "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND*"
       }
     ]
   },

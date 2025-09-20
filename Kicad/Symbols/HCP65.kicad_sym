@@ -47154,10 +47154,29 @@
 			)
 		)
 		(symbol "Main_Clock_Generator_1_1"
-			(pin input line
+			(pin input inverted
 				(at -5.08 0 0)
 				(length 5.08)
-				(name "~{Reset}_Switch"
+				(name "~{Reset}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -2.54 0)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -47298,6 +47317,25 @@
 					)
 				)
 				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -22.86 0)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -47690,42 +47728,6 @@
 					)
 				)
 				(number "52"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -15.24 180)
-				(length 5.08)
-				(name "~{Reset}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -17.78 180)
-				(length 5.08)
-				(name "~{Reset}_CLK"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
 					(effects
 						(font
 							(size 1.27 1.27)

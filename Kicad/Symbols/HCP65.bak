@@ -47154,10 +47154,29 @@
 			)
 		)
 		(symbol "Main_Clock_Generator_1_1"
-			(pin input line
+			(pin input inverted
 				(at -5.08 0 0)
 				(length 5.08)
-				(name "~{Reset}_Switch"
+				(name "~{Reset}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -2.54 0)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -47697,28 +47716,11 @@
 					)
 				)
 			)
-			(pin output line
-				(at 35.56 -15.24 180)
-				(length 5.08)
-				(name "~{Reset}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
+			(pin no_connect line
 				(at 35.56 -17.78 180)
 				(length 5.08)
-				(name "~{Reset}_CLK"
+				(hide yes)
+				(name "N.C."
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -51479,7 +51481,7 @@
 				)
 			)
 		)
-		(property "Value" "Main Full Memory Abort"
+		(property "Value" "Main Memory Full Abort"
 			(at 15.24 3.175 0)
 			(effects
 				(font
@@ -51506,7 +51508,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Main Full Memory Abort"
+		(property "Description" "Main Memory Full Abort"
 			(at 15.24 -20.32 0)
 			(effects
 				(font
@@ -51514,7 +51516,7 @@
 				)
 			)
 		)
-		(property "Silkscreen" "Main Full Memory Abort"
+		(property "Silkscreen" "Main Memory Full Abort"
 			(at 15.24 -22.86 0)
 			(effects
 				(font
@@ -51523,7 +51525,7 @@
 				(hide yes)
 			)
 		)
-		(property "ki_keywords" "HCP65 Main Full Memory Abort"
+		(property "ki_keywords" "HCP65 Main Memory Full Abort"
 			(at 0 0 0)
 			(effects
 				(font

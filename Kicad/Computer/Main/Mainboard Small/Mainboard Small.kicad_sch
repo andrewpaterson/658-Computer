@@ -3926,7 +3926,7 @@
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "B"
-				(at 15.875 5.08 0)
+				(at 15.24 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3943,7 +3943,7 @@
 				)
 			)
 			(property "Footprint" "HCP65_Parts:HCP65_Clock_Generator"
-				(at 15.24 -90.17 0)
+				(at 15.875 -72.39 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3961,7 +3961,7 @@
 				)
 			)
 			(property "Description" "Main Clock Generator"
-				(at 16.51 -35.56 0)
+				(at 15.24 -10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3977,7 +3977,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Main Clock Generator"
+			(property "ki_keywords" "HCP65 Main Clock Generator"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3989,7 +3989,7 @@
 			(symbol "Main_Clock_Generator_0_1"
 				(polyline
 					(pts
-						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -88.265) (xy 0 -88.265) (xy 0 1.905)
+						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -70.485) (xy 0 -70.485) (xy 0 1.905)
 					)
 					(stroke
 						(width 0.1524)
@@ -4002,7 +4002,7 @@
 			)
 			(symbol "Main_Clock_Generator_1_0"
 				(pin no_connect line
-					(at -5.08 -45.72 0)
+					(at -5.08 -43.18 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4021,7 +4021,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -48.26 0)
+					(at -5.08 -45.72 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4040,7 +4040,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -50.8 0)
+					(at -5.08 -48.26 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4088,7 +4088,7 @@
 							)
 						)
 					)
-					(number "37"
+					(number "38"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4107,25 +4107,6 @@
 							)
 						)
 					)
-					(number "38"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -60.96 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
 					(number "39"
 						(effects
 							(font
@@ -4134,8 +4115,26 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 35.56 -5.08 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "37"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin no_connect line
-					(at -5.08 -76.2 0)
+					(at 35.56 -25.4 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4154,45 +4153,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -78.74 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "57"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -81.28 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "58"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -50.8 180)
+					(at 35.56 -38.1 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4211,7 +4172,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -63.5 180)
+					(at 35.56 -50.8 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4229,76 +4190,38 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -73.66 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "59"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -76.2 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "60"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -78.74 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "61"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "Main_Clock_Generator_1_1"
-				(pin input line
+				(pin input inverted
 					(at -5.08 0 0)
 					(length 5.08)
-					(name "~{Reset}_Switch"
+					(name "~{Reset}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "13"
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -2.54 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4420,7 +4343,7 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin no_connect inverted
 					(at -5.08 -20.32 0)
 					(length 5.08)
 					(hide yes)
@@ -4431,7 +4354,26 @@
 							)
 						)
 					)
-					(number "16"
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 -22.86 0)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4573,7 +4515,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -43.18 0)
+					(at -5.08 -50.8 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4583,7 +4525,7 @@
 							)
 						)
 					)
-					(number "31"
+					(number "35"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4592,7 +4534,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -63.5 0)
+					(at -5.08 -60.96 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4611,7 +4553,7 @@
 					)
 				)
 				(pin no_connect line
-					(at -5.08 -66.04 0)
+					(at -5.08 -63.5 0)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4621,64 +4563,7 @@
 							)
 						)
 					)
-					(number "41"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -68.58 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "48"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -71.12 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "49"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -5.08 -73.66 0)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "50"
+					(number "42"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4687,7 +4572,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -83.82 0)
+					(at -5.08 -66.04 0)
 					(length 5.08)
 					(name "5V"
 						(effects
@@ -4705,7 +4590,7 @@
 					)
 				)
 				(pin passive line
-					(at -5.08 -86.36 0)
+					(at -5.08 -68.58 0)
 					(length 5.08)
 					(name "5V"
 						(effects
@@ -4714,7 +4599,7 @@
 							)
 						)
 					)
-					(number "35"
+					(number "31"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4732,7 +4617,7 @@
 							)
 						)
 					)
-					(number "10"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4750,25 +4635,7 @@
 							)
 						)
 					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "42"
+					(number "20"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4786,7 +4653,7 @@
 							)
 						)
 					)
-					(number "55"
+					(number "48"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4794,10 +4661,11 @@
 						)
 					)
 				)
-				(pin passive line
+				(pin no_connect line
 					(at 35.56 -10.16 180)
 					(length 5.08)
-					(name "GND"
+					(hide yes)
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4812,8 +4680,44 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin output clock
 					(at 35.56 -12.7 180)
+					(length 5.08)
+					(name "CLK_{0}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output clock
+					(at 35.56 -15.24 180)
+					(length 5.08)
+					(name "~{Main_Access}_{0}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -17.78 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -4831,35 +4735,17 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -15.24 180)
+				(pin output clock
+					(at 35.56 -20.32 180)
 					(length 5.08)
-					(name "~{Reset}"
+					(name "CLK_{1}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -17.78 180)
-					(length 5.08)
-					(name "~{Reset}_CLK"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
+					(number "13"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4870,43 +4756,7 @@
 				(pin output clock
 					(at 35.56 -22.86 180)
 					(length 5.08)
-					(name "CLK_{0}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -25.4 180)
-					(length 5.08)
-					(name "~{Main_Access}_{0}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output clock
-					(at 35.56 -30.48 180)
-					(length 5.08)
-					(name "CLK_{1}"
+					(name "~{Main_Access}_{1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4921,17 +4771,17 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -33.02 180)
+				(pin output clock
+					(at 35.56 -27.94 180)
 					(length 5.08)
-					(name "~{Main_Access}_{1}"
+					(name "CLK_{2}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "15"
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4940,9 +4790,9 @@
 					)
 				)
 				(pin output clock
-					(at 35.56 -38.1 180)
+					(at 35.56 -30.48 180)
 					(length 5.08)
-					(name "CLK_{2}"
+					(name "~{Main_Access}_{2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4957,10 +4807,11 @@
 						)
 					)
 				)
-				(pin output inverted
-					(at 35.56 -40.64 180)
+				(pin no_connect inverted
+					(at 35.56 -33.02 180)
 					(length 5.08)
-					(name "~{Main_Access}_{2}"
+					(hide yes)
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4976,34 +4827,16 @@
 					)
 				)
 				(pin output clock
-					(at 35.56 -45.72 180)
+					(at 35.56 -35.56 180)
 					(length 5.08)
-					(name "CLK_{3}"
+					(name "CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 35.56 -48.26 180)
-					(length 5.08)
-					(name "~{Main_Access}_{3}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
+					(number "51"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5012,7 +4845,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -53.34 180)
+					(at 35.56 -40.64 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5031,7 +4864,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -55.88 180)
+					(at 35.56 -43.18 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5050,7 +4883,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -58.42 180)
+					(at 35.56 -45.72 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5069,7 +4902,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -60.96 180)
+					(at 35.56 -48.26 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5088,7 +4921,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -66.04 180)
+					(at 35.56 -53.34 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5106,8 +4939,8 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 35.56 -68.58 180)
+				(pin no_connect inverted
+					(at 35.56 -55.88 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5117,7 +4950,7 @@
 							)
 						)
 					)
-					(number "51"
+					(number "21"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5126,7 +4959,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -71.12 180)
+					(at 35.56 -58.42 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5145,7 +4978,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -81.28 180)
+					(at 35.56 -60.96 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5155,7 +4988,7 @@
 							)
 						)
 					)
-					(number "62"
+					(number "41"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5164,7 +4997,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -83.82 180)
+					(at 35.56 -63.5 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5174,7 +5007,7 @@
 							)
 						)
 					)
-					(number "63"
+					(number "55"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5183,7 +5016,7 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -86.36 180)
+					(at 35.56 -66.04 180)
 					(length 5.08)
 					(hide yes)
 					(name "N.C."
@@ -5193,7 +5026,26 @@
 							)
 						)
 					)
-					(number "64"
+					(number "49"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -68.58 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "50"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -6966,7 +6818,7 @@
 							)
 						)
 					)
-					(number "9"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7450,7 +7302,7 @@
 							)
 						)
 					)
-					(number "10"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7468,7 +7320,7 @@
 							)
 						)
 					)
-					(number "47"
+					(number "48"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7599,7 +7451,7 @@
 							)
 						)
 					)
-					(number "48"
+					(number "47"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -11872,7 +11724,7 @@
 	)
 	(text "Clock"
 		(exclude_from_sim no)
-		(at 384.81 345.44 0)
+		(at 384.81 325.12 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -12119,6 +11971,10 @@
 		(uuid "1835b39a-a941-4e69-b4d7-09dbf8eff704")
 	)
 	(no_connect
+		(at 405.13 274.32)
+		(uuid "1a1bd44e-6afb-4787-a397-3b526cd34f8d")
+	)
+	(no_connect
 		(at 119.38 203.2)
 		(uuid "1c7b4a44-421d-49f6-b15f-bda6fa323d17")
 	)
@@ -12263,10 +12119,6 @@
 		(uuid "612647de-c5f1-4bfa-ba44-a8ca7f552d56")
 	)
 	(no_connect
-		(at 405.13 266.7)
-		(uuid "64bcae15-da7b-4398-9da3-6bf2ad4ec3d5")
-	)
-	(no_connect
 		(at 119.38 100.33)
 		(uuid "6a4f6bc1-fc05-423e-b467-6f522e900baa")
 	)
@@ -12363,10 +12215,6 @@
 		(uuid "9ef21d37-fac3-4b3e-bf5a-8d76de7f80af")
 	)
 	(no_connect
-		(at 364.49 251.46)
-		(uuid "a0a9fd4d-22cc-492b-bb71-f3205dd0cab6")
-	)
-	(no_connect
 		(at 119.38 57.15)
 		(uuid "a13f5111-eb8c-4b66-b7f6-c868702592e9")
 	)
@@ -12427,6 +12275,10 @@
 		(uuid "c0e3432b-35d4-4c6c-9808-83d25eeca217")
 	)
 	(no_connect
+		(at 405.13 287.02)
+		(uuid "c11e89ad-c7fb-425b-b92a-91f26038d6e7")
+	)
+	(no_connect
 		(at 60.96 102.87)
 		(uuid "c33d0dfd-35ff-4f03-a993-a034a0dd40a1")
 	)
@@ -12445,10 +12297,6 @@
 	(no_connect
 		(at 180.34 200.66)
 		(uuid "cc04d427-213f-4632-a8ee-45ee49c03c32")
-	)
-	(no_connect
-		(at 405.13 269.24)
-		(uuid "cebd8183-1d89-4404-b9b7-5fe7a19b6779")
 	)
 	(no_connect
 		(at 60.96 195.58)
@@ -12473,6 +12321,10 @@
 	(no_connect
 		(at 83.82 85.09)
 		(uuid "d6b35b0e-8828-4bff-92b2-4c4a29fd3ccb")
+	)
+	(no_connect
+		(at 405.13 271.78)
+		(uuid "d6d512e3-76b0-4eb4-a2aa-09ec3890989d")
 	)
 	(no_connect
 		(at 180.34 248.92)
@@ -12537,6 +12389,10 @@
 	(no_connect
 		(at 119.38 213.36)
 		(uuid "f67e36ef-0ab4-4f4f-b4b9-be2d7293b56d")
+	)
+	(no_connect
+		(at 405.13 279.4)
+		(uuid "f8f9fa11-f2d6-444b-8ade-22b16004946a")
 	)
 	(no_connect
 		(at 405.13 289.56)
@@ -15131,7 +14987,7 @@
 		(uuid "1512d78c-5027-463c-b8ac-2dfa644e6846")
 	)
 	(label "~{Main Access}"
-		(at 405.13 276.86 0)
+		(at 405.13 266.7 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -17071,7 +16927,7 @@
 		(uuid "46015efc-92cc-4cb0-a76b-df416cf7f36a")
 	)
 	(label "5V"
-		(at 364.49 335.28 180)
+		(at 364.49 317.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19320,16 +19176,6 @@
 		)
 		(uuid "7edce674-a97a-4add-b6d4-65bd08491a1c")
 	)
-	(label "GND"
-		(at 405.13 261.62 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7f461b29-42d3-45e3-958b-9d7666dea65f")
-	)
 	(label "DD3"
 		(at 142.24 246.38 0)
 		(effects
@@ -19871,7 +19717,7 @@
 		(uuid "8f1fc98d-38ed-4811-aed9-dc3d3c1f291f")
 	)
 	(label "MPU CLK"
-		(at 405.13 274.32 0)
+		(at 405.13 264.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22310,6 +22156,16 @@
 		)
 		(uuid "d7e62826-b925-4e05-a53c-52fbdb32d73c")
 	)
+	(label "~{Reset}"
+		(at 364.49 251.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d82103c9-ea8f-4aec-b030-f966cb4f36d2")
+	)
 	(label "18V Switched"
 		(at 278.13 281.94 270)
 		(effects
@@ -23261,7 +23117,7 @@
 		(uuid "f73f3e59-2af9-4d9d-8808-7c248ecb36b1")
 	)
 	(label "5V"
-		(at 364.49 337.82 180)
+		(at 364.49 320.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28215,7 +28071,7 @@
 		(dnp no)
 		(uuid "9e487a99-f455-4ac0-bca7-86bce1459bf3")
 		(property "Reference" "B12"
-			(at 385.445 246.38 0)
+			(at 384.81 246.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28232,7 +28088,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Clock_Generator"
-			(at 384.81 341.63 0)
+			(at 385.445 323.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28250,7 +28106,7 @@
 			)
 		)
 		(property "Description" "Main Clock Generator"
-			(at 386.08 287.02 0)
+			(at 384.81 261.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28295,21 +28151,6 @@
 		)
 		(pin "56"
 			(uuid "e9823f37-ff02-41ae-aa4c-3529b2fa274b")
-		)
-		(pin "57"
-			(uuid "897e70b9-9bab-42fb-a56a-9f1b4a304a45")
-		)
-		(pin "58"
-			(uuid "846eab6a-e03f-4392-9d1d-3a8316a245d0")
-		)
-		(pin "59"
-			(uuid "c433495f-d5c0-47e2-918c-a5e001b5f2f0")
-		)
-		(pin "60"
-			(uuid "0661691d-a552-4beb-ae86-e1de2ab1c5f9")
-		)
-		(pin "61"
-			(uuid "e6ce67c9-f617-4d5f-b238-51e8a5987fff")
 		)
 		(pin "1"
 			(uuid "2e40a63d-c805-4875-8f0c-34af486c78e3")
@@ -28439,15 +28280,6 @@
 		)
 		(pin "6"
 			(uuid "aeff3148-3723-4708-b25c-c5b3acd275ec")
-		)
-		(pin "62"
-			(uuid "1459ff16-3bb0-46c3-8382-7dcc1ed70678")
-		)
-		(pin "63"
-			(uuid "7923c112-1ca1-4332-96dc-48205e580005")
-		)
-		(pin "64"
-			(uuid "45cae779-4d04-4ac8-87ab-9d6991f5cd4e")
 		)
 		(pin "7"
 			(uuid "17a3e456-0d9f-480f-ab07-1cdb5db5c879")

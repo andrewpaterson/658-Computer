@@ -378,6 +378,264 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Connector_Generic:Conn_02x03_Odd_Even"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 1.27 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_02x03_Odd_Even"
+				(at 1.27 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_2x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_02x03_Odd_Even_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 3.81 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 2.667)
+					(end 2.54 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 0.127)
+					(end 2.54 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 3.81 -2.413)
+					(end 2.54 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 0 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Diptronic:DTS-62N-V"
 			(pin_names
 				(offset 0.762)
@@ -2608,6 +2866,144 @@
 					(effects
 						(font
 							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "HCP65:C_0805"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 2.286 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "?μF"
+				(at 2.54 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:C_0805"
+				(at 16.764 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 2.2225 0.3175 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "capacitor cap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0805_0_1"
+				(polyline
+					(pts
+						(xy 1.9685 -1.4605) (xy 1.9685 1.5875)
+					)
+					(stroke
+						(width 0.3048)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.9845 -1.4605) (xy 2.9845 1.5875)
+					)
+					(stroke
+						(width 0.3302)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_0805_1_1"
+				(pin passive line
+					(at 0 0 0)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.032)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
 						)
 					)
 				)
@@ -10207,6 +10603,207 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Maxim:MAX6816EUS+T"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MAX6816EUS+T"
+				(at 12.7 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:MAX812REUST"
+				(at 20.955 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf"
+				(at 20.955 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "bounce eliminator"
+				(at 12.7 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.22"
+				(at 20.955 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Maxim Integrated"
+				(at 20.955 -20.32 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "MAX6816EUS+T"
+				(at 20.955 -22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Part Number" "700-MAX6816EUST"
+				(at 20.955 -25.4 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D"
+				(at 20.955 -27.94 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "MAX6816"
+				(at 20.955 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "MAX6816EUS+T_0_0"
+				(pin passive line
+					(at 0 0 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 25.4 -2.54 180)
+					(length 5.08)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "MAX6816EUS+T_0_1"
+				(polyline
+					(pts
+						(xy 5.08 2.54) (xy 20.32 2.54) (xy 20.32 -5.08) (xy 5.08 -5.08) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "RS_Components:448-376"
 			(pin_names
 				(offset 0.762)
@@ -12088,6 +12685,10 @@
 		(uuid "1ca11c97-a854-41f2-80ab-e858ca40bb48")
 	)
 	(no_connect
+		(at 386.08 370.84)
+		(uuid "1de9ccd2-0225-4f12-b25d-d34744dd4060")
+	)
+	(no_connect
 		(at 443.23 370.84)
 		(uuid "1f244992-722a-4d70-8a23-95ffecff204e")
 	)
@@ -12376,6 +12977,10 @@
 		(uuid "c11e89ad-c7fb-425b-b92a-91f26038d6e7")
 	)
 	(no_connect
+		(at 360.68 370.84)
+		(uuid "c19e426f-64c9-4eb5-b0e0-88dda5bce8fe")
+	)
+	(no_connect
 		(at 60.96 102.87)
 		(uuid "c33d0dfd-35ff-4f03-a993-a034a0dd40a1")
 	)
@@ -12518,6 +13123,16 @@
 			(type default)
 		)
 		(uuid "01e62f79-dfea-416d-841c-d91c9f31b3b1")
+	)
+	(wire
+		(pts
+			(xy 391.16 368.3) (xy 386.08 368.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04f9eab3-0dcd-488b-8d64-df59cea2df12")
 	)
 	(wire
 		(pts
@@ -13471,7 +14086,7 @@
 	)
 	(wire
 		(pts
-			(xy 320.04 252.73) (xy 320.04 254)
+			(xy 320.04 252.73) (xy 320.04 257.81)
 		)
 		(stroke
 			(width 0)
@@ -14201,6 +14816,16 @@
 	)
 	(wire
 		(pts
+			(xy 326.39 257.81) (xy 320.04 257.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2044112-a87d-41bb-a780-006c108b4a60")
+	)
+	(wire
+		(pts
 			(xy 256.54 62.23) (xy 252.73 62.23)
 		)
 		(stroke
@@ -14509,6 +15134,16 @@
 		)
 		(uuid "05d09204-ce70-436f-8ea0-3095244ac8c1")
 	)
+	(label "GND"
+		(at 391.16 365.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "05e67102-2b4e-4cd8-9f08-d980acfa1559")
+	)
 	(label "AD16"
 		(at 142.24 233.68 0)
 		(effects
@@ -14648,6 +15283,16 @@
 			(justify right bottom)
 		)
 		(uuid "099894e1-fa3d-4437-b321-95ac1ceb6be7")
+	)
+	(label "5V"
+		(at 406.4 378.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0a556549-114d-4dbf-a61c-ea34b29909bf")
 	)
 	(label "~{Memory Hi}_{ Device}16"
 		(at 524.51 67.31 0)
@@ -15709,6 +16354,16 @@
 		)
 		(uuid "244ba4c6-042e-459a-8ba1-fd6db40249fd")
 	)
+	(label "GND"
+		(at 236.22 304.8 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "247aebcc-48b8-4ff6-b820-690dda5b5dd2")
+	)
 	(label "5V"
 		(at 481.33 209.55 180)
 		(effects
@@ -16029,6 +16684,16 @@
 		)
 		(uuid "2d700fb4-f452-4850-a6ee-7252a64674bb")
 	)
+	(label "GND"
+		(at 401.32 378.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2d84f170-1d9c-42a8-ab46-c43012cfc4bb")
+	)
 	(label "~{Select} DEV17"
 		(at 60.96 236.22 180)
 		(effects
@@ -16209,6 +16874,16 @@
 		)
 		(uuid "30995241-a0a1-4c9d-a0e2-45e8ac6bcde9")
 	)
+	(label "GND"
+		(at 255.27 304.8 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "309ee364-3104-4674-ae71-f6b0fca8f68d")
+	)
 	(label "AM18"
 		(at 203.2 276.86 0)
 		(effects
@@ -16349,6 +17024,16 @@
 		)
 		(uuid "33bb6c1d-6bf7-4e6d-bcda-62d2b61b7a53")
 	)
+	(label "~{Reset Switch}"
+		(at 403.86 398.78 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "33f10e18-2b2d-4cc0-b8c4-9dda2eae25d0")
+	)
 	(label "~{Main} MPU"
 		(at 31.75 339.09 180)
 		(effects
@@ -16398,6 +17083,16 @@
 			(justify right bottom)
 		)
 		(uuid "34de3c3d-d1ba-4448-a264-a38d3cee43df")
+	)
+	(label "18V Switched"
+		(at 403.86 393.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "352fc8d2-b04e-4dfa-bc27-d3879a07ec2b")
 	)
 	(label "3.3V"
 		(at 318.77 365.76 180)
@@ -16698,6 +17393,16 @@
 			(justify right bottom)
 		)
 		(uuid "3cdb2317-6670-4555-9780-fb06733f2e87")
+	)
+	(label "18V Socket"
+		(at 391.16 393.7 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3cf960fe-573b-41cb-b2a6-3c05e64d10d6")
 	)
 	(label "~{Main}19"
 		(at 144.78 346.71 180)
@@ -17809,6 +18514,16 @@
 		)
 		(uuid "57ee4737-72ce-4135-9aea-d0d5d97abb21")
 	)
+	(label "~{NMI}_{2}"
+		(at 416.56 368.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "57fa8037-5f4f-464d-a265-822eeee7c999")
+	)
 	(label "GND"
 		(at 60.96 208.28 180)
 		(effects
@@ -18290,12 +19005,12 @@
 		(uuid "63646ed5-b7f4-4966-9041-5528117e8aba")
 	)
 	(label "GND"
-		(at 320.04 259.08 270)
+		(at 331.47 257.81 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right bottom)
+			(justify left bottom)
 		)
 		(uuid "63ac2b6a-00fd-415f-adcb-afb418d9a310")
 	)
@@ -20409,6 +21124,16 @@
 		)
 		(uuid "a18e7808-a160-4c98-8d42-cc22147d7611")
 	)
+	(label "GND"
+		(at 391.16 396.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a20a3679-5d96-4e80-909e-a4f894007d67")
+	)
 	(label "AM12"
 		(at 265.43 350.52 180)
 		(effects
@@ -20818,6 +21543,16 @@
 			(justify left bottom)
 		)
 		(uuid "ad1c3bb8-050f-4c40-928e-cb689d4785f1")
+	)
+	(label "GND"
+		(at 236.22 276.86 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "adb33e22-2716-4b86-8170-4988bbf7df0f")
 	)
 	(label "DM3"
 		(at 180.34 274.32 180)
@@ -21308,6 +22043,16 @@
 			(justify left bottom)
 		)
 		(uuid "bbd8cce1-dc14-4a94-9fd2-23d91d1bb806")
+	)
+	(label "GND"
+		(at 360.68 368.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bbdef4e4-b4a3-4d27-9624-bd17ba79fa3a")
 	)
 	(label "DM4"
 		(at 180.34 125.73 180)
@@ -22109,6 +22854,16 @@
 		)
 		(uuid "d0da9b1d-22d1-446f-bd65-ee1c7bb725ef")
 	)
+	(label "GND"
+		(at 236.22 290.83 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d11efd28-dbc6-4eec-be74-366d9dbbedf2")
+	)
 	(label "~{Reset}"
 		(at 203.2 39.37 0)
 		(effects
@@ -22158,6 +22913,16 @@
 			(justify left bottom)
 		)
 		(uuid "d341494f-5b09-4e5f-9936-e4ff48a1ded5")
+	)
+	(label "5V LED"
+		(at 320.04 257.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d3590fd8-f3b9-46e0-85c0-571ea96712cc")
 	)
 	(label "AD10"
 		(at 142.24 218.44 0)
@@ -22798,6 +23563,16 @@
 			(justify right bottom)
 		)
 		(uuid "e604732b-cfd1-41ab-98c2-fb75bad76da4")
+	)
+	(label "5V"
+		(at 416.56 365.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e6efe953-bf01-4698-876d-6d348f13a1e0")
 	)
 	(label "M~{RD}"
 		(at 180.34 287.02 180)
@@ -23489,6 +24264,16 @@
 		)
 		(uuid "fcf2e171-8fa0-49e2-9cb4-476acad5e228")
 	)
+	(label "GND"
+		(at 391.16 398.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fcf6e5f4-da9f-4291-847b-ba86c7cf34f6")
+	)
 	(label "~{Reset}"
 		(at 436.88 251.46 180)
 		(effects
@@ -23608,6 +24393,16 @@
 			(justify right bottom)
 		)
 		(uuid "fe6ff3ae-4b7f-4171-82f5-86f34d26faf2")
+	)
+	(label "5V LED"
+		(at 403.86 396.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ff2c14b0-ebcb-4a39-8627-2b0b0b3ca56d")
 	)
 	(label "AD6"
 		(at 203.2 208.28 0)
@@ -25423,7 +26218,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:LED")
-		(at 320.04 256.54 90)
+		(at 328.93 257.81 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25431,7 +26226,7 @@
 		(dnp no)
 		(uuid "3f48aefe-e907-4f92-bc82-9f5bc89098a4")
 		(property "Reference" "LED2"
-			(at 316.865 256.54 0)
+			(at 328.93 260.985 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25439,7 +26234,7 @@
 			)
 		)
 		(property "Value" "Red"
-			(at 322.58 256.54 0)
+			(at 328.93 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25447,7 +26242,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:LED_D5.0mm"
-			(at 325.12 256.54 0)
+			(at 328.93 252.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25456,7 +26251,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 327.66 250.19 90)
+			(at 322.58 250.19 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25465,7 +26260,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 322.58 256.54 0)
+			(at 328.93 255.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25619,6 +26414,221 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "H6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Maxim:MAX6816EUS+T")
+		(at 391.16 365.76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4386a225-3357-4e58-a930-4aa801986667")
+		(property "Reference" "IC7"
+			(at 403.86 356.7021 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MAX6816EUS+T"
+			(at 403.86 359.1264 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:MAX812REUST"
+			(at 412.115 375.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/MAX6816-MAX6818.pdf"
+			(at 412.115 378.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "bounce eliminator"
+			(at 403.86 361.5507 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.22"
+			(at 412.115 383.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Maxim Integrated"
+			(at 412.115 386.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "MAX6816EUS+T"
+			(at 412.115 388.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "700-MAX6816EUST"
+			(at 412.115 391.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Maxim-Integrated/MAX6816EUS%2bT?qs=1THa7WoU59EAx6vXEummCg%3D%3D"
+			(at 412.115 393.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "MAX6816"
+			(at 412.115 381 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f2b035c8-6eac-47fb-bb0b-31d48c720cc2")
+		)
+		(pin "4"
+			(uuid "e0aa7e04-8664-4002-b068-67425481d3da")
+		)
+		(pin "3"
+			(uuid "8c84ab92-af6b-40be-89bc-9c826701b67c")
+		)
+		(pin "1"
+			(uuid "ec232747-3d11-4d97-8538-821535a290d8")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "IC7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_02x03_Odd_Even")
+		(at 396.24 396.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "45895e53-e267-42d4-bc03-448373510e6a")
+		(property "Reference" "J1"
+			(at 397.51 388.2855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Conn_02x03_Counter_Clockwise"
+			(at 397.51 390.7098 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"
+			(at 396.24 396.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 396.24 396.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 396.24 396.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "06f057f9-e679-47fd-805a-8685f3664da0")
+		)
+		(pin "5"
+			(uuid "30e36482-e1a8-4cc1-982d-90ed42c377fc")
+		)
+		(pin "1"
+			(uuid "5d614d53-adaa-4400-9162-89f98a429ad9")
+		)
+		(pin "3"
+			(uuid "4b38364b-a120-42a7-acfd-4ea9b3eeb89f")
+		)
+		(pin "6"
+			(uuid "efac67f4-614c-4527-8158-62376376ef86")
+		)
+		(pin "4"
+			(uuid "4b7bca18-6481-4d49-8f18-cbb668e43b93")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "J1")
 					(unit 1)
 				)
 			)
@@ -26709,6 +27719,71 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "R3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 236.22 288.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6a08e79f-f3cd-436e-8948-1cd291fba61e")
+		(property "Reference" "H12"
+			(at 236.22 283.845 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 236.22 281.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 236.22 298.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 243.84 302.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 236.22 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7db2ee54-f18f-40e3-aeb2-ff7726223a05")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H12")
 					(unit 1)
 				)
 			)
@@ -28558,6 +29633,160 @@
 		)
 	)
 	(symbol
+		(lib_id "Diptronic:DTS-62N-V")
+		(at 360.68 368.3 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a5185c0d-7e30-4ea2-9094-4ffe75469fe7")
+		(property "Reference" "S3"
+			(at 373.38 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DTS-62N-V"
+			(at 373.38 363.855 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:DTS62NV"
+			(at 382.27 382.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://akizukidenshi.com/download/ds/cosland/DTS-6-V.PDF"
+			(at 382.27 384.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Tactile Switch"
+			(at 373.38 375.285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "7"
+			(at 382.27 379.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Diptronics"
+			(at 382.27 387.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "DTS-62N-V"
+			(at 382.27 389.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Part Number" "113-DTS-62N-V"
+			(at 382.27 392.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diptronics/DTS-62N-V?qs=gTYE2QTfZfSKTB5KYn%252Brkw%3D%3D"
+			(at 382.27 394.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Part Number" ""
+			(at 389.89 386.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Arrow Price/Stock" ""
+			(at 389.89 388.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Garbage" "Tactile Switches Through Hole 6*6"
+			(at 360.68 368.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3899841c-4849-4232-8fa6-03cde493dea4")
+		)
+		(pin "2"
+			(uuid "1c6fb54d-53f5-41d6-bde3-eb89cffc000f")
+		)
+		(pin "3"
+			(uuid "69a2d3aa-d58f-4630-8457-a9c0e48329bd")
+		)
+		(pin "4"
+			(uuid "ad475930-f29b-473f-a766-411440ee9821")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "S3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:TestPoint")
 		(at 327.66 41.91 0)
 		(unit 1)
@@ -28616,6 +29845,71 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "TP2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 236.22 274.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ab0b23da-c3a3-4ba7-82ec-1ef1c486b57e")
+		(property "Reference" "H11"
+			(at 236.22 269.875 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 236.22 267.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 236.22 284.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 243.84 288.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 236.22 274.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e29aecff-83f5-4ca5-b22b-7630b9ebbdf1")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H11")
 					(unit 1)
 				)
 			)
@@ -29705,6 +30999,71 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 255.27 302.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cbb3a415-7f03-4574-b298-166c5a79cb4b")
+		(property "Reference" "H10"
+			(at 255.27 297.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 255.27 295.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 255.27 312.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 262.89 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 255.27 302.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "878a2103-c105-4e12-8c88-33c169d5d886")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H10")
 					(unit 1)
 				)
 			)
@@ -31010,6 +32369,71 @@
 		)
 	)
 	(symbol
+		(lib_id "HCP65:MountingHole_Pad")
+		(at 236.22 302.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e954a178-196b-4bde-9f04-a4fd74d71e46")
+		(property "Reference" "H13"
+			(at 236.22 297.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "MountingHole_Pad"
+			(at 236.22 295.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "HCP65_Parts:HCP65_MountingHole_M3_"
+			(at 236.22 312.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 243.84 316.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 236.22 302.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9875083e-d7c2-45b8-bf4c-b0a2bac62a90")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "H13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "HCP65:NetTie")
 		(at 514.35 241.3 0)
 		(unit 1)
@@ -31534,6 +32958,74 @@
 			(project "Mainboard Small"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 401.32 378.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ed6a33f4-7652-455a-9593-c48027062b80")
+		(property "Reference" "C16"
+			(at 403.8028 372.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 403.8028 375.1142 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 418.084 386.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 403.5425 378.1425 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 401.32 378.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b88c201a-143f-4877-be89-5b4a8929e016")
+		)
+		(pin "1"
+			(uuid "07fcb93a-39da-4e1d-8caa-3339c18e57ff")
+		)
+		(instances
+			(project "Mainboard Small"
+				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
+					(reference "C16")
 					(unit 1)
 				)
 			)

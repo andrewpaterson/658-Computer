@@ -1054,168 +1054,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:C_Radial_D8.0mm_P3.80mm"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "C"
-				(at 0.635 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "?μF"
-				(at 0.635 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:CP_Radial_D8.0mm_P3.80mm"
-				(at 0 -11.43 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 5.08 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0.635 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "Polarised Capacitor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "CP_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "C_Radial_D8.0mm_P3.80mm_0_1"
-				(rectangle
-					(start -2.286 0.508)
-					(end 2.286 1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 2.286) (xy -0.762 2.286)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 2.794) (xy -1.27 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 2.286 -0.508)
-					(end -2.286 -1.016)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-			)
-			(symbol "C_Radial_D8.0mm_P3.80mm_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 2.794)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.794)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "HCP65:Pin_Header_01x32"
 			(pin_names
 				(offset 1.016)
@@ -2725,202 +2563,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ST_Microelectronics:LD1117S50C"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 7.62 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LD1117S50C"
-				(at 7.62 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:LD1117S33C"
-				(at 27.94 -16.51 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.st.com/resource/en/datasheet/ld1117.pdf"
-				(at 27.94 -19.05 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-				(at 27.94 -21.59 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Height" "1.8"
-				(at 27.94 -24.13 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "STMicroelectronics"
-				(at 27.94 -26.67 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "LD1117S50C"
-				(at 27.94 -29.21 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "LD1117S50"
-				(at 27.94 -13.97 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-				(at 27.94 -32.004 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(symbol "LD1117S50C_0_0"
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "LD1117S50C_0_1"
-				(polyline
-					(pts
-						(xy 0 1.905) (xy 15.24 1.905) (xy 15.24 -4.445) (xy 0 -4.445) (xy 0 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "LD1117S50C_1_0"
-				(pin passive line
-					(at -5.08 0 0)
-					(length 5.08)
-					(name "15VIn"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 0 180)
-					(length 5.08)
-					(name "5.0VOut"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 20.32 -2.54 180)
-					(length 5.08)
-					(name "5.0VOut"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Texas_Instruments:BQ4802LYPWR"
 			(pin_names
 				(offset 0.762)
@@ -4030,34 +3672,10 @@
 		)
 	)
 	(junction
-		(at 101.6 86.36)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "09362b65-6bf5-4ccb-9b3d-c191db38eca1")
-	)
-	(junction
 		(at 113.03 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "413af9fc-5730-4581-bcd6-4066802553e7")
-	)
-	(junction
-		(at 130.81 86.36)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "47996b8f-061e-483e-be32-d2e2344369df")
-	)
-	(junction
-		(at 134.62 86.36)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "4e065e59-0139-43b3-91df-b0e852c6275a")
-	)
-	(junction
-		(at 101.6 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "84539a02-a885-4077-895c-ece386ba7c79")
 	)
 	(junction
 		(at 142.24 66.04)
@@ -4150,10 +3768,6 @@
 		(uuid "adb4dde8-8105-4d84-9876-6506e3ea9bcf")
 	)
 	(no_connect
-		(at 22.86 111.76)
-		(uuid "ae4e0df1-d1fc-4c09-914b-9428299f437b")
-	)
-	(no_connect
 		(at 22.86 93.98)
 		(uuid "b36dfdd8-a715-4805-a051-dd31e5375ccb")
 	)
@@ -4181,23 +3795,13 @@
 	)
 	(wire
 		(pts
-			(xy 134.62 86.36) (xy 134.62 87.63)
+			(xy 46.99 111.76) (xy 45.72 111.76)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1273d91f-5e35-43ea-9484-d743f30b4e3e")
-	)
-	(wire
-		(pts
-			(xy 134.62 86.36) (xy 148.59 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "22cc949a-d889-40aa-a9e1-767340ca4782")
+		(uuid "13fd2a1f-c46a-4c15-addc-d947d82065f5")
 	)
 	(wire
 		(pts
@@ -4208,16 +3812,6 @@
 			(type default)
 		)
 		(uuid "26219dd1-99de-4424-b167-2c7dcb1ebc12")
-	)
-	(wire
-		(pts
-			(xy 105.41 93.98) (xy 101.6 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "376939f6-df22-4cbf-b671-4796dba7dcdc")
 	)
 	(wire
 		(pts
@@ -4241,26 +3835,6 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 86.36) (xy 134.62 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "68a2f6d4-16e2-4f35-b669-f344abb33093")
-	)
-	(wire
-		(pts
-			(xy 105.41 88.9) (xy 105.41 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6aa18d1b-c9e1-4cdd-88b4-5a84e3a0ef50")
-	)
-	(wire
-		(pts
 			(xy 113.03 66.04) (xy 113.03 68.58)
 		)
 		(stroke
@@ -4278,26 +3852,6 @@
 			(type default)
 		)
 		(uuid "7bf0bba2-3a79-4b4a-a76e-2ac49fbee0bb")
-	)
-	(wire
-		(pts
-			(xy 101.6 97.79) (xy 101.6 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "890771f3-65be-459d-9e22-7d18dafcc041")
-	)
-	(wire
-		(pts
-			(xy 134.62 92.71) (xy 134.62 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8aec9ae4-179f-42df-9725-ea09a7ebedb8")
 	)
 	(wire
 		(pts
@@ -4328,36 +3882,6 @@
 			(type default)
 		)
 		(uuid "b30d0b6d-cfff-46a2-9c13-dbc09538de20")
-	)
-	(wire
-		(pts
-			(xy 97.79 86.36) (xy 101.6 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b8385517-eede-4073-af0e-efd302bfc46e")
-	)
-	(wire
-		(pts
-			(xy 101.6 86.36) (xy 105.41 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c00816d2-3a85-458b-8bea-39256becce55")
-	)
-	(wire
-		(pts
-			(xy 130.81 86.36) (xy 130.81 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c446fc80-82f9-4e6f-a29f-53db61fc3377")
 	)
 	(wire
 		(pts
@@ -4419,16 +3943,6 @@
 		)
 		(uuid "f5a44683-1946-4e2a-9349-8f328e411edc")
 	)
-	(label "5V"
-		(at 148.59 86.36 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "00cf3d34-289c-4da3-bb2b-d7a64a7e450a")
-	)
 	(label "A4"
 		(at 67.31 24.13 180)
 		(effects
@@ -4488,16 +4002,6 @@
 			(justify right bottom)
 		)
 		(uuid "16e7aa65-8702-4096-8c3b-d99729cbe5fa")
-	)
-	(label "12V"
-		(at 97.79 86.36 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "17484042-b240-4e31-b7a8-17e201e76760")
 	)
 	(label "GND"
 		(at 82.55 105.41 0)
@@ -4578,16 +4082,6 @@
 			(justify left bottom)
 		)
 		(uuid "35a2c221-c784-4cb9-9ab9-9747b443adf6")
-	)
-	(label "GND"
-		(at 134.62 97.79 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "35b71c9d-3527-4954-91e7-c681cce478bd")
 	)
 	(label "GND"
 		(at 22.86 29.21 180)
@@ -4678,16 +4172,6 @@
 			(justify right bottom)
 		)
 		(uuid "4aabd593-89b3-482c-b711-1b5ef107246f")
-	)
-	(label "GND"
-		(at 101.6 97.79 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4ef247b6-ac53-4fa3-bcd8-81bda009e723")
 	)
 	(label "3.3V"
 		(at 22.86 46.99 180)
@@ -5407,22 +4891,22 @@
 	)
 	(global_label "A2"
 		(shape input)
-		(at 45.72 111.76 0)
+		(at 22.86 116.84 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "14980061-2d86-4992-bc5f-4cf908198739")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 50.9239 111.76 0)
+			(at 17.6561 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -5528,6 +5012,28 @@
 		(uuid "46f2059d-a124-465e-9a80-3b6f9cc0c981")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 51.1658 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "5V"
+		(shape passive)
+		(at 46.99 111.76 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4fca6e1e-370a-4c84-8fb0-3ef3b8c7fb55")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 51.162 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5649,7 +5155,7 @@
 	)
 	(global_label "A4"
 		(shape input)
-		(at 22.86 116.84 180)
+		(at 22.86 114.3 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5659,7 +5165,7 @@
 		)
 		(uuid "aa313e96-8bfa-484f-a34b-108f48131898")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 17.5767 116.84 0)
+			(at 17.5767 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5759,7 +5265,7 @@
 	)
 	(global_label "A3"
 		(shape input)
-		(at 22.86 114.3 180)
+		(at 22.86 111.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5769,7 +5275,7 @@
 		)
 		(uuid "d1a9dd33-8e6d-4c1a-b68a-0aaa243ea049")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 17.5767 114.3 0)
+			(at 17.5767 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5867,7 +5373,7 @@
 			)
 		)
 	)
-	(global_label "12V"
+	(global_label "5V"
 		(shape passive)
 		(at 21.59 73.66 180)
 		(fields_autoplaced yes)
@@ -5879,7 +5385,7 @@
 		)
 		(uuid "fed249a7-566a-4cbf-85e2-67d94b5d0ba4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 16.2879 73.66 0)
+			(at 17.418 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7520,6 +7026,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:237-8270"
@@ -7929,303 +7436,6 @@
 			(project "Sound Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 134.62 92.71 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e709320d-5966-4ce6-8dc9-beedf555f3f9")
-		(property "Reference" "C14"
-			(at 137.16 87.63 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "10µF"
-			(at 139.7 92.71 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 142.24 75.946 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 134.3025 90.4875 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 134.62 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "826c931f-6564-4628-bf0c-89e73492f31c")
-		)
-		(pin "2"
-			(uuid "94283274-89f2-4f90-a015-ee804e932ebe")
-		)
-		(instances
-			(project "Hex LCD Device"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-			(project "Pico Sound"
-				(path "/36ae9fab-3bd5-422b-bccc-b7d474dd236c"
-					(reference "C7")
-					(unit 1)
-				)
-			)
-			(project "Video Timer"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C2")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/435bbe75-130b-4ff1-a245-161bf90dff48"
-					(reference "C8")
-					(unit 1)
-				)
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431/662feba9-2017-4e89-b774-f7d895f327d7"
-					(reference "C20")
-					(unit 1)
-				)
-			)
-			(project "Sound"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_Radial_D8.0mm_P3.80mm")
-		(at 101.6 90.17 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e8cf46ff-f7a6-4b1e-b17a-f0b74e535543")
-		(property "Reference" "C13"
-			(at 102.235 87.63 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10μF"
-			(at 96.52 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
-			(at 101.6 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 102.235 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "d3b1c55c-6149-4638-9ed2-ac5f59639f63")
-		)
-		(pin "1"
-			(uuid "751077d3-8afc-4536-b5d4-095eddd7901c")
-		)
-		(instances
-			(project ""
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "ST_Microelectronics:LD1117S50C")
-		(at 110.49 86.36 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ec5b5431-6e11-47a7-af28-3346b5460b1d")
-		(property "Reference" "IC10"
-			(at 118.11 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LD1117S50C"
-			(at 118.11 83.185 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:LD1117S33C"
-			(at 138.43 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.st.com/resource/en/datasheet/ld1117.pdf"
-			(at 138.43 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at 138.43 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Height" "1.8"
-			(at 138.43 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "STMicroelectronics"
-			(at 138.43 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "LD1117S50C"
-			(at 138.43 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "LD1117S50"
-			(at 138.43 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "IC: voltage regulator; LDO, linear, fixed; 5.0V; 0.95A; SOT223; SMD"
-			(at 138.43 118.364 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c43251f9-8813-49fc-b869-4b96a7d43f45")
-		)
-		(pin "2"
-			(uuid "f2c0e0bf-3bc2-48e8-ad98-3381f1b99783")
-		)
-		(pin "3"
-			(uuid "b75effa3-237b-4f55-93ef-2eb7f35e7d7f")
-		)
-		(pin "4"
-			(uuid "c1713ef8-b1bd-4085-8c52-bf31f63f5b60")
-		)
-		(instances
-			(project "Hex LCD Device"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "IC10")
-					(unit 1)
-				)
-			)
-			(project "LCD Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC3")
 					(unit 1)
 				)
 			)

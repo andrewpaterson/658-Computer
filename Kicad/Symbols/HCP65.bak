@@ -14293,24 +14293,6 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -15.24 0)
-				(length 5.08)
-				(name "A2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "23"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
 				(at -5.08 -17.78 0)
 				(length 5.08)
 				(name "A1"
@@ -14339,6 +14321,24 @@
 					)
 				)
 				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -35.56 0)
+				(length 5.08)
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -14485,7 +14485,7 @@
 						)
 					)
 				)
-				(number "20"
+				(number "19"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -14503,7 +14503,25 @@
 						)
 					)
 				)
-				(number "19"
+				(number "18"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -15.24 0)
+				(length 5.08)
+				(name "A2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "20"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -14606,30 +14624,10 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -35.56 0)
-				(length 5.08)
-				(hide yes)
-				(name "N.C."
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin passive line
 				(at -5.08 -38.1 0)
 				(length 5.08)
-				(hide yes)
-				(name "12V"
+				(name "5V"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -14966,7 +14964,7 @@
 						)
 					)
 				)
-				(number "18"
+				(number "11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -52942,7 +52940,7 @@
 						)
 					)
 				)
-				(number "9"
+				(number "10"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -53426,7 +53424,7 @@
 						)
 					)
 				)
-				(number "10"
+				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -53444,7 +53442,7 @@
 						)
 					)
 				)
-				(number "47"
+				(number "48"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -53575,7 +53573,7 @@
 						)
 					)
 				)
-				(number "48"
+				(number "47"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -76863,10 +76861,10 @@
 			)
 		)
 		(symbol "Status_Device_Board_1_0"
-			(pin input inverted
-				(at -5.08 -7.62 0)
+			(pin input line
+				(at -5.08 -12.7 0)
 				(length 5.08)
-				(name "~{WD}"
+				(name "A2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -76884,24 +76882,6 @@
 			(pin input line
 				(at -5.08 -15.24 0)
 				(length 5.08)
-				(name "A2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "23"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -5.08 -17.78 0)
-				(length 5.08)
 				(name "A1"
 					(effects
 						(font
@@ -76918,7 +76898,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -20.32 0)
+				(at -5.08 -17.78 0)
 				(length 5.08)
 				(name "A0"
 					(effects
@@ -76928,6 +76908,24 @@
 					)
 				)
 				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -35.56 0)
+				(length 5.08)
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "23"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -77064,7 +77062,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -10.16 0)
+				(at -5.08 -7.62 0)
 				(length 5.08)
 				(name "A4"
 					(effects
@@ -77082,7 +77080,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -12.7 0)
+				(at -5.08 -10.16 0)
 				(length 5.08)
 				(name "A3"
 					(effects
@@ -77100,7 +77098,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -22.86 0)
+				(at -5.08 -20.32 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77119,7 +77117,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -25.4 0)
+				(at -5.08 -22.86 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77138,7 +77136,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -27.94 0)
+				(at -5.08 -25.4 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77157,7 +77155,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -30.48 0)
+				(at -5.08 -27.94 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77176,7 +77174,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -33.02 0)
+				(at -5.08 -30.48 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77195,7 +77193,7 @@
 				)
 			)
 			(pin no_connect line
-				(at -5.08 -35.56 0)
+				(at -5.08 -33.02 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -77216,8 +77214,7 @@
 			(pin passive line
 				(at -5.08 -38.1 0)
 				(length 5.08)
-				(hide yes)
-				(name "12V"
+				(name "5V"
 					(effects
 						(font
 							(size 1.27 1.27)

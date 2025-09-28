@@ -7420,114 +7420,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:NetTie"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "NT"
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "NetTie"
-				(at 2.54 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:NetTie:NetTie-2_SMD_Pad0.5mm"
-				(at 20.955 -6.985 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "NetTie_0_1"
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 3.81 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "NetTie_1_1"
-				(pin passive line
-					(at 0 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers
 				(hide yes)
@@ -15369,11 +15261,15 @@
 		(uuid "fc3c8175-a555-4ceb-8860-589431b4fea3")
 	)
 	(no_connect
+		(at 29.21 377.19)
+		(uuid "092b93aa-3cfe-4890-b976-7f63b8afcce5")
+	)
+	(no_connect
 		(at 182.88 34.29)
 		(uuid "1b1fbf9c-d14c-405e-a8df-2ea3d867f671")
 	)
 	(no_connect
-		(at 62.23 389.89)
+		(at 29.21 389.89)
 		(uuid "2b2e0177-c8ba-4e40-a8af-8a38ec2633de")
 	)
 	(no_connect
@@ -15383,6 +15279,10 @@
 	(no_connect
 		(at 265.43 270.51)
 		(uuid "3379c96d-736b-4582-ad2d-b784fc9116b7")
+	)
+	(no_connect
+		(at 29.21 384.81)
+		(uuid "3c2007ae-37a8-4772-beb9-aa96c3d66d86")
 	)
 	(no_connect
 		(at 265.43 275.59)
@@ -15399,10 +15299,6 @@
 	(no_connect
 		(at 182.88 29.21)
 		(uuid "62bf76f8-7eb7-489d-82e5-444a24f8d2a5")
-	)
-	(no_connect
-		(at 62.23 379.73)
-		(uuid "7600d7af-7fde-44db-860b-5c5745236d58")
 	)
 	(no_connect
 		(at 101.6 39.37)
@@ -15429,20 +15325,16 @@
 		(uuid "9e6a6764-4458-48c7-af0f-a0fe7c848f6f")
 	)
 	(no_connect
+		(at 29.21 379.73)
+		(uuid "a411fbb1-4816-4723-b7e3-44afa5182053")
+	)
+	(no_connect
+		(at 29.21 382.27)
+		(uuid "b77359c6-c9a7-45db-a3e5-edad0ece3a3e")
+	)
+	(no_connect
 		(at 256.54 116.84)
 		(uuid "c7682080-8cc5-4a3f-8816-e463e1019dc1")
-	)
-	(no_connect
-		(at 62.23 384.81)
-		(uuid "d8ab9d6f-d130-4171-93c9-73c23d0f219e")
-	)
-	(no_connect
-		(at 62.23 377.19)
-		(uuid "f20bb0a9-3a21-4ad3-b103-cf9a8d029033")
-	)
-	(no_connect
-		(at 62.23 382.27)
-		(uuid "fd731fe2-959c-49e3-98dd-a6836d34f8bf")
 	)
 	(no_connect
 		(at 265.43 273.05)
@@ -40543,16 +40435,6 @@
 		)
 		(uuid "4061518b-a998-43d9-b0e7-f62985574604")
 	)
-	(label "~{CLK}2"
-		(at 57.15 389.89 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "40eb557b-c0bb-4d7b-90ae-5d4793292ce7")
-	)
 	(label "DM0"
 		(at 407.67 332.74 180)
 		(effects
@@ -40682,16 +40564,6 @@
 			(justify right bottom)
 		)
 		(uuid "42df5820-f5ae-4a22-9ee4-e98cfa83dc89")
-	)
-	(label "~{CLK}1"
-		(at 29.21 384.81 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "43615e1e-10a7-4f4f-9dc8-57d1bb7ec2cb")
 	)
 	(label "DM6"
 		(at 461.01 161.29 270)
@@ -41092,16 +40964,6 @@
 			(justify left bottom)
 		)
 		(uuid "4ed7d0de-8931-4b07-b47e-dec117c738b9")
-	)
-	(label "~{CLK}1"
-		(at 57.15 384.81 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4ef0aa69-6e39-4dbd-9d89-a176cbfedc72")
 	)
 	(label "AM15"
 		(at 29.21 224.79 0)
@@ -44643,16 +44505,6 @@
 		)
 		(uuid "a50b8195-3f20-4822-b7b6-cb0049365944")
 	)
-	(label "CLK1"
-		(at 29.21 382.27 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a5381558-ac97-46b9-ad8d-a24ee730f396")
-	)
 	(label "DD5"
 		(at 337.82 398.78 270)
 		(effects
@@ -45393,16 +45245,6 @@
 		)
 		(uuid "bbbc89d0-eea2-4163-8cc5-31a45e3ae70d")
 	)
-	(label "CLK1"
-		(at 57.15 382.27 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "bc06353f-97da-4e3b-8a23-1e5b27135d44")
-	)
 	(label "Palette1"
 		(at 320.04 311.15 180)
 		(effects
@@ -45572,16 +45414,6 @@
 			(justify left bottom)
 		)
 		(uuid "bf6e2ab3-8d7f-461a-b522-7f046f5a452f")
-	)
-	(label "CLK0"
-		(at 29.21 377.19 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c02ace3b-96be-4d75-80cb-832e920b91c3")
 	)
 	(label "DC[0..7]"
 		(at 194.31 114.3 0)
@@ -46063,16 +45895,6 @@
 		)
 		(uuid "cb1c1207-bf3b-4116-b821-6af1ca36d44a")
 	)
-	(label "~{CLK}0"
-		(at 29.21 379.73 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cb5d2adc-949f-4529-acc0-8bcdc3d43a7a")
-	)
 	(label "AM0"
 		(at 510.54 85.09 180)
 		(effects
@@ -46182,16 +46004,6 @@
 			(justify left bottom)
 		)
 		(uuid "cd48a977-4c7f-492f-945b-4a8cfe513d2f")
-	)
-	(label "CLK0"
-		(at 57.15 377.19 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "cd51bdb5-45b3-452c-b0cf-02f0d217d985")
 	)
 	(label "AM13"
 		(at 510.54 52.07 180)
@@ -47733,16 +47545,6 @@
 		)
 		(uuid "f6653226-6d09-460e-8b39-77dae66650b3")
 	)
-	(label "~{CLK}0"
-		(at 57.15 379.73 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f67c57e6-0e17-4b9c-85ae-fd3bc5e76c4c")
-	)
 	(label "Green3"
 		(at 29.21 140.97 0)
 		(effects
@@ -48198,74 +48000,6 @@
 			(project "Video Board - Memory"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "H19")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 57.15 377.19 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1c531bc4-dde7-4a31-9c1a-61d075d020ea")
-		(property "Reference" "NT3"
-			(at 59.69 375.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 59.69 378.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 78.105 384.175 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 59.69 375.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 377.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "615c57be-00af-4c90-b77e-7a9edecc6268")
-		)
-		(pin "2"
-			(uuid "131e00a2-5e1d-4ae4-9d83-e618e1a019b4")
-		)
-		(instances
-			(project "Video Board - Memory"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT3")
 					(unit 1)
 				)
 			)
@@ -49539,74 +49273,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 57.15 389.89 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "644737ea-dc8f-4e5f-97c4-dd7fcb7ff49d")
-		(property "Reference" "NT1"
-			(at 59.69 388.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 59.69 391.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 78.105 396.875 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 59.69 388.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 389.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b092d3ba-d3c4-43da-ae01-8a60ffc592d0")
-		)
-		(pin "2"
-			(uuid "843f199c-6f27-4adf-84ad-695f3f32cd4e")
-		)
-		(instances
-			(project "Video Board - Memory"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:D_Flip_Flop_16bit")
 		(at 514.35 299.72 0)
 		(unit 1)
@@ -50818,74 +50484,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 57.15 384.81 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "87e5f69f-15b5-4946-8004-feffdd41f4f4")
-		(property "Reference" "NT2"
-			(at 59.69 383.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 59.69 386.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 78.105 391.795 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 59.69 383.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 384.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "aa6272a9-6e87-4ef7-aef9-f1ea903a4bb4")
-		)
-		(pin "2"
-			(uuid "d72ed9a3-56dc-4b34-89ac-5901547fcc55")
-		)
-		(instances
-			(project "Video Board - Memory"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "ST_Microelectronics:LD1117S50C")
 		(at 78.74 90.17 0)
 		(unit 1)
@@ -51166,74 +50764,6 @@
 			(project "Video Board - Memory"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "H1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 57.15 379.73 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ac32c119-5c4f-42ae-9726-d8a728c6f406")
-		(property "Reference" "NT4"
-			(at 59.69 378.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 59.69 381 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 78.105 386.715 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 59.69 378.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 379.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f9e8fd6b-4770-4afb-b4c7-575bfc92f9ce")
-		)
-		(pin "2"
-			(uuid "21d38f0b-5f81-4b3e-b268-f4d1e26faa30")
-		)
-		(instances
-			(project "Video Board - Memory"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT4")
 					(unit 1)
 				)
 			)
@@ -53536,74 +53066,6 @@
 			(project "Video Board - Memory"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B33")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 57.15 382.27 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "eac90988-a011-405f-9a93-e9cdbf0229ec")
-		(property "Reference" "NT5"
-			(at 59.69 381 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 59.69 383.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 78.105 389.255 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 59.69 381 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 57.15 382.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4f31efd4-3a56-4848-90c9-029d753883e4")
-		)
-		(pin "2"
-			(uuid "64566641-c48b-4cc3-b402-a5201ee149d8")
-		)
-		(instances
-			(project "Video Board - Memory"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT5")
 					(unit 1)
 				)
 			)

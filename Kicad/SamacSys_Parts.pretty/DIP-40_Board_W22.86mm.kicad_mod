@@ -1,7 +1,7 @@
 (footprint "DIP-40_Board_W22.86mm"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "40-lead though-hole mounted DIP package, row spacing 22.86 mm (900 mils)")
 	(tags "THT DIP DIL PDIP 2.54mm 22.86mm 900mil")
@@ -24,18 +24,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b5ca347d-3a2e-4853-b921-b906985730af")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -249,18 +237,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "56c0b08e-958d-4e09-b361-6a51dc9f46f8")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 11.43 22.86 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "b276c06b-5c3c-4b2b-a795-d1568a520ffc")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
 	)
 	(pad "1" thru_hole oval
 		(at 0 0)
@@ -583,5 +559,17 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "f29f2e16-f501-4adc-b26f-e655f75ec8f3")
+	)
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Boards/Board 2x20 W22.86/Board 2x20 W22.86.wrl"
+		(offset
+			(xyz 0 0 -0.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
 	)
 )

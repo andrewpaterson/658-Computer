@@ -1,7 +1,7 @@
 (footprint "DIP-44_Board_W15.24mm"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "44-lead though-hole mounted DIP package, row spacing 15.24 mm (600 mils)")
 	(tags "THT DIP DIL PDIP 2.54mm 15.24mm 600mil")
@@ -25,18 +25,6 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "34bebd5a-37d3-450d-a95a-7e6059e328d1")
-		(effects
-			(font
-				(size 1.27 1.27)
 				(thickness 0.15)
 			)
 		)
@@ -250,18 +238,6 @@
 		)
 		(layer "F.CrtYd")
 		(uuid "633dadd4-0ab7-4ded-aacc-9cce3040a150")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 7.62 24.13 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "098456d8-b82e-4558-a951-bb94c27895c3")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-		)
 	)
 	(pad "1" thru_hole circle
 		(at 0 0)
@@ -616,5 +592,17 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "1dc8ec9d-5afa-4af8-98d5-bc3957adb6b3")
+	)
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Boards/Board 2x22 W15.24/Board 2x22 W15.24.wrl"
+		(offset
+			(xyz 0 0 -0.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
 	)
 )

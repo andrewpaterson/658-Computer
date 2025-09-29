@@ -1,7 +1,7 @@
 (footprint "DIP-12_Board_W22.86mm_Alt"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "12-lead though-hole mounted DIP package, row spacing 22.86 mm")
 	(tags "THT DIP DIL PDIP 2.54mm 22.86mm")
@@ -22,18 +22,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" ""
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "47db0a70-ee53-4cad-8de3-a091545b5e6d")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -347,5 +335,17 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(uuid "f41867b6-15d8-49c3-829d-6b27150df389")
+	)
+	(embedded_fonts no)
+	(model "${_658_COMPUTER_}/Kicad/Boards/Board 2x06 W22.86/Board 2x06 W22.86.wrl"
+		(offset
+			(xyz 0 0 -0.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
 	)
 )

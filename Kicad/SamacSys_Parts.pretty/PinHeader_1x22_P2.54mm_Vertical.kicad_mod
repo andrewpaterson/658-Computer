@@ -1,0 +1,108 @@
+(footprint "PinHeader_1x22_P2.54mm_Vertical"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Through hole straight pin header, 1x22, 2.54mm pitch, single row")
+	(tags "Through hole pin header THT 1x22 2.54mm single row")
+	(property "Reference" "REF**"
+		(at 0 -2.38 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "980f4c51-91b2-4516-a2f3-14f34a065d52")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PinHeader_1x22_P2.54mm_Vertical"
+		(at 0 55.72 0)
+		(layer "F.Fab")
+		(uuid "8e9b76f8-6567-4c09-8204-d97a4abd8766")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d85ccd69-7bf8-4d5d-b0f4-d53b551baa1c")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e133ec0c-6e0f-4e27-8bc7-6c393600ca6d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -1.77 -1.78)
+		(end -1.77 55.12)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "c643fa04-489b-42e6-b69b-ab0e8c62f043")
+	)
+	(fp_line
+		(start -1.77 55.12)
+		(end 1.77 55.12)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "17c9a9b7-cfed-4826-8a33-8bb44706f07e")
+	)
+	(fp_line
+		(start 1.77 -1.78)
+		(end -1.77 -1.78)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e97f46fa-0f3f-432a-ba8b-332fb3f38e95")
+	)
+	(fp_line
+		(start 1.77 55.12)
+		(end 1.77 -1.78)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ce0bfede-357a-4f42-95fb-5c95c68eb7ff")
+	)
+	(embedded_fonts no)
+	(model "${KICAD9_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x22_P2.54mm_Vertical.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

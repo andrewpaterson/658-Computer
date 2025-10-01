@@ -35288,15 +35288,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "74LVC1G02 - Single 2-input NOR gate@en-us"
-			(at 0 0 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(symbol "74LVC1G02GV,125_0_0"
 			(pin input line
 				(at 0 0 0)
@@ -35700,24 +35691,6 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at 25.4 -5.08 180)
-				(length 5.08)
-				(name "N.C."
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 		)
 		(symbol "74LVC1G04GV,125_0_1"
 			(polyline
@@ -35788,6 +35761,27 @@
 				)
 				(fill
 					(type none)
+				)
+			)
+		)
+		(symbol "74LVC1G04GV,125_1_0"
+			(pin no_connect line
+				(at 25.4 -5.08 180)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
 				)
 			)
 		)
@@ -58620,7 +58614,7 @@
 			)
 		)
 		(property "Description" "9.1V Zener diode"
-			(at 10.16 -5.08 0)
+			(at 10.16 -2.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -58741,7 +58735,7 @@
 		)
 		(symbol "BZX84-C9V1,215_1_0"
 			(pin no_connect line
-				(at 0 -2.54 0)
+				(at 0 -6.35 0)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."

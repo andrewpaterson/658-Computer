@@ -20,14 +20,14 @@
   <lib desc="#Soc" name="11"/>
   <main name="main"/>
   <options>
+    <a name="simrand" val="0"/>
     <a name="simlimit" val="1000"/>
     <a name="gateUndefined" val="ignore"/>
-    <a name="simrand" val="0"/>
   </options>
   <mappings>
     <tool lib="8" map="Ctrl Button1" name="Menu Tool"/>
-    <tool lib="8" map="Button2" name="Menu Tool"/>
     <tool lib="8" map="Button3" name="Menu Tool"/>
+    <tool lib="8" map="Button2" name="Menu Tool"/>
   </mappings>
   <toolbar>
     <tool lib="8" name="Poke Tool"/>
@@ -37,8 +37,8 @@
     <sep/>
     <tool lib="0" name="Pin"/>
     <tool lib="0" name="Pin">
-      <a name="facing" val="west"/>
       <a name="output" val="true"/>
+      <a name="facing" val="west"/>
     </tool>
     <sep/>
     <tool lib="1" name="NOT Gate"/>
@@ -58,379 +58,470 @@
     <tool lib="4" name="Register"/>
   </toolbar>
   <circuit name="main">
-    <wire from="(410,740)" to="(410,760)"/>
-    <comp lib="4" loc="(470,910)" name="D Flip-Flop">
+    <comp lib="4" loc="(470,540)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
-    <wire from="(690,650)" to="(690,660)"/>
-    <wire from="(590,670)" to="(590,690)"/>
-    <wire from="(250,980)" to="(370,980)"/>
-    <comp lib="4" loc="(470,510)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
+    <wire from="(710,290)" to="(710,440)"/>
+    <wire from="(250,140)" to="(260,140)"/>
+    <wire from="(750,340)" to="(750,440)"/>
+    <comp lib="0" loc="(1030,400)" name="Tunnel">
+      <a name="label" val="MPUClk2"/>
+      <a name="facing" val="east"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
     </comp>
-    <wire from="(270,690)" to="(370,690)"/>
-    <wire from="(450,1050)" to="(680,1050)"/>
-    <comp lib="4" loc="(440,1090)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(520,1110)" to="(540,1110)"/>
-    <wire from="(500,1140)" to="(500,1160)"/>
-    <wire from="(330,450)" to="(330,510)"/>
-    <wire from="(470,910)" to="(480,910)"/>
-    <comp lib="1" loc="(410,1120)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(590,670)" to="(650,670)"/>
-    <wire from="(460,630)" to="(460,690)"/>
-    <wire from="(750,590)" to="(1030,590)"/>
-    <comp lib="1" loc="(550,1120)" name="NOT Gate">
+    <wire from="(370,720)" to="(380,720)"/>
+    <wire from="(420,140)" to="(430,140)"/>
+    <wire from="(300,210)" to="(370,210)"/>
+    <wire from="(350,140)" to="(360,140)"/>
+    <comp lib="1" loc="(300,570)" name="NOT Gate">
       <a name="size" val="20"/>
       <a name="facing" val="north"/>
     </comp>
-    <wire from="(450,650)" to="(680,650)"/>
-    <wire from="(440,580)" to="(530,580)"/>
-    <wire from="(650,700)" to="(810,700)"/>
-    <comp lib="10" loc="(1030,560)" name="Digital Oscilloscope">
-      <a name="inputs" val="8"/>
-      <a name="nState" val="16"/>
+    <wire from="(350,480)" to="(350,540)"/>
+    <wire from="(410,110)" to="(410,140)"/>
+    <wire from="(360,380)" to="(430,380)"/>
+    <wire from="(380,740)" to="(400,740)"/>
+    <wire from="(320,190)" to="(320,200)"/>
+    <wire from="(600,260)" to="(700,260)"/>
+    <wire from="(370,600)" to="(460,600)"/>
+    <wire from="(380,280)" to="(610,280)"/>
+    <wire from="(800,340)" to="(800,620)"/>
+    <wire from="(430,380)" to="(480,380)"/>
+    <wire from="(340,100)" to="(610,100)"/>
+    <comp lib="4" loc="(400,140)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
     </comp>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <wire from="(390,1070)" to="(590,1070)"/>
-    <wire from="(520,690)" to="(520,710)"/>
-    <wire from="(480,510)" to="(480,530)"/>
-    <comp lib="1" loc="(210,510)" name="AND Gate">
+    <wire from="(340,780)" to="(410,780)"/>
+    <comp lib="1" loc="(370,170)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(480,520)" to="(480,540)"/>
+    <wire from="(390,590)" to="(390,610)"/>
+    <comp lib="4" loc="(470,140)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(280,520)" to="(480,520)"/>
+    <wire from="(140,140)" to="(200,140)"/>
+    <wire from="(380,320)" to="(380,340)"/>
+    <wire from="(1030,400)" to="(1040,400)"/>
+    <wire from="(360,770)" to="(360,790)"/>
+    <wire from="(410,770)" to="(410,780)"/>
+    <wire from="(590,120)" to="(590,310)"/>
+    <wire from="(300,260)" to="(390,260)"/>
+    <comp lib="4" loc="(510,720)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(220,480)" to="(220,600)"/>
+    <wire from="(220,380)" to="(220,480)"/>
+    <wire from="(260,140)" to="(290,140)"/>
+    <wire from="(390,660)" to="(390,720)"/>
+    <wire from="(660,840)" to="(710,840)"/>
+    <wire from="(590,520)" to="(590,710)"/>
+    <wire from="(610,610)" to="(650,610)"/>
+    <wire from="(320,700)" to="(520,700)"/>
+    <wire from="(280,120)" to="(480,120)"/>
+    <wire from="(260,540)" to="(290,540)"/>
+    <wire from="(600,510)" to="(600,660)"/>
+    <wire from="(520,700)" to="(520,720)"/>
+    <wire from="(180,210)" to="(300,210)"/>
+    <comp lib="1" loc="(340,350)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(60,60)" to="(80,60)"/>
+    <comp lib="0" loc="(80,150)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="RSTB"/>
+    </comp>
+    <wire from="(340,770)" to="(340,780)"/>
+    <comp lib="4" loc="(440,320)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(220,200)" to="(320,200)"/>
+    <wire from="(410,780)" to="(500,780)"/>
+    <wire from="(220,600)" to="(320,600)"/>
+    <wire from="(410,560)" to="(430,560)"/>
+    <comp lib="1" loc="(430,750)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(390,260)" to="(390,320)"/>
+    <wire from="(620,680)" to="(700,680)"/>
+    <comp lib="4" loc="(510,320)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(220,600)" to="(220,780)"/>
+    <comp lib="1" loc="(390,570)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(200,320)" to="(300,320)"/>
+    <comp lib="1" loc="(460,170)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(280,160)" to="(290,160)"/>
+    <wire from="(370,210)" to="(460,210)"/>
+    <wire from="(770,280)" to="(770,320)"/>
+    <wire from="(350,80)" to="(350,140)"/>
+    <comp lib="1" loc="(440,170)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(220,380)" to="(360,380)"/>
+    <wire from="(390,200)" to="(440,200)"/>
+    <comp lib="1" loc="(360,350)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <comp lib="0" loc="(1030,370)" name="Tunnel">
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="MPUClk1"/>
+      <a name="facing" val="east"/>
+    </comp>
+    <wire from="(340,140)" to="(340,160)"/>
+    <comp lib="0" loc="(880,340)" name="Tunnel">
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="MPUClk0"/>
+    </comp>
+    <wire from="(390,320)" to="(400,320)"/>
+    <wire from="(580,730)" to="(740,730)"/>
+    <comp lib="1" loc="(140,140)" name="AND Gate">
       <a name="size" val="30"/>
     </comp>
-    <comp lib="4" loc="(400,910)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(410,930)" to="(430,930)"/>
-    <wire from="(580,690)" to="(590,690)"/>
-    <wire from="(550,1140)" to="(550,1160)"/>
-    <comp lib="1" loc="(500,720)" name="NOT Gate">
+    <wire from="(300,190)" to="(300,210)"/>
+    <wire from="(200,440)" to="(200,720)"/>
+    <wire from="(320,600)" to="(370,600)"/>
+    <wire from="(180,790)" to="(360,790)"/>
+    <wire from="(260,80)" to="(260,140)"/>
+    <wire from="(160,480)" to="(220,480)"/>
+    <wire from="(710,690)" to="(710,840)"/>
+    <comp lib="1" loc="(500,750)" name="NOT Gate">
       <a name="size" val="20"/>
       <a name="facing" val="north"/>
     </comp>
-    <wire from="(520,1060)" to="(520,1090)"/>
-    <wire from="(460,1030)" to="(460,1090)"/>
-    <wire from="(420,450)" to="(420,510)"/>
-    <comp lib="4" loc="(540,910)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(680,1000)" to="(720,1000)"/>
-    <comp lib="1" loc="(510,940)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(480,480)" to="(480,510)"/>
-    <wire from="(230,980)" to="(250,980)"/>
-    <wire from="(460,1090)" to="(470,1090)"/>
-    <wire from="(430,1140)" to="(430,1160)"/>
-    <wire from="(780,1060)" to="(780,1210)"/>
-    <wire from="(510,960)" to="(510,980)"/>
-    <wire from="(580,1090)" to="(590,1090)"/>
-    <comp lib="1" loc="(530,940)" name="NOT Gate">
+    <comp lib="1" loc="(480,350)" name="NOT Gate">
       <a name="facing" val="north"/>
       <a name="size" val="20"/>
     </comp>
-    <wire from="(250,580)" to="(370,580)"/>
-    <wire from="(400,910)" to="(410,910)"/>
-    <comp lib="1" loc="(370,540)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <comp lib="2" loc="(790,640)" name="Multiplexer">
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(550,490)" to="(660,490)"/>
-    <wire from="(270,1090)" to="(270,1210)"/>
-    <wire from="(660,1080)" to="(810,1080)"/>
-    <a name="simulationFrequency" val="16.0"/>
-    <wire from="(680,980)" to="(720,980)"/>
-    <wire from="(480,880)" to="(480,910)"/>
-    <comp lib="1" loc="(320,510)" name="NOT Gate"/>
-    <wire from="(430,1160)" to="(500,1160)"/>
-    <comp lib="4" loc="(400,510)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(110,310)" to="(130,310)"/>
-    <comp lib="1" loc="(460,540)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(370,630)" to="(460,630)"/>
-    <wire from="(670,1030)" to="(770,1030)"/>
-    <wire from="(550,890)" to="(660,890)"/>
-    <wire from="(410,470)" to="(410,510)"/>
-    <wire from="(650,1070)" to="(650,1100)"/>
-    <wire from="(590,1070)" to="(650,1070)"/>
-    <comp lib="4" loc="(540,510)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(500,1160)" to="(550,1160)"/>
-    <wire from="(320,510)" to="(330,510)"/>
-    <wire from="(420,450)" to="(490,450)"/>
-    <comp lib="2" loc="(750,590)" name="Multiplexer">
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(330,850)" to="(330,910)"/>
-    <comp lib="4" loc="(510,690)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(490,450)" to="(490,510)"/>
-    <wire from="(680,870)" to="(680,980)"/>
-    <wire from="(450,1050)" to="(450,1090)"/>
-    <wire from="(390,1110)" to="(400,1110)"/>
-    <wire from="(740,610)" to="(740,810)"/>
-    <comp lib="1" loc="(390,940)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(800,620)" to="(800,640)"/>
-    <wire from="(460,1030)" to="(530,1030)"/>
-    <comp lib="1" loc="(440,940)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(690,650)" to="(770,650)"/>
-    <wire from="(510,690)" to="(520,690)"/>
-    <wire from="(370,1090)" to="(400,1090)"/>
-    <wire from="(370,690)" to="(400,690)"/>
-    <wire from="(740,810)" to="(780,810)"/>
-    <wire from="(350,890)" to="(350,930)"/>
-    <wire from="(740,990)" to="(870,990)"/>
-    <comp lib="0" loc="(80,520)" name="Tunnel">
-      <a name="facing" val="east"/>
-      <a name="labelfont" val="SansSerif bold 10"/>
-      <a name="label" val="RSTB"/>
-    </comp>
-    <comp lib="4" loc="(580,1090)" name="D Flip-Flop">
-      <a name="appearance" val="classic"/>
-    </comp>
-    <wire from="(80,500)" to="(180,500)"/>
-    <wire from="(450,710)" to="(470,710)"/>
-    <comp lib="1" loc="(430,720)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(460,960)" to="(460,980)"/>
-    <wire from="(330,510)" to="(330,850)"/>
-    <wire from="(270,510)" to="(290,510)"/>
+    <wire from="(460,260)" to="(460,320)"/>
+    <wire from="(1030,340)" to="(1040,340)"/>
+    <wire from="(340,560)" to="(360,560)"/>
     <a name="circuit" val="main"/>
-    <wire from="(670,480)" to="(670,630)"/>
-    <wire from="(250,760)" to="(410,760)"/>
-    <wire from="(270,1210)" to="(730,1210)"/>
-    <wire from="(540,910)" to="(550,910)"/>
-    <comp lib="2" loc="(790,1040)" name="Multiplexer">
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(270,1090)" to="(370,1090)"/>
-    <wire from="(420,510)" to="(430,510)"/>
-    <comp lib="2" loc="(740,990)" name="Multiplexer">
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(270,810)" to="(270,1090)"/>
-    <comp lib="1" loc="(410,720)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(540,510)" to="(550,510)"/>
-    <wire from="(840,650)" to="(1030,650)"/>
-    <wire from="(450,1090)" to="(450,1110)"/>
-    <wire from="(520,710)" to="(540,710)"/>
-    <wire from="(680,470)" to="(680,580)"/>
-    <wire from="(820,710)" to="(820,810)"/>
-    <wire from="(780,1210)" to="(820,1210)"/>
-    <comp lib="1" loc="(390,540)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(680,580)" to="(730,580)"/>
-    <wire from="(450,690)" to="(450,710)"/>
-    <wire from="(480,530)" to="(500,530)"/>
-    <wire from="(460,630)" to="(530,630)"/>
-    <comp lib="1" loc="(510,540)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(670,630)" to="(770,630)"/>
-    <comp lib="0" loc="(230,580)" name="Tunnel">
+    <wire from="(320,300)" to="(520,300)"/>
+    <wire from="(480,120)" to="(590,120)"/>
+    <comp lib="0" loc="(880,370)" name="Tunnel">
+      <a name="label" val="MPUClk1"/>
       <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <comp lib="1" loc="(440,570)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(710,440)" to="(750,440)"/>
+    <wire from="(440,190)" to="(440,200)"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <wire from="(480,770)" to="(480,790)"/>
+    <wire from="(770,280)" to="(880,280)"/>
+    <wire from="(340,100)" to="(340,140)"/>
+    <wire from="(500,370)" to="(500,390)"/>
+    <wire from="(80,150)" to="(110,150)"/>
+    <wire from="(470,540)" to="(480,540)"/>
+    <wire from="(330,140)" to="(340,140)"/>
+    <wire from="(320,200)" to="(390,200)"/>
+    <wire from="(460,590)" to="(460,600)"/>
+    <wire from="(300,720)" to="(330,720)"/>
+    <wire from="(80,130)" to="(110,130)"/>
+    <comp lib="1" loc="(320,570)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(460,720)" to="(470,720)"/>
+    <comp lib="0" loc="(880,280)" name="Tunnel">
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="Main2B"/>
+    </comp>
+    <wire from="(590,310)" to="(740,310)"/>
+    <wire from="(260,480)" to="(350,480)"/>
+    <wire from="(380,340)" to="(400,340)"/>
+    <comp lib="2" loc="(720,270)" name="Multiplexer">
+      <a name="size" val="20"/>
+    </comp>
+    <comp lib="10" loc="(1040,190)" name="Digital Oscilloscope">
+      <a name="nState" val="16"/>
+      <a name="inputs" val="8"/>
+    </comp>
+    <wire from="(300,320)" to="(330,320)"/>
+    <wire from="(410,110)" to="(600,110)"/>
+    <comp lib="0" loc="(1030,280)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Main2B"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <wire from="(480,520)" to="(590,520)"/>
+    <wire from="(340,390)" to="(410,390)"/>
+    <wire from="(660,640)" to="(660,840)"/>
+    <wire from="(1030,190)" to="(1040,190)"/>
+    <wire from="(380,680)" to="(380,720)"/>
+    <wire from="(410,510)" to="(410,540)"/>
+    <comp lib="0" loc="(160,210)" name="Tunnel">
       <a name="label" val="RSTB"/>
       <a name="facing" val="east"/>
-    </comp>
-    <wire from="(410,870)" to="(410,910)"/>
-    <wire from="(800,620)" to="(1030,620)"/>
-    <wire from="(250,1160)" to="(430,1160)"/>
-    <wire from="(370,1030)" to="(460,1030)"/>
-    <wire from="(350,890)" to="(550,890)"/>
-    <wire from="(530,1030)" to="(530,1090)"/>
-    <wire from="(480,880)" to="(670,880)"/>
-    <wire from="(490,850)" to="(490,910)"/>
-    <wire from="(440,560)" to="(440,580)"/>
-    <wire from="(460,980)" to="(510,980)"/>
-    <wire from="(330,850)" to="(420,850)"/>
-    <wire from="(420,910)" to="(430,910)"/>
-    <comp lib="1" loc="(370,940)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <comp lib="0" loc="(80,500)" name="Clock"/>
-    <wire from="(780,810)" to="(820,810)"/>
-    <wire from="(350,490)" to="(350,530)"/>
-    <wire from="(680,600)" to="(680,650)"/>
-    <wire from="(840,650)" to="(840,690)"/>
-    <wire from="(400,510)" to="(410,510)"/>
-    <wire from="(780,660)" to="(780,810)"/>
-    <wire from="(550,490)" to="(550,510)"/>
-    <wire from="(410,910)" to="(410,930)"/>
-    <wire from="(950,770)" to="(950,1090)"/>
-    <wire from="(590,1070)" to="(590,1090)"/>
-    <wire from="(420,850)" to="(490,850)"/>
-    <comp lib="2" loc="(830,1090)" name="Multiplexer">
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(420,850)" to="(420,910)"/>
-    <wire from="(550,890)" to="(550,910)"/>
-    <comp lib="1" loc="(570,1120)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(510,1090)" to="(520,1090)"/>
-    <wire from="(650,670)" to="(650,700)"/>
-    <wire from="(910,740)" to="(910,1040)"/>
-    <wire from="(450,1110)" to="(470,1110)"/>
-    <wire from="(490,510)" to="(500,510)"/>
-    <wire from="(480,910)" to="(480,930)"/>
-    <wire from="(410,870)" to="(680,870)"/>
-    <wire from="(390,670)" to="(390,710)"/>
-    <wire from="(730,1210)" to="(780,1210)"/>
-    <wire from="(350,490)" to="(550,490)"/>
-    <wire from="(790,640)" to="(800,640)"/>
-    <wire from="(390,1070)" to="(390,1110)"/>
-    <wire from="(370,630)" to="(370,690)"/>
-    <wire from="(330,910)" to="(360,910)"/>
-    <comp lib="1" loc="(570,720)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(370,580)" to="(440,580)"/>
-    <comp lib="1" loc="(480,720)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(870,710)" to="(870,990)"/>
-    <wire from="(250,580)" to="(250,760)"/>
-    <wire from="(480,740)" to="(480,760)"/>
-    <wire from="(210,510)" to="(270,510)"/>
-    <wire from="(270,690)" to="(270,810)"/>
-    <wire from="(410,530)" to="(430,530)"/>
-    <wire from="(530,690)" to="(540,690)"/>
-    <wire from="(410,760)" to="(480,760)"/>
-    <wire from="(370,1030)" to="(370,1090)"/>
-    <comp lib="0" loc="(130,310)" name="Tunnel">
       <a name="labelfont" val="SansSerif bold 10"/>
-      <a name="label" val="RSTB"/>
     </comp>
-    <wire from="(820,1110)" to="(820,1210)"/>
-    <comp lib="0" loc="(1030,560)" name="Clock"/>
-    <wire from="(680,1000)" to="(680,1050)"/>
-    <wire from="(80,520)" to="(180,520)"/>
-    <wire from="(480,930)" to="(500,930)"/>
-    <wire from="(440,1090)" to="(450,1090)"/>
-    <comp lib="1" loc="(480,1120)" name="NOT Gate">
+    <wire from="(200,840)" to="(660,840)"/>
+    <comp lib="2" loc="(720,670)" name="Multiplexer">
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(1030,220)" to="(1040,220)"/>
+    <wire from="(280,560)" to="(290,560)"/>
+    <wire from="(300,260)" to="(300,320)"/>
+    <wire from="(200,720)" to="(200,840)"/>
+    <comp lib="0" loc="(1030,340)" name="Tunnel">
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="MPUClk0"/>
+      <a name="facing" val="east"/>
+    </comp>
+    <wire from="(430,370)" to="(430,380)"/>
+    <wire from="(730,250)" to="(730,270)"/>
+    <wire from="(610,230)" to="(610,280)"/>
+    <wire from="(260,480)" to="(260,540)"/>
+    <comp lib="1" loc="(410,750)" name="NOT Gate">
       <a name="facing" val="north"/>
       <a name="size" val="20"/>
     </comp>
-    <wire from="(330,450)" to="(420,450)"/>
-    <wire from="(520,1060)" to="(690,1060)"/>
-    <wire from="(490,910)" to="(500,910)"/>
-    <wire from="(530,630)" to="(530,690)"/>
-    <comp lib="1" loc="(430,1120)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
+    <wire from="(450,720)" to="(450,740)"/>
+    <wire from="(370,590)" to="(370,600)"/>
+    <wire from="(430,790)" to="(480,790)"/>
+    <wire from="(420,80)" to="(420,140)"/>
+    <wire from="(410,510)" to="(600,510)"/>
+    <wire from="(460,660)" to="(460,720)"/>
+    <wire from="(340,370)" to="(340,390)"/>
+    <comp lib="4" loc="(370,720)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
     </comp>
-    <wire from="(670,880)" to="(670,1030)"/>
-    <wire from="(350,930)" to="(360,930)"/>
-    <wire from="(450,650)" to="(450,690)"/>
-    <comp lib="0" loc="(230,980)" name="Tunnel">
+    <wire from="(200,140)" to="(200,320)"/>
+    <comp lib="1" loc="(340,750)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(390,720)" to="(400,720)"/>
+    <comp lib="0" loc="(1030,250)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="label" val="Main1B"/>
+    </comp>
+    <wire from="(280,520)" to="(280,560)"/>
+    <wire from="(610,100)" to="(610,210)"/>
+    <wire from="(410,540)" to="(410,560)"/>
+    <wire from="(380,680)" to="(610,680)"/>
+    <comp lib="0" loc="(160,610)" name="Tunnel">
       <a name="label" val="RSTB"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="facing" val="east"/>
     </comp>
-    <wire from="(690,1050)" to="(690,1060)"/>
-    <wire from="(250,980)" to="(250,1160)"/>
-    <comp lib="4" loc="(510,1090)" name="D Flip-Flop">
+    <wire from="(520,300)" to="(520,320)"/>
+    <comp lib="1" loc="(430,350)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(680,220)" to="(880,220)"/>
+    <wire from="(340,500)" to="(610,500)"/>
+    <wire from="(340,160)" to="(360,160)"/>
+    <comp lib="2" loc="(760,320)" name="Multiplexer">
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(410,160)" to="(430,160)"/>
+    <wire from="(350,540)" to="(360,540)"/>
+    <wire from="(1030,370)" to="(1040,370)"/>
+    <wire from="(300,660)" to="(390,660)"/>
+    <wire from="(200,720)" to="(300,720)"/>
+    <wire from="(610,210)" to="(660,210)"/>
+    <wire from="(320,590)" to="(320,600)"/>
+    <wire from="(600,660)" to="(700,660)"/>
+    <wire from="(580,700)" to="(580,730)"/>
+    <wire from="(510,720)" to="(520,720)"/>
+    <comp lib="0" loc="(880,250)" name="Tunnel">
+      <a name="label" val="Main1B"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <wire from="(300,610)" to="(390,610)"/>
+    <comp lib="0" loc="(1030,190)" name="Clock"/>
+    <comp lib="4" loc="(330,540)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
-    <wire from="(370,560)" to="(370,580)"/>
-    <wire from="(680,600)" to="(730,600)"/>
-    <wire from="(730,1010)" to="(730,1210)"/>
-    <wire from="(660,490)" to="(660,680)"/>
-    <comp lib="1" loc="(550,720)" name="NOT Gate">
+    <wire from="(390,610)" to="(440,610)"/>
+    <wire from="(300,660)" to="(300,720)"/>
+    <wire from="(670,440)" to="(710,440)"/>
+    <wire from="(450,290)" to="(450,320)"/>
+    <wire from="(320,740)" to="(330,740)"/>
+    <wire from="(160,210)" to="(180,210)"/>
+    <wire from="(760,320)" to="(770,320)"/>
+    <wire from="(480,370)" to="(480,380)"/>
+    <comp lib="0" loc="(880,220)" name="Tunnel">
+      <a name="label" val="Main0B"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <wire from="(440,590)" to="(440,610)"/>
+    <wire from="(500,770)" to="(500,780)"/>
+    <wire from="(450,320)" to="(450,340)"/>
+    <wire from="(620,280)" to="(620,290)"/>
+    <wire from="(410,370)" to="(410,390)"/>
+    <wire from="(400,540)" to="(410,540)"/>
+    <wire from="(260,80)" to="(350,80)"/>
+    <comp lib="0" loc="(80,60)" name="Tunnel">
+      <a name="label" val="RSTB"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <comp lib="1" loc="(360,750)" name="NOT Gate">
       <a name="size" val="20"/>
       <a name="facing" val="north"/>
     </comp>
-    <wire from="(690,1050)" to="(770,1050)"/>
-    <wire from="(870,710)" to="(1030,710)"/>
-    <wire from="(410,470)" to="(680,470)"/>
-    <wire from="(910,740)" to="(1030,740)"/>
-    <wire from="(520,660)" to="(520,690)"/>
-    <wire from="(520,1090)" to="(520,1110)"/>
-    <wire from="(530,1090)" to="(540,1090)"/>
-    <wire from="(410,510)" to="(410,530)"/>
-    <wire from="(390,670)" to="(590,670)"/>
-    <comp lib="4" loc="(440,690)" name="D Flip-Flop">
+    <wire from="(370,190)" to="(370,210)"/>
+    <wire from="(180,610)" to="(180,790)"/>
+    <wire from="(380,280)" to="(380,320)"/>
+    <wire from="(450,290)" to="(620,290)"/>
+    <wire from="(410,140)" to="(410,160)"/>
+    <comp lib="2" loc="(680,220)" name="Multiplexer">
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(590,710)" to="(740,710)"/>
+    <wire from="(460,190)" to="(460,210)"/>
+    <wire from="(820,370)" to="(880,370)"/>
+    <wire from="(460,320)" to="(470,320)"/>
+    <wire from="(670,620)" to="(800,620)"/>
+    <wire from="(610,500)" to="(610,610)"/>
+    <wire from="(320,700)" to="(320,740)"/>
+    <wire from="(340,500)" to="(340,540)"/>
+    <wire from="(430,770)" to="(430,790)"/>
+    <wire from="(450,690)" to="(620,690)"/>
+    <wire from="(360,790)" to="(430,790)"/>
+    <comp lib="4" loc="(330,140)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
-    <comp lib="1" loc="(460,940)" name="NOT Gate">
-      <a name="facing" val="north"/>
-      <a name="size" val="20"/>
-    </comp>
-    <wire from="(480,480)" to="(670,480)"/>
-    <wire from="(480,760)" to="(570,760)"/>
-    <wire from="(790,1040)" to="(910,1040)"/>
-    <wire from="(520,660)" to="(690,660)"/>
-    <wire from="(830,690)" to="(840,690)"/>
-    <comp lib="1" loc="(530,540)" name="NOT Gate">
-      <a name="size" val="20"/>
-      <a name="facing" val="north"/>
-    </comp>
-    <wire from="(950,770)" to="(1030,770)"/>
-    <wire from="(350,530)" to="(360,530)"/>
-    <wire from="(460,690)" to="(470,690)"/>
-    <wire from="(660,890)" to="(660,1080)"/>
-    <wire from="(270,510)" to="(270,690)"/>
-    <wire from="(370,960)" to="(370,980)"/>
-    <wire from="(830,1090)" to="(950,1090)"/>
-    <wire from="(230,580)" to="(250,580)"/>
-    <wire from="(650,1100)" to="(810,1100)"/>
-    <wire from="(530,560)" to="(530,580)"/>
-    <wire from="(570,740)" to="(570,760)"/>
-    <wire from="(660,680)" to="(810,680)"/>
-    <comp lib="0" loc="(110,310)" name="Pin">
+    <comp lib="4" loc="(400,540)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
-    <comp lib="1" loc="(500,1120)" name="NOT Gate">
+    <wire from="(480,120)" to="(480,140)"/>
+    <wire from="(720,670)" to="(820,670)"/>
+    <wire from="(450,340)" to="(470,340)"/>
+    <wire from="(400,140)" to="(410,140)"/>
+    <wire from="(180,390)" to="(340,390)"/>
+    <wire from="(800,340)" to="(880,340)"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <wire from="(320,340)" to="(330,340)"/>
+    <comp lib="2" loc="(760,720)" name="Multiplexer">
       <a name="size" val="20"/>
-      <a name="facing" val="north"/>
     </comp>
-    <wire from="(470,510)" to="(480,510)"/>
-    <comp lib="2" loc="(830,690)" name="Multiplexer">
-      <a name="size" val="20"/>
+    <wire from="(410,390)" to="(500,390)"/>
+    <wire from="(750,740)" to="(750,840)"/>
+    <wire from="(440,720)" to="(450,720)"/>
+    <comp lib="0" loc="(1030,220)" name="Tunnel">
+      <a name="labelfont" val="SansSerif bold 10"/>
+      <a name="facing" val="east"/>
+      <a name="label" val="Main0B"/>
     </comp>
-    <comp lib="4" loc="(580,690)" name="D Flip-Flop">
+    <comp lib="4" loc="(440,720)" name="D Flip-Flop">
       <a name="appearance" val="classic"/>
     </comp>
-    <wire from="(330,510)" to="(360,510)"/>
-    <wire from="(270,810)" to="(740,810)"/>
-    <wire from="(390,710)" to="(400,710)"/>
-    <comp lib="1" loc="(440,540)" name="NOT Gate">
+    <comp lib="1" loc="(410,350)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <comp lib="1" loc="(390,170)" name="NOT Gate">
       <a name="facing" val="north"/>
       <a name="size" val="20"/>
     </comp>
-    <wire from="(370,980)" to="(460,980)"/>
-    <wire from="(440,690)" to="(450,690)"/>
+    <wire from="(390,190)" to="(390,200)"/>
+    <wire from="(390,260)" to="(460,260)"/>
+    <comp lib="1" loc="(480,750)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(760,720)" to="(840,720)"/>
+    <wire from="(610,630)" to="(650,630)"/>
+    <wire from="(600,110)" to="(600,260)"/>
+    <wire from="(620,680)" to="(620,690)"/>
+    <wire from="(450,740)" to="(470,740)"/>
+    <wire from="(360,370)" to="(360,380)"/>
+    <wire from="(420,540)" to="(430,540)"/>
+    <comp lib="2" loc="(670,620)" name="Multiplexer">
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(280,120)" to="(280,160)"/>
+    <wire from="(370,320)" to="(380,320)"/>
+    <wire from="(610,630)" to="(610,680)"/>
+    <wire from="(620,280)" to="(700,280)"/>
+    <wire from="(220,200)" to="(220,380)"/>
+    <wire from="(440,320)" to="(450,320)"/>
+    <wire from="(580,300)" to="(580,330)"/>
+    <wire from="(320,300)" to="(320,340)"/>
+    <comp lib="1" loc="(370,570)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(340,540)" to="(340,560)"/>
+    <wire from="(200,320)" to="(200,440)"/>
+    <comp lib="1" loc="(460,570)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(840,400)" to="(880,400)"/>
+    <comp lib="1" loc="(500,350)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(350,80)" to="(420,80)"/>
+    <wire from="(380,720)" to="(380,740)"/>
+    <wire from="(420,480)" to="(420,540)"/>
+    <wire from="(160,610)" to="(180,610)"/>
+    <wire from="(390,660)" to="(460,660)"/>
+    <wire from="(1030,250)" to="(1040,250)"/>
+    <wire from="(200,440)" to="(670,440)"/>
+    <wire from="(820,370)" to="(820,670)"/>
+    <wire from="(470,140)" to="(480,140)"/>
+    <comp lib="1" loc="(320,170)" name="NOT Gate">
+      <a name="size" val="20"/>
+      <a name="facing" val="north"/>
+    </comp>
+    <wire from="(720,270)" to="(730,270)"/>
+    <wire from="(710,840)" to="(750,840)"/>
+    <wire from="(580,330)" to="(740,330)"/>
+    <wire from="(260,140)" to="(260,480)"/>
+    <comp lib="1" loc="(300,170)" name="NOT Gate">
+      <a name="facing" val="north"/>
+      <a name="size" val="20"/>
+    </comp>
+    <wire from="(840,400)" to="(840,720)"/>
+    <wire from="(610,230)" to="(660,230)"/>
+    <wire from="(1030,280)" to="(1040,280)"/>
+    <wire from="(450,690)" to="(450,720)"/>
+    <wire from="(200,140)" to="(220,140)"/>
+    <wire from="(350,480)" to="(420,480)"/>
+    <wire from="(220,780)" to="(340,780)"/>
+    <wire from="(730,250)" to="(880,250)"/>
+    <comp lib="0" loc="(80,130)" name="Clock"/>
+    <comp lib="0" loc="(160,480)" name="Constant"/>
+    <wire from="(330,540)" to="(340,540)"/>
+    <comp lib="4" loc="(370,320)" name="D Flip-Flop">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(670,240)" to="(670,440)"/>
+    <comp lib="1" loc="(250,140)" name="NOT Gate"/>
+    <wire from="(520,300)" to="(580,300)"/>
+    <comp lib="0" loc="(880,400)" name="Tunnel">
+      <a name="label" val="MPUClk2"/>
+      <a name="labelfont" val="SansSerif bold 10"/>
+    </comp>
+    <wire from="(180,210)" to="(180,390)"/>
+    <wire from="(510,320)" to="(520,320)"/>
+    <wire from="(520,700)" to="(580,700)"/>
+    <comp lib="0" loc="(60,60)" name="Pin">
+      <a name="appearance" val="classic"/>
+    </comp>
+    <wire from="(180,610)" to="(300,610)"/>
+    <wire from="(300,590)" to="(300,610)"/>
   </circuit>
 </project>

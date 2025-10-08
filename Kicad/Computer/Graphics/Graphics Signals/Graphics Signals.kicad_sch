@@ -2454,24 +2454,6 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 25.4 -5.08 180)
-					(length 5.08)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "74LVC1G04GV,125_0_1"
 				(polyline
@@ -2542,6 +2524,27 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+			)
+			(symbol "74LVC1G04GV,125_1_0"
+				(pin no_connect line
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -4429,6 +4432,16 @@
 	)
 	(wire
 		(pts
+			(xy 208.28 74.93) (xy 212.09 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7e893261-8a41-4b86-8c5e-28d645e98389")
+	)
+	(wire
+		(pts
 			(xy 16.51 149.86) (xy 17.78 149.86)
 		)
 		(stroke
@@ -4898,7 +4911,7 @@
 		(uuid "4633c57e-87fe-400e-9ce3-2f1a514c9c79")
 	)
 	(label "CLK3"
-		(at 212.09 74.93 180)
+		(at 208.28 74.93 180)
 		(effects
 			(font
 				(size 1.27 1.27)

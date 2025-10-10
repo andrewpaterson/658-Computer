@@ -9841,7 +9841,7 @@
 				(pin input clock
 					(at -5.08 0 0)
 					(length 5.08)
-					(name "CLK_{M}"
+					(name "Main_CLK"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10262,7 +10262,7 @@
 				(pin output inverted
 					(at 35.56 -30.48 180)
 					(length 5.08)
-					(name "~{RD}_{M}"
+					(name "~{Main_RD}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -10280,7 +10280,7 @@
 				(pin output inverted
 					(at 35.56 -33.02 180)
 					(length 5.08)
-					(name "~{WD}_{M}"
+					(name "~{Main_WD}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -17352,16 +17352,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 323.85) (xy 90.17 323.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3338b2db-3348-4484-86e3-d2befa3f4c87")
-	)
-	(wire
-		(pts
 			(xy 210.82 351.79) (xy 251.46 351.79)
 		)
 		(stroke
@@ -18208,6 +18198,16 @@
 		)
 		(uuid "4fe9034b-2659-4ff0-82ed-937a665d3387")
 	)
+	(wire
+		(pts
+			(xy 66.04 303.53) (xy 67.31 303.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "504f276a-8e7e-46e5-ac0e-af4bdcd80f94")
+	)
 	(bus
 		(pts
 			(xy 480.06 288.29) (xy 480.06 285.75)
@@ -18960,16 +18960,6 @@
 			(color 255 172 41 1)
 		)
 		(uuid "6a569725-28d5-4703-a49f-3bb53c710e84")
-	)
-	(wire
-		(pts
-			(xy 91.44 326.39) (xy 90.17 326.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6b824bae-4bf5-4ec7-888c-d689ac90b9d4")
 	)
 	(wire
 		(pts
@@ -21816,16 +21806,6 @@
 		)
 		(uuid "cad8bf10-4fec-4f93-831d-8cb7c80201a2")
 	)
-	(wire
-		(pts
-			(xy 91.44 321.31) (xy 90.17 321.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cbc6f6e8-0b31-4d1d-863d-a91030fcc44c")
-	)
 	(bus
 		(pts
 			(xy 487.68 97.79) (xy 487.68 100.33)
@@ -24405,7 +24385,7 @@
 		)
 		(uuid "2dc5587d-d3ff-407e-80f4-fd40c0bda631")
 	)
-	(label "M~{WD}"
+	(label "~{Main WD}"
 		(at 191.77 288.29 0)
 		(effects
 			(font
@@ -25505,7 +25485,7 @@
 		)
 		(uuid "637cec0d-fafd-49a4-a3e4-7a0f1377586b")
 	)
-	(label "~{Enable Device}"
+	(label "~{Device Enable}"
 		(at 191.77 59.69 0)
 		(effects
 			(font
@@ -27805,7 +27785,7 @@
 		)
 		(uuid "cb85d51f-5ef5-4750-a774-ba21a6fced1a")
 	)
-	(label "M~{RD}"
+	(label "~{Main RD}"
 		(at 191.77 285.75 0)
 		(effects
 			(font
@@ -29247,7 +29227,7 @@
 			)
 		)
 	)
-	(global_label "M~{WD}"
+	(global_label "~{Main WD}"
 		(shape output)
 		(at 66.04 354.33 180)
 		(fields_autoplaced yes)
@@ -29303,27 +29283,6 @@
 		(uuid "414adad6-de53-4de6-9b21-5f45dafcc76e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 96.6652 372.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "HD1"
-		(shape output)
-		(at 91.44 323.85 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "455d3a87-629b-4f78-98bc-a1375e8058a7")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.762 323.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29596,7 +29555,7 @@
 			)
 		)
 	)
-	(global_label "M~{RD}"
+	(global_label "~{Main RD}"
 		(shape output)
 		(at 66.04 351.79 180)
 		(fields_autoplaced yes)
@@ -30073,27 +30032,6 @@
 			)
 		)
 	)
-	(global_label "HD2"
-		(shape output)
-		(at 91.44 321.31 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a85049de-1b35-488f-9baf-51be7a39aab8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.762 321.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "AM18"
 		(shape output)
 		(at 91.44 341.63 0)
@@ -30115,9 +30053,9 @@
 			)
 		)
 	)
-	(global_label "~{Enable Device}"
-		(shape input)
-		(at 67.31 303.53 180)
+	(global_label "~{Device Enable}"
+		(shape output)
+		(at 66.04 303.53 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -30127,7 +30065,7 @@
 		)
 		(uuid "b1e024ac-e9cb-45c6-8aec-e402a6a10641")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 50.8992 303.53 0)
+			(at 49.6292 303.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30246,7 +30184,7 @@
 			)
 		)
 	)
-	(global_label "~{Memory_B}"
+	(global_label "~{Memory B}"
 		(shape input)
 		(at 67.31 323.85 180)
 		(fields_autoplaced yes)
@@ -30334,7 +30272,7 @@
 			)
 		)
 	)
-	(global_label "~{Memory_A}"
+	(global_label "~{Memory A}"
 		(shape input)
 		(at 67.31 321.31 180)
 		(fields_autoplaced yes)
@@ -30551,6 +30489,28 @@
 			)
 		)
 	)
+	(global_label "HD0"
+		(shape tri_state)
+		(at 90.17 326.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e75be54b-0519-4967-983d-572c22bbf8c3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 98.0765 326.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "AD15"
 		(shape input)
 		(at 90.17 295.91 0)
@@ -30564,6 +30524,28 @@
 		(uuid "e77f6a40-b46b-441b-b6f8-d5ea195f754e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 97.7296 295.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "HD2"
+		(shape tri_state)
+		(at 90.17 321.31 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e9b340a7-f691-4463-803d-b7a00665bb35")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 98.0765 321.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -30633,6 +30615,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "HD1"
+		(shape tri_state)
+		(at 90.17 323.85 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ef86bf8e-62f0-416d-bb1d-abef87d8c0a6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 98.0765 323.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -30763,27 +30767,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "HD0"
-		(shape output)
-		(at 91.44 326.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f86c67b1-78c7-4391-87e6-15d7f6919a01")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 96.762 326.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)

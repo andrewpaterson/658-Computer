@@ -27766,6 +27766,16 @@
 		)
 		(uuid "074d68ed-9e8d-492a-bfa8-cf41e1728343")
 	)
+	(wire
+		(pts
+			(xy 35.56 264.16) (xy 36.83 264.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "078c968f-5400-448e-bf6f-8d059d5a7881")
+	)
 	(bus
 		(pts
 			(xy 633.73 342.9) (xy 631.19 342.9)
@@ -42225,7 +42235,7 @@
 		)
 		(uuid "2a8cb58a-eff2-4bca-bb76-187b7479dce9")
 	)
-	(label "M~{RD}"
+	(label "~{Main RD}"
 		(at 802.64 314.96 180)
 		(effects
 			(font
@@ -43545,7 +43555,7 @@
 		)
 		(uuid "4afc1172-e46b-4d5d-bd67-206d6bafe82d")
 	)
-	(label "M~{WD}"
+	(label "~{Main WD}"
 		(at 802.64 312.42 180)
 		(effects
 			(font
@@ -44365,7 +44375,7 @@
 		)
 		(uuid "63efac2a-3d9a-475e-beaf-26e49bc7f1a4")
 	)
-	(label "~{Enable Device}"
+	(label "~{Device Enable}"
 		(at 405.13 227.33 0)
 		(effects
 			(font
@@ -44375,7 +44385,7 @@
 		)
 		(uuid "63fc4ad0-e3de-4c01-adb4-de8c9b29b707")
 	)
-	(label "~{Enable Device}"
+	(label "~{Device Enable}"
 		(at 284.48 198.12 0)
 		(effects
 			(font
@@ -50190,6 +50200,28 @@
 			)
 		)
 	)
+	(global_label "AM23"
+		(shape input)
+		(at 59.69 289.56 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4e504e48-b8a4-40b2-b964-538f178b7a96")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 67.6342 289.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "HD0"
 		(shape tri_state)
 		(at 59.69 287.02 0)
@@ -50410,7 +50442,7 @@
 			)
 		)
 	)
-	(global_label "M~{WD}"
+	(global_label "~{Main WD}"
 		(shape input)
 		(at 36.83 314.96 180)
 		(fields_autoplaced yes)
@@ -50467,6 +50499,28 @@
 		(uuid "765c93ac-84c2-413d-9f6a-562761dbaf1f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 29.8534 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Main CLK"
+		(shape input)
+		(at 36.83 215.9 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "769c3ca0-c92a-44b7-90d8-3b4644f090a4")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 24.9549 215.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50533,6 +50587,50 @@
 		(uuid "7cdba394-6a83-46ff-9d1b-afb063c30ac1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 30.1785 210.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AM22"
+		(shape input)
+		(at 59.69 292.1 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7da74373-c500-44c4-9750-7479084a1a6d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 67.6342 292.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "~{Main}"
+		(shape input)
+		(at 36.83 231.14 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8584059e-6d50-4809-9b15-6b4a96421812")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 29.4906 231.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50630,7 +50728,7 @@
 			)
 		)
 	)
-	(global_label "M~{RD}"
+	(global_label "~{Main RD}"
 		(shape input)
 		(at 36.83 312.42 180)
 		(fields_autoplaced yes)
@@ -50819,6 +50917,28 @@
 		(uuid "aa4a1642-b5b1-43da-a25e-3d6013fadce5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 67.6342 320.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "AM21"
+		(shape input)
+		(at 59.69 294.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "adece50d-7620-4a1c-8165-0995a6332d54")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 67.6342 294.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51092,9 +51212,9 @@
 			)
 		)
 	)
-	(global_label "~{Enable Device}"
-		(shape input)
-		(at 36.83 264.16 180)
+	(global_label "~{Device Enable}"
+		(shape output)
+		(at 35.56 264.16 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -51104,7 +51224,7 @@
 		)
 		(uuid "d0ce3cc1-3741-4ed2-8db0-e3e33ea40666")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 20.4192 264.16 0)
+			(at 19.1492 264.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51176,6 +51296,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "~{Main Access}"
+		(shape input)
+		(at 36.83 236.22 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dd17e0b6-fd5b-4530-bbed-690fe93c2f4b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 22.1124 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)

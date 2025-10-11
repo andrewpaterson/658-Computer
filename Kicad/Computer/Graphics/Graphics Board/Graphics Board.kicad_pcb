@@ -482,14 +482,14 @@
 	(net 378 "unconnected-(B18-~{RD}+~{Device_RAM_3}-Pad18)")
 	(net 379 "12V")
 	(net 380 "unconnected-(B19-N.C.-Pad13)")
-	(net 381 "unconnected-(B19-N.C.-Pad27)")
+	(net 381 "unconnected-(B7-N.C.-Pad3)")
 	(net 382 "unconnected-(B19-~{MCLK}-Pad31)")
 	(net 383 "~{Main WD}")
 	(net 384 "~{Main RD}")
 	(net 385 "unconnected-(B19-N.C.-Pad9)")
 	(net 386 "unconnected-(B19-N.C.-Pad7)")
 	(net 387 "unconnected-(B19-N.C.-Pad26)")
-	(net 388 "unconnected-(B19-N.C.-Pad24)")
+	(net 388 "unconnected-(B7-N.C.-Pad2)")
 	(net 389 "unconnected-(B19-N.C.-Pad30)")
 	(net 390 "Main CLK")
 	(net 391 "unconnected-(B19-CLK3-Pad19)")
@@ -512,6 +512,8 @@
 	(net 408 "/SourceA+O17")
 	(net 409 "Net-(B21-C0)")
 	(net 410 "unconnected-(B21-C7-Pad30)")
+	(net 411 "unconnected-(B19-N.C.-Pad25)")
+	(net 412 "unconnected-(B19-~{Read}-Pad10)")
 	(footprint "HCP65_Parts:HCP65_MountingHole_M3_"
 		(layer "F.Cu")
 		(uuid "017bfb66-bc58-4316-848f-fc9d537bcd4a")
@@ -4419,12 +4421,12 @@
 			)
 		)
 	)
-	(footprint "HCP65_Parts:HCP65_Main_Memory_Data"
+	(footprint "HCP65_Parts:HCP65_Graphics_Main_Data"
 		(layer "F.Cu")
 		(uuid "30ee0b49-23a9-4a4a-baf3-0e4851a9e2bb")
 		(at 127 -27.94 -90)
-		(descr "HCP65 Main Memory Data")
-		(tags "HCP65 Main Memory Data")
+		(descr "HCP65 Graphics Main Data")
+		(tags "HCP65 Graphics Main Data")
 		(property "Reference" "B7"
 			(at 7.62 -0.762 270)
 			(layer "F.SilkS")
@@ -4436,7 +4438,7 @@
 				)
 			)
 		)
-		(property "Value" "Main Memory Data"
+		(property "Value" "Graphics Main Data"
 			(at 7.366 43.434 270)
 			(layer "F.Fab")
 			(hide yes)
@@ -4461,7 +4463,7 @@
 				)
 			)
 		)
-		(property "Description" "Main Memory Data"
+		(property "Description" "Graphics Main Data"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4474,7 +4476,7 @@
 				)
 			)
 		)
-		(property "Silkscreen" "Main Memory Data"
+		(property "Silkscreen" "Graphics Main Data"
 			(at 6.985 41.656 270)
 			(layer "F.SilkS")
 			(uuid "0ed297a5-a0db-496b-8aeb-269f444d0365")
@@ -4497,7 +4499,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "cea9dff7-4735-4c4e-8c9a-073b51046000")
+			(uuid "e33c026b-9b2e-4d3a-9fde-85f6d14b013d")
 		)
 		(fp_line
 			(start -1.778 38.1)
@@ -4507,7 +4509,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "34ff5d9b-38e8-41a7-8165-6b35da0546ba")
+			(uuid "402f24b6-c793-403d-8b32-976433f5e012")
 		)
 		(fp_line
 			(start 17.018 38.1)
@@ -4517,7 +4519,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4f9d20c4-4bf9-4e87-ac85-294833b7048d")
+			(uuid "6584e44b-dbc5-4df3-8884-94c111c274e8")
 		)
 		(fp_line
 			(start 6.62 -2.524)
@@ -4527,7 +4529,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "59d2c5a7-2e2d-4b37-8179-0726e2901ed0")
+			(uuid "2107ab8a-6d59-4609-895c-f1f0b85222f3")
 		)
 		(fp_line
 			(start 14.986 -2.524)
@@ -4537,7 +4539,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "2d91a935-8660-432b-a9e7-c8809188229e")
+			(uuid "2e2d057e-7947-46a3-923d-b91697db5211")
 		)
 		(fp_line
 			(start 0.835732 -2.613732)
@@ -4547,7 +4549,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "d0d77f6b-8271-4b8f-90ec-f4cc8987daf1")
+			(uuid "0ce8aaed-75a1-4455-8a2e-a59a70c21d0c")
 		)
 		(fp_line
 			(start 8.615965 -2.613742)
@@ -4557,7 +4559,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "a9306876-c32a-4075-9844-5bdc02d85930")
+			(uuid "53837203-2418-471e-872e-4ee29ca6e5de")
 		)
 		(fp_arc
 			(start 0.835733 40.713733)
@@ -4568,7 +4570,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "88ee6586-efb4-45ab-92f7-0b9ddc9b8400")
+			(uuid "0240de53-580a-475b-9421-0c95b066089d")
 		)
 		(fp_arc
 			(start 17.018 38.1)
@@ -4579,7 +4581,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "4188e5df-1151-4ca7-9833-9ddfec8a2501")
+			(uuid "dc6f92a7-90e5-49b1-9543-287a73024c6c")
 		)
 		(fp_arc
 			(start -1.778 0)
@@ -4590,7 +4592,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "1de330bc-b95e-4583-9f24-65c35bc00dbf")
+			(uuid "a8893abb-662b-4ac4-877d-fa4c1fbedae8")
 		)
 		(fp_arc
 			(start 8.62 -2.524)
@@ -4601,7 +4603,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "39a2ea22-4744-4c06-bb17-b2af9e598439")
+			(uuid "f45271df-6079-402d-81da-cc17e5423d67")
 		)
 		(fp_arc
 			(start 14.404267 -2.613733)
@@ -4612,7 +4614,7 @@
 				(type solid)
 			)
 			(layer "F.SilkS")
-			(uuid "e1ab25ff-f967-4f13-9a12-1e639dd3980e")
+			(uuid "1e5fac88-f8aa-4db6-8076-b2d494d5e3e0")
 		)
 		(fp_circle
 			(center 0 -1.322605)
@@ -4623,7 +4625,7 @@
 			)
 			(fill yes)
 			(layer "F.SilkS")
-			(uuid "ce6a15e9-9ac5-4774-a5a6-6fb23ecd7462")
+			(uuid "590aec2d-ab62-4843-a2fa-3021cd89396e")
 		)
 		(fp_line
 			(start -2.032 41.021)
@@ -4633,7 +4635,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "24b4eee3-a91b-4513-bb4a-88262b9515c4")
+			(uuid "75653d7c-f68f-4571-91e3-d0885696f02e")
 		)
 		(fp_line
 			(start -2.032 -2.921)
@@ -4643,7 +4645,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "c2f0f4e5-e928-4cea-b93e-b1dfb5b5b925")
+			(uuid "25da1142-46bb-41bf-a212-b11b08d19ad0")
 		)
 		(fp_line
 			(start -2.032 -2.921)
@@ -4653,7 +4655,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "d73afccc-b1b2-4c62-9c5a-e677cbdee483")
+			(uuid "1e8c8e37-3207-42e7-ba29-b3071508b40e")
 		)
 		(fp_line
 			(start 17.272 -2.921)
@@ -4663,7 +4665,7 @@
 				(type solid)
 			)
 			(layer "F.CrtYd")
-			(uuid "bfff8eae-3f35-4e8b-8d62-46371b612392")
+			(uuid "5f523016-b64f-4c73-864a-22082a27301d")
 		)
 		(pad "1" thru_hole circle
 			(at 0 0 270)
@@ -4682,9 +4684,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 248 "~{Main Access}")
-			(pinfunction "~{Main_Access}")
-			(pintype "input")
+			(net 388 "unconnected-(B7-N.C.-Pad2)")
+			(pinfunction "N.C.")
+			(pintype "no_connect")
 			(uuid "c93e6286-c7d3-4fdc-956b-d512c49520da")
 		)
 		(pad "3" thru_hole circle
@@ -4693,9 +4695,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 247 "~{Main}")
-			(pinfunction "~{Main}")
-			(pintype "input")
+			(net 381 "unconnected-(B7-N.C.-Pad3)")
+			(pinfunction "N.C.")
+			(pintype "no_connect")
 			(uuid "394ad579-71c4-4e82-a819-a33be015911a")
 		)
 		(pad "4" thru_hole circle
@@ -4704,8 +4706,8 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 231 "/~{Read}")
-			(pinfunction "~{RD}")
+			(net 181 "/~{Main Read}")
+			(pinfunction "~{Main_Read}")
 			(pintype "input")
 			(uuid "ebc1acee-440c-470c-8558-5184bae08c5d")
 		)
@@ -4726,8 +4728,8 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 240 "/~{Write}")
-			(pinfunction "~{WD}")
+			(net 320 "/~{Main Write}")
+			(pinfunction "~{Main_Write}")
 			(pintype "input")
 			(uuid "7c54eb38-43c7-41d0-a2b7-19462d32eab9")
 		)
@@ -5018,7 +5020,7 @@
 			(uuid "845f3190-784a-4ca9-b362-94c48cf585e1")
 		)
 		(embedded_fonts no)
-		(model "${_658_COMPUTER_}/Kicad/Computer/Processor/HCP65 Main Memory Data/Main Memory Data.wrl"
+		(model "${_658_COMPUTER_}/Kicad/Computer/Graphics/Graphics Main Data/Graphics Main Data.wrl"
 			(offset
 				(xyz 0 0 3)
 			)
@@ -5026,7 +5028,7 @@
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -13198,7 +13200,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 390 "Main CLK")
-			(pinfunction "Main_CLK")
+			(pinfunction "CLK_{M}")
 			(pintype "input")
 			(uuid "6c970dc9-466e-43de-9b2c-035a313feb77")
 		)
@@ -13285,9 +13287,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 231 "/~{Read}")
+			(net 412 "unconnected-(B19-~{Read}-Pad10)")
 			(pinfunction "~{Read}")
-			(pintype "output")
+			(pintype "output+no_connect")
 			(uuid "c15fd09a-e10a-4d4a-8a40-a2b6611ad0c0")
 		)
 		(pad "11" thru_hole circle
@@ -13330,7 +13332,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 383 "~{Main WD}")
-			(pinfunction "~{Main_WD}")
+			(pinfunction "M~{WD}")
 			(pintype "output")
 			(uuid "b197e9e0-8745-4dc3-8aea-a1037fafda0f")
 		)
@@ -13374,7 +13376,7 @@
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(net 384 "~{Main RD}")
-			(pinfunction "~{Main_RD}")
+			(pinfunction "M~{RD}")
 			(pintype "output")
 			(uuid "fe2b7423-72a7-4498-8826-338b05d541fa")
 		)
@@ -13439,9 +13441,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 388 "unconnected-(B19-N.C.-Pad24)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 212 "/Counting")
+			(pinfunction "Counting")
+			(pintype "output")
 			(uuid "f5cc321b-5bbc-4c18-a8ab-f7aa3c0aa019")
 		)
 		(pad "25" thru_hole circle
@@ -13450,9 +13452,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 212 "/Counting")
-			(pinfunction "Counting")
-			(pintype "output")
+			(net 411 "unconnected-(B19-N.C.-Pad25)")
+			(pinfunction "N.C.")
+			(pintype "no_connect")
 			(uuid "55ec1eb6-9580-45f3-83f6-b46431a268f1")
 		)
 		(pad "26" thru_hole circle
@@ -13472,9 +13474,9 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 381 "unconnected-(B19-N.C.-Pad27)")
-			(pinfunction "N.C.")
-			(pintype "no_connect")
+			(net 247 "~{Main}")
+			(pinfunction "~{Main}")
+			(pintype "output")
 			(uuid "f8a0589d-426e-425d-bdb8-0bd636d7fdc1")
 		)
 		(pad "28" thru_hole circle

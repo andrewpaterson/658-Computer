@@ -1,7 +1,7 @@
 (footprint "HCP65_Memory_32KB_With_Latch"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Memory 32KB With Latch")
 	(tags "HCP65 Memory 32KB With Latch")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_Memory_32KB_With_Latch"
-		(at 7.366 54.61 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "c5d11893-5ddf-4208-895e-0a789a3a682a")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -91,7 +78,7 @@
 	)
 	(fp_line
 		(start 0.835732 -2.613732)
-		(end 14.404268 -2.613732)
+		(end 6.604 -2.613732)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -108,6 +95,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "92789d7e-39c2-4a74-8308-01ab33a9d006")
+	)
+	(fp_line
+		(start 8.636 -2.613732)
+		(end 14.404268 -2.613732)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "65aac891-7476-46a1-9b0c-3b3f83f580b2")
 	)
 	(fp_line
 		(start 14.404269 50.873733)
@@ -201,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "3b7c5498-9f37-4822-ab88-c229c1fd3384")
 	)
@@ -565,6 +562,7 @@
 		(remove_unused_layers no)
 		(uuid "806a6753-a03f-488e-b865-37a83c6d1730")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Component Boards/Memory 32KB with Output/Memory 32KB with Output.wrl"
 		(offset
 			(xyz 0 0 3)

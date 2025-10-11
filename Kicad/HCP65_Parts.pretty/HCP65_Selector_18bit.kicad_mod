@@ -1,7 +1,7 @@
 (footprint "HCP65_Selector_18bit"
-	(version 20240108)
+	(version 20241229)
 	(generator "pcbnew")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(layer "F.Cu")
 	(descr "HCP65 Selector 18bit")
 	(tags "HCP65 Selector 18bit")
@@ -21,19 +21,6 @@
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b5d08301-5718-4db3-b01e-6d171f438392")
-		(effects
-			(font
-				(size 0.635 0.635)
-				(thickness 0.15)
-			)
-		)
-	)
-	(property "Footprint" "HCP65_Selector_18bit"
-		(at 7.493 84.836 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "88588e6b-7710-4ef9-bbe8-15143f330df8")
 		(effects
 			(font
 				(size 0.635 0.635)
@@ -91,7 +78,7 @@
 	)
 	(fp_line
 		(start 0.832188 -2.613732)
-		(end 14.407812 -2.613732)
+		(end 6.604 -2.613732)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -108,6 +95,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "92789d7e-39c2-4a74-8308-01ab33a9d006")
+	)
+	(fp_line
+		(start 8.636 -2.613732)
+		(end 14.407812 -2.613732)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "27fa3085-e81e-4e41-aa83-4d0899e90835")
 	)
 	(fp_line
 		(start 14.404269 81.353733)
@@ -201,7 +198,7 @@
 			(width 0.12)
 			(type solid)
 		)
-		(fill solid)
+		(fill yes)
 		(layer "F.SilkS")
 		(uuid "0bbedaca-a296-43e0-a02e-f18339e93729")
 	)
@@ -757,6 +754,7 @@
 		(remove_unused_layers no)
 		(uuid "a6200dc1-13bb-45b4-8be3-75d756a73291")
 	)
+	(embedded_fonts no)
 	(model "${_658_COMPUTER_}/Kicad/Computer/Component Boards/Selector 18bit/Selector 18bit.wrl"
 		(offset
 			(xyz 0 0 3)

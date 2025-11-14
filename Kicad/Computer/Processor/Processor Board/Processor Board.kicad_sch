@@ -7709,7 +7709,7 @@
 				(pin input line
 					(at -5.08 -20.32 0)
 					(length 5.08)
-					(name "~{User_Program}"
+					(name "~{Process_ID}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -21980,7 +21980,7 @@
 		)
 		(uuid "2a073b1d-521c-421d-b6c6-bfe6a4bbd0a9")
 	)
-	(text "(UP ~{WD})"
+	(text "(PI ~{WD})"
 		(exclude_from_sim no)
 		(at 426.72 165.1 0)
 		(effects
@@ -22078,7 +22078,7 @@
 		)
 		(uuid "b80f114f-141d-493f-ba71-c23103b8c360")
 	)
-	(text "(UP ~{RD})"
+	(text "(PI ~{RD})"
 		(exclude_from_sim no)
 		(at 426.72 162.56 0)
 		(effects
@@ -22113,7 +22113,7 @@
 		)
 		(uuid "c58a8a87-cf51-46b8-853b-05b4b4275650")
 	)
-	(text "(UP ~{RAM_{CS}})"
+	(text "(PI ~{RAM_{CS}})"
 		(exclude_from_sim no)
 		(at 426.72 170.18 0)
 		(effects
@@ -22146,7 +22146,7 @@
 		)
 		(uuid "e5b74459-60e5-4f33-ad65-ba99307e903d")
 	)
-	(text "(UP ~{ROM_{CS}})"
+	(text "(PI ~{ROM_{CS}})"
 		(exclude_from_sim no)
 		(at 426.72 167.64 0)
 		(effects
@@ -22198,6 +22198,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5a31978-5a0d-427f-a6e2-39036de48dac")
+	)
+	(junction
+		(at 167.64 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cf96f550-b3ad-4922-b693-4f4b4c98a3e2")
 	)
 	(no_connect
 		(at 74.93 311.15)
@@ -23478,6 +23484,16 @@
 	)
 	(wire
 		(pts
+			(xy 167.64 43.18) (xy 177.8 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b32e40a-670e-4bc0-b174-1c02a74494de")
+	)
+	(wire
+		(pts
 			(xy 68.58 33.02) (xy 67.31 33.02)
 		)
 		(stroke
@@ -23607,6 +23623,16 @@
 	)
 	(wire
 		(pts
+			(xy 177.8 25.4) (xy 167.64 25.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "532c208d-eaf9-4dc8-bc37-a22a6547d665")
+	)
+	(wire
+		(pts
 			(xy 165.1 91.44) (xy 175.26 91.44)
 		)
 		(stroke
@@ -23689,6 +23715,16 @@
 			(color 103 205 0 1)
 		)
 		(uuid "5c7ff655-c68b-4e25-9a0d-49a24414358d")
+	)
+	(wire
+		(pts
+			(xy 167.64 25.4) (xy 167.64 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d3b50f9-d8b8-45cd-b3ce-7baed3b0e66a")
 	)
 	(wire
 		(pts
@@ -23955,6 +23991,16 @@
 			(type default)
 		)
 		(uuid "748eb411-8d0b-42af-b0ce-d39b247a4aa0")
+	)
+	(wire
+		(pts
+			(xy 157.48 38.1) (xy 167.64 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7556334c-b04a-4d85-bca2-eb90fe8b0481")
 	)
 	(bus
 		(pts
@@ -24345,6 +24391,16 @@
 			(type default)
 		)
 		(uuid "aee5145d-7ec5-495e-9a07-a7c8a129d0cc")
+	)
+	(wire
+		(pts
+			(xy 167.64 38.1) (xy 167.64 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af21f1fb-08c1-40d6-abbb-7f38089ea8f7")
 	)
 	(wire
 		(pts
@@ -24964,7 +25020,7 @@
 		(uuid "000eb905-f589-4c24-a01e-2201082495ed")
 	)
 	(label "GND"
-		(at 354.33 179.07 0)
+		(at 349.25 185.42 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -24984,7 +25040,7 @@
 		(uuid "008c5cee-01eb-4778-a462-0dba78daff47")
 	)
 	(label "A1"
-		(at 364.49 177.8 180)
+		(at 359.41 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25014,7 +25070,7 @@
 		(uuid "00dc1b9c-cf61-4e37-ae8e-5f9e44f47685")
 	)
 	(label "SA9"
-		(at 384.81 190.5 0)
+		(at 379.73 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25134,7 +25190,7 @@
 		(uuid "030ac28a-5e24-4775-ac5f-1b4a919b2f6e")
 	)
 	(label "S~{RAM_{CS}}"
-		(at 419.1 203.2 0)
+		(at 414.02 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25443,7 +25499,7 @@
 		)
 		(uuid "09d1f797-0ebe-4c16-b069-b2b73815962f")
 	)
-	(label "UP6"
+	(label "PI6"
 		(at 394.97 38.1 0)
 		(effects
 			(font
@@ -25543,7 +25599,7 @@
 		)
 		(uuid "0c5399de-5584-4c52-8f54-ca1f051e16ab")
 	)
-	(label "UP0"
+	(label "PI0"
 		(at 431.8 83.82 180)
 		(effects
 			(font
@@ -25644,7 +25700,7 @@
 		(uuid "0e2f88d1-b37b-47f7-804d-1c71c92bd7d5")
 	)
 	(label "A17"
-		(at 394.97 203.2 180)
+		(at 389.89 209.55 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25734,7 +25790,7 @@
 		(uuid "1162aa8a-6e48-477e-beda-1a43f32e5ba4")
 	)
 	(label "A3"
-		(at 364.49 190.5 180)
+		(at 359.41 196.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25854,7 +25910,7 @@
 		(uuid "155faeac-8284-4635-88d7-59a01c66a6b8")
 	)
 	(label "A10"
-		(at 379.73 196.85 180)
+		(at 374.65 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25864,7 +25920,7 @@
 		(uuid "161918ab-f4e4-4616-b2a6-dc6a59d117b2")
 	)
 	(label "A14"
-		(at 394.97 184.15 180)
+		(at 389.89 190.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -25884,7 +25940,7 @@
 		(uuid "16f4a6b6-0ffb-4c28-87b2-94fdc7b363a0")
 	)
 	(label "SA4"
-		(at 369.57 196.85 0)
+		(at 364.49 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26114,7 +26170,7 @@
 		(uuid "1c500a27-4cab-4f7d-a057-bddb8e017b27")
 	)
 	(label "A15"
-		(at 394.97 190.5 180)
+		(at 389.89 196.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26233,7 +26289,7 @@
 		)
 		(uuid "229fa7a6-4bc4-45f5-913f-bfe0529a72e4")
 	)
-	(label "UP6"
+	(label "PI6"
 		(at 430.53 147.32 180)
 		(effects
 			(font
@@ -26243,7 +26299,7 @@
 		)
 		(uuid "22a17789-7eb8-48ce-88d7-127cb7889e6f")
 	)
-	(label "UP7"
+	(label "PI7"
 		(at 394.97 35.56 0)
 		(effects
 			(font
@@ -26583,7 +26639,7 @@
 		)
 		(uuid "2d28e044-3839-49cd-9c97-2ff9ade07660")
 	)
-	(label "UP3"
+	(label "PI3"
 		(at 394.97 45.72 0)
 		(effects
 			(font
@@ -26654,7 +26710,7 @@
 		(uuid "2f590f60-a37c-4fce-8ba7-ea2d0bb862ce")
 	)
 	(label "SA6"
-		(at 384.81 171.45 0)
+		(at 379.73 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26674,7 +26730,7 @@
 		(uuid "2fca36b2-dc2d-424b-be90-3c3678640806")
 	)
 	(label "A2"
-		(at 364.49 184.15 180)
+		(at 359.41 190.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26734,7 +26790,7 @@
 		(uuid "31499d22-b550-466e-a557-b877328d67f9")
 	)
 	(label "SA12"
-		(at 400.05 171.45 0)
+		(at 394.97 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26764,7 +26820,7 @@
 		(uuid "31b224dd-fbf7-4eac-8d0b-e980551da841")
 	)
 	(label "A9"
-		(at 379.73 190.5 180)
+		(at 374.65 196.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26774,7 +26830,7 @@
 		(uuid "31ca5317-d519-4785-8fe9-53cb160a87c4")
 	)
 	(label "S~{ROM_{CS}}"
-		(at 419.1 196.85 0)
+		(at 414.02 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26944,7 +27000,7 @@
 		(uuid "377b97da-9570-4a33-b0b1-21717bcc8da6")
 	)
 	(label "A8"
-		(at 379.73 184.15 180)
+		(at 374.65 190.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26973,7 +27029,7 @@
 		)
 		(uuid "39369acd-1eca-4454-bd11-101aafaf94aa")
 	)
-	(label "UP1"
+	(label "PI1"
 		(at 431.8 86.36 180)
 		(effects
 			(font
@@ -27124,7 +27180,7 @@
 		(uuid "3d9f73f1-da27-436b-8f77-9ee40f7f7b12")
 	)
 	(label "RTI"
-		(at 349.25 171.45 180)
+		(at 344.17 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27264,7 +27320,7 @@
 		(uuid "40b5f94a-10f1-4937-88cb-c95deca62146")
 	)
 	(label "SA15"
-		(at 400.05 190.5 0)
+		(at 394.97 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27304,7 +27360,7 @@
 		(uuid "41b3f820-9bb1-44d6-bd5d-bfc2f3b3e4eb")
 	)
 	(label "~{RAM}"
-		(at 414.02 203.2 180)
+		(at 408.94 209.55 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27314,7 +27370,7 @@
 		(uuid "422ddf75-a960-4867-bd52-cf6c89d8a3af")
 	)
 	(label "SA18"
-		(at 419.1 179.07 0)
+		(at 414.02 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -27613,7 +27669,7 @@
 		)
 		(uuid "49480dc8-2c9a-40c1-aae6-df5072fa9ac4")
 	)
-	(label "UP4"
+	(label "PI4"
 		(at 394.97 43.18 0)
 		(effects
 			(font
@@ -27974,7 +28030,7 @@
 		(uuid "549c0b2a-ac0b-4b6a-92fe-3039501ada17")
 	)
 	(label "SA16"
-		(at 400.05 196.85 0)
+		(at 394.97 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28074,7 +28130,7 @@
 		(uuid "582f1fe6-2300-410c-ad25-1639a2ef540a")
 	)
 	(label "~{WD}"
-		(at 414.02 190.5 180)
+		(at 408.94 196.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28144,7 +28200,7 @@
 		(uuid "5b9df663-e219-47f0-b222-c62311e1b74c")
 	)
 	(label "A13"
-		(at 394.97 177.8 180)
+		(at 389.89 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28374,7 +28430,7 @@
 		(uuid "65614b64-cac4-4cb3-86b5-36535b1f0146")
 	)
 	(label "SA2"
-		(at 369.57 184.15 0)
+		(at 364.49 190.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28704,7 +28760,7 @@
 		(uuid "7042305f-406e-423a-b5d5-24ceaceac47c")
 	)
 	(label "A0"
-		(at 364.49 171.45 180)
+		(at 359.41 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28744,7 +28800,7 @@
 		(uuid "71471974-1f0e-4f29-8532-53976b484863")
 	)
 	(label "SA10"
-		(at 384.81 196.85 0)
+		(at 379.73 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28894,7 +28950,7 @@
 		(uuid "79356c19-1b86-41d3-b2a1-b3b979ab55d5")
 	)
 	(label "SA5"
-		(at 369.57 203.2 0)
+		(at 364.49 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28904,7 +28960,7 @@
 		(uuid "79a3c3e5-5582-4552-a607-440aa5e6ded2")
 	)
 	(label "A4"
-		(at 364.49 196.85 180)
+		(at 359.41 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -28994,7 +29050,7 @@
 		(uuid "7c9c22c8-412f-461b-87bf-7d83c1269834")
 	)
 	(label "SA1"
-		(at 369.57 177.8 0)
+		(at 364.49 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29203,7 +29259,7 @@
 		)
 		(uuid "821dd32f-19f6-4083-b52f-395c5bf37306")
 	)
-	(label "UP3"
+	(label "PI3"
 		(at 431.8 91.44 180)
 		(effects
 			(font
@@ -29323,7 +29379,7 @@
 		)
 		(uuid "85d9cead-b338-4ec0-b777-93fade99d478")
 	)
-	(label "UP5"
+	(label "PI5"
 		(at 394.97 40.64 0)
 		(effects
 			(font
@@ -29364,7 +29420,7 @@
 		(uuid "86413d9d-6376-4b37-b735-068141c1d796")
 	)
 	(label "A12"
-		(at 394.97 171.45 180)
+		(at 389.89 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29423,7 +29479,7 @@
 		)
 		(uuid "87b2a553-bfe8-4ae2-a1ad-b448413a014c")
 	)
-	(label "UP2"
+	(label "PI2"
 		(at 431.8 88.9 180)
 		(effects
 			(font
@@ -29844,7 +29900,7 @@
 		(uuid "92f05ed8-2195-4c8b-900e-f82967d5288f")
 	)
 	(label "A5"
-		(at 364.49 203.2 180)
+		(at 359.41 209.55 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30244,7 +30300,7 @@
 		(uuid "9e94e8d8-aa20-4474-8519-630ae4a81d2b")
 	)
 	(label "A16"
-		(at 394.97 196.85 180)
+		(at 389.89 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30534,7 +30590,7 @@
 		(uuid "a90d8ca0-75be-444c-a73f-e21dcb91358c")
 	)
 	(label "A6"
-		(at 379.73 171.45 180)
+		(at 374.65 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30564,7 +30620,7 @@
 		(uuid "a9848400-278b-41c5-8cff-87642baee102")
 	)
 	(label "Enter Interrupt"
-		(at 349.25 186.69 180)
+		(at 344.17 193.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30583,7 +30639,7 @@
 		)
 		(uuid "aa799957-2f63-4a29-8eca-1ab4090712ed")
 	)
-	(label "UP[0..7]"
+	(label "PI[0..7]"
 		(at 411.48 77.47 180)
 		(effects
 			(font
@@ -30654,7 +30710,7 @@
 		(uuid "ad0a0759-ab22-442f-b042-2a875ff6ad9c")
 	)
 	(label "S~{WD}"
-		(at 419.1 190.5 0)
+		(at 414.02 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -30663,7 +30719,7 @@
 		)
 		(uuid "ad2533f1-9732-47c6-af8f-4cdc0f67aad1")
 	)
-	(label "UP0"
+	(label "PI0"
 		(at 394.97 53.34 0)
 		(effects
 			(font
@@ -30683,7 +30739,7 @@
 		)
 		(uuid "ad4a226a-ad2e-4a7c-9b69-66b8db7a99b6")
 	)
-	(label "~{User Process}"
+	(label "~{Process ID}"
 		(at 294.64 144.78 0)
 		(effects
 			(font
@@ -30733,7 +30789,7 @@
 		)
 		(uuid "b00b6580-c263-49cb-80c3-275b7f400989")
 	)
-	(label "UP7"
+	(label "PI7"
 		(at 430.53 149.86 180)
 		(effects
 			(font
@@ -30813,7 +30869,7 @@
 		)
 		(uuid "b1adc7dd-e152-411e-b458-fc87bf731f7d")
 	)
-	(label "UP5"
+	(label "PI5"
 		(at 430.53 144.78 180)
 		(effects
 			(font
@@ -30994,7 +31050,7 @@
 		(uuid "b783e3fb-b617-4e17-a283-5f49d8ecb499")
 	)
 	(label "SA17"
-		(at 400.05 203.2 0)
+		(at 394.97 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -31014,7 +31070,7 @@
 		(uuid "b7a78bd9-9cda-433c-8d26-df76daa4209f")
 	)
 	(label "A11"
-		(at 379.73 203.2 180)
+		(at 374.65 209.55 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -31024,7 +31080,7 @@
 		(uuid "b7d04fb3-0980-4caf-a983-6bbc8d3264dd")
 	)
 	(label "SA7"
-		(at 384.81 177.8 0)
+		(at 379.73 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -31084,7 +31140,7 @@
 		(uuid "b95aa664-0573-4dae-bbd9-b8f3fbfeab39")
 	)
 	(label "SA3"
-		(at 369.57 190.5 0)
+		(at 364.49 196.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -31224,7 +31280,7 @@
 		(uuid "c07484de-f131-4cda-b178-b8bc5f775828")
 	)
 	(label "GND"
-		(at 354.33 171.45 0)
+		(at 349.25 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -31623,7 +31679,7 @@
 		)
 		(uuid "cf1dea75-d216-4169-8662-92e37c2cc42c")
 	)
-	(label "UP2"
+	(label "PI2"
 		(at 394.97 48.26 0)
 		(effects
 			(font
@@ -31754,7 +31810,7 @@
 		(uuid "d3e0c414-5d20-4327-bdd4-9c8a9596a14c")
 	)
 	(label "SA13"
-		(at 400.05 177.8 0)
+		(at 394.97 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32064,7 +32120,7 @@
 		(uuid "dcbe3035-5453-4fe1-b2a7-b99ebb4a8af2")
 	)
 	(label "SA0"
-		(at 369.57 171.45 0)
+		(at 364.49 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32083,7 +32139,7 @@
 		)
 		(uuid "dd1dc9b5-afbc-4954-ac59-98ffc1cca4c9")
 	)
-	(label "~{User Process}"
+	(label "~{Process ID}"
 		(at 354.33 45.72 180)
 		(effects
 			(font
@@ -32234,7 +32290,7 @@
 		(uuid "e08e216a-089f-4e28-a2eb-4ca4c13261c2")
 	)
 	(label "A7"
-		(at 379.73 177.8 180)
+		(at 374.65 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32283,7 +32339,7 @@
 		)
 		(uuid "e26b51fd-2a1a-4164-9ed8-6c7ca465f806")
 	)
-	(label "UP4"
+	(label "PI4"
 		(at 430.53 142.24 180)
 		(effects
 			(font
@@ -32304,7 +32360,7 @@
 		(uuid "e3218ec5-9b17-450f-8b9d-393b81eb417c")
 	)
 	(label "~{ROM}"
-		(at 414.02 196.85 180)
+		(at 408.94 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32313,7 +32369,7 @@
 		)
 		(uuid "e377d1ac-78d9-46f0-b087-9d3d99675c82")
 	)
-	(label "UP1"
+	(label "PI1"
 		(at 394.97 50.8 0)
 		(effects
 			(font
@@ -32324,7 +32380,7 @@
 		(uuid "e417e0b0-37e8-40b9-b86e-096937c99f15")
 	)
 	(label "S~{RD}"
-		(at 419.1 184.15 0)
+		(at 414.02 190.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32384,7 +32440,7 @@
 		(uuid "e63376fe-d97c-436c-93e2-667f88c19d06")
 	)
 	(label "SA8"
-		(at 384.81 184.15 0)
+		(at 379.73 190.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32484,7 +32540,7 @@
 		(uuid "e8a15f0f-0c6e-4de6-a7dc-3aa9d6390b89")
 	)
 	(label "GND"
-		(at 354.33 186.69 0)
+		(at 349.25 193.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32574,7 +32630,7 @@
 		(uuid "e9f41de4-359b-445d-b908-5cfb9dbdcffa")
 	)
 	(label "A18"
-		(at 414.02 179.07 180)
+		(at 408.94 184.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32764,7 +32820,7 @@
 		(uuid "f17e78ad-3b66-43f3-a207-c3c8f626e7bf")
 	)
 	(label "SA14"
-		(at 400.05 184.15 0)
+		(at 394.97 190.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32934,7 +32990,7 @@
 		(uuid "f6919927-a2d2-47ee-8b65-b5ef2f77dcd0")
 	)
 	(label "~{RD}"
-		(at 414.02 184.15 180)
+		(at 408.94 190.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -32974,7 +33030,7 @@
 		(uuid "f7a06dbb-656e-42b7-b26a-d26c29aa9c74")
 	)
 	(label "SA11"
-		(at 384.81 203.2 0)
+		(at 379.73 209.55 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -33014,7 +33070,7 @@
 		(uuid "f90c0758-a6d6-4004-8f61-10db66651d3a")
 	)
 	(label "Kernal"
-		(at 349.25 179.07 180)
+		(at 344.17 185.42 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -36519,7 +36575,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 196.85 0)
+		(at 359.41 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36527,7 +36583,7 @@
 		(dnp no)
 		(uuid "11f0eed9-b29c-4926-96f2-63b2d53a2ac5")
 		(property "Reference" "R13"
-			(at 367.03 195.072 0)
+			(at 361.95 201.422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36535,7 +36591,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 198.755 0)
+			(at 361.95 205.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36543,7 +36599,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 204.47 0)
+			(at 376.936 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36552,7 +36608,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 196.85 0)
+			(at 359.41 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36561,7 +36617,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 196.85 0)
+			(at 359.41 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36980,7 +37036,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 184.15 0)
+		(at 389.89 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36988,7 +37044,7 @@
 		(dnp no)
 		(uuid "1bd73dc3-0f43-46e4-adb5-7ea6da60321c")
 		(property "Reference" "R23"
-			(at 397.51 182.372 0)
+			(at 392.43 188.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36996,7 +37052,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 186.055 0)
+			(at 392.43 192.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37004,7 +37060,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 191.77 0)
+			(at 407.416 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37013,7 +37069,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 184.15 0)
+			(at 389.89 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37022,7 +37078,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 184.15 0)
+			(at 389.89 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37047,7 +37103,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 196.85 0)
+		(at 389.89 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37055,7 +37111,7 @@
 		(dnp no)
 		(uuid "1fb7428b-c8cd-4e11-a3cb-71e1340b3719")
 		(property "Reference" "R25"
-			(at 397.51 195.072 0)
+			(at 392.43 201.422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37063,7 +37119,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 198.755 0)
+			(at 392.43 205.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37071,7 +37127,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 204.47 0)
+			(at 407.416 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37080,7 +37136,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 196.85 0)
+			(at 389.89 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37089,7 +37145,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 196.85 0)
+			(at 389.89 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37196,7 +37252,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 184.15 0)
+		(at 359.41 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37204,7 +37260,7 @@
 		(dnp no)
 		(uuid "21392281-229f-4ff7-942b-81666eacbc1c")
 		(property "Reference" "R11"
-			(at 367.03 182.372 0)
+			(at 361.95 188.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37212,7 +37268,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 186.055 0)
+			(at 361.95 192.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37220,7 +37276,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 191.77 0)
+			(at 376.936 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37229,7 +37285,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 184.15 0)
+			(at 359.41 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37238,7 +37294,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 184.15 0)
+			(at 359.41 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37263,7 +37319,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 171.45 0)
+		(at 389.89 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37271,7 +37327,7 @@
 		(dnp no)
 		(uuid "225f2886-d761-41dc-a45d-e53ebe1af734")
 		(property "Reference" "R21"
-			(at 397.51 169.672 0)
+			(at 392.43 176.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37279,7 +37335,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 173.355 0)
+			(at 392.43 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37287,7 +37343,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 179.07 0)
+			(at 407.416 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37296,7 +37352,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 171.45 0)
+			(at 389.89 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37305,7 +37361,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 171.45 0)
+			(at 389.89 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37330,7 +37386,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 203.2 0)
+		(at 374.65 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37338,7 +37394,7 @@
 		(dnp no)
 		(uuid "25725bfc-3c57-4735-bc3f-bab3808f2fc1")
 		(property "Reference" "R20"
-			(at 382.27 201.422 0)
+			(at 377.19 207.772 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37346,7 +37402,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 205.105 0)
+			(at 377.19 211.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37354,7 +37410,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 210.82 0)
+			(at 392.176 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37363,7 +37419,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 203.2 0)
+			(at 374.65 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37372,7 +37428,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 203.2 0)
+			(at 374.65 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37397,7 +37453,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 177.8 0)
+		(at 374.65 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37405,7 +37461,7 @@
 		(dnp no)
 		(uuid "286ca373-6199-460a-9923-8f30843c199b")
 		(property "Reference" "R16"
-			(at 382.27 176.022 0)
+			(at 377.19 182.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37413,7 +37469,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 179.705 0)
+			(at 377.19 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37421,7 +37477,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 185.42 0)
+			(at 392.176 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37430,7 +37486,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 177.8 0)
+			(at 374.65 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37439,7 +37495,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 177.8 0)
+			(at 374.65 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37464,7 +37520,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 414.02 179.07 0)
+		(at 408.94 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37472,7 +37528,7 @@
 		(dnp no)
 		(uuid "29767cb7-788e-4a95-b88c-0f7cb1c1d009")
 		(property "Reference" "R27"
-			(at 416.56 177.292 0)
+			(at 411.48 182.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37480,7 +37536,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 416.56 180.975 0)
+			(at 411.48 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37488,7 +37544,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 431.546 186.69 0)
+			(at 426.466 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37497,7 +37553,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 414.02 179.07 0)
+			(at 408.94 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37506,7 +37562,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 414.02 179.07 0)
+			(at 408.94 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37721,7 +37777,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 190.5 0)
+		(at 359.41 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37729,7 +37785,7 @@
 		(dnp no)
 		(uuid "35cc5432-e5c7-4515-9926-cf791fb23c54")
 		(property "Reference" "R12"
-			(at 367.03 188.722 0)
+			(at 361.95 195.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37737,7 +37793,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 192.405 0)
+			(at 361.95 198.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37745,7 +37801,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 198.12 0)
+			(at 376.936 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37754,7 +37810,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 190.5 0)
+			(at 359.41 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37763,7 +37819,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 190.5 0)
+			(at 359.41 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37788,7 +37844,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 177.8 0)
+		(at 389.89 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -37796,7 +37852,7 @@
 		(dnp no)
 		(uuid "36b621da-ef01-4691-9d6e-be4521ab96a5")
 		(property "Reference" "R22"
-			(at 397.51 176.022 0)
+			(at 392.43 182.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37804,7 +37860,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 179.705 0)
+			(at 392.43 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37812,7 +37868,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 185.42 0)
+			(at 407.416 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37821,7 +37877,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 177.8 0)
+			(at 389.89 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -37830,7 +37886,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 177.8 0)
+			(at 389.89 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38093,7 +38149,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 414.02 203.2 0)
+		(at 408.94 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38101,7 +38157,7 @@
 		(dnp no)
 		(uuid "39b8c865-9f21-4bd2-8b4d-0b8b249f612c")
 		(property "Reference" "R32"
-			(at 416.56 201.422 0)
+			(at 411.48 207.772 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38109,7 +38165,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 416.56 205.105 0)
+			(at 411.48 211.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38117,7 +38173,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 431.546 210.82 0)
+			(at 426.466 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38126,7 +38182,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 414.02 203.2 0)
+			(at 408.94 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38135,7 +38191,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 414.02 203.2 0)
+			(at 408.94 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38437,7 +38493,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 349.25 179.07 0)
+		(at 344.17 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -38445,7 +38501,7 @@
 		(dnp no)
 		(uuid "40aeac5f-4ab1-46b7-98a4-bd86f68489bb")
 		(property "Reference" "R1"
-			(at 351.79 177.292 0)
+			(at 346.71 183.642 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38453,7 +38509,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 351.79 180.975 0)
+			(at 346.71 187.325 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38461,7 +38517,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 366.776 186.69 0)
+			(at 361.696 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38470,7 +38526,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 349.25 179.07 0)
+			(at 344.17 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -38479,7 +38535,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 349.25 179.07 0)
+			(at 344.17 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39149,7 +39205,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 203.2 0)
+		(at 389.89 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -39157,7 +39213,7 @@
 		(dnp no)
 		(uuid "56d284b1-0e27-4cdb-853c-c773ab1170f7")
 		(property "Reference" "R26"
-			(at 397.51 201.422 0)
+			(at 392.43 207.772 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39165,7 +39221,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 205.105 0)
+			(at 392.43 211.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39173,7 +39229,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 210.82 0)
+			(at 407.416 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39182,7 +39238,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 203.2 0)
+			(at 389.89 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39191,7 +39247,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 203.2 0)
+			(at 389.89 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39382,7 +39438,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 414.02 196.85 0)
+		(at 408.94 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -39390,7 +39446,7 @@
 		(dnp no)
 		(uuid "5ab79ca4-e010-4243-ad05-16ec4afb2c8a")
 		(property "Reference" "R31"
-			(at 416.56 195.072 0)
+			(at 411.48 201.422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39398,7 +39454,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 416.56 198.755 0)
+			(at 411.48 205.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39406,7 +39462,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 431.546 204.47 0)
+			(at 426.466 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39415,7 +39471,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 414.02 196.85 0)
+			(at 408.94 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -39424,7 +39480,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 414.02 196.85 0)
+			(at 408.94 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40371,7 +40427,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 349.25 186.69 0)
+		(at 344.17 193.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40379,7 +40435,7 @@
 		(dnp no)
 		(uuid "6fa81e0c-bbe2-4f72-9f69-40d2dbc46855")
 		(property "Reference" "R6"
-			(at 351.79 184.912 0)
+			(at 346.71 191.262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40387,7 +40443,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 351.79 188.595 0)
+			(at 346.71 194.945 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40395,7 +40451,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 366.776 194.31 0)
+			(at 361.696 200.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40404,7 +40460,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 349.25 186.69 0)
+			(at 344.17 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40413,7 +40469,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 349.25 186.69 0)
+			(at 344.17 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40506,7 +40562,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 171.45 0)
+		(at 374.65 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40514,7 +40570,7 @@
 		(dnp no)
 		(uuid "7d510280-e830-438d-80e7-57b0d42c140b")
 		(property "Reference" "R15"
-			(at 382.27 169.672 0)
+			(at 377.19 176.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40522,7 +40578,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 173.355 0)
+			(at 377.19 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40530,7 +40586,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 179.07 0)
+			(at 392.176 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40539,7 +40595,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 171.45 0)
+			(at 374.65 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40548,7 +40604,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 171.45 0)
+			(at 374.65 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40573,7 +40629,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 414.02 190.5 0)
+		(at 408.94 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40581,7 +40637,7 @@
 		(dnp no)
 		(uuid "7dee146a-b83e-4814-804b-66c915d2cbc9")
 		(property "Reference" "R30"
-			(at 416.56 188.722 0)
+			(at 411.48 195.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40589,7 +40645,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 416.56 192.405 0)
+			(at 411.48 198.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40597,7 +40653,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 431.546 198.12 0)
+			(at 426.466 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40606,7 +40662,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 414.02 190.5 0)
+			(at 408.94 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40615,7 +40671,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 414.02 190.5 0)
+			(at 408.94 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40640,7 +40696,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 184.15 0)
+		(at 374.65 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40648,7 +40704,7 @@
 		(dnp no)
 		(uuid "805db195-8b1e-42ac-a86d-1cc0fdd18f2d")
 		(property "Reference" "R17"
-			(at 382.27 182.372 0)
+			(at 377.19 188.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40656,7 +40712,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 186.055 0)
+			(at 377.19 192.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40664,7 +40720,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 191.77 0)
+			(at 392.176 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40673,7 +40729,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 184.15 0)
+			(at 374.65 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40682,7 +40738,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 184.15 0)
+			(at 374.65 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40707,7 +40763,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 203.2 0)
+		(at 359.41 209.55 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -40715,7 +40771,7 @@
 		(dnp no)
 		(uuid "813f328c-89a3-4cc8-86a7-dc8071af9918")
 		(property "Reference" "R14"
-			(at 367.03 201.422 0)
+			(at 361.95 207.772 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40723,7 +40779,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 205.105 0)
+			(at 361.95 211.455 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40731,7 +40787,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 210.82 0)
+			(at 376.936 217.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40740,7 +40796,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 203.2 0)
+			(at 359.41 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40749,7 +40805,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 203.2 0)
+			(at 359.41 209.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41480,7 +41536,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 171.45 0)
+		(at 359.41 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -41488,7 +41544,7 @@
 		(dnp no)
 		(uuid "936085c6-4f30-4be4-abf9-a6c6b7a177ee")
 		(property "Reference" "R9"
-			(at 367.03 169.672 0)
+			(at 361.95 176.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41496,7 +41552,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 173.355 0)
+			(at 361.95 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41504,7 +41560,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 179.07 0)
+			(at 376.936 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41513,7 +41569,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 171.45 0)
+			(at 359.41 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41522,7 +41578,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 171.45 0)
+			(at 359.41 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42918,7 +42974,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 394.97 190.5 0)
+		(at 389.89 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42926,7 +42982,7 @@
 		(dnp no)
 		(uuid "c8dcef36-a24e-4510-9fc3-ef9679c62f1c")
 		(property "Reference" "R24"
-			(at 397.51 188.722 0)
+			(at 392.43 195.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42934,7 +42990,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 397.51 192.405 0)
+			(at 392.43 198.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42942,7 +42998,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 412.496 198.12 0)
+			(at 407.416 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42951,7 +43007,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 394.97 190.5 0)
+			(at 389.89 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42960,7 +43016,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 394.97 190.5 0)
+			(at 389.89 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -42985,7 +43041,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 364.49 177.8 0)
+		(at 359.41 184.15 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -42993,7 +43049,7 @@
 		(dnp no)
 		(uuid "cabe8b25-3874-4926-a6e9-a6855def2ed0")
 		(property "Reference" "R10"
-			(at 367.03 176.022 0)
+			(at 361.95 182.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43001,7 +43057,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 367.03 179.705 0)
+			(at 361.95 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43009,7 +43065,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 382.016 185.42 0)
+			(at 376.936 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43018,7 +43074,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 177.8 0)
+			(at 359.41 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43027,7 +43083,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 364.49 177.8 0)
+			(at 359.41 184.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43218,7 +43274,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 414.02 184.15 0)
+		(at 408.94 190.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43226,7 +43282,7 @@
 		(dnp no)
 		(uuid "dfe3fa43-d878-4e52-81c5-093bbc76a4e4")
 		(property "Reference" "R29"
-			(at 416.56 182.372 0)
+			(at 411.48 188.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43234,7 +43290,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 416.56 186.055 0)
+			(at 411.48 192.405 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43242,7 +43298,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 431.546 191.77 0)
+			(at 426.466 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43251,7 +43307,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 414.02 184.15 0)
+			(at 408.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43260,7 +43316,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 414.02 184.15 0)
+			(at 408.94 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43285,7 +43341,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 349.25 171.45 0)
+		(at 344.17 177.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43293,7 +43349,7 @@
 		(dnp no)
 		(uuid "e0ede250-b088-4b4b-9208-8dd2346edf2a")
 		(property "Reference" "R7"
-			(at 351.79 169.672 0)
+			(at 346.71 176.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43301,7 +43357,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 351.79 173.355 0)
+			(at 346.71 179.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43309,7 +43365,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 366.776 179.07 0)
+			(at 361.696 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43318,7 +43374,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 349.25 171.45 0)
+			(at 344.17 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43327,7 +43383,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 349.25 171.45 0)
+			(at 344.17 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43352,7 +43408,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 196.85 0)
+		(at 374.65 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43360,7 +43416,7 @@
 		(dnp no)
 		(uuid "eede8f46-aca2-4e2f-8a20-cb87551a076b")
 		(property "Reference" "R19"
-			(at 382.27 195.072 0)
+			(at 377.19 201.422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43368,7 +43424,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 198.755 0)
+			(at 377.19 205.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43376,7 +43432,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 204.47 0)
+			(at 392.176 210.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43385,7 +43441,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 196.85 0)
+			(at 374.65 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43394,7 +43450,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 196.85 0)
+			(at 374.65 203.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43783,7 +43839,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 379.73 190.5 0)
+		(at 374.65 196.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -43791,7 +43847,7 @@
 		(dnp no)
 		(uuid "f3cb9d13-249f-40a4-b591-e51d42655bc5")
 		(property "Reference" "R18"
-			(at 382.27 188.722 0)
+			(at 377.19 195.072 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43799,7 +43855,7 @@
 			)
 		)
 		(property "Value" "0Ω"
-			(at 382.27 192.405 0)
+			(at 377.19 198.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43807,7 +43863,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 397.256 198.12 0)
+			(at 392.176 204.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43816,7 +43872,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 379.73 190.5 0)
+			(at 374.65 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43825,7 +43881,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 379.73 190.5 0)
+			(at 374.65 196.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -58,7 +58,24 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "silk_edge_clearance|-2962872|-1205000|51399a1a-1672-4fa0-aafd-1ef0627baa3f|10d64b49-94e1-47c2-aa20-bae65861f927",
+          ""
+        ],
+        [
+          "silk_edge_clearance|-2962872|-1205000|51399a1a-1672-4fa0-aafd-1ef0627baa3f|2bf817ab-4c36-46cf-ac17-c42b886c8d17",
+          ""
+        ],
+        [
+          "silk_edge_clearance|-9115000|-3174247|3257cba5-f235-4fc6-895e-55c34e044f4c|557dabff-a8d5-4f10-9dbc-10c1ad3518e1",
+          ""
+        ],
+        [
+          "silk_edge_clearance|-9115000|-3174247|3257cba5-f235-4fc6-895e-55c34e044f4c|e1dab62f-63ea-4b3a-873e-2c35e0b35434",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -459,6 +476,7 @@
       "single_global_label": "ignore",
       "unannotated": "error",
       "unconnected_wire_endpoint": "ignore",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"

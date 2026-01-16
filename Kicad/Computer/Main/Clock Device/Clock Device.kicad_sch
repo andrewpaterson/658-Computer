@@ -1484,24 +1484,6 @@
 						)
 					)
 				)
-				(pin no_connect line
-					(at 25.4 -5.08 180)
-					(length 5.08)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
 			(symbol "74LVC1G04GV,125_0_1"
 				(polyline
@@ -1572,6 +1554,27 @@
 					)
 					(fill
 						(type none)
+					)
+				)
+			)
+			(symbol "74LVC1G04GV,125_1_0"
+				(pin no_connect line
+					(at 25.4 -5.08 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -3672,13 +3675,13 @@
 		)
 	)
 	(junction
-		(at 113.03 66.04)
+		(at 109.22 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "413af9fc-5730-4581-bcd6-4066802553e7")
 	)
 	(junction
-		(at 142.24 66.04)
+		(at 138.43 91.44)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b483095b-b3f1-413b-bfdc-dd45b3a6b7a0")
@@ -3704,7 +3707,7 @@
 		(uuid "1f171749-6649-4163-8918-61f436faf0ad")
 	)
 	(no_connect
-		(at 138.43 71.12)
+		(at 134.62 96.52)
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
 	(no_connect
@@ -3805,7 +3808,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 71.12) (xy 142.24 66.04)
+			(xy 138.43 96.52) (xy 138.43 91.44)
 		)
 		(stroke
 			(width 0)
@@ -3815,7 +3818,7 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 66.04) (xy 113.03 66.04)
+			(xy 93.98 91.44) (xy 109.22 91.44)
 		)
 		(stroke
 			(width 0)
@@ -3835,7 +3838,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 66.04) (xy 113.03 68.58)
+			(xy 109.22 91.44) (xy 109.22 93.98)
 		)
 		(stroke
 			(width 0)
@@ -3865,7 +3868,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 66.04) (xy 142.24 66.04)
+			(xy 134.62 91.44) (xy 138.43 91.44)
 		)
 		(stroke
 			(width 0)
@@ -3895,7 +3898,7 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 66.04) (xy 97.79 71.12)
+			(xy 93.98 91.44) (xy 93.98 96.52)
 		)
 		(stroke
 			(width 0)
@@ -3915,7 +3918,7 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 71.12) (xy 99.06 71.12)
+			(xy 93.98 96.52) (xy 95.25 96.52)
 		)
 		(stroke
 			(width 0)
@@ -3935,7 +3938,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 66.04) (xy 147.32 66.04)
+			(xy 138.43 91.44) (xy 143.51 91.44)
 		)
 		(stroke
 			(width 0)
@@ -3964,7 +3967,7 @@
 		(uuid "05763f90-72d0-461a-bda8-3438cea9766a")
 	)
 	(label "D7"
-		(at 60.96 43.18 180)
+		(at 67.31 46.99 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3974,7 +3977,7 @@
 		(uuid "0584c322-ac20-4eff-9514-1c804ee8b5db")
 	)
 	(label "D3"
-		(at 60.96 55.88 180)
+		(at 67.31 59.69 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4014,7 +4017,7 @@
 		(uuid "19b44a3c-45d9-4a4d-989e-4501cd62c479")
 	)
 	(label "DQ2"
-		(at 86.36 58.42 0)
+		(at 92.71 62.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4034,7 +4037,7 @@
 		(uuid "1f0977b2-dcbe-4db5-a513-4ea57dcea381")
 	)
 	(label "GND"
-		(at 147.32 71.12 0)
+		(at 143.51 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4044,7 +4047,7 @@
 		(uuid "2703f9d4-cbda-4d41-b75d-1696dd2e6090")
 	)
 	(label "D1"
-		(at 60.96 60.96 180)
+		(at 67.31 64.77 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4094,7 +4097,7 @@
 		(uuid "39c6024c-c7fe-472c-bd86-766a6394b672")
 	)
 	(label "DQ5"
-		(at 86.36 48.26 0)
+		(at 92.71 52.07 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4124,7 +4127,7 @@
 		(uuid "43d90bab-9b97-4731-8be0-2423e182afb5")
 	)
 	(label "GND"
-		(at 104.14 71.12 0)
+		(at 100.33 96.52 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4134,7 +4137,7 @@
 		(uuid "47a447a5-df4b-4ed7-a925-ccbc4a7d8442")
 	)
 	(label "5V"
-		(at 97.79 66.04 180)
+		(at 93.98 91.44 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4194,7 +4197,7 @@
 		(uuid "50c2dfb8-2036-453c-85d6-88a1a592e27c")
 	)
 	(label "DQ0"
-		(at 86.36 63.5 0)
+		(at 92.71 67.31 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4204,7 +4207,7 @@
 		(uuid "52bacfb4-7c2b-4e2e-8559-0be2aae9bd4a")
 	)
 	(label "DQ1"
-		(at 86.36 60.96 0)
+		(at 92.71 64.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4284,7 +4287,7 @@
 		(uuid "5f68425d-ca07-4e2f-8544-1d2faff34235")
 	)
 	(label "GND"
-		(at 113.03 71.12 180)
+		(at 109.22 96.52 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4314,7 +4317,7 @@
 		(uuid "63a93944-9db6-4b22-9a4d-49d44094dfcc")
 	)
 	(label "D6"
-		(at 60.96 45.72 180)
+		(at 67.31 49.53 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4324,7 +4327,7 @@
 		(uuid "65f14a70-0681-420e-8c62-9f3e75da46fb")
 	)
 	(label "DQ3"
-		(at 86.36 55.88 0)
+		(at 92.71 59.69 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4394,7 +4397,7 @@
 		(uuid "7dd60c4a-5307-479f-be69-94ca45722f7a")
 	)
 	(label "DQ4"
-		(at 86.36 50.8 0)
+		(at 92.71 54.61 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4404,7 +4407,7 @@
 		(uuid "81f2a7c2-0fb5-4da7-9d66-a0cf03e74527")
 	)
 	(label "D5"
-		(at 60.96 48.26 180)
+		(at 67.31 52.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4434,7 +4437,7 @@
 		(uuid "8af839ee-f750-460b-91e8-cd04f759972d")
 	)
 	(label "~{CS}"
-		(at 60.96 40.64 180)
+		(at 67.31 44.45 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4484,7 +4487,7 @@
 		(uuid "9f03d137-568d-4f44-8142-c26e8c85b686")
 	)
 	(label "DQ7"
-		(at 86.36 43.18 0)
+		(at 92.71 46.99 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4514,7 +4517,7 @@
 		(uuid "a4664c84-93af-4e1a-9f0a-c200af40c8f5")
 	)
 	(label "D2"
-		(at 60.96 58.42 180)
+		(at 67.31 62.23 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4534,7 +4537,7 @@
 		(uuid "aa942e45-88db-426a-9f72-32ab96502009")
 	)
 	(label "D0"
-		(at 60.96 63.5 180)
+		(at 67.31 67.31 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4544,7 +4547,7 @@
 		(uuid "abae67a5-ced7-4fe1-99e7-b630e217f105")
 	)
 	(label "D4"
-		(at 60.96 50.8 180)
+		(at 67.31 54.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4554,7 +4557,7 @@
 		(uuid "af66faec-68bc-46f3-ac34-597be0bc594a")
 	)
 	(label "GND"
-		(at 60.96 66.04 180)
+		(at 67.31 69.85 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4574,7 +4577,7 @@
 		(uuid "b391ed10-e463-4b05-a7f8-33724c2d5a93")
 	)
 	(label "3.3V"
-		(at 147.32 66.04 0)
+		(at 143.51 91.44 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4624,7 +4627,7 @@
 		(uuid "bde4dc5e-d8ab-42a5-881f-bfea30c72238")
 	)
 	(label "DQ6"
-		(at 86.36 45.72 0)
+		(at 92.71 49.53 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4694,7 +4697,7 @@
 		(uuid "d3387bff-2f7d-4d82-ac2d-454194b7cee4")
 	)
 	(label "~{CS}"
-		(at 60.96 53.34 180)
+		(at 67.31 57.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4804,7 +4807,7 @@
 		(uuid "f2a5b26d-a57e-4b88-aabb-0630fc522a86")
 	)
 	(label "5V"
-		(at 86.36 40.64 0)
+		(at 92.71 44.45 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5636,7 +5639,7 @@
 	)
 	(symbol
 		(lib_id "Texas_Instruments:SN74CBT3244CPWR")
-		(at 60.96 40.64 0)
+		(at 67.31 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5644,7 +5647,7 @@
 		(dnp no)
 		(uuid "268f704a-3a2f-43cc-b71e-fdeedda1c722")
 		(property "Reference" "IC3"
-			(at 73.66 35.56 0)
+			(at 80.01 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5652,7 +5655,7 @@
 			)
 		)
 		(property "Value" "SN74CBT3244CPWR"
-			(at 73.66 37.465 0)
+			(at 80.01 41.275 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5661,7 +5664,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOP65P640X120-20N"
-			(at 85.09 135.56 0)
+			(at 91.44 139.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5671,7 +5674,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/gpn/sn74cbt3244c"
-			(at 85.09 235.56 0)
+			(at 91.44 239.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5681,7 +5684,7 @@
 			)
 		)
 		(property "Description" "Dual 4bit bus switch"
-			(at 73.66 69.215 0)
+			(at 80.01 73.025 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5689,7 +5692,7 @@
 			)
 		)
 		(property "Height" "1.2"
-			(at 85.725 132.715 0)
+			(at 92.075 136.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5699,7 +5702,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Texas Instruments"
-			(at 90.17 255.93 0)
+			(at 96.52 259.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5709,7 +5712,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "SN74CBT3244CPWR"
-			(at 85.725 271.78 0)
+			(at 92.075 275.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5719,7 +5722,7 @@
 			)
 		)
 		(property "Mouser Part Number" "595-SN74CBT3244CPWR"
-			(at 85.725 285.75 0)
+			(at 92.075 289.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5729,7 +5732,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/SN74CBT3244CPWR?qs=mE33ZKBHyE5%252BGeBr%2FFRY2g%3D%3D"
-			(at 85.09 265.455 0)
+			(at 91.44 269.265 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5739,7 +5742,7 @@
 			)
 		)
 		(property "Silkscreen" "74CBT3244"
-			(at 73.66 71.12 0)
+			(at 80.01 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6896,7 +6899,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 99.06 71.12 0)
+		(at 95.25 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6904,7 +6907,7 @@
 		(dnp no)
 		(uuid "917f04ae-f97d-4894-bd1f-ee221fa78eea")
 		(property "Reference" "C8"
-			(at 101.346 68.58 0)
+			(at 97.536 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6912,7 +6915,7 @@
 			)
 		)
 		(property "Value" "10µF"
-			(at 99.06 73.66 0)
+			(at 95.25 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6921,7 +6924,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 115.824 78.74 0)
+			(at 112.014 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6930,7 +6933,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 101.2825 70.8025 90)
+			(at 97.4725 96.2025 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6939,7 +6942,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 99.06 71.12 0)
+			(at 95.25 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7124,7 +7127,7 @@
 	)
 	(symbol
 		(lib_id "Diodes_Inc:AP7365-33WG-7")
-		(at 113.03 66.04 0)
+		(at 109.22 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7132,7 +7135,7 @@
 		(dnp no)
 		(uuid "b4ee3465-e6d3-4314-a2ec-3e4d6aa12bf0")
 		(property "Reference" "IC5"
-			(at 125.73 60.96 0)
+			(at 121.92 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7140,7 +7143,7 @@
 			)
 		)
 		(property "Value" "AP7365-33WG-7"
-			(at 125.73 62.865 0)
+			(at 121.92 88.265 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7149,7 +7152,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
-			(at 134.62 80.645 0)
+			(at 130.81 106.045 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7159,7 +7162,7 @@
 			)
 		)
 		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
-			(at 134.62 83.185 0)
+			(at 130.81 108.585 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7169,7 +7172,7 @@
 			)
 		)
 		(property "Description" "3.3V LDO voltage regulator"
-			(at 125.73 74.295 0)
+			(at 121.92 99.695 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7177,7 +7180,7 @@
 			)
 		)
 		(property "Height" "1.3"
-			(at 134.62 85.725 0)
+			(at 130.81 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7187,7 +7190,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Diodes Inc."
-			(at 134.62 88.265 0)
+			(at 130.81 113.665 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7197,7 +7200,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "AP7365-33WG-7"
-			(at 134.62 90.805 0)
+			(at 130.81 116.205 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7207,7 +7210,7 @@
 			)
 		)
 		(property "Mouser Part Number" "621-AP7365-33WG-7"
-			(at 134.62 93.345 0)
+			(at 130.81 118.745 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7217,7 +7220,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
-			(at 134.62 95.885 0)
+			(at 130.81 121.285 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7227,7 +7230,7 @@
 			)
 		)
 		(property "Arrow Part Number" "AP7365-33WG-7"
-			(at 134.62 98.425 0)
+			(at 130.81 123.825 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7237,7 +7240,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
-			(at 134.62 100.965 0)
+			(at 130.81 126.365 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7247,7 +7250,7 @@
 			)
 		)
 		(property "Silkscreen" "AP7365"
-			(at 134.62 78.105 0)
+			(at 130.81 103.505 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7308,7 +7311,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 142.24 71.12 0)
+		(at 138.43 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7316,7 +7319,7 @@
 		(dnp no)
 		(uuid "ca8a3ba5-4963-4a20-bcbe-311314889adc")
 		(property "Reference" "C9"
-			(at 144.526 68.58 0)
+			(at 140.716 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7324,7 +7327,7 @@
 			)
 		)
 		(property "Value" "10µF"
-			(at 142.24 73.66 0)
+			(at 138.43 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7333,7 +7336,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 159.004 78.74 0)
+			(at 155.194 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7342,7 +7345,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 144.4625 70.8025 90)
+			(at 140.6525 96.2025 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7351,7 +7354,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 142.24 71.12 0)
+			(at 138.43 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)

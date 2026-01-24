@@ -5095,7 +5095,7 @@
 				(pin output clock
 					(at 35.56 -15.24 180)
 					(length 5.08)
-					(name "~{Main_Access}_{0}"
+					(name "~{Main_Slot}_{0}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5150,7 +5150,7 @@
 				(pin output clock
 					(at 35.56 -22.86 180)
 					(length 5.08)
-					(name "~{Main_Access}_{1}"
+					(name "~{Main_Slot}_{1}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5186,7 +5186,7 @@
 				(pin output clock
 					(at 35.56 -30.48 180)
 					(length 5.08)
-					(name "~{Main_Access}_{2}"
+					(name "~{Main_Slot}_{2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -12486,6 +12486,17 @@
 		)
 		(uuid "7a7fcb8a-96ca-4bf4-8626-28f54230cc72")
 	)
+	(text "The only cards currently writing to the address bus are:\n1) Processor Board (obviously)\n2) Blitter Board\n3) Graphics Board"
+		(exclude_from_sim no)
+		(at 60.706 169.164 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7c6aa01f-a295-4e57-bbfc-e0efaadd23b0")
+	)
 	(text "(Device 2)"
 		(exclude_from_sim no)
 		(at 525.78 304.8 0)
@@ -12505,6 +12516,17 @@
 			)
 		)
 		(uuid "a010644b-f753-496d-96be-801196a7855e")
+	)
+	(text "The only cards currently reading from the address bus are:\n1) Memory Board\n2) Video Board\n3) Coprocessor Board"
+		(exclude_from_sim no)
+		(at 140.97 169.164 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "a8953d14-4971-4e59-987a-76486103a024")
 	)
 	(text "Main Memory Channel"
 		(exclude_from_sim no)
@@ -15754,7 +15776,7 @@
 		)
 		(uuid "1512d78c-5027-463c-b8ac-2dfa644e6846")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 405.13 266.7 0)
 		(effects
 			(font
@@ -16754,7 +16776,7 @@
 		)
 		(uuid "2e1c9f93-b9ae-412d-a6af-40b2933f7d40")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 180.34 210.82 180)
 		(effects
 			(font
@@ -17524,7 +17546,7 @@
 		)
 		(uuid "3f879109-ea5a-4979-93fd-73fe1fc5acbb")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 180.34 64.77 180)
 		(effects
 			(font
@@ -17644,7 +17666,7 @@
 		)
 		(uuid "43072db9-b3ed-40a0-8f82-a81c96365981")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 119.38 64.77 180)
 		(effects
 			(font
@@ -18584,7 +18606,7 @@
 		)
 		(uuid "594c3b89-fbab-4a94-a612-20a2076d8c9e")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 60.96 210.82 180)
 		(effects
 			(font
@@ -20334,7 +20356,7 @@
 		)
 		(uuid "8754b9e3-a7bd-4977-8e3c-435eeb35982b")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 60.96 64.77 180)
 		(effects
 			(font
@@ -23064,7 +23086,7 @@
 		)
 		(uuid "d737aa36-a2d8-43fb-9265-b68af9fffa3a")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 279.4 62.23 180)
 		(effects
 			(font
@@ -23494,7 +23516,7 @@
 		)
 		(uuid "e3f8ad3d-af31-4a12-b21f-d88c3a985902")
 	)
-	(label "~{Main Access}"
+	(label "~{Main Slot}"
 		(at 119.38 210.82 180)
 		(effects
 			(font

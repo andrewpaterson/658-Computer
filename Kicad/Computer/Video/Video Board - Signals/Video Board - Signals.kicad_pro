@@ -58,7 +58,28 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "lib_footprint_mismatch|101605000|-34285000|049825a3-4891-43cb-b6c3-2cd9dff01b28|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|27945000|-34285000|9fbdc53a-068f-46a2-b175-73b44e52c2ee|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|45725000|-153665000|4df40d30-ed65-4328-a5e6-b6d6a3bb5fe6|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "lib_footprint_mismatch|99060000|-153665000|9eb43055-bfdb-481b-94ff-406cd013ff5f|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "silk_overlap|193690143|-26011447|787dcc7c-ffe5-403a-b2be-d58c5c6d977a|e94856e6-0124-4f4e-9097-b91919079781",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -506,7 +527,6 @@
         "bus_width": 12,
         "clearance": 0.5,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -524,7 +544,6 @@
         "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -551,23 +570,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "Power"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
-      },
-      {
-        "netclass": "Power",
-        "pattern": "/GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "/12V"
+        "pattern": "*12V"
       },
       {
         "netclass": "Power",
-        "pattern": "/5V"
+        "pattern": "*5V"
       }
     ]
   },

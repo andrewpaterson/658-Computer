@@ -68530,7 +68530,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Kernal_Mode"
-			(at 15.24 -105.41 0)
+			(at 13.97 -96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -68556,7 +68556,7 @@
 			)
 		)
 		(property "Silkscreen" "Kernal Mode"
-			(at 15.24 -53.34 0)
+			(at 15.494 -50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -68576,7 +68576,7 @@
 		(symbol "Kernal_Mode_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -91.44) (xy 0 -91.44) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -82.55) (xy 0 -82.55) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -68588,35 +68588,17 @@
 			)
 		)
 		(symbol "Kernal_Mode_1_0"
-			(pin input inverted
-				(at -5.08 -12.7 0)
+			(pin input line
+				(at -5.08 -53.34 0)
 				(length 5.08)
-				(name "~{RD}"
+				(name "OP4"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "58"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input inverted
-				(at -5.08 -15.24 0)
-				(length 5.08)
-				(name "~{WD}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "54"
+				(number "61"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68625,9 +68607,9 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -20.32 0)
+				(at -5.08 -55.88 0)
 				(length 5.08)
-				(name "~{Process_ID}"
+				(name "OP3"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68642,10 +68624,10 @@
 					)
 				)
 			)
-			(pin input inverted
-				(at -5.08 -22.86 0)
+			(pin input line
+				(at -5.08 -58.42 0)
 				(length 5.08)
-				(name "~{Interrupt_Depth}"
+				(name "OP2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68660,18 +68642,35 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -81.28 0)
+			(pin input line
+				(at -5.08 -60.96 0)
 				(length 5.08)
-				(hide yes)
-				(name "N.C."
+				(name "OP1"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "45"
+				(number "58"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -63.5 0)
+				(length 5.08)
+				(name "OP0"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "57"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68680,7 +68679,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 12.7 -96.52 90)
+				(at 11.43 -87.63 90)
 				(length 5.08)
 				(name "D5"
 					(effects
@@ -68698,7 +68697,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 15.24 -96.52 90)
+				(at 13.97 -87.63 90)
 				(length 5.08)
 				(name "D4"
 					(effects
@@ -68716,7 +68715,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 17.78 -96.52 90)
+				(at 16.51 -87.63 90)
 				(length 5.08)
 				(name "D3"
 					(effects
@@ -68734,7 +68733,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 20.32 -96.52 90)
+				(at 19.05 -87.63 90)
 				(length 5.08)
 				(name "D2"
 					(effects
@@ -68752,7 +68751,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 22.86 -96.52 90)
+				(at 21.59 -87.63 90)
 				(length 5.08)
 				(name "D1"
 					(effects
@@ -68770,7 +68769,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 25.4 -96.52 90)
+				(at 24.13 -87.63 90)
 				(length 5.08)
 				(name "D0"
 					(effects
@@ -68790,7 +68789,7 @@
 			(pin output line
 				(at 35.56 -27.94 180)
 				(length 5.08)
-				(name "UP0"
+				(name "PID0"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68806,16 +68805,16 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -55.88 180)
+				(at 35.56 -38.1 180)
 				(length 5.08)
-				(name "Kernal_Mode"
+				(name "A_{OUT}21"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "56"
+				(number "45"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68833,7 +68832,7 @@
 						)
 					)
 				)
-				(number "57"
+				(number "54"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68842,17 +68841,16 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -66.04 180)
+				(at 35.56 -60.96 180)
 				(length 5.08)
-				(hide yes)
-				(name "Kernal_Mode_{_PART}"
+				(name "Enter_Interrupt"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "61"
+				(number "56"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68865,6 +68863,24 @@
 			(pin input inverted
 				(at -5.08 0 0)
 				(length 5.08)
+				(name "~{Reset}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input inverted
+				(at -5.08 -2.54 0)
+				(length 5.08)
 				(name "~{VP}"
 					(effects
 						(font
@@ -68873,24 +68889,6 @@
 					)
 				)
 				(number "1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input line
-				(at -5.08 -2.54 0)
-				(length 5.08)
-				(name "Opcode_Valid"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "64"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68916,10 +68914,10 @@
 					)
 				)
 			)
-			(pin input line
+			(pin input inverted
 				(at -5.08 -7.62 0)
 				(length 5.08)
-				(name "Latch_Bank_Remap"
+				(name "~{PHI2}"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68934,18 +68932,17 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -73.66 0)
+			(pin input inverted
+				(at -5.08 -10.16 0)
 				(length 5.08)
-				(hide yes)
-				(name "N.C."
+				(name "~{Interrupt_Depth}"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "24"
+				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68953,18 +68950,17 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -76.2 0)
+			(pin input inverted
+				(at -5.08 -12.7 0)
 				(length 5.08)
-				(hide yes)
-				(name "N.C."
+				(name "~{Process_ID}"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "43"
+				(number "8"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68972,18 +68968,17 @@
 					)
 				)
 			)
-			(pin no_connect line
-				(at -5.08 -78.74 0)
+			(pin input inverted
+				(at -5.08 -15.24 0)
 				(length 5.08)
-				(hide yes)
-				(name "N.C."
+				(name "~{WD}"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "44"
+				(number "7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -68991,35 +68986,17 @@
 					)
 				)
 			)
-			(pin passive line
-				(at -5.08 -86.36 0)
+			(pin input inverted
+				(at -5.08 -17.78 0)
 				(length 5.08)
-				(name "5V"
+				(name "~{RD}"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -5.08 -88.9 0)
-				(length 5.08)
-				(name "5V"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "35"
+				(number "6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69028,7 +69005,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -33.02 0)
+				(at -5.08 -22.86 0)
 				(length 5.08)
 				(name "BA_{IN}7"
 					(effects
@@ -69046,7 +69023,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -35.56 0)
+				(at -5.08 -25.4 0)
 				(length 5.08)
 				(name "BA_{IN}6"
 					(effects
@@ -69064,7 +69041,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -38.1 0)
+				(at -5.08 -27.94 0)
 				(length 5.08)
 				(name "BA_{IN}5"
 					(effects
@@ -69082,7 +69059,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -40.64 0)
+				(at -5.08 -30.48 0)
 				(length 5.08)
 				(name "BA_{IN}4"
 					(effects
@@ -69100,7 +69077,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -43.18 0)
+				(at -5.08 -33.02 0)
 				(length 5.08)
 				(name "BA_{IN}3"
 					(effects
@@ -69118,7 +69095,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -45.72 0)
+				(at -5.08 -35.56 0)
 				(length 5.08)
 				(name "BA_{IN}2"
 					(effects
@@ -69136,7 +69113,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -48.26 0)
+				(at -5.08 -38.1 0)
 				(length 5.08)
 				(name "BA_{IN}1"
 					(effects
@@ -69154,7 +69131,7 @@
 				)
 			)
 			(pin input line
-				(at -3.81 -50.8 0)
+				(at -5.08 -40.64 0)
 				(length 5.08)
 				(name "BA_{IN}0"
 					(effects
@@ -69171,8 +69148,117 @@
 					)
 				)
 			)
+			(pin input line
+				(at -5.08 -45.72 0)
+				(length 5.08)
+				(name "OP7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "64"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -48.26 0)
+				(length 5.08)
+				(name "OP6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "63"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -50.8 0)
+				(length 5.08)
+				(name "OP5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "62"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -74.93 0)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "24"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -77.47 0)
+				(length 5.08)
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -5.08 -80.01 0)
+				(length 5.08)
+				(name "5V"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "35"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
 			(pin tri_state line
-				(at 7.62 -96.52 90)
+				(at 6.35 -87.63 90)
 				(length 5.08)
 				(name "D7"
 					(effects
@@ -69190,7 +69276,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 10.16 -96.52 90)
+				(at 8.89 -87.63 90)
 				(length 5.08)
 				(name "D6"
 					(effects
@@ -69282,7 +69368,7 @@
 			(pin output line
 				(at 35.56 -10.16 180)
 				(length 5.08)
-				(name "UP7"
+				(name "PID7"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69300,7 +69386,7 @@
 			(pin output line
 				(at 35.56 -12.7 180)
 				(length 5.08)
-				(name "UP6"
+				(name "PID6"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69318,7 +69404,7 @@
 			(pin output line
 				(at 35.56 -15.24 180)
 				(length 5.08)
-				(name "UP5"
+				(name "PID5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69336,7 +69422,7 @@
 			(pin output line
 				(at 35.56 -17.78 180)
 				(length 5.08)
-				(name "UP4"
+				(name "PID4"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69354,7 +69440,7 @@
 			(pin output line
 				(at 35.56 -20.32 180)
 				(length 5.08)
-				(name "UP3"
+				(name "PID3"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69372,7 +69458,7 @@
 			(pin output line
 				(at 35.56 -22.86 180)
 				(length 5.08)
-				(name "UP2"
+				(name "PID2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69390,7 +69476,7 @@
 			(pin output line
 				(at 35.56 -25.4 180)
 				(length 5.08)
-				(name "UP1"
+				(name "PID1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69415,7 +69501,7 @@
 						)
 					)
 				)
-				(number "46"
+				(number "43"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69433,25 +69519,7 @@
 						)
 					)
 				)
-				(number "47"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -38.1 180)
-				(length 5.08)
-				(name "A_{OUT}21"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "48"
+				(number "44"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69469,7 +69537,7 @@
 						)
 					)
 				)
-				(number "49"
+				(number "46"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69487,7 +69555,7 @@
 						)
 					)
 				)
-				(number "50"
+				(number "47"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69505,7 +69573,7 @@
 						)
 					)
 				)
-				(number "51"
+				(number "48"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69523,7 +69591,7 @@
 						)
 					)
 				)
-				(number "52"
+				(number "49"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69541,7 +69609,7 @@
 						)
 					)
 				)
-				(number "53"
+				(number "50"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69550,16 +69618,16 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -60.96 180)
+				(at 35.56 -55.88 180)
 				(length 5.08)
-				(name "Enter_Interrupt"
+				(name "Kernal_Mode"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "62"
+				(number "53"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69577,7 +69645,7 @@
 						)
 					)
 				)
-				(number "63"
+				(number "11"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69588,15 +69656,14 @@
 			(pin output line
 				(at 35.56 -68.58 180)
 				(length 5.08)
-				(hide yes)
-				(name "Interrupt_CLK"
+				(name "C4"
 					(effects
 						(font
 							(size 1.27 1.27)
 						)
 					)
 				)
-				(number "4"
+				(number "51"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69607,8 +69674,25 @@
 			(pin output line
 				(at 35.56 -71.12 180)
 				(length 5.08)
-				(hide yes)
-				(name "C7"
+				(name "C3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "52"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -73.66 180)
+				(length 5.08)
+				(name "C2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69624,10 +69708,9 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -73.66 180)
+				(at 35.56 -76.2 180)
 				(length 5.08)
-				(hide yes)
-				(name "C6"
+				(name "C1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -69643,104 +69726,8 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -76.2 180)
-				(length 5.08)
-				(hide yes)
-				(name "C5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "12"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
 				(at 35.56 -78.74 180)
 				(length 5.08)
-				(hide yes)
-				(name "C4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "11"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -81.28 180)
-				(length 5.08)
-				(hide yes)
-				(name "C3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -83.82 180)
-				(length 5.08)
-				(hide yes)
-				(name "C2"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -86.36 180)
-				(length 5.08)
-				(hide yes)
-				(name "C1"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output line
-				(at 35.56 -88.9 180)
-				(length 5.08)
-				(hide yes)
 				(name "C0"
 					(effects
 						(font
@@ -69748,7 +69735,7 @@
 						)
 					)
 				)
-				(number "6"
+				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)

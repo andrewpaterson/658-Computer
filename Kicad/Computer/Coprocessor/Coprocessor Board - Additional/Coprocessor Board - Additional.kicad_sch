@@ -6346,26 +6346,8 @@
 						)
 					)
 				)
-				(pin output line
-					(at 35.56 -2.54 180)
-					(length 5.08)
-					(name "Bank_Latch"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin output inverted
-					(at 35.56 -5.08 180)
+					(at 35.56 -2.54 180)
 					(length 5.08)
 					(name "~{Data_Output}"
 						(effects
@@ -6375,6 +6357,24 @@
 						)
 					)
 					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 35.56 -5.08 180)
+					(length 5.08)
+					(name "Bank_Latch"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7809,11 +7809,11 @@
 		(uuid "b3b4be78-163f-47d8-80b6-2d96f02d3302")
 	)
 	(no_connect
-		(at 274.32 318.77)
+		(at 274.32 316.23)
 		(uuid "0a4fc7e8-b5f7-4550-8456-7446222a6aad")
 	)
 	(no_connect
-		(at 274.32 137.16)
+		(at 274.32 134.62)
 		(uuid "d4945588-ec8a-4ac2-9622-5b5731b6c49a")
 	)
 	(bus_entry
@@ -21817,7 +21817,7 @@
 		(uuid "cd748580-5b97-4306-acc6-2950c8ecfa2c")
 	)
 	(label "Bank Latch3"
-		(at 274.32 316.23 0)
+		(at 274.32 318.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -22317,7 +22317,7 @@
 		(uuid "e67a5f74-f4a5-4b9b-96f5-e46664e75c9e")
 	)
 	(label "Bank Latch2"
-		(at 274.32 134.62 0)
+		(at 274.32 137.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)

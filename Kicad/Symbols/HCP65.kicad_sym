@@ -70632,7 +70632,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_MPU_Address_Decode"
-			(at 15.875 -145.415 0)
+			(at 15.875 -140.335 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -70678,7 +70678,7 @@
 		(symbol "MPU_Address_Decode_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -144.145) (xy 0 -144.145) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -139.065) (xy 0 -139.065) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -70691,7 +70691,7 @@
 		)
 		(symbol "MPU_Address_Decode_1_0"
 			(pin output inverted
-				(at 35.56 -63.5 180)
+				(at 35.56 -68.58 180)
 				(length 5.08)
 				(name "~{Device2}"
 					(effects
@@ -70709,7 +70709,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -66.04 180)
+				(at 35.56 -71.12 180)
 				(length 5.08)
 				(name "~{Device3}"
 					(effects
@@ -70727,7 +70727,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -68.58 180)
+				(at 35.56 -73.66 180)
 				(length 5.08)
 				(name "~{Device4}"
 					(effects
@@ -70745,7 +70745,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -71.12 180)
+				(at 35.56 -76.2 180)
 				(length 5.08)
 				(name "~{Device5}"
 					(effects
@@ -70763,7 +70763,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -73.66 180)
+				(at 35.56 -78.74 180)
 				(length 5.08)
 				(name "~{Device6}"
 					(effects
@@ -70781,7 +70781,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -76.2 180)
+				(at 35.56 -81.28 180)
 				(length 5.08)
 				(name "~{Device7}"
 					(effects
@@ -70799,7 +70799,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -86.36 180)
+				(at 35.56 -88.9 180)
 				(length 5.08)
 				(name "~{Device17}"
 					(effects
@@ -70945,7 +70945,7 @@
 		)
 		(symbol "MPU_Address_Decode_1_1"
 			(text "~{Main} (~{Kernal_Mode})\n200000..FFFFFF\n~{Main} (Kernal_Mode)\n000000..FFFFFF"
-				(at 1.27 -52.07 0)
+				(at 1.27 -56.388 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -70953,39 +70953,7 @@
 					(justify left)
 				)
 			)
-			(text "000000..07FFFF"
-				(at 8.89 -43.18 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(text "080000..0FFFFF"
-				(at 8.89 -45.72 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
 			(text "108000..10FFFF"
-				(at 8.89 -60.96 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(text "110000..117FFF"
-				(at 8.89 -63.5 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(text "118000..11FFFF"
 				(at 8.89 -66.04 0)
 				(effects
 					(font
@@ -70993,7 +70961,7 @@
 					)
 				)
 			)
-			(text "120000..127FFF"
+			(text "110000..117FFF"
 				(at 8.89 -68.58 0)
 				(effects
 					(font
@@ -71001,7 +70969,7 @@
 					)
 				)
 			)
-			(text "128000..12FFFF"
+			(text "118000..11FFFF"
 				(at 8.89 -71.12 0)
 				(effects
 					(font
@@ -71009,7 +70977,7 @@
 					)
 				)
 			)
-			(text "130000..137FFF"
+			(text "120000..127FFF"
 				(at 8.89 -73.66 0)
 				(effects
 					(font
@@ -71017,7 +70985,7 @@
 					)
 				)
 			)
-			(text "138000..13FFFF"
+			(text "128000..12FFFF"
 				(at 8.89 -76.2 0)
 				(effects
 					(font
@@ -71025,15 +70993,23 @@
 					)
 				)
 			)
-			(text "180000..19FFFF"
-				(at 8.89 -83.82 0)
+			(text "130000..137FFF"
+				(at 8.89 -78.74 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(text "1A0000..1BFFFF"
+			(text "138000..13FFFF"
+				(at 8.89 -81.28 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(text "180000..19FFFF"
 				(at 8.89 -86.36 0)
 				(effects
 					(font
@@ -71041,7 +71017,7 @@
 					)
 				)
 			)
-			(text "1C0000..1DFFFF"
+			(text "1A0000..1BFFFF"
 				(at 8.89 -88.9 0)
 				(effects
 					(font
@@ -71049,7 +71025,7 @@
 					)
 				)
 			)
-			(text "1E0000..1FFFFF"
+			(text "1C0000..1DFFFF"
 				(at 8.89 -91.44 0)
 				(effects
 					(font
@@ -71057,8 +71033,8 @@
 					)
 				)
 			)
-			(text "100000..10000F"
-				(at 8.89 -96.52 0)
+			(text "1E0000..1FFFFF"
+				(at 8.89 -93.98 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -71191,6 +71167,42 @@
 					(font
 						(size 1.27 1.27)
 					)
+				)
+			)
+			(text "000000..07FFFF"
+				(at 16.764 -43.18 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(text "080000..0FFFFF"
+				(at 16.764 -45.72 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(text "100000..10000F"
+				(at 16.764 -48.26 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(text "108000..1FFFFF"
+				(at 16.764 -50.8 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
 				)
 			)
 			(pin input inverted
@@ -71482,7 +71494,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -139.7 0)
+				(at -5.08 -134.62 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -71500,7 +71512,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -142.24 0)
+				(at -5.08 -137.16 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -71628,42 +71640,6 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -30.48 180)
-				(length 5.08)
-				(name "~{Devices}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "29"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output inverted
-				(at 35.56 -33.02 180)
-				(length 5.08)
-				(name "~{Registers}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "28"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin output inverted
 				(at 35.56 -43.18 180)
 				(length 5.08)
 				(name "~{RAM}"
@@ -71702,6 +71678,42 @@
 			(pin output inverted
 				(at 35.56 -48.26 180)
 				(length 5.08)
+				(name "~{Registers}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 35.56 -50.8 180)
+				(length 5.08)
+				(name "~{Devices}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "29"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output inverted
+				(at 35.56 -53.34 180)
+				(length 5.08)
 				(name "~{Main}"
 					(effects
 						(font
@@ -71718,7 +71730,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -60.96 180)
+				(at 35.56 -66.04 180)
 				(length 5.08)
 				(name "~{Device1}"
 					(effects
@@ -71736,7 +71748,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -83.82 180)
+				(at 35.56 -86.36 180)
 				(length 5.08)
 				(name "~{Device16}"
 					(effects
@@ -71754,7 +71766,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -88.9 180)
+				(at 35.56 -91.44 180)
 				(length 5.08)
 				(name "~{Device18}"
 					(effects
@@ -71772,7 +71784,7 @@
 				)
 			)
 			(pin output inverted
-				(at 35.56 -91.44 180)
+				(at 35.56 -93.98 180)
 				(length 5.08)
 				(name "~{Device19}"
 					(effects
@@ -77308,7 +77320,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Address"
-			(at 15.24 -87.63 0)
+			(at 15.24 -90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -77354,7 +77366,7 @@
 		(symbol "Main_Memory_Address_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -85.725) (xy 0 -85.725) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -88.265) (xy 0 -88.265) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -77367,7 +77379,7 @@
 		)
 		(symbol "Main_Memory_Address_1_0"
 			(pin input line
-				(at -5.08 -76.2 0)
+				(at -5.08 -78.74 0)
 				(length 5.08)
 				(name "A0"
 					(effects
@@ -77421,7 +77433,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -17.78 180)
+				(at 35.56 -20.32 180)
 				(length 5.08)
 				(name "MA23"
 					(effects
@@ -77439,7 +77451,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -20.32 180)
+				(at 35.56 -22.86 180)
 				(length 5.08)
 				(name "MA22"
 					(effects
@@ -77457,7 +77469,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -22.86 180)
+				(at 35.56 -25.4 180)
 				(length 5.08)
 				(name "MA21"
 					(effects
@@ -77475,7 +77487,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -25.4 180)
+				(at 35.56 -27.94 180)
 				(length 5.08)
 				(name "MA20"
 					(effects
@@ -77493,7 +77505,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -27.94 180)
+				(at 35.56 -30.48 180)
 				(length 5.08)
 				(name "MA19"
 					(effects
@@ -77511,7 +77523,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -50.8 180)
+				(at 35.56 -53.34 180)
 				(length 5.08)
 				(name "MA10"
 					(effects
@@ -77529,7 +77541,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -63.5 180)
+				(at 35.56 -66.04 180)
 				(length 5.08)
 				(name "MA5"
 					(effects
@@ -77547,7 +77559,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -66.04 180)
+				(at 35.56 -68.58 180)
 				(length 5.08)
 				(name "MA4"
 					(effects
@@ -77565,7 +77577,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -68.58 180)
+				(at 35.56 -71.12 180)
 				(length 5.08)
 				(name "MA3"
 					(effects
@@ -77583,7 +77595,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -71.12 180)
+				(at 35.56 -73.66 180)
 				(length 5.08)
 				(name "MA2"
 					(effects
@@ -77601,7 +77613,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -73.66 180)
+				(at 35.56 -76.2 180)
 				(length 5.08)
 				(name "MA1"
 					(effects
@@ -77619,7 +77631,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -76.2 180)
+				(at 35.56 -78.74 180)
 				(length 5.08)
 				(name "MA0"
 					(effects
@@ -77639,9 +77651,9 @@
 		)
 		(symbol "Main_Memory_Address_1_1"
 			(arc
-				(start 6.068 -51.016)
-				(mid 6.235 -52.6433)
-				(end 5.357 -54.0234)
+				(start 6.068 -53.556)
+				(mid 6.235 -55.1833)
+				(end 5.357 -56.5634)
 				(stroke
 					(width 0)
 					(type default)
@@ -77651,9 +77663,9 @@
 				)
 			)
 			(arc
-				(start 5.357 -35.3086)
-				(mid 6.2357 -36.6886)
-				(end 6.068 -38.316)
+				(start 5.357 -37.8486)
+				(mid 6.2357 -39.2286)
+				(end 6.068 -40.856)
 				(stroke
 					(width 0)
 					(type default)
@@ -77687,7 +77699,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -32.512)
+				(center 5.334 -35.052)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77698,7 +77710,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -33.274)
+				(center 5.334 -35.814)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77709,7 +77721,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -34.036)
+				(center 5.334 -36.576)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77720,7 +77732,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -55.372)
+				(center 5.334 -57.912)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77731,7 +77743,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -56.134)
+				(center 5.334 -58.674)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77742,7 +77754,7 @@
 				)
 			)
 			(circle
-				(center 5.334 -56.896)
+				(center 5.334 -59.436)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77754,7 +77766,7 @@
 			)
 			(polyline
 				(pts
-					(xy 5.842 -78.74) (xy 6.35 -79.248)
+					(xy 5.842 -81.28) (xy 6.35 -81.788)
 				)
 				(stroke
 					(width 0)
@@ -77790,7 +77802,7 @@
 			)
 			(polyline
 				(pts
-					(xy 6.858 -78.74) (xy 5.842 -78.74) (xy 6.35 -78.232)
+					(xy 6.858 -81.28) (xy 5.842 -81.28) (xy 6.35 -80.772)
 				)
 				(stroke
 					(width 0)
@@ -77801,9 +77813,9 @@
 				)
 			)
 			(arc
-				(start 7.338 -44.666)
-				(mid 5.3879 -41.754)
-				(end 6.068 -38.316)
+				(start 7.338 -47.206)
+				(mid 5.3879 -44.294)
+				(end 6.068 -40.856)
 				(stroke
 					(width 0)
 					(type default)
@@ -77813,9 +77825,9 @@
 				)
 			)
 			(arc
-				(start 6.068 -51.016)
-				(mid 5.3879 -47.578)
-				(end 7.338 -44.666)
+				(start 6.068 -53.556)
+				(mid 5.3879 -50.118)
+				(end 7.338 -47.206)
 				(stroke
 					(width 0)
 					(type default)
@@ -77849,9 +77861,9 @@
 				)
 			)
 			(arc
-				(start 23.8761 -38.354)
-				(mid 24.5562 -41.792)
-				(end 22.6061 -44.704)
+				(start 23.8761 -40.894)
+				(mid 24.5562 -44.332)
+				(end 22.6061 -47.244)
 				(stroke
 					(width 0)
 					(type default)
@@ -77861,9 +77873,9 @@
 				)
 			)
 			(arc
-				(start 22.6061 -44.704)
-				(mid 24.5562 -47.616)
-				(end 23.8761 -51.054)
+				(start 22.6061 -47.244)
+				(mid 24.5562 -50.156)
+				(end 23.8761 -53.594)
 				(stroke
 					(width 0)
 					(type default)
@@ -77897,9 +77909,9 @@
 				)
 			)
 			(arc
-				(start 23.489 -79.762)
-				(mid 23.9953 -80.0724)
-				(end 24.126 -80.652)
+				(start 23.489 -82.302)
+				(mid 23.9953 -82.6124)
+				(end 24.126 -83.192)
 				(stroke
 					(width 0)
 					(type default)
@@ -77909,9 +77921,9 @@
 				)
 			)
 			(arc
-				(start 24.128 -78.866)
-				(mid 23.9971 -79.4463)
-				(end 23.491 -79.756)
+				(start 24.128 -81.406)
+				(mid 23.9971 -81.9863)
+				(end 23.491 -82.296)
 				(stroke
 					(width 0)
 					(type default)
@@ -77921,7 +77933,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -32.512)
+				(center 24.638 -35.052)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77932,7 +77944,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -33.274)
+				(center 24.638 -35.814)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77943,7 +77955,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -34.036)
+				(center 24.638 -36.576)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77954,7 +77966,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -55.372)
+				(center 24.638 -57.912)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77965,7 +77977,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -56.134)
+				(center 24.638 -58.674)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -77976,7 +77988,7 @@
 				)
 			)
 			(circle
-				(center 24.638 -56.896)
+				(center 24.638 -59.436)
 				(radius 0.0001)
 				(stroke
 					(width 0.2)
@@ -78011,9 +78023,9 @@
 				)
 			)
 			(arc
-				(start 24.128 -78.866)
-				(mid 24.2877 -78.0992)
-				(end 24.89 -77.596)
+				(start 24.128 -81.406)
+				(mid 24.2877 -80.6392)
+				(end 24.89 -80.136)
 				(stroke
 					(width 0)
 					(type default)
@@ -78023,9 +78035,9 @@
 				)
 			)
 			(arc
-				(start 24.888 -81.922)
-				(mid 24.2861 -81.4196)
-				(end 24.126 -80.652)
+				(start 24.888 -84.462)
+				(mid 24.2861 -83.9596)
+				(end 24.126 -83.192)
 				(stroke
 					(width 0)
 					(type default)
@@ -78035,9 +78047,9 @@
 				)
 			)
 			(arc
-				(start 23.8761 -38.354)
-				(mid 23.7087 -36.7269)
-				(end 24.5871 -35.3466)
+				(start 23.8761 -40.894)
+				(mid 23.7087 -39.2669)
+				(end 24.5871 -37.8866)
 				(stroke
 					(width 0)
 					(type default)
@@ -78047,9 +78059,9 @@
 				)
 			)
 			(arc
-				(start 24.5871 -54.0614)
-				(mid 23.7079 -52.6815)
-				(end 23.8761 -51.054)
+				(start 24.5871 -56.6014)
+				(mid 23.7079 -55.2215)
+				(end 23.8761 -53.594)
 				(stroke
 					(width 0)
 					(type default)
@@ -78068,7 +78080,7 @@
 				)
 			)
 			(text "Socket"
-				(at 7.112 -78.74 0)
+				(at 7.112 -81.28 0)
 				(effects
 					(font
 						(size 1 1)
@@ -78077,7 +78089,7 @@
 				)
 			)
 			(text "Board"
-				(at 7.62 -44.704 0)
+				(at 7.62 -47.244 0)
 				(effects
 					(font
 						(size 1 1)
@@ -78095,7 +78107,7 @@
 				)
 			)
 			(text "Socket"
-				(at 22.352 -44.704 0)
+				(at 22.352 -47.244 0)
 				(effects
 					(font
 						(size 1 1)
@@ -78113,7 +78125,7 @@
 				)
 			)
 			(text "Board"
-				(at 23.239 -79.628 0)
+				(at 23.239 -82.168 0)
 				(effects
 					(font
 						(size 1 1)
@@ -78194,7 +78206,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -17.78 0)
+				(at -5.08 -20.32 0)
 				(length 5.08)
 				(name "A23"
 					(effects
@@ -78212,7 +78224,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -20.32 0)
+				(at -5.08 -22.86 0)
 				(length 5.08)
 				(name "A22"
 					(effects
@@ -78230,7 +78242,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -22.86 0)
+				(at -5.08 -25.4 0)
 				(length 5.08)
 				(name "A21"
 					(effects
@@ -78248,7 +78260,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -25.4 0)
+				(at -5.08 -27.94 0)
 				(length 5.08)
 				(name "A20"
 					(effects
@@ -78266,7 +78278,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -27.94 0)
+				(at -5.08 -30.48 0)
 				(length 5.08)
 				(name "A19"
 					(effects
@@ -78284,7 +78296,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -30.48 0)
+				(at -5.08 -33.02 0)
 				(length 5.08)
 				(name "A18"
 					(effects
@@ -78302,7 +78314,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -33.02 0)
+				(at -5.08 -35.56 0)
 				(length 5.08)
 				(name "A17"
 					(effects
@@ -78320,7 +78332,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -35.56 0)
+				(at -5.08 -38.1 0)
 				(length 5.08)
 				(name "A16"
 					(effects
@@ -78338,7 +78350,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -38.1 0)
+				(at -5.08 -40.64 0)
 				(length 5.08)
 				(name "A15"
 					(effects
@@ -78356,7 +78368,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -40.64 0)
+				(at -5.08 -43.18 0)
 				(length 5.08)
 				(name "A14"
 					(effects
@@ -78374,7 +78386,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -43.18 0)
+				(at -5.08 -45.72 0)
 				(length 5.08)
 				(name "A13"
 					(effects
@@ -78392,7 +78404,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -45.72 0)
+				(at -5.08 -48.26 0)
 				(length 5.08)
 				(name "A12"
 					(effects
@@ -78410,7 +78422,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -48.26 0)
+				(at -5.08 -50.8 0)
 				(length 5.08)
 				(name "A11"
 					(effects
@@ -78428,7 +78440,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -50.8 0)
+				(at -5.08 -53.34 0)
 				(length 5.08)
 				(name "A10"
 					(effects
@@ -78446,7 +78458,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -53.34 0)
+				(at -5.08 -55.88 0)
 				(length 5.08)
 				(name "A9"
 					(effects
@@ -78464,7 +78476,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -55.88 0)
+				(at -5.08 -58.42 0)
 				(length 5.08)
 				(name "A8"
 					(effects
@@ -78482,7 +78494,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -58.42 0)
+				(at -5.08 -60.96 0)
 				(length 5.08)
 				(name "A7"
 					(effects
@@ -78500,7 +78512,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -60.96 0)
+				(at -5.08 -63.5 0)
 				(length 5.08)
 				(name "A6"
 					(effects
@@ -78518,7 +78530,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -63.5 0)
+				(at -5.08 -66.04 0)
 				(length 5.08)
 				(name "A5"
 					(effects
@@ -78536,7 +78548,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -66.04 0)
+				(at -5.08 -68.58 0)
 				(length 5.08)
 				(name "A4"
 					(effects
@@ -78554,7 +78566,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -68.58 0)
+				(at -5.08 -71.12 0)
 				(length 5.08)
 				(name "A3"
 					(effects
@@ -78572,7 +78584,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -71.12 0)
+				(at -5.08 -73.66 0)
 				(length 5.08)
 				(name "A2"
 					(effects
@@ -78590,7 +78602,7 @@
 				)
 			)
 			(pin input line
-				(at -5.08 -73.66 0)
+				(at -5.08 -76.2 0)
 				(length 5.08)
 				(name "A1"
 					(effects
@@ -78608,7 +78620,7 @@
 				)
 			)
 			(pin input clock
-				(at -5.08 -78.74 0)
+				(at -5.08 -81.28 0)
 				(length 5.08)
 				(name "MCLK"
 					(effects
@@ -78626,7 +78638,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -81.28 0)
+				(at -5.08 -83.82 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -78644,7 +78656,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -83.82 0)
+				(at -5.08 -86.36 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -78734,7 +78746,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -30.48 180)
+				(at 35.56 -33.02 180)
 				(length 5.08)
 				(name "MA18"
 					(effects
@@ -78752,7 +78764,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -33.02 180)
+				(at 35.56 -35.56 180)
 				(length 5.08)
 				(name "MA17"
 					(effects
@@ -78770,7 +78782,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -35.56 180)
+				(at 35.56 -38.1 180)
 				(length 5.08)
 				(name "MA16"
 					(effects
@@ -78788,7 +78800,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -38.1 180)
+				(at 35.56 -40.64 180)
 				(length 5.08)
 				(name "MA15"
 					(effects
@@ -78806,7 +78818,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -40.64 180)
+				(at 35.56 -43.18 180)
 				(length 5.08)
 				(name "MA14"
 					(effects
@@ -78824,7 +78836,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -43.18 180)
+				(at 35.56 -45.72 180)
 				(length 5.08)
 				(name "MA13"
 					(effects
@@ -78842,7 +78854,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -45.72 180)
+				(at 35.56 -48.26 180)
 				(length 5.08)
 				(name "MA12"
 					(effects
@@ -78860,7 +78872,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -48.26 180)
+				(at 35.56 -50.8 180)
 				(length 5.08)
 				(name "MA11"
 					(effects
@@ -78878,7 +78890,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -53.34 180)
+				(at 35.56 -55.88 180)
 				(length 5.08)
 				(name "MA9"
 					(effects
@@ -78896,7 +78908,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -55.88 180)
+				(at 35.56 -58.42 180)
 				(length 5.08)
 				(name "MA8"
 					(effects
@@ -78914,7 +78926,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -58.42 180)
+				(at 35.56 -60.96 180)
 				(length 5.08)
 				(name "MA7"
 					(effects
@@ -78932,7 +78944,7 @@
 				)
 			)
 			(pin output line
-				(at 35.56 -60.96 180)
+				(at 35.56 -63.5 180)
 				(length 5.08)
 				(name "MA6"
 					(effects
@@ -78950,7 +78962,7 @@
 				)
 			)
 			(pin output clock
-				(at 35.56 -78.74 180)
+				(at 35.56 -81.28 180)
 				(length 5.08)
 				(name "CLK"
 					(effects
@@ -78968,7 +78980,7 @@
 				)
 			)
 			(pin output inverted_clock
-				(at 35.56 -81.28 180)
+				(at 35.56 -83.82 180)
 				(length 5.08)
 				(name "~{CLK}"
 					(effects
@@ -78986,7 +78998,7 @@
 				)
 			)
 			(pin no_connect line
-				(at 35.56 -83.82 180)
+				(at 35.56 -86.36 180)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -79834,7 +79846,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Main_Memory_Data"
-			(at 15.24 -41.91 0)
+			(at 15.24 -44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -79852,7 +79864,7 @@
 			)
 		)
 		(property "Description" "Main Memory Data"
-			(at 15.748 -31.75 0)
+			(at 15.748 -34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -79860,7 +79872,7 @@
 			)
 		)
 		(property "Silkscreen" "Main Memory Data"
-			(at 14.605 -15.24 0)
+			(at 14.605 -17.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -79880,7 +79892,7 @@
 		(symbol "Main_Memory_Data_0_1"
 			(polyline
 				(pts
-					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -40.005) (xy 0 -40.005) (xy 0 1.905)
+					(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -42.545) (xy 0 -42.545) (xy 0 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -79893,7 +79905,7 @@
 		)
 		(symbol "Main_Memory_Data_1_0"
 			(pin no_connect line
-				(at 35.56 -38.1 180)
+				(at 35.56 -40.64 180)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -79914,9 +79926,9 @@
 		)
 		(symbol "Main_Memory_Data_1_1"
 			(arc
-				(start 5.814 -25.108)
-				(mid 5.981 -26.7353)
-				(end 5.103 -28.1154)
+				(start 5.814 -27.648)
+				(mid 5.981 -29.2753)
+				(end 5.103 -30.6554)
 				(stroke
 					(width 0)
 					(type default)
@@ -79926,9 +79938,9 @@
 				)
 			)
 			(arc
-				(start 5.103 -9.4006)
-				(mid 5.9817 -10.7806)
-				(end 5.814 -12.408)
+				(start 5.103 -11.9406)
+				(mid 5.9817 -13.3206)
+				(end 5.814 -14.948)
 				(stroke
 					(width 0)
 					(type default)
@@ -79986,9 +79998,9 @@
 				)
 			)
 			(arc
-				(start 7.084 -18.758)
-				(mid 5.1339 -15.846)
-				(end 5.814 -12.408)
+				(start 7.084 -21.298)
+				(mid 5.1339 -18.386)
+				(end 5.814 -14.948)
 				(stroke
 					(width 0)
 					(type default)
@@ -79998,9 +80010,9 @@
 				)
 			)
 			(arc
-				(start 5.814 -25.108)
-				(mid 5.1339 -21.67)
-				(end 7.084 -18.758)
+				(start 5.814 -27.648)
+				(mid 5.1339 -24.21)
+				(end 7.084 -21.298)
 				(stroke
 					(width 0)
 					(type default)
@@ -80034,9 +80046,9 @@
 				)
 			)
 			(arc
-				(start 24.6381 -12.7)
-				(mid 25.3182 -16.138)
-				(end 23.3681 -19.05)
+				(start 24.6381 -15.24)
+				(mid 25.3182 -18.678)
+				(end 23.3681 -21.59)
 				(stroke
 					(width 0)
 					(type default)
@@ -80046,9 +80058,9 @@
 				)
 			)
 			(arc
-				(start 23.3681 -19.05)
-				(mid 25.3182 -21.962)
-				(end 24.6381 -25.4)
+				(start 23.3681 -21.59)
+				(mid 25.3182 -24.502)
+				(end 24.6381 -27.94)
 				(stroke
 					(width 0)
 					(type default)
@@ -80058,9 +80070,9 @@
 				)
 			)
 			(arc
-				(start 25.3491 -28.4074)
-				(mid 24.4703 -27.0274)
-				(end 24.6381 -25.4)
+				(start 25.3491 -30.9474)
+				(mid 24.4703 -29.5674)
+				(end 24.6381 -27.94)
 				(stroke
 					(width 0)
 					(type default)
@@ -80070,9 +80082,9 @@
 				)
 			)
 			(arc
-				(start 24.6381 -12.7)
-				(mid 24.4737 -11.074)
-				(end 25.3491 -9.6926)
+				(start 24.6381 -15.24)
+				(mid 24.4737 -13.614)
+				(end 25.3491 -12.2326)
 				(stroke
 					(width 0)
 					(type default)
@@ -80091,7 +80103,7 @@
 				)
 			)
 			(text "Board"
-				(at 7.366 -18.796 0)
+				(at 7.366 -21.336 0)
 				(effects
 					(font
 						(size 1 1)
@@ -80109,7 +80121,7 @@
 				)
 			)
 			(text "Socket"
-				(at 23.114 -19.05 0)
+				(at 23.114 -21.59 0)
 				(effects
 					(font
 						(size 1 1)
@@ -80190,7 +80202,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -10.16 0)
+				(at -5.08 -12.7 0)
 				(length 5.08)
 				(name "D7"
 					(effects
@@ -80208,7 +80220,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -12.7 0)
+				(at -5.08 -15.24 0)
 				(length 5.08)
 				(name "D6"
 					(effects
@@ -80226,7 +80238,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -15.24 0)
+				(at -5.08 -17.78 0)
 				(length 5.08)
 				(name "D5"
 					(effects
@@ -80244,7 +80256,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -17.78 0)
+				(at -5.08 -20.32 0)
 				(length 5.08)
 				(name "D4"
 					(effects
@@ -80262,7 +80274,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -20.32 0)
+				(at -5.08 -22.86 0)
 				(length 5.08)
 				(name "D3"
 					(effects
@@ -80280,7 +80292,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -22.86 0)
+				(at -5.08 -25.4 0)
 				(length 5.08)
 				(name "D2"
 					(effects
@@ -80298,7 +80310,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -25.4 0)
+				(at -5.08 -27.94 0)
 				(length 5.08)
 				(name "D1"
 					(effects
@@ -80316,7 +80328,7 @@
 				)
 			)
 			(pin tri_state line
-				(at -5.08 -27.94 0)
+				(at -5.08 -30.48 0)
 				(length 5.08)
 				(name "D0"
 					(effects
@@ -80326,25 +80338,6 @@
 					)
 				)
 				(number "15"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at -5.08 -30.48 0)
-				(length 5.08)
-				(hide yes)
-				(name "N.C."
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "16"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -80363,6 +80356,25 @@
 						)
 					)
 				)
+				(number "16"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at -5.08 -35.56 0)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
 				(number "27"
 					(effects
 						(font
@@ -80372,7 +80384,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -35.56 0)
+				(at -5.08 -38.1 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -80390,7 +80402,7 @@
 				)
 			)
 			(pin passive line
-				(at -5.08 -38.1 0)
+				(at -5.08 -40.64 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -80480,7 +80492,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -10.16 180)
+				(at 35.56 -12.7 180)
 				(length 5.08)
 				(name "MD7"
 					(effects
@@ -80498,7 +80510,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -12.7 180)
+				(at 35.56 -15.24 180)
 				(length 5.08)
 				(name "MD6"
 					(effects
@@ -80516,7 +80528,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -15.24 180)
+				(at 35.56 -17.78 180)
 				(length 5.08)
 				(name "MD5"
 					(effects
@@ -80534,7 +80546,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -17.78 180)
+				(at 35.56 -20.32 180)
 				(length 5.08)
 				(name "MD4"
 					(effects
@@ -80552,7 +80564,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -20.32 180)
+				(at 35.56 -22.86 180)
 				(length 5.08)
 				(name "MD3"
 					(effects
@@ -80570,7 +80582,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -22.86 180)
+				(at 35.56 -25.4 180)
 				(length 5.08)
 				(name "MD2"
 					(effects
@@ -80588,7 +80600,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -25.4 180)
+				(at 35.56 -27.94 180)
 				(length 5.08)
 				(name "MD1"
 					(effects
@@ -80606,7 +80618,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 35.56 -27.94 180)
+				(at 35.56 -30.48 180)
 				(length 5.08)
 				(name "MD0"
 					(effects
@@ -80616,25 +80628,6 @@
 					)
 				)
 				(number "18"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin no_connect line
-				(at 35.56 -30.48 180)
-				(length 5.08)
-				(hide yes)
-				(name "N.C."
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "29"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -80653,7 +80646,7 @@
 						)
 					)
 				)
-				(number "30"
+				(number "29"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -80663,6 +80656,25 @@
 			)
 			(pin no_connect line
 				(at 35.56 -35.56 180)
+				(length 5.08)
+				(hide yes)
+				(name "N.C."
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "30"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin no_connect line
+				(at 35.56 -38.1 180)
 				(length 5.08)
 				(hide yes)
 				(name "N.C."
@@ -121098,8 +121110,26 @@
 					)
 				)
 			)
-			(pin input line
+			(pin input inverted
 				(at -5.08 -20.32 0)
+				(length 5.08)
+				(name "~{DE}"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "58"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -5.08 -22.86 0)
 				(length 5.08)
 				(name "Bank_Latch"
 					(effects
@@ -121109,24 +121139,6 @@
 					)
 				)
 				(number "30"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin input inverted
-				(at -5.08 -22.86 0)
-				(length 5.08)
-				(name "~{Data_Output}"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "58"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -124636,26 +124648,8 @@
 					)
 				)
 			)
-			(pin output line
-				(at 35.56 -2.54 180)
-				(length 5.08)
-				(name "Bank_Latch"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "10"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
 			(pin output inverted
-				(at 35.56 -5.08 180)
+				(at 35.56 -2.54 180)
 				(length 5.08)
 				(name "~{Data_Output}"
 					(effects
@@ -124665,6 +124659,24 @@
 					)
 				)
 				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin output line
+				(at 35.56 -5.08 180)
+				(length 5.08)
+				(name "Bank_Latch"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
 					(effects
 						(font
 							(size 1.27 1.27)

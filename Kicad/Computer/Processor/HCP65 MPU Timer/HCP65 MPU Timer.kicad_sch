@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "MPU Timer")
-		(date "2024-02-22")
-		(rev "V1")
+		(date "2026-01-30")
+		(rev "V2")
 	)
 	(lib_symbols
 		(symbol "Diodes_Inc:AP7365-33WG-7"
@@ -4466,10 +4466,6 @@
 		(uuid "10a053e4-8242-4f4e-9908-1d090086b25f")
 	)
 	(no_connect
-		(at 59.69 132.08)
-		(uuid "1c5331cc-64e1-4152-9aed-e14f1192604a")
-	)
-	(no_connect
 		(at 113.03 93.98)
 		(uuid "1eba101b-f1d8-455e-a7b0-fb93c064135d")
 	)
@@ -4666,6 +4662,16 @@
 			(type default)
 		)
 		(uuid "6bcd95ff-6a51-4ead-aa6a-628fdc2cc852")
+	)
+	(wire
+		(pts
+			(xy 60.96 132.08) (xy 59.69 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "766f5e36-e1b9-4e7c-9fd5-8a5daebd0fcf")
 	)
 	(wire
 		(pts
@@ -6231,6 +6237,30 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 60.96 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "fc69b7d3-152e-4234-b1e0-d63926a99d7c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 66.0484 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)

@@ -5,9 +5,9 @@
 	(uuid "5ce90b85-49a2-4937-86c7-662b0d6f8431")
 	(paper "A3")
 	(title_block
-		(title "HCP65 W65C816 Clock Hold")
-		(date "2024-05-11")
-		(rev "V1")
+		(title "W65C816 Clock Hold")
+		(date "2026-01-29")
+		(rev "V2")
 	)
 	(lib_symbols
 		(symbol "Bourns:CAY16-200J4LF"
@@ -7265,10 +7265,6 @@
 		(uuid "fa79873c-ba65-4c76-b770-8eb9e874755a")
 	)
 	(no_connect
-		(at 341.63 180.34)
-		(uuid "2c12ebfe-aaad-4f3c-a487-08886cd0142e")
-	)
-	(no_connect
 		(at 228.6 54.61)
 		(uuid "36af59f3-c8c4-4b73-a746-2fc05d3a7b34")
 	)
@@ -8016,6 +8012,16 @@
 	)
 	(wire
 		(pts
+			(xy 341.63 180.34) (xy 342.9 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "989bda3e-8c7b-472c-aa92-3bb20c8fdd01")
+	)
+	(wire
+		(pts
 			(xy 87.63 36.83) (xy 87.63 49.53)
 		)
 		(stroke
@@ -8573,16 +8579,6 @@
 			(type default)
 		)
 		(uuid "ed43ba42-f028-492d-b964-dbc2798dc435")
-	)
-	(wire
-		(pts
-			(xy 341.63 180.34) (xy 342.9 180.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ee27f6dd-2813-4d5e-af93-5547ff893fb7")
 	)
 	(wire
 		(pts
@@ -11522,6 +11518,30 @@
 		(uuid "ee62491a-a37a-4a83-9338-224c49652ea3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 323.7867 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 341.63 180.34 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify right)
+		)
+		(uuid "f0d75a2f-903a-4351-a472-1349e0891946")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 336.5416 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)

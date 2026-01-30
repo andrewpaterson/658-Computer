@@ -6,8 +6,8 @@
 	(paper "A3")
 	(title_block
 		(title "MPU NMI")
-		(date "2024-02-22")
-		(rev "V1")
+		(date "2026-01-30")
+		(rev "V2")
 	)
 	(lib_symbols
 		(symbol "Diodes_Inc:AP7365-33WG-7"
@@ -9119,8 +9119,8 @@
 			)
 		)
 	)
-	(global_label "Timer"
-		(shape output)
+	(global_label "3.3V"
+		(shape passive)
 		(at 53.34 152.4 0)
 		(fields_autoplaced yes)
 		(effects
@@ -9128,13 +9128,12 @@
 				(size 1 1)
 				(thickness 0.2)
 				(bold yes)
-				(italic yes)
 			)
 			(justify left)
 		)
 		(uuid "08856064-9394-4719-a218-615c3afd43c2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 61.4657 152.4 0)
+			(at 58.4284 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)

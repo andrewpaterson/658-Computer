@@ -6,8 +6,8 @@
 	(paper "A5")
 	(title_block
 		(title "Main Memory Address")
-		(date "2023-12-05")
-		(rev "V0")
+		(date "2026-01-29")
+		(rev "V1")
 	)
 	(lib_symbols
 		(symbol "Diodes_Inc:AP7365-33WG-7"
@@ -3261,112 +3261,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:R_0805"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "R"
-				(at 2.54 1.778 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "?Ω"
-				(at 2.54 -1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:R_0805"
-				(at 17.526 -7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "R_0805_0_1"
-				(rectangle
-					(start 0.762 0.762)
-					(end 4.318 -0.762)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_0805_1_1"
-				(pin passive line
-					(at 0 0 0)
-					(length 0.72)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 0.72)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Nexperia:74LVC16244ADGG,112"
 			(pin_names
 				(offset 0.762)
@@ -4724,372 +4618,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Nexperia:74LVC1GX04GW,125"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 12.7 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "74LVC1GX04GW,125"
-				(at 12.7 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
-				(at 23.495 -14.605 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1GX04.pdf"
-				(at 23.495 -17.145 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "inverter and buffer"
-				(at 12.7 -10.795 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 23.495 -22.225 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 23.495 -24.765 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC1GX04GW,125"
-				(at 23.495 -27.305 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-74LVC1GX04GW-G"
-				(at 23.495 -29.845 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1GX04GW125?qs=me8TqzrmIYXdz6qx7bR6zQ%3D%3D"
-				(at 23.495 -32.385 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "'1GX04"
-				(at 12.7 -13.335 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Garbage" "NEXPERIA - 74LVC1GX04GW,125 - LOGIC, CRYSTAL OSCILLATOR DRIVER, SC88-6"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "74LVC1GX04GW,125_0_0"
-				(pin no_connect line
-					(at 0 0 0)
-					(length 5.08)
-					(hide yes)
-					(name "n.c."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 -3.81 0)
-					(length 5.08)
-					(name "X1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 0 180)
-					(length 5.08)
-					(hide yes)
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 25.4 -2.54 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output inverted
-					(at 25.4 -5.08 180)
-					(length 5.08)
-					(name "~{Y}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LVC1GX04GW,125_0_1"
-				(polyline
-					(pts
-						(xy 5.08 1.905) (xy 20.32 1.905) (xy 20.32 -9.525) (xy 5.08 -9.525) (xy 5.08 1.905)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 9.525 -2.54) (xy 10.7949 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 9.525 -5.08) (xy 10.7949 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 10.795 -1.524)
-					(end 10.795 -3.556)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.795 -3.556) (xy 13.335 -2.54) (xy 10.795 -1.524)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 10.795 -4.064)
-					(end 10.795 -6.096)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.795 -6.096) (xy 13.335 -5.08) (xy 10.795 -4.064)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 13.335 -2.54) (xy 15.875 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 13.843 -5.08)
-					(radius 0.508)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.351 -5.08) (xy 15.875 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-	)
-	(junction
-		(at 92.71 57.15)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1185eabb-904b-4e82-b44a-7cc8aeb25ff2")
-	)
-	(junction
-		(at 92.71 64.77)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "13043a07-044e-425d-92c9-6892ff41985c")
 	)
 	(junction
 		(at 36.83 118.11)
@@ -5108,6 +4636,10 @@
 		(uuid "097676ba-5e83-4067-8c79-15b91d5842db")
 	)
 	(no_connect
+		(at 24.13 96.52)
+		(uuid "1ae09332-e923-44e8-a2fb-a2bd8b2714a8")
+	)
+	(no_connect
 		(at 62.23 123.19)
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
@@ -5120,12 +4652,16 @@
 		(uuid "39090904-cf6a-4d2e-af14-3d68a1bb0829")
 	)
 	(no_connect
+		(at 44.45 22.86)
+		(uuid "59a7695f-2cc5-4141-856b-7b5eea552eac")
+	)
+	(no_connect
 		(at 144.78 73.66)
 		(uuid "6d86d1da-3fc2-446b-b027-c1c2a7b57ad3")
 	)
 	(no_connect
-		(at 44.45 27.94)
-		(uuid "a4b0a63c-eb9d-4f99-9d9f-d16d43d4a838")
+		(at 44.45 25.4)
+		(uuid "ae36781f-325c-42aa-b8b9-d64888187097")
 	)
 	(no_connect
 		(at 144.78 71.12)
@@ -5177,26 +4713,6 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 71.12) (xy 92.71 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "33f7cc98-466d-4e0f-9702-86f06819b5a0")
-	)
-	(wire
-		(pts
-			(xy 87.63 62.23) (xy 92.71 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "34fcef0b-b355-4509-a8de-9c6467f7b699")
-	)
-	(wire
-		(pts
 			(xy 45.72 76.2) (xy 44.45 76.2)
 		)
 		(stroke
@@ -5204,6 +4720,16 @@
 			(type default)
 		)
 		(uuid "3d420ff7-8ee6-48b3-af66-58483e04a6b4")
+	)
+	(wire
+		(pts
+			(xy 45.72 27.94) (xy 44.45 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "471625a2-858d-4426-9372-020d4dd10a2c")
 	)
 	(wire
 		(pts
@@ -5267,26 +4793,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 25.4) (xy 45.72 25.4)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5fbd73ea-6b4c-41ad-b8dc-c2129c24a65e")
-	)
-	(wire
-		(pts
-			(xy 92.71 62.23) (xy 92.71 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "614275a8-f77a-495b-a821-301907303db0")
-	)
-	(wire
-		(pts
 			(xy 45.72 91.44) (xy 44.45 91.44)
 		)
 		(stroke
@@ -5304,16 +4810,6 @@
 			(type default)
 		)
 		(uuid "69f155f3-452f-480c-8384-23faf4a839b3")
-	)
-	(wire
-		(pts
-			(xy 92.71 57.15) (xy 95.25 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "69f58d1c-2a20-4623-8c1a-753be5c58ab0")
 	)
 	(wire
 		(pts
@@ -5347,26 +4843,6 @@
 	)
 	(wire
 		(pts
-			(xy 95.25 50.8) (xy 92.71 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "74e31e35-e0cc-435f-ba2b-8de64ba68786")
-	)
-	(wire
-		(pts
-			(xy 92.71 71.12) (xy 92.71 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "77fc42c4-a89d-4c2f-b189-b72ba1966254")
-	)
-	(wire
-		(pts
 			(xy 45.72 73.66) (xy 44.45 73.66)
 		)
 		(stroke
@@ -5384,16 +4860,6 @@
 			(type default)
 		)
 		(uuid "7f517f40-8986-44ac-8446-838304d71027")
-	)
-	(wire
-		(pts
-			(xy 92.71 64.77) (xy 95.25 64.77)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "87df3b0c-58b2-4fa4-b6db-a510ae12462f")
 	)
 	(wire
 		(pts
@@ -5424,16 +4890,6 @@
 			(type default)
 		)
 		(uuid "97a8ebb8-88d3-4782-9398-8b6dcd1af3ff")
-	)
-	(wire
-		(pts
-			(xy 87.63 59.69) (xy 92.71 59.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9bc80d03-49d9-4895-9d39-032f026a3062")
 	)
 	(wire
 		(pts
@@ -5547,16 +5003,6 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 22.86) (xy 45.72 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c915ef95-7f74-449e-8ddd-080a3433fba7")
-	)
-	(wire
-		(pts
 			(xy 45.72 45.72) (xy 44.45 45.72)
 		)
 		(stroke
@@ -5564,26 +5010,6 @@
 			(type default)
 		)
 		(uuid "d00c17bb-f64f-4942-bc45-a689391cd985")
-	)
-	(wire
-		(pts
-			(xy 92.71 59.69) (xy 92.71 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "df119732-a912-45c8-8673-da06694bb089")
-	)
-	(wire
-		(pts
-			(xy 92.71 50.8) (xy 92.71 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e4e2dcf3-83ee-4e1d-91ff-221e0e1e7eb3")
 	)
 	(wire
 		(pts
@@ -5845,36 +5271,6 @@
 		)
 		(uuid "2961e5ee-5f88-4284-858c-e84108ae2c16")
 	)
-	(label "GND"
-		(at 62.23 64.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "296929b0-5dda-489f-b618-aa86687b4924")
-	)
-	(label "CLK"
-		(at 100.33 57.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "29d176af-6b12-4333-ae9a-22ea5547da0d")
-	)
-	(label "~{CLK}"
-		(at 100.33 64.77 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2b6703c4-dfda-40fd-a26e-7e1b67de5e2c")
-	)
 	(label "MA6"
 		(at 191.77 45.72 0)
 		(effects
@@ -5964,16 +5360,6 @@
 			(justify left bottom)
 		)
 		(uuid "4022ab4f-d52e-4cc2-b50e-b68d88372212")
-	)
-	(label "GND"
-		(at 68.58 81.28 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "40c69fa4-fc49-44a1-a9bc-1b7842e04fc1")
 	)
 	(label "GND"
 		(at 27.94 123.19 0)
@@ -6144,16 +5530,6 @@
 			(justify right bottom)
 		)
 		(uuid "6dab5719-32f5-4bb7-b89c-528c393f3a9a")
-	)
-	(label "3.3V"
-		(at 87.63 57.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7304b890-d623-4fcf-af60-a5a7204aff14")
 	)
 	(label "A2"
 		(at 166.37 35.56 180)
@@ -6376,16 +5752,6 @@
 		(uuid "944b6934-a442-4a07-9c31-c88cfbbebcba")
 	)
 	(label "GND"
-		(at 100.33 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "96a228eb-8881-475e-ac7a-3626365284d1")
-	)
-	(label "GND"
 		(at 166.37 96.52 180)
 		(effects
 			(font
@@ -6504,16 +5870,6 @@
 			(justify left bottom)
 		)
 		(uuid "b39af118-c84e-4c7c-86e2-a785c4040d1a")
-	)
-	(label "GND"
-		(at 100.33 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b600e3e0-07b6-4cf5-b213-18105b8b5776")
 	)
 	(label "GND"
 		(at 191.77 93.98 0)
@@ -6785,16 +6141,6 @@
 		)
 		(uuid "f14007b6-adfc-4b1f-984c-8d76b2298d0a")
 	)
-	(label "3.3V"
-		(at 63.5 81.28 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f301e5c7-372c-44a8-aaed-78d965ac4ce7")
-	)
 	(label "~{Main RD}"
 		(at 144.78 66.04 0)
 		(effects
@@ -6804,16 +6150,6 @@
 			(justify left bottom)
 		)
 		(uuid "f513bafd-e806-44e6-9639-cb332f296ddc")
-	)
-	(label "MCLK"
-		(at 62.23 60.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f7d56d43-1bee-4e58-9a46-72712d73c838")
 	)
 	(label "~{Main Access}"
 		(at 119.38 55.88 180)
@@ -6850,6 +6186,30 @@
 		(uuid "07327b32-12f2-47e7-98c5-e209b6d096eb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 52.4547 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 45.72 27.94 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "081b633c-2294-485a-9b54-6ae9151573da")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 50.8084 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7003,30 +6363,6 @@
 			)
 		)
 	)
-	(global_label "~{CLK}"
-		(shape output)
-		(at 45.72 25.4 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "2bc047da-4573-437f-a6b9-0f8fded7ce2d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 52.2733 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "MA13"
 		(shape output)
 		(at 45.72 63.5 0)
@@ -7090,30 +6426,6 @@
 		(uuid "3340fbf1-d0da-4543-982a-8ac0e495959b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 52.4547 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "CLK"
-		(shape output)
-		(at 45.72 22.86 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "389d3fab-6ef0-483e-bd91-4a730df90750")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 52.2733 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7786,30 +7098,6 @@
 		(uuid "97271d32-4b4c-4e25-be05-8b3009a43062")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 17.6372 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "MCLK"
-		(shape input)
-		(at 24.13 96.52 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify right)
-		)
-		(uuid "9afb15d1-fea4-443a-9023-f05d60b69b20")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 16.1253 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8528,423 +7816,6 @@
 			(project "Sound Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "C23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 95.25 57.15 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "420eb010-77a5-4034-9d82-8d0bec2f843a")
-		(property "Reference" "R1"
-			(at 97.79 55.372 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "20Ω"
-			(at 97.79 59.055 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 112.776 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 95.25 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 95.25 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f213415b-4942-4202-978b-a0bd3894c6c6")
-		)
-		(pin "2"
-			(uuid "ce6a25a3-382b-4193-b695-5ec8e9c291f9")
-		)
-		(instances
-			(project ""
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:R_0805")
-		(at 95.25 64.77 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4f27e995-a635-48c1-9b27-ccc87cb67588")
-		(property "Reference" "R2"
-			(at 97.79 62.992 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "20Ω"
-			(at 97.79 66.675 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 112.776 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 95.25 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 95.25 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3ae16f59-b5c3-4be6-a5ef-b5e1cee701f0")
-		)
-		(pin "2"
-			(uuid "10f50e5d-174e-4444-a12f-7165464526aa")
-		)
-		(instances
-			(project "HCP65 Main Memory Address"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "R2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 63.5 81.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5a2a7e97-b87c-45ce-8e7e-af4bff9f90f1")
-		(property "Reference" "C6"
-			(at 65.786 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 66.04 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 80.264 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 65.7225 80.9625 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 63.5 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9f7e1834-80d8-4747-813a-2786326eed0d")
-		)
-		(pin "2"
-			(uuid "967097d7-abf3-49d3-8963-aa204dfb8888")
-		)
-		(instances
-			(project "HCP65 Main Memory Address"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C6")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC1GX04GW,125")
-		(at 62.23 57.15 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7d59adbc-bfc6-44f8-a930-c64adbf094da")
-		(property "Reference" "IC3"
-			(at 74.93 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LVC1GX04GW,125"
-			(at 74.93 53.975 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOP65P210X110-6N"
-			(at 85.725 71.755 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1GX04.pdf"
-			(at 85.725 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "inverter and buffer"
-			(at 74.93 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 85.725 79.375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 85.725 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC1GX04GW,125"
-			(at 85.725 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC1GX04GW-G"
-			(at 85.725 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1GX04GW125?qs=me8TqzrmIYXdz6qx7bR6zQ%3D%3D"
-			(at 85.725 89.535 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "'1GX04"
-			(at 74.93 70.485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Garbage" "NEXPERIA - 74LVC1GX04GW,125 - LOGIC, CRYSTAL OSCILLATOR DRIVER, SC88-6"
-			(at 62.23 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "6"
-			(uuid "fa1af99b-4cfa-4ea9-84fe-a6ffe0182663")
-		)
-		(pin "1"
-			(uuid "47ced062-78d9-4b58-911e-3826e3e7daca")
-		)
-		(pin "4"
-			(uuid "a57392f3-b8b4-4f2d-8954-6cc540ae49a5")
-		)
-		(pin "5"
-			(uuid "65d8830f-47bc-419e-90ab-5a18e459a7a7")
-		)
-		(pin "2"
-			(uuid "04f5fd9c-9ba3-4fb9-a6bf-b5f3737c7554")
-		)
-		(pin "3"
-			(uuid "5d3b9e55-75c1-436b-a524-49e6543b943c")
-		)
-		(instances
-			(project ""
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "IC3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 95.25 50.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "83bdab50-6882-406f-975d-6cac78733d93")
-		(property "Reference" "C10"
-			(at 97.536 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 97.79 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 112.014 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 97.4725 50.4825 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 95.25 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4fc17f92-b3c2-42a5-8e59-ea03129ad57a")
-		)
-		(pin "2"
-			(uuid "ef989644-c656-440c-8fe4-9a0bab9239f0")
-		)
-		(instances
-			(project "HCP65 Main Memory Address"
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -9833,73 +8704,6 @@
 			(project "Sound Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "C23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 95.25 71.12 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c73ae219-9222-451b-b0eb-a82edd528515")
-		(property "Reference" "C7"
-			(at 97.536 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "5pF"
-			(at 97.79 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 112.014 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 97.4725 70.8025 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 95.25 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "91426f02-6a9a-4fca-b183-9997d90a6478")
-		)
-		(pin "2"
-			(uuid "14f4c574-0569-4271-b7c4-e856fb94a056")
-		)
-		(instances
-			(project ""
-				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
-					(reference "C7")
 					(unit 1)
 				)
 			)

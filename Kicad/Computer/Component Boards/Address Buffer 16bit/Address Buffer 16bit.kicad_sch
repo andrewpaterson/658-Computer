@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Address Buffer 16bit")
-		(date "2024-02-01")
-		(rev "V0")
+		(date "2026-01-29")
+		(rev "V1")
 	)
 	(lib_symbols
 		(symbol "Bourns:CAY16-103J4LF"
@@ -3700,10 +3700,6 @@
 		(at 71.12 161.29)
 		(uuid "2acb9f61-7e35-41b1-ad56-ec6ab018021d")
 	)
-	(no_connect
-		(at 67.31 66.04)
-		(uuid "a31198a2-7011-44f4-bd93-f4469b32183c")
-	)
 	(wire
 		(pts
 			(xy 177.8 87.63) (xy 138.43 87.63)
@@ -4153,6 +4149,16 @@
 			(type default)
 		)
 		(uuid "7b32a4ad-9d6a-4ca8-93b9-7e3abee9b2c4")
+	)
+	(wire
+		(pts
+			(xy 68.58 66.04) (xy 67.31 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80109a5d-99ed-438a-a165-df4ca2d36e12")
 	)
 	(wire
 		(pts
@@ -6206,6 +6212,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 68.58 66.04 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left)
+		)
+		(uuid "49d165ae-9e8e-4b67-8362-a9e7d6754920")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 73.2934 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)

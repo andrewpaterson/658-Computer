@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "HCP65 Device Reset")
-		(date "2024-09-20")
-		(rev "V1")
+		(date "2026-01-29")
+		(rev "V2")
 	)
 	(lib_symbols
 		(symbol "Diodes_Inc:AP7365-33WG-7"
@@ -4381,10 +4381,6 @@
 		(uuid "054e65db-5e9d-47fa-a9e7-b124fbbc9ae8")
 	)
 	(no_connect
-		(at 53.34 106.68)
-		(uuid "4e320a41-ba52-461e-a412-c83eeef6f7a7")
-	)
-	(no_connect
 		(at 227.33 123.19)
 		(uuid "6a7d12bb-95ff-4370-9c58-408ea8c2ce87")
 	)
@@ -4421,6 +4417,16 @@
 			(type default)
 		)
 		(uuid "0207d76a-5ff2-40d8-9b21-91c722a2fcc9")
+	)
+	(wire
+		(pts
+			(xy 74.93 119.38) (xy 73.66 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0509abb9-8b65-4a09-a564-a2f7ceb8c023")
 	)
 	(wire
 		(pts
@@ -4541,6 +4547,16 @@
 			(type default)
 		)
 		(uuid "43c205dd-f32f-4ac9-8c8d-64856876ae23")
+	)
+	(wire
+		(pts
+			(xy 52.07 132.08) (xy 53.34 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c5ac9ea-883d-44e6-bba5-9f7df22aa3de")
 	)
 	(wire
 		(pts
@@ -5848,7 +5864,7 @@
 	)
 	(global_label "D3"
 		(shape tri_state)
-		(at 53.34 119.38 180)
+		(at 53.34 114.3 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5860,7 +5876,31 @@
 		)
 		(uuid "10b43248-9c55-4b91-a337-789a24c13371")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 119.38 0)
+			(at 46.764 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 52.07 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify right)
+		)
+		(uuid "27a36e2d-68a6-417a-bda8-0ccf99e4221c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 46.9816 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6088,7 +6128,7 @@
 	)
 	(global_label "D4"
 		(shape tri_state)
-		(at 53.34 121.92 180)
+		(at 53.34 119.38 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6100,7 +6140,7 @@
 		)
 		(uuid "60e8b56e-e819-4492-a8c7-0eb44eb0082f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 121.92 0)
+			(at 46.764 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6208,7 +6248,7 @@
 	)
 	(global_label "D2"
 		(shape tri_state)
-		(at 53.34 114.3 180)
+		(at 53.34 111.76 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6220,7 +6260,7 @@
 		)
 		(uuid "78b274b7-86c7-4131-94d9-d3eedc754461")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 114.3 0)
+			(at 46.764 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6232,7 +6272,7 @@
 	)
 	(global_label "~{WD}"
 		(shape input)
-		(at 53.34 132.08 180)
+		(at 53.34 129.54 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6244,7 +6284,7 @@
 		)
 		(uuid "86722fe4-33f6-4415-8e63-7f236157359c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 47.6334 132.08 0)
+			(at 47.6334 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6256,7 +6296,7 @@
 	)
 	(global_label "D0"
 		(shape tri_state)
-		(at 53.34 109.22 180)
+		(at 53.34 106.68 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6268,7 +6308,7 @@
 		)
 		(uuid "8840324b-7390-407a-85e7-2645d5685d32")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 109.22 0)
+			(at 46.764 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6280,7 +6320,7 @@
 	)
 	(global_label "D6"
 		(shape tri_state)
-		(at 53.34 127 180)
+		(at 53.34 124.46 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6292,7 +6332,7 @@
 		)
 		(uuid "886a8dea-ad27-4449-b7d2-ac93bb374009")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 127 0)
+			(at 46.764 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6472,7 +6512,7 @@
 	)
 	(global_label "D7"
 		(shape tri_state)
-		(at 53.34 129.54 180)
+		(at 53.34 127 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6484,7 +6524,7 @@
 		)
 		(uuid "a0a6110b-a7e5-4931-a963-600f7c97fd03")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 129.54 0)
+			(at 46.764 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6568,7 +6608,7 @@
 	)
 	(global_label "D1"
 		(shape tri_state)
-		(at 53.34 111.76 180)
+		(at 53.34 109.22 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6580,7 +6620,7 @@
 		)
 		(uuid "c1edacdc-032d-465d-83de-2b8006465b7c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 111.76 0)
+			(at 46.764 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6592,7 +6632,7 @@
 	)
 	(global_label "D5"
 		(shape tri_state)
-		(at 53.34 124.46 180)
+		(at 53.34 121.92 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6604,7 +6644,7 @@
 		)
 		(uuid "c573e8ba-60f1-4d01-a048-43cfefb945aa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.764 124.46 0)
+			(at 46.764 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6688,7 +6728,7 @@
 	)
 	(global_label "~{Reset}_{Device}19"
 		(shape output)
-		(at 73.66 119.38 0)
+		(at 74.93 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6700,7 +6740,7 @@
 		)
 		(uuid "d6d3daad-73ad-47f5-bf5c-491603c87ee5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 89.1518 119.38 0)
+			(at 90.4218 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)

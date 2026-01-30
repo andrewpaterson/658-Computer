@@ -6,8 +6,8 @@
 	(paper "A5")
 	(title_block
 		(title "MPU Timer")
-		(date "2024-02-22")
-		(rev "V1")
+		(date "2026-01-29")
+		(rev "V2")
 	)
 	(lib_symbols
 		(symbol "HCP65:Board_02x06_W15.24mm"
@@ -1797,10 +1797,6 @@
 		(uuid "64b9c341-bb60-4b97-89cb-a6d923e423aa")
 	)
 	(no_connect
-		(at 52.07 44.45)
-		(uuid "80148c1a-8320-4c88-9ba5-7634d4469047")
-	)
-	(no_connect
 		(at 52.07 34.29)
 		(uuid "c7f4704e-a632-4178-8438-0445659d763f")
 	)
@@ -2053,6 +2049,16 @@
 			(type default)
 		)
 		(uuid "7f2d452a-273e-4c4f-abb6-528fb3f0660e")
+	)
+	(wire
+		(pts
+			(xy 53.34 44.45) (xy 52.07 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7fd7be44-a095-439f-b0dc-b9331662d5bb")
 	)
 	(polyline
 		(pts
@@ -2534,6 +2540,28 @@
 		(uuid "c867b221-e1fb-4e70-8d9b-46af864a0157")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 59.0844 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "3.3V"
+		(shape passive)
+		(at 53.34 44.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "de3fe5b4-0f53-4608-afd0-cd2343d48885")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 59.3263 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)

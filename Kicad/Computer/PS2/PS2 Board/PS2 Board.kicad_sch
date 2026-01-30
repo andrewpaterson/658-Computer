@@ -8454,7 +8454,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:State_Reader_16bit"
+		(symbol "HCP65:State_Reader_8bit"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -8466,7 +8466,7 @@
 					)
 				)
 			)
-			(property "Value" "State Reader 16bit"
+			(property "Value" "State Reader 8bit"
 				(at 20.32 3.175 0)
 				(effects
 					(font
@@ -8475,8 +8475,8 @@
 					)
 				)
 			)
-			(property "Footprint" "HCP65_Parts:HCP65_State_Reader"
-				(at 20.32 -53.975 0)
+			(property "Footprint" "HCP65_Parts:HCP65_State_Reader_8bit"
+				(at 20.32 -42.672 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -8493,16 +8493,16 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "State Reader 16bit"
-				(at 19.685 -22.86 0)
+			(property "Description" "State Reader 8bit"
+				(at 19.812 -8.89 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Silkscreen" "State Reader 16bit"
-				(at 19.685 -25.4 0)
+			(property "Silkscreen" "State Reader 8bit"
+				(at 19.812 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -8510,7 +8510,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "State Reader 16bit"
+			(property "ki_keywords" "State Reader 8bit"
 				(at 0 0 0)
 				(effects
 					(font
@@ -8519,10 +8519,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "State_Reader_16bit_0_1"
+			(symbol "State_Reader_8bit_0_1"
 				(polyline
 					(pts
-						(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -52.705) (xy 5.08 -52.705) (xy 5.08 1.905)
+						(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -27.94) (xy 5.08 -27.94) (xy 5.08 1.905)
 					)
 					(stroke
 						(width 0.1524)
@@ -8533,18 +8533,18 @@
 					)
 				)
 			)
-			(symbol "State_Reader_16bit_1_1"
+			(symbol "State_Reader_8bit_1_1"
 				(pin input line
 					(at 0 0 0)
 					(length 5.08)
-					(name "Read_State_Low"
+					(name "Read_State"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8555,14 +8555,14 @@
 				(pin input line
 					(at 0 -2.54 0)
 					(length 5.08)
-					(name "Read_State_High"
+					(name "S7"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
+					(number "24"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8570,17 +8570,71 @@
 						)
 					)
 				)
-				(pin tri_state line
+				(pin input line
+					(at 0 -5.08 0)
+					(length 5.08)
+					(name "S6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "23"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -7.62 0)
+					(length 5.08)
+					(name "S5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "22"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 -10.16 0)
+					(length 5.08)
+					(name "S4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at 0 -12.7 0)
 					(length 5.08)
-					(name "D7"
+					(name "S3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "19"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8588,17 +8642,17 @@
 						)
 					)
 				)
-				(pin tri_state line
+				(pin input line
 					(at 0 -15.24 0)
 					(length 5.08)
-					(name "D6"
+					(name "S2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "18"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8606,17 +8660,17 @@
 						)
 					)
 				)
-				(pin tri_state line
+				(pin input line
 					(at 0 -17.78 0)
 					(length 5.08)
-					(name "D5"
+					(name "S1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "10"
+					(number "17"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8624,64 +8678,10 @@
 						)
 					)
 				)
-				(pin tri_state line
+				(pin input line
 					(at 0 -20.32 0)
 					(length 5.08)
-					(name "D4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 0 -22.86 0)
-					(length 5.08)
-					(name "D3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 0 -25.4 0)
-					(length 5.08)
-					(name "D2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin tri_state line
-					(at 0 -27.94 0)
-					(length 5.08)
-					(name "D1"
+					(name "S0"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8696,26 +8696,8 @@
 						)
 					)
 				)
-				(pin tri_state line
-					(at 0 -30.48 0)
-					(length 5.08)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "16"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
-					(at 0 -48.26 0)
+					(at 0 -22.86 0)
 					(length 5.08)
 					(name "5V"
 						(effects
@@ -8733,7 +8715,7 @@
 					)
 				)
 				(pin passive line
-					(at 0 -50.8 0)
+					(at 0 -25.4 0)
 					(length 5.08)
 					(name "5V"
 						(effects
@@ -8742,7 +8724,151 @@
 							)
 						)
 					)
-					(number "17"
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 11.43 -33.02 90)
+					(length 5.08)
+					(name "D7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 13.97 -33.02 90)
+					(length 5.08)
+					(name "D6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 16.51 -33.02 90)
+					(length 5.08)
+					(name "D5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 19.05 -33.02 90)
+					(length 5.08)
+					(name "D4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 21.59 -33.02 90)
+					(length 5.08)
+					(name "D3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 24.13 -33.02 90)
+					(length 5.08)
+					(name "D2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 26.67 -33.02 90)
+					(length 5.08)
+					(name "D1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin tri_state line
+					(at 29.21 -33.02 90)
+					(length 5.08)
+					(name "D0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8760,7 +8886,7 @@
 							)
 						)
 					)
-					(number "5"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8778,7 +8904,7 @@
 							)
 						)
 					)
-					(number "12"
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8796,7 +8922,7 @@
 							)
 						)
 					)
-					(number "21"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8814,7 +8940,7 @@
 							)
 						)
 					)
-					(number "28"
+					(number "21"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -8822,287 +8948,18 @@
 						)
 					)
 				)
-				(pin input line
-					(at 40.64 -12.7 180)
-					(length 5.08)
-					(name "S15"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -15.24 180)
-					(length 5.08)
-					(name "S14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -17.78 180)
-					(length 5.08)
-					(name "S13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -20.32 180)
-					(length 5.08)
-					(name "S12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "32"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -22.86 180)
-					(length 5.08)
-					(name "S11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "31"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
+				(pin no_connect line
 					(at 40.64 -25.4 180)
 					(length 5.08)
-					(name "S10"
+					(hide yes)
+					(name "N.C."
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "30"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -27.94 180)
-					(length 5.08)
-					(name "S9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "29"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -30.48 180)
-					(length 5.08)
-					(name "S8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "27"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -33.02 180)
-					(length 5.08)
-					(name "S7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "26"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -35.56 180)
-					(length 5.08)
-					(name "S6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "25"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -38.1 180)
-					(length 5.08)
-					(name "S5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "24"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -40.64 180)
-					(length 5.08)
-					(name "S4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "23"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -43.18 180)
-					(length 5.08)
-					(name "S3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "22"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -45.72 180)
-					(length 5.08)
-					(name "S2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -48.26 180)
-					(length 5.08)
-					(name "S1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "19"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 40.64 -50.8 180)
-					(length 5.08)
-					(name "S0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "18"
+					(number "14"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -11487,12 +11344,12 @@
 		(uuid "10e56e35-0a34-45f1-8497-f8f8f367b2a4")
 	)
 	(label "~{Packet Waiting}_{ 1}"
-		(at 212.09 240.03 0)
+		(at 186.69 223.52 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "11212701-05df-4349-be1b-fee60641cb3c")
 	)
@@ -11507,7 +11364,7 @@
 		(uuid "1144ddb0-fb76-4d7e-8a9f-aa07621de428")
 	)
 	(label "D5"
-		(at 171.45 207.01 180)
+		(at 203.2 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11687,7 +11544,7 @@
 		(uuid "1d8bb79d-c8f5-471f-9f1d-f6252531ea0e")
 	)
 	(label "GND"
-		(at 212.09 194.31 0)
+		(at 227.33 208.28 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11747,7 +11604,7 @@
 		(uuid "20bd4840-162f-443e-8dc1-f84010e34645")
 	)
 	(label "D0"
-		(at 171.45 219.71 180)
+		(at 215.9 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11826,16 +11683,6 @@
 		)
 		(uuid "262e8293-f5d4-49f5-9708-54690274ad6e")
 	)
-	(label "GND"
-		(at 171.45 191.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2768cf26-edc5-4a15-922c-bcba8bbcd002")
-	)
 	(label "D4"
 		(at 116.84 217.17 270)
 		(effects
@@ -11896,16 +11743,6 @@
 		)
 		(uuid "2c6699f9-3ca0-4f3f-926c-4c629ac95abd")
 	)
-	(label "GND"
-		(at 212.09 219.71 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2da81895-84c8-4a1b-8a54-76e217151e42")
-	)
 	(label "D7"
 		(at 109.22 217.17 270)
 		(effects
@@ -11945,16 +11782,6 @@
 			(justify right bottom)
 		)
 		(uuid "31086c79-4f00-44c1-ada4-8f00ac70c9df")
-	)
-	(label "GND"
-		(at 212.09 214.63 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "323c2f4d-d096-47ac-acf6-cfe274ca9cae")
 	)
 	(label "D5"
 		(at 326.39 171.45 180)
@@ -12116,16 +11943,6 @@
 		)
 		(uuid "3f56c9e7-2f2f-4d44-8535-d9fad3ce652a")
 	)
-	(label "GND"
-		(at 212.09 207.01 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3f9979d1-d4ab-4f65-a224-c7ec1f300718")
-	)
 	(label "Read PS2 FIFO_{ 2}"
 		(at 212.09 100.33 0)
 		(effects
@@ -12217,12 +12034,12 @@
 		(uuid "43707565-7542-4b63-a429-d90e05e2adbf")
 	)
 	(label "~{Output Ready}_{ 2}"
-		(at 212.09 224.79 0)
+		(at 186.69 208.28 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "454a0b2f-29e7-4e31-ab40-d173981b0624")
 	)
@@ -12417,7 +12234,7 @@
 		(uuid "51690017-56d5-4bbb-84b9-7c86d3ff1d49")
 	)
 	(label "D4"
-		(at 171.45 209.55 180)
+		(at 205.74 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12477,17 +12294,7 @@
 		(uuid "5634c419-0c6a-4349-8889-75f1cce0c222")
 	)
 	(label "GND"
-		(at 212.09 209.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "568d81d4-d276-4a28-b9cf-6254124108bb")
-	)
-	(label "GND"
-		(at 212.09 191.77 0)
+		(at 227.33 205.74 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12577,7 +12384,7 @@
 		(uuid "5e5eea90-d4ae-4cc8-8d6c-61d99d895b90")
 	)
 	(label "D2"
-		(at 171.45 214.63 180)
+		(at 210.82 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12595,16 +12402,6 @@
 			(justify left bottom)
 		)
 		(uuid "5f123860-bbfb-44f1-8b87-7a1230811a0b")
-	)
-	(label "GND"
-		(at 212.09 204.47 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60a61da7-009b-47a5-9910-9975457a44c9")
 	)
 	(label "5V"
 		(at 326.39 62.23 180)
@@ -12667,12 +12464,12 @@
 		(uuid "64164bb7-1ad3-4d00-bfc1-074a9d7bca80")
 	)
 	(label "~{Code Waiting}_{ 1}"
-		(at 212.09 237.49 0)
+		(at 186.69 220.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "641f6546-8751-4d4b-9fb9-817105c2f3c5")
 	)
@@ -12808,22 +12605,22 @@
 		(uuid "6e0ca19c-a3b4-4f9a-bb60-c65d19c0e43a")
 	)
 	(label "~{Code Waiting}_{ 2}"
-		(at 212.09 227.33 0)
+		(at 186.69 210.82 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "6e23096e-2b56-420c-9697-943469e86eb7")
 	)
 	(label "~{Output Ready}_{ 1}"
-		(at 212.09 234.95 0)
+		(at 186.69 218.44 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "6fac6e5e-4f35-4fd7-a005-5d43706e097d")
 	)
@@ -12868,12 +12665,12 @@
 		(uuid "71a4dc27-2403-4e8a-b109-89086debb429")
 	)
 	(label "GND"
-		(at 212.09 232.41 0)
+		(at 186.69 215.9 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "7203fcc8-ce80-4ea3-ab74-1a109c5fa56c")
 	)
@@ -12899,7 +12696,7 @@
 		)
 	)
 	(label "D6"
-		(at 171.45 204.47 180)
+		(at 200.66 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12989,7 +12786,7 @@
 		(uuid "7ccfa1e8-83e7-44e9-9c1e-fb805e0b6a46")
 	)
 	(label "5V"
-		(at 171.45 240.03 180)
+		(at 186.69 228.6 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12999,7 +12796,7 @@
 		(uuid "7d9bfda2-3925-49d0-b17a-78a029d47522")
 	)
 	(label "D7"
-		(at 171.45 201.93 180)
+		(at 198.12 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13119,7 +12916,7 @@
 		(uuid "8489b72b-a0d3-410c-9166-4aab19a04b22")
 	)
 	(label "5V"
-		(at 171.45 237.49 180)
+		(at 186.69 226.06 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13331,12 +13128,12 @@
 		(uuid "9571722e-628e-47e4-9222-983d7b687c65")
 	)
 	(label "GND"
-		(at 212.09 222.25 0)
+		(at 186.69 205.74 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "96d55a95-0313-4ed9-8096-467cbefc8dcf")
 	)
@@ -13462,7 +13259,7 @@
 		(uuid "9e35debb-b09a-4f92-85e7-3e8d18c82f64")
 	)
 	(label "GND"
-		(at 212.09 196.85 0)
+		(at 227.33 210.82 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13532,12 +13329,12 @@
 		(uuid "a382b1ba-275a-4c33-a6da-d36069ef60a2")
 	)
 	(label "~{Packet Waiting}_{ 2}"
-		(at 212.09 229.87 0)
+		(at 186.69 213.36 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
 		(uuid "a4bc5bfc-c5f5-474f-b232-5ab94ea11558")
 	)
@@ -13784,7 +13581,7 @@
 		(uuid "b9204333-34be-40cd-998b-bdb01d5d739d")
 	)
 	(label "D3"
-		(at 171.45 212.09 180)
+		(at 208.28 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14094,7 +13891,7 @@
 		(uuid "ce85afad-2d3d-47f4-88e1-bf9cd3bbb0b4")
 	)
 	(label "GND"
-		(at 212.09 189.23 0)
+		(at 227.33 203.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14284,16 +14081,6 @@
 		)
 		(uuid "dd293597-e571-47ff-a7b9-24b472f6a441")
 	)
-	(label "GND"
-		(at 212.09 201.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "de73d358-ea15-45f6-a832-e9341f9bb69b")
-	)
 	(label "D4"
 		(at 138.43 110.49 0)
 		(effects
@@ -14315,7 +14102,7 @@
 		(uuid "dea5f0f4-5b2a-43f2-9c9a-8fbe2966d679")
 	)
 	(label "D1"
-		(at 171.45 217.17 180)
+		(at 213.36 236.22 270)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14395,7 +14182,7 @@
 		(uuid "e382a5a1-2e7d-4d67-b601-df415b5ba52a")
 	)
 	(label "Read State"
-		(at 171.45 189.23 180)
+		(at 186.69 203.2 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -14505,16 +14292,6 @@
 		)
 		(uuid "eba30251-fb53-4243-9a75-11d0fc0265e8")
 	)
-	(label "GND"
-		(at 212.09 217.17 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ec4a0d00-ca52-432b-9d61-5fb5d3961832")
-	)
 	(label "D~{RD}"
 		(at 97.79 44.45 180)
 		(effects
@@ -14604,16 +14381,6 @@
 			(justify right bottom)
 		)
 		(uuid "f2c14354-16dc-41fc-9ae9-c1fc800d6e67")
-	)
-	(label "GND"
-		(at 212.09 212.09 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f67d5036-401a-4df4-834c-38ed54344e82")
 	)
 	(label "PS2 Data_{ 2}"
 		(at 326.39 204.47 180)
@@ -18525,8 +18292,8 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:State_Reader_16bit")
-		(at 171.45 189.23 0)
+		(lib_id "HCP65:State_Reader_8bit")
+		(at 186.69 203.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18534,7 +18301,7 @@
 		(dnp no)
 		(uuid "ea499fe4-12cf-4086-842d-73993881e910")
 		(property "Reference" "B5"
-			(at 191.135 184.15 0)
+			(at 206.375 198.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18542,7 +18309,7 @@
 			)
 		)
 		(property "Value" "State Reader 16bit"
-			(at 191.77 186.055 0)
+			(at 207.01 200.025 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18550,8 +18317,8 @@
 				)
 			)
 		)
-		(property "Footprint" "HCP65_Parts:HCP65_State_Reader"
-			(at 191.77 243.205 0)
+		(property "Footprint" "HCP65_Parts:HCP65_State_Reader_8bit"
+			(at 207.01 245.872 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18560,7 +18327,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 171.45 207.01 0)
+			(at 186.69 220.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18568,16 +18335,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "State Reader 16bit"
-			(at 191.135 212.09 0)
+		(property "Description" "State Reader 8bit"
+			(at 206.502 212.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Silkscreen" "State Reader 16bit"
-			(at 191.135 214.63 0)
+		(property "Silkscreen" "State Reader 8bit"
+			(at 206.502 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18636,32 +18403,8 @@
 		(pin "24"
 			(uuid "cf242675-37b9-4f1e-94f4-c08c64da57aa")
 		)
-		(pin "25"
-			(uuid "96396b83-fd30-4c75-a7e4-011f3155ae82")
-		)
-		(pin "26"
-			(uuid "ca9c164c-e398-45eb-82a2-8f4d8ec7cbb2")
-		)
-		(pin "27"
-			(uuid "b49295b2-e90f-434f-8364-9e5760a258cc")
-		)
-		(pin "28"
-			(uuid "f2f8df7c-ec47-41b7-b95e-d59a9930d6d7")
-		)
-		(pin "29"
-			(uuid "8f25c45c-ba3c-498a-9cab-cd13b2461df6")
-		)
 		(pin "3"
 			(uuid "9d3e0dbd-329e-4afa-810b-dbd1bac75d86")
-		)
-		(pin "30"
-			(uuid "c1a2af7e-be25-4b60-899c-03dcb087ea84")
-		)
-		(pin "31"
-			(uuid "76fef057-f88e-4679-a330-f73235f2a976")
-		)
-		(pin "32"
-			(uuid "cf1a4d84-2f48-4c4d-8ec8-40b2ea120836")
 		)
 		(pin "4"
 			(uuid "b0b87b0f-690d-4d43-9c89-3562d73def80")

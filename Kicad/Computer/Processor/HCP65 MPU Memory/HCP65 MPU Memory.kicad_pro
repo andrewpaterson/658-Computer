@@ -501,7 +501,6 @@
         "bus_width": 12,
         "clearance": 0.5,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -519,7 +518,6 @@
         "bus_width": 12,
         "clearance": 0.2,
         "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
@@ -542,19 +540,19 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "/3.3V"
+        "pattern": "*3.3V"
       },
       {
         "netclass": "Power",
-        "pattern": "5V"
+        "pattern": "*5V"
       },
       {
         "netclass": "Power",
-        "pattern": "GND"
+        "pattern": "*GND"
       },
       {
         "netclass": "12V",
-        "pattern": "12V*"
+        "pattern": "*12V*"
       }
     ]
   },

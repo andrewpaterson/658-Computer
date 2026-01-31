@@ -46690,7 +46690,7 @@
 			)
 		)
 		(property "Footprint" "HCP65_Parts:HCP65_Board_Presence"
-			(at 20.32 -45.212 0)
+			(at 20.32 -55.372 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46708,7 +46708,7 @@
 			)
 		)
 		(property "Description" "Board Presence"
-			(at 19.812 -8.89 0)
+			(at 19.812 -19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46716,7 +46716,7 @@
 			)
 		)
 		(property "Silkscreen" "Board Presence"
-			(at 19.812 -11.43 0)
+			(at 19.812 -21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -46736,7 +46736,7 @@
 		(symbol "Board_Presence_0_1"
 			(polyline
 				(pts
-					(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -30.48) (xy 5.08 -30.48) (xy 5.08 1.905)
+					(xy 5.08 1.905) (xy 35.56 1.905) (xy 35.56 -40.64) (xy 5.08 -40.64) (xy 5.08 1.905)
 				)
 				(stroke
 					(width 0.1524)
@@ -46787,6 +46787,78 @@
 			(pin input line
 				(at 0 -5.08 0)
 				(length 5.08)
+				(name "S11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "28"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -7.62 0)
+				(length 5.08)
+				(name "S10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "27"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -10.16 0)
+				(length 5.08)
+				(name "S9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "26"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -12.7 0)
+				(length 5.08)
+				(name "S8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "25"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at 0 -15.24 0)
+				(length 5.08)
 				(name "S7"
 					(effects
 						(font
@@ -46803,7 +46875,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -7.62 0)
+				(at 0 -17.78 0)
 				(length 5.08)
 				(name "S6"
 					(effects
@@ -46821,7 +46893,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -10.16 0)
+				(at 0 -20.32 0)
 				(length 5.08)
 				(name "S5"
 					(effects
@@ -46839,7 +46911,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -12.7 0)
+				(at 0 -22.86 0)
 				(length 5.08)
 				(name "S4"
 					(effects
@@ -46857,7 +46929,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -15.24 0)
+				(at 0 -25.4 0)
 				(length 5.08)
 				(name "S3"
 					(effects
@@ -46875,7 +46947,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -17.78 0)
+				(at 0 -27.94 0)
 				(length 5.08)
 				(name "S2"
 					(effects
@@ -46893,7 +46965,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -20.32 0)
+				(at 0 -30.48 0)
 				(length 5.08)
 				(name "S1"
 					(effects
@@ -46911,7 +46983,7 @@
 				)
 			)
 			(pin input line
-				(at 0 -22.86 0)
+				(at 0 -33.02 0)
 				(length 5.08)
 				(name "S0"
 					(effects
@@ -46929,7 +47001,7 @@
 				)
 			)
 			(pin passive line
-				(at 0 -25.4 0)
+				(at 0 -35.56 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -46947,7 +47019,7 @@
 				)
 			)
 			(pin passive line
-				(at 0 -27.94 0)
+				(at 0 -38.1 0)
 				(length 5.08)
 				(name "5V"
 					(effects
@@ -46965,7 +47037,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 11.43 -35.56 90)
+				(at 11.43 -45.72 90)
 				(length 5.08)
 				(name "D7"
 					(effects
@@ -46983,7 +47055,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 13.97 -35.56 90)
+				(at 13.97 -45.72 90)
 				(length 5.08)
 				(name "D6"
 					(effects
@@ -47001,7 +47073,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 16.51 -35.56 90)
+				(at 16.51 -45.72 90)
 				(length 5.08)
 				(name "D5"
 					(effects
@@ -47019,7 +47091,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 19.05 -35.56 90)
+				(at 19.05 -45.72 90)
 				(length 5.08)
 				(name "D4"
 					(effects
@@ -47037,7 +47109,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 21.59 -35.56 90)
+				(at 21.59 -45.72 90)
 				(length 5.08)
 				(name "D3"
 					(effects
@@ -47055,7 +47127,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 24.13 -35.56 90)
+				(at 24.13 -45.72 90)
 				(length 5.08)
 				(name "D2"
 					(effects
@@ -47073,7 +47145,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 26.67 -35.56 90)
+				(at 26.67 -45.72 90)
 				(length 5.08)
 				(name "D1"
 					(effects
@@ -47091,7 +47163,7 @@
 				)
 			)
 			(pin tri_state line
-				(at 29.21 -35.56 90)
+				(at 29.21 -45.72 90)
 				(length 5.08)
 				(name "D0"
 					(effects

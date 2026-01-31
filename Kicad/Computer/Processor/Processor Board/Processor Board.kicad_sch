@@ -3054,7 +3054,7 @@
 				(pin input inverted
 					(at -5.08 0 0)
 					(length 5.08)
-					(name "Device_~{CS}"
+					(name "~{CS}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4679,7 +4679,7 @@
 				(pin input inverted
 					(at -5.08 0 0)
 					(length 5.08)
-					(name "Device_~{CS}"
+					(name "~{CS}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4697,7 +4697,7 @@
 				(pin input line
 					(at -5.08 -2.54 0)
 					(length 5.08)
-					(name "D_DIR"
+					(name "DIR"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -22159,6 +22159,17 @@
 		)
 		(uuid fc2e76f4-249c-48a5-885f-6db6d3dfddfe)
 	)
+	(text "~{RAM} and ~{ROM} are reversed before Native Latch\nis set.  This allows the '816 to initially boot from \nROM; the first step which is to copy the 512KB ROM \ninto the 512KB RAM before switching out of\nemulation mode."
+		(exclude_from_sim no)
+		(at 676.91 173.99 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "008d95be-0da9-4c08-bf76-35814bcfdb8e")
+	)
 	(text "The Clock Hold bus for Register access and \nMain Memory access is also set here.  For\nbetter or worse.\n\nThat is why ~{Register} and ~{Main} are passed in."
 		(exclude_from_sim no)
 		(at 676.91 157.48 0)
@@ -22169,6 +22180,20 @@
 			(justify left top)
 		)
 		(uuid "02aa5e89-3168-4f21-ae2d-e107d405d840")
+	)
+	(text "Selector:      1 1 1  PI(0..7)  A(23..16)\nFinal address: 18.16  15.....8  7.......0\n\n\n\nSelector:      A(18..0)\nFinal address: 18.....0"
+		(exclude_from_sim no)
+		(at 457.2 167.64 0)
+		(effects
+			(font
+				(face "Courier New")
+				(size 1.27 1.27)
+				(bold yes)
+				(color 37 70 255 1)
+			)
+			(justify left top)
+		)
+		(uuid "059a3639-cf1b-4189-84ad-c6632ac930d8")
 	)
 	(text "Main Access"
 		(exclude_from_sim no)
@@ -22182,6 +22207,19 @@
 			(justify left bottom)
 		)
 		(uuid "07e312a8-9eb6-46f9-ade9-cfa6843ac447")
+	)
+	(text "Board Presence"
+		(exclude_from_sim no)
+		(at 45.72 511.81 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(thickness 0.508)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "0ae3975d-09c4-482d-992c-62359795d399")
 	)
 	(text "If Main Memory Mode is required then include:\n  Main Memory Data (B15)\n  Main Memory Address (B7)\n\nIf Main Memory Mode is not required then ommit:\n  Main Memory Data (B15)\n  Main Memory Address (B7)\n\n\nMain memory must not be read from if ommitted"
 		(exclude_from_sim no)
@@ -22217,6 +22255,17 @@
 			(justify left bottom)
 		)
 		(uuid "1fc14398-9b42-4d37-8f19-ca60c33be32b")
+	)
+	(text "(PI A18)"
+		(exclude_from_sim no)
+		(at 551.18 175.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "20c4903f-250a-429a-a25f-cb345a9aa096")
 	)
 	(text "Privilege"
 		(exclude_from_sim no)
@@ -22312,6 +22361,28 @@
 		)
 		(uuid "604580b7-7c83-4fd9-be19-b3f1a1772f1c")
 	)
+	(text "Pratically this means a value is read from the address given by\nthe Program Identifier and the Bank Address at the top of the\n512KB memory.\n\nThe value read is latched as a Bank Address override allowing\neach process to be given its own bank 0, 1, 2 etc...\n\nThis bank remapping only applies when not in Kernal Mode and\nwhen accessing main memory."
+		(exclude_from_sim no)
+		(at 455.93 185.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "632865f9-0fe3-4f87-bdb0-c06bce737f04")
+	)
+	(text "PHI2 low puts addresses onto the onboard memory address bus."
+		(exclude_from_sim no)
+		(at 455.93 165.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "646eb154-7a0b-4cbb-9155-e091cfd501ec")
+	)
 	(text "Socket"
 		(exclude_from_sim no)
 		(at 45.72 220.98 0)
@@ -22337,6 +22408,17 @@
 			(justify left bottom)
 		)
 		(uuid "6f7ed1df-a547-4eb5-89be-2e0f9e8de71b")
+	)
+	(text "PHI2 high puts addresses onto the onboard memory address bus.\n"
+		(exclude_from_sim no)
+		(at 455.93 175.26 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7f972835-7dae-447e-8e39-d3e7fa2c70b1")
 	)
 	(text "When in Kernal mode (protected mode) device decoding is done.\nThat includes on-board registers as device 0.\nMain memory above 2MB is accessible, main memory below \n2MB is not accessible to the Kernal.\n\nWhen not in Kernal Mode no device decoding is done and all of\nmain memory is accessible to User processes.\n"
 		(exclude_from_sim no)
@@ -22373,6 +22455,17 @@
 		)
 		(uuid "a5e6ae92-56f5-400e-8e1b-b2d0068f27ca")
 	)
+	(text "(PI A16)"
+		(exclude_from_sim no)
+		(at 551.18 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "b20cf46b-a36d-4ed3-978e-c306e32619a3")
+	)
 	(text "Device Access"
 		(exclude_from_sim no)
 		(at 252.73 427.99 0)
@@ -22385,6 +22478,17 @@
 			(justify left bottom)
 		)
 		(uuid "b80f114f-141d-493f-ba71-c23103b8c360")
+	)
+	(text "(PI A17)"
+		(exclude_from_sim no)
+		(at 551.18 172.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c27d92ab-3edf-4706-9418-edc2c1a6f9e0")
 	)
 	(text "(PI ~{RD})"
 		(exclude_from_sim no)
@@ -44297,7 +44401,7 @@
 		(uuid "3d9f73f1-da27-436b-8f77-9ee40f7f7b12")
 	)
 	(label "RTI"
-		(at 528.32 195.58 0)
+		(at 534.67 199.39 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -48247,7 +48351,7 @@
 		(uuid "a9848400-278b-41c5-8cff-87642baee102")
 	)
 	(label "Enter Interrupt"
-		(at 528.32 210.82 0)
+		(at 534.67 214.63 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -48937,7 +49041,7 @@
 		(uuid "c07484de-f131-4cda-b178-b8bc5f775828")
 	)
 	(label "GND"
-		(at 523.24 195.58 180)
+		(at 529.59 199.39 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50217,7 +50321,7 @@
 		(uuid "e26b51fd-2a1a-4164-9ed8-6c7ca465f806")
 	)
 	(label "3.3V"
-		(at 523.24 203.2 180)
+		(at 529.59 207.01 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50477,7 +50581,7 @@
 		(uuid "e8a15f0f-0c6e-4de6-a7dc-3aa9d6390b89")
 	)
 	(label "GND"
-		(at 523.24 210.82 180)
+		(at 529.59 214.63 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -51057,7 +51161,7 @@
 		(uuid "f90c0758-a6d6-4004-8f61-10db66651d3a")
 	)
 	(label "Kernal"
-		(at 528.32 203.2 0)
+		(at 534.67 207.01 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -55924,7 +56028,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 528.32 203.2 0)
+		(at 534.67 207.01 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55933,7 +56037,7 @@
 		(dnp no)
 		(uuid "40aeac5f-4ab1-46b7-98a4-bd86f68489bb")
 		(property "Reference" "R1"
-			(at 525.78 201.422 0)
+			(at 532.13 205.232 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55941,7 +56045,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 525.78 205.105 0)
+			(at 532.13 208.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55949,7 +56053,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 510.794 210.82 0)
+			(at 517.144 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55958,7 +56062,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 528.32 203.2 0)
+			(at 534.67 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55967,7 +56071,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 528.32 203.2 0)
+			(at 534.67 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57794,7 +57898,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 528.32 210.82 0)
+		(at 534.67 214.63 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57803,7 +57907,7 @@
 		(dnp no)
 		(uuid "6fa81e0c-bbe2-4f72-9f69-40d2dbc46855")
 		(property "Reference" "R6"
-			(at 525.78 209.042 0)
+			(at 532.13 212.852 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57811,7 +57915,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 525.78 212.725 0)
+			(at 532.13 216.535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57819,7 +57923,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 510.794 218.44 0)
+			(at 517.144 222.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57828,7 +57932,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 528.32 210.82 0)
+			(at 534.67 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57837,7 +57941,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 528.32 210.82 0)
+			(at 534.67 214.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -60244,7 +60348,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:R_0805")
-		(at 528.32 195.58 0)
+		(at 534.67 199.39 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60253,7 +60357,7 @@
 		(dnp no)
 		(uuid "e0ede250-b088-4b4b-9208-8dd2346edf2a")
 		(property "Reference" "R7"
-			(at 525.78 193.802 0)
+			(at 532.13 197.612 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -60261,7 +60365,7 @@
 			)
 		)
 		(property "Value" "6.8KΩ"
-			(at 525.78 197.485 0)
+			(at 532.13 201.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -60269,7 +60373,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:R_0805"
-			(at 510.794 203.2 0)
+			(at 517.144 207.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -60278,7 +60382,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 528.32 195.58 0)
+			(at 534.67 199.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -60287,7 +60391,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 528.32 195.58 0)
+			(at 534.67 199.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)

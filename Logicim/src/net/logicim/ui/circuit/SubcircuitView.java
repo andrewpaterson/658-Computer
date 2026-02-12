@@ -844,6 +844,7 @@ public class SubcircuitView
 
     // allUpdatedConnectionViews are for fireConnectionEvents.  Simulations that were already connected (is that possible?) should not fireConnectionEvents.  You should validate this on firing.
     fireConnectionEvents(allUpdatedConnectionViews);
+    return allUpdatedConnectionViews;
   }
 
   protected void validateConnectionViewsNotNull(Collection<ConnectionView> tracesConnectionViews)

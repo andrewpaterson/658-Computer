@@ -16,10 +16,9 @@ public class NandGate
           pins);
   }
 
-  @Override
-  protected boolean transformOutput(boolean value)
+  protected AndLogic createLogic()
   {
-    return !value;
+    return new NandLogic();
   }
 
   @Override

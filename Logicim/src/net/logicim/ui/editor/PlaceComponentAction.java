@@ -1,8 +1,10 @@
 package net.logicim.ui.editor;
 
+import net.common.SimulatorException;
 import net.common.util.StringUtil;
 import net.logicim.ui.Logicim;
 import net.logicim.ui.common.integratedcircuit.StaticView;
+import net.logicim.ui.simulation.component.factory.ViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 
 public class PlaceComponentAction
@@ -27,7 +29,12 @@ public class PlaceComponentAction
   @Override
   public void executeEditorAction()
   {
-    editor.startPlaceComponent(ViewFactoryStore.getInstance().get(staticViewClass));
+    ViewFactory<?, ?> viewFactory = ViewFactoryStore.getInstance().get(staticViewClass);
+    if (viewFactory == null)
+    {
+      throw new SimulatorException("Cannot find View Factory [%s].  Add it into LogicimPanel as necessary.", staticViewClass.getSimpleName());
+    }
+    editor.startPlaceComponent(viewFactory);
   }
 
   @Override

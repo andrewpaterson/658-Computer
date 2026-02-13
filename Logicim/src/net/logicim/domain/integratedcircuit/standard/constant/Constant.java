@@ -56,7 +56,7 @@ public class Constant
   }
 
   @Override
-  public State createState()
+  public ConstantState createState()
   {
     return new ConstantState(defaultValue);
   }

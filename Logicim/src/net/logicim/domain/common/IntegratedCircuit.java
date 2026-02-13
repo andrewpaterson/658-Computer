@@ -159,11 +159,6 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
     this.events.clear();
   }
 
-  public State createState()
-  {
-    return new Stateless();
-  }
-
   @Override
   public void reset(Simulation simulation)
   {
@@ -181,6 +176,8 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
     return containingSubcircuitSimulation;
   }
+
+  public abstract STATE createState();
 
   public abstract void simulationStarted(Simulation simulation);
 

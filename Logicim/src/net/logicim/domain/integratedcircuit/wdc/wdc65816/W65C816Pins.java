@@ -133,17 +133,17 @@ public class W65C816Pins
 
   public TraceValue readAbort(Timeline timeline)
   {
-    return abortB.readValue(timeline.getTime());
+    return abortB.readValue(timeline);
   }
 
   public TraceValue readIRQ(Timeline timeline)
   {
-    return irqB.readValue(timeline.getTime());
+    return irqB.readValue(timeline);
   }
 
   public TraceValue readNMI(Timeline timeline)
   {
-    return nmiB.readValue(timeline.getTime());
+    return nmiB.readValue(timeline);
   }
 
   public void writeMLB(Timeline timeline, boolean b)
@@ -163,7 +163,7 @@ public class W65C816Pins
 
   public TraceValue readRES(Timeline timeline)
   {
-    return resB.readValue(timeline.getTime());
+    return resB.readValue(timeline);
   }
 
   public void writeMX(Timeline timeline, boolean b)
@@ -173,12 +173,12 @@ public class W65C816Pins
 
   public TraceValue readPhi2(Timeline timeline)
   {
-    return phi2.readValue(timeline.getTime());
+    return phi2.readValue(timeline);
   }
 
   public TraceValue readBE(Timeline timeline)
   {
-    return be.readValue(timeline.getTime());
+    return be.readValue(timeline);
   }
 
   public void writeE(Timeline timeline, boolean b)

@@ -1258,7 +1258,7 @@ public class SubcircuitView
       }
     }
 
-    xxx
+    //xxx
     List<SubcircuitInstanceCreation> creations = new ArrayList<>();
     for (ViewPath viewPath : viewPaths)
     {

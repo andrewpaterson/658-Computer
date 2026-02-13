@@ -3,6 +3,7 @@ package net.logicim.ui.simulation.component.integratedcircuit.standard.clock;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.standard.clock.ClockData;
+import net.logicim.data.simulation.SimulationStateData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.voltage.VoltageColour;
@@ -119,7 +120,7 @@ public class ClockView
     long time = circuitSimulation.getTime();
     if (integratedCircuit != null)
     {
-      ClockOscillatorState state = integratedCircuit.getState();
+      ClockOscillatorState state = (ClockOscillatorState) integratedCircuit.getState();
       if (state != null)
       {
         float voltage = integratedCircuit.getInternalVoltage(time);
@@ -183,6 +184,7 @@ public class ClockView
 
   public ClockData save(boolean selected)
   {
+    SimulationStateData<ClockOscillatorState> simulationState = saveSimulationState();
     return new ClockData(position,
                          rotation,
                          properties.name,
@@ -193,7 +195,7 @@ public class ClockView
                          id,
                          enabled,
                          selected,
-                         saveSimulationState(),
+                         simulationState,
                          properties.inverseOut,
                          properties.explicitPowerPorts);
   }

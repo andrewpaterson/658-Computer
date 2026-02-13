@@ -25,6 +25,7 @@ import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferViewFactory;
@@ -96,6 +97,7 @@ public class LogicimPanel
                                           new LabelViewFactory(),
                                           new PinViewFactory(),
                                           new W65C816ViewFactory(),
+                                          new DTypeFlipFlopViewFactory(),
                                           new SubcircuitInstanceViewFactory());
 
     addComponentListener(this);

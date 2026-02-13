@@ -59,7 +59,7 @@ public class Oscilloscope
   }
 
   @Override
-  public State createState()
+  public OscilloscopeState createState()
   {
     return new OscilloscopeState(pins.getInputs().size(), numberOfDivsWide * samplesPerDiv);
   }

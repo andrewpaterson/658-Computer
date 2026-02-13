@@ -727,7 +727,7 @@ public class W65C816
   }
 
   @Override
-  public State createState()
+  public W65C816State createState()
   {
     return new W65C816State();
   }

@@ -1,5 +1,6 @@
 package net.logicim.ui.simulation.component.integratedcircuit.standard.common;
 
+import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.logicim.data.integratedcircuit.common.StandardIntegratedCircuitProperties;
 import net.logicim.domain.CircuitSimulation;
@@ -17,8 +18,14 @@ import net.logicim.ui.common.integratedcircuit.IntegratedCircuitView;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.common.BoundingBox;
 import net.logicim.ui.shape.line.LineView;
+import net.logicim.ui.shape.text.TextView;
 
 import java.awt.*;
+import java.util.List;
+
+import static java.awt.Font.SANS_SERIF;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.LEFT;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.RIGHT;
 
 public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, PROPERTIES extends StandardIntegratedCircuitProperties>
     extends IntegratedCircuitView<IC, PROPERTIES>
@@ -49,6 +56,116 @@ public abstract class StandardIntegratedCircuitView<IC extends IntegratedCircuit
 
       vccLine = new LineView(this, vccPortView.getRelativePosition(), new Int2D(vccPortView.getRelativePosition().x + 1, vccPortView.getRelativePosition().y));
       gndLine = new LineView(this, gndPortView.getRelativePosition(), new Int2D(gndPortView.getRelativePosition().x - 1, gndPortView.getRelativePosition().y));
+    }
+  }
+
+  @SuppressWarnings("SuspiciousNameCombination")
+  protected void createLeftAndRightPortViews(List<PortView> leftViews,
+                                             List<PortView> rightViews,
+                                             int leftOffset,
+                                             int rightOffset,
+                                             int leftYStart,
+                                             int rightYStart,
+                                             int yStep,
+                                             PortViewCreatorList leftCreators,
+                                             PortViewCreatorList rightCreators)
+  {
+    int y = leftYStart;
+    for (PortViewCreator creator : leftCreators.creators)
+    {
+      leftViews.add(createPortView(y,
+                                   creator.name,
+                                   creator.text,
+                                   leftOffset,
+                                   creator.portCount,
+                                   creator.clock,
+                                   creator.inverted,
+                                   Rotation.South));
+      y += yStep;
+    }
+
+    y = rightYStart;
+    for (PortViewCreator creator : rightCreators.creators)
+    {
+
+      rightViews.add(createPortView(y,
+                                    creator.name,
+                                    creator.text,
+                                    rightOffset,
+                                    creator.portCount,
+                                    creator.clock,
+                                    creator.inverted,
+                                    Rotation.North));
+      y += yStep;
+    }
+  }
+
+  private PortView createPortView(int x,
+                                  String portName,
+                                  String text,
+                                  int y,
+                                  int portCount,
+                                  boolean clock,
+                                  boolean inverted,
+                                  Rotation rotation)
+  {
+    PortView portView;
+    if (portCount == 1)
+    {
+      portView = new PortView(this,
+                              portName,
+                              new Int2D(x, y));
+      portView.setText(text.trim());
+    }
+    else
+    {
+      portView = new PortView(this,
+                              getPortNames(portName,
+                                           0,
+                                           portCount,
+                                           1),
+                              new Int2D(x, y));
+      portView.setText(text);
+    }
+    if (clock)
+    {
+      portView.setDrawClock(true);
+    }
+    if (inverted)
+    {
+      portView.setInverting(true, rotation);
+    }
+    return portView;
+  }
+
+  @SuppressWarnings("SuspiciousNameCombination")
+  protected void createPortLabels(List<TextView> labels,
+                                  int fontSize,
+                                  List<PortView> leftPorts,
+                                  List<PortView> rightPorts,
+                                  float leftOffset,
+                                  float rightOffset)
+  {
+    for (PortView portView : leftPorts)
+    {
+      labels.add(new TextView(this,
+                              new Float2D(portView.getRelativePosition().x, leftOffset),
+                              portView.getText(),
+                              SANS_SERIF,
+                              fontSize,
+                              false,
+                              LEFT));
+    }
+
+    for (PortView portView : rightPorts)
+    {
+      labels.add(new TextView(this,
+                              new Float2D(portView.getRelativePosition().x, rightOffset),
+                              portView.getText(),
+                              SANS_SERIF,
+                              fontSize,
+                              false,
+                              RIGHT));
     }
   }
 

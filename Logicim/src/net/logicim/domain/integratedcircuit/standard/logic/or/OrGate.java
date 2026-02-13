@@ -37,7 +37,7 @@ public class OrGate
     int lows = 0;
     for (LogicPort input : inputs)
     {
-      TraceValue inValue = input.readValue(timeline.getTime());
+      TraceValue inValue = input.readValue(timeline);
       if (inValue.isHigh())
       {
         highs++;
@@ -66,6 +66,12 @@ public class OrGate
   public String getType()
   {
     return TYPE;
+  }
+
+  @Override
+  public Stateless createState()
+  {
+    return new Stateless();
   }
 }
 

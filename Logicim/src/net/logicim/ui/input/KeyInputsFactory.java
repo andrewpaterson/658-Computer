@@ -9,6 +9,8 @@ import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferView;
@@ -50,7 +52,8 @@ public class KeyInputsFactory
     placeComponentKeyInput(editor, TunnelView.class, KeyEvent.VK_T, Up, Up, Down);
     placeComponentKeyInput(editor, LabelView.class, KeyEvent.VK_L, Up, Up, Down);
     placeComponentKeyInput(editor, PinView.class, KeyEvent.VK_P, Up, Up, Up);
-    placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Up, Up, Up);
+    placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Down, Up, Down);
+    placeComponentKeyInput(editor, DTypeFlipFlopView.class, KeyEvent.VK_F, Up, Up, Down);
 
     editor.addKeyInput(new KeyInput(editor.getAction(EditPropertiesAction.NAME), KeyEvent.VK_E, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateLeftAction.NAME), KeyEvent.VK_R, Up, Up, Down));

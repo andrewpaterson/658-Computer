@@ -100,7 +100,7 @@ public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
   {
   }
 
-  protected float getVCC(long time)
+  public float getVCC(long time)
   {
     PowerInPort voltageCommon = getPins().getVoltageCommon();
     return voltageCommon.getVoltageIn(time);

@@ -17,6 +17,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.probe.ProbeView;
 import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
@@ -40,6 +41,7 @@ public class EditorActionsFactory
     placeComponentAction(editor, XnorGateView.class);
     placeComponentAction(editor, BufferView.class);
     placeComponentAction(editor, OscilloscopeView.class);
+    placeComponentAction(editor, ProbeView.class);
     placeComponentAction(editor, GroundView.class);
     placeComponentAction(editor, PositivePowerView.class);
     placeComponentAction(editor, SplitterView.class);

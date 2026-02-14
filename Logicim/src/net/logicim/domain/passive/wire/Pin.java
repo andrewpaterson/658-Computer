@@ -1,7 +1,6 @@
 package net.logicim.domain.passive.wire;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PortType;
 import net.logicim.domain.common.port.PowerInPort;
@@ -19,6 +18,8 @@ public class Pin
     extends Passive
 {
   protected List<TracePort> tracePorts;
+
+  //Why do these exist?  As long as you know the VoltageConfiguration you know the high and low.
   protected PowerInPort vcc;
   protected PowerInPort vss;
 
@@ -59,19 +60,9 @@ public class Pin
     return vcc.getVoltageIn(time);
   }
 
-  public float getGND(long time)
-  {
-    return vss.getVoltageIn(time);
-  }
-
   public PowerInPort getVoltageGround()
   {
     return vss;
-  }
-
-  public List<TracePort> getTracePorts()
-  {
-    return tracePorts;
   }
 }
 

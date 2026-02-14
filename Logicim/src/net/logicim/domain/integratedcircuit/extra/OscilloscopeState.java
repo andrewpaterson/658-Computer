@@ -47,8 +47,11 @@ public class OscilloscopeState
     tickPosition = 0;
   }
 
-
-  public OscilloscopeState(int sampleCount, float[][] minVoltage, float[][] maxVoltage, int[][] colour, int tickPosition)
+  public OscilloscopeState(int sampleCount,
+                           float[][] minVoltage,
+                           float[][] maxVoltage,
+                           int[][] colour,
+                           int tickPosition)
   {
     this.sampleCount = sampleCount;
     this.minVoltage = minVoltage;
@@ -66,7 +69,10 @@ public class OscilloscopeState
     }
   }
 
-  public void sample(int input, Trace trace, VoltageRepresentation colours, long time)
+  public void sample(int input,
+                     Trace trace,
+                     VoltageRepresentation colours,
+                     long time)
   {
     Color colour;
     float minimumVoltage;

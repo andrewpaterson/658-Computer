@@ -10,7 +10,6 @@ import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
-import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferView;
@@ -19,6 +18,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.probe.ProbeView;
 import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
@@ -45,7 +45,8 @@ public class KeyInputsFactory
     placeComponentKeyInput(editor, XorGateView.class, KeyEvent.VK_X, Up, Up, Down);
     placeComponentKeyInput(editor, XnorGateView.class, KeyEvent.VK_X, Down, Up, Down);
     placeComponentKeyInput(editor, BufferView.class, KeyEvent.VK_N, Down, Up, Down);
-    placeComponentKeyInput(editor, OscilloscopeView.class, KeyEvent.VK_P, Up, Up, Down);
+    placeComponentKeyInput(editor, OscilloscopeView.class, KeyEvent.VK_P, Up, Down, Down);
+    placeComponentKeyInput(editor, ProbeView.class, KeyEvent.VK_P, Up, Up, Down);
     placeComponentKeyInput(editor, GroundView.class, KeyEvent.VK_G, Up, Up, Up);
     placeComponentKeyInput(editor, PositivePowerView.class, KeyEvent.VK_V, Up, Up, Up);
     placeComponentKeyInput(editor, SplitterView.class, KeyEvent.VK_S, Up, Up, Down);

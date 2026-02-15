@@ -1,6 +1,6 @@
 package net.logicim.ui.circuit;
 
-import net.common.util.Counter;
+import net.common.util.IdentifierSource;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 import net.logicim.ui.circuit.order.CircuitInstanceOrderer;
@@ -42,22 +42,22 @@ public interface CircuitInstanceView
   {
     List<CircuitInstanceViewParent> circuitInstanceViews = new ArrayList<>();
 
-    Counter counter = new Counter();
-    CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(null, this, counter.tick());
+    IdentifierSource identifierSource = new IdentifierSource();
+    CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(null, this, identifierSource.tick());
     circuitInstanceViews.add(instanceViewParent);
-    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViews, counter);
+    recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViews, identifierSource);
     return circuitInstanceViews;
   }
 
-  private void recurseFindSubCircuitViews(CircuitInstanceViewParent circuitInstanceViewParent, List<CircuitInstanceViewParent> circuitInstanceViewParents, Counter counter)
+  private void recurseFindSubCircuitViews(CircuitInstanceViewParent circuitInstanceViewParent, List<CircuitInstanceViewParent> circuitInstanceViewParents, IdentifierSource identifierSource)
   {
     SubcircuitView subcircuitView = circuitInstanceViewParent.getCircuitSubcircuitView();
     Set<SubcircuitInstanceView> instanceViews = subcircuitView.findAllSubcircuitInstanceViews();
     for (SubcircuitInstanceView instanceView : instanceViews)
     {
-      CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(circuitInstanceViewParent, instanceView, counter.tick());
+      CircuitInstanceViewParent instanceViewParent = new CircuitInstanceViewParent(circuitInstanceViewParent, instanceView, identifierSource.tick());
       circuitInstanceViewParents.add(instanceViewParent);
-      recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, counter);
+      recurseFindSubCircuitViews(instanceViewParent, circuitInstanceViewParents, identifierSource);
     }
   }
 

@@ -72,7 +72,7 @@ public class Timeline
     for (; ; )
     {
       SimultaneousEvents events = this.events.findFirst();
-      if (events != null)
+      if ((events != null) && (events.size() > 0))
       {
         if (events.time >= time)
         {

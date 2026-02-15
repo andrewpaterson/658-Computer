@@ -304,6 +304,11 @@ public class VoltageConfiguration
     return vcc;
   }
 
+  public int getAverageDelayTime()
+  {
+    return (highToLowHoldTime + lowToHighHoldTime) /2 + (highToLowSlewTime + lowToHighSlewTime) / 2;
+  }
+
   @Override
   public int compareTo(VoltageConfiguration o)
   {

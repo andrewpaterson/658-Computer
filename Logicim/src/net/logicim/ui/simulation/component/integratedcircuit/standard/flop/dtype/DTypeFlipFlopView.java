@@ -27,6 +27,7 @@ import java.util.List;
 public class DTypeFlipFlopView
     extends StandardIntegratedCircuitView<DTypeFlipFlop, DTypeFlipFlopProperties>
 {
+  protected static int FONT_SIZE = 10;
   protected static int leftOffset = 3;
   protected static int rightOffset = -3;
 
@@ -74,7 +75,7 @@ public class DTypeFlipFlopView
   {
     rectangle = new RectangleView(this, 8, rightOffset - leftOffset, true, true);
     createPortLabels(labels,
-                     10,
+                     FONT_SIZE,
                      leftPorts,
                      rightPorts,
                      leftOffset - 0.6f,

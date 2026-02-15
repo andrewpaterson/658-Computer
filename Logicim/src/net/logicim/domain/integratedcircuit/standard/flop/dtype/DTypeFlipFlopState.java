@@ -18,11 +18,6 @@ public class DTypeFlipFlopState
     this.state = state;
   }
 
-  public void tick()
-  {
-    state = !state;
-  }
-
   public boolean getState()
   {
     return state;

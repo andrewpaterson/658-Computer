@@ -17,6 +17,7 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
+import net.logicim.ui.simulation.component.common.DetailView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.PortViewCreator;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.PortViewCreatorList;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
@@ -25,9 +26,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
 
 public class W65C816View
     extends StandardIntegratedCircuitView<W65C816, W65C816Properties>
@@ -196,50 +196,19 @@ public class W65C816View
     return flag;
   }
 
-  private TextView createDetail(float y, int width, String name, String value)
+  private TextView createDetail(float y,
+                                int width,
+                                String name,
+                                String value)
   {
-    createDetailLabel(name, y);
-    createDetailRectangle(y, width);
-    return createDetailValue(value, y);
-  }
-
-  private RectangleView createDetailRectangle(float y, int width)
-  {
-    RectangleView rectangle = new RectangleView(this,
-                                                new Float2D(y - 0.6f, 0),
-                                                new Float2D(y + 0.6f, -width),
-                                                true,
-                                                true).setLineWidth(1).setFillColour(Colours.getInstance().getBackground());
-    rectangles.add(rectangle);
-    return rectangle;
-  }
-
-  @SuppressWarnings("SuspiciousNameCombination")
-  private TextView createDetailLabel(String label, float y)
-  {
-    TextView textView = new TextView(this,
-                                     new Float2D(y, 0),
-                                     label + ": ",
-                                     SANS_SERIF,
-                                     FONT_SIZE,
-                                     false,
-                                     RIGHT);
-    labels.add(textView);
-    return textView;
-  }
-
-  @SuppressWarnings("SuspiciousNameCombination")
-  private TextView createDetailValue(String value, float y)
-  {
-    TextView textView = new TextView(this,
-                                     new Float2D(y, -0.6f),
-                                     value,
-                                     MONOSPACED,
-                                     FONT_SIZE,
-                                     false,
-                                     LEFT).setColor(Colours.getInstance().getCommentText());
-    labels.add(textView);
-    return textView;
+    return DetailView.create(this,
+                             labels,
+                             rectangles,
+                             y,
+                             width,
+                             name,
+                             value,
+                             FONT_SIZE);
   }
 
   @Override

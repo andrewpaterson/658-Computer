@@ -26,6 +26,7 @@ import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateViewFactory;
@@ -100,6 +101,7 @@ public class LogicimPanel
                                           new PinViewFactory(),
                                           new ProbeViewFactory(),
                                           new ConstantViewFactory(),
+                                          new CounterViewFactory(),
                                           new W65C816ViewFactory(),
                                           new DTypeFlipFlopViewFactory(),
                                           new SubcircuitInstanceViewFactory());

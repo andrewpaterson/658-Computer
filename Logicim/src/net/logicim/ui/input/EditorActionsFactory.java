@@ -9,6 +9,7 @@ import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
@@ -50,6 +51,7 @@ public class EditorActionsFactory
     placeComponentAction(editor, LabelView.class);
     placeComponentAction(editor, PinView.class);
     placeComponentAction(editor, ConstantView.class);
+    placeComponentAction(editor, CounterView.class);
     placeComponentAction(editor, W65C816View.class);
     placeComponentAction(editor, DTypeFlipFlopView.class);
 

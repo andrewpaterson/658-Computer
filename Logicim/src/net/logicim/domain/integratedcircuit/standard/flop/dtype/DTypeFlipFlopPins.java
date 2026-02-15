@@ -51,21 +51,6 @@ public class DTypeFlipFlopPins
     return clock == port;
   }
 
-  public boolean isData(LogicPort port)
-  {
-    return data == port;
-  }
-
-  public boolean isSet(LogicPort port)
-  {
-    return set == port;
-  }
-
-  public boolean isReset(LogicPort port)
-  {
-    return reset == port;
-  }
-
   public LogicPort getOutputQ()
   {
     return outputQ;

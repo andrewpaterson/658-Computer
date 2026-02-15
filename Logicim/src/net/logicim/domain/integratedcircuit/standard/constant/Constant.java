@@ -59,7 +59,7 @@ public class Constant
     for (LogicPort output : outputs)
     {
       output.writeBool(timeline, (constantValue & 1) == 1);
-      constantValue >>= 1;
+      constantValue >>>= 1;
     }
   }
 }

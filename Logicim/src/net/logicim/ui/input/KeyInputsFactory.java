@@ -10,6 +10,7 @@ import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
@@ -55,6 +56,7 @@ public class KeyInputsFactory
     placeComponentKeyInput(editor, LabelView.class, KeyEvent.VK_L, Up, Up, Down);
     placeComponentKeyInput(editor, PinView.class, KeyEvent.VK_P, Up, Up, Up);
     placeComponentKeyInput(editor, ConstantView.class, KeyEvent.VK_C, Up, Up, Up);
+    placeComponentKeyInput(editor, CounterView.class, KeyEvent.VK_C, Down, Up, Down);
     placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Down, Up, Down);
     placeComponentKeyInput(editor, DTypeFlipFlopView.class, KeyEvent.VK_F, Up, Up, Down);
 

@@ -359,12 +359,12 @@ public class PortView
     return false;
   }
 
-  private List<Trace> getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
+  private Set<Trace> getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
     Ports ports = simulationPorts.get(viewPath, circuitSimulation);
     if (ports != null)
     {
-      List<Trace> traces = new ArrayList<>(ports.size());
+      Set<Trace> traces = new LinkedHashSet<>(ports.size());
       for (Port port : ports.getPorts())
       {
         Trace trace = port.getTrace();
@@ -386,11 +386,11 @@ public class PortView
     for (Ports ports : simulationPorts.getComponents())
     {
       SubcircuitSimulation subcircuitSimulation = ports.getContainingSubcircuitSimulation();
-        for (Port port : ports.getPorts())
+      for (Port port : ports.getPorts())
+      {
+        if (port.getTrace() != null)
         {
-          if (port.getTrace() != null)
-          {
-            port.traceConnected(subcircuitSimulation.getSimulation());
+          port.traceConnected(subcircuitSimulation.getSimulation());
         }
       }
     }
@@ -443,7 +443,7 @@ public class PortView
     List<Port> portList = ports.getPorts();
     for (int i = 0; i < size; i++)
     {
-      Port port =  portList.get(i);
+      Port port = portList.get(i);
       if (port != null && port.getTrace() != null)
       {
         float voltage = port.getTrace().getVoltage(circuitSimulation.getTime());

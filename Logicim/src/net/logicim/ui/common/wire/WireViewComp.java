@@ -118,7 +118,7 @@ public class WireViewComp
 
   private void saveTraceIds(Map<Long, long[]> simulationTraces, Traces traces, SubcircuitSimulation simulation)
   {
-    List<Trace> traceList = traces.getTraces();
+    List<Trace> traceList = new ArrayList<>(traces.getTraces());
     long[] ids = new long[traceList.size()];
     simulationTraces.put(simulation.getId(), ids);
     for (int i = 0; i < traceList.size(); i++)
@@ -128,7 +128,7 @@ public class WireViewComp
     }
   }
 
-  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, Set<Trace> traces)
   {
     SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     if (simulationWires.get(viewPath, circuitSimulation) != null)

@@ -15,6 +15,7 @@ import net.logicim.ui.common.integratedcircuit.View;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TraceView
     extends View
@@ -283,7 +284,7 @@ public class TraceView
                          selected);
   }
 
-  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, Set<Trace> traces)
   {
     wireView.connectTraces(viewPath, circuitSimulation, traces);
   }

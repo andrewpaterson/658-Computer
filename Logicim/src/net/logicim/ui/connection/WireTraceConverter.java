@@ -14,7 +14,7 @@ import java.util.*;
 
 public class WireTraceConverter
 {
-  protected Map<LocalMultiSimulationConnectionNet, List<Trace>> localMultiSimulationConnectionNetMap;
+  protected Map<LocalMultiSimulationConnectionNet, Set<Trace>> localMultiSimulationConnectionNetMap;
   protected WireList wireList;
   protected CircuitSimulation circuitSimulation;
 
@@ -76,10 +76,10 @@ public class WireTraceConverter
 
   private void connectWireViews()
   {
-    for (Map.Entry<LocalMultiSimulationConnectionNet, List<Trace>> connectionNetEntry : localMultiSimulationConnectionNetMap.entrySet())
+    for (Map.Entry<LocalMultiSimulationConnectionNet, Set<Trace>> connectionNetEntry : localMultiSimulationConnectionNetMap.entrySet())
     {
       LocalMultiSimulationConnectionNet connectionNet = connectionNetEntry.getKey();
-      List<Trace> traces = connectionNetEntry.getValue();
+      Set<Trace> traces = connectionNetEntry.getValue();
 
       Set<WireView> processedWireViews = new HashSet<>();
       Map<ViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
@@ -139,10 +139,10 @@ public class WireTraceConverter
 
   private void addTrace(LocalMultiSimulationConnectionNet multiSimulationConnectionNet, Trace trace)
   {
-    List<Trace> traces = localMultiSimulationConnectionNetMap.get(multiSimulationConnectionNet);
+    Set<Trace> traces = localMultiSimulationConnectionNetMap.get(multiSimulationConnectionNet);
     if (traces == null)
     {
-      traces = new ArrayList<>();
+      traces = new LinkedHashSet<>();
       localMultiSimulationConnectionNetMap.put(multiSimulationConnectionNet, traces);
     }
     traces.add(trace);

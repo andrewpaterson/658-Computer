@@ -606,7 +606,9 @@ public class Logicim
 
   protected void mouseModifierKeys(int keyCode)
   {
-    if ((keyCode == KeyEvent.VK_ALT) || (keyCode == KeyEvent.VK_SHIFT) || (keyCode == KeyEvent.VK_CONTROL))
+    if ((keyCode == KeyEvent.VK_ALT) ||
+        (keyCode == KeyEvent.VK_SHIFT) ||
+        (keyCode == KeyEvent.VK_CONTROL))
     {
       Int2D position = mousePosition.get();
       if (position != null)

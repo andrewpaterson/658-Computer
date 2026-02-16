@@ -3,15 +3,15 @@ package net.logicim.domain.common.wire;
 import net.logicim.domain.common.CircuitElement;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
-import java.util.List;
+import java.util.Set;
 
 public class Traces
     implements CircuitElement
 {
-  protected List<Trace> traces;
+  protected Set<Trace> traces;
   protected SubcircuitSimulation containingSubcircuitSimulation;
 
-  public Traces(List<Trace> traces, SubcircuitSimulation containingSubcircuitSimulation)
+  public Traces(Set<Trace> traces, SubcircuitSimulation containingSubcircuitSimulation)
   {
     this.containingSubcircuitSimulation = containingSubcircuitSimulation;
     this.traces = traces;
@@ -22,7 +22,7 @@ public class Traces
     return traces.size();
   }
 
-  public List<Trace> getTraces()
+  public Set<Trace> getTraces()
   {
     return traces;
   }

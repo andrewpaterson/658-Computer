@@ -38,6 +38,7 @@ public class WireTraceConverter
   {
     Simulation simulation = circuitSimulation.getSimulation();
 
+    Set<Port> ports = new LinkedHashSet<>();
     List<FullWire> fullWires = wireList.getFullWires();
     for (FullWire fullWire : fullWires)
     {
@@ -45,13 +46,12 @@ public class WireTraceConverter
       Set<ComponentViewPortNames> localWires = fullWire.getLocalWires(circuitSimulation);
       for (ComponentViewPortNames localWire : localWires)
       {
-
         List<ComponentViewPortName> connectedPortIndices = localWire.getConnectedPortIndices();
-        for (ComponentViewPortName connectedPortIndex : connectedPortIndices)
+        for (ComponentViewPortName componentViewPortName : connectedPortIndices)
         {
-          ComponentView<?> componentView = connectedPortIndex.getComponentView();
-          String portName = connectedPortIndex.getPortName();
-          ViewPath viewPath = connectedPortIndex.getViewPath();
+          ComponentView<?> componentView = componentViewPortName.getComponentView();
+          String portName = componentViewPortName.getPortName();
+          ViewPath viewPath = componentViewPortName.getViewPath();
 
           SubcircuitSimulation subcircuitSimulation = getSubcircuitSimulation(viewPath);
 
@@ -64,14 +64,29 @@ public class WireTraceConverter
                                          componentView.getDescription(),
                                          subcircuitSimulation.getDescription());
           }
+          if (ports.contains(port))
+          {
+            throw new SimulatorException("Port [%s] on %s [%s] for simulation [%s] has already been connected.",
+                                         portName,
+                                         componentView.getClass().getSimpleName(),
+                                         componentView.getDescription(),
+                                         subcircuitSimulation.getDescription());
+          }
           port.disconnect(simulation);
           port.connect(trace);
+          ports.add(port);
         }
 
         LocalMultiSimulationConnectionNet multiSimulationConnectionNet = localWire.getMultiSimulationConnectionNet();
         addTrace(multiSimulationConnectionNet, trace);
       }
     }
+
+//    for (Port port : ports)
+//    {
+//      String s = port.toDebugString();
+//      System.out.println(s);
+//    }
   }
 
   private void connectWireViews()

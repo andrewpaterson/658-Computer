@@ -26,10 +26,9 @@ public abstract class IntegratedCircuitEvent
     this.integratedCircuit.add(this);
   }
 
-  @Override
   public void execute(Simulation simulation)
   {
-    removeFromOwner();
+    super.execute(simulation);
   }
 
   @Override

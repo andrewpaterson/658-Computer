@@ -40,7 +40,7 @@ public abstract class PortEvent
 
   public void execute(Simulation simulation)
   {
-    removeFromOwner();
+    super.execute(simulation);
   }
 
   public IntegratedCircuit<?, ?> getIntegratedCircuit()

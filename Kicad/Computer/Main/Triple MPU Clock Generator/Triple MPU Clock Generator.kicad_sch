@@ -3757,6 +3757,159 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "IQD:LFSPXO020733"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Y"
+				(at 13.97 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LFSPXO020733"
+				(at 13.97 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:LFSPXO020733"
+				(at 18.415 -14.605 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.mouser.co.za/datasheet/2/741/LFSPXO020733Reel-984741.pdf"
+				(at 18.415 -17.145 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "clock oscillator 1.8432MHz"
+				(at 14.605 -5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Silkscreen" "1.8432Hz"
+				(at 13.97 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LFSPXO020733_0_0"
+				(pin input line
+					(at 0 0 0)
+					(length 5.08)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "LFSPXO020733_0_1"
+				(polyline
+					(pts
+						(xy 5.08 1.905) (xy 22.86 1.905) (xy 22.86 -4.445) (xy 5.08 -4.445) (xy 5.08 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LFSPXO020733_1_0"
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 27.94 0 180)
+					(length 5.08)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 27.94 -2.54 180)
+					(length 5.08)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Nexperia:74LVC14APW,118"
 			(pin_names
 				(offset 0.762)
@@ -5258,6 +5411,256 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Nexperia:74LVC1G17GV,125"
+			(pin_names
+				(offset 0.762)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "IC"
+				(at 12.7 7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "74LVC1G17GV,125"
+				(at 12.7 5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
+				(at 18.415 -13.97 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G17.pdf"
+				(at 18.415 -16.51 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Schmitt buffer"
+				(at 13.335 -5.715 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Height" "1.1"
+				(at 18.415 -21.59 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Name" "Nexperia"
+				(at 18.415 -24.13 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Manufacturer_Part_Number" "74LVC1G17GV,125"
+				(at 18.415 -26.67 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Silkscreen" "'1G17"
+				(at 18.415 -19.05 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(symbol "74LVC1G17GV,125_0_0"
+				(pin no_connect line
+					(at 0 2.54 0)
+					(length 5.08)
+					(hide yes)
+					(name "n.c."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 0 0 0)
+					(length 5.08)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 0)
+					(length 5.08)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 2.54 180)
+					(length 5.08)
+					(hide yes)
+					(name "3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 25.4 0 180)
+					(length 5.08)
+					(name "Y"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "74LVC1G17GV,125_0_1"
+				(polyline
+					(pts
+						(xy 5.08 4.445) (xy 20.32 4.445) (xy 20.32 -4.445) (xy 5.08 -4.445) (xy 5.08 4.445)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 9.525 0) (xy 11.43 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 11.43 1.016)
+					(end 11.43 -1.016)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 11.43 -1.016) (xy 13.97 0) (xy 11.43 1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 13.97 0) (xy 15.875 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Nexperia:74LVC74APW,118_Multi"
 			(pin_names
 				(offset 0.762)
@@ -5766,15 +6169,6 @@
 					(hide yes)
 				)
 			)
-			(property "Garbage" "SMD Crystal Oscillator 100MHz 3.3V 15pF 4-Pin CLCC Cut Tape"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
 			(symbol "XLH735100.000000I_0_0"
 				(pin no_connect line
 					(at 0 0 0)
@@ -6257,10 +6651,6 @@
 		(uuid "3861bfd6-d9ba-4438-b665-cf3d4697b8a7")
 	)
 	(no_connect
-		(at 68.58 127)
-		(uuid "3b7d50c4-4902-4dee-b0e5-12272a5bc519")
-	)
-	(no_connect
 		(at 66.04 82.55)
 		(uuid "3ec6f80a-d6df-438f-952e-b19705521032")
 	)
@@ -6271,6 +6661,10 @@
 	(no_connect
 		(at 368.3 81.28)
 		(uuid "48d1a2e9-b88e-434c-afae-6747634515bf")
+	)
+	(no_connect
+		(at 68.58 124.46)
+		(uuid "4c937562-8db2-413a-bc88-6bd92e66ef5f")
 	)
 	(no_connect
 		(at 347.98 231.14)
@@ -6409,10 +6803,6 @@
 		(uuid "ae3551f5-2f1c-41a4-9e19-07267a1b3d22")
 	)
 	(no_connect
-		(at 68.58 124.46)
-		(uuid "b1f91c12-0f85-404d-ba2b-e8562f3e3e4e")
-	)
-	(no_connect
 		(at 223.52 113.03)
 		(uuid "b5943bb0-4e01-491e-a1c0-d1d28526950d")
 	)
@@ -6548,6 +6938,16 @@
 	)
 	(wire
 		(pts
+			(xy 69.85 127) (xy 68.58 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "089c421e-89e9-42e0-a8a8-a6d788da9a7c")
+	)
+	(wire
+		(pts
 			(xy 334.01 187.96) (xy 347.98 187.96)
 		)
 		(stroke
@@ -6645,6 +7045,16 @@
 			(type default)
 		)
 		(uuid "3e8eabb4-781b-4ff1-9c2c-a474e38cb9b9")
+	)
+	(wire
+		(pts
+			(xy 226.06 172.72) (xy 243.84 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45b01bbc-b7a0-458d-8a8f-eb2e7dff5584")
 	)
 	(wire
 		(pts
@@ -7086,6 +7496,16 @@
 		)
 		(uuid "078e692c-af05-4687-8e43-587926240cc3")
 	)
+	(label "GND"
+		(at 198.12 172.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0849b128-da7d-42df-a571-929bc8baf36a")
+	)
 	(label "CK_{1}"
 		(at 313.69 223.52 180)
 		(effects
@@ -7437,6 +7857,16 @@
 		(uuid "2e9879af-602e-40e4-bda4-18e98cac3b5a")
 	)
 	(label "3.3V"
+		(at 269.24 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2eee5ebd-8543-4280-a066-5490d4c03243")
+	)
+	(label "3.3V"
 		(at 111.76 59.69 0)
 		(effects
 			(font
@@ -7586,6 +8016,16 @@
 		)
 		(uuid "415e417f-034e-4158-802d-8aa16af589b7")
 	)
+	(label "3.3V"
+		(at 198.12 170.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4202e3ad-0d8f-4735-88b0-22ffcaa4c817")
+	)
 	(label "MA_{4s}"
 		(at 86.36 64.77 180)
 		(effects
@@ -7715,6 +8155,16 @@
 			(justify right bottom)
 		)
 		(uuid "4d1fb774-775f-4d3c-8388-accdb7bfcde2")
+	)
+	(label "GND"
+		(at 160.02 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4fcdbfea-8cec-4631-a892-da74bdb6e071")
 	)
 	(label "GND"
 		(at 368.3 193.04 0)
@@ -7977,6 +8427,16 @@
 		(uuid "70ac6132-b3a2-4713-a328-0ce1eed6fc1a")
 	)
 	(label "GND"
+		(at 173.99 226.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "71d2a895-dcff-42ab-9ccd-f937b9721db5")
+	)
+	(label "GND"
 		(at 368.3 78.74 0)
 		(effects
 			(font
@@ -8065,6 +8525,16 @@
 			(justify right bottom)
 		)
 		(uuid "7934553c-0582-4622-a368-a6bc19b068be")
+	)
+	(label "3.3V"
+		(at 168.91 226.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "79780db8-6b31-4174-83a1-a4e3bc7de4fe")
 	)
 	(label "MA_{4}"
 		(at 223.52 62.23 0)
@@ -8246,6 +8716,16 @@
 		)
 		(uuid "8d24098c-27af-4b2a-9be2-2538433071f1")
 	)
+	(label "WATCH CLK"
+		(at 269.24 172.72 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8de2e3eb-3bf1-4758-8b31-004a0a392f36")
+	)
 	(label "3.3V"
 		(at 140.97 203.2 180)
 		(effects
@@ -8255,6 +8735,16 @@
 			(justify right bottom)
 		)
 		(uuid "8e4c2956-83d0-43a0-bdde-ac0c6f97023b")
+	)
+	(label "3.3V"
+		(at 154.94 226.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8eb4978e-7ed4-4119-a29f-517e8dd715fe")
 	)
 	(label "3.3V"
 		(at 170.18 129.54 180)
@@ -8766,6 +9256,16 @@
 		)
 		(uuid "c82c037f-4d7c-47b3-b349-a390ab10790c")
 	)
+	(label "GND"
+		(at 243.84 175.26 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c8c1a620-a774-428d-b236-22ba48c06823")
+	)
 	(label "3.3V"
 		(at 251.46 78.74 0)
 		(effects
@@ -9066,6 +9566,16 @@
 		)
 		(uuid "ed1960b5-d0eb-4093-ac57-bbd9bd99d06b")
 	)
+	(label "3.3V"
+		(at 226.06 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ed9560c1-64c7-46b4-ad7f-12aa1dc9f46d")
+	)
 	(label "CK_{0s}"
 		(at 335.28 204.47 0)
 		(effects
@@ -9215,6 +9725,30 @@
 			(justify left bottom)
 		)
 		(uuid "fe090ab8-3cdb-4942-a370-38c6e2961e94")
+	)
+	(global_label "WATCH CLK"
+		(shape output)
+		(at 69.85 127 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "065b0680-c016-4aa6-b42a-c14bc4588508")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 80.9562 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(global_label "GND"
 		(shape passive)
@@ -9693,6 +10227,91 @@
 			(project "Triple MPU Clock Generator"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "CN1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IQD:LFSPXO020733")
+		(at 198.12 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0916200a-54fe-414e-915e-7be96fb25608")
+		(property "Reference" "Y2"
+			(at 212.09 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LFSPXO020733"
+			(at 212.09 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:LFSPXO020733"
+			(at 216.535 184.785 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.mouser.co.za/datasheet/2/741/LFSPXO020733Reel-984741.pdf"
+			(at 216.535 187.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "clock oscillator 1.8432MHz"
+			(at 212.09 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "1.8432Hz"
+			(at 212.09 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a4e36a6-5ea3-44be-8666-0d113aa37dee")
+		)
+		(pin "4"
+			(uuid "27fa16e4-88bc-4ae8-a408-389115c680cc")
+		)
+		(pin "3"
+			(uuid "66cf5b37-95f5-41d2-b140-d5f29881497d")
+		)
+		(pin "2"
+			(uuid "5bac2845-b655-4c2c-84f3-6f8d6e489cac")
+		)
+		(instances
+			(project ""
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "Y2")
 					(unit 1)
 				)
 			)
@@ -12374,6 +12993,125 @@
 			(project "Sound"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b/f77e925c-a0a2-46fc-a442-a4077818f930"
 					(reference "C30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Nexperia:74LVC1G17GV,125")
+		(at 243.84 172.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6b6649c2-1990-4788-8917-91bc92128a35")
+		(property "Reference" "IC8"
+			(at 256.54 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "74LVC1G17GV,125"
+			(at 256.54 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(bold yes)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
+			(at 262.255 186.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G17.pdf"
+			(at 262.255 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Schmitt buffer"
+			(at 256.54 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Height" "1.1"
+			(at 262.255 194.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "Nexperia"
+			(at 262.255 196.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "74LVC1G17GV,125"
+			(at 262.255 199.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Silkscreen" "'1G17"
+			(at 262.255 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "66b43a4f-e659-4d7a-8897-a01e8d34e8cd")
+		)
+		(pin "5"
+			(uuid "6aa5976e-e8b3-49dc-b0c0-ba8cfc6daae1")
+		)
+		(pin "1"
+			(uuid "391c2487-9ceb-493a-8a7d-db97ec71fff0")
+		)
+		(pin "2"
+			(uuid "0cbec6da-b134-4106-a9bf-2c83f1bc67c8")
+		)
+		(pin "4"
+			(uuid "4ef9b8a1-049d-46fd-883b-daba70967f01")
+		)
+		(instances
+			(project ""
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "IC8")
 					(unit 1)
 				)
 			)
@@ -15411,15 +16149,6 @@
 				(hide yes)
 			)
 		)
-		(property "Garbage" "SMD Crystal Oscillator 100MHz 3.3V 15pF 4-Pin CLCC Cut Tape"
-			(at 144.78 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "7b81abf8-d7c4-49f6-91cb-896e22e0fa87")
 		)
@@ -15946,6 +16675,73 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
+		(at 154.94 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cc2daa0e-084b-4b28-95f5-7ac337304df7")
+		(property "Reference" "C15"
+			(at 157.226 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 157.48 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 171.704 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.1625 225.7425 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78b35b7e-bd21-4e60-8a94-2c1170a54373")
+		)
+		(pin "2"
+			(uuid "f6a13469-fd9c-4c0e-8286-fd86323a89b2")
+		)
+		(instances
+			(project "Triple MPU Clock Generator"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
 		(at 154.94 218.44 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -16273,6 +17069,73 @@
 			(project "Triple MPU Clock Generator"
 				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
 					(reference "C8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "HCP65:C_0805")
+		(at 168.91 226.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fbe77066-1ffa-47e6-84d6-217bd7f5e4dd")
+		(property "Reference" "C9"
+			(at 171.196 223.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1μF"
+			(at 171.45 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "SamacSys_Parts:C_0805"
+			(at 185.674 233.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 171.1325 225.7425 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 168.91 226.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d0c6ee63-96f8-49ee-a331-75685e3549ab")
+		)
+		(pin "2"
+			(uuid "27fb4389-983d-4fa8-a88c-1ba61cfd1280")
+		)
+		(instances
+			(project "Triple MPU Clock Generator"
+				(path "/337b5f72-8be1-4121-9dc6-479b565482b2"
+					(reference "C9")
 					(unit 1)
 				)
 			)

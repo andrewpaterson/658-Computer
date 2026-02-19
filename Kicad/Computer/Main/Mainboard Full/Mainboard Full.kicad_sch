@@ -4602,25 +4602,6 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -38.1 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "54"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
 					(at 35.56 -50.8 180)
 					(length 5.08)
 					(hide yes)
@@ -4632,6 +4613,25 @@
 						)
 					)
 					(number "45"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -63.5 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "54"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5293,6 +5293,24 @@
 						)
 					)
 				)
+				(pin output clock
+					(at 35.56 -38.1 180)
+					(length 5.08)
+					(name "Watch_CLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "55"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin no_connect line
 					(at 35.56 -40.64 180)
 					(length 5.08)
@@ -5438,25 +5456,6 @@
 						)
 					)
 					(number "41"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -63.5 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "55"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -15402,10 +15401,6 @@
 		(uuid "57f0d7eb-fe0f-4ce6-8940-352343576838")
 	)
 	(no_connect
-		(at 354.33 110.49)
-		(uuid "599bc12c-d8cb-473b-857a-cfa499d6acf9")
-	)
-	(no_connect
 		(at 60.96 52.07)
 		(uuid "59ae1107-b460-469e-a589-50ad950345a2")
 	)
@@ -15610,10 +15605,6 @@
 		(uuid "880869c4-6029-48b2-80c1-126790c18220")
 	)
 	(no_connect
-		(at 416.56 414.02)
-		(uuid "88534386-65bb-4a54-90f4-8ceea962584e")
-	)
-	(no_connect
 		(at 119.38 107.95)
 		(uuid "8889e0ca-e807-4829-9a03-97d1c8c24db9")
 	)
@@ -15804,10 +15795,6 @@
 	(no_connect
 		(at 416.56 491.49)
 		(uuid "b497ef62-8eea-480a-b9fb-f76201aefe17")
-	)
-	(no_connect
-		(at 327.66 414.02)
-		(uuid "b4a85f62-ce32-40d4-a3b1-8a0f5b1abdfd")
 	)
 	(no_connect
 		(at 238.76 382.27)
@@ -21024,6 +21011,16 @@
 			(justify right bottom)
 		)
 		(uuid "2d700fb4-f452-4850-a6ee-7252a64674bb")
+	)
+	(label "Watchdog CLK"
+		(at 511.81 367.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2d7fe3bb-76a9-4a0b-bed4-7de18c249956")
 	)
 	(label "MPU1 D~{WD}"
 		(at 60.96 387.35 180)
@@ -32795,6 +32792,16 @@
 		)
 		(uuid "d03511a5-c53e-4ce6-91a2-032395787f9f")
 	)
+	(label "Watchdog CLK"
+		(at 327.66 414.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d0374079-e5ca-4a7d-839b-aa86182ceada")
+	)
 	(label "~{Memory Lo} MPU0 DEV19"
 		(at 589.28 189.23 0)
 		(effects
@@ -34635,6 +34642,16 @@
 		)
 		(uuid "ecbb3a62-d249-454a-a5bc-5be4822ccd60")
 	)
+	(label "Watchdog CLK"
+		(at 354.33 110.49 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ecc1b091-53d8-415e-837a-be751da1e3a9")
+	)
 	(label "MPU2 AD14"
 		(at 439.42 383.54 0)
 		(effects
@@ -35864,6 +35881,16 @@
 			(justify right bottom)
 		)
 		(uuid "fd6c17e5-7fec-4000-a896-aa1e07c0cf89")
+	)
+	(label "Watchdog CLK"
+		(at 416.56 414.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "fd8bd3d2-f5e8-4d69-93bc-21ae2592911f")
 	)
 	(label "GND"
 		(at 377.19 200.66 0)
@@ -45271,7 +45298,7 @@
 		(dnp no)
 		(uuid "9e487a99-f455-4ac0-bca7-86bce1459bf3")
 		(property "Reference" "B12"
-			(at 481.965 323.85 0)
+			(at 491.49 323.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)

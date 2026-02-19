@@ -291,7 +291,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector:Conn_01x07_Pin"
+		(symbol "Connector:Conn_01x08_Pin"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -307,8 +307,8 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x07_Pin"
-				(at 0 -10.16 0)
+			(property "Value" "Conn_01x08_Pin"
+				(at 0 -12.7 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -333,7 +333,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x07, script generated"
+			(property "Description" "Generic connector, single row, 01x08, script generated"
 				(at 0 0 0)
 				(effects
 					(font
@@ -368,7 +368,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_01x07_Pin_1_1"
+			(symbol "Conn_01x08_Pin_1_1"
 				(rectangle
 					(start 0.8636 7.747)
 					(end 0 7.493)
@@ -438,6 +438,17 @@
 				(rectangle
 					(start 0.8636 -7.493)
 					(end 0 -7.747)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -10.033)
+					(end 0 -10.287)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -521,6 +532,18 @@
 				(polyline
 					(pts
 						(xy 1.27 -7.62) (xy 0.8636 -7.62)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -10.16) (xy 0.8636 -10.16)
 					)
 					(stroke
 						(width 0.1524)
@@ -649,6 +672,24 @@
 						)
 					)
 					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -10.16 180)
+					(length 3.81)
+					(name "Pin_8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -22908,10 +22949,6 @@
 		(uuid "28b0e8de-943a-413a-ab62-6b5e57b82adb")
 	)
 	(no_connect
-		(at 69.85 107.95)
-		(uuid "31bbd375-3c94-4a67-b459-9d6774f6773f")
-	)
-	(no_connect
 		(at 193.04 140.97)
 		(uuid "3d9d807c-fb6b-46c3-843c-36c208321d59")
 	)
@@ -34356,7 +34393,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 412.75) (xy 167.64 412.75)
+			(xy 168.91 415.29) (xy 167.64 415.29)
 		)
 		(stroke
 			(width 0)
@@ -41050,7 +41087,7 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 410.21) (xy 167.64 410.21)
+			(xy 168.91 412.75) (xy 167.64 412.75)
 		)
 		(stroke
 			(width 0)
@@ -44790,7 +44827,7 @@
 		)
 		(uuid "466c9741-7335-4961-9b5d-0ee1b1008cb4")
 	)
-	(label "CLK_{IN}"
+	(label "Main CLK"
 		(at 134.62 97.79 180)
 		(effects
 			(font
@@ -46040,7 +46077,7 @@
 		)
 		(uuid "69b8cd31-94a1-4cb7-a522-ce3305efe660")
 	)
-	(label "CLK_{IN}"
+	(label "Main CLK"
 		(at 39.37 279.4 180)
 		(effects
 			(font
@@ -48730,7 +48767,7 @@
 		)
 		(uuid "b2f817da-675c-4604-b2a4-8cf1e121fd8d")
 	)
-	(label "CLK"
+	(label "Watchdog CLK"
 		(at 198.12 457.2 180)
 		(effects
 			(font
@@ -52118,7 +52155,7 @@
 			)
 		)
 	)
-	(global_label "CLK_{IN}"
+	(global_label "Main CLK"
 		(shape input)
 		(at 167.64 402.59 0)
 		(fields_autoplaced yes)
@@ -52205,7 +52242,7 @@
 			)
 		)
 	)
-	(global_label "CLK_{IN}"
+	(global_label "Main CLK"
 		(shape input)
 		(at 69.85 39.37 180)
 		(fields_autoplaced yes)
@@ -52348,6 +52385,28 @@
 		(uuid "3b84f457-6874-4b32-b7e0-7bc9f7243b6c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 104.3434 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Watchdog CLK"
+		(shape input)
+		(at 167.64 410.21 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify left)
+		)
+		(uuid "3b91d963-94ca-42d3-abc1-afceccd5a36d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 180.6571 410.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53669,6 +53728,28 @@
 			)
 		)
 	)
+	(global_label "Watchdog CLK"
+		(shape input)
+		(at 69.85 107.95 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+			)
+			(justify right)
+		)
+		(uuid "b4d3034c-4233-45d8-a941-d77658079c33")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 56.8329 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "~{Enable} DEV18"
 		(shape input)
 		(at 92.71 201.93 0)
@@ -54238,7 +54319,7 @@
 	)
 	(global_label "5V"
 		(shape passive)
-		(at 168.91 410.21 0)
+		(at 168.91 412.75 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -54248,7 +54329,7 @@
 		)
 		(uuid "f0b099a8-c01d-440a-870c-a9844f009d83")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 173.082 410.21 0)
+			(at 173.082 412.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54456,7 +54537,7 @@
 	)
 	(global_label "12V"
 		(shape passive)
-		(at 168.91 412.75 0)
+		(at 168.91 415.29 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -54466,7 +54547,7 @@
 		)
 		(uuid "fd5a0449-39b8-472a-b662-43f09d8c9da9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 174.2915 412.75 0)
+			(at 174.2915 415.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55344,7 +55425,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x07_Pin")
+		(lib_id "Connector:Conn_01x08_Pin")
 		(at 162.56 405.13 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55353,22 +55434,22 @@
 		(dnp no)
 		(uuid "20e56e86-9d55-4965-9046-3bbc99f19155")
 		(property "Reference" "J2"
-			(at 167.64 394.97 0)
+			(at 162.56 394.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "Conn_01x07_Pin"
-			(at 167.64 415.29 0)
+		(property "Value" "Conn_01x08_Pin"
+			(at 162.56 417.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical"
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at 162.56 405.13 0)
 			(effects
 				(font
@@ -55386,7 +55467,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x07, script generated"
+		(property "Description" "Generic connector, single row, 01x08, script generated"
 			(at 162.56 405.13 0)
 			(effects
 				(font
@@ -55415,6 +55496,9 @@
 		)
 		(pin "6"
 			(uuid "e4f13fcf-040f-4da0-b70e-2ff47cc9bce8")
+		)
+		(pin "8"
+			(uuid "2f583001-aa6e-4d56-bdbe-49d39e416a42")
 		)
 		(instances
 			(project ""

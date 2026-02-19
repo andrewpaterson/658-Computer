@@ -4547,25 +4547,6 @@
 					)
 				)
 				(pin no_connect line
-					(at 35.56 -38.1 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "54"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
 					(at 35.56 -50.8 180)
 					(length 5.08)
 					(hide yes)
@@ -4577,6 +4558,25 @@
 						)
 					)
 					(number "45"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 35.56 -63.5 180)
+					(length 5.08)
+					(hide yes)
+					(name "N.C."
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "54"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -5238,6 +5238,24 @@
 						)
 					)
 				)
+				(pin output clock
+					(at 35.56 -38.1 180)
+					(length 5.08)
+					(name "Watch_CLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "55"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin no_connect line
 					(at 35.56 -40.64 180)
 					(length 5.08)
@@ -5383,25 +5401,6 @@
 						)
 					)
 					(number "41"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 35.56 -63.5 180)
-					(length 5.08)
-					(hide yes)
-					(name "N.C."
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "55"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -12823,10 +12822,6 @@
 		(uuid "54b912f6-a4cf-4871-bdb5-c222de830eae")
 	)
 	(no_connect
-		(at 279.4 110.49)
-		(uuid "599bc12c-d8cb-473b-857a-cfa499d6acf9")
-	)
-	(no_connect
 		(at 60.96 52.07)
 		(uuid "59ae1107-b460-469e-a589-50ad950345a2")
 	)
@@ -13117,10 +13112,6 @@
 	(no_connect
 		(at 405.13 279.4)
 		(uuid "f8f9fa11-f2d6-444b-8ade-22b16004946a")
-	)
-	(no_connect
-		(at 405.13 289.56)
-		(uuid "f99367d6-5feb-4100-a074-01b2f5fc44da")
 	)
 	(no_connect
 		(at 119.38 228.6)
@@ -20256,6 +20247,16 @@
 		)
 		(uuid "85418667-9d3a-4b2a-ba97-79b5680f9935")
 	)
+	(label "Watchdog CLK"
+		(at 279.4 110.49 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "855cbc18-25ae-4236-bf5d-75732125ba31")
+	)
 	(label "DD1"
 		(at 83.82 105.41 0)
 		(effects
@@ -20785,6 +20786,16 @@
 			(justify right bottom)
 		)
 		(uuid "963fdec4-66ca-479b-b8dd-5e5dc869f23c")
+	)
+	(label "Watchdog CLK"
+		(at 405.13 289.56 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "968f85ca-add0-453c-abeb-949acdb04d2e")
 	)
 	(label "AD16"
 		(at 203.2 233.68 0)

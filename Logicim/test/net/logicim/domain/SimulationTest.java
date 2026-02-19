@@ -3,7 +3,6 @@ package net.logicim.domain;
 import net.common.collection.linkedlist.LinkedList;
 import net.logicim.assertions.SmoothVoltage;
 import net.logicim.assertions.TraceSmoothVoltage;
-import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.SimultaneousEvents;
 import net.logicim.domain.common.event.Event;
@@ -46,15 +45,18 @@ public class SimulationTest
 
     Trace constantTrace = new Trace();
     Trace outputTrace = new Trace();
-    Constant constant = new Constant(subcircuitSimulation, "Constant", new ConstantPins(new TestVoltageConfiguration(testPower.getVCC(),
-                                                                                                                     0.8f,
-                                                                                                                     2.0f,
-                                                                                                                     testPower.getGND(),
-                                                                                                                     testPower.getVCC(),
-                                                                                                                     (int) nanosecondsToTime(2.0f),
-                                                                                                                     (int) nanosecondsToTime(2.0f))),
-                                     (int) nanosecondsToTime(1), 1);
-    constant.getPins().getOutput().connect(constantTrace);
+    Constant constant = new Constant(subcircuitSimulation,
+                                     "Constant",
+                                     new ConstantPins(new TestVoltageConfiguration(testPower.getVCC(),
+                                                                                   0.8f,
+                                                                                   2.0f,
+                                                                                   testPower.getGND(),
+                                                                                   testPower.getVCC(),
+                                                                                   (int) nanosecondsToTime(2.0f),
+                                                                                   (int) nanosecondsToTime(2.0f)),
+                                                      1),
+                                     1);
+    constant.getPins().getOutputs().get(0).connect(constantTrace);
     testPower.connect(constant);
 
     Inverter inverter = new Inverter(subcircuitSimulation, "Not", new BufferPins(1, new TestVoltageConfiguration(testPower.getVCC(),
@@ -188,10 +190,10 @@ public class SimulationTest
                                                                                    testPower.getGND(),
                                                                                    testPower.getVCC(),
                                                                                    (int) nanosecondsToTime(2.0f),
-                                                                                   (int) nanosecondsToTime(2.0f))),
-                                     (int) nanosecondsToTime(1),
+                                                                                   (int) nanosecondsToTime(2.0f)),
+                                                      1),
                                      1);
-    constant.getPins().getOutput().connect(connectingTrace);
+    constant.getPins().getOutputs().get(0).connect(connectingTrace);
     testPower.connect(constant);
 
     Inverter inverter = new Inverter(subcircuitSimulation,

@@ -10,6 +10,7 @@ import net.logicim.ui.common.port.PortView;
 
 import java.util.List;
 
+import static net.logicim.ui.common.Rotation.North;
 import static net.logicim.ui.common.integratedcircuit.PropertyClamp.clamp;
 
 public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
@@ -50,7 +51,7 @@ public abstract class LogicGateView<IC extends IntegratedCircuit<?, ?>>
                                            new Int2D(0, -2));
     if (negateOutput)
     {
-      outputPortView.setInverting(true, Rotation.North);
+      outputPortView.setInverting(true, North);
     }
   }
 

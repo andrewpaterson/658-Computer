@@ -6,6 +6,7 @@ import net.logicim.domain.common.wire.Trace;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Set;
 
 public abstract class VoltageColour
 {
@@ -51,7 +52,7 @@ public abstract class VoltageColour
     }
   }
 
-  public static Color getColourForTraces(VoltageRepresentation colours, List<Trace> traces, long time)
+  public static Color getColourForTraces(VoltageRepresentation colours, Set<Trace> traces, long time)
   {
     if ((traces == null) ||
         (traces.isEmpty()) ||

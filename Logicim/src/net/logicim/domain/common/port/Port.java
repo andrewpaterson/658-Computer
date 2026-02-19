@@ -58,7 +58,12 @@ public abstract class Port
 
   public String toDebugString()
   {
-    return getHolder().getName() + "." + name;
+    String holderName = getHolder().getName();
+    if (holderName == null)
+    {
+      holderName = "";
+    }
+    return holderName + "." + this.name + "(" + getTraceId() + ")";
   }
 
   public String getDescription()

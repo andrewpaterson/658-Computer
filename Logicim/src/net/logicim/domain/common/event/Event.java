@@ -12,12 +12,14 @@ public abstract class Event
   protected long time;
   protected long id;
   protected boolean removed;
+  protected boolean executed;
 
   public Event(long time, Timeline timeline)
   {
     this.time = time;
     this.id = nextId++;
     removed = false;
+    executed = false;
     timeline.addFutureEvent(this);
   }
 
@@ -43,12 +45,22 @@ public abstract class Event
     return removed;
   }
 
+  public boolean isExecuted()
+  {
+    return executed;
+  }
+
   public long getTime()
   {
     return time;
   }
 
-  public abstract void execute(Simulation simulation);
+  public void execute(Simulation simulation)
+  {
+    executed = true;
+    removeFromOwner();
+  }
+
 
   public abstract IntegratedCircuit<?, ?> getIntegratedCircuit();
 

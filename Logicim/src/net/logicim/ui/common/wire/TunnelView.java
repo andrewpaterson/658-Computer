@@ -263,7 +263,7 @@ public class TunnelView
   }
 
   @Override
-  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces)
+  public void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, Set<Trace> traces)
   {
     wireView.connectTraces(viewPath, circuitSimulation, traces);
   }

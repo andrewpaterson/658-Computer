@@ -9,13 +9,13 @@ import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.ConnectionView;
 import net.logicim.ui.common.integratedcircuit.View;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 public interface WireView
 {
-  void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, List<Trace> traces);
+  void connectTraces(ViewPath viewPath, CircuitSimulation circuitSimulation, Set<Trace> traces);
 
   Traces getTraces(ViewPath viewPath, CircuitSimulation circuitSimulation);
 
@@ -42,7 +42,7 @@ public interface WireView
                                      TraceLoader traceLoader,
                                      long[] traceIds)
   {
-    List<Trace> traces = new ArrayList<>(traceIds.length);
+    Set<Trace> traces = new LinkedHashSet<>(traceIds.length);
     for (long id : traceIds)
     {
       Trace trace = traceLoader.create(id);

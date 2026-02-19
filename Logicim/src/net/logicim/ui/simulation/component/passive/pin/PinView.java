@@ -1,11 +1,9 @@
 package net.logicim.ui.simulation.component.passive.pin;
 
-import net.common.SimulatorException;
 import net.common.type.Float2D;
 import net.common.type.Int2D;
 import net.common.util.StringUtil;
 import net.logicim.data.circuit.SubcircuitPinAlignment;
-import net.logicim.data.common.Radix;
 import net.logicim.data.integratedcircuit.common.PassiveData;
 import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
@@ -33,6 +31,7 @@ import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.circle.CircleView;
 import net.logicim.ui.shape.text.TextView;
 import net.logicim.ui.simulation.component.common.InstanceView;
+import net.logicim.ui.simulation.component.common.RadixHelper;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.FrameView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitPinView;
@@ -43,7 +42,6 @@ import java.util.List;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
-import static net.logicim.domain.common.wire.TraceValue.*;
 
 public class PinView
     extends PassiveView<Pin, PinProperties>
@@ -120,41 +118,7 @@ public class PinView
 
   private int calculateMaxDigits()
   {
-    int maxDigits = 0;
-    if (properties.radix == Radix.BINARY)
-    {
-      maxDigits = properties.bitWidth;
-    }
-    else if (properties.radix == Radix.HEXADECIMAL)
-    {
-      maxDigits = (int) Math.ceil(properties.bitWidth / 4.0f);
-    }
-    else if (properties.radix == Radix.DECIMAL)
-    {
-      if (properties.bitWidth < 63)
-      {
-        long maxInt = 1 << properties.bitWidth - 1;
-        String s = Long.toString(maxInt);
-        maxDigits = s.length();
-      }
-      else if (properties.bitWidth == 64)
-      {
-        maxDigits = 20;
-      }
-      else if (properties.bitWidth == 63)
-      {
-        maxDigits = 19;
-      }
-      else
-      {
-        throw new SimulatorException("Cannot calculate maximum decimal digits for bitwidth [%s].", properties.bitWidth);
-      }
-    }
-    if (maxDigits < 1)
-    {
-      maxDigits = 1;
-    }
-    return maxDigits;
+    return RadixHelper.calculateMaxDigits(properties.radix, properties.bitWidth);
   }
 
   @Override
@@ -321,134 +285,7 @@ public class PinView
 
   private String getStringValue(TraceValue[] values)
   {
-    if (values == null)
-    {
-      return "";
-    }
-
-    if (properties.radix == Radix.BINARY)
-    {
-      return toBinaryString(values);
-    }
-    else if (properties.radix == Radix.HEXADECIMAL)
-    {
-      return toHexadecimalString(values);
-    }
-    else if (properties.radix == Radix.DECIMAL)
-    {
-      return toDecimalString(values);
-    }
-    else
-    {
-      return "";
-    }
-  }
-
-  private String toDecimalString(TraceValue[] values)
-  {
-    long longValue = 0;
-    for (int i = 0; i < values.length; i++)
-    {
-      TraceValue value = values[i];
-      if (value == High)
-      {
-        longValue += 1 << i;
-      }
-      else if (value == Undriven)
-      {
-        return StringUtil.pad(maxDigits, Character.toString(getBinaryChar(Undriven)));
-      }
-      else if (value == Unsettled)
-      {
-        return StringUtil.pad(maxDigits, Character.toString(getBinaryChar(Unsettled)));
-      }
-    }
-
-    return Long.toString(longValue);
-  }
-
-  private String toHexadecimalString(TraceValue[] values)
-  {
-    StringBuilder builder = new StringBuilder();
-    int nybbleIndex = 0;
-    boolean undriven = false;
-    boolean unsettled = false;
-    int nybble = 0;
-    for (TraceValue value : values)
-    {
-      if (nybbleIndex == 0)
-      {
-        nybble = 0;
-      }
-      if (value == High)
-      {
-        nybble += 1 << nybbleIndex;
-      }
-      else if (value == Undriven)
-      {
-        undriven = true;
-      }
-      else if (value == Unsettled)
-      {
-        unsettled = true;
-      }
-
-      nybbleIndex++;
-      if (nybbleIndex == 4)
-      {
-        nybbleIndex = 0;
-        if (unsettled)
-        {
-          builder.append(getBinaryChar(Unsettled));
-        }
-        else if (undriven)
-        {
-          builder.append(getBinaryChar(Undriven));
-        }
-        else
-        {
-          builder.append(Integer.toHexString(nybble));
-        }
-        undriven = false;
-        unsettled = false;
-      }
-    }
-    builder.reverse();
-    return builder.toString().toUpperCase();
-  }
-
-  private String toBinaryString(TraceValue[] values)
-  {
-    StringBuilder builder = new StringBuilder();
-    for (int i = values.length - 1; i >= 0; i--)
-    {
-      builder.append(getBinaryChar(values[i]));
-    }
-    return builder.toString();
-  }
-
-  private char getBinaryChar(TraceValue value)
-  {
-    if (value == High)
-    {
-      return '1';
-    }
-    else if (value == Low)
-    {
-      return '0';
-    }
-    else if (value == Unsettled)
-    {
-      return 'X';
-    }
-    else if (value == Undriven)
-    {
-      return '.';
-    }
-    else
-    {
-      throw new SimulatorException("Cannot get binary value for unknown radix.");
-    }
+    return RadixHelper.getStringValue(values, properties.radix, maxDigits);
   }
 
   public PortView getPortView()

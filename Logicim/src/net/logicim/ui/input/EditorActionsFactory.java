@@ -8,6 +8,9 @@ import net.logicim.ui.panels.LogicimPanel;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferView;
@@ -16,6 +19,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.probe.ProbeView;
 import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
@@ -39,13 +43,17 @@ public class EditorActionsFactory
     placeComponentAction(editor, XnorGateView.class);
     placeComponentAction(editor, BufferView.class);
     placeComponentAction(editor, OscilloscopeView.class);
+    placeComponentAction(editor, ProbeView.class);
     placeComponentAction(editor, GroundView.class);
     placeComponentAction(editor, PositivePowerView.class);
     placeComponentAction(editor, SplitterView.class);
     placeComponentAction(editor, TunnelView.class);
     placeComponentAction(editor, LabelView.class);
     placeComponentAction(editor, PinView.class);
+    placeComponentAction(editor, ConstantView.class);
+    placeComponentAction(editor, CounterView.class);
     placeComponentAction(editor, W65C816View.class);
+    placeComponentAction(editor, DTypeFlipFlopView.class);
 
     editor.addAction(EditPropertiesAction.NAME, new EditPropertiesAction(editor, panel));
     editor.addAction(PlacementRotateLeftAction.NAME, new PlacementRotateLeftAction(editor));

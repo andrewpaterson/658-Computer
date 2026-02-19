@@ -33,9 +33,10 @@ public class FullWire
     Set<ComponentViewPortNames> result = new LinkedHashSet<>();
     for (ComponentViewPortNames localWire : localWires)
     {
-      LocalMultiSimulationConnectionNet multiSimulationConnectionNet = localWire.getMultiSimulationConnectionNet();
-      Set<ComponentViewPortNames> componentViewPortNames = multiSimulationConnectionNet.getLocalWires(circuitSimulation);
-      result.addAll(componentViewPortNames);
+      if (localWire.containsCircuitSimulation(circuitSimulation))
+      {
+        result.add(localWire);
+      }
     }
     return result;
   }

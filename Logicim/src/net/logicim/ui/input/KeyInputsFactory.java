@@ -9,6 +9,9 @@ import net.logicim.ui.input.action.KeyInput;
 import net.logicim.ui.simulation.component.decorative.label.LabelView;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferView;
@@ -17,6 +20,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.probe.ProbeView;
 import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816View;
 import net.logicim.ui.simulation.component.passive.pin.PinView;
 import net.logicim.ui.simulation.component.passive.power.GroundView;
@@ -43,14 +47,18 @@ public class KeyInputsFactory
     placeComponentKeyInput(editor, XorGateView.class, KeyEvent.VK_X, Up, Up, Down);
     placeComponentKeyInput(editor, XnorGateView.class, KeyEvent.VK_X, Down, Up, Down);
     placeComponentKeyInput(editor, BufferView.class, KeyEvent.VK_N, Down, Up, Down);
-    placeComponentKeyInput(editor, OscilloscopeView.class, KeyEvent.VK_P, Up, Up, Down);
+    placeComponentKeyInput(editor, OscilloscopeView.class, KeyEvent.VK_P, Up, Down, Down);
+    placeComponentKeyInput(editor, ProbeView.class, KeyEvent.VK_P, Up, Up, Down);
     placeComponentKeyInput(editor, GroundView.class, KeyEvent.VK_G, Up, Up, Up);
     placeComponentKeyInput(editor, PositivePowerView.class, KeyEvent.VK_V, Up, Up, Up);
     placeComponentKeyInput(editor, SplitterView.class, KeyEvent.VK_S, Up, Up, Down);
     placeComponentKeyInput(editor, TunnelView.class, KeyEvent.VK_T, Up, Up, Down);
     placeComponentKeyInput(editor, LabelView.class, KeyEvent.VK_L, Up, Up, Down);
     placeComponentKeyInput(editor, PinView.class, KeyEvent.VK_P, Up, Up, Up);
-    placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Up, Up, Up);
+    placeComponentKeyInput(editor, ConstantView.class, KeyEvent.VK_C, Up, Up, Up);
+    placeComponentKeyInput(editor, CounterView.class, KeyEvent.VK_C, Down, Up, Down);
+    placeComponentKeyInput(editor, W65C816View.class, KeyEvent.VK_W, Down, Up, Down);
+    placeComponentKeyInput(editor, DTypeFlipFlopView.class, KeyEvent.VK_F, Up, Up, Down);
 
     editor.addKeyInput(new KeyInput(editor.getAction(EditPropertiesAction.NAME), KeyEvent.VK_E, Up, Up, Up));
     editor.addKeyInput(new KeyInput(editor.getAction(PlacementRotateLeftAction.NAME), KeyEvent.VK_R, Up, Up, Down));

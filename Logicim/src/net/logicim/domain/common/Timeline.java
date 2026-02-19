@@ -30,8 +30,7 @@ public class Timeline
 
   public void addFutureEvent(Event event)
   {
-    boolean b = addEvent(event);
-    if (!b)
+    if (!addEvent(event))
     {
       throw new SimulatorException("Cannot add event in the past.  Event time [" + toNanosecondsString(eventTime) + "] must be after current time [" + toNanosecondsString(time) + "].");
     }
@@ -40,10 +39,11 @@ public class Timeline
   public boolean addEvent(Event event)
   {
     long eventTime = event.getTime();
-    if (eventTime < time || eventTime == time)
+    if (eventTime <= time)
     {
       return false;
     }
+
     SimultaneousEvents simultaneousEvents = events.find(eventTime);
     if (simultaneousEvents == null)
     {
@@ -68,23 +68,30 @@ public class Timeline
   public boolean runToTime(long timeForward)
   {
     long targetTime = time + timeForward;
+    boolean anyProcessed = false;
 
     for (; ; )
     {
       SimultaneousEvents events = this.events.findFirst();
-      if (events != null)
+      if ((events != null) &&
+          (events.size() > 0))
       {
         if (events.time >= time)
         {
-          if (events.time < targetTime)
+          if (events.time <= targetTime)
           {
+            if (time > events.time)
+            {
+              throw new SimulatorException("Cannot update simulation time.  Event time [" + toNanosecondsString(events.time) + "] must be after current time [" + toNanosecondsString(time) + "].");
+            }
             time = events.time;
             runEvent(events);
+            anyProcessed = true;
           }
           else
           {
             time = targetTime;
-            return true;
+            break;
           }
         }
         else
@@ -95,9 +102,11 @@ public class Timeline
       else
       {
         time = targetTime;
-        return false;
+        break;
       }
     }
+
+    return anyProcessed;
   }
 
   public boolean runSimultaneous()
@@ -164,7 +173,12 @@ public class Timeline
     event.removeFromOwner();
     if (simultaneousEvents != null)
     {
-      return simultaneousEvents.remove(event);
+      boolean remove = simultaneousEvents.remove(event);
+      if (simultaneousEvents.events.size() == 0)
+      {
+        events.remove(simultaneousEvents.time);
+      }
+      return remove;
     }
     else
     {

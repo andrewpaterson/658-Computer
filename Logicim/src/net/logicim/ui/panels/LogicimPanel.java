@@ -25,6 +25,9 @@ import net.logicim.ui.simulation.component.decorative.label.LabelViewFactory;
 import net.logicim.ui.simulation.component.factory.ViewFactoryStore;
 import net.logicim.ui.simulation.component.integratedcircuit.extra.OscilloscopeViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.constant.ConstantViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.counter.CounterViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.flop.dtype.DTypeFlipFlopViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.AndGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.and.NandGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.buffer.BufferViewFactory;
@@ -33,6 +36,7 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.N
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.or.OrGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XnorGateViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.logic.xor.XorGateViewFactory;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.probe.ProbeViewFactory;
 import net.logicim.ui.simulation.component.integratedcircuit.wdc.W65C816ViewFactory;
 import net.logicim.ui.simulation.component.passive.pin.PinViewFactory;
 import net.logicim.ui.simulation.component.passive.power.GroundViewFactory;
@@ -95,7 +99,11 @@ public class LogicimPanel
                                           new TunnelViewFactory(),
                                           new LabelViewFactory(),
                                           new PinViewFactory(),
+                                          new ProbeViewFactory(),
+                                          new ConstantViewFactory(),
+                                          new CounterViewFactory(),
                                           new W65C816ViewFactory(),
+                                          new DTypeFlipFlopViewFactory(),
                                           new SubcircuitInstanceViewFactory());
 
     addComponentListener(this);

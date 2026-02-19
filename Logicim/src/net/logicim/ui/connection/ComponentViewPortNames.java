@@ -1,5 +1,6 @@
 package net.logicim.ui.connection;
 
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.integratedcircuit.ComponentView;
 import net.logicim.ui.simulation.component.passive.splitter.SplitterView;
@@ -65,6 +66,18 @@ public class ComponentViewPortNames
   public LocalMultiSimulationConnectionNet getMultiSimulationConnectionNet()
   {
     return multiSimulationConnectionNet;
+  }
+
+  public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    for (ComponentViewPortName connectedPortIndex : connectedPortIndices)
+    {
+      if (!connectedPortIndex.getViewPath().containsCircuitSimulation(circuitSimulation))
+      {
+        return false;
+      }
+    }
+    return true;
   }
 }
 

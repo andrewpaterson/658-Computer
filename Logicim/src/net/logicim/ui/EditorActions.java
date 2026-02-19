@@ -33,7 +33,7 @@ public class EditorActions
     EditorAction action = actions.get(description);
     if (action == null)
     {
-      throw new SimulatorException("Cannot find Editor Action [%s].", description);
+      throw new SimulatorException("Cannot find Editor Action [%s].  Add it into EditorActionsFactory as necessary.", description);
     }
     return action;
   }

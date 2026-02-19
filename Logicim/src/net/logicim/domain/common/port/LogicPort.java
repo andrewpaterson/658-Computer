@@ -97,6 +97,11 @@ public class LogicPort
     return Undriven;
   }
 
+  public TraceValue readValue(Timeline timeline)
+  {
+    return readValue(timeline.getTime());
+  }
+
   public void disconnect(Simulation simulation)
   {
     super.disconnect(simulation);

@@ -31,7 +31,11 @@ public class BufferProperties
   @Override
   public ComponentProperties duplicate()
   {
-    return new BufferProperties(name, family, explicitPowerPorts, inputCount, inputWidth);
+    return new BufferProperties(name,
+                                family,
+                                explicitPowerPorts,
+                                inputCount,
+                                inputWidth);
   }
 
   @Override

@@ -41,7 +41,7 @@ public class Buffer
       {
         LogicPort input = inputs.get(i);
         LogicPort output = outputs.get(i);
-        TraceValue inValue = input.readValue(timeline.getTime());
+        TraceValue inValue = input.readValue(timeline);
         if (inValue.isHigh())
         {
           output.writeBool(timeline, transformOutput(true));
@@ -63,6 +63,12 @@ public class Buffer
   public String getType()
   {
     return TYPE;
+  }
+
+  @Override
+  public Stateless createState()
+  {
+    return new Stateless();
   }
 }
 

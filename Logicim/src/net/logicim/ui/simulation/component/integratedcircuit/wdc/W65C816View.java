@@ -2,7 +2,6 @@ package net.logicim.ui.simulation.component.integratedcircuit.wdc;
 
 import net.common.type.Float2D;
 import net.common.type.Int2D;
-import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.integratedcircuit.standard.logic.wdc.W65C816Data;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
@@ -18,24 +17,26 @@ import net.logicim.ui.common.Viewport;
 import net.logicim.ui.common.port.PortView;
 import net.logicim.ui.shape.rectangle.RectangleView;
 import net.logicim.ui.shape.text.TextView;
+import net.logicim.ui.simulation.component.common.DetailView;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.common.PortViewCreator;
+import net.logicim.ui.simulation.component.integratedcircuit.standard.common.PortViewCreatorList;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.common.StandardIntegratedCircuitView;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
-import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.*;
+import static net.logicim.data.integratedcircuit.decorative.HorizontalAlignment.CENTER;
 
 public class W65C816View
     extends StandardIntegratedCircuitView<W65C816, W65C816Properties>
 {
   public static int FONT_SIZE = 10;
 
-  protected int yOffset = -8;  //Remember the component is rotated 90 degrees.
-  protected int left = 11;
-  protected int right = -11;
+  protected static int leftOffset = 11;
+  protected static int rightOffset = -11;
+
   protected List<PortView> leftPorts;
   protected List<PortView> rightPorts;
   protected List<TextView> labels;
@@ -72,39 +73,25 @@ public class W65C816View
 
     leftPorts = new ArrayList<>();
     rightPorts = new ArrayList<>();
+    labels = new ArrayList<>();
 
     createPortViews();
     createGraphics();
     finaliseView();
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   private void createGraphics()
   {
     rectangles = new ArrayList<>();
-    rectangles.add(new RectangleView(this, 26, right - left, true, true));
+    rectangles.add(new RectangleView(this, 26, rightOffset - leftOffset, true, true));
 
-    labels = new ArrayList<>();
-    for (PortView portView : leftPorts)
-    {
-      labels.add(new TextView(this,
-                              new Float2D(portView.getRelativePosition().x, left - 0.6f),
-                              portView.getText(),
-                              SANS_SERIF,
-                              FONT_SIZE,
-                              false,
-                              HorizontalAlignment.LEFT));
-    }
-
-    for (PortView portView : rightPorts)
-    {
-      labels.add(new TextView(this,
-                              new Float2D(portView.getRelativePosition().x, right + 0.6f),
-                              portView.getText(),
-                              SANS_SERIF,
-                              FONT_SIZE,
-                              false,
-                              RIGHT));
-    }
+    createPortLabels(labels,
+                     FONT_SIZE,
+                     leftPorts,
+                     rightPorts,
+                     leftOffset - 0.6f,
+                     rightOffset + 0.6f);
 
     float y = -12;
     float yStep = 2;
@@ -178,6 +165,7 @@ public class W65C816View
                             CENTER));
   }
 
+  @SuppressWarnings("SuspiciousNameCombination")
   private TextView createFlag(String name, float x, float y, boolean set, boolean visible)
   {
     TextView flag = new TextView(this,
@@ -208,48 +196,19 @@ public class W65C816View
     return flag;
   }
 
-  private TextView createDetail(float y, int width, String name, String value)
+  private TextView createDetail(float y,
+                                int width,
+                                String name,
+                                String value)
   {
-    createDetailLabel(name, y);
-    createDetailRectangle(y, width);
-    return createDetailValue(value, y);
-  }
-
-  private RectangleView createDetailRectangle(float y, int width)
-  {
-    RectangleView rectangle = new RectangleView(this,
-                                                new Float2D(y - 0.6f, 0),
-                                                new Float2D(y + 0.6f, -width),
-                                                true,
-                                                true).setLineWidth(1).setFillColour(Colours.getInstance().getBackground());
-    rectangles.add(rectangle);
-    return rectangle;
-  }
-
-  private TextView createDetailLabel(String label, float y)
-  {
-    TextView textView = new TextView(this,
-                                     new Float2D(y, 0),
-                                     label + ": ",
-                                     SANS_SERIF,
-                                     FONT_SIZE,
-                                     false,
-                                     RIGHT);
-    labels.add(textView);
-    return textView;
-  }
-
-  private TextView createDetailValue(String value, float y)
-  {
-    TextView textView = new TextView(this,
-                                     new Float2D(y, -0.6f),
-                                     value,
-                                     MONOSPACED,
-                                     FONT_SIZE,
-                                     false,
-                                     LEFT).setColor(Colours.getInstance().getCommentText());
-    labels.add(textView);
-    return textView;
+    return DetailView.create(this,
+                             labels,
+                             rectangles,
+                             y,
+                             width,
+                             name,
+                             value,
+                             FONT_SIZE);
   }
 
   @Override
@@ -261,92 +220,26 @@ public class W65C816View
   protected void createPortViews()
   {
     super.createPortViews();
+    createLeftAndRightPortViews(leftPorts, rightPorts,
+                                leftOffset, rightOffset,
+                                -6, -8, 2,
+                                new PortViewCreatorList(new PortViewCreator("PHI2", true, false),
+                                                        new PortViewCreator("RESB", true),
+                                                        new PortViewCreator("NMIB", true),
+                                                        new PortViewCreator("IRQB", true),
+                                                        new PortViewCreator("ABORTB", true),
+                                                        new PortViewCreator("RDY"),
+                                                        new PortViewCreator("BE")),
+                                new PortViewCreatorList(new PortViewCreator("RWB"),
+                                                        new PortViewCreator("VDA"),
+                                                        new PortViewCreator("VPA"),
+                                                        new PortViewCreator("VPB", true),
+                                                        new PortViewCreator("Address", 16),
+                                                        new PortViewCreator("MLB", true),
+                                                        new PortViewCreator("E"),
+                                                        new PortViewCreator("MX"),
+                                                        new PortViewCreator("Data", 8)));
 
-    int yStep = 2;
-
-    //Inputs
-    int y = 2;
-    PortView phi2PortView = createPortView(y, "PHI2", left).setDrawClock(true);
-    leftPorts.add(phi2PortView);
-
-    y += yStep;
-    PortView resetPortView = createPortView(y, "RESB", left).setInverting(true, Rotation.South);
-    leftPorts.add(resetPortView);
-
-    y += yStep;
-    PortView nonMaskableInterruptPortView = createPortView(y, "NMIB", left).setInverting(true, Rotation.South);
-    leftPorts.add(nonMaskableInterruptPortView);
-
-    y += yStep;
-    PortView interruptRequestPortView = createPortView(y, "IRQB", left).setInverting(true, Rotation.South);
-    leftPorts.add(interruptRequestPortView);
-
-    y += yStep;
-    PortView abortPortView = createPortView(y, "ABORTB", left).setInverting(true, Rotation.South);
-    leftPorts.add(abortPortView);
-
-    y += yStep;
-    PortView readyPortView = createPortView(y, "RDY", left);
-    leftPorts.add(readyPortView);
-
-    y += yStep;
-    PortView busEnablePortView = createPortView(y, "BE", left);
-    leftPorts.add(busEnablePortView);
-
-    //Outputs
-    y = 0;
-    PortView readWritePortView = createPortView(y, "RWB", right);
-    rightPorts.add(readWritePortView);
-
-    y += yStep;
-    PortView validDataAddressPortView = createPortView(y, "VDA", right);
-    rightPorts.add(validDataAddressPortView);
-
-    y += yStep;
-    PortView validProgramAddressPortView = createPortView(y, "VPA", right);
-    rightPorts.add(validProgramAddressPortView);
-
-    y += yStep;
-    PortView vectorPullPortView = createPortView(y, "VPB", right).setInverting(true, Rotation.North);
-    rightPorts.add(vectorPullPortView);
-
-    y += yStep;
-    PortView addressPortView = createPortView(y, "Address", 16, right);
-    rightPorts.add(addressPortView);
-
-    y += yStep;
-    PortView memoryLockPortView = createPortView(y, "MLB", right).setInverting(true, Rotation.North);
-    rightPorts.add(memoryLockPortView);
-
-    y += yStep;
-    PortView emulationPortView = createPortView(y, "E", right);
-    rightPorts.add(emulationPortView);
-
-    y += yStep;
-    PortView memoryIndexWidthPortView = createPortView(y, "MX", right);
-    rightPorts.add(memoryIndexWidthPortView);
-
-    //Bidirectional
-    y += yStep;
-    PortView dataPortView = createPortView(y, "Data", 8, right);
-    rightPorts.add(dataPortView);
-  }
-
-  private PortView createPortView(int x, String portName, int portCount, int y)
-  {
-    return new PortView(this,
-                        getPortNames(portName,
-                                     0,
-                                     portCount,
-                                     1),
-                        new Int2D(yOffset + x, y)).setText(portName);
-  }
-
-  private PortView createPortView(int x, String portName, int y)
-  {
-    return new PortView(this,
-                        portName,
-                        new Int2D(yOffset + x, y)).setText(portName.trim());
   }
 
   @Override

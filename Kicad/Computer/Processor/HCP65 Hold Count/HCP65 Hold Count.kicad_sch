@@ -5,7 +5,7 @@
 	(uuid "5ce90b85-49a2-4937-86c7-662b0d6f8431")
 	(paper "A4")
 	(title_block
-		(title "W65C816 Clock Hold")
+		(title "Hold Count")
 		(date "2026-01-29")
 		(rev "V2")
 	)
@@ -3661,8 +3661,8 @@
 		)
 	)
 	(rectangle
-		(start 209.55 26.67)
-		(end 270.51 66.04)
+		(start 39.37 149.86)
+		(end 100.33 189.23)
 		(stroke
 			(width 0)
 			(type dash)
@@ -3685,7 +3685,7 @@
 		(uuid 862f367a-2a9c-422a-b1b8-177345241013)
 	)
 	(rectangle
-		(start 26.67 72.39)
+		(start 26.67 76.2)
 		(end 181.61 127)
 		(stroke
 			(width 0)
@@ -3698,7 +3698,7 @@
 	)
 	(text "Power and Spares"
 		(exclude_from_sim no)
-		(at 212.09 63.5 0)
+		(at 41.91 186.69 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -3736,35 +3736,39 @@
 		(uuid "8e926765-7e4f-44f4-865a-a675b33b1592")
 	)
 	(junction
+		(at 139.7 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0088cf33-c878-4c99-af9d-4918dbe93cd5")
+	)
+	(junction
 		(at 137.16 88.9)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "655211ee-118f-4c66-91ae-1e215de95a12")
 	)
 	(junction
-		(at 228.6 35.56)
+		(at 58.42 158.75)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "af922d36-9d62-48c6-b790-78df7c3b2ffd")
 	)
 	(junction
-		(at 138.43 106.68)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c7b5189e-c425-4514-a12c-e52d90381b28")
-	)
-	(junction
-		(at 257.81 35.56)
+		(at 87.63 158.75)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f858ef2f-0215-4556-a517-27b0e19f2520")
 	)
 	(no_connect
-		(at 30.48 54.61)
+		(at 30.48 34.29)
 		(uuid "2361e927-8701-46ea-8d5a-60502e9ea19a")
 	)
 	(no_connect
-		(at 254 40.64)
+		(at 50.8 31.75)
+		(uuid "588639b7-01c5-48fe-8b34-2b34cfc6e9be")
+	)
+	(no_connect
+		(at 83.82 163.83)
 		(uuid "96da3a6d-9eab-458e-8680-0e9fce4342d0")
 	)
 	(no_connect
@@ -3772,15 +3776,15 @@
 		(uuid "c2223dbe-31d3-4310-abfc-12c2de32424c")
 	)
 	(no_connect
-		(at 30.48 57.15)
+		(at 30.48 36.83)
 		(uuid "c2479476-6460-46f4-84b4-3a578fa9c0ed")
 	)
 	(no_connect
-		(at 50.8 57.15)
+		(at 50.8 36.83)
 		(uuid "e6f43fdb-7853-4e50-a944-02d2ed743c2d")
 	)
 	(no_connect
-		(at 50.8 54.61)
+		(at 50.8 34.29)
 		(uuid "fb49e1bd-ae3b-47d9-af96-994be4da1907")
 	)
 	(wire
@@ -3875,26 +3879,6 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 36.83) (xy 30.48 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "24340599-f89d-4777-813b-d082dba2aa9f")
-	)
-	(wire
-		(pts
-			(xy 29.21 34.29) (xy 30.48 34.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "274d5ec9-f469-4eff-acef-703cef23a86d")
-	)
-	(wire
-		(pts
 			(xy 92.71 90.17) (xy 97.79 90.17)
 		)
 		(stroke
@@ -3935,7 +3919,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 107.95) (xy 138.43 106.68)
+			(xy 139.7 107.95) (xy 139.7 106.68)
 		)
 		(stroke
 			(width 0)
@@ -3985,7 +3969,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 40.64) (xy 214.63 40.64)
+			(xy 43.18 163.83) (xy 44.45 163.83)
 		)
 		(stroke
 			(width 0)
@@ -3995,7 +3979,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 34.29) (xy 52.07 34.29)
+			(xy 50.8 54.61) (xy 52.07 54.61)
 		)
 		(stroke
 			(width 0)
@@ -4012,16 +3996,6 @@
 			(type default)
 		)
 		(uuid "5a320251-c17d-486d-92bf-c0c619c011f1")
-	)
-	(wire
-		(pts
-			(xy 50.8 31.75) (xy 52.07 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5aa8feae-c066-452d-b2a8-4143ac83e89d")
 	)
 	(wire
 		(pts
@@ -4055,7 +4029,7 @@
 	)
 	(wire
 		(pts
-			(xy 123.19 106.68) (xy 138.43 106.68)
+			(xy 123.19 106.68) (xy 139.7 106.68)
 		)
 		(stroke
 			(width 0)
@@ -4075,7 +4049,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 40.64) (xy 257.81 35.56)
+			(xy 87.63 163.83) (xy 87.63 158.75)
 		)
 		(stroke
 			(width 0)
@@ -4135,7 +4109,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 35.56) (xy 213.36 40.64)
+			(xy 43.18 158.75) (xy 43.18 163.83)
 		)
 		(stroke
 			(width 0)
@@ -4205,6 +4179,16 @@
 	)
 	(wire
 		(pts
+			(xy 52.07 49.53) (xy 50.8 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98081117-4207-4cd7-920c-9a4aa927afea")
+	)
+	(wire
+		(pts
 			(xy 29.21 59.69) (xy 30.48 59.69)
 		)
 		(stroke
@@ -4265,7 +4249,7 @@
 	)
 	(wire
 		(pts
-			(xy 138.43 90.17) (xy 138.43 106.68)
+			(xy 139.7 90.17) (xy 139.7 106.68)
 		)
 		(stroke
 			(width 0)
@@ -4315,7 +4299,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 35.56) (xy 228.6 38.1)
+			(xy 58.42 158.75) (xy 58.42 161.29)
 		)
 		(stroke
 			(width 0)
@@ -4335,7 +4319,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 107.95) (xy 138.43 107.95)
+			(xy 147.32 107.95) (xy 139.7 107.95)
 		)
 		(stroke
 			(width 0)
@@ -4365,7 +4349,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 35.56) (xy 228.6 35.56)
+			(xy 43.18 158.75) (xy 58.42 158.75)
 		)
 		(stroke
 			(width 0)
@@ -4375,7 +4359,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 35.56) (xy 257.81 35.56)
+			(xy 83.82 158.75) (xy 87.63 158.75)
 		)
 		(stroke
 			(width 0)
@@ -4425,7 +4409,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 35.56) (xy 262.89 35.56)
+			(xy 87.63 158.75) (xy 92.71 158.75)
 		)
 		(stroke
 			(width 0)
@@ -4465,7 +4449,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 90.17) (xy 138.43 90.17)
+			(xy 147.32 90.17) (xy 139.7 90.17)
 		)
 		(stroke
 			(width 0)
@@ -4515,7 +4499,7 @@
 	)
 	(wire
 		(pts
-			(xy 50.8 36.83) (xy 52.07 36.83)
+			(xy 50.8 57.15) (xy 52.07 57.15)
 		)
 		(stroke
 			(width 0)
@@ -4563,16 +4547,6 @@
 		)
 		(uuid "fff6f05e-8da0-4d81-a600-af37eb0a1f06")
 	)
-	(label "GND"
-		(at 127 121.92 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0091931a-c419-4799-9a08-b12616740d75")
-	)
 	(label "3.3V"
 		(at 167.64 121.92 180)
 		(effects
@@ -4594,7 +4568,7 @@
 		(uuid "0ae64233-408b-4ab4-9b80-c44cbbec4792")
 	)
 	(label "3.3V"
-		(at 262.89 35.56 0)
+		(at 92.71 158.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4604,7 +4578,7 @@
 		(uuid "0b355838-4885-497e-ba55-5421525d522a")
 	)
 	(label "GND"
-		(at 262.89 40.64 0)
+		(at 92.71 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4672,16 +4646,6 @@
 			(justify left bottom)
 		)
 		(uuid "1c5b9281-d2b1-496f-b54a-356ddb0b3281")
-	)
-	(label "3.3V"
-		(at 121.92 121.92 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "21d0869b-5052-4f67-880f-6886f222536f")
 	)
 	(label "3.3V"
 		(at 123.19 86.36 0)
@@ -4774,7 +4738,7 @@
 		(uuid "3e5c143e-fbcb-48f1-ab23-2944bbeefae1")
 	)
 	(label "GND"
-		(at 219.71 40.64 0)
+		(at 49.53 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5134,7 +5098,7 @@
 		(uuid "c11a0d8e-03ef-4284-82ea-e40af68352dd")
 	)
 	(label "5V"
-		(at 213.36 35.56 180)
+		(at 43.18 158.75 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5204,7 +5168,7 @@
 		(uuid "ed200a97-8818-4cc1-8388-111decdfea6b")
 	)
 	(label "GND"
-		(at 228.6 40.64 180)
+		(at 58.42 163.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5265,7 +5229,7 @@
 	)
 	(global_label "Count1"
 		(shape output)
-		(at 52.07 34.29 0)
+		(at 52.07 54.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5278,7 +5242,7 @@
 		)
 		(uuid "07501465-c1dd-4f8c-92e4-99b6ac0e0084")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 65.3678 34.29 0)
+			(at 65.3678 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5339,7 +5303,7 @@
 	)
 	(global_label "Count2"
 		(shape output)
-		(at 52.07 36.83 0)
+		(at 52.07 57.15 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5352,7 +5316,7 @@
 		)
 		(uuid "34e8bd7f-e3be-4931-bf24-8f453e95fe4a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 65.3678 36.83 0)
+			(at 65.3678 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5604,7 +5568,7 @@
 	)
 	(global_label "~{CLK High Pulse}"
 		(shape input)
-		(at 29.21 36.83 180)
+		(at 30.48 57.15 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5616,7 +5580,7 @@
 		)
 		(uuid "a436eaec-3135-4d3e-a394-9a99c9a74804")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 14.7228 36.83 0)
+			(at 15.9928 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5628,7 +5592,7 @@
 	)
 	(global_label "Count0"
 		(shape output)
-		(at 52.07 31.75 0)
+		(at 52.07 49.53 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5641,7 +5605,7 @@
 		)
 		(uuid "b05c3dc3-6084-4291-90cd-f6e7a09c1285")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 65.3678 31.75 0)
+			(at 65.3678 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5653,7 +5617,7 @@
 	)
 	(global_label "CLK High Pulse"
 		(shape input)
-		(at 29.21 34.29 180)
+		(at 30.48 54.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5665,7 +5629,7 @@
 		)
 		(uuid "ee62491a-a37a-4a83-9338-224c49652ea3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 14.7228 34.29 0)
+			(at 15.9928 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6268,7 +6232,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 257.81 40.64 0)
+		(at 87.63 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6276,7 +6240,7 @@
 		(dnp no)
 		(uuid "16e9132d-1f5d-4764-8e2b-1cd43a7a2c22")
 		(property "Reference" "C44"
-			(at 260.096 38.1 0)
+			(at 89.916 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6284,7 +6248,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 260.35 43.18 0)
+			(at 90.17 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6292,7 +6256,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 274.574 48.26 0)
+			(at 104.394 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6301,7 +6265,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 260.0325 40.3225 90)
+			(at 89.8525 163.5125 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6310,7 +6274,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 257.81 40.64 0)
+			(at 87.63 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6414,7 +6378,7 @@
 	)
 	(symbol
 		(lib_id "HCP65:C_0805")
-		(at 214.63 40.64 0)
+		(at 44.45 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6422,7 +6386,7 @@
 		(dnp no)
 		(uuid "2e00584a-5177-477b-9ae3-1942c2341906")
 		(property "Reference" "C43"
-			(at 216.916 38.1 0)
+			(at 46.736 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6430,7 +6394,7 @@
 			)
 		)
 		(property "Value" "10μF"
-			(at 217.17 43.18 0)
+			(at 46.99 166.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6438,7 +6402,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 231.394 48.26 0)
+			(at 61.214 171.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6447,7 +6411,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 216.8525 40.3225 90)
+			(at 46.6725 163.5125 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6456,7 +6420,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 214.63 40.64 0)
+			(at 44.45 163.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6904,22 +6868,22 @@
 			(uuid "9f0bd6bb-5654-43a8-87f5-04c14d339cc0")
 		)
 		(pin "1"
-			(uuid "5fe38c2f-06fb-4301-a45d-90ee66f3d1e2")
+			(uuid "5fe38c2f-06fb-4301-a45d-90ee66f3d1e3")
 		)
 		(pin "2"
-			(uuid "929bb122-8fc3-482b-8037-3b863ba67204")
+			(uuid "929bb122-8fc3-482b-8037-3b863ba67205")
 		)
 		(pin "3"
-			(uuid "c8a57df7-77a3-4d2f-9fa0-512e4439b1f7")
+			(uuid "c8a57df7-77a3-4d2f-9fa0-512e4439b1f8")
 		)
 		(pin "4"
-			(uuid "672ed1ce-0f3e-4baa-93fa-9cac57d944ed")
+			(uuid "672ed1ce-0f3e-4baa-93fa-9cac57d944ee")
 		)
 		(pin "5"
-			(uuid "d4f085e4-0a36-451e-bfb4-cac098a68466")
+			(uuid "d4f085e4-0a36-451e-bfb4-cac098a68467")
 		)
 		(pin "6"
-			(uuid "d9611993-1051-4467-86ac-d15b8b308dc6")
+			(uuid "d9611993-1051-4467-86ac-d15b8b308dc7")
 		)
 		(pin "10"
 			(uuid "30b1ddfd-e6bc-40c4-b856-3bf8ed96250f")
@@ -6931,13 +6895,13 @@
 			(uuid "9d829dd9-4a49-44f5-8c37-f934d82160f2")
 		)
 		(pin "11"
-			(uuid "9e5910f7-e516-4569-8f70-0f98c3a33280")
+			(uuid "9e5910f7-e516-4569-8f70-0f98c3a33281")
 		)
 		(pin "12"
-			(uuid "748ea2ee-0cbe-4357-92fb-b071f9170c9c")
+			(uuid "748ea2ee-0cbe-4357-92fb-b071f9170c9d")
 		)
 		(pin "13"
-			(uuid "77a08694-a735-4a10-afbc-37e77104436b")
+			(uuid "77a08694-a735-4a10-afbc-37e77104436c")
 		)
 		(instances
 			(project "W65C816 Clock Hold"
@@ -7201,76 +7165,8 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 127 121.92 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "bdba978d-af54-49b0-b334-f48b42a9d8b0")
-		(property "Reference" "C4"
-			(at 124.714 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 124.46 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 110.236 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 124.7775 121.6025 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 127 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "31b1a77e-f7ea-4356-b631-0532998770fe")
-		)
-		(pin "2"
-			(uuid "0848489e-f98f-4450-95ac-c8c9cb3c1fc6")
-		)
-		(instances
-			(project "W65C816 Clock Hold"
-				(path "/5ce90b85-49a2-4937-86c7-662b0d6f8431"
-					(reference "C4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Diodes_Inc:AP7365-33WG-7")
-		(at 228.6 35.56 0)
+		(at 58.42 158.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7278,7 +7174,7 @@
 		(dnp no)
 		(uuid "c18a0e31-909c-47a8-ad6f-5bc047dcdec6")
 		(property "Reference" "IC2"
-			(at 241.3 30.48 0)
+			(at 71.12 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7286,7 +7182,7 @@
 			)
 		)
 		(property "Value" "AP7365-33WG-7"
-			(at 241.3 32.385 0)
+			(at 71.12 155.575 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7295,7 +7191,7 @@
 			)
 		)
 		(property "Footprint" "SamacSys_Parts:SOT95P285X130-5N"
-			(at 250.19 50.165 0)
+			(at 80.01 173.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7305,7 +7201,7 @@
 			)
 		)
 		(property "Datasheet" "https://componentsearchengine.com/Datasheets/1/AP7365-33WG-7.pdf"
-			(at 250.19 52.705 0)
+			(at 80.01 175.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7315,7 +7211,7 @@
 			)
 		)
 		(property "Description" "3.3V LDO voltage regulator"
-			(at 241.3 43.815 0)
+			(at 71.12 167.005 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7323,7 +7219,7 @@
 			)
 		)
 		(property "Height" "1.3"
-			(at 250.19 55.245 0)
+			(at 80.01 178.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7333,7 +7229,7 @@
 			)
 		)
 		(property "Manufacturer_Name" "Diodes Inc."
-			(at 250.19 57.785 0)
+			(at 80.01 180.975 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7343,7 +7239,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "AP7365-33WG-7"
-			(at 250.19 60.325 0)
+			(at 80.01 183.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7353,7 +7249,7 @@
 			)
 		)
 		(property "Mouser Part Number" "621-AP7365-33WG-7"
-			(at 250.19 62.865 0)
+			(at 80.01 186.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7363,7 +7259,7 @@
 			)
 		)
 		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Diodes-Incorporated/AP7365-33WG-7?qs=abZ1nkZpTuOZFvxvoFPL0w%3D%3D"
-			(at 250.19 65.405 0)
+			(at 80.01 188.595 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7373,7 +7269,7 @@
 			)
 		)
 		(property "Arrow Part Number" "AP7365-33WG-7"
-			(at 250.19 67.945 0)
+			(at 80.01 191.135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7383,7 +7279,7 @@
 			)
 		)
 		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/ap7365-33wg-7/diodes-incorporated?region=nac"
-			(at 250.19 70.485 0)
+			(at 80.01 193.675 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7393,7 +7289,7 @@
 			)
 		)
 		(property "Silkscreen" "AP7365"
-			(at 250.19 47.625 0)
+			(at 80.01 170.815 0)
 			(effects
 				(font
 					(size 1.27 1.27)

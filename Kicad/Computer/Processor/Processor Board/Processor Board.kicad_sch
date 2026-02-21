@@ -16381,114 +16381,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:NetTie"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "NT"
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "NetTie"
-				(at 2.54 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:NetTie:NetTie-2_SMD_Pad0.5mm"
-				(at 20.955 -6.985 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "NetTie_0_1"
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 3.81 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "NetTie_1_1"
-				(pin passive line
-					(at 0 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers
 				(hide yes)
@@ -23051,12 +22943,6 @@
 		(uuid "1dd2eb6c-ac79-4ad9-9603-c897bb0d1de1")
 	)
 	(junction
-		(at 203.2 186.69)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1eae6303-a93a-4804-81ea-bfcb37fadc6b")
-	)
-	(junction
 		(at 256.54 257.81)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -23121,12 +23007,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "78774c79-aaf8-45ea-b9b4-b63e962f044c")
-	)
-	(junction
-		(at 201.93 184.15)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "79209ea6-464c-4627-a339-73ca00da1f39")
 	)
 	(junction
 		(at 628.65 250.19)
@@ -27724,7 +27604,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 64.77) (xy 205.74 194.31)
+			(xy 205.74 64.77) (xy 205.74 189.23)
 		)
 		(stroke
 			(width 0)
@@ -28022,7 +27902,7 @@
 	)
 	(wire
 		(pts
-			(xy 279.4 196.85) (xy 204.47 196.85)
+			(xy 279.4 191.77) (xy 204.47 191.77)
 		)
 		(stroke
 			(width 0)
@@ -28609,16 +28489,6 @@
 			(color 80 134 255 1)
 		)
 		(uuid "108f278c-94ef-49c0-93b3-561a0e4423a0")
-	)
-	(wire
-		(pts
-			(xy 270.51 184.15) (xy 270.51 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10e96e45-df5b-456f-8349-c5409093cee1")
 	)
 	(bus
 		(pts
@@ -30065,7 +29935,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 101.6) (xy 207.01 191.77)
+			(xy 207.01 101.6) (xy 207.01 186.69)
 		)
 		(stroke
 			(width 0)
@@ -31567,7 +31437,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 99.06) (xy 208.28 189.23)
+			(xy 208.28 99.06) (xy 208.28 184.15)
 		)
 		(stroke
 			(width 0)
@@ -32265,7 +32135,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 191.77) (xy 279.4 191.77)
+			(xy 207.01 186.69) (xy 279.4 186.69)
 		)
 		(stroke
 			(width 0)
@@ -32494,16 +32364,6 @@
 		)
 		(uuid "4fec9251-a3a8-4cc8-99c0-b6333d91dd72")
 	)
-	(wire
-		(pts
-			(xy 203.2 186.69) (xy 273.05 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "500e8bc4-79c2-4ed2-be5b-035390b6a15a")
-	)
 	(bus
 		(pts
 			(xy 355.6 330.2) (xy 358.14 330.2)
@@ -32578,16 +32438,6 @@
 			(color 230 162 61 1)
 		)
 		(uuid "50db2291-4ee8-4262-a603-7a5abe94c6f8")
-	)
-	(wire
-		(pts
-			(xy 219.71 49.53) (xy 203.2 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "511beed0-a2ad-4cae-9727-317ae4cc9c7b")
 	)
 	(bus
 		(pts
@@ -34252,16 +34102,6 @@
 		)
 		(uuid "6cbe239a-2d68-4e1f-9821-c1e611e1ef94")
 	)
-	(wire
-		(pts
-			(xy 201.93 46.99) (xy 201.93 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6cbef432-7f7a-4327-8d84-d3714743d98b")
-	)
 	(bus
 		(pts
 			(xy 262.89 401.32) (xy 262.89 403.86)
@@ -34630,16 +34470,6 @@
 			(color 112 255 194 1)
 		)
 		(uuid "725ea880-dadd-483b-b75e-7d0a17769669")
-	)
-	(wire
-		(pts
-			(xy 203.2 49.53) (xy 203.2 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "72bc05b3-53cb-4d2f-9429-07d48958674b")
 	)
 	(wire
 		(pts
@@ -35973,16 +35803,6 @@
 		)
 		(uuid "8a631d80-09ec-4801-af66-3fc7b1e0f206")
 	)
-	(wire
-		(pts
-			(xy 201.93 46.99) (xy 219.71 46.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8a842232-e3a7-449d-b4e6-58f365e30f24")
-	)
 	(bus
 		(pts
 			(xy 688.34 154.94) (xy 690.88 154.94)
@@ -36004,16 +35824,6 @@
 			(color 111 221 0 1)
 		)
 		(uuid "8aed7301-ae24-4c94-ad64-6f207bf0061a")
-	)
-	(wire
-		(pts
-			(xy 270.51 151.13) (xy 279.4 151.13)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8b0a970b-2108-4d55-a992-89612462deea")
 	)
 	(wire
 		(pts
@@ -36045,16 +35855,6 @@
 			(color 111 221 0 1)
 		)
 		(uuid "8b78c343-9aa0-4cfa-9fb3-f8fe1594b013")
-	)
-	(wire
-		(pts
-			(xy 201.93 184.15) (xy 270.51 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8bc6977c-99bb-43f9-bf74-f52c1a2bf683")
 	)
 	(wire
 		(pts
@@ -38426,7 +38226,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 194.31) (xy 279.4 194.31)
+			(xy 205.74 189.23) (xy 279.4 189.23)
 		)
 		(stroke
 			(width 0)
@@ -38507,16 +38307,6 @@
 			(color 230 162 61 1)
 		)
 		(uuid "ba233518-43c2-43c3-be47-25aecd9effab")
-	)
-	(wire
-		(pts
-			(xy 186.69 186.69) (xy 203.2 186.69)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba3d1fbe-f25f-47a2-aa74-2b84c07be615")
 	)
 	(bus
 		(pts
@@ -39460,16 +39250,6 @@
 	)
 	(wire
 		(pts
-			(xy 186.69 184.15) (xy 201.93 184.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb84a040-1002-475c-a28d-d116725afdbf")
-	)
-	(wire
-		(pts
 			(xy 176.53 308.61) (xy 170.18 308.61)
 		)
 		(stroke
@@ -39895,16 +39675,6 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 186.69) (xy 273.05 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d1e402a9-1da0-4b2d-b80b-b36ad2f36868")
-	)
-	(wire
-		(pts
 			(xy 129.54 339.09) (xy 124.46 339.09)
 		)
 		(stroke
@@ -40319,7 +40089,7 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 121.92) (xy 204.47 196.85)
+			(xy 204.47 121.92) (xy 204.47 191.77)
 		)
 		(stroke
 			(width 0)
@@ -40966,16 +40736,6 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 153.67) (xy 279.4 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e2f0ce6b-9c50-42c9-bb15-e447bc56f489")
-	)
-	(wire
-		(pts
 			(xy 279.4 143.51) (xy 260.35 143.51)
 		)
 		(stroke
@@ -41529,7 +41289,7 @@
 	)
 	(wire
 		(pts
-			(xy 208.28 189.23) (xy 279.4 189.23)
+			(xy 208.28 184.15) (xy 279.4 184.15)
 		)
 		(stroke
 			(width 0)
@@ -43142,16 +42902,6 @@
 		)
 		(uuid "0786d01d-5d18-4898-8383-15b1a47f3d06")
 	)
-	(label "BE"
-		(at 219.71 49.53 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "07b336ba-7daa-434e-a9ec-5a1c0029d3c0")
-	)
 	(label "GND"
 		(at 318.77 365.76 0)
 		(effects
@@ -43531,16 +43281,6 @@
 			(justify left bottom)
 		)
 		(uuid "124e1afd-2d86-419f-a1e2-d7fd3f1d655f")
-	)
-	(label "RDY"
-		(at 186.69 184.15 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "12581d30-29d4-4ade-868e-64784c9d1ca8")
 	)
 	(label "KA[16..23]"
 		(at 617.22 53.34 0)
@@ -44081,16 +43821,6 @@
 			(justify left bottom)
 		)
 		(uuid "23376355-8578-4c86-a17d-63530768ea86")
-	)
-	(label "BE"
-		(at 186.69 186.69 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "234b3aee-8750-4b65-b538-e313dc84de5d")
 	)
 	(label "~{Register}"
 		(at 651.51 77.47 180)
@@ -46363,7 +46093,7 @@
 		(uuid "5f1ee30d-d846-44ed-b90f-eb09069b80d2")
 	)
 	(label "Latch Time Present"
-		(at 279.4 194.31 0)
+		(at 279.4 189.23 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -46643,7 +46373,7 @@
 		(uuid "6a1fe069-e8b6-4c24-8a4d-9ed077a48c49")
 	)
 	(label "CLK"
-		(at 279.4 189.23 0)
+		(at 279.4 184.15 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -47431,16 +47161,6 @@
 			(justify right bottom)
 		)
 		(uuid "831a61f6-0a10-495f-aaa5-ecbcd1b971b1")
-	)
-	(label "RDY"
-		(at 279.4 151.13 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "834abe30-23e0-4934-a32f-ec30485a6d97")
 	)
 	(label "D2"
 		(at 87.63 407.67 270)
@@ -48323,7 +48043,7 @@
 		(uuid "9520e3e4-f811-42b1-82ea-e76541021301")
 	)
 	(label "3.3V"
-		(at 181.61 184.15 180)
+		(at 219.71 46.99 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -48603,7 +48323,7 @@
 		(uuid "9bac139b-7b2f-4285-acb0-cba23eaac8ed")
 	)
 	(label "~{CLK}"
-		(at 279.4 191.77 0)
+		(at 279.4 186.69 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -48921,16 +48641,6 @@
 			(justify left bottom)
 		)
 		(uuid "a5621141-fd69-4260-8b5a-ad4df92e8442")
-	)
-	(label "BE"
-		(at 279.4 153.67 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "a562fb31-bed0-4125-af7d-b64592485ee3")
 	)
 	(label "D5"
 		(at 80.01 407.67 270)
@@ -50182,16 +49892,6 @@
 		)
 		(uuid "cc0dd8fb-d39a-4e92-ae81-5b3714bf4c7a")
 	)
-	(label "RDY"
-		(at 219.71 46.99 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "cc3f6cf8-ce1b-44c8-a6af-8cf499efc9c3")
-	)
 	(label "E"
 		(at 176.53 349.25 180)
 		(effects
@@ -50503,7 +50203,7 @@
 		(uuid "d4ce93be-8d39-44f9-a5b2-c73cb2fbc3d5")
 	)
 	(label "Clock Hold Present"
-		(at 279.4 196.85 0)
+		(at 279.4 191.77 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -52063,7 +51763,7 @@
 		(uuid "feb2ba5a-a48b-4c0f-bf72-a64e20b9b2ef")
 	)
 	(label "3.3V"
-		(at 181.61 186.69 180)
+		(at 219.71 49.53 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -58681,75 +58381,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 186.69 186.69 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "6e5a861b-3369-4110-831c-7a0e5cb7af9f")
-		(property "Reference" "NT3"
-			(at 184.15 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 184.15 187.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 165.735 193.675 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 186.69 186.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "eb4097f5-9806-4d71-b82d-c804cf0e73b0")
-		)
-		(pin "2"
-			(uuid "79791c6b-4e8d-4c23-a6a8-f6201e186dcb")
-		)
-		(instances
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:R_0805")
 		(at 534.67 214.63 0)
 		(mirror y)
@@ -58954,75 +58585,6 @@
 			(project ""
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "B22")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 186.69 184.15 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7720aabd-86d8-4e80-9807-0b56aee81791")
-		(property "Reference" "NT2"
-			(at 184.15 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 184.15 185.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 165.735 191.135 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 184.15 182.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 186.69 184.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7c3a6c15-4881-48d9-8e23-b71d2fe4122a")
-		)
-		(pin "2"
-			(uuid "350e6ad8-8ba8-4d0c-b7d2-bcc0baae4dee")
-		)
-		(instances
-			(project "Processor Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT2")
 					(unit 1)
 				)
 			)

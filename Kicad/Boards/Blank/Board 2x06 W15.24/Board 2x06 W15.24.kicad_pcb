@@ -9,7 +9,7 @@
 	(paper "A4")
 	(title_block
 		(title "Board 2x06 W15.24mm")
-		(date "2025-09-29")
+		(date "2026-03-04")
 		(rev "V0")
 	)
 	(layers
@@ -1245,6 +1245,30 @@
 				(thickness 0.2)
 				(bold yes)
 			)
+		)
+	)
+	(gr_text "GND"
+		(at 14.224 0 0)
+		(layer "F.SilkS")
+		(uuid "bb74a969-31c9-4aa5-a2e9-de32528d8ce0")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+			(justify right)
+		)
+	)
+	(gr_text "5V"
+		(at 1.016 12.7 0)
+		(layer "F.SilkS")
+		(uuid "cff214fa-b2e1-4b62-9ff8-506c8f26655b")
+		(effects
+			(font
+				(size 0.635 0.635)
+				(thickness 0.15)
+			)
+			(justify left)
 		)
 	)
 	(embedded_fonts no)

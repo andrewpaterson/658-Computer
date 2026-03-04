@@ -1,0 +1,437 @@
+(kicad_pcb
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(general
+		(thickness 0.1)
+		(legacy_teardrops no)
+	)
+	(paper "A5")
+	(title_block
+		(title "Board 2x20 W15.24mm")
+		(date "2025-09-29")
+		(rev "V1")
+	)
+	(layers
+		(0 "F.Cu" signal)
+		(2 "B.Cu" signal)
+		(13 "F.Paste" user)
+		(15 "B.Paste" user)
+		(5 "F.SilkS" user "F.Silkscreen")
+		(7 "B.SilkS" user "B.Silkscreen")
+		(1 "F.Mask" user)
+		(3 "B.Mask" user)
+		(25 "Edge.Cuts" user)
+		(27 "Margin" user)
+		(31 "F.CrtYd" user "F.Courtyard")
+		(29 "B.CrtYd" user "B.Courtyard")
+	)
+	(setup
+		(stackup
+			(layer "F.SilkS"
+				(type "Top Silk Screen")
+			)
+			(layer "F.Paste"
+				(type "Top Solder Paste")
+			)
+			(layer "F.Mask"
+				(type "Top Solder Mask")
+				(thickness 0.01)
+			)
+			(layer "F.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "dielectric 1"
+				(type "core")
+				(thickness 0.01)
+				(material "FR4")
+				(epsilon_r 4.5)
+				(loss_tangent 0.02)
+			)
+			(layer "B.Cu"
+				(type "copper")
+				(thickness 0.035)
+			)
+			(layer "B.Mask"
+				(type "Bottom Solder Mask")
+				(thickness 0.01)
+			)
+			(layer "B.Paste"
+				(type "Bottom Solder Paste")
+			)
+			(layer "B.SilkS"
+				(type "Bottom Silk Screen")
+			)
+			(copper_finish "None")
+			(dielectric_constraints no)
+		)
+		(pad_to_mask_clearance 0)
+		(allow_soldermask_bridges_in_footprints no)
+		(tenting front back)
+		(pcbplotparams
+			(layerselection 0x00000000_00000000_55555555_5755f5ff)
+			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
+			(disableapertmacros no)
+			(usegerberextensions yes)
+			(usegerberattributes yes)
+			(usegerberadvancedattributes yes)
+			(creategerberjobfile no)
+			(dashed_line_dash_ratio 12.000000)
+			(dashed_line_gap_ratio 3.000000)
+			(svgprecision 4)
+			(plotframeref no)
+			(mode 1)
+			(useauxorigin yes)
+			(hpglpennumber 1)
+			(hpglpenspeed 20)
+			(hpglpendiameter 15.000000)
+			(pdf_front_fp_property_popups yes)
+			(pdf_back_fp_property_popups yes)
+			(pdf_metadata yes)
+			(pdf_single_document no)
+			(dxfpolygonmode yes)
+			(dxfimperialunits yes)
+			(dxfusepcbnewfont yes)
+			(psnegative no)
+			(psa4output no)
+			(plot_black_and_white yes)
+			(sketchpadsonfab no)
+			(plotpadnumbers no)
+			(hidednponfab no)
+			(sketchdnponfab yes)
+			(crossoutdnponfab yes)
+			(subtractmaskfromsilk no)
+			(outputformat 1)
+			(mirror no)
+			(drillshape 0)
+			(scaleselection 1)
+			(outputdirectory "Device Decode Stage A")
+		)
+	)
+	(net 0 "")
+	(footprint "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+		(layer "B.Cu")
+		(uuid "13d33af6-a48d-44d3-8479-6c323b26cbf6")
+		(at 15.24 0 180)
+		(descr "Through hole straight pin header, 1x20, 2.54mm pitch, single row")
+		(tags "Through hole pin header THT 1x20 2.54mm single row")
+		(property "Reference" "J3"
+			(at 0 2.33 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "053b2738-1f57-40f8-ade2-a4c143674ec0")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 0 -50.59 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "07f40974-31c4-419d-a6ed-f8e6ce15981f")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "66202a83-8adc-4fbf-9c97-4665a1d44f7c")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d9b8e1ba-335f-411f-80ab-cfafe6b26b60")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property ki_fp_filters "Connector*:*_1x??_*")
+		(path "/7afdacaf-4685-4267-b2f1-34f9785c8dfb")
+		(sheetname "/")
+		(sheetfile "Board 2x20 W15.24.kicad_sch")
+		(attr through_hole)
+		(fp_line
+			(start 1.8 1.8)
+			(end -1.8 1.8)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "dab1e6e9-78bc-4fbb-9ca2-c05625580f05")
+		)
+		(fp_line
+			(start 1.8 -50.05)
+			(end 1.8 1.8)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "e68d7fe7-4b4a-43c4-9a8b-b1e24e1d3a8e")
+		)
+		(fp_line
+			(start -1.8 1.8)
+			(end -1.8 -50.05)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "a29fc271-1c3b-4c1c-90d4-ed148e71cc6d")
+		)
+		(fp_line
+			(start -1.8 -50.05)
+			(end 1.8 -50.05)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "147a3493-784b-49f1-a69d-d25190980f84")
+		)
+		(embedded_fonts no)
+		(model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x20_P2.54mm_Vertical.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "SamacSys_Parts:PinHeader_1x20_P2.54mm_Vertical"
+		(layer "B.Cu")
+		(uuid "1aeb3a91-39e5-446d-a382-fe7f1f1e5322")
+		(at 0 0 180)
+		(descr "Through hole straight pin header, 1x20, 2.54mm pitch, single row")
+		(tags "Through hole pin header THT 1x20 2.54mm single row")
+		(property "Reference" "J2"
+			(at 0 2.33 0)
+			(layer "B.SilkS")
+			(hide yes)
+			(uuid "436c8905-0245-48a3-91ed-e5f75d420e3d")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "Pin_Header_01x20"
+			(at 0 -50.59 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "280c0d78-31ed-4ede-b970-2310932813a1")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d5aa4a7e-7811-47cd-98db-d45bb686eba4")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1165f3b2-5683-4d77-80c7-44ab243e95f6")
+			(effects
+				(font
+					(size 0.635 0.635)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property ki_fp_filters "Connector*:*_1x??_*")
+		(path "/08fc9b14-e9af-491f-9937-ccfa7218a2b3")
+		(sheetname "/")
+		(sheetfile "Board 2x20 W15.24.kicad_sch")
+		(attr through_hole)
+		(fp_line
+			(start 1.8 1.8)
+			(end -1.8 1.8)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "d2682965-0c06-4a7c-9057-14c534c70a5c")
+		)
+		(fp_line
+			(start 1.8 -50.05)
+			(end 1.8 1.8)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "a1322dda-e661-4a08-a608-72e88f5a21e3")
+		)
+		(fp_line
+			(start -1.8 1.8)
+			(end -1.8 -50.05)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "93a374ce-ac32-4026-ae3a-e32961b2696d")
+		)
+		(fp_line
+			(start -1.8 -50.05)
+			(end 1.8 -50.05)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "B.CrtYd")
+			(uuid "dc9db316-8f50-4b15-80d8-96b71e312707")
+		)
+		(embedded_fonts no)
+		(model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x20_P2.54mm_Vertical.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(gr_line
+		(start -1.016 49.276)
+		(end -1.016 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "2105897d-fe34-4cf2-8b40-04a21e2e75f8")
+	)
+	(gr_line
+		(start -1.016 -1.016)
+		(end 1.016 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "2fa2f021-cea4-4ff2-919f-80c0bba0b835")
+	)
+	(gr_line
+		(start 16.256 49.276)
+		(end 14.224 49.276)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "33a25aea-1583-4d17-b147-33499023828e")
+	)
+	(gr_line
+		(start 14.224 -1.016)
+		(end 16.256 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "429ec3bf-11f9-484a-bae3-960a679aaeb5")
+	)
+	(gr_line
+		(start 1.016 49.276)
+		(end -1.016 49.276)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "7c4a8ec1-fb67-4ab5-8cc4-abc5385c45d0")
+	)
+	(gr_line
+		(start 1.016 -1.016)
+		(end 1.016 49.276)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "80016e2b-cde0-4297-87c3-22c30fbc091e")
+	)
+	(gr_line
+		(start 14.224 49.276)
+		(end 14.224 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "84502007-13ba-49d9-91a9-83dd4aa7f8e2")
+	)
+	(gr_line
+		(start 16.256 -1.016)
+		(end 16.256 49.276)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Edge.Cuts")
+		(uuid "b5013db0-c838-41e5-b45b-e38897743648")
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "SchematicTemplateEmpty.kicad_wks")
+			(type worksheet)
+			(data |KLUv/SD7XQQAAogaGHDNA0DI0YHeJkZJEFFVxQMowuuE/g+8jIvBxWBT/2vh1FcSt5Ib9cQSzXyk
+				GShwlE35w6OmzkAhcuvJ70v9T6nFnOf7yji46Wx9P3oyjmu2PmGbdgIHZg4ACTRa/dqGnlrsLtE8
+				CMOXFwwgECKBfCkXiwycxMV0o0DTmt/Cqz2YeOJuYSObnQ==|
+			)
+			(checksum "E2C0BF1F44F75A6780C51A0DB68D5F9E")
+		)
+	)
+)

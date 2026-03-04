@@ -4919,114 +4919,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "HCP65:NetTie"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "NT"
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "NetTie"
-				(at 2.54 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:NetTie:NetTie-2_SMD_Pad0.5mm"
-				(at 20.955 -6.985 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 2.54 1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "NetTie_0_1"
-				(polyline
-					(pts
-						(xy 1.27 0) (xy 3.81 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "NetTie_1_1"
-				(pin passive line
-					(at 0 0 0)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 0 180)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "HCP65:R_0805"
 			(pin_numbers
 				(hide yes)
@@ -6463,6 +6355,305 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "HCP65:UART_Signals"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 15.875 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "UART Signals"
+				(at 15.24 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(bold yes)
+					)
+				)
+			)
+			(property "Footprint" "HCP65_Parts:HCP65_UART_Signals"
+				(at 15.24 -18.415 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "UART Signals"
+				(at 15.24 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Silkscreen" "UART Signals"
+				(at 15.24 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "HCP65 UART Signals"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "UART_Signals_0_1"
+				(polyline
+					(pts
+						(xy 0 1.905) (xy 30.48 1.905) (xy 30.48 -17.145) (xy 0 -17.145) (xy 0 1.905)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "UART_Signals_1_1"
+				(pin input inverted
+					(at -5.08 0 0)
+					(length 5.08)
+					(name "~{Device_Registers}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -2.54 0)
+					(length 5.08)
+					(name "~{Device_Select}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -5.08 0)
+					(length 5.08)
+					(name "A3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -7.62 0)
+					(length 5.08)
+					(name "~{A3}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -10.16 0)
+					(length 5.08)
+					(name "~{INT1}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input inverted
+					(at -5.08 -12.7 0)
+					(length 5.08)
+					(name "~{INT2}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -15.24 0)
+					(length 5.08)
+					(name "5V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 0 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 35.56 -2.54 180)
+					(length 5.08)
+					(name "~{UART1}_{SEL}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 35.56 -5.08 180)
+					(length 5.08)
+					(name "~{UART2}_{SEL}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 35.56 -10.16 180)
+					(length 5.08)
+					(name "~{Device_Enable}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output inverted
+					(at 35.56 -12.7 180)
+					(length 5.08)
+					(name "~{Device_Interrupt}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Microchip:SST39VF010-70-4I-NHE"
 			(pin_names
 				(offset 0.762)
@@ -7182,1112 +7373,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Nexperia:74LVC1G08GV,125"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 11.43 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "74LVC1G08GV,125"
-				(at 12.7 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-				(at 24.13 -12.065 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G08.pdf"
-				(at 24.13 -14.605 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "2-input AND gate"
-				(at 12.7 -8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 24.13 -19.685 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 24.13 -22.225 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC1G08GV,125"
-				(at 24.13 -24.765 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-74LVC1G08GV"
-				(at 24.13 -27.305 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G08GV125?qs=me8TqzrmIYXEnurJEPZc7A%3D%3D"
-				(at 24.13 -29.845 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Part Number" "74LVC1G08GV,125"
-				(at 24.13 -32.385 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Arrow Price/Stock" "https://www.arrow.com/en/products/74lvc1g08gv125/nexperia"
-				(at 24.13 -34.925 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "'1G08"
-				(at 24.13 -17.145 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(symbol "74LVC1G08GV,125_0_0"
-				(pin input line
-					(at 0 0 0)
-					(length 5.08)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 1.27 180)
-					(length 5.08)
-					(hide yes)
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 25.4 -1.27 180)
-					(length 5.08)
-					(name "Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LVC1G08GV,125_0_1"
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -6.985) (xy 5.08 -6.985) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 0) (xy 10.1599 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -2.54) (xy 10.1599 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.248 0.635) (xy 10.248 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 0.635) (xy 10.248 0.635)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -3.175) (xy 10.248 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 14.605 -1.27)
-					(mid 13.6635 -2.6605)
-					(end 12.065 -3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 0.635)
-					(mid 13.6649 0.1222)
-					(end 14.605 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -1.27) (xy 17.145 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Nexperia:74LVC32APW,118"
-			(pin_names
-				(offset 0.762)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "IC"
-				(at 12.7 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "74LVC32APW,118"
-				(at 12.7 4.445 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-						(bold yes)
-					)
-				)
-			)
-			(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-				(at 38.735 -13.335 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC32A.pdf"
-				(at 38.735 -33.655 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Description" "2-input OR gate"
-				(at 12.7 -23.495 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Height" "1.1"
-				(at 38.735 -15.875 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Name" "Nexperia"
-				(at 38.735 -18.415 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer_Part_Number" "74LVC32APW,118"
-				(at 38.735 -20.955 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Part Number" "771-74LVC32APW-T"
-				(at 38.735 -23.495 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=771-74LVC32APW-T"
-				(at 38.735 -26.035 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-					(hide yes)
-				)
-			)
-			(property "Silkscreen" "74LVC32"
-				(at 12.7 -25.4 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "74LVC32APW,118_0_0"
-				(pin passive line
-					(at 0 0 0)
-					(length 5.08)
-					(name "1A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 0)
-					(length 5.08)
-					(name "1B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 0)
-					(length 5.08)
-					(name "2A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -7.62 0)
-					(length 5.08)
-					(name "2B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -10.16 0)
-					(length 5.08)
-					(name "3A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -12.7 0)
-					(length 5.08)
-					(name "3B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -15.24 0)
-					(length 5.08)
-					(name "4A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -17.78 0)
-					(length 5.08)
-					(name "4B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -20.32 0)
-					(length 5.08)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 1.27 180)
-					(length 5.08)
-					(hide yes)
-					(name "3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 -1.27 180)
-					(length 5.08)
-					(name "1Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 -6.35 180)
-					(length 5.08)
-					(name "2Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 -11.43 180)
-					(length 5.08)
-					(name "3Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 25.4 -16.51 180)
-					(length 5.08)
-					(name "4Y"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "74LVC32APW,118_0_1"
-				(polyline
-					(pts
-						(xy 5.08 3.175) (xy 20.32 3.175) (xy 20.32 -22.225) (xy 5.08 -22.225) (xy 5.08 3.175)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 9.437 -4.445)
-					(mid 10.4969 -6.35)
-					(end 9.437 -8.255)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 9.437 -9.525)
-					(mid 10.4969 -11.43)
-					(end 9.437 -13.335)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 9.437 -14.605)
-					(mid 10.4969 -16.51)
-					(end 9.437 -18.415)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 9.525 0.635)
-					(mid 10.5849 -1.27)
-					(end 9.525 -3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -5.08) (xy 10.0719 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -7.62) (xy 10.0719 -7.62)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -10.16) (xy 10.0719 -10.16)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -12.7) (xy 10.0719 -12.7)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -15.24) (xy 10.0719 -15.24)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.802 -17.78) (xy 10.0719 -17.78)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 0) (xy 10.1599 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 8.89 -2.54) (xy 10.1599 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -4.445) (xy 9.437 -4.445)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -8.255) (xy 9.437 -8.255)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -9.525) (xy 9.437 -9.525)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -13.335) (xy 9.437 -13.335)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -14.605) (xy 9.437 -14.605)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 11.977 -18.415) (xy 9.437 -18.415)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 14.517 -6.35)
-					(mid 13.5755 -7.7405)
-					(end 11.977 -8.255)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.517 -11.43)
-					(mid 13.5755 -12.8205)
-					(end 11.977 -13.335)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 14.517 -16.51)
-					(mid 13.5755 -17.9005)
-					(end 11.977 -18.415)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 11.977 -4.445)
-					(mid 13.576 -4.9588)
-					(end 14.517 -6.35)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 11.977 -9.525)
-					(mid 13.576 -10.0388)
-					(end 14.517 -11.43)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 11.977 -14.605)
-					(mid 13.576 -15.1188)
-					(end 14.517 -16.51)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 0.635) (xy 9.525 0.635)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.065 -3.175) (xy 9.525 -3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(arc
-					(start 14.605 -1.27)
-					(mid 13.6633 -2.6604)
-					(end 12.065 -3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 12.065 0.635)
-					(mid 13.664 0.1212)
-					(end 14.605 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.517 -6.35) (xy 17.057 -6.35)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.517 -11.43) (xy 17.057 -11.43)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.517 -16.51) (xy 17.057 -16.51)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 14.605 -1.27) (xy 17.145 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "ST_Microelectronics:LD1117S50C"
 			(pin_names
 				(offset 0.762)
@@ -8540,10 +7625,6 @@
 		(uuid "0b2f1eec-ece8-43b8-a3ba-945a5c4d6114")
 	)
 	(no_connect
-		(at 223.52 55.88)
-		(uuid "0c95d1e6-dcc5-40a9-9499-07e55bd6889a")
-	)
-	(no_connect
 		(at 46.99 110.49)
 		(uuid "0f9d40e2-c2d9-4091-8bb8-7e6fcadd8dd2")
 	)
@@ -8594,10 +7675,6 @@
 	(no_connect
 		(at 336.55 120.65)
 		(uuid "3bebbc9b-bc67-43be-b3fd-f7e98ba9b4ba")
-	)
-	(no_connect
-		(at 223.52 60.96)
-		(uuid "3e4e8dc4-f292-4cf1-ad26-2ad43dbb567a")
 	)
 	(no_connect
 		(at 69.85 191.77)
@@ -10257,16 +9334,6 @@
 		)
 		(uuid "68cbc8ca-3792-4021-9766-6fb0cd207ef6")
 	)
-	(wire
-		(pts
-			(xy 119.38 71.12) (xy 120.65 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a4c7274-377f-4151-9669-3ea6e077efd7")
-	)
 	(bus
 		(pts
 			(xy 234.95 234.95) (xy 232.41 234.95)
@@ -10518,16 +9585,6 @@
 			(color 36 156 255 1)
 		)
 		(uuid "8adee645-4f78-49af-ab28-019d9dcbd678")
-	)
-	(wire
-		(pts
-			(xy 144.78 71.12) (xy 125.73 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8bca62dc-9f90-442c-8318-942d29f2ab47")
 	)
 	(bus
 		(pts
@@ -11414,7 +10471,7 @@
 		(uuid "071d326e-f3b9-4063-9630-18984722bc53")
 	)
 	(label "~{A3}"
-		(at 198.12 46.99 180)
+		(at 210.82 48.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11443,16 +10500,6 @@
 		)
 		(uuid "0c561ba3-a87b-4b13-8d49-92125d94c57c")
 	)
-	(label "~{Device Registers}"
-		(at 198.12 49.53 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0c6e0960-215f-4039-9865-c57d84d2f6f4")
-	)
 	(label "~{Reset Device}"
 		(at 210.82 125.73 180)
 		(effects
@@ -11464,7 +10511,7 @@
 		(uuid "0d433656-7e35-41ff-9e85-71c0e3b4c1eb")
 	)
 	(label "~{Device Enable}"
-		(at 144.78 71.12 0)
+		(at 251.46 50.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11594,16 +10641,6 @@
 		(uuid "1f4a91b1-f273-48f5-acd9-010847dd524f")
 	)
 	(label "GND"
-		(at 198.12 59.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2093c937-0153-407a-ae2a-44580fbffc49")
-	)
-	(label "GND"
 		(at 251.46 92.71 0)
 		(effects
 			(font
@@ -11704,7 +10741,7 @@
 		(uuid "2cca5766-a929-482f-9403-3ff8d2be545f")
 	)
 	(label "~{Device Interrupt}"
-		(at 284.48 55.88 0)
+		(at 251.46 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11934,7 +10971,7 @@
 		(uuid "4f997f26-b4df-4e3e-86e8-5e9dac028fc1")
 	)
 	(label "~{Device Registers}"
-		(at 198.12 44.45 180)
+		(at 210.82 40.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11962,16 +10999,6 @@
 			(justify right bottom)
 		)
 		(uuid "54b8015b-e14c-4bb6-9333-1a1b0df79b9d")
-	)
-	(label "3.3V"
-		(at 193.04 73.66 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "566eb14b-48b3-4d53-b459-63241d8cac87")
 	)
 	(label "AD0"
 		(at 109.22 165.1 180)
@@ -12183,16 +11210,6 @@
 		)
 		(uuid "65f0dd30-b114-4c38-ae7f-9ae04ad5cb69")
 	)
-	(label "3.3V"
-		(at 284.48 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "66816fc8-3dca-4a0d-bcb9-c17d7b76e2aa")
-	)
 	(label "A0"
 		(at 295.91 120.65 180)
 		(effects
@@ -12212,16 +11229,6 @@
 			(justify left bottom)
 		)
 		(uuid "688bfc11-dcee-4196-bd7a-1f67bfa48328")
-	)
-	(label "GND"
-		(at 198.12 73.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "6b644f56-29b8-4a22-a188-a9e2f727c9d6")
 	)
 	(label "~{UART2}_{SEL}"
 		(at 295.91 187.96 180)
@@ -12263,26 +11270,6 @@
 		)
 		(uuid "7000b47a-8937-4df4-8a97-98684e285b6a")
 	)
-	(label "3.3V"
-		(at 259.08 71.12 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7399ff19-09e8-4c4d-bbe7-c7ccd096b6d2")
-	)
-	(label "GND"
-		(at 259.08 59.69 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "741ecefe-c715-440d-8268-b90caea8aca2")
-	)
 	(label "5V"
 		(at 295.91 133.35 180)
 		(effects
@@ -12294,7 +11281,7 @@
 		(uuid "758656d2-6087-4344-a477-6ffaa7fbbb75")
 	)
 	(label "~{UART1}_{SEL}"
-		(at 223.52 45.72 0)
+		(at 251.46 43.18 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12304,7 +11291,7 @@
 		(uuid "76f79c66-8281-4f82-9f03-a3bb0658c6cb")
 	)
 	(label "~{UART2}_{SEL}"
-		(at 223.52 50.8 0)
+		(at 251.46 45.72 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12494,7 +11481,7 @@
 		(uuid "89d5a1b7-c284-4389-9d32-8dbb201b2706")
 	)
 	(label "~{Device Select}"
-		(at 119.38 71.12 180)
+		(at 210.82 43.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12502,16 +11489,6 @@
 			(justify right bottom)
 		)
 		(uuid "8bc85445-9c06-4e4e-a900-37c20ba30f91")
-	)
-	(label "GND"
-		(at 198.12 62.23 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8d724d34-11c0-4594-b828-aa1e94bb8c67")
 	)
 	(label "~{A3}"
 		(at 251.46 120.65 0)
@@ -12553,26 +11530,6 @@
 			(justify right bottom)
 		)
 		(uuid "8f10bde1-ac0d-4c82-a955-cb8069164392")
-	)
-	(label "GND"
-		(at 198.12 54.61 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "8fd3ea2a-afc1-450e-aace-82fc5962bb76")
-	)
-	(label "3.3V"
-		(at 223.52 43.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9024cc62-2e5a-4b2d-9053-118a9d7155df")
 	)
 	(label "3.3V"
 		(at 231.14 241.3 180)
@@ -12645,7 +11602,7 @@
 		(uuid "959d617b-d543-455e-a0cd-aa5a3389f44f")
 	)
 	(label "A3"
-		(at 198.12 52.07 180)
+		(at 210.82 45.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12703,16 +11660,6 @@
 			(justify right bottom)
 		)
 		(uuid "9f5d6ff3-049b-43b3-bcfa-76fe28495ddf")
-	)
-	(label "GND"
-		(at 198.12 64.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9f922a54-e0ea-41db-8edb-a689d08b13b5")
 	)
 	(label "A13"
 		(at 210.82 105.41 180)
@@ -12773,16 +11720,6 @@
 			(justify left bottom)
 		)
 		(uuid "a9306e9f-8bcf-46e6-a6e0-ccda3315ea2e")
-	)
-	(label "GND"
-		(at 198.12 57.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "aaeb3754-fc1a-4b3c-a16c-b8f627ea3b2e")
 	)
 	(label "D2"
 		(at 320.04 223.52 270)
@@ -12885,7 +11822,7 @@
 		(uuid "b57db6b1-2bd5-4ac6-8d96-a9fcf1c70608")
 	)
 	(label "~{INT1}"
-		(at 259.08 54.61 180)
+		(at 210.82 50.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13125,6 +12062,16 @@
 		)
 		(uuid "d67025da-0966-438c-a42c-956762ccde8a")
 	)
+	(label "5V"
+		(at 210.82 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d719fb52-3a42-46dc-b26f-8bf1e2c9706f")
+	)
 	(label "DD2"
 		(at 109.22 175.26 180)
 		(effects
@@ -13356,7 +12303,7 @@
 		(uuid "ee605657-1a33-451f-be73-03eb473053f0")
 	)
 	(label "~{INT2}"
-		(at 259.08 57.15 180)
+		(at 210.82 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -13416,14 +12363,14 @@
 		(uuid "f8067ae0-c999-4816-9b55-dd22644376d4")
 	)
 	(label "GND"
-		(at 264.16 71.12 0)
+		(at 251.46 40.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "f8eee01c-b9fc-4288-bcfc-bd58c8899d0c")
+		(uuid "f86a0080-337f-4938-84fe-0d6a5d1a72b3")
 	)
 	(label "GND"
 		(at 361.95 38.1 0)
@@ -14550,141 +13497,6 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 193.04 73.66 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "012b86e7-355b-4e34-816a-35104bd77f35")
-		(property "Reference" "C4"
-			(at 195.326 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1μF"
-			(at 195.58 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 209.804 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 195.2625 73.3425 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 193.04 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "420c00dd-dfcf-4c9b-8bbb-b8fce4c22947")
-		)
-		(pin "2"
-			(uuid "af451564-daa7-40b6-bad0-c337fdf2af2b")
-		)
-		(instances
-			(project "UART Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "HCP65:NetTie")
-		(at 120.65 71.12 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "03e97383-c9c0-4fb5-a03c-609e904f62a1")
-		(property "Reference" "NT1"
-			(at 123.19 69.3999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "NetTie"
-			(at 123.19 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "NetTie:NetTie-2_SMD_Pad0.5mm"
-			(at 141.605 78.105 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 123.19 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 120.65 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5c90165f-d704-492b-9c42-2db54f27ad84")
-		)
-		(pin "1"
-			(uuid "8d317d4e-4e17-41bc-ba1a-2ca0914c8bec")
-		)
-		(instances
-			(project ""
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "NT1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "HCP65:MountingHole_Pad")
 		(at 52.07 224.79 0)
 		(unit 1)
@@ -15125,32 +13937,33 @@
 		)
 	)
 	(symbol
-		(lib_id "HCP65:C_0805")
-		(at 259.08 71.12 0)
+		(lib_id "HCP65:UART_Signals")
+		(at 215.9 40.64 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3cb03aec-b508-4c53-b074-e3074a61fa01")
-		(property "Reference" "C5"
-			(at 261.366 68.58 0)
+		(uuid "32d03c56-076b-405b-8986-a60b645440e8")
+		(property "Reference" "B6"
+			(at 231.14 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "1μF"
-			(at 261.62 73.66 0)
+		(property "Value" "UART Signals"
+			(at 231.14 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
+					(bold yes)
 				)
 			)
 		)
-		(property "Footprint" "SamacSys_Parts:C_0805"
-			(at 275.844 78.74 0)
+		(property "Footprint" "HCP65_Parts:HCP65_UART_Signals"
+			(at 231.14 59.055 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15159,7 +13972,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 261.3025 70.8025 90)
+			(at 215.9 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15167,8 +13980,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 259.08 71.12 0)
+		(property "Description" "UART Signals"
+			(at 231.14 59.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Silkscreen" "UART Signals"
+			(at 231.14 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15176,175 +13997,46 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "fc09ec40-80f2-4f82-9090-e2fa25421aa5")
-		)
-		(pin "2"
-			(uuid "5194dedb-2b80-4978-a474-d68879e954db")
-		)
-		(instances
-			(project "UART Board"
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC1G08GV,125")
-		(at 259.08 54.61 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "54f855b3-e82a-45c5-97a3-0b2837593528")
-		(property "Reference" "IC2"
-			(at 270.51 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "74LVC1G08GV,125"
-			(at 271.78 50.165 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOT95P275X110-5N"
-			(at 283.21 66.675 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC1G08.pdf"
-			(at 283.21 69.215 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "2-input AND gate"
-			(at 271.78 62.865 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 283.21 74.295 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 283.21 76.835 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC1G08GV,125"
-			(at 283.21 79.375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC1G08GV"
-			(at 283.21 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.co.uk/ProductDetail/Nexperia/74LVC1G08GV125?qs=me8TqzrmIYXEnurJEPZc7A%3D%3D"
-			(at 283.21 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Part Number" "74LVC1G08GV,125"
-			(at 283.21 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Arrow Price/Stock" "https://www.arrow.com/en/products/74lvc1g08gv125/nexperia"
-			(at 283.21 89.535 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "'1G08"
-			(at 283.21 71.755 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "ed95420e-8d8e-45e9-a393-57fcd154a2a7")
-		)
-		(pin "2"
-			(uuid "9b269e21-729e-4545-8980-39fab6498a98")
-		)
-		(pin "1"
-			(uuid "32e13119-e27a-4e40-80b3-88b5646354ee")
-		)
-		(pin "3"
-			(uuid "93ce9a34-53b6-4955-a428-a9cdf393c019")
+		(pin "7"
+			(uuid "43bcd8a9-70f2-49dd-ad56-bcc73e7e54d9")
 		)
 		(pin "5"
-			(uuid "82d58fb7-78ec-4ba6-b033-7eea1e6a3e0f")
+			(uuid "1fc224e5-af2e-49bd-b4f4-25aee26c990f")
+		)
+		(pin "2"
+			(uuid "0d7f8b73-4557-4d26-be43-10dfe79fabf4")
+		)
+		(pin "6"
+			(uuid "fb1a7dd8-b6ce-43da-bc20-6af8df21d0c7")
+		)
+		(pin "8"
+			(uuid "2c6d9d3c-ba26-4334-a66d-d7ce2272463f")
+		)
+		(pin "3"
+			(uuid "304c1256-39f1-4144-bf50-88838e89e005")
+		)
+		(pin "12"
+			(uuid "cfb2bd03-6364-4221-92be-f61f6c659146")
+		)
+		(pin "1"
+			(uuid "d2292726-ccce-4790-9277-df9636d234e1")
+		)
+		(pin "4"
+			(uuid "da7af3d9-e09f-4c38-97b5-dfb1b8979d69")
+		)
+		(pin "11"
+			(uuid "681fdeef-31fd-4ce4-b6ae-cd17b4d7ecd5")
+		)
+		(pin "9"
+			(uuid "4636c7ae-7531-4ecb-8de5-22ddaba68f7c")
+		)
+		(pin "10"
+			(uuid "87222096-a3cc-4a6c-8aef-3a325bc91bc7")
 		)
 		(instances
 			(project ""
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC2")
+					(reference "B6")
 					(unit 1)
 				)
 			)
@@ -16949,170 +15641,6 @@
 			(project "Default Board"
 				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
 					(reference "IC1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Nexperia:74LVC32APW,118")
-		(at 198.12 44.45 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e66ad3e8-c9b1-42a1-a007-b7cf4e3c99dc")
-		(property "Reference" "IC4"
-			(at 210.82 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "74LVC32APW,118"
-			(at 210.82 40.005 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(bold yes)
-				)
-			)
-		)
-		(property "Footprint" "SamacSys_Parts:SOP65P640X110-14N"
-			(at 236.855 57.785 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/74LVC32A.pdf"
-			(at 236.855 78.105 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "2-input OR gate"
-			(at 210.82 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Height" "1.1"
-			(at 236.855 60.325 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" "Nexperia"
-			(at 236.855 62.865 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Part_Number" "74LVC32APW,118"
-			(at 236.855 65.405 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" "771-74LVC32APW-T"
-			(at 236.855 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" "https://www.mouser.com/Search/Refine.aspx?Keyword=771-74LVC32APW-T"
-			(at 236.855 70.485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Silkscreen" "74LVC32"
-			(at 210.82 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "6"
-			(uuid "a160cfef-3ee7-4268-b333-4c38610b5d1a")
-		)
-		(pin "9"
-			(uuid "a247f910-e3b5-4bb9-93c4-6dd06de986c6")
-		)
-		(pin "10"
-			(uuid "960bf9e0-ccb8-42c8-a921-b9b07ed9d6d3")
-		)
-		(pin "7"
-			(uuid "0ea0c793-3e32-4190-8159-4354bc356758")
-		)
-		(pin "8"
-			(uuid "2cd68a89-2480-46f1-9532-95ae113fc396")
-		)
-		(pin "4"
-			(uuid "ebc7d76e-2278-4e91-88b3-16d74d756445")
-		)
-		(pin "12"
-			(uuid "8cd9dbb0-908a-421f-b5f0-f99f2d0eef88")
-		)
-		(pin "11"
-			(uuid "4a706c5b-c3d5-4195-a040-62bf85fa205a")
-		)
-		(pin "14"
-			(uuid "82099e7c-cfbe-4573-b013-70ca89ce2b77")
-		)
-		(pin "3"
-			(uuid "6d117a94-b322-4a08-932e-9e52ac776c4a")
-		)
-		(pin "2"
-			(uuid "6e9482f0-f307-4df9-a28f-c601dc82c947")
-		)
-		(pin "1"
-			(uuid "01e4d735-b1c6-40a6-b6bc-952766db9160")
-		)
-		(pin "13"
-			(uuid "7ef148bf-f070-45e7-83d8-fdb910737618")
-		)
-		(pin "5"
-			(uuid "b78369e2-a2bc-4678-af82-848596718c86")
-		)
-		(instances
-			(project ""
-				(path "/8357857d-ab8c-4646-b786-aad4001c0a6b"
-					(reference "IC4")
 					(unit 1)
 				)
 			)

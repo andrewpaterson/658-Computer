@@ -1436,7 +1436,7 @@
 	)
 	(text "Low indicates CPU in kernel mode, high user mode."
 		(exclude_from_sim no)
-		(at 147.32 48.26 0)
+		(at 147.32 45.72 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1562,17 +1562,6 @@
 		)
 		(uuid "31b50542-f1f8-4fd4-b6e7-577a05365f5a")
 	)
-	(text "Low indicates interrupt stack pushes will occur next cycle."
-		(exclude_from_sim no)
-		(at 147.32 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "38a6aec8-b879-4473-8fb9-41e5a8d40f1d")
-	)
 	(text "Low indicates a read from a valid address."
 		(exclude_from_sim no)
 		(at 147.32 73.66 0)
@@ -1594,17 +1583,6 @@
 			(justify left)
 		)
 		(uuid "3d95a710-9580-4ef3-967f-ddbdb01af4d4")
-	)
-	(text "Pull low to set only the data bus high impedance."
-		(exclude_from_sim no)
-		(at 147.32 45.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4b449ad0-5143-4c82-974e-3a7a37e2c4f0")
 	)
 	(text "Program Counter"
 		(exclude_from_sim no)
@@ -1818,17 +1796,6 @@
 		)
 		(uuid "84056d98-3bf8-4135-a327-740db12399eb")
 	)
-	(text "Pull low to reset into 6502/816 mode (can also be entered in software)."
-		(exclude_from_sim no)
-		(at 147.32 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9219c506-012b-4d18-bfee-845461bcb5c7")
-	)
 	(text "Low indicates CPU is halted, waiting on an interrupt."
 		(exclude_from_sim no)
 		(at 147.32 106.68 0)
@@ -1851,6 +1818,17 @@
 		)
 		(uuid "9bc7c4fe-4eb2-490c-968e-1e1a0f03399e")
 	)
+	(text "User settable flag.  High on reset."
+		(exclude_from_sim no)
+		(at 147.32 50.8 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9dbe6af1-17dd-4cb1-8c51-24a4a7167839")
+	)
 	(text "4080MB usable address space"
 		(exclude_from_sim no)
 		(at 71.755 170.815 0)
@@ -1862,7 +1840,7 @@
 		)
 		(uuid "9e6f5462-6b4b-478d-a771-e233bc9392f7")
 	)
-	(text "Low indicates interrupt stack pulls are complete."
+	(text "User settable flag intended for address decoding.  Low on reset."
 		(exclude_from_sim no)
 		(at 147.32 53.34 0)
 		(effects
@@ -1927,17 +1905,6 @@
 			(justify left)
 		)
 		(uuid "bd4c1b55-306d-46c3-a09a-eb2ddca08575")
-	)
-	(text "Low indicates a read-modify-write instruction is executed."
-		(exclude_from_sim no)
-		(at 147.32 104.14 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "be354bd9-dfbd-4e63-aa16-229a434037af")
 	)
 	(text "FFFE:FFFF"
 		(exclude_from_sim no)
@@ -2056,8 +2023,16 @@
 		(uuid "fe458e06-0391-493b-8413-6f8d804285ec")
 	)
 	(no_connect
+		(at 129.54 48.26)
+		(uuid "28443c3d-1fc9-46e4-8a6a-70a330f805f9")
+	)
+	(no_connect
 		(at 93.98 25.4)
 		(uuid "2f4bdb21-db6e-43c6-aba0-fbd671861cf1")
+	)
+	(no_connect
+		(at 129.54 104.14)
+		(uuid "3132f2be-2438-410e-9069-b49df44d78dd")
 	)
 	(no_connect
 		(at 86.36 25.4)
@@ -2115,6 +2090,16 @@
 	)
 	(wire
 		(pts
+			(xy 129.54 50.8) (xy 130.81 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03de0026-5d94-4c54-917e-ad6334a9e576")
+	)
+	(wire
+		(pts
 			(xy 130.81 114.3) (xy 129.54 114.3)
 		)
 		(stroke
@@ -2156,13 +2141,13 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 48.26) (xy 129.54 48.26)
+			(xy 130.81 45.72) (xy 129.54 45.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1668c2b2-2954-45bb-a34a-31d25f0cd49f")
+		(uuid "2515e043-2c1c-410d-8cf8-aad70949d604")
 	)
 	(wire
 		(pts
@@ -2456,16 +2441,6 @@
 	)
 	(wire
 		(pts
-			(xy 130.81 104.14) (xy 129.54 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d19d644f-ec8d-4535-88d0-8594e4657e07")
-	)
-	(wire
-		(pts
 			(xy 130.81 58.42) (xy 129.54 58.42)
 		)
 		(stroke
@@ -2483,16 +2458,6 @@
 			(type default)
 		)
 		(uuid "df93858c-4859-47e4-9267-723336deecbe")
-	)
-	(wire
-		(pts
-			(xy 129.54 50.8) (xy 130.81 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e1810c4b-720a-422b-94bb-2bafeb420183")
 	)
 	(wire
 		(pts
@@ -2535,7 +2500,7 @@
 		)
 		(uuid "f8f30508-c1dd-4529-a448-6009416a5d8c")
 	)
-	(global_label "~{CLK}"
+	(global_label "~{Cycle CLK}"
 		(shape input)
 		(at 129.54 78.74 0)
 		(fields_autoplaced yes)
@@ -2549,7 +2514,7 @@
 		)
 		(uuid "02276adb-cd4a-4cbe-8aa7-967b537b3c29")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 135.0748 78.74 0)
+			(at 139.8366 78.74 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3263,6 +3228,32 @@
 			)
 		)
 	)
+	(global_label "Watchdog CLK"
+		(shape input)
+		(at 129.54 40.64 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "3d8193df-f49e-4a6d-81b9-23defa3c7cce")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 142.9321 40.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "D1"
 		(shape tri_state)
 		(at 73.66 25.4 90)
@@ -3278,32 +3269,6 @@
 		(uuid "3dac45b4-e4f4-4f19-8e9d-88d71458a8b0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 73.66 19.8473 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "~{6502}"
-		(shape input)
-		(at 129.54 40.64 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "3f05d930-5e33-4c18-89f3-a38f968f8c47")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 136.0749 40.64 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3356,32 +3321,6 @@
 		(uuid "41301f1d-e0c4-49cc-a8da-0319cf83ed7b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 135.7079 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "~{Enter Interrupt}"
-		(shape output)
-		(at 130.81 50.8 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "416ce33d-0aa2-4f97-9cb5-3977f65373ce")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 144.5828 50.8 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4719,7 +4658,7 @@
 			)
 		)
 	)
-	(global_label "~{Exit Interrupt}"
+	(global_label "~{Initial}"
 		(shape output)
 		(at 130.81 53.34 0)
 		(fields_autoplaced yes)
@@ -4733,7 +4672,7 @@
 		)
 		(uuid "9d6e19ea-05d3-41b1-83c5-a411ce384bf6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 143.4876 53.34 0)
+			(at 137.8687 53.34 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4898,58 +4837,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-			)
-		)
-	)
-	(global_label "~{Kernel Mode}"
-		(shape output)
-		(at 130.81 48.26 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "a7315c4e-2550-422b-a42e-4ae2fd8100b3")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 142.8686 48.26 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "~{ML}"
-		(shape output)
-		(at 130.81 104.14 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "a9812554-fa75-417a-97e9-c761a9a2739f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 135.4877 104.14 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 	)
@@ -5265,6 +5152,32 @@
 			)
 		)
 	)
+	(global_label "~{Kernel Mode}"
+		(shape output)
+		(at 130.81 45.72 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "c93c24a1-8d52-47f0-8946-2084fa4aced6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 142.8686 45.72 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "A25"
 		(shape tri_state)
 		(at 25.4 91.44 180)
@@ -5314,6 +5227,32 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "~{Flag}"
+		(shape output)
+		(at 130.81 50.8 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "ca3822ea-5b0b-437f-909b-fd12b84db6e9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 136.7258 50.8 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)
@@ -5912,32 +5851,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-			)
-		)
-	)
-	(global_label "DE"
-		(shape input)
-		(at 129.54 45.72 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.2)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "fd445c43-cd2b-4e3b-a5c2-ae5c44617f39")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 134.1701 45.72 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 	)

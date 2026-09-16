@@ -1941,11 +1941,10 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin input line
 					(at 60.96 -45.72 180)
 					(length 5.08)
-					(hide yes)
-					(name "N.C."
+					(name "~{Clock_÷_4}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1960,11 +1959,10 @@
 						)
 					)
 				)
-				(pin no_connect line
+				(pin input line
 					(at 60.96 -43.18 180)
 					(length 5.08)
-					(hide yes)
-					(name "N.C."
+					(name "~{Clock_÷_2}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3824,10 +3822,6 @@
 		(uuid "fe458e06-0391-493b-8413-6f8d804285ec")
 	)
 	(no_connect
-		(at 158.75 139.7)
-		(uuid "2937f6bf-5bdc-4d80-a86c-938a4c06985f")
-	)
-	(no_connect
 		(at 113.03 38.1)
 		(uuid "2f4bdb21-db6e-43c6-aba0-fbd671861cf1")
 	)
@@ -3846,10 +3840,6 @@
 	(no_connect
 		(at 140.97 38.1)
 		(uuid "5ea2c9ad-ad2d-4e8a-96b8-3464368b0cda")
-	)
-	(no_connect
-		(at 158.75 137.16)
-		(uuid "7be12ca3-d229-4e39-a732-0992ab2c21f5")
 	)
 	(no_connect
 		(at 138.43 38.1)
@@ -5455,6 +5445,32 @@
 			)
 		)
 	)
+	(global_label "~{DIV4}"
+		(shape input)
+		(at 158.75 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "3d6e3ce0-e0f6-4498-827a-a1d967e19c9d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 164.761 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "Watchdog CLK"
 		(shape input)
 		(at 158.75 58.42 0)
@@ -6232,6 +6248,32 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+	)
+	(global_label "~{DIV2}"
+		(shape input)
+		(at 158.75 137.16 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.2)
+				(bold yes)
+			)
+			(justify left)
+		)
+		(uuid "60db1601-ca4c-497b-b110-7f09709af125")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 164.761 137.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 	)

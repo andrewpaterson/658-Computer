@@ -11,11 +11,19 @@ public class NamedFont
   protected Map<Float, Map<Float, Font>> bold;
   protected String name;
   protected Font defaultFont;
+  protected Font boldFont;
 
   public NamedFont(Font defaultFont)
   {
+    this(defaultFont, null);
+  }
+
+  //  boldFont is a separate bold face.  Without one, bold text is derived from the default font.
+  public NamedFont(Font defaultFont, Font boldFont)
+  {
     this.name = defaultFont.getName();
     this.defaultFont = defaultFont;
+    this.boldFont = boldFont;
 
     plain = new LinkedHashMap<>();
     bold = new LinkedHashMap<>();
@@ -33,7 +41,14 @@ public class NamedFont
     Font font = rotationMap.get(size);
     if (font == null)
     {
-      font = defaultFont.deriveFont(Font.BOLD, size);
+      if (boldFont != null)
+      {
+        font = boldFont.deriveFont(size);
+      }
+      else
+      {
+        font = defaultFont.deriveFont(Font.BOLD, size);
+      }
       if (rotation != 0)
       {
         AffineTransform affineTransform = AffineTransform.getRotateInstance(Math.toRadians(rotation));

@@ -1,11 +1,20 @@
 package net.logicim.ui.circuit;
 
+import net.common.SimulatorException;
 import net.common.geometry.Line;
 import net.common.type.Int2D;
+import net.logicim.data.editor.EditorData;
 import net.logicim.data.family.Family;
 import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.data.subciruit.SubcircuitInstanceProperties;
+import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
+import net.logicim.domain.common.wire.Trace;
+import net.logicim.domain.common.wire.Traces;
+import net.logicim.file.reader.LogicimFileReader;
+import net.logicim.file.writer.LogicimFileWriter;
+import net.logicim.ui.circuit.path.ViewPath;
+import net.logicim.ui.circuit.path.ViewPaths;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.integratedcircuit.StaticView;
 import net.logicim.ui.common.wire.TraceView;
@@ -19,12 +28,15 @@ import net.logicim.ui.simulation.component.passive.pin.PinViewFactory;
 import net.logicim.ui.simulation.component.subcircuit.SubcircuitInstanceView;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
 import static net.logicim.domain.common.Units.MHz;
+import static net.logicim.file.writer.ReflectiveWriter.EDITOR_DATA_TAG_NAME;
+import static net.logicim.file.writer.ReflectiveWriter.LOGICIM_DOC_NAME;
 
 //  Builds circuits through the same CircuitEditor and SubcircuitEditor calls the UI makes when a user places
 //  components and pulls wires, so that the view paths, simulations and traces are created the same way.
@@ -36,6 +48,27 @@ public class TestCircuit
   {
     FamilyVoltageConfigurationStore.getInstance();
     circuitEditor = new CircuitEditor(mainSubcircuitTypeName);
+  }
+
+  //  Writes the circuit to XML the way the editor saves a file (and an undo step) and loads it into a new CircuitEditor.
+  //  Views held from before the reload belong to the old CircuitEditor.
+  public void saveAndReload()
+  {
+    EditorData editorData = new EditorData(circuitEditor.save(),
+                                           0,
+                                           0,
+                                           false,
+                                           Rotation.North,
+                                           new ArrayList<>(),
+                                           new ArrayList<>(),
+                                           new ArrayList<>(),
+                                           false);
+    StringWriter writer = new StringWriter();
+    LogicimFileWriter.writeXML(editorData, writer, LOGICIM_DOC_NAME, EDITOR_DATA_TAG_NAME);
+
+    EditorData loadedEditorData = (EditorData) new LogicimFileReader(LOGICIM_DOC_NAME, EDITOR_DATA_TAG_NAME).load(writer.toString());
+    circuitEditor = new CircuitEditor();
+    circuitEditor.load(loadedEditorData.circuit);
   }
 
   public CircuitEditor getCircuitEditor()
@@ -134,6 +167,12 @@ public class TestCircuit
     return new WirePull().createTraceViews(subcircuitEditor, lines);
   }
 
+  public void deleteWires(SubcircuitEditor subcircuitEditor, Set<TraceView> traceViews)
+  {
+    edit(subcircuitEditor);
+    subcircuitEditor.deleteTraceViews(traceViews);
+  }
+
   //  Joins two points with a horizontal then vertical wire, or a single straight wire when they line up.
   public Set<TraceView> connect(SubcircuitEditor subcircuitEditor, Int2D from, Int2D to)
   {
@@ -145,6 +184,65 @@ public class TestCircuit
     {
       return addWire(subcircuitEditor, from, new Int2D(to.x, from.y), to);
     }
+  }
+
+  //  Finds views by name, for example after saveAndReload has replaced them.
+  public PinView getPin(SubcircuitEditor subcircuitEditor, String name)
+  {
+    for (PinView pinView : subcircuitEditor.getInstanceSubcircuitView().findAllPins())
+    {
+      if (pinView.getName().equals(name))
+      {
+        return pinView;
+      }
+    }
+    throw new SimulatorException("Cannot find Pin [%s] in Subcircuit [%s].", name, subcircuitEditor.getTypeName());
+  }
+
+  public SubcircuitInstanceView getSubcircuitInstance(SubcircuitEditor subcircuitEditor, String name)
+  {
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitEditor.getInstanceSubcircuitView().getSubcircuitInstanceViews())
+    {
+      if (subcircuitInstanceView.getName().equals(name))
+      {
+        return subcircuitInstanceView;
+      }
+    }
+    throw new SimulatorException("Cannot find Subcircuit Instance [%s] in Subcircuit [%s].", name, subcircuitEditor.getTypeName());
+  }
+
+  //  The view path from the top level sub-circuit editor down through the given sub-circuit instances.
+  public ViewPath getViewPath(SubcircuitEditor topSubcircuitEditor, SubcircuitInstanceView... subcircuitInstanceViews)
+  {
+    ViewPaths viewPaths = circuitEditor.getViewPaths();
+    ViewPath viewPath = viewPaths.getViewPath(viewPaths.getEmptyPath(), topSubcircuitEditor);
+    for (SubcircuitInstanceView subcircuitInstanceView : subcircuitInstanceViews)
+    {
+      viewPath = viewPaths.getViewPath(viewPath, subcircuitInstanceView);
+    }
+    return viewPath;
+  }
+
+  //  The traces of a wire on a view path in the path's only circuit simulation.
+  public static Set<Trace> getTraces(Set<TraceView> traceViews, ViewPath viewPath)
+  {
+    List<CircuitSimulation> circuitSimulations = viewPath.getCircuitSimulations();
+    if (circuitSimulations.size() != 1)
+    {
+      throw new SimulatorException("Expected one Circuit Simulation on Path [%s] but found [%s].", viewPath.getDescription(), circuitSimulations.size());
+    }
+    CircuitSimulation circuitSimulation = circuitSimulations.get(0);
+
+    Set<Trace> result = new LinkedHashSet<>();
+    for (TraceView traceView : traceViews)
+    {
+      Traces traces = traceView.getTraces(viewPath, circuitSimulation);
+      if (traces != null)
+      {
+        result.addAll(traces.getTraces());
+      }
+    }
+    return result;
   }
 
   public static Int2D getPosition(PinView pinView)

@@ -96,10 +96,10 @@ public class WireTraceConverter
       LocalMultiSimulationConnectionNet connectionNet = connectionNetEntry.getKey();
       Set<Trace> traces = connectionNetEntry.getValue();
 
-      Set<WireView> processedWireViews = new HashSet<>();
       Map<ViewPath, List<WireViewPathConnection>> connectedWires = connectionNet.getConnectedWires();
       for (Map.Entry<ViewPath, List<WireViewPathConnection>> wireEntry : connectedWires.entrySet())
       {
+        Set<WireView> processedWireViews = new HashSet<>();
         List<WireViewPathConnection> wireViewPathConnections = wireEntry.getValue();
         for (WireViewPathConnection wireViewPathConnection : wireViewPathConnections)
         {

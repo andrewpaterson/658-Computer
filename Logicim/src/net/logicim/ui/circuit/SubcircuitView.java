@@ -865,6 +865,33 @@ public class SubcircuitView
     ViewPaths viewPaths = getCircuitEditor().getViewPaths();
     ViewPath viewPath = viewPaths.getViewPath(parentViewPath, circuitInstanceView);
 
+    Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
+    for (ViewPath startingViewPath : getStartingViewPaths(viewPaths, viewPath, circuitInstanceView))
+    {
+      allUpdatedConnectionViews.addAll(createTracesForConnectionViewsForViewPath(viewPaths, startingViewPath, tracesConnectionViews));
+    }
+    return allUpdatedConnectionViews;
+  }
+
+  //  An edit made in the sub-circuit editor changes every instance of the sub-circuit, not only the editor's own path.
+  protected List<ViewPath> getStartingViewPaths(ViewPaths viewPaths, ViewPath viewPath, CircuitInstanceView circuitInstanceView)
+  {
+    if (circuitInstanceView == subcircuitEditor)
+    {
+      return viewPaths.getPathsEndingWithSubcircuitView(this);
+    }
+    else
+    {
+      List<ViewPath> startingViewPaths = new ArrayList<>();
+      startingViewPaths.add(viewPath);
+      return startingViewPaths;
+    }
+  }
+
+  protected Set<ConnectionView> createTracesForConnectionViewsForViewPath(ViewPaths viewPaths,
+                                                                          ViewPath viewPath,
+                                                                          Collection<ConnectionView> tracesConnectionViews)
+  {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tracesConnectionViews)
     {
@@ -876,7 +903,7 @@ public class SubcircuitView
           List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
           WireList wireList = wireListFinder.createWireList(connectionNets);
 
-          for (SubcircuitSimulation subcircuitSimulation : simulations.getSubcircuitSimulations())
+          for (SubcircuitSimulation subcircuitSimulation : viewPath.getSubcircuitSimulations())
           {
             WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation);
             wireTraceConverter.process();

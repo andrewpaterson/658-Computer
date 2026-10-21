@@ -2,13 +2,15 @@ package net.logicim.domain.common.propagation;
 
 import net.logicim.domain.common.LongTime;
 import net.logicim.domain.common.voltage.Voltage;
+import org.junit.jupiter.api.Test;
 
 import static net.logicim.assertions.Validator.validate;
 import static net.logicim.assertions.Validator.validateNotNull;
 
 public class FamilyVoltageConfigurationTest
 {
-  static void testHighVoltageIn()
+  @Test
+  public void testHighVoltageIn()
   {
     FamilyVoltageConfigurationStore.getInstance();
     testHighVoltageIn("LVC", "0.0V -> ----\n" +
@@ -182,7 +184,8 @@ public class FamilyVoltageConfigurationTest
     validate(expected, builder.toString());
   }
 
-  static void testLowVoltageIn()
+  @Test
+  public void testLowVoltageIn()
   {
     FamilyVoltageConfigurationStore.getInstance();
     testLowVoltageIn("LVC", "0.0V -> ----\n" +
@@ -304,7 +307,8 @@ public class FamilyVoltageConfigurationTest
     validate(expected, builder.toString());
   }
 
-  static void testHighVoltageOut()
+  @Test
+  public void testHighVoltageOut()
   {
     FamilyVoltageConfigurationStore.getInstance();
     testHighVoltageOut("LVC", "0.0V -> ----\n" +
@@ -426,7 +430,8 @@ public class FamilyVoltageConfigurationTest
     validate(expected, builder.toString());
   }
 
-  static void testLowVoltageOut()
+  @Test
+  public void testLowVoltageOut()
   {
     FamilyVoltageConfigurationStore.getInstance();
     testLowVoltageOut("LVC", "0.0V -> ----\n" +
@@ -548,7 +553,8 @@ public class FamilyVoltageConfigurationTest
     validate(expected, builder.toString());
   }
 
-  static void testCalculateHoldTime()
+  @Test
+  public void testCalculateHoldTime()
   {
     testCalculateHoldTime("LVC", 3.1f, 0.2f, "1.8V -> 3.3ns\n" +
                                              "1.9V -> 3.1ns\n" +
@@ -600,14 +606,6 @@ public class FamilyVoltageConfigurationTest
       }
     }
     validate(expected, builder.toString());
-  }
-  public static void test()
-  {
-    testHighVoltageIn();
-    testLowVoltageIn();
-    testHighVoltageOut();
-    testLowVoltageOut();
-    testCalculateHoldTime();
   }
 }
 

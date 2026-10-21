@@ -1,10 +1,13 @@
 package net.logicim.ui.editor;
 
+import org.junit.jupiter.api.Test;
+
 import static net.logicim.assertions.Validator.validate;
 
 public class InternationalUnitsTest
 {
-  protected static void testToString()
+  @Test
+  public void testToString()
   {
     validate("1.00 Hz", InternationalUnits.toString(1, "Hz"));
     validate("10.0 Hz", InternationalUnits.toString(10, "Hz"));
@@ -37,7 +40,8 @@ public class InternationalUnitsTest
     validate("9.90 mHz", InternationalUnits.toString(0.0099, "Hz"));
   }
 
-  protected static void testParse()
+  @Test
+  public void testParse()
   {
     validate(1e6d, InternationalUnits.parse("1 MHz", "Hz"));
     validate(1, InternationalUnits.parse("1 Hz", "Hz"));
@@ -46,12 +50,6 @@ public class InternationalUnitsTest
     validate(1e6d, InternationalUnits.parse("1MHz", "Hz"));
     validate(1e6d, InternationalUnits.parse("1Mhz", "Hz"));
     validate(0.001, InternationalUnits.parse("1mhz", "Hz"));
-  }
-
-  public static void test()
-  {
-    testToString();
-    testParse();
   }
 }
 

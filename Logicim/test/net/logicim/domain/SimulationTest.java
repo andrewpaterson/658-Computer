@@ -24,6 +24,8 @@ import net.logicim.domain.integratedcircuit.standard.logic.or.OrGate;
 import net.logicim.domain.integratedcircuit.standard.logic.or.OrGatePins;
 import net.logicim.domain.passive.subcircuit.SubcircuitTopSimulation;
 import net.logicim.ui.simulation.DebugGlobalEnvironment;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
@@ -34,6 +36,12 @@ import static net.logicim.domain.common.Units.MHz;
 
 public class SimulationTest
 {
+  @BeforeAll
+  public static void setUp()
+  {
+    new DebugGlobalEnvironment();
+  }
+
   private static CircuitSimulation createCircuitSimulation()
   {
     CircuitSimulation circuitSimulation = new CircuitSimulation("");
@@ -41,7 +49,8 @@ public class SimulationTest
     return circuitSimulation;
   }
 
-  private static void testInverterEvents()
+  @Test
+  public void testInverterEvents()
   {
     CircuitSimulation circuitSimulation = createCircuitSimulation();
     SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
@@ -169,7 +178,8 @@ public class SimulationTest
     validateFalse(eventsProcessed);
   }
 
-  private static void testInverterLevels()
+  @Test
+  public void testInverterLevels()
   {
     CircuitSimulation circuitSimulation = createCircuitSimulation();
     SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
@@ -272,7 +282,8 @@ public class SimulationTest
              builder.toString());
   }
 
-  private static void testClockOscillator()
+  @Test
+  public void testClockOscillator()
   {
     CircuitSimulation circuitSimulation = createCircuitSimulation();
     SubcircuitTopSimulation subcircuitSimulation = circuitSimulation.getSubcircuitTopSimulation();
@@ -500,15 +511,6 @@ public class SimulationTest
       count++;
     }
     throw new ArrayIndexOutOfBoundsException(index);
-  }
-
-  public static void test()
-  {
-    new DebugGlobalEnvironment();
-
-    testInverterEvents();
-    testInverterLevels();
-    testClockOscillator();
   }
 }
 

@@ -20,6 +20,8 @@ import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.Cloc
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockView;
 import net.logicim.ui.simulation.component.integratedcircuit.standard.clock.ClockViewFactory;
 import net.logicim.ui.simulation.subcircuit.SubcircuitEditor;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
@@ -27,7 +29,14 @@ import static net.logicim.assertions.Validator.validateEquals;
 
 public class CircuitEditorTest
 {
-  public static void test()
+  @BeforeAll
+  public static void setUp()
+  {
+    new DebugGlobalEnvironment();
+  }
+
+  @Test
+  public void testClockSchedulesFirstTick()
   {
     FamilyVoltageConfigurationStore.getInstance();
 
@@ -63,13 +72,6 @@ public class CircuitEditorTest
     validateEquals(1, events.size());
     Event event = events.getFirst();
     validateEquals(TickEvent.class, event.getClass());
-  }
-
-  public static void main(String[] args)
-  {
-    new DebugGlobalEnvironment();
-
-    CircuitEditorTest.test();
   }
 }
 

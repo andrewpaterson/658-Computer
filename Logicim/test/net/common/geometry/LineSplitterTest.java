@@ -3,6 +3,7 @@ package net.common.geometry;
 import net.logicim.assertions.Validator;
 import net.common.type.Int2D;
 import net.common.type.Positions;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Set;
 
 public class LineSplitterTest
 {
-  protected static void testCrossPattern()
+  @Test
+  public void testCrossPattern()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(-5, 5, 0));
@@ -32,7 +34,8 @@ public class LineSplitterTest
     Validator.validate(4, splitLines.size());
   }
 
-  protected static void testTeePattern()
+  @Test
+  public void testTeePattern()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(-5, 5, 0));
@@ -53,7 +56,8 @@ public class LineSplitterTest
     Validator.validate(3, splitLines.size());
   }
 
-  protected static void testRightAngle()
+  @Test
+  public void testRightAngle()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(-5, 0, 0));
@@ -81,13 +85,6 @@ public class LineSplitterTest
   protected static Line verticalLine(int start, int end, int x)
   {
     return new Line(new Int2D(x, start), new Int2D(x, end));
-  }
-
-  public static void test()
-  {
-    testCrossPattern();
-    testTeePattern();
-    testRightAngle();
   }
 }
 

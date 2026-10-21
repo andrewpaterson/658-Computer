@@ -4,6 +4,8 @@ import net.logicim.data.common.KeyData;
 import net.logicim.data.common.ValueData;
 import net.logicim.data.passive.wire.TunnelProperties;
 import net.logicim.domain.integratedcircuit.standard.clock.ClockOscillatorState;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -13,7 +15,9 @@ import static net.logicim.assertions.Validator.validate;
 
 public class ReflectiveWriterTest
 {
-  public static void testWriteInteger()
+  @Test
+  @Disabled("Was commented out of the old test() suite.")
+  public void testWriteInteger()
   {
     StringWriter writer = new StringWriter();
     LogicimFileWriter.writeXML(new ValueData(100), writer, "doc", "root");
@@ -26,7 +30,9 @@ public class ReflectiveWriterTest
              "</doc>\n", writer.toString().replace("\r", ""));
   }
 
-  public static void testWriteClockState()
+  @Test
+  @Disabled("Was commented out of the old test() suite.")
+  public void testWriteClockState()
   {
     StringWriter writer = new StringWriter();
     LogicimFileWriter.writeXML(new ClockOscillatorState(true), writer, "doc", "root");
@@ -39,7 +45,9 @@ public class ReflectiveWriterTest
              "</doc>\n", writer.toString().replace("\r", ""));
   }
 
-  public static void testWriteLongArray()
+  @Test
+  @Disabled("Was commented out of the old test() suite.")
+  public void testWriteLongArray()
   {
     StringWriter writer = new StringWriter();
     LogicimFileWriter.writeXML(new ValueData(new long[]{2, 3}), writer, "doc", "root");
@@ -53,7 +61,9 @@ public class ReflectiveWriterTest
              "</doc>\n", writer.toString().replace("\r", ""));
   }
 
-  public static void testWriteList()
+  @Test
+  @Disabled("Was commented out of the old test() suite.")
+  public void testWriteList()
   {
     StringWriter writer = new StringWriter();
     ArrayList<Object> list = new ArrayList<>();
@@ -78,7 +88,8 @@ public class ReflectiveWriterTest
              "</doc>\n", writer.toString().replace("\r", ""));
   }
 
-  public static void testWriteMap()
+  @Test
+  public void testWriteMap()
   {
     StringWriter writer = new StringWriter();
     LinkedHashMap<Object, Object> map = new LinkedHashMap<>();
@@ -112,15 +123,6 @@ public class ReflectiveWriterTest
              "    </object>\n" +
              "  </root>\n" +
              "</doc>\n", writer.toString().replace("\r", ""));
-  }
-
-  public static void test()
-  {
-//    testWriteInteger();
-//    testWriteClockState();
-//    testWriteLongArray();
-//    testWriteList();
-    testWriteMap();
   }
 }
 

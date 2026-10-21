@@ -13,15 +13,17 @@ import net.common.reflect.ClassInspector;
 import net.common.util.EnvironmentInspector;
 import net.common.util.FileUtil;
 import net.logicim.assertions.ValidationException;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.List;
 
 import static net.logicim.assertions.Validator.*;
 
-public abstract class TokeniserTest
+public class TokeniserTest
 {
-  protected static void testStatementAssignment1()
+  @Test
+  public void testStatementAssignment1()
   {
     SixteenHighTokeniser parser = createParser("i = 0;");
     ParseResult parseResult = parser.parse();
@@ -33,7 +35,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementAssignment2()
+  @Test
+  public void testStatementAssignment2()
   {
     SixteenHighTokeniser parser = createParser("i = (c * 3);");
     ParseResult parseResult = parser.parse();
@@ -90,7 +93,8 @@ public abstract class TokeniserTest
     validateEquals(3L, ctInt.getValue());
   }
 
-  protected static void testStatementAssignment2MissingSemicolon()
+  @Test
+  public void testStatementAssignment2MissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("i = (c * 3)");
     ParseResult parseResult = parser.parse();
@@ -99,7 +103,8 @@ public abstract class TokeniserTest
     validate("ERROR  [11]: Expected ';'.", parser.getError());
   }
 
-  protected static void testStatementAssignment3()
+  @Test
+  public void testStatementAssignment3()
   {
     SixteenHighTokeniser parser = createParser("i = -(0x230LL * +((-.4f) % 3));");
     ParseResult parseResult = parser.parse();
@@ -111,7 +116,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementAssignment4()
+  @Test
+  public void testStatementAssignment4()
   {
     SixteenHighTokeniser parser = createParser("c = -d;");
     ParseResult parseResult = parser.parse();
@@ -123,7 +129,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementAssignment5()
+  @Test
+  public void testStatementAssignment5()
   {
     SixteenHighTokeniser parser = createParser("c = ~(5);");
     ParseResult parseResult = parser.parse();
@@ -135,7 +142,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementAssignment6()
+  @Test
+  public void testStatementAssignment6()
   {
     SixteenHighTokeniser parser = createParser("i = (c * 3 + (x - y));");
     ParseResult parseResult = parser.parse();
@@ -230,7 +238,8 @@ public abstract class TokeniserTest
     validateEquals(0, variableMember5.getArrayIndices().size());
   }
 
-  protected static void testPlusExpression()
+  @Test
+  public void testPlusExpression()
   {
     SixteenHighTokeniser parser = createParser("x = (5 + ~d);");
     ParseResult parseResult = parser.parse();
@@ -242,7 +251,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testMultiplePointerVariable()
+  @Test
+  public void testMultiplePointerVariable()
   {
     SixteenHighTokeniser parser = createParser("int8**** p = 0;");
     ParseResult parseResult = parser.parse();
@@ -254,7 +264,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testCompoundVariable1()
+  @Test
+  public void testCompoundVariable1()
   {
     SixteenHighTokeniser parser = createParser("*p[3] = 5;");
     ParseResult parseResult = parser.parse();
@@ -266,7 +277,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testCompoundVariable2()
+  @Test
+  public void testCompoundVariable2()
   {
     SixteenHighTokeniser parser = createParser("*(*p[3])[5] = 5;");
     ParseResult parseResult = parser.parse();
@@ -278,7 +290,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testCompoundVariable3()
+  @Test
+  public void testCompoundVariable3()
   {
     String s = "rec @Struct\n" +
                "    int**** x;\n" +
@@ -296,7 +309,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testCompoundVariable4()
+  @Test
+  public void testCompoundVariable4()
   {
     String s = "rec @SXX\n" +
                "    int**** a;\n" +
@@ -321,7 +335,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testUnsignedShiftRightExpression()
+  @Test
+  public void testUnsignedShiftRightExpression()
   {
     SixteenHighTokeniser parser = createParser("x = (5 + >>>d);");
     ParseResult parseResult = parser.parse();
@@ -333,7 +348,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementDeclaration()
+  @Test
+  public void testStatementDeclaration()
   {
     SixteenHighTokeniser parser = createParser("int16 i; int16 number;");
     ParseResult parseResult = parser.parse();
@@ -345,7 +361,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testStatementDirective()
+  @Test
+  public void testStatementDirective()
   {
     SixteenHighTokeniser parser = createParser("$access_mode read-write; $access_time 0x3;");
     ParseResult parseResult = parser.parse();
@@ -358,7 +375,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testArrayInitialisation()
+  @Test
+  public void testArrayInitialisation()
   {
     SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2];");
     ParseResult parseResult = parser.parse();
@@ -370,7 +388,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testArrayInitialisationMissingSemicolon()
+  @Test
+  public void testArrayInitialisationMissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("int8[6] a1d = [2,3,1,3,1,2]");
     ParseResult parseResult = parser.parse();
@@ -379,7 +398,8 @@ public abstract class TokeniserTest
     validate("ERROR  [27]: Expected ';'.", parser.getError());
   }
 
-  protected static void testArrayStuff()
+  @Test
+  public void testArrayStuff()
   {
     SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3LL))] = (5 + b * c + 99 * 1.05);");
     ParseResult parseResult = parser.parse();
@@ -392,7 +412,8 @@ public abstract class TokeniserTest
   }
 
 
-  protected static void testArrayStuffMissingSemicolon()
+  @Test
+  public void testArrayStuffMissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("@a[(c * (b + 0x3LL))] = (5 + b * c + 99 * 1.05)");
     ParseResult parseResult = parser.parse();
@@ -401,7 +422,8 @@ public abstract class TokeniserTest
     validate("ERROR  [47]: Expected ';'.", parser.getError());
   }
 
-  protected static void testArrayIndices()
+  @Test
+  public void testArrayIndices()
   {
     SixteenHighTokeniser parser = createParser("a[2] = b[3];");
     ParseResult parseResult = parser.parse();
@@ -413,7 +435,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  protected static void testSingleInitialisation()
+  @Test
+  public void testSingleInitialisation()
   {
     SixteenHighTokeniser parser = createParser("int8 i = 5;");
     ParseResult parseResult = parser.parse();
@@ -425,7 +448,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testComplexArrayIndices()
+  @Test
+  public void testComplexArrayIndices()
   {
     SixteenHighTokeniser parser = createParser("int32 c = (a2d[y][a1d[y]] * 3);");
     ParseResult parseResult = parser.parse();
@@ -437,7 +461,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testIdentifierContainingNumber()
+  @Test
+  public void testIdentifierContainingNumber()
   {
     SixteenHighTokeniser parser = createParser("a1d[2] =66;");
     ParseResult parseResult = parser.parse();
@@ -449,7 +474,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testGlobalAndFileVariables()
+  @Test
+  public void testGlobalAndFileVariables()
   {
     SixteenHighTokeniser parser = createParser("int8*\t@hello;int8\t@@world;");
     ParseResult parseResult = parser.parse();
@@ -462,7 +488,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testReferenceOperator()
+  @Test
+  public void testReferenceOperator()
   {
     SixteenHighTokeniser parser = createParser("p = &p[5];");
     ParseResult parseResult = parser.parse();
@@ -474,7 +501,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testRecordSimpleDeclaration()
+  @Test
+  public void testRecordSimpleDeclaration()
   {
     SixteenHighTokeniser parser = createParser("rec @party int8* animal; end");
     ParseResult parseResult = parser.parse();
@@ -488,7 +516,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testRecordFieldSelection()
+  @Test
+  public void testRecordFieldSelection()
   {
     SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello;");
     ParseResult parseResult = parser.parse();
@@ -500,7 +529,8 @@ public abstract class TokeniserTest
     validateTrue(parser.isCompleted());
   }
 
-  private static void testRecordFieldSelectionMissingSemicolon()
+  @Test
+  public void testRecordFieldSelectionMissingSemicolon()
   {
     SixteenHighTokeniser parser = createParser("@party_address.line[1] = @hello");
     ParseResult parseResult = parser.parse();
@@ -509,7 +539,8 @@ public abstract class TokeniserTest
     validate("ERROR  [31]: Expected ';'.", parser.getError());
   }
 
-  protected static void testSimple()
+  @Test
+  public void testSimple()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Simple.16h", log);
@@ -555,7 +586,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  protected static void testPointers()
+  @Test
+  public void testPointers()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Pointer.16h", log);
@@ -606,7 +638,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testArrayDeclaration()
+  @Test
+  public void testArrayDeclaration()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Array.16h", log);
@@ -628,7 +661,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testExpressions()
+  @Test
+  public void testExpressions()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Expressions.16h", log);
@@ -672,7 +706,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testStack()
+  @Test
+  public void testStack()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Stack.16h", log);
@@ -723,7 +758,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testRecordVariable()
+  @Test
+  public void testRecordVariable()
   {
     SixteenHighTokeniser parser = createParser("@use_structs:\n" +
                                                "   @party_address address = 0;\n" +
@@ -740,7 +776,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testRecord()
+  @Test
+  public void testRecord()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Struct.16h", log);
@@ -791,7 +828,8 @@ public abstract class TokeniserTest
              "end\n", s);
   }
 
-  private static void testDirectives()
+  @Test
+  public void testDirectives()
   {
     Logger log = new Logger();
     SixteenHighTokeniser parser = createParser("Directive.16h", log);
@@ -847,48 +885,6 @@ public abstract class TokeniserTest
     {
       throw new ValidationException(error);
     }
-  }
-
-  public static void test()
-  {
-    testStatementAssignment1();
-    testStatementAssignment2();
-    testStatementAssignment2MissingSemicolon();
-    testStatementAssignment3();
-    testStatementAssignment4();
-    testStatementAssignment5();
-    testStatementAssignment6();
-    testStatementDeclaration();
-    testStatementDirective();
-    testSingleInitialisation();
-    testArrayInitialisation();
-    testArrayInitialisationMissingSemicolon();
-    testArrayStuff();
-    testArrayStuffMissingSemicolon();
-    testArrayIndices();
-    testComplexArrayIndices();
-    testIdentifierContainingNumber();
-    testGlobalAndFileVariables();
-    testReferenceOperator();
-    testPlusExpression();
-    testUnsignedShiftRightExpression();
-    testRecordSimpleDeclaration();
-    testRecordFieldSelection();
-    testRecordFieldSelectionMissingSemicolon();
-    testMultiplePointerVariable();
-    testCompoundVariable1();
-    testCompoundVariable2();
-    testCompoundVariable3();
-    testCompoundVariable4();
-
-    testSimple();
-    testArrayDeclaration();
-    testPointers();
-    testExpressions();
-    testStack();
-    testRecordVariable();
-    testRecord();
-    testDirectives();
   }
 }
 

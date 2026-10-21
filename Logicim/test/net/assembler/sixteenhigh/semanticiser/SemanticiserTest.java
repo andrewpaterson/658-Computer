@@ -15,6 +15,7 @@ import net.assembler.sixteenhigh.tokeniser.SixteenHighTokeniser;
 import net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode;
 import net.common.logger.Logger;
 import net.common.util.CollectionUtil;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -23,9 +24,10 @@ import static net.assembler.sixteenhigh.semanticiser.expression.operator.Operato
 import static net.assembler.sixteenhigh.tokeniser.literal.PrimitiveTypeCode.*;
 import static net.logicim.assertions.Validator.*;
 
-public abstract class SemanticiserTest
+public class SemanticiserTest
 {
-  protected static void testSimple1()
+  @Test
+  public void testSimple1()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testSimple", "int32 @@a = 5;");
     validateTrue(semanticiser.parse());
@@ -45,7 +47,8 @@ public abstract class SemanticiserTest
     validateTripleVariableLiteral(triples.get(0), int32, "@@a", null, null, null, int32, "5");
   }
 
-  protected static void testSimple2()
+  @Test
+  public void testSimple2()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testSimple", "int32 @@a = 2; @@a /= 5;");
     validateTrue(semanticiser.parse());
@@ -65,7 +68,8 @@ public abstract class SemanticiserTest
     validateTripleVariableLiteral(triples.get(0), int32, "@@a", null, null, null, int32, "5");
   }
 
-  protected static void testComplex1()
+  @Test
+  public void testComplex1()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int16 @c; int8 @x; int8 @y; int32 @a = (+@c * 3b + (@x - @y));");
     validateTrue(semanticiser.parse());
@@ -92,7 +96,8 @@ public abstract class SemanticiserTest
     validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int16, "@a~2");
   }
 
-  protected static void testComplex2()
+  @Test
+  public void testComplex2()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int8 @y; int32 @a = (-0b10b * 3b + @y % @y)");
     validateTrue(semanticiser.parse());
@@ -117,7 +122,8 @@ public abstract class SemanticiserTest
     validateTripleVariableVariable(triples.get(3), int32, "@a", null, null, null, int8, "@a~2");
   }
 
-  protected static void testComplex3()
+  @Test
+  public void testComplex3()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testComplex", "int32 @a = 5; int32 @b = (@a + 0x1us - 0); int16 @c = (0xABCDull + 1 - 2 * 5 / 7 % 9 + @a + @b); int @d /= @a;");
     validateTrue(semanticiser.parse());
@@ -251,7 +257,8 @@ public abstract class SemanticiserTest
     validateEquals(typeCode, variable.type.getType());
   }
 
-  protected static void testArray()
+  @Test
+  public void testArray()
   {
     SixteenHighSemanticiser semanticiser = createSixteenHighSemanticiser("testArray", "int32 @[100]; int32 @b; int 32 @c; @a[(@c * (@b + 0x3L))] = (5 + @b * @c + 99 * 1.05);");
     validateTrue(semanticiser.parse());
@@ -276,7 +283,8 @@ public abstract class SemanticiserTest
                                     contents);
   }
 
-  private static void testAutoCast()
+  @Test
+  public void testAutoCast()
   {
     List<PrimitiveTypeCode> primitiveTypeCodes = CollectionUtil.newList(int8,
                                                                         uint8,
@@ -300,17 +308,6 @@ public abstract class SemanticiserTest
         validateNotNull(code);
       }
     }
-  }
-
-  public static void test()
-  {
-    testAutoCast();
-    testSimple1();
-    testSimple2();
-    testComplex1();
-    testComplex2();
-    testComplex3();
-    testArray();
   }
 }
 

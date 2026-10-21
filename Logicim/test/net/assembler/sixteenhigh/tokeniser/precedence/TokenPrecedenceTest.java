@@ -14,6 +14,7 @@ import net.assembler.sixteenhigh.tokeniser.statment.expression.*;
 import net.common.logger.Logger;
 import net.common.parser.Tristate;
 import net.logicim.assertions.ValidationException;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ import static net.logicim.assertions.Validator.*;
 
 public class TokenPrecedenceTest
 {
-  protected static void testSingleLiteral()
+  @Test
+  public void testSingleLiteral()
   {
     SixteenHighTokeniser parser = createParser("i = \"ABC\"");
     TokenStatement tokenStatement = getTokenStatement(parser);
@@ -32,7 +34,8 @@ public class TokenPrecedenceTest
     validateLiteral("ABC", expression);
   }
 
-  protected static void testSingleBracketedLiteral()
+  @Test
+  public void testSingleBracketedLiteral()
   {
     SixteenHighTokeniser parser = createParser("i = (\"XYZ\")");
     TokenStatement tokenStatement = getTokenStatement(parser);
@@ -43,7 +46,8 @@ public class TokenPrecedenceTest
     validateLiteral("XYZ", expression);
   }
 
-  protected static void testMultiplyThenAdd()
+  @Test
+  public void testMultiplyThenAdd()
   {
     SixteenHighTokeniser parser = createParser("i = (c * 3 + (x - y))");
     TokenStatement tokenStatement = getTokenStatement(parser);
@@ -71,7 +75,8 @@ public class TokenPrecedenceTest
     validateVariable("y", binaryTokenExpression3.getRightExpression());
   }
 
-  protected static void testAddThenMultiplyThenDivide()
+  @Test
+  public void testAddThenMultiplyThenDivide()
   {
     SixteenHighTokeniser parser = createParser("i = (3 + 4 * 5 / 6)");
     TokenStatement tokenStatement = getTokenStatement(parser);
@@ -152,14 +157,6 @@ public class TokenPrecedenceTest
                                     "",
                                     new TokenUnit(""),
                                     contents);
-  }
-
-  public static void test()
-  {
-    testSingleLiteral();
-    testSingleBracketedLiteral();
-    testMultiplyThenAdd();
-    testAddThenMultiplyThenDivide();
   }
 }
 

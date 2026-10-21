@@ -2,6 +2,7 @@ package net.common.geometry;
 
 import net.logicim.assertions.Validator;
 import net.common.type.Int2D;
+import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -9,7 +10,8 @@ import java.util.Set;
 
 public class LineMinimiserTest
 {
-  protected static void testEdgesOverlapping()
+  @Test
+  public void testEdgesOverlapping()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(1, 5, 0));
@@ -22,7 +24,8 @@ public class LineMinimiserTest
     Validator.validateEquals(new Int2D(10, 0), line.getEnd());
   }
 
-  protected static void testAllOverlapping()
+  @Test
+  public void testAllOverlapping()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(1, 5, 0));
@@ -38,7 +41,8 @@ public class LineMinimiserTest
     Validator.validateEquals(new Int2D(16, 0), line.getEnd());
   }
 
-  protected static void testSomeOverlapping()
+  @Test
+  public void testSomeOverlapping()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(1, 5, 0));
@@ -57,7 +61,8 @@ public class LineMinimiserTest
     Validator.validateEquals(new Int2D(16, 0), line.getEnd());
   }
 
-  protected static void testParallelWithOverlapping()
+  @Test
+  public void testParallelWithOverlapping()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(1, 5, 0));
@@ -79,7 +84,8 @@ public class LineMinimiserTest
     Validator.validateEquals(new Int2D(10, 1), line.getEnd());
   }
 
-  protected static void testOrthogonal()
+  @Test
+  public void testOrthogonal()
   {
     Set<Line> lines = new LinkedHashSet<>();
     lines.add(horizontalLine(-5, 5, 0));
@@ -105,15 +111,6 @@ public class LineMinimiserTest
   protected static Line verticalLine(int start, int end, int x)
   {
     return new Line(new Int2D(x, start), new Int2D(x, end));
-  }
-
-  public static void test()
-  {
-    testEdgesOverlapping();
-    testAllOverlapping();
-    testSomeOverlapping();
-    testParallelWithOverlapping();
-    testOrthogonal();
   }
 }
 

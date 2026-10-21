@@ -2,14 +2,16 @@ package net.assembler.sixteenhigh.tokeniser.literal;
 
 import net.common.logger.Logger;
 import net.common.parser.TextParser;
+import org.junit.jupiter.api.Test;
 
 import static net.common.parser.TextParser.*;
 import static net.common.parser.Tristate.*;
 import static net.logicim.assertions.Validator.*;
 
-public abstract class LiteralParserTest
+public class LiteralParserTest
 {
-  protected static void testIntegerLiterals()
+  @Test
+  public void testIntegerLiterals()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("5"));
     LiteralResult integerLiteral = literalParser.getIntegerLiteral(NUMBER_SEPARATOR_NONE);
@@ -302,7 +304,8 @@ public abstract class LiteralParserTest
     validateTrue(integerLiteral.getChar().isPositive());
   }
 
-  private static void testFloatingLiteral()
+  @Test
+  public void testFloatingLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("5.3"));
     LiteralResult floatingLiteral = literalParser.getFloatingLiteral();
@@ -455,7 +458,8 @@ public abstract class LiteralParserTest
     validateFalse(floatingLiteral.state);
   }
 
-  private static void testBooleanLiteral()
+  @Test
+  public void testBooleanLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("whee"));
     LiteralResult booleanLiteral = literalParser.getBooleanLiteral();
@@ -500,7 +504,8 @@ public abstract class LiteralParserTest
     validate(false, booleanLiteral.getBoolean().getValue());
   }
 
-  private static void testCharacterLiteral()
+  @Test
+  public void testCharacterLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("'c'"));
     LiteralResult characterLiteral = literalParser.getCharacterLiteral();
@@ -524,7 +529,8 @@ public abstract class LiteralParserTest
     validateTrue(characterLiteral.getShort().isValid());
   }
 
-  private static void testStringLiteral()
+  @Test
+  public void testStringLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("\"Hello\""));
     LiteralResult characterLiteral = literalParser.getStringLiteral();
@@ -545,7 +551,8 @@ public abstract class LiteralParserTest
     validate("Q\tQ", characterLiteral.getString().value);
   }
 
-  private static void testAnyLiteral()
+  @Test
+  public void testAnyLiteral()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("\"Hello\""));
     LiteralResult literalResult = literalParser.parseLiteral(NUMBER_SEPARATOR_NONE);
@@ -590,7 +597,8 @@ public abstract class LiteralParserTest
     validate(false, literalResult.getBoolean().getValue());
   }
 
-  private static void testIntegerComma()
+  @Test
+  public void testIntegerComma()
   {
     LiteralParser literalParser = new LiteralParser(createTextParser("5,5"));
     LiteralResult integerLiteral = literalParser.parseLiteral(NUMBER_SEPARATOR_NONE);
@@ -601,16 +609,6 @@ public abstract class LiteralParserTest
     validateTrue(integerLiteral.getInt().isValid());
   }
 
-  public static void test()
-  {
-    testIntegerLiterals();
-    testFloatingLiteral();
-    testBooleanLiteral();
-    testCharacterLiteral();
-    testStringLiteral();
-    testAnyLiteral();
-    testIntegerComma();
-  }
 
   protected static TextParser createTextParser(String contents)
   {

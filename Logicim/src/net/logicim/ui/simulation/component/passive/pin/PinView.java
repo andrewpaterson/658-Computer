@@ -9,6 +9,7 @@ import net.logicim.data.integratedcircuit.decorative.HorizontalAlignment;
 import net.logicim.data.passive.wire.PinData;
 import net.logicim.data.passive.wire.PinProperties;
 import net.logicim.domain.CircuitSimulation;
+import net.logicim.domain.common.Circuit;
 import net.logicim.domain.common.defaults.DefaultLogicLevels;
 import net.logicim.domain.common.propagation.FamilyVoltageConfiguration;
 import net.logicim.domain.common.propagation.FamilyVoltageConfigurationStore;
@@ -25,6 +26,7 @@ import net.logicim.ui.circuit.path.ViewPath;
 import net.logicim.ui.common.Colours;
 import net.logicim.ui.common.Rotation;
 import net.logicim.ui.common.Viewport;
+import net.logicim.ui.common.integratedcircuit.ImplicitPowerSources;
 import net.logicim.ui.common.integratedcircuit.PassiveView;
 import net.logicim.ui.common.integratedcircuit.PropertyClamp;
 import net.logicim.ui.common.port.PortView;
@@ -39,6 +41,7 @@ import net.logicim.ui.simulation.component.subcircuit.SubcircuitPinView;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static java.awt.Font.MONOSPACED;
 import static java.awt.Font.SANS_SERIF;
@@ -211,6 +214,39 @@ public class PinView
 
     PowerSource gndPowerSource = new PowerSource(containingSubcircuitSimulation, "", 0);
     gndPowerSource.getPowerOutPort().connect(gndTrace);
+  }
+
+  @Override
+  public void destroyComponent(ViewPath viewPath, CircuitSimulation circuitSimulation)
+  {
+    Pin pin = simulationPassives.get(viewPath, circuitSimulation);
+    if (pin != null)
+    {
+      removePowerSourcesIfNecessary(circuitSimulation.getCircuit(), pin);
+    }
+    super.destroyComponent(viewPath, circuitSimulation);
+  }
+
+  @Override
+  public void destroyAllComponents()
+  {
+    for (Map.Entry<ViewPath, Map<CircuitSimulation, Pin>> pathEntry : simulationPassives.getEntrySet())
+    {
+      for (Map.Entry<CircuitSimulation, Pin> entry : pathEntry.getValue().entrySet())
+      {
+        removePowerSourcesIfNecessary(entry.getKey().getCircuit(), entry.getValue());
+      }
+    }
+    super.destroyAllComponents();
+  }
+
+  protected void removePowerSourcesIfNecessary(Circuit circuit, Pin pin)
+  {
+    if (!mustIncludeExplicitPowerPorts(familyVoltageConfiguration))
+    {
+      ImplicitPowerSources.remove(circuit, pin.getVoltageCommon());
+      ImplicitPowerSources.remove(circuit, pin.getVoltageGround());
+    }
   }
 
   protected boolean mustIncludeExplicitPowerPorts(FamilyVoltageConfiguration familyVoltageConfiguration)

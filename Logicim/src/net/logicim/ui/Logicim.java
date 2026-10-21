@@ -828,7 +828,7 @@ public class Logicim
   {
     SubcircuitSimulation subcircuitSimulation = circuitEditor.getCurrentSubcircuitSimulation();
     CircuitSimulation circuitSimulation = subcircuitSimulation.getCircuitSimulation();
-    circuitSimulation.reset(circuitSimulation);
+    circuitEditor.resetSimulation(circuitSimulation);
   }
 
   public EditorData save()

@@ -18,7 +18,7 @@ public class WireListFinder
 {
   protected ViewPaths paths;
   protected List<PathConnectionView> pathConnectionViewStack;
-  protected Set<SubcircuitPinView> processedSubcircuitPinViews;
+  protected Map<ViewPath, Set<SubcircuitPinView>> processedSubcircuitPinViews;
   protected Set<ConnectionView> processedSplitterViewConnections;
 
   public WireListFinder(ViewPath viewPath,
@@ -36,7 +36,7 @@ public class WireListFinder
     SubcircuitView subcircuitView = circuitInstanceView.getInstanceSubcircuitView();
     PathConnectionView pathConnectionView = subcircuitView.getPathConnection(viewPath, inputConnectionView);
     this.pathConnectionViewStack.add(pathConnectionView);
-    this.processedSubcircuitPinViews = new LinkedHashSet<>();
+    this.processedSubcircuitPinViews = new LinkedHashMap<>();
     this.processedSplitterViewConnections = new LinkedHashSet<>();
   }
 
@@ -224,7 +224,7 @@ public class WireListFinder
                                      subcircuitInstanceView.getDescription(),
                                      subcircuitInstanceViewConnection.connectionView.toString());
       }
-      processedSubcircuitPinViews.add(subcircuitPinView);
+      addProcessedSubcircuitPinView(viewPath, subcircuitPinView);
 
       ConnectionView pinConnection = getPinConnectionView(subcircuitInstanceView, subcircuitInstanceViewConnection.connectionView);
 
@@ -249,18 +249,37 @@ public class WireListFinder
         if (subcircuitPinView.getSubcircuitInstanceView() == pathLast)
         {
           //I'm not sure this check is good enough for partial wires and splitter views.
-          if (!processedSubcircuitPinViews.contains(subcircuitPinView))
+          ViewPath newPath = paths.getPathExceptLast(viewPath);
+          if (!isProcessedSubcircuitPinView(newPath, subcircuitPinView))
           {
-            processedSubcircuitPinViews.add(subcircuitPinView);
+            addProcessedSubcircuitPinView(newPath, subcircuitPinView);
 
             ConnectionView subcircuitInstanceConnection = subcircuitPinView.getConnection();
-            ViewPath newPath = paths.getPathExceptLast(viewPath);
             localConnectionsToProcess.add(new ConnectionViewProcessStackItem(newPath, subcircuitInstanceConnection));
           }
         }
       }
     }
     return localConnectionsToProcess;
+  }
+
+  //  A Subcircuit Pin View belongs to a Subcircuit Instance View, which is shared by every path through its containing
+  //  sub-circuit.  The path containing the instance is needed to identify one pin of one instance.
+  private void addProcessedSubcircuitPinView(ViewPath containingViewPath, SubcircuitPinView subcircuitPinView)
+  {
+    Set<SubcircuitPinView> subcircuitPinViews = processedSubcircuitPinViews.get(containingViewPath);
+    if (subcircuitPinViews == null)
+    {
+      subcircuitPinViews = new LinkedHashSet<>();
+      processedSubcircuitPinViews.put(containingViewPath, subcircuitPinViews);
+    }
+    subcircuitPinViews.add(subcircuitPinView);
+  }
+
+  private boolean isProcessedSubcircuitPinView(ViewPath containingViewPath, SubcircuitPinView subcircuitPinView)
+  {
+    Set<SubcircuitPinView> subcircuitPinViews = processedSubcircuitPinViews.get(containingViewPath);
+    return (subcircuitPinViews != null) && subcircuitPinViews.contains(subcircuitPinView);
   }
 
   private ConnectionView getPinConnectionView(SubcircuitInstanceView subcircuitInstanceView, ConnectionView connectionView)

@@ -84,6 +84,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
     }
     destroyPortViewComponents(viewPath, circuitSimulation);
     Circuit circuit = circuitSimulation.getCircuit();
+    removePowerSourcesIfNecessary(circuit, removedIntegratedCircuit);
     circuit.remove(removedIntegratedCircuit);
     simulationIntegratedCircuits.remove(viewPath, circuitSimulation);
   }
@@ -100,6 +101,7 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
         CircuitSimulation circuitSimulation = entry.getKey();
         IC integratedCircuit = entry.getValue();
         Circuit circuit = circuitSimulation.getCircuit();
+        removePowerSourcesIfNecessary(circuit, integratedCircuit);
         circuit.remove(integratedCircuit);
       }
     }
@@ -162,6 +164,15 @@ public abstract class IntegratedCircuitView<IC extends IntegratedCircuit<?, ?>, 
 
       PowerSource gndPowerSource = new PowerSource(containingSubcircuitSimulation, "", 0);
       gndPowerSource.getPowerOutPort().connect(gndTrace, false);
+    }
+  }
+
+  protected void removePowerSourcesIfNecessary(Circuit circuit, IC integratedCircuit)
+  {
+    if (!mustIncludeExplicitPowerPorts(FamilyVoltageConfigurationStore.get(properties.family)))
+    {
+      ImplicitPowerSources.remove(circuit, integratedCircuit.getPins().getVoltageCommon());
+      ImplicitPowerSources.remove(circuit, integratedCircuit.getPins().getVoltageGround());
     }
   }
 

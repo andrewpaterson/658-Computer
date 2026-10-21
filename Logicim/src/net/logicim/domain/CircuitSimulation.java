@@ -1,5 +1,6 @@
 package net.logicim.domain;
 
+import net.common.SimulatorException;
 import net.common.util.StringUtil;
 import net.logicim.data.circuit.TimelineData;
 import net.logicim.data.simulation.CircuitSimulationData;
@@ -97,10 +98,14 @@ public class CircuitSimulation
     }
   }
 
-  public void reset(CircuitSimulation circuitSimulation)
+  //  Every component must already have been destroyed.  They are re-created against the new Simulation.
+  public void reset()
   {
+    if (!circuit.isEmpty())
+    {
+      throw new SimulatorException("Cannot reset Circuit Simulation [%s].  Its Circuit still contains components.", getDescription());
+    }
     this.simulation = new Simulation();
-    this.circuit.resetSimulation(circuitSimulation);
   }
 
   public CircuitSimulationData save()

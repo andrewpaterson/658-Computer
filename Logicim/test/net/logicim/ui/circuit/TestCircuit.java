@@ -186,6 +186,12 @@ public class TestCircuit
     }
   }
 
+  //  The wires currently touching a grid position.  Adding wires can replace the TraceViews they join to.
+  public static Set<TraceView> getWiresAt(SubcircuitEditor subcircuitEditor, Int2D position)
+  {
+    return new LinkedHashSet<>(subcircuitEditor.getInstanceSubcircuitView().getTraceViewsInGridSpace(position.x, position.y));
+  }
+
   //  Finds views by name, for example after saveAndReload has replaced them.
   public PinView getPin(SubcircuitEditor subcircuitEditor, String name)
   {

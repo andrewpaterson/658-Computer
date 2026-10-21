@@ -868,7 +868,10 @@ public class SubcircuitView
     Set<ConnectionView> allUpdatedConnectionViews = new LinkedHashSet<>();
     for (ViewPath startingViewPath : getStartingViewPaths(viewPaths, viewPath, circuitInstanceView))
     {
-      allUpdatedConnectionViews.addAll(createTracesForConnectionViewsForViewPath(viewPaths, startingViewPath, tracesConnectionViews));
+      allUpdatedConnectionViews.addAll(createTracesForConnectionViewsForViewPath(viewPaths,
+                                                                                 startingViewPath,
+                                                                                 tracesConnectionViews,
+                                                                                 startingViewPath.getSubcircuitSimulations()));
     }
     return allUpdatedConnectionViews;
   }
@@ -890,7 +893,8 @@ public class SubcircuitView
 
   protected Set<ConnectionView> createTracesForConnectionViewsForViewPath(ViewPaths viewPaths,
                                                                           ViewPath viewPath,
-                                                                          Collection<ConnectionView> tracesConnectionViews)
+                                                                          Collection<ConnectionView> tracesConnectionViews,
+                                                                          List<SubcircuitSimulation> subcircuitSimulations)
   {
     Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
     for (ConnectionView connectionView : tracesConnectionViews)
@@ -903,7 +907,7 @@ public class SubcircuitView
           List<LocalMultiSimulationConnectionNet> connectionNets = wireListFinder.createConnectionNets();
           WireList wireList = wireListFinder.createWireList(connectionNets);
 
-          for (SubcircuitSimulation subcircuitSimulation : viewPath.getSubcircuitSimulations())
+          for (SubcircuitSimulation subcircuitSimulation : subcircuitSimulations)
           {
             WireTraceConverter wireTraceConverter = new WireTraceConverter(wireList, subcircuitSimulation);
             wireTraceConverter.process();
@@ -1307,6 +1311,7 @@ public class SubcircuitView
     }
 
     createComponents(creations, viewPathComponents);
+    startComponents(creations, viewPathComponents);
 
     for (SubcircuitInstanceCreation creation : creations)
     {
@@ -1383,7 +1388,11 @@ public class SubcircuitView
                                                                        creation.getCircuitSimulation(),
                                                                        subcircuitInstance);
     }
+  }
 
+  protected void startComponents(List<SubcircuitInstanceCreation> creations,
+                                 List<ViewPathComponents> viewPathComponentsList)
+  {
     for (SubcircuitInstanceCreation creation : creations)
     {
       SubcircuitInstanceView subcircuitInstanceView = creation.getSubcircuitInstanceView();
@@ -1684,6 +1693,7 @@ public class SubcircuitView
 
     SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     simulations.remove(subcircuitSimulation);
+    viewPath.removeSubcircuitSimulation(circuitSimulation);
   }
 
   protected void destroyComponents(Collection<StaticView<?>> staticViews,
@@ -1701,7 +1711,10 @@ public class SubcircuitView
 
     for (TraceView traceView : traceViews)
     {
-      traceView.destroyComponent(viewPath, circuitSimulation);
+      if (traceView.getTraces(viewPath, circuitSimulation) != null)
+      {
+        traceView.destroyComponent(viewPath, circuitSimulation);
+      }
     }
 
     for (StaticView<?> staticView : staticViews)
@@ -1711,6 +1724,54 @@ public class SubcircuitView
         staticView.destroyComponent(viewPath, circuitSimulation);
       }
     }
+  }
+
+  //  Destroys every component, sub-circuit instance simulation and trace in the Circuit Simulation below this top level
+  //  path and re-creates them from the views.  Traces are connected before the components are started because
+  //  connecting a port to a trace removes the port's events.
+  public void resetSimulation(ViewPath viewPath, CircuitSimulation circuitSimulation)
+  {
+    destroyComponents(getStaticViews(),
+                      traceViews,
+                      viewPath,
+                      circuitSimulation);
+    circuitSimulation.reset();
+
+    List<ViewPathComponents> viewPathComponents = new ArrayList<>();
+    viewPathComponents.add(new ViewPathComponents(new ViewPathCircuitSimulation(viewPath, circuitSimulation), getComponentViews()));
+    List<SubcircuitInstanceCreation> creations = new ArrayList<>();
+    recurseFindSubcircuitInstanceCreations(creations,
+                                           viewPathComponents,
+                                           viewPath,
+                                           circuitSimulation,
+                                           getSubcircuitInstanceViews());
+    circuitEditor.updateSimulationPaths();
+
+    createComponents(creations, viewPathComponents);
+    Set<ConnectionView> connectionViews = createTracesForCircuitSimulation(circuitSimulation);
+    startComponents(creations, viewPathComponents);
+    fireConnectionEvents(connectionViews);
+  }
+
+  protected Set<ConnectionView> createTracesForCircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    ViewPaths viewPaths = getCircuitEditor().getViewPaths();
+    Set<ConnectionView> updatedConnectionViews = new LinkedHashSet<>();
+    for (ViewPath viewPath : viewPaths.getViewPaths())
+    {
+      if (viewPath.containsCircuitSimulation(circuitSimulation))
+      {
+        SubcircuitView subcircuitView = viewPath.getLast().getInstanceSubcircuitView();
+        Set<ConnectionView> connectionViews = subcircuitView.getConnectionViews(subcircuitView.getStaticViews(), subcircuitView.traceViews);
+        List<SubcircuitSimulation> subcircuitSimulations = new ArrayList<>();
+        subcircuitSimulations.add(viewPath.getSubcircuitSimulation(circuitSimulation));
+        updatedConnectionViews.addAll(subcircuitView.createTracesForConnectionViewsForViewPath(viewPaths,
+                                                                                              viewPath,
+                                                                                              connectionViews,
+                                                                                              subcircuitSimulations));
+      }
+    }
+    return updatedConnectionViews;
   }
 
   public void createTracesForSubcircuitInstanceView(ViewPath parentViewPath, SubcircuitInstanceView subcircuitInstanceView)

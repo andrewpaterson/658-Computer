@@ -162,6 +162,15 @@ public class ViewPath
     circuitSimulations.put(circuitSimulation, subcircuitSimulation);
   }
 
+  public void removeSubcircuitSimulation(CircuitSimulation circuitSimulation)
+  {
+    SubcircuitSimulation removed = circuitSimulations.remove(circuitSimulation);
+    if (removed == null)
+    {
+      throw new SimulatorException("Cannot remove CircuitSimulation [%s] from Path [%s].  It is not set.", circuitSimulation.getDescription(), getDescription());
+    }
+  }
+
   public boolean containsCircuitSimulation(CircuitSimulation circuitSimulation)
   {
     return circuitSimulations.containsKey(circuitSimulation);

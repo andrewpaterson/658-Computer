@@ -255,6 +255,35 @@ public class SubcircuitWireConnectionTest
     assertReloadPreservesWires(circuit);
   }
 
+  //  Each Leaf joins its In and Out, so in both Middles the Out wire is on the clock's net.  The net crosses the same
+  //  Leaf pin once inside each Middle.
+  @Test
+  public void testNetCrossesSamePinInTwoInstances()
+  {
+    TestCircuit circuit = new TestCircuit("Main");
+    PassThrough leaf = new PassThrough(circuit, "Leaf");
+    leaf.wireInToOut(circuit);
+
+    PassThrough middle = new PassThrough(circuit, "Middle");
+    SubcircuitInstanceView leafInstance = circuit.addSubcircuitInstance(middle.subcircuitEditor, leaf.subcircuitEditor, "Leaf", 10, 20, Rotation.West);
+    circuit.connect(middle.subcircuitEditor, TestCircuit.getPosition(middle.in), leaf.getIn(leafInstance));
+    Set<TraceView> middleOutWire = circuit.connect(middle.subcircuitEditor, leaf.getOut(leafInstance), TestCircuit.getPosition(middle.out));
+
+    SubcircuitEditor main = circuit.getSubcircuitEditor("Main");
+    SubcircuitInstanceView firstMiddle = circuit.addSubcircuitInstance(main, middle.subcircuitEditor, "First Middle", 0, 0, Rotation.West);
+    SubcircuitInstanceView secondMiddle = circuit.addSubcircuitInstance(main, middle.subcircuitEditor, "Second Middle", 0, 40, Rotation.West);
+    ClockView clock = circuit.addClock(main, -20, -10);
+    circuit.connect(main, TestCircuit.getPosition(clock), middle.getIn(firstMiddle));
+    circuit.connect(main, middle.getIn(firstMiddle), middle.getIn(secondMiddle));
+
+    assertNoDisconnectedWires(circuit);
+    Set<TraceView> clockWire = TestCircuit.getWiresAt(main, TestCircuit.getPosition(clock));
+    Set<Trace> clockTraces = TestCircuit.getTraces(clockWire, circuit.getViewPath(main));
+    assertSameTraces(clockTraces, TestCircuit.getTraces(middleOutWire, circuit.getViewPath(main, firstMiddle)));
+    assertSameTraces(clockTraces, TestCircuit.getTraces(middleOutWire, circuit.getViewPath(main, secondMiddle)));
+    assertReloadPreservesWires(circuit);
+  }
+
   //  The innermost wire is added last, after Leaf has been nested two levels deep.
   @Test
   public void testLeafWiredAfterNesting()

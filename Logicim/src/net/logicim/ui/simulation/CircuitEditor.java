@@ -1132,6 +1132,21 @@ public class CircuitEditor
     return result;
   }
 
+  //  Re-creates every component and trace in the Circuit Simulation, starting from its top level sub-circuit editor.
+  public void resetSimulation(CircuitSimulation circuitSimulation)
+  {
+    for (ViewPath viewPath : viewPaths.getViewPaths())
+    {
+      if ((viewPath.size() == 1) && viewPath.containsCircuitSimulation(circuitSimulation))
+      {
+        SubcircuitView subcircuitView = viewPath.getLast().getInstanceSubcircuitView();
+        subcircuitView.resetSimulation(viewPath, circuitSimulation);
+        return;
+      }
+    }
+    throw new SimulatorException("Cannot find a top level Path for Circuit Simulation [%s].", circuitSimulation.getDescription());
+  }
+
   public ViewPathCircuitSimulation addNewSimulation(String simulationName)
   {
     SubcircuitEditor subcircuitEditor = getCurrentSubcircuitEditor();

@@ -214,8 +214,12 @@ public class PackageInspectorFactory
         if (isValidClassFile(childFile))
         {
           String path = childFile.getPath();
-          String directoryName = resource.getPath();
+          String directoryName = new File(resource.getFile()).getPath();
           String classFileName = path.substring(directoryName.length());
+          if (classFileName.startsWith(File.separator))
+          {
+            classFileName = classFileName.substring(1);
+          }
           classFileName = stripClassSuffix(classFileName);
           classFileName = classFileName.replace('/', '.');
           classFileName = classFileName.replace('\\', '.');

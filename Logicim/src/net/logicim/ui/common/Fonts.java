@@ -2,6 +2,7 @@ package net.logicim.ui.common;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
+import java.awt.image.BufferedImage;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,6 +40,16 @@ public class Fonts
     }
   }
 
+  protected void ensureDefaultFont()
+  {
+    if (defaultGraphicsFont == null)
+    {
+      Graphics2D graphics = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).createGraphics();
+      ensureDefaultFont(graphics);
+      graphics.dispose();
+    }
+  }
+
   public static Fonts getInstance()
   {
     if (instance == null)
@@ -50,6 +61,7 @@ public class Fonts
 
   private NamedFont getFont(String fontName)
   {
+    ensureDefaultFont();
     NamedFont namedFont = fonts.get(fontName);
     if (namedFont == null)
     {
@@ -62,16 +74,19 @@ public class Fonts
 
   public Font getBoldFont(float rotation, float size)
   {
+    ensureDefaultFont();
     return defaultFont.getBoldFont(rotation, size);
   }
 
   public Font getPlainFont(float rotation, float size)
   {
+    ensureDefaultFont();
     return defaultFont.getPlainFont(rotation, size);
   }
 
   public Font getFont(float size, boolean bold)
   {
+    ensureDefaultFont();
     return defaultFont.getFont(0, size, bold);
   }
 
@@ -83,6 +98,7 @@ public class Fonts
 
   public FontRenderContext getFontRenderContext()
   {
+    ensureDefaultFont();
     return fontRenderContext;
   }
 }

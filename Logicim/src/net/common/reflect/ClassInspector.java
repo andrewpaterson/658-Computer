@@ -197,7 +197,7 @@ public class ClassInspector
     {
       if (!fields.containsKey(field.getName()))
       {
-        field.setAccessible(true);
+        field.trySetAccessible();
         fields.put(field.getName(), field);
       }
     }
@@ -621,7 +621,7 @@ public class ClassInspector
       MethodKey methodKey = new MethodKey(method);
       if (!_allMethodsMap.containsKey(methodKey))
       {
-        method.setAccessible(true);
+        method.trySetAccessible();
         _allMethodsMap.put(methodKey, method);
       }
     }

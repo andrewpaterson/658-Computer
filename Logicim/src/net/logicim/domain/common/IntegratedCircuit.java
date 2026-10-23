@@ -8,13 +8,12 @@ import net.logicim.domain.common.port.LogicPort;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.PowerInPort;
 import net.logicim.domain.common.state.State;
-import net.logicim.domain.common.state.Stateless;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
 public abstract class IntegratedCircuit<PINS extends Pins, STATE extends State>
-    implements Component
+    implements CircuitComponent
 {
   protected SubcircuitSimulation containingSubcircuitSimulation;
   protected PINS pins;

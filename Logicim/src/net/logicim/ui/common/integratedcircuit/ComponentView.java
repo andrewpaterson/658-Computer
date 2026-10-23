@@ -8,7 +8,7 @@ import net.logicim.data.integratedcircuit.common.ComponentData;
 import net.logicim.data.port.common.SimulationMultiPortData;
 import net.logicim.domain.CircuitSimulation;
 import net.logicim.domain.common.CircuitElement;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.port.Port;
 import net.logicim.domain.common.port.event.Ports;
 import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
@@ -332,7 +332,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
       throw new SimulatorException("Cannot create component with simulation [null] for %s, [%s].", getClass().getSimpleName(), getDescription());
     }
 
-    Component component = getComponent(viewPath, circuitSimulation);
+    CircuitComponent component = getComponent(viewPath, circuitSimulation);
     if (component != null)
     {
       throw new SimulatorException("[%s] component has already been created for simulation [%s] for %s [%s].", component.getDescription(), subcircuitSimulation.getDescription(), getClass().getSimpleName(), getDescription());
@@ -344,7 +344,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     SubcircuitSimulation subcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     if (subcircuitSimulation != null)
     {
-      Component component = getComponent(viewPath, circuitSimulation);
+      CircuitComponent component = getComponent(viewPath, circuitSimulation);
       if (component == null)
       {
         throw new SimulatorException("Component configured in simulation [%s] on [%s].  Call create().",
@@ -358,7 +358,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void validatePorts(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(viewPath, circuitSimulation);
+    CircuitComponent component = getComponent(viewPath, circuitSimulation);
     if (component != null)
     {
       validatePorts(viewPath,
@@ -370,13 +370,13 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   protected void postCreateComponent(ViewPath viewPath,
                                      CircuitSimulation circuitSimulation,
-                                     Component component)
+                                     CircuitComponent component)
   {
     addPortsToPortViews(viewPath, circuitSimulation, component);
     validateComponent(viewPath, circuitSimulation);
   }
 
-  private void addPortsToPortViews(ViewPath viewPath, CircuitSimulation circuitSimulation, Component component)
+  private void addPortsToPortViews(ViewPath viewPath, CircuitSimulation circuitSimulation, CircuitComponent component)
   {
     SubcircuitSimulation containingSubcircuitSimulation = viewPath.getSubcircuitSimulation(circuitSimulation);
     List<PortView> portViews = getPortViews();
@@ -424,7 +424,7 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
     Map<SubcircuitSimulation, ? extends CircuitElement> components = getViewPathComponentSimulation().getSubcircuitSimulationComponents(circuitSimulation);
     for (Map.Entry<SubcircuitSimulation, ? extends CircuitElement> entry : components.entrySet())
     {
-      Component component = (Component) entry.getValue();
+      CircuitComponent component = (CircuitComponent) entry.getValue();
       component.reset(circuitSimulation.getSimulation());
     }
   }
@@ -432,13 +432,13 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
   @Override
   public void simulationStarted(ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(viewPath, circuitSimulation);
+    CircuitComponent component = getComponent(viewPath, circuitSimulation);
     component.reset(circuitSimulation.getSimulation());
   }
 
   public Port getPort(String portName, ViewPath viewPath, CircuitSimulation circuitSimulation)
   {
-    Component component = getComponent(viewPath, circuitSimulation);
+    CircuitComponent component = getComponent(viewPath, circuitSimulation);
     if (component != null)
     {
       return component.getPort(portName);
@@ -481,9 +481,9 @@ public abstract class ComponentView<PROPERTIES extends ComponentProperties>
 
   public abstract ViewPathComponentSimulation<?> getViewPathComponentSimulation();
 
-  public abstract Component getComponent(ViewPath viewPath, CircuitSimulation circuitSimulation);
+  public abstract CircuitComponent getComponent(ViewPath viewPath, CircuitSimulation circuitSimulation);
 
-  public abstract Component createComponent(ViewPath viewPath, CircuitSimulation circuitSimulation);
+  public abstract CircuitComponent createComponent(ViewPath viewPath, CircuitSimulation circuitSimulation);
 
   public abstract String getComponentType();
 

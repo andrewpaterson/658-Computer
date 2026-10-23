@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.flop.dtype;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
@@ -10,7 +10,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 public class DTypeFlipFlop
     extends IntegratedCircuit<DTypeFlipFlopPins, DTypeFlipFlopState>
-    implements Component
+    implements CircuitComponent
 {
   public static final String TYPE = "D-type flip flop";
 

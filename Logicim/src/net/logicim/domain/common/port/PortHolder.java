@@ -2,7 +2,7 @@ package net.logicim.domain.common.port;
 
 import net.common.SimulatorException;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.Described;
 
 import java.util.ArrayList;
@@ -46,6 +46,6 @@ public abstract class PortHolder
 
   public abstract String getName();
 
-  public abstract Component getComponent();
+  public abstract CircuitComponent getComponent();
 }
 

@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.standard.counter;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
@@ -12,7 +12,7 @@ import static net.common.util.StringUtil.getByteStringHex;
 
 public class Counter
     extends IntegratedCircuit<CounterPins, CounterState>
-    implements Component
+    implements CircuitComponent
 {
   public static final String TYPE = "Counter";
 

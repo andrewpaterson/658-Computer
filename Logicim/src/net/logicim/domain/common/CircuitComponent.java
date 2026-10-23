@@ -7,7 +7,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 import java.util.List;
 
-public interface Component
+public interface CircuitComponent
     extends CircuitElement
 {
   List<Port> getPorts();

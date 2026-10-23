@@ -2,7 +2,7 @@ package net.logicim.domain.common.port.event;
 
 import net.logicim.data.port.event.PortEventData;
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Pins;
 import net.logicim.domain.common.Timeline;
@@ -62,7 +62,7 @@ public abstract class PortEvent
       Pins pins = port.getPins();
       if (pins != null)
       {
-        Component component = pins.getComponent();
+        CircuitComponent component = pins.getComponent();
         if (component != null)
         {
           return component.getDescription();

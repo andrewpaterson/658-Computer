@@ -58,7 +58,7 @@ public class Circuit
     }
   }
 
-  public void disconnectComponent(Component component, Simulation simulation)
+  public void disconnectComponent(CircuitComponent component, Simulation simulation)
   {
     component.disconnect(simulation);
   }

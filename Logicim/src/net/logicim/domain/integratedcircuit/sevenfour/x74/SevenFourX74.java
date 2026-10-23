@@ -1,7 +1,7 @@
 package net.logicim.domain.integratedcircuit.sevenfour.x74;
 
 import net.logicim.domain.Simulation;
-import net.logicim.domain.common.Component;
+import net.logicim.domain.common.CircuitComponent;
 import net.logicim.domain.common.IntegratedCircuit;
 import net.logicim.domain.common.Timeline;
 import net.logicim.domain.common.port.LogicPort;
@@ -9,7 +9,7 @@ import net.logicim.domain.passive.subcircuit.SubcircuitSimulation;
 
 public class SevenFourX74
     extends IntegratedCircuit<SevenFourX74Pins, SevenFourX74State>
-    implements Component
+    implements CircuitComponent
 {
   public static final String TYPE = "74x74";
 

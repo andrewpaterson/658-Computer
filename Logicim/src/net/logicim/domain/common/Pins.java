@@ -87,7 +87,7 @@ public abstract class Pins
   }
 
   @Override
-  public Component getComponent()
+  public CircuitComponent getComponent()
   {
     return integratedCircuit;
   }

@@ -10514,6 +10514,17 @@
 			)
 		)
 	)
+	(text "The ~{WR}_{A} and ~{WR}_{B} strobes are decoded straight from the counter by the 74LVC138.  The counter is\nsynchronous, but the skew between its outputs could still give a runt pulse on Y1 or Y5 at the 3 to 4 and\n7 to 8 counts.  A runt on ~{WR}_{A} after channel A's write could latch a wrong sample into the DAC until\nthe next sample.  Should probably be fixed by clocking both strobes through a flip flop (e.g. 74LVC2G74)\non the 10MHz clock.  There may be no space for it on this board."
+		(exclude_from_sim no)
+		(at 120.65 140.97 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "b209ca52-7963-4e93-934b-0e246d7e2b89")
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

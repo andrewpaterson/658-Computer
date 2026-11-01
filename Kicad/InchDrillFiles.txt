@@ -1,8 +1,0 @@
-Drill files in inches (INCH).  All drill files should be in millimetres (METRIC).
-Regenerate drill files from KiCad with Units = Millimeters, or let the Excellon writer convert them.
-
-None.  2026-10-22: the 230 inch files on 115 boards listed here on 2026-10-21 were converted to METRIC with
-the GerberLib Excellon writer (x 25.4, exact).  Every hole and slot was checked against the original with the
-GerberLib interpreter and with gerbonara.  Every .drl file in 658-Computer is now METRIC.
-
-Re-survey with: grep -rl --include=*.drl "^INCH" .

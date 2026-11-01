@@ -1,8 +1,5 @@
 package net.common.logger;
 
-import net.assembler.sixteenhigh.semanticiser.LogResult;
-import net.common.SimulatorException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,49 +67,6 @@ public class Logger
     {
       builder.append(message);
       builder.append("\n");
-    }
-    return builder.toString();
-  }
-
-  public boolean log(String filename, int index, LogResult logResult)
-  {
-    if (logResult.is(FATAL))
-    {
-      return logFatal(filename, index, logResult.message);
-    }
-    else if (logResult.is(ERROR))
-    {
-      return logError(filename, index, logResult.message);
-    }
-    else if (logResult.is(WARNING))
-    {
-      logWarning(filename, index, logResult.message);
-      return true;
-    }
-    else if (logResult.is(INFO))
-    {
-      logInfo(filename, index, logResult.message);
-      return true;
-    }
-    else
-    {
-      throw new SimulatorException("Unknown log level [%s].", logResult.level);
-    }
-  }
-
-  public String getErrorMessages()
-  {
-    StringBuilder builder = new StringBuilder();
-    for (String message : messages)
-    {
-      if (message.startsWith(ERROR))
-      {
-        builder.append(message);
-        if (messages.size() > 1)
-        {
-          builder.append("\n");
-        }
-      }
     }
     return builder.toString();
   }
